@@ -316,9 +316,9 @@ car-details  -->
                             <li> <span>Fuel Type: </span> <strong class="text-right">{{ $product->car->fuel_type->name ?? '' }} </strong></li>
                             <li> <span>Condition: </span> <strong class="text-right"> {{ $product->condition->name ?? '' }} </strong></li>
                             <li> <span>Selller type: </span> <strong class="text-right"> {{ $product->supplier->user_type->name ?? '' }} </strong></li>
-                            <li> <span>Selling Price: </span> <strong class="text-right"> {{ $product->msrp }} </strong></li>
+                            <li> <span>Selling Price: </span> <strong class="text-right"> {{ $product->msrp ?? 0 }} </strong></li>
 							@if($product->condition_id == 2 || $product->condition_id == 3)
-                            <li> <span>Remarks (any Prob): </span> <strong class="text-right"> {{ $product->description }} </strong></li>
+                            <li> <span>Remarks (any Prob): </span> <strong class="text-right"> {{ $product->description ?? '' }} </strong></li>
 							@endif
                         </ul>
                     </div>
@@ -342,7 +342,7 @@ car-details  -->
 								<form action="{{ route('auctions.store') }}" method="post" class="d-block">
 									@csrf
 									<input type="hidden" name="product_id" value="{{ $product->id }}" />
-									
+
 									<label class="u-dspn">Your max bid:</label>
 									<input placeholder="" class="MaxBidClass" type="text" name="amount">
 									@if(session()->has('amount'))
@@ -363,17 +363,17 @@ car-details  -->
                             <ul>
                                 <li><i class="fa fa-500px" aria-hidden="true"></i> Make Year <div class="twelve-name">{{ $product->car->manufacturing_year }}</div>
                                 </li>
-                                <li><i class="fa fa-road" aria-hidden="true"></i> Loan availability 
+                                <li><i class="fa fa-road" aria-hidden="true"></i> Loan availability
                                     <div class="twelve-name">@if($product->car->loan_available) Yes @else No @endif</div>
                                 </li>
-                                <li><i class="fa fa-hourglass-end" aria-hidden="true"></i> Fuel type 
+                                <li><i class="fa fa-hourglass-end" aria-hidden="true"></i> Fuel type
                                     <div class="twelve-name">{{ $product->car->fuel_type->name ?? '' }}</div></li>
                             </ul>
                         </div>
 
                         <div class="col-md-4 fourcol mobile-half-col">
                             <ul>
-                                <li><i class="fa fa-cloud-upload" aria-hidden="true"></i> Gross weight 
+                                <li><i class="fa fa-cloud-upload" aria-hidden="true"></i> Gross weight
                                     <div class="twelve-name">{{ $product->car->weight ?? '0' }}kg</div></li>
                                 <li><i class="fa fa-snowflake-o" aria-hidden="true"></i>Gear box <div class="twelve-name">{{ $product->car->gear_box->name ?? '' }}</div></li>
                                 <li><i class="fa fa-taxi" aria-hidden="true"></i>Seating Capacity <div class="twelve-name">{{ $product->car->seating_capacity->name ?? '' }}</div>
@@ -385,7 +385,7 @@ car-details  -->
                             <ul>
                                 <li><i class="fa fa-podcast" aria-hidden="true"></i> Drive type <div class="twelve-name">{{ $product->car->drive_type->name ?? '' }}WD</div></li>
                                 <li><i class="fa fa-rss-square" aria-hidden="true"></i> Transmission <div class="twelve-name">
-                                    automatic  
+                                    automatic
                                 </div></li>
                                 <li><i class="fa fa-road" aria-hidden="true"></i> Maximum power<div class="twelve-name">{{ $product->car->maximum_power ?? '' }}bph</div></li>
                             </ul>
@@ -404,7 +404,7 @@ car-details  -->
                                 <li>
                                     <a class="smstoggle">Engine and transmission<i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner" style="display: block;">
-                                       
+
                                         <li class="">
                                             <div class="list-label">Engine Type </div>
                                             <div class="list-stat">{{ $product->car->engine_type->name ?? '' }}</div>
@@ -865,21 +865,21 @@ car-details  -->
                             </div>
 							<div class="user-info-card">
                                 <div class="user-photo">
-                                    <img class="img-circle" src="{{ url('/') }}/assets/profile/{{ $product->supplier->photo }}" alt="">
+                                    <img class="img-circle" src="{{ url('/') }}/assets/profile/{{ $product->supplier->photo ?? 'not-found.jpg' }}" alt="">
                                 </div>
                                 <div class="user-information">
-                                    <span class="user-name"><a class="hover-color" href="#">{{ $product->supplier->name }}</a></span>
+                                    <span class="user-name"><a class="hover-color" href="#">{{ $product->supplier->name ?? 'Unnamed' }}</a></span>
                                     <div class="item-date">
                                         <span>Published on: {{ $product->created_at->format('jS M Y') }}</span><br>
                                         <a href="{{ route('car-listing') }}" class="link">More Ads</a>
                                     </div>
 									<div class="user-phone">
-									<i class="fa fa-mobile" aria-hidden="true"></i><span data-replace="{{ $product->supplier->phone }}">{{ $product->supplier->phone }}</span>
+									<i class="fa fa-mobile" aria-hidden="true"></i><span data-replace="{{ $product->supplier->phone ?? '' }}">{{ $product->supplier->phone ?? '' }}</span>
 								</div>
                                 </div>
-								 
+
                             </div>
-                           
+
                             </br>
                             <form class="gray-form" action="{{ route('requested-more-infos.store') }}" method="post">
 								@csrf
@@ -1025,7 +1025,7 @@ End What a new button -->
             }
 
 
-            //------------------------------- 
+            //-------------------------------
             function addNavigation() {
                 stage.onMouseOver = mouseOver;
                 stage.onMouseDown = mousePressed;

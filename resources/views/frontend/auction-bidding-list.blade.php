@@ -53,8 +53,8 @@
                                 </thead>
                                 <tbody>
 									@php($i=0)
-									@foreach($product->bids as $bid)
-									
+									@foreach($bidder_product->bids as $bid)
+
                                     <tr>
                                         <td class="bidding-table-details">
                                             <span class="@if($i ==0) bid-updated @endif">{{ $bid->user->email ?? '' }}</span>

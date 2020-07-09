@@ -76,12 +76,12 @@ class HomeController extends Controller
 
     public function auctionBiddingList($id) {
 		$product = Product::with(['bids' => function($q) {
-			$q->with('user')->where('valid_until', '>=', Carbon::now())->latest();
+			$q->with('user')->where('valid_until', '<=', Carbon::now())->latest();
 		}])->where('id', $id)->first();
+
 		$bidder_product = Product::with(['bids' => function($q) {
-			$q->where('valid_until', '>=', Carbon::now())->groupBy('user_id');
+			$q->where('valid_until', '<=', Carbon::now())->groupBy('user_id')->latest();
 		}])->where('id', $id)->first();
-		
 		$remaining = $this->getRemaining($product->auction_to);
 		return view('frontend.auction-bidding-list', compact('product', 'bidder_product', 'remaining'));
 	}
@@ -103,9 +103,15 @@ class HomeController extends Controller
 			});
 		}
 		$products = $products->where('auction_from', '<=', Carbon::now())->where('auction_to', '>=', Carbon::now())->paginate(9);
+
 		$suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
 		$type = 'Car';
-		return view('frontend.auction-product-list', compact('products', 'suppliers', 'type'));
+        $brands = Brand::where('category_id', 1)->get();
+        $models = Model::where('category_id', 1)->get();
+        $body_types = BodyType::where('category_id', 1)->get();
+        $fuel_types = FuelType::where('category_id', 1)->get();
+        $packages = Package::where('category_id', 1)->get();
+		return view('frontend.auction-product-list', compact('products', 'suppliers', 'type', 'brands', 'models', 'body_types', 'fuel_types', 'packages'));
 	}
 	public function bicycleCompare() {
 		return view('frontend.bicycle-compare');
@@ -411,7 +417,7 @@ class HomeController extends Controller
 	public function termAndCondition() {
 		return view('frontend.term-and-condition');
 	}
-	
+
 	private function getRemaining($datestr = 0) {
 		//Convert to date
 		$date=strtotime($datestr);//Converted to a PHP date (a second count)
@@ -422,7 +428,7 @@ class HomeController extends Controller
 		$hours=floor(($diff-$days*60*60*24)/(60*60));
 		$minutes=floor(($diff-$days*60*60*24-$hours*60*60)/60);
 		$seconds=$diff-$days*60*60*24-$hours*60*60-$minutes*60;
-		
+
 		//Report
 		return [$days, $hours, $minutes, $seconds];
 	}

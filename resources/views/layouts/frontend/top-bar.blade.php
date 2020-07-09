@@ -23,8 +23,9 @@
 							@endguest
 							@auth
                             <div class="sms-seller-dropdown">
-                                <a href="{{ route('seller-profile', Auth::user()->id) }}" class="sms-dropdown">
-                                    <img class="img-circle resize" alt="" src="{{ url('/') }}/assets/profile/{{ $user->photo ?? 'not-found.jpg' }}"> {{ $user->name ?? 'Unnamed' }} <i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                                <a href="#" class="sms-dropdown">
+                                    <img class="img-circle resize" alt="" src="{{ url('/') }}/assets/profile/{{ $user->photo ?? 'not-found.jpg' }}"> {{ $user->name ?? 'Unnamed' }} <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                                </a>
                                 <ul>
                                     <li><a href="{{ route('seller-profile', Auth::user()->id) }}">Seller Profile</a></li>
                                     <li><a href="{{ route('seller-my-ad', Auth::user()->id) }}">Active Ads</a></li>
