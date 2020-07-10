@@ -64,12 +64,15 @@ Route::get('requested-more-infos-unviewed', 'Frontend\RequestedMoreInfoControlle
 Route::resource('make-an-offers', 'Frontend\MakeAnOfferController');
 Route::get('make-an-offers-unviewed', 'Frontend\MakeAnOfferController@unviewed')->name('make-an-offers.unviewed');
 Route::resource('orders', 'Backend\OrderController');
+Route::get('/panorama', function() {
+    return view('frontend.panorama');
+})->name('panorama');
 //Routes for dashboard
 Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::get('/seller-my-ad/{id}', 'Frontend\HomeController@sellerMyAd')->name('seller-my-ad');
 	Route::get('/seller-profile/{id}', 'Frontend\HomeController@sellerProfile')->name('seller-profile');
-	
-	
+
+
 	Route::resource('auctions', 'Backend\AuctionController');
     Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
 	Route::resource('cashbooks', 'Backend\CashbookController');
@@ -88,7 +91,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::resource('products', 'Backend\ProductController')->middleware('moderator:Product');
 	Route::get('products-auction/{id}', 'Backend\ProductController@auction')->name('products.auction');
 	Route::post('products-auction/{id}', 'Backend\ProductController@auctionStore')->name('products.auction.store');
-	
+
 	Route::resource('cars', 'Backend\CarController')->middleware('moderator:Product');
 	Route::resource('motorcycles', 'Backend\MotorcycleController')->middleware('moderator:Product');
 	Route::resource('bicycles', 'Backend\BicycleController')->middleware('moderator:Product');
@@ -103,7 +106,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::resource('comments', 'Backend\CommentController');
 	Route::resource('sub-comments', 'Backend\SubCommentController');
 	Route::resource('reviews', 'Frontend\ReviewController');
-	
+
 	Route::get('/clear-cache', function() {
 		Artisan::call('cache:clear');
 		Artisan::call('view:clear');

@@ -280,7 +280,9 @@ car-details  -->
                                                 <span aria-hidden="true">×</span>
                                             </button>
                                         </div>
-                                        <canvas id='canvas' width="730px" height="570px"></canvas>
+                                        <div class="modal-body">
+                                            <iframe class="hundred" allowfullscreen style="border-style:none;" src="{{ route('panorama')  }}?panorama=assets/images/not-found.jpg&amp;title=Jordan%20Pond&amp;author=Rejaul%20Karim&amp;preview=assets/images/not-found-preview.jpg"></iframe>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -950,34 +952,6 @@ End What a new button -->
             stage.mouseMoveOutside = true;
             createjs.Touch.enable(stage);
 
-            var imgList = [
-				@for($i=1; $i<=36; $i++)
-					@php($image='image'.$i)
-					@if($product->$image)
-						"{{ url('/') }}/images/360-view/{{ $product->$image ?? 'not-found.jpg' }}",
-					@endif
-				@endfor
-            ];
-            var images = [],
-                loaded = 0,
-                currentFrame = 0,
-                totalFrames = imgList.length;
-            var rotate360Interval, start_x;
-
-            var bg = new createjs.Shape();
-            stage.addChild(bg);
-
-            var bmp = new createjs.Bitmap();
-            stage.addChild(bmp);
-
-
-
-            function load360Image() {
-                var img = new Image();
-                img.src = imgList[loaded];
-                img.onload = img360Loaded;
-                images[loaded] = img;
-            }
 
             function img360Loaded(event) {
                 loaded++;
@@ -993,8 +967,6 @@ End What a new button -->
 
             function start360() {
                 document.body.style.cursor = 'none';
-
-
 
                 // update-draw
                 update360(0);
