@@ -144,6 +144,20 @@ class DashBoardController extends Controller
 		Blade::directive('enddealeroradmin', function () {
 			return '<?php endif; ?>';
 		});
+		Blade::directive('mobile', function () {
+			return '<?php if ($device=="Mobile"): ?>';
+		});
+
+		Blade::directive('endmobile', function () {
+			return '<?php endif; ?>';
+		});
+		Blade::directive('computer', function () {
+			return '<?php if ($device=="Computer"): ?>';
+		});
+
+		Blade::directive('endcomputer', function () {
+			return '<?php endif; ?>';
+		});
     }
 	public static function sendUserToView()
     {

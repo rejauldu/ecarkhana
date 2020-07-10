@@ -17,8 +17,8 @@
 	<meta property="og:image"         content="{{ url('/assets/products/cars') }}/{{ $product->photo ?? 'not-found.jpg' }}" />
 	@endif
 	<!--/Facebook Share end-->
-	
-	
+
+
 	<title>{{ config('app.name', 'Laravel') }}</title>
 	<link rel="icon" href="{{ asset('assets/favicon.ico') }}" type="image/gif" sizes="16x16">
 	<!-- Fonts -->
@@ -35,6 +35,7 @@
     <!-- revolution -->
     <link rel="stylesheet" href="{{ asset('css/revolution/settings.css') }}" />
     <!-- main style -->
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <!-- swiper -->
     <link rel="stylesheet" href="{{ asset('css/swiper.css') }}" />
