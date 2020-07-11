@@ -511,17 +511,13 @@ car-details  -->
                                             <div class="list-stat">{{ $product->car->engine_type->name ?? '' }}</div>
                                         </li>
                                         <li class="">
+                                            <div class="list-label">Engine Capacity</div>
+                                            <div class="list-stat">{{ $product->car->engine_capacity ?? 0 }}cc</div>
+                                        </li>
+                                        <li class="">
                                             <div class="list-label">Displacement</div>
-                                            <div class="list-stat">{{ $product->car->displacement->name ?? '' }}cc
+                                            <div class="list-stat">{{ $product->car->displacement->name ?? '' }}
                                             </div>
-                                        </li>
-                                        <li class="">
-                                            <div class="list-label">Mileage kmpl</div>
-                                            <div class="list-stat">{{ $product->car->milage ?? '' }} kmpl</div>
-                                        </li>
-                                        <li class="">
-                                            <div class="list-label">Engine check warning</div>
-                                            <div class="list-stat">{{ $product->car->engine_check_warning ?? '' }}</div>
                                         </li>
                                         <li class="">
                                             <div class="list-label"> Max power</div>
@@ -532,8 +528,12 @@ car-details  -->
                                             <div class="list-stat">{{ $product->car->maximum_torque ?? '' }}</div>
                                         </li>
                                         <li class="">
-                                            <div class="list-label">Ground clearance</div>
-                                            <div class="list-stat">{{ $product->car->maximum_power ?? '' }}</div>
+                                            <div class="list-label">Mileage kmpl</div>
+                                            <div class="list-stat">{{ $product->car->milage ?? '' }} kmpl</div>
+                                        </li>
+                                        <li class="">
+                                            <div class="list-label">Engine check warning</div>
+                                            <div class="list-stat">{{ $product->car->engine_check_warning ?? '' }}</div>
                                         </li>
                                         <li class="">
                                             <div class="list-label">Wheels base</div>
@@ -547,10 +547,6 @@ car-details  -->
                                         <li class="">
                                             <div class="list-label">Transmission</div>
                                             <div class="list-stat">{{ $product->car->transmission->name ?? '' }}</div>
-                                        </li>
-                                        <li class="">
-                                            <div class="list-label"> Boot space</div>
-                                            <div class="list-stat">{{ $product->car->boot_space ?? '' }}</div>
                                         </li>
                                         <li class="">
                                             <div class="list-label"> Cylinder</div>
@@ -575,7 +571,7 @@ car-details  -->
                                             <div class="list-stat">{{ $product->car->weight ?? '' }} kg</div>
                                         </li>
                                         <li class="">
-                                            <div class="list-label">Selling capacity</div>
+                                            <div class="list-label">Seating capacity</div>
                                             <div class="list-stat">{{ $product->car->selling_capacity ?? '' }}</div>
                                         </li>
                                         <li class="">
@@ -587,6 +583,23 @@ car-details  -->
                                             <div class="list-label">Wheel base</div>
                                             <div class="list-stat">{{ $product->car->wheel_base->name ?? '' }}</div>
                                         </li>
+                                        <li class="">
+                                            <div class="list-label">No of Door</div>
+                                            <div class="list-stat">{{ $product->car->no_of_door ?? 0 }}</div>
+                                        </li>
+                                        <li class="">
+                                            <div class="list-label">Length</div>
+                                            <div class="list-stat">{{ $product->car->length ?? 0 }}</div>
+                                        </li>
+                                        <li class="">
+                                            <div class="list-label">Width</div>
+                                            <div class="list-stat">{{ $product->car->width ?? 0 }}</div>
+                                        </li>
+                                        <li class="">
+                                            <div class="list-label">Height</div>
+                                            <div class="list-stat">{{ $product->car->height ?? 0 }}</div>
+                                        </li>
+
                                     </ul>
                                 </li>
                                 <li>
@@ -596,6 +609,10 @@ car-details  -->
                                         <li class="">
                                             <div class="list-label"> Front suspension</div>
                                             <div class="list-stat">{{ $product->car->front_suspension ?? '' }}</div>
+                                        </li>
+                                        <li class="">
+                                            <div class="list-label"> Rear suspension</div>
+                                            <div class="list-stat">{{ $product->car->rear_suspension ?? '' }}</div>
                                         </li>
                                         <li class="">
                                             <div class="list-label"> Wheel type</div>
@@ -626,8 +643,8 @@ car-details  -->
                                             <div class="list-stat">{{ $product->car->steering_type ?? '' }}</div>
                                         </li>
                                         <li class="">
-                                            <div class="list-label">Steering Gear type</div>
-                                            <div class="list-stat">{{ $product->car->steering_gear_type ?? '' }}</div>
+                                            <div class="list-label">Steering Column</div>
+                                            <div class="list-stat">{{ $product->car->steering_column ?? 0 }}</div>
                                         </li>
                                         <li class="">
                                             <div class="list-label">Front break type</div>
@@ -749,8 +766,6 @@ car-details  -->
                                     {{ $product->description ?? '' }}
                                 </div>
                             @endif
-
-
                         </div>
                         <div id="tab3" class="tabcontent">
                             <ul class="smsaccordion">

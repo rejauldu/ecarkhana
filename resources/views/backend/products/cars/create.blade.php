@@ -123,6 +123,10 @@
 															@endforeach
 														</select>
 													</div>
+                                                    <div class="form-group">
+                                                        <label for="engine-capacity">Engine Capacity</label>
+                                                        <input id="engine-capacity" type="number" class="form-control" name="engine_capacity" value="{{ $car->engine_capacity ?? '' }}" placeholder="Enter Engine Capacity" title="Enter Engine Capacity" />
+                                                    </div>
 													<div class="form-group">
 														<label for="fuel-type">Fuel Type</label>
 														<select id="fuel-type" name="fuel_type_id" class="custom-select">
@@ -328,6 +332,10 @@
 														<label for="steering-type">Steering Type</label>
 														<input id="steering-type" type="text" class="form-control" name="steering_type" value="{{ $car->steering_type ?? '' }}" placeholder="Enter Steering Type" title="Enter Steering Type" />
 													</div>
+                                                    <div class="form-group">
+                                                        <label for="steering-type">Steering Column</label>
+                                                        <input id="steering-type" type="text" class="form-control" name="steering_column" value="{{ $car->steering_column ?? '' }}" placeholder="Enter Steering Column" title="Enter Steering Column" />
+                                                    </div>
 													<div class="form-group">
 														<label for="steering-gear-type">Steering Gear Type</label>
 														<input id="steering-gear-type" type="text" class="form-control" name="steering_gear_type" value="{{ $car->steering_gear_type ?? '' }}" placeholder="Enter Steering Gear Type" title="Enter Steering Gear Type" />

@@ -12,7 +12,7 @@ class Car extends Model
      * @var array
      */
     protected $fillable = [
-        'brand_id', 'model_id', 'body_type_id', 'package_id', 'displacement_id', 'manufacturing_year', 'ground_clearance_id', 'drive_type_id', 'engine_type_id', 'fuel_type_id', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'transmission_id', 'seating_capacity', 'weight', 'maximum_power', 'maximum_torque', 'emi_star_from', 'gear_box_id', 'loan_upto', 'engine_check_warning', 'wheel_base_id', 'mild_hybrid', 'cylinder_id', 'boot_space', 'front_suspension', 'wheel_type_id', 'wheel_size', 'turning_radius', 'tyre_type_id', 'front_tyre_size', 'rear_tyre_size', 'steering_type', 'steering_gear_type', 'front_brake_id', 'rear_brake_id', 'fuel_tank_capacity', 'milage', 'airbag', 'wheel_base', 'finance_upto', 'auction_grade', 'no_of_door', 'length', 'width', 'height', 'rear_suspension', 'what_a_new', 'pros_cons', 'registration_cost', 'key_feature', 'interior_feature', 'exterior_feature', 'safety_security', 'additional_feature', 'created_at', 'updated_at'
+        'brand_id', 'model_id', 'body_type_id', 'package_id', 'displacement_id', 'manufacturing_year', 'ground_clearance_id', 'drive_type_id', 'engine_type_id', 'engine_capacity', 'fuel_type_id', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'transmission_id', 'seating_capacity', 'weight', 'maximum_power', 'maximum_torque', 'emi_star_from', 'gear_box_id', 'loan_upto', 'engine_check_warning', 'wheel_base_id', 'mild_hybrid', 'cylinder_id', 'boot_space', 'front_suspension', 'wheel_type_id', 'wheel_size', 'turning_radius', 'tyre_type_id', 'front_tyre_size', 'rear_tyre_size', 'steering_type', 'steering_column', 'steering_gear_type', 'front_brake_id', 'rear_brake_id', 'fuel_tank_capacity', 'milage', 'airbag', 'wheel_base', 'finance_upto', 'auction_grade', 'no_of_door', 'length', 'width', 'height', 'rear_suspension', 'what_a_new', 'pros_cons', 'registration_cost', 'key_feature', 'interior_feature', 'exterior_feature', 'safety_security', 'additional_feature', 'created_at', 'updated_at'
     ];
 
     /**
@@ -21,7 +21,7 @@ class Car extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
