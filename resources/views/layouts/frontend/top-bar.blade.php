@@ -22,7 +22,7 @@
                             </div>
 							@endguest
 							@auth
-                            <div class="sms-seller-dropdown">
+                            <div class="sms-seller-dropdown" id="app">
                                 <a href="#" class="sms-dropdown">
                                     <img class="img-circle resize" alt="" src="{{ url('/') }}/assets/profile/{{ $user->photo ?? 'not-found.jpg' }}"> {{ $user->name ?? 'Unnamed' }} <i class="fa fa-sort-desc" aria-hidden="true"></i>
                                 </a>

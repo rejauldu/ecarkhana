@@ -519,7 +519,7 @@ End Chat-box-->
 		</div>
 	</div>
 	<!-- Scripts -->
-	<script src="{{ asset('js/frontend/app.js') }}?{{ time() }}"></script>
+	<script src="{{ asset('js/app.js') }}?{{ time() }}"></script>
 	<!-- Smooth Scroll -->
 	<script src="{{ asset('js/smooth-scroll.js') }}"></script>
 	<!-- owl-carousel -->
@@ -545,7 +545,7 @@ End Chat-box-->
     <script type="text/javascript" src="{{ asset('js/revolution/extensions/revolution.extension.parallax.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/revolution/extensions/revolution.extension.slideanims.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/revolution/extensions/revolution.extension.video.min.js') }}"></script>
-	
+
     <!-- custom -->
     <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 	<script src="{{ asset('js/theme.js') }}?{{ time() }}"></script>
@@ -571,7 +571,6 @@ End Chat-box-->
 				}
 			});
 		}
-		
 	})();
 	function pushToCompare(x) {
 		popFromCompare(x);
@@ -600,7 +599,7 @@ End Chat-box-->
 		sessionStorage.removeItem('compare_count');
 	}
 	</script>
-    
+
 	@yield('script')
 </body>
 </html>

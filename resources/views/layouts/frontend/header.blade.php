@@ -24,7 +24,7 @@
 	<!-- Fonts -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- All packages style -->
-	<link href="{{ asset('css/frontend/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<!-- flaticon -->
     <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}" />
 	<!-- owl-carousel -->
@@ -39,7 +39,6 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <!-- swiper -->
     <link rel="stylesheet" href="{{ asset('css/swiper.css') }}" />
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	@yield('style')
 </head>
 <body>

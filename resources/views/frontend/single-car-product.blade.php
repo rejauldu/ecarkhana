@@ -14,7 +14,8 @@
     <!--=================================
 car-details  -->
 
-    <section class="car-details page-section-ptb">
+    <section class="car-details page-section-ptb" id="product">
+
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
@@ -785,33 +786,93 @@ car-details  -->
                             </ul>
                         </div>
                         <div id="tab4" class="tabcontent">
-                            <div class="details-form contact-2">
-                                <form class="gray-form">
+                            <div class="details-form contact-2" id="finance-calculator">
                                     <h5>Financing Calculator</h5>
-                                    <div class="form-group">
-                                        <label>Vehicle Price ($)*</label>
-                                        <input type="text" class="form-control" id="validationCustom11"
-                                               placeholder="Price" required="">
+                                <div class="form-group">
+                                    <label>Period (Month)*</label>
+                                    <input type="text" class="form-control" placeholder="Month" id="validationCustom13" required="" value="50">
+                                </div>
+                                <div class="form-group">
+                                    <h5>Select Bank</h5>
+                                    <div class="row">
+                                        <div class="col-6 col-md-4 col-lg-3">
+                                            <div class="custom-control custom-radio pl-0">
+                                                <input type="radio" class="custom-control-input" id="customRadio0" name="example1" value="customEx" checked="checked">
+                                                <label class="custom-control-label" for="customRadio0"><img class="img-thumbnail" src="{{ asset('images/dbbl.png') }}" /></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4 col-lg-3">
+                                            <div class="custom-control custom-radio pl-0">
+                                                <input type="radio" class="custom-control-input" id="customRadio1" name="example1" value="customEx">
+                                                <label class="custom-control-label" for="customRadio1"><img class="img-thumbnail" src="{{ asset('images/dbbl.png') }}" /></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4 col-lg-3">
+                                            <div class="custom-control custom-radio pl-0">
+                                                <input type="radio" class="custom-control-input" id="customRadio2" name="example1" value="customEx">
+                                                <label class="custom-control-label" for="customRadio2"><img class="img-thumbnail" src="{{ asset('images/dbbl.png') }}" /></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4 col-lg-3">
+                                            <div class="custom-control custom-radio pl-0">
+                                                <input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+                                                <label class="custom-control-label" for="customRadio3"><img class="img-thumbnail" src="{{ asset('images/dbbl.png') }}" /></label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Interest rate (%)*</label>
-                                        <input type="text" class="form-control" placeholder="Rate"
-                                               id="validationCustom12" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Period (Month)*</label>
-                                        <input type="text" class="form-control" placeholder="Month"
-                                               id="validationCustom13" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Down Payment *</label>
-                                        <input type="text" class="form-control" placeholder="Payment"
-                                               id="validationCustom14" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="button red">Estimate payment</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <div class="form-group">
+                                    <button class="button red" data-toggle="modal" data-target="#finance-result">Estimate payment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The Modal -->
+                    <div class="modal" id="finance-result">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Financing Calculation</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <table class="table table-striped table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td>car Price</td>
+                                                <td>Tk.50000000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Monthly installment</td>
+                                                <td>Tk.20000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Interest Rate</td>
+                                                <td>2%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Down payment</td>
+                                                <td>Tk.10000000</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Total payable</th>
+                                                <th>Tk.55000000</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -1083,6 +1144,7 @@ car-details  -->
                 </div>
             </div>
         </div>
+
     </section>
 
     <!--=================================
@@ -1235,4 +1297,23 @@ End What a new button -->
             document.getElementById('feedback-score').value = e.innerHTML;
         }
     </script>
+    <script>
+        (function() {
+            var product = new Vue({
+                el: '#finance-calculator',
+                data: {
+                    temp_quantity: 12,
+                    show_image_src: "{{ url('/') }}/assets/products/{{ $product->image1 ?? 'not-found.jpg' }}"
+                },
+                methods: {
+                    floatImage: function (e) {
+
+                    }
+                }
+            });
+        })();
+    </script>
 @endsection
+
+
+
