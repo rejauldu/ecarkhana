@@ -358,14 +358,14 @@ car-details  -->
                                                     <div id="internal" class="container tab-pane active"><br>
                                                         <h3>Internal</h3>
                                                         <div class="row">
-                                                            <div class="col-12"><div id="panorama"></div></div>
+                                                            <div class="col-12 size-32"><div id="panorama" class="size-child"></div></div>
                                                         </div>
 
                                                     </div>
                                                     <div id="external" class="container tab-pane fade"><br>
                                                         <h3>External</h3>
                                                         <div class="row">
-                                                            <div class="col-12"><div id="object" class=""></div></div>
+                                                            <div class="col-12 size-32"><div id="object" class="size-child"></div></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -810,13 +810,20 @@ car-details  -->
                         </div>
                         <div id="tab4" class="tabcontent">
                             <div class="details-form contact-2" id="finance-calculator">
-                                    <h5>Financing Calculator</h5>
-                                <div class="form-group">
+                                <h5>Financing Calculator</h5>
+                                <label for="msrp">Car price:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Tk.</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Enter price" id="msrp" value="{{ $product->msrp ?? 0 }}">
+                                </div>
+                                <div class="form-group mt-2">
                                     <label>Period (Month)*</label>
                                     <input type="text" class="form-control" placeholder="Month" id="validationCustom13" required="" value="50">
                                 </div>
                                 <div class="form-group">
-                                    <h5>Select Bank</h5>
+                                    <label for="customRadio0">Select bank:</label>
                                     <div class="row">
                                         <div class="col-6 col-md-4 col-lg-3">
                                             <div class="custom-control custom-radio pl-0">
@@ -844,7 +851,14 @@ car-details  -->
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <label for="msrp">Down payment:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Tk.</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Enter down payment" id="msrp" value="2000000">
+                                </div>
+                                <div class="form-group mt-3">
                                     <button class="button red" data-toggle="modal" data-target="#finance-result">Estimate payment</button>
                                 </div>
                             </div>

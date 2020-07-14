@@ -77,17 +77,17 @@
         	//load the first image
             var loadedImages = 2;
             var appropriateImageUrl = imagePath + "1." + imageExtension;
-            selector.css("background-image", "url(" + appropriateImageUrl + ")");
+            selector.css({"background-image": "url(" + appropriateImageUrl + ")", "background-size": '100% 100%'});
 
             $("<img/>").attr("src", appropriateImageUrl).on("load", function() {
-                //selector.height(this.height).width(this.width);
+                selector.css({"maxWidth":"100vw", "maxHeight":"100vh"});
             });
 
             //load all other images by force
             for (var n = 2; n <= totalImages; n++) {
                 appropriateImageUrl = imagePath + n+"." + imageExtension;
-                selector.append("<img src='" + appropriateImageUrl + "' style='display:none;'>");
-                $("<img/>").attr("src", appropriateImageUrl).css("display", "none").on("load", function() {
+                selector.append("<img src='" + appropriateImageUrl + "' style='display:none; width:100%'>");
+                $("<img/>").attr("src", appropriateImageUrl).css({"display": "none", 'width':'100%'}).on("load", function() {
                     loadedImages++;
                     if (loadedImages >= totalImages) {
                         $("#VCc").removeClass("onLoadingDiv");

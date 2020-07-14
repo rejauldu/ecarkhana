@@ -225,7 +225,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     padding-bottom: 50%
 }
 
-.size-21 img {
+.size-21 img, .size-21 size-child {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -234,7 +234,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center
+    object-position: center;
 }
 
 .size-11 {
@@ -248,7 +248,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     padding-bottom: 100%
 }
 
-.size-11 img {
+.size-11 img, .size-11 .size-child {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -257,7 +257,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center
+    object-position: center;
 }
 
 .size-12 {
@@ -271,7 +271,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     padding-bottom: 200%
 }
 
-.size-12 img {
+.size-12 img, .size-12 .size-child {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -280,7 +280,51 @@ table.dataTable thead .sorting_desc_disabled:before {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center
+    object-position: center;
+}
+.size-32 {
+    position: relative;
+    width: 100%
+}
+
+.size-32:after {
+    content: "";
+    display: block;
+    padding-bottom: 75%;
+}
+
+.size-32 img, .size-32 .size-child {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.size-23 {
+    position: relative;
+    width: 100%
+}
+
+.size-23:after {
+    content: "";
+    display: block;
+    padding-bottom: 150%;
+}
+
+.size-23 img, .size-23 .size-child {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .owl-heading {
