@@ -49,7 +49,7 @@ Start Service -->
                             <a href="car-listing.html">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
-                                    <p>Sell car</p>
+                                    <p>Nearby bicycle </p>
                                 </div>
                             </a>
                         </li>
@@ -57,7 +57,7 @@ Start Service -->
                             <a href="">
                                 <div class="service_box">
                                     <i class="flaticon-tag"></i><br>
-                                    <p>offers</p>
+                                    <p>Fit calculator</p>
                                 </div>
                             </a>
                         </li>
@@ -65,7 +65,7 @@ Start Service -->
                             <a href="dealer-list.html">
                                 <div class="service_box">
                                     <i class="flaticon-friend"></i><br>
-                                    <p> car dealers</p>
+                                    <p> Buy bicycle </p>
                                 </div>
                             </a>
                         </li>
@@ -73,7 +73,7 @@ Start Service -->
                             <a href="">
                                 <div class="service_box">
                                     <i class="flaticon-tag"></i><br>
-                                    <p>EMI calculator</p>
+                                    <p>Sell bicycle </p>
                                 </div>
                             </a>
                         </li>
@@ -81,7 +81,7 @@ Start Service -->
                             <a href="">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
-                                    <p>autoloan</p>
+                                    <p>Comparision </p>
                                 </div>
                             </a>
                         </li>
@@ -90,7 +90,7 @@ Start Service -->
                             <a href="">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
-                                    <p>Used car</p>
+                                    <p>New bicycle / bike</p>
                                 </div>
                             </a>
                         </li>
@@ -98,7 +98,7 @@ Start Service -->
                             <a href="car-insurance.html">
                                 <div class="service_box">
                                     <i class="flaticon-umbrella"></i><br>
-                                    <p>insurance</p>
+                                    <p>Used bicycle </p>
                                 </div>
                             </a>
                         </li>
@@ -106,7 +106,7 @@ Start Service -->
                             <a href="single-accessories.html">
                                 <div class="service_box">
                                     <i class="flaticon-supermarket"></i><br>
-                                    <p>Accessories</p>
+                                    <p>National distributor </p>
                                 </div>
                             </a>
                         </li>
@@ -118,7 +118,7 @@ Start Service -->
                             <a href="">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
-                                    <p>Rent car</p>
+                                    <p>Loan comparison</p>
                                 </div>
                             </a>
                         </li>
@@ -126,7 +126,7 @@ Start Service -->
                             <a href="compare-car.html">
                                 <div class="service_box">
                                     <i class="fa fa-wpforms" aria-hidden="true"></i><br>
-                                    <p>comparison</p>
+                                    <p>Nearby workshop</p>
                                 </div>
                             </a>
                         </li>
@@ -150,7 +150,7 @@ Start Service -->
                             <a href="">
                                 <div class="service_box">
                                     <i class="fa fa-bookmark-o" aria-hidden="true"></i><br>
-                                    <p>booking</p>
+                                    <p>Blog </p>
                                 </div>
                             </a>
                         </li>
@@ -158,11 +158,11 @@ Start Service -->
                             <a href="car-loan.html">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
-                                    <p>Car loan</p>
+                                    <p>Offer </p>
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
@@ -177,7 +177,7 @@ Start Service -->
                                     <p>Showroom</p>
                                 </div>
                             </a>
-                        </li>
+                        </li> -->
                    </div>
 
                     </ul>

@@ -43,6 +43,22 @@
                             <a href="{{ route('motorcycle-listing') }}">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
+                                    <p>Nearby bike</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="service_box">
+                                    <i class="flaticon-tag"></i><br>
+                                    <p>Buy bike</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('dealer-list') }}">
+                                <div class="service_box">
+                                    <i class="flaticon-friend"></i><br>
                                     <p>Sell bike</p>
                                 </div>
                             </a>
@@ -51,23 +67,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-tag"></i><br>
-                                    <p>offers</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('dealer-list') }}">
-                                <div class="service_box">
-                                    <i class="flaticon-friend"></i><br>
-                                    <p>bike dealers</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="service_box">
-                                    <i class="flaticon-tag"></i><br>
-                                    <p>EMI calculator</p>
+                                    <p>Bike comparison </p>
                                 </div>
                             </a>
                         </li>
@@ -75,7 +75,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
-                                    <p>autoloan</p>
+                                    <p>New bike</p>
                                 </div>
                             </a>
                         </li>
@@ -84,7 +84,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
-                                    <p>Used car</p>
+                                    <p>Used Bike</p>
                                 </div>
                             </a>
                         </li>
@@ -92,7 +92,7 @@
                             <a href="{{ route('car-insurance') }}">
                                 <div class="service_box">
                                     <i class="flaticon-umbrella"></i><br>
-                                    <p>insurance</p>
+                                    <p>Eshowroom </p>
                                 </div>
                             </a>
                         </li>
@@ -100,7 +100,7 @@
                             <a href="{{ route('single-accessories') }}">
                                 <div class="service_box">
                                     <i class="flaticon-supermarket"></i><br>
-                                    <p>Accessories</p>
+                                    <p>National distributor</p>
                                 </div>
                             </a>
                         </li>
@@ -112,7 +112,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
-                                    <p>Rent car</p>
+                                    <p>Loan comparison</p>
                                 </div>
                             </a>
                         </li>
@@ -120,7 +120,7 @@
                             <a href="{{ route('compare-car') }}">
                                 <div class="service_box">
                                     <i class="fa fa-wpforms" aria-hidden="true"></i><br>
-                                    <p>comparison</p>
+                                    <p>Loan eligible </p>
                                 </div>
                             </a>
                         </li>
@@ -144,7 +144,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="fa fa-bookmark-o" aria-hidden="true"></i><br>
-                                    <p>booking</p>
+                                    <p>Insurance </p>
                                 </div>
                             </a>
                         </li>
@@ -152,7 +152,7 @@
                             <a href="{{ route('car-loan') }}">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
-                                    <p>Car loan</p>
+                                    <p>Brta services</p>
                                 </div>
                             </a>
                         </li>
@@ -160,7 +160,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
-                                    <p>Buy car</p>
+                                    <p>Nearby workshop</p>
                                 </div>
                             </a>
                         </li>
@@ -168,7 +168,7 @@
                             <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-friend"></i><br>
-                                    <p>Showroom</p>
+                                    <p>Offer </p>
                                 </div>
                             </a>
                         </li>

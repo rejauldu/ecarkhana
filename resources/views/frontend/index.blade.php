@@ -609,11 +609,11 @@ start Featured Cars -->
                                     </div>
                                     <ul>
                                         <li><i class="fa fa-road" aria-hidden="true"></i>{{ $used_product->car->kms_driven ?? ''}} km</li>
-                                        <li><i class="fa fa-tachometer" aria-hidden="true"></i>{{ $used_product->car->milage ?? ''}} miles</li>
+                                        <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $used_product->car->milage ?? ''}} Registration Year</li>
                                         <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $used_product->car->model->name ?? ''}} model</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i>{{ $used_product->car->fuel_type->name ?? ''}}</li>
-                                        <li><i class="fa fa-user" aria-hidden="true"></i>{{ $used_product->car->brand->name ?? ''}} brand</li>
-                                        <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ $used_product->car->maximum_power ?? ''}} kW</li>
+                                        <li><i class="fa fa-car" aria-hidden="true"></i>{{ $used_product->car->fuel_type->name ?? ''}} Displacement</li>
+                                        <li><i class="fa fa-hourglass-end" aria-hidden="true"></i>{{ $used_product->car->brand->name ?? ''}} Fuel type</li>
+                                        <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ $used_product->car->maximum_power ?? ''}} Body type</li>
                                     </ul>
                                 </div>
                             </div>
