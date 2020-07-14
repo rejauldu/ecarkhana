@@ -343,9 +343,32 @@ car-details  -->
                                         </div>
                                         <div class="modal-body row">
                                             <div class="col-12">
-                                                <iframe @mobile class="size-11" @else width="730" height="570"
-                                                        @endmobile allowfullscreen style="border-style:none;"
-                                                        src="{{ route('panorama')  }}?panorama=assets/panorama/{{ $product->panorama ?? 'not-found.jpg' }}&amp;preview=assets/panorama/{{ $product->panorama_preview ?? 'not-found-preview.jpg' }}"></iframe>
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-toggle="tab" href="#internal">Internal</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#external">External</a>
+                                                    </li>
+                                                </ul>
+
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div id="internal" class="container tab-pane active"><br>
+                                                        <h3>Internal</h3>
+                                                        <div class="row">
+                                                            <div class="col-12"><div id="panorama"></div></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="external" class="container tab-pane fade"><br>
+                                                        <h3>External</h3>
+                                                        <div class="row">
+                                                            <div class="col-12"><div id="object" class=""></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1166,11 +1189,16 @@ End What a new button -->
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{ url('/') }}/css/countdown.css"/>
+    <link rel="stylesheet" href="{{ url('/') }}/css/pannellum.css"/>
+    <style>
+    </style>
 @endsection
 @section('script')
     <!-- 360-view -->
     <script type="text/javascript" src="{{ url('/') }}/js/jquery.flipper-responsive.js"></script>
     <script type="text/javascript" src="{{ url('/') }}/js/easeljs-0.6.0.min.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/pannellum.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/js/3deye.js?{{ time() }}"></script>
 
     <script>
         jQuery(function ($) {
@@ -1312,6 +1340,29 @@ End What a new button -->
                 }
             });
         })();
+    </script>
+    <script>
+        console.log("hello2");
+        $(document).ready(function(){
+            console.log("hello1");
+
+            console.log("hello");
+            $("#object").vc3dEye({
+                imagePath:"{{ url('/') }}/images/360-view/default/",
+                totalImages:36,
+                imageExtension:"jpg",
+                autoRotate:500,
+                autoRotateInactivityDelay:5000
+            });
+            pannellum.viewer('panorama', {
+                "type": "equirectangular",
+                "panorama": "{{ url('/') }}/assets/panorama/examplepano.jpg",
+                "preview": "{{ url('/') }}/assets/panorama/examplepano-preview.jpg",
+                "autoRotate":5,
+                "autoRotateInactivityDelay": 5000,
+                "orientationOnByDefault":true
+            });
+        });
     </script>
 @endsection
 
