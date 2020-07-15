@@ -427,7 +427,7 @@ car-details  -->
                                     class="text-right"> {{ $product->msrp ?? 0 }} </strong></li>
                             @if($product->condition_id == 2 || $product->condition_id == 3)
                                 <li><span>Remarks (any Prob): </span> <strong
-                                        class="text-right"> {{ $product->description ?? '' }} </strong></li>
+                                        class="text-right"> {!! $product->note ?? '' !!}  </strong></li>
                             @endif
                         </ul>
                     </div>
@@ -453,7 +453,6 @@ car-details  -->
                                     <form action="{{ route('auctions.store') }}" method="post" class="d-block">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}"/>
-
                                         <label class="u-dspn">Your max bid:</label>
                                         <input placeholder="" class="MaxBidClass" type="text" name="amount">
                                         @if(session()->has('amount'))
@@ -469,52 +468,60 @@ car-details  -->
                             </div>
                         </div>
                     @endif
-                    <div class="row twelvecol tablet-hidden">
-
-                        <div class="col-md-4 fourcol mobile-half-col">
-                            <ul>
-                                <li><i class="fa fa-500px" aria-hidden="true"></i> Make Year
-                                    <div class="twelve-name">{{ $product->car->manufacturing_year }}</div>
-                                </li>
-                                <li><i class="fa fa-road" aria-hidden="true"></i> Loan availability
-                                    <div class="twelve-name">@if($product->car->loan_available) Yes @elseNo @endif</div>
-                                </li>
-                                <li><i class="fa fa-hourglass-end" aria-hidden="true"></i> Fuel type
-                                    <div class="twelve-name">{{ $product->car->fuel_type->name ?? '' }}</div>
-                                </li>
-                            </ul>
+                    <h5>General Specification</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="details-block details-weight">
+                                <ul>
+                                    <li>
+                                        <span><i class="fa fa-industry text-red" aria-hidden="true"></i> Make Year: </span>
+                                        <strong class="text-right">{{ $product->car->manufacturing_year ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-cab text-red" aria-hidden="true"></i> Transmission: </span>
+                                        <strong class="text-right">{{ $product->car->transmission->name ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-fire text-red" aria-hidden="true"></i> Fuel Type: </span>
+                                        <strong class="text-right">{{ $product->car->fuel_type->name ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-balance-scale text-red" aria-hidden="true"></i> Gross Weight: </span>
+                                        <strong class="text-right">{{ $product->car->weight ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-power-off text-red" aria-hidden="true"></i> Maximum Power: </span>
+                                        <strong class="text-right">{{ $product->car->maximum_power ?? '' }}</strong>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-
-                        <div class="col-md-4 fourcol mobile-half-col">
-                            <ul>
-                                <li><i class="fa fa-cloud-upload" aria-hidden="true"></i> Gross weight
-                                    <div class="twelve-name">{{ $product->car->weight ?? '0' }}kg</div>
-                                </li>
-                                <li><i class="fa fa-snowflake-o" aria-hidden="true"></i>Gear box
-                                    <div class="twelve-name">{{ $product->car->gear_box->name ?? '' }}</div>
-                                </li>
-                                <li><i class="fa fa-taxi" aria-hidden="true"></i>Seating Capacity
-                                    <div class="twelve-name">{{ $product->car->seating_capacity->name ?? '' }}</div>
-                                </li>
-                            </ul>
+                        <div class="col-md-6">
+                            <div class="details-block details-weight">
+                                <ul>
+                                    <li>
+                                        <span><i class="fa fa-ticket text-red" aria-hidden="true"></i> Seating Capacity: </span>
+                                        <strong class="text-right">{{ $product->car->seating_capacity ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-car text-red" aria-hidden="true"></i> Drive Type: </span>
+                                        <strong class="text-right">{{ $product->car->drive_type->name ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-gear text-red" aria-hidden="true"></i> Gear Box: </span>
+                                        <strong class="text-right">{{ $product->car->gear_box->name ?? '' }}</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-money text-red" aria-hidden="true"></i> Loan Availability: </span>
+                                        <strong class="text-right">Upto {{ $product->car->loan_upto ?? '' }}%</strong>
+                                    </li>
+                                    <li>
+                                        <span><i class="fa fa-info-circle text-red" aria-hidden="true"></i> After sell service: </span>
+                                        <strong class="text-right">@if($product->car->after_sell_service) Yes @else No @endif</strong>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-
-                        <div class="col-md-4 fourcol last mobile-border-top mobile-hidden">
-                            <ul>
-                                <li><i class="fa fa-podcast" aria-hidden="true"></i> Drive type
-                                    <div class="twelve-name">{{ $product->car->drive_type->name ?? '' }}WD</div>
-                                </li>
-                                <li><i class="fa fa-rss-square" aria-hidden="true"></i> Transmission
-                                    <div class="twelve-name">
-                                        automatic
-                                    </div>
-                                </li>
-                                <li><i class="fa fa-road" aria-hidden="true"></i> Maximum power
-                                    <div class="twelve-name">{{ $product->car->maximum_power ?? '' }}bph</div>
-                                </li>
-                            </ul>
-                        </div>
-
                     </div>
                     <div id="tabs">
                         <ul class="tabs">
@@ -527,9 +534,8 @@ car-details  -->
                         <div id="tab1" class="tabcontent">
                             <ul class="smsaccordion">
                                 <li>
-                                    <a class="smstoggle">Engine and transmission<i class="fa fa-chevron-down"></i></a>
+                                    <a class="smstoggle">Engine and Transmission<i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner" style="display: block;">
-
                                         <li class="">
                                             <div class="list-label">Engine Type</div>
                                             <div class="list-stat">{{ $product->car->engine_type->name ?? '' }}</div>
@@ -588,7 +594,7 @@ car-details  -->
                                 </li>
 
                                 <li>
-                                    <a class="smstoggle"> weight and dimension<i class="fa fa-chevron-down"></i></a>
+                                    <a class="smstoggle"> Weight and Dimension<i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner">
                                         <li class="">
                                             <div class="list-label">Gross weight</div>
@@ -627,7 +633,7 @@ car-details  -->
                                     </ul>
                                 </li>
                                 <li>
-                                    <a class="smstoggle"> wheels tyre steering and brakes <i
+                                    <a class="smstoggle"> Wheels Tyre Steering and Brakes <i
                                             class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner">
                                         <li class="">
@@ -682,7 +688,7 @@ car-details  -->
                                 </li>
 
                                 <li>
-                                    <a class="smstoggle"> fuel and consumption <i class="fa fa-chevron-down"></i></a>
+                                    <a class="smstoggle"> Fuel and Consumption <i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner">
                                         <li class="">
                                             <div class="list-label">Fuel type</div>
@@ -698,7 +704,89 @@ car-details  -->
                                         </li>
                                     </ul>
                                 </li>
-
+                            </ul>
+                        </div>
+                        <div id="tab2" class="tabcontent">
+                            <div class="des-icon">
+                                <ul class="smsinner" style="display: block;">
+                                    <li class="">
+                                        <div class="list-label">Body type</div>
+                                        <div class="list-stat">{{ $product->car->body_type->name ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Make year</div>
+                                        <div class="list-stat">{{ $product->car->make_year ?? '(empty)' }}</div>
+                                    </li>
+                                    @if($product->condition_id == 3)
+                                        <li>
+                                            <div class="list-label">Registration year: </div>
+                                            <div class="list-stat">{{ $product->registration_year ?? '' }}</div>
+                                        </li>
+                                        <li>
+                                            <div class="list-label">Kms driven: </div>
+                                            <div class="list-stat">{{ $product->kms_driven ?? '' }}</div>
+                                        </li>
+                                    @elseif($product->condition_id == 2)
+                                        <li>
+                                            <div class="list-label">Auction grade: </div>
+                                            <div class="list-stat">{{ $product->auction_grade->name ?? '' }}</div>
+                                        </li>
+                                        <li>
+                                            <div class="list-label">Kms driven: </div>
+                                            <div class="list-stat">{{ $product->kms_driven ?? '' }}</div>
+                                        </li>
+                                    @endif
+                                    <li class="">
+                                        <div class="list-label">Boot Space</div>
+                                        <div class="list-stat">{{ $product->car->boot_space ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Airbag</div>
+                                        <div class="list-stat">{{ $product->car->airbag ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Dashboard Color</div>
+                                        <div class="list-stat">{{ $product->car->dashboard_color ?? '(empty)' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Wheel Base</div>
+                                        <div class="list-stat">{{ $product->car->wheel_base ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Color</div>
+                                        <div class="list-stat">{{ $product->color ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Finance Upto</div>
+                                        <div class="list-stat">{{ $product->finance_upto ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Supplier</div>
+                                        <div class="list-stat">{{ $product->supplier->name ?? '' }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            @if($product->condition_id == 2 || $product->condition_id == 3)
+                                <div class="des-content">
+                                    {{ $product->description ?? '' }}
+                                </div>
+                            @endif
+                        </div>
+                        <div id="tab3" class="tabcontent">
+                            <ul class="smsaccordion">
+                                <li>
+                                    <a class="smstoggle">Key features<i class="fa fa-chevron-down"></i></a>
+                                    <ul class="smsinner" style="display: block;">
+                                        @foreach($key_features as $key_feature)
+                                            @php($array = explode(",", $product->car->key_feature))
+                                            @if(in_array($key_feature->id, $array))
+                                                <li class="">
+                                                    <div class="list-stat">{{ $key_feature->name }}</div>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </li>
                                 <li>
                                     <a class="smstoggle"> Interior / Exterior <i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner">
@@ -712,8 +800,7 @@ car-details  -->
                                                             @php($array = explode(",", $product->car->interior_feature))
                                                             @if(in_array($interior_feature->id, $array))
                                                                 <li class="">
-                                                                    <div
-                                                                        class="list-stat">{{ $interior_feature->name }}</div>
+                                                                    <div class="list-stat">{{ $interior_feature->name }}</div>
                                                                 </li>
                                                             @endif
                                                         @endforeach
@@ -742,7 +829,7 @@ car-details  -->
                                 </li>
 
                                 <li>
-                                    <a class="smstoggle"> Safety and security <i class="fa fa-chevron-down"></i></a>
+                                    <a class="smstoggle"> Safety and Security <i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner">
                                         @foreach($safety_securities as $safety_security)
                                             @php($array = explode(",", $product->car->safety_security))
@@ -753,55 +840,12 @@ car-details  -->
                                     </ul>
                                 </li>
                                 <li>
-                                    <a class="smstoggle">Additional features <i class="fa fa-chevron-down"></i></a>
+                                    <a class="smstoggle">Additional Features <i class="fa fa-chevron-down"></i></a>
                                     <ul class="smsinner">
                                         @foreach($additional_features as $additional_feature)
                                             @php($array = explode(",", $product->car->additional_feature))
                                             @if(in_array($additional_feature->id, $array))
                                                 <p>{{ $additional_feature->name }}</p>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="tab2" class="tabcontent">
-                            <div class="des-icon">
-                                <ul>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>Body type</li>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>Make year</li>
-                                    @if($product->condition_id == 2 || $product->condition_id == 3)
-                                        <li><i class="fa fa-road" aria-hidden="true"></i>kms driven</li>
-                                    @endif
-                                    <li><i class="fa fa-hourglass-end" aria-hidden="true"></i>Boot space</li>
-                                    <li><i class="fa fa-500px" aria-hidden="true"></i> airbag</li>
-                                    <li><i class="fa fa-500px" aria-hidden="true"></i> Finance up to</li>
-                                    <li><i class="fa fa-cloud-upload" aria-hidden="true"></i>Wheel base</li>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>Color</li>
-                                    @if($product->condition_id == 3)
-                                        <li><i class="fa fa-500px" aria-hidden="true"></i> Registration year</li>
-                                    @endif
-                                    <li><i class="fa fa-500px" aria-hidden="true"></i> Manufacturing year</li>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>Location</li>
-                                </ul>
-                            </div>
-                            @if($product->condition_id == 2 || $product->condition_id == 3)
-                                <div class="des-content">
-                                    {{ $product->description ?? '' }}
-                                </div>
-                            @endif
-                        </div>
-                        <div id="tab3" class="tabcontent">
-                            <ul class="smsaccordion">
-                                <li>
-                                    <a class="smstoggle">Key features<i class="fa fa-chevron-down"></i></a>
-                                    <ul class="smsinner" style="display: block;">
-                                        @foreach($key_features as $key_feature)
-                                            @php($array = explode(",", $product->car->key_feature))
-                                            @if(in_array($key_feature->id, $array))
-                                                <li class="">
-                                                    <div class="list-stat">{{ $key_feature->name }}</div>
-                                                </li>
                                             @endif
                                         @endforeach
                                     </ul>
