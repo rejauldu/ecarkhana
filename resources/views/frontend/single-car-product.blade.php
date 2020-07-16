@@ -299,8 +299,7 @@ car-details  -->
                                  alt="">
                             <img class="img-fluid" src="{{ url('/') }}/assets/products/cars/{{ $product->car->image9 }}"
                                  alt="">
-                            <img class="img-fluid"
-                                 src="{{ url('/') }}/assets/products/cars/{{ $product->car->image10 }}" alt="">
+                            <img class="img-fluid" src="{{ url('/') }}/assets/products/cars/{{ $product->car->image10 }}">
                         </div>
                         <div class="slider slider-nav">
                             <img class="img-fluid" src="{{ url('/') }}/assets/products/cars/{{ $product->car->image1 }}"
@@ -321,8 +320,7 @@ car-details  -->
                                  alt="">
                             <img class="img-fluid" src="{{ url('/') }}/assets/products/cars/{{ $product->car->image9 }}"
                                  alt="">
-                            <img class="img-fluid"
-                                 src="{{ url('/') }}/assets/products/cars/{{ $product->car->image10 }}" alt="">
+                            <img class="img-fluid" src="{{ url('/') }}/assets/products/cars/{{ $product->car->image10 }}">
                         </div>
 
                         <div class="sms-360-view">
