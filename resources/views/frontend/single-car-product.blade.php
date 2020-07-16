@@ -715,7 +715,7 @@ car-details  -->
                                     </li>
                                     <li class="">
                                         <div class="list-label">Make year</div>
-                                        <div class="list-stat">{{ $product->car->make_year ?? '(empty)' }}</div>
+                                        <div class="list-stat">{{ $product->car->manufacturing_year ?? '' }}</div>
                                     </li>
                                     @if($product->condition_id == 3)
                                         <li>

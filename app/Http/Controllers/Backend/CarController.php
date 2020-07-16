@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Color;
 use App\Car;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
@@ -53,6 +54,7 @@ class CarController extends Controller
      */
     public function create()
     {
+        $dropdowns['colors'] = Color::all();
 		$dropdowns['brands'] = Brand::where('category_id', 1)->get();
 		$dropdowns['models'] = Model::where('category_id', 1)->get();
 		$dropdowns['body_types'] = BodyType::where('category_id', 1)->get();
@@ -137,6 +139,7 @@ class CarController extends Controller
      */
     public function edit($id)
     {
+        $dropdowns['colors'] = Color::all();
 		$dropdowns['brands'] = Brand::where('category_id', 1)->get();
 		$dropdowns['models'] = Model::where('category_id', 1)->get();
 		$dropdowns['body_types'] = BodyType::where('category_id', 1)->get();
@@ -175,6 +178,10 @@ class CarController extends Controller
 			$car->safety_security = explode(',', $car->safety_security);
 		if(isset($car->additional_feature))
 			$car->additional_feature = explode(',', $car->additional_feature);
+        if(isset($car->what_a_new))
+            $car->what_a_new = explode(',', $car->what_a_new);
+        if(isset($car->pros_cons))
+            $car->pros_cons = explode(',', $car->pros_cons);
         return view('backend.products.cars.create', $dropdowns);
     }
 
@@ -200,6 +207,10 @@ class CarController extends Controller
 			$data['additional_feature'] = implode(',', $data['additional_feature']);
 		if(!isset($data['loan_availability']))
 			$data['loan_availability'] = 0;
+        if(isset($data['what_a_new']))
+            $data['what_a_new'] = implode(',', $data['what_a_new']);
+        if(isset($data['pros_cons']))
+            $data['pros_cons'] = implode(',', $data['pros_cons']);
 		for($i=1; $i<=10; $i++) {
 			$file = $request->file('image'.$i);
 			if($file) {

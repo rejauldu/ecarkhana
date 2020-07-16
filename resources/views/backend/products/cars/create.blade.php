@@ -208,6 +208,17 @@
 														<label for="boot-space">Boot Space</label>
 														<input id="boot-space" type="text" class="form-control" name="boot_space" value="{{ $car->boot_space ?? '' }}" placeholder="Enter Boot Space" title="Enter Boot Space" />
 													</div>
+                                                    <div class="form-group">
+                                                        <label for="color">dashboard_ Color</label>
+                                                        <select id="color" name="dashboard_color_id" class="custom-select" required>
+                                                            <option value="0" selected>--Select Color--</option>
+                                                            @foreach($colors as $color)
+                                                                <option value="{{ $color->id }}" @if(isset($car) && $car->dashboard_color_id == $color->id) selected @endif>{{ $color->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <div class="valid-feedback">Valid.</div>
+                                                        <div class="invalid-feedback">Please fill out this field.</div>
+                                                    </div>
 													<div class="row">
 														<div class="col-6 form-group">
 															<input type="file" id="image1" name="image1" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image1-view')" accept="image/*" value="Upload image" />
