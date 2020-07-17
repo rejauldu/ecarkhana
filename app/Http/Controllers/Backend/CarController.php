@@ -33,17 +33,17 @@ use App\Dropdowns\SafetySecurity;
 use App\Dropdowns\AdditionalFeature;
 use App\Dropdowns\WhatANew;
 use App\Dropdowns\ProsCons;
+use App\Dropdowns\AfterSellService;
 
-class CarController extends Controller
-{
+class CarController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		$cars = Car::with('brand', 'model', 'package')->orderBy('id', 'desc')->get();
+    public function index() {
+        $cars = Car::with('brand', 'model', 'package')->orderBy('id', 'desc')->get();
         return view('backend.products.cars.index', compact('cars'));
     }
 
@@ -52,35 +52,35 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         $dropdowns['colors'] = Color::all();
-		$dropdowns['brands'] = Brand::where('category_id', 1)->get();
-		$dropdowns['models'] = Model::where('category_id', 1)->get();
-		$dropdowns['body_types'] = BodyType::where('category_id', 1)->get();
-		$dropdowns['packages'] = Package::where('category_id', 1)->get();
-		$dropdowns['displacements'] = Displacement::where('category_id', 1)->get();
-		$dropdowns['ground_clearances'] = GroundClearance::where('category_id', 1)->get();
-		$dropdowns['drive_types'] = DriveType::where('category_id', 1)->get();
-		$dropdowns['engine_types'] = EngineType::where('category_id', 1)->get();
-		$dropdowns['fuel_types'] = FuelType::where('category_id', 1)->get();
-		$dropdowns['conditions'] = Condition::where('category_id', 1)->get();
-		$dropdowns['transmissions'] = Transmission::where('category_id', 1)->get();
-		$dropdowns['selling_capacities'] = SellingCapacity::where('category_id', 1)->get();
-		$dropdowns['gear_boxes'] = GearBox::where('category_id', 1)->get();
-		$dropdowns['wheel_bases'] = WheelBase::where('category_id', 1)->get();
-		$dropdowns['cylinders'] = Cylinder::where('category_id', 1)->get();
-		$dropdowns['wheel_types'] = WheelType::where('category_id', 1)->get();
-		$dropdowns['tyre_types'] = TyreType::where('category_id', 1)->get();
-		$dropdowns['front_brakes'] = FrontBrake::where('category_id', 1)->get();
-		$dropdowns['rear_brakes'] = RearBrake::where('category_id', 1)->get();
-		$dropdowns['key_features'] = KeyFeature::where('category_id', 1)->get();
-		$dropdowns['interior_features'] = InteriorFeature::all();
-		$dropdowns['exterior_features'] = ExteriorFeature::all();
-		$dropdowns['safety_securities'] = SafetySecurity::all();
-		$dropdowns['additional_features'] = AdditionalFeature::all();
-		$dropdowns['what_a_news'] = WhatANew::all();
-		$dropdowns['pros_conses'] = ProsCons::all();
+        $dropdowns['brands'] = Brand::where('category_id', 1)->get();
+        $dropdowns['models'] = Model::where('category_id', 1)->get();
+        $dropdowns['body_types'] = BodyType::where('category_id', 1)->get();
+        $dropdowns['packages'] = Package::where('category_id', 1)->get();
+        $dropdowns['displacements'] = Displacement::where('category_id', 1)->get();
+        $dropdowns['ground_clearances'] = GroundClearance::where('category_id', 1)->get();
+        $dropdowns['drive_types'] = DriveType::where('category_id', 1)->get();
+        $dropdowns['engine_types'] = EngineType::where('category_id', 1)->get();
+        $dropdowns['fuel_types'] = FuelType::where('category_id', 1)->get();
+        $dropdowns['conditions'] = Condition::where('category_id', 1)->get();
+        $dropdowns['transmissions'] = Transmission::where('category_id', 1)->get();
+        $dropdowns['selling_capacities'] = SellingCapacity::where('category_id', 1)->get();
+        $dropdowns['gear_boxes'] = GearBox::where('category_id', 1)->get();
+        $dropdowns['wheel_bases'] = WheelBase::where('category_id', 1)->get();
+        $dropdowns['cylinders'] = Cylinder::where('category_id', 1)->get();
+        $dropdowns['wheel_types'] = WheelType::where('category_id', 1)->get();
+        $dropdowns['tyre_types'] = TyreType::where('category_id', 1)->get();
+        $dropdowns['front_brakes'] = FrontBrake::where('category_id', 1)->get();
+        $dropdowns['rear_brakes'] = RearBrake::where('category_id', 1)->get();
+        $dropdowns['key_features'] = KeyFeature::where('category_id', 1)->get();
+        $dropdowns['interior_features'] = InteriorFeature::all();
+        $dropdowns['exterior_features'] = ExteriorFeature::all();
+        $dropdowns['safety_securities'] = SafetySecurity::all();
+        $dropdowns['additional_features'] = AdditionalFeature::all();
+        $dropdowns['what_a_news'] = WhatANew::all();
+        $dropdowns['pros_conses'] = ProsCons::all();
+        $dropdowns['after_sell_services'] = AfterSellService::all();
         return view('backend.products.cars.create', $dropdowns);
     }
 
@@ -90,34 +90,42 @@ class CarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $data = $request->except('_token', '_method');
-		if(isset($data['key_feature']))
-			$data['key_feature'] = implode(',', $data['key_feature']);
-		if(isset($data['exterior_feature']))
-			$data['exterior_feature'] = implode(',', $data['exterior_feature']);
-		if(isset($data['interior_feature']))
-			$data['interior_feature'] = implode(',', $data['interior_feature']);
-		if(isset($data['safety_security']))
-			$data['safety_security'] = implode(',', $data['safety_security']);
-		if(isset($data['additional_feature']))
-			$data['additional_feature'] = implode(',', $data['additional_feature']);
-		if(isset($data['what_a_new']))
-			$data['what_a_new'] = implode(',', $data['what_a_new']);
-		if(isset($data['pros_cons']))
-			$data['pros_cons'] = implode(',', $data['pros_cons']);
-		for($i=1; $i<=10; $i++) {
-			$file = $request->file('image'.$i);
-			if($file) {
-				$destination_path = 'assets/products/cars';
-				$new_name = time().'-image'.$i.'.'.$file->getClientOriginalExtension();
-				$file->move($destination_path, $new_name);
-				$data['image'.$i] = $new_name;
-			}
-		}
-		Car::create($data);
-		return redirect(route('cars.index'))->with('message', 'Car created successfully');
+        if (isset($data['key_feature']))
+            $data['key_feature'] = implode(',', $data['key_feature']);
+        if (isset($data['exterior_feature']))
+            $data['exterior_feature'] = implode(',', $data['exterior_feature']);
+        if (isset($data['interior_feature']))
+            $data['interior_feature'] = implode(',', $data['interior_feature']);
+        if (isset($data['safety_security']))
+            $data['safety_security'] = implode(',', $data['safety_security']);
+        if (isset($data['additional_feature']))
+            $data['additional_feature'] = implode(',', $data['additional_feature']);
+        if (isset($data['what_a_new']))
+            $data['what_a_new'] = implode(',', $data['what_a_new']);
+        if (isset($data['pros_cons']))
+            $data['pros_cons'] = implode(',', $data['pros_cons']);
+        if (isset($data['after_sell_service']))
+            $data['after_sell_service'] = implode(',', $data['after_sell_service']);
+        $car = Car::create($data);
+        $panorama = $request->file('panorama');
+        if ($panorama) {
+            $destination_path = 'assets/products/cars/'.$car->id;
+            $new_name = 'panorama' . '.jpg';
+            $panorama->move($destination_path, $new_name);
+        }
+        $files = $request->file('360');
+        for ($i = 0; $i < count($files); $i++) {
+            $file = $files[$i];
+            if ($file) {
+                $destination_path = 'assets/products/cars/'.$car->id;
+                $new_name = ($i+1) . '.' . $file->getClientOriginalExtension();
+                $file->move($destination_path, $new_name);
+            }
+        }
+        
+        return redirect(route('cars.index'))->with('message', 'Car created successfully');
     }
 
     /**
@@ -126,8 +134,7 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -137,51 +144,53 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $dropdowns['colors'] = Color::all();
-		$dropdowns['brands'] = Brand::where('category_id', 1)->get();
-		$dropdowns['models'] = Model::where('category_id', 1)->get();
-		$dropdowns['body_types'] = BodyType::where('category_id', 1)->get();
-		$dropdowns['packages'] = Package::where('category_id', 1)->get();
-		$dropdowns['displacements'] = Displacement::where('category_id', 1)->get();
-		$dropdowns['ground_clearances'] = GroundClearance::where('category_id', 1)->get();
-		$dropdowns['drive_types'] = DriveType::where('category_id', 1)->get();
-		$dropdowns['engine_types'] = EngineType::where('category_id', 1)->get();
-		$dropdowns['fuel_types'] = FuelType::where('category_id', 1)->get();
-		$dropdowns['conditions'] = Condition::where('category_id', 1)->get();
-		$dropdowns['transmissions'] = Transmission::where('category_id', 1)->get();
-		$dropdowns['selling_capacities'] = SellingCapacity::where('category_id', 1)->get();
-		$dropdowns['gear_boxes'] = GearBox::where('category_id', 1)->get();
-		$dropdowns['wheel_bases'] = WheelBase::where('category_id', 1)->get();
-		$dropdowns['cylinders'] = Cylinder::where('category_id', 1)->get();
-		$dropdowns['wheel_types'] = WheelType::where('category_id', 1)->get();
-		$dropdowns['tyre_types'] = TyreType::where('category_id', 1)->get();
-		$dropdowns['front_brakes'] = FrontBrake::where('category_id', 1)->get();
-		$dropdowns['rear_brakes'] = RearBrake::where('category_id', 1)->get();
-		$dropdowns['key_features'] = KeyFeature::where('category_id', 1)->get();
-		$dropdowns['interior_features'] = InteriorFeature::all();
-		$dropdowns['exterior_features'] = ExteriorFeature::all();
-		$dropdowns['safety_securities'] = SafetySecurity::all();
-		$dropdowns['additional_features'] = AdditionalFeature::all();
-		$dropdowns['what_a_news'] = WhatANew::all();
-		$dropdowns['pros_conses'] = ProsCons::all();
-		$car = Car::find($id);
-		$dropdowns['car'] = $car;
-		if(isset($car->key_feature))
-			$car->key_feature = explode(',', $car->key_feature);
-		if(isset($car->exterior_feature))
-			$car->exterior_feature = explode(',', $car->exterior_feature);
-		if(isset($car->interior_feature))
-			$car->interior_feature = explode(',', $car->interior_feature);
-		if(isset($car->safety_security))
-			$car->safety_security = explode(',', $car->safety_security);
-		if(isset($car->additional_feature))
-			$car->additional_feature = explode(',', $car->additional_feature);
-        if(isset($car->what_a_new))
+        $dropdowns['brands'] = Brand::where('category_id', 1)->get();
+        $dropdowns['models'] = Model::where('category_id', 1)->get();
+        $dropdowns['body_types'] = BodyType::where('category_id', 1)->get();
+        $dropdowns['packages'] = Package::where('category_id', 1)->get();
+        $dropdowns['displacements'] = Displacement::where('category_id', 1)->get();
+        $dropdowns['ground_clearances'] = GroundClearance::where('category_id', 1)->get();
+        $dropdowns['drive_types'] = DriveType::where('category_id', 1)->get();
+        $dropdowns['engine_types'] = EngineType::where('category_id', 1)->get();
+        $dropdowns['fuel_types'] = FuelType::where('category_id', 1)->get();
+        $dropdowns['conditions'] = Condition::where('category_id', 1)->get();
+        $dropdowns['transmissions'] = Transmission::where('category_id', 1)->get();
+        $dropdowns['selling_capacities'] = SellingCapacity::where('category_id', 1)->get();
+        $dropdowns['gear_boxes'] = GearBox::where('category_id', 1)->get();
+        $dropdowns['wheel_bases'] = WheelBase::where('category_id', 1)->get();
+        $dropdowns['cylinders'] = Cylinder::where('category_id', 1)->get();
+        $dropdowns['wheel_types'] = WheelType::where('category_id', 1)->get();
+        $dropdowns['tyre_types'] = TyreType::where('category_id', 1)->get();
+        $dropdowns['front_brakes'] = FrontBrake::where('category_id', 1)->get();
+        $dropdowns['rear_brakes'] = RearBrake::where('category_id', 1)->get();
+        $dropdowns['key_features'] = KeyFeature::where('category_id', 1)->get();
+        $dropdowns['interior_features'] = InteriorFeature::all();
+        $dropdowns['exterior_features'] = ExteriorFeature::all();
+        $dropdowns['safety_securities'] = SafetySecurity::all();
+        $dropdowns['additional_features'] = AdditionalFeature::all();
+        $dropdowns['what_a_news'] = WhatANew::all();
+        $dropdowns['pros_conses'] = ProsCons::all();
+        $dropdowns['after_sell_services'] = AfterSellService::all();
+        $car = Car::find($id);
+        $dropdowns['car'] = $car;
+        if (isset($car->key_feature))
+            $car->key_feature = explode(',', $car->key_feature);
+        if (isset($car->exterior_feature))
+            $car->exterior_feature = explode(',', $car->exterior_feature);
+        if (isset($car->interior_feature))
+            $car->interior_feature = explode(',', $car->interior_feature);
+        if (isset($car->safety_security))
+            $car->safety_security = explode(',', $car->safety_security);
+        if (isset($car->additional_feature))
+            $car->additional_feature = explode(',', $car->additional_feature);
+        if (isset($car->what_a_new))
             $car->what_a_new = explode(',', $car->what_a_new);
-        if(isset($car->pros_cons))
+        if (isset($car->pros_cons))
             $car->pros_cons = explode(',', $car->pros_cons);
+        if (isset($car->after_sell_service))
+            $car->after_sell_service = explode(',', $car->after_sell_service);
         return view('backend.products.cars.create', $dropdowns);
     }
 
@@ -192,36 +201,43 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $data = $request->except('_token', '_method');
-		if(isset($data['key_feature']))
-			$data['key_feature'] = implode(',', $data['key_feature']);
-		if(isset($data['exterior_feature']))
-			$data['exterior_feature'] = implode(',', $data['exterior_feature']);
-		if(isset($data['interior_feature']))
-			$data['interior_feature'] = implode(',', $data['interior_feature']);
-		if(isset($data['safety_security']))
-			$data['safety_security'] = implode(',', $data['safety_security']);
-		if(isset($data['additional_feature']))
-			$data['additional_feature'] = implode(',', $data['additional_feature']);
-		if(!isset($data['loan_availability']))
-			$data['loan_availability'] = 0;
-        if(isset($data['what_a_new']))
+        if (isset($data['key_feature']))
+            $data['key_feature'] = implode(',', $data['key_feature']);
+        if (isset($data['exterior_feature']))
+            $data['exterior_feature'] = implode(',', $data['exterior_feature']);
+        if (isset($data['interior_feature']))
+            $data['interior_feature'] = implode(',', $data['interior_feature']);
+        if (isset($data['safety_security']))
+            $data['safety_security'] = implode(',', $data['safety_security']);
+        if (isset($data['additional_feature']))
+            $data['additional_feature'] = implode(',', $data['additional_feature']);
+        if (!isset($data['loan_availability']))
+            $data['loan_availability'] = 0;
+        if (isset($data['what_a_new']))
             $data['what_a_new'] = implode(',', $data['what_a_new']);
-        if(isset($data['pros_cons']))
+        if (isset($data['pros_cons']))
             $data['pros_cons'] = implode(',', $data['pros_cons']);
-		for($i=1; $i<=10; $i++) {
-			$file = $request->file('image'.$i);
-			if($file) {
-				$destination_path = 'assets/products/cars';
-				$new_name = $id.'-image'.$i.'.'.$file->getClientOriginalExtension();
-				$file->move($destination_path, $new_name);
-				$data['image'.$i] = $new_name;
-			}
-		}
-		Car::find($id)->update($data);
-		return redirect(route('cars.index'))->with('message', 'Car updated successfully');
+        if (isset($data['after_sell_service']))
+            $data['after_sell_service'] = implode(',', $data['after_sell_service']);
+        $panorama = $request->file('panorama');
+        if ($panorama) {
+            $destination_path = 'assets/products/cars/'.$id;
+            $new_name = 'panorama' . '.jpg';
+            $panorama->move($destination_path, $new_name);
+        }
+        $files = $request->file('360');
+        for ($i = 0; $i < count($files); $i++) {
+            $file = $files[$i];
+            if ($file) {
+                $destination_path = 'assets/products/cars/'.$id;
+                $new_name = ($i+1) . '.' . $file->getClientOriginalExtension();
+                $file->move($destination_path, $new_name);
+            }
+        }
+        Car::find($id)->update($data);
+        return redirect(route('cars.index'))->with('message', 'Car updated successfully');
     }
 
     /**
@@ -230,8 +246,8 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }
