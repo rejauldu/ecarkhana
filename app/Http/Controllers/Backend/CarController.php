@@ -80,7 +80,6 @@ class CarController extends Controller {
         $dropdowns['additional_features'] = AdditionalFeature::all();
         $dropdowns['what_a_news'] = WhatANew::all();
         $dropdowns['pros_conses'] = ProsCons::all();
-        $dropdowns['after_sell_services'] = AfterSellService::all();
         return view('backend.products.cars.create', $dropdowns);
     }
 
@@ -106,8 +105,6 @@ class CarController extends Controller {
             $data['what_a_new'] = implode(',', $data['what_a_new']);
         if (isset($data['pros_cons']))
             $data['pros_cons'] = implode(',', $data['pros_cons']);
-        if (isset($data['after_sell_service']))
-            $data['after_sell_service'] = implode(',', $data['after_sell_service']);
         $car = Car::create($data);
         $panorama = $request->file('panorama');
         if ($panorama) {
@@ -172,7 +169,6 @@ class CarController extends Controller {
         $dropdowns['additional_features'] = AdditionalFeature::all();
         $dropdowns['what_a_news'] = WhatANew::all();
         $dropdowns['pros_conses'] = ProsCons::all();
-        $dropdowns['after_sell_services'] = AfterSellService::all();
         $car = Car::find($id);
         $dropdowns['car'] = $car;
         if (isset($car->key_feature))
@@ -189,8 +185,6 @@ class CarController extends Controller {
             $car->what_a_new = explode(',', $car->what_a_new);
         if (isset($car->pros_cons))
             $car->pros_cons = explode(',', $car->pros_cons);
-        if (isset($car->after_sell_service))
-            $car->after_sell_service = explode(',', $car->after_sell_service);
         return view('backend.products.cars.create', $dropdowns);
     }
 
@@ -219,8 +213,6 @@ class CarController extends Controller {
             $data['what_a_new'] = implode(',', $data['what_a_new']);
         if (isset($data['pros_cons']))
             $data['pros_cons'] = implode(',', $data['pros_cons']);
-        if (isset($data['after_sell_service']))
-            $data['after_sell_service'] = implode(',', $data['after_sell_service']);
         $panorama = $request->file('panorama');
         if ($panorama) {
             $destination_path = 'assets/products/cars/'.$id;

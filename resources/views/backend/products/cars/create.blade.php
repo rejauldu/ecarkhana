@@ -426,17 +426,6 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">After sell service</div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <div class="row">
-                                                            @foreach($after_sell_services as $after_sell_service)
-                                                            <div class="col-6">
-                                                                <input type="checkbox" class="custom-control-input" id="after-sell-service-{{ $after_sell_service->id }}" name="after_sell_service[]" value="{{ $after_sell_service->id }}" @if(isset($car) && $car->after_sell_service && in_array($after_sell_service->id, $car->after_sell_service)) checked @endif>
-                                                                <label class="custom-control-label" for="after-sell-service-{{ $after_sell_service->id }}">{{ $after_sell_service->name }}</label>
-                                                            </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
                                                     <div class="form-group">
                                                         <button id="profile-submit" class="btn btn-theme mt-5" type="submit">Store</button>
                                                     </div>
