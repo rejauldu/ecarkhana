@@ -31,9 +31,55 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="slider-slick">
-                    <div class="slider slider-for detail-big-motorcycle-gallery">
+                    <div class="slider slider-for detail-big-car-gallery">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image2 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image3 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image4 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image5 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image6 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image7 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image8 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image9 }}"
+                             alt="">
+                        <img class="img-fluid"
+                             src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image10 }}">
                     </div>
                     <div class="slider slider-nav">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image2 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image3 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image4 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image5 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image6 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image7 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image8 }}"
+                             alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image9 }}"
+                             alt="">
+                        <img class="img-fluid"
+                             src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image10 }}">
+                    </div>
+
+                    <div class="sms-360-view">
+                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg-360">
+                            <img src="{{ url('/') }}/images/360-view.png" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -588,7 +634,7 @@
                         <h5>Share now</h5>
                         <ul>
                             <li>
-                                <a href="http://www.facebook.com/sharer.php?u={{ Request::url() }}" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+                                <a href="https://www.facebook.com/sharer.php?u={{ Request::url() }}" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
                             </li>
                             <li>
                                 <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ $product->note }}&url={{ Request::url() }}" data-size="large"><i class="fa fa-twitter"></i> Twitter</a>
@@ -597,13 +643,13 @@
                                 <a href="whatsapp://send?text={{ Request::url() }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i> WhatsApp</a>
                             </li>
                             <li>
-                                <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ Request::url() }}" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url() }}" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a>
                             </li>
                             <li>
-                                <a href="http://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ url('/') }}/assets/products/{{ $product->image1 ?? 'not-found.jpg' }}"&description={{ $product->note }}" class="pin-it-button" count-layout="horizontal"><i class="fa fa-pinterest"></i> Pinterest</a>
+                                <a href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ url('/') }}/assets/products/{{ $product->image1 ?? 'not-found.jpg' }}"&description={{ $product->note }}" class="pin-it-button" count-layout="horizontal"><i class="fa fa-pinterest"></i> Pinterest</a>
                             </li>
                             <li>
-                                <a href="http://reddit.com/submit?url={{ Request::url() }}&title={{ $product->name }}" target="_blank"><i class="fa fa-whatsapp"></i> Reddit</a>
+                                <a href="https://reddit.com/submit?url={{ Request::url() }}&title={{ $product->name }}" target="_blank"><i class="fa fa-whatsapp"></i> Reddit</a>
                             </li>
                         </ul>
                     </div>
@@ -670,7 +716,7 @@
                                 <div class="item">
                                     <div class="featured-car-list">
                                         <div class="featured-car-img">
-                                            <a href=""><img src="{{ url('/') }}/assets/products/motorcycles/{{ $related_product->motorcycle->image1 }}" class="img-responsive" alt="Image"></a>
+                                            <a href=""><img src="{{ url('/') }}/assets/products/{{ $related_product->motorcycle->id }}/{{ $related_product->motorcycle->image1 }}" class="img-responsive" alt="Image"></a>
                                             <div class="label_icon">{{ $related_product->condition->name }}</div>
                                             <div class="compare_item">
                                                 <div class="checkbox">
@@ -704,7 +750,20 @@
         </div>
     </div>
 </section>
-
+<div class="modal fade bd-example-modal-lg-360" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body row">
+                <div class="clearfix col-12">
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="col-12 size-32"><div id="object" class="size-child"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--=================================End car-details -->
 
 <!--=================================Start What a new button -->
@@ -765,6 +824,7 @@
 <!-- 360-view -->
 <script type="text/javascript" src="{{ url('/') }}/js/jquery.flipper-responsive.js"></script>
 <script type="text/javascript" src="{{ url('/') }}/js/easeljs-0.6.0.min.js"></script>
+<script type="text/javascript" src="{{ url('/') }}/js/3deye.js?{{ time() }}"></script>
 
 <script>
     jQuery(function($) {
@@ -902,5 +962,16 @@
     e.classList.add('active');
     document.getElementById('feedback-score').value = e.innerHTML;
     }
+</script>
+<script>
+    $(document).ready(function(){
+        $("#object").vc3dEye({
+            imagePath:"{{ url('/') }}/assets/products/17/",
+            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."\assets\products\\17", FilesystemIterator::SKIP_DOTS)) }},
+            imageExtension:"jpg",
+            autoRotate:500,
+            autoRotateInactivityDelay:5000
+        });
+    });
 </script>
 @endsection
