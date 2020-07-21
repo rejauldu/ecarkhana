@@ -395,6 +395,7 @@ Start Used Cars In Your City And Budget -->
 						@endforeach
                     </div>
                 </div>
+                <a href="car-listing" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -720,6 +721,400 @@ Start Popular car -->
     </section>
     <!--=================================
 End Popular car -->
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-lg-12 col-sm-12">
+                    <div class="section-title">
+                        <span>What Our Happy Clients say about us</span>
+                        <h2>Recondition Cars </h2>
+                        <div class="separator"></div>
+                    </div>
+                    <div class="owl-carousel owl-theme owl-loaded owl-drag" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+						                        
+						                        
+						                    <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-750px, 0px, 0px); transition: all 0.25s ease 0s; width: 2000px;"><div class="owl-item cloned" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="3" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2015 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/3">Hank Bradtke</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 96 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item cloned" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="1" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2020 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/1">Ms. Hattie DuBuque MD</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 86 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item cloned" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="3" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2015 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/3">Hank Bradtke</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 96 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item active" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="1" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2020 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/1">Ms. Hattie DuBuque MD</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 86 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item active" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="3" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2015 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/3">Hank Bradtke</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 96 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item cloned active" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="1" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2020 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/1">Ms. Hattie DuBuque MD</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 86 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item cloned" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="3" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2015 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/3">Hank Bradtke</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 96 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div><div class="owl-item cloned" style="width: 230px; margin-right: 20px;"><div class="item">
+                            <div class="car-item text-center">
+                                <div class="car-image">
+                                    <img class="img-fluid" src="http://ecarkhana/assets/products/cars/default.jpg" alt="">
+                                    <div class="car-overlay-banner">
+                                        <ul>
+                                            <li>
+                                                <div class="compare_item">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" class="compare-checkbox" product-id="1" id="compare2">
+                                                        <label for="compare2">Compare</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="car-list">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> 2020</li>
+                                        <li><i class="fa fa-cog"></i> Auto</li>
+                                        <li><i class="fa fa-dashboard"></i> 2020 mi</li>
+                                    </ul>
+                                </div>
+                                <div class="car-content">
+                                    <!-- <div class="star">
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star  orange-color"></i>
+                                        <i class="fa  fa-star-o  orange-color"></i>
+                                    </div> -->
+                                    <div class="location-list">
+                                    <ul class="sms-list-inline">
+                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
+                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                    </ul>
+                                </div>
+
+                                    <a href="http://ecarkhana/single-car-product/1">Ms. Hattie DuBuque MD</a>
+                                    <div class="separator"></div>
+                                    <div class="price">
+                                        <!--<span class="old-price">$35,568</span>-->
+                                        <span class="new-price">৳ 86 </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-angle-left fa-2x"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button></div><div class="owl-dots disabled"><button role="button" class="owl-dot active"><span></span></button></div></div>
+                </div>
+</div>
+</div>
+</section>
 
 
     <!--=================================

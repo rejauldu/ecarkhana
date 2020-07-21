@@ -13,6 +13,12 @@
    Start Dealer -->
     <section class="inner_pages">
         <div class="container">
+        <div class="sms-search-box">
+        <form action="#" class="search-wrapper cf">
+        <input type="text" placeholder="Search here..." required="">
+        <button type="submit">Search</button>
+    </form>
+        </div>
             <div class="result-sorting-wrapper">
                 <div class="sorting-count">
                     <p>1 - 6 <span>of 50 Results for your search.</span></p>

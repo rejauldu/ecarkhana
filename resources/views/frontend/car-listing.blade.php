@@ -66,38 +66,7 @@ product-listing  -->
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-8">
-                    <div class="sorting-options-main">
-                        @include('layouts.frontend.car-filter')
-                        <div class="row sorting-options">
-                            <div class="col-lg-5">
-                                <h5>All Cars</h5>
-                            </div>
-                            <div class="col-lg-3 text-right">
-                                <div class="selected-box">
-									<select>
-										<option>Show</option>
-										<option>1</option>
-										<option>2 </option>
-										<option>3 </option>
-										<option>4 </option>
-										<option>5 </option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-4 text-right">
-								<div class="selected-box">
-									<select>
-										<option>Sort by</option>
-										<option>Price: Lowest first</option>
-										<option>Price: Highest first </option>
-										<option>Product Name: A to Z </option>
-										<option>Product Name: Z to A </option>
-										<option>In stock</option>
-									</select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
                     <div class="row">
 						@foreach($products as $product)
                         <div class="col-lg-4">

@@ -18,7 +18,7 @@ Auction product-listing  -->
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="sorting-options-main">
-                        <div id="filter_form2 car-listing">
+                        <!-- <div id="filter_form2 car-listing">
                             <div class="container">
                                 <nav>
                                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -321,7 +321,14 @@ Auction product-listing  -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <div class="sms-search-box">
+        <form action="#" class="search-wrapper cf">
+        <input type="text" placeholder="Search here..." required="">
+        <button type="submit">Search</button>
+    </form>
+        </div>
+
                         <div class="row sorting-options">
                             <div class="col-lg-5">
                                 <h5>Group Buying Products</h5>
@@ -369,7 +376,7 @@ Auction product-listing  -->
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a href="single-bike-product.html">Toyota avalon hybrid </a>
+                                    <a href="single-bike-product.html">Toyota avalon hybrid <span class="remaining">(120)</span> </a>
                                     <div class="separator"></div>
                                     <div class="price">
                                         <span class="new-price">$32,698 </span>
@@ -393,7 +400,7 @@ Auction product-listing  -->
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a href="single-bike-product.html">Hyundai santa fe sport </a>
+                                    <a href="single-bike-product.html">Hyundai santa fe sport  <span class="remaining">(120)</span> </a>
                                     <div class="separator"></div>
                                     <div class="price">
                                         <span class="new-price">$32,698 </span>
@@ -417,7 +424,7 @@ Auction product-listing  -->
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a href="single-bike-product.html">Lexus is f</a>
+                                    <a href="single-bike-product.html">Lexus is f  <span class="remaining">(120)</span> </a>
                                     <div class="separator"></div>
                                     <div class="price">
                                         <span class="new-price">$32,698 </span>
@@ -441,7 +448,7 @@ Auction product-listing  -->
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a href="single-bike-product.html">Acura Rsx</a>
+                                    <a href="single-bike-product.html">Acura Rsx  <span class="remaining">(120)</span> </a>
                                     <div class="separator"></div>
                                     <div class="price">
                                         <span class="new-price">$32,698 </span>
@@ -465,7 +472,7 @@ Auction product-listing  -->
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a href="single-bike-product.html">GTA 5 Lowriders DLC</a>
+                                    <a href="single-bike-product.html">GTA 5 Lowriders DLC  <span class="remaining">(120)</span> </a>
                                     <div class="separator"></div>
                                     <div class="price">
                                         <span class="new-price">$32,698 </span>
@@ -489,7 +496,7 @@ Auction product-listing  -->
                                     </ul>
                                 </div>
                                 <div class="car-content">
-                                    <a href="single-bike-product.html"> Lexus GS 450h</a>
+                                    <a href="single-bike-product.html"> Lexus GS 450h  <span class="remaining">(120)</span> </a>
                                     <div class="separator"></div>
                                     <div class="price">
                                         <span class="new-price">$32,698 </span>
