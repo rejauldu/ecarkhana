@@ -8,7 +8,7 @@
 @endif
 @include('layouts.frontend.motorcycle-background')
 <!--=================================car-details  -->
-<section class="car-details page-section-ptb">
+<section class="car-details page-section-ptb" id="product">
     <div class="container">
         <div class="row bike-space">
             <div class="col-md-9">
@@ -91,7 +91,7 @@
                         <div class="inc qtybutton" @click="temp_quantity+=1">+</div>
                     </div>
                     <div class="add_to_cart_btn">
-                        <a href="#" @click.prevent="addToCart()">add to cart</a>
+                        <a href="#" @click.prevent="floatImage($event)">add to cart</a>
                     </div>
                     <div class="wishlist">
                         <a href="#"><i class="fa fa-heart-o"></i></a>
@@ -646,7 +646,7 @@
                                 <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url() }}" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a>
                             </li>
                             <li>
-                                <a href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ url('/') }}/assets/products/{{ $product->image1 ?? 'not-found.jpg' }}"&description={{ $product->note }}" class="pin-it-button" count-layout="horizontal"><i class="fa fa-pinterest"></i> Pinterest</a>
+                                <a href="https://pinterest.com/pin/create/button/?url={{ Request::url() }}&media={{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}"&description={{ $product->note }}" class="pin-it-button" count-layout="horizontal"><i class="fa fa-pinterest"></i> Pinterest</a>
                             </li>
                             <li>
                                 <a href="https://reddit.com/submit?url={{ Request::url() }}&title={{ $product->name }}" target="_blank"><i class="fa fa-whatsapp"></i> Reddit</a>
@@ -779,48 +779,117 @@
     </div>
 </div>
 @endsection
+@section('style')
+<style>
+html, body {
+  position:relative;
+}
+.float-it {
+	-webkit-transition: all 1000ms ease-out;
+       -moz-transition: all 1000ms ease-out;
+         -o-transition: all 1000ms ease-out;
+            transition: all 1000ms ease-out;
+    z-index: 999999;
+    display: block;
+}
+</style>
+@endsection
 @section('script')
 <script>
+
     var app2 = new Vue({
-    el: '#add-to-cart',
-            data: {
-            temp_quantity:1,
+      el: '#product',
+      data: {
+    		temp_quantity:1
+      },
+      methods: {
+            floatImage: function (e) {
+                var img = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('img.slick-active');
+                console.log(img);
+                var cloned = img.cloneNode();
+                var coords = this.getCoords(img);
+                var cart_coords = this.getCoords(document.getElementById('cart'));
+                
+                var middle_percent = 100; /* Just enter the middle point size *1/4;*/
+                
+                cloned.style.top = coords.top+"px";
+                cloned.style.left = coords.left+"px";
+                cloned.style.width = img.width+"px";
+                cloned.style.height = img.height+"px";
+                cloned.style.position = "absolute";
+                cloned.classList.add('float-it');
+                document.body.append(cloned);
+                
+                setTimeout(function(){
+                	cloned.style.top = cart_coords.top+"px"; /*This is the middle point */
+                	cloned.style.left = cart_coords.left-100+"px";
+                	cloned.style.width = img.offsetWidth*middle_percent/400+"px";
+                	cloned.style.height = img.offsetHeight*middle_percent/400+"px";
+                	cloned.style.position = "absolute";
+                }, 100);
+                setTimeout(function(){
+                	cloned.style.top = cart_coords.top+10+"px";
+                	cloned.style.left = cart_coords.left+10+"px";
+                	cloned.style.width = "0px";
+                	cloned.style.height = "0px";
+                	cloned.style.opacity = 0;
+                }, 10*middle_percent);
+                var _this = this;
+                setTimeout(function(){
+                    _this.addToCart();
+                }, 1500);
             },
-            methods: {
             addToCart: function() {
-            if (this.temp_quantity < 1) {
-            this.temp_quantity = 1;
-            return;
-            }
-            var is_same = false;
-            for (let i = 0; i < cart.products.length; i++) {
-            if (cart.products[i].id == {{ $product->id }}) {
-            cart.products[i].quantity = parseInt(cart.products[i].quantity) + parseInt(this.temp_quantity);
-            is_same = true;
-            break;
-            }
-            }
-            if (!is_same) {
-            let product = {
-            "id": {{ $product->id }},
-                    "photo": "{{ url('/') }}/images/bike/cart-img.webp",
-                    "quantity": this.temp_quantity,
-                    "price": {{ $product->msrp }},
-                    "brand": "{{ $product->brand->name }}",
-                    "model": "{{ $product->model->name }}"
-            };
-            cart.products.unshift(product);
-            }
-            localStorage.cart_products = JSON.stringify(cart.products);
-            }
-            },
-            watch: {
-            temp_quantity: function() {
-            if (this.temp_quantity < 1)
-                    this.temp_quantity = 1;
-            }
-            }
-    });</script>
+    			if(this.temp_quantity<1) {
+    				this.temp_quantity = 1;
+    				return;
+    			}
+    			var is_same = false;
+    			for(let i=0; i<cart.products.length; i++) {
+    				if(cart.products[i].id == {{ $product->id }}) {
+    					cart.products[i].quantity = parseInt(cart.products[i].quantity)+parseInt(this.temp_quantity);
+    					is_same = true;
+    					break;
+    				}
+    			}
+    			if(!is_same) {
+    				let product = {
+    					"id": {{ $product->id }},
+    					"quantity": this.temp_quantity,
+    					"msrp": {{ $product->msrp }},
+    					"name": "{{ $product->name }}",
+    					"image1": "{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg'}}",
+    					"note": @json($product->note)
+    				};
+    				cart.products.unshift(product);
+    			}
+    			localStorage.cart = JSON.stringify(cart.products);
+    		},
+        	getCoords: function(elem) { // crossbrowser version
+        		var box = elem.getBoundingClientRect();
+        
+        		var body = document.body;
+        		var docEl = document.documentElement;
+        
+        		var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+        		var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+        
+        		var clientTop = docEl.clientTop || body.clientTop || 0;
+        		var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        
+        		var top  = box.top +  scrollTop - clientTop;
+        		var left = box.left + scrollLeft - clientLeft;
+        
+        		return { top: Math.round(top), left: Math.round(left) };
+        	},
+        	limitQuantity: function() {
+        	    if(this.temp_quantity<12)
+        	        this.temp_quantity = 12;
+        	}
+        }
+    });
+</script>
+
 <!-- 360-view -->
 <script type="text/javascript" src="{{ url('/') }}/js/jquery.flipper-responsive.js"></script>
 <script type="text/javascript" src="{{ url('/') }}/js/easeljs-0.6.0.min.js"></script>
@@ -966,12 +1035,13 @@
 <script>
     $(document).ready(function(){
         $("#object").vc3dEye({
-            imagePath:"{{ url('/') }}/assets/products/17/",
-            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."\assets\products\\17", FilesystemIterator::SKIP_DOTS)) }},
+            imagePath:"{{ url('/') }}/assets/products/motorcycles/{{ $product->id }}/",
+            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/motorcycles/".$product->id, FilesystemIterator::SKIP_DOTS)) }},
             imageExtension:"jpg",
             autoRotate:500,
             autoRotateInactivityDelay:5000
         });
     });
 </script>
+
 @endsection

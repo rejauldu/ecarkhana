@@ -64,6 +64,7 @@ Route::get('requested-more-infos-unviewed', 'Frontend\RequestedMoreInfoControlle
 Route::resource('make-an-offers', 'Frontend\MakeAnOfferController');
 Route::get('make-an-offers-unviewed', 'Frontend\MakeAnOfferController@unviewed')->name('make-an-offers.unviewed');
 Route::resource('orders', 'Backend\OrderController');
+Route::get('order-complete', 'Backend\OrderController@orderComplete')->name('order-complete');
 Route::get('/panorama', function() {
     return view('frontend.panorama');
 })->name('panorama');
