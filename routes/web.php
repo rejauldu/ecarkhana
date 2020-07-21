@@ -45,6 +45,7 @@ Route::get('/search-page', 'Frontend\HomeController@searchPage')->name('search-p
 
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');
 Route::get('/single-accessories', 'Frontend\HomeController@singleAccessories')->name('single-accessories');
+Route::get('/single-bicycle-product/{product}', 'Frontend\HomeController@singleBicycleProduct')->name('single-bicycle-product');
 Route::get('/single-motorcycle-product/{product}', 'Frontend\HomeController@singleMotorcycleProduct')->name('single-motorcycle-product');
 Route::get('/single-blog', 'Frontend\HomeController@singleBlog')->name('single-blog');
 Route::get('/single-car-product/{product}', 'Frontend\HomeController@singleCarProduct')->name('single-car-product');

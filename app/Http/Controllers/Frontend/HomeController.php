@@ -349,6 +349,23 @@ class HomeController extends Controller
 	public function singleAccessories() {
 		return view('frontend.single-accessories');
 	}
+        public function singleBicycleProduct($id) {
+		$product = Product::has('car')
+			->with('bicycle.brand', 'bicycle.model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+			->where('id', $id)
+			->first();
+                dd($product);
+		$key_features = KeyFeature::where('category_id', 3)->get();
+		$after_sell_services = AfterSellService::where('category_id', 3)->get();
+		$related_products = Product::whereHas('bicycle', function($q) use($product) {
+			$q->where('brand_id', $product->bicycle->brand_id);
+			//->where('model_id', $product->model_id);
+		})
+		->with('bicycle', 'bicycle.brand', 'bicycle.model', 'supplier.region')
+		->get();
+		$product->after_sell_service = explode(',', $product->after_sell_service);
+		return view('frontend.single-car-product', compact('product', 'key_features', 'after_sell_services', 'related_products'));
+	}
 	public function singleMotorcycleProduct($id) {
 		$product = Product::has('motorcycle')
 			->with('auction_grade', 'brand', 'model', 'motorcycle.displacement', 'motorcycle.ground_clearance', 'motorcycle.engine_type', 'motorcycle.condition', 'motorcycle.front_brake', 'motorcycle.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')

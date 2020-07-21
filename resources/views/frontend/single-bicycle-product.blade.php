@@ -6,7 +6,7 @@
     {{ session()->get('message') }}
 </div>
 @endif
-@include('layouts.frontend.motorcycle-background')
+@include('layouts.frontend.bicycle-background')
 <!--=================================car-details  -->
 <section class="car-details page-section-ptb" id="product">
     <div class="container">
@@ -107,21 +107,22 @@
                     <h5>General Specification</h5>
                     <ul>
                         <li> <span>Bike type </span> <strong class="text-right">{{ $product->condition->name ?? '' }}</strong></li>
-                        <li> <span>Brand </span> <strong class="text-right">{{ $product->motorcycle->brand->name ?? '' }}</strong></li>
-                        <li> <span>Model</span> <strong class="text-right">{{ $product->motorcycle->model->name ?? '' }}</strong></li>
-                        <li> <span>Displacement</span> <strong class="text-right">{{ $product->motorcycle->displacement->name ?? '' }}</strong></li>
+                        <li> <span>Brand </span> <strong class="text-right">{{ $product->bicycle->brand->name ?? '' }}</strong></li>
+                        <li> <span>Model</span> <strong class="text-right">{{ $product->bicycle->model->name ?? '' }}</strong></li>
+                        <li> <span>Frame Size</span> <strong class="text-right">{{ $product->bicycle->frame_size ?? '' }}</strong></li>
                         @if($product->condition_id == 3)
                         <li> <span>Registration year: </span> <strong class="text-right">{{ $product->registration_year ?? '' }}</strong></li>
                         <li> <span>Kms driven: </span> <strong class="text-right">{{ $product->kms_driven ?? '' }}</strong></li>
                         @endif
-                        <li> <span>Engine type </span> <strong class="text-right">{{ $product->motorcycle->engine_type->name ?? '' }}</strong></li>
-                        <li> <span>Max power </span> <strong class="text-right">{{ $product->motorcycle->maximum_power ?? '' }}</strong></li>
-                        <li> <span>Max torque</span> <strong class="text-right">{{ $product->motorcycle->maximum_torque ?? '' }}</strong></li>
-                        <li> <span>Max speed </span> <strong class="text-right">{{ $product->motorcycle->maximum_speed ?? '' }}</strong></li>
-                        <li> <span>Mileage kmpl </span> <strong class="text-right">{{ $product->motorcycle->milage ?? '' }}</strong></li>
-                        <li> <span>Made origin  </span> <strong class="text-right">{{ $product->motorcycle->made_origin->name ?? '' }}</strong></li>
-                        <li> <span>Bike assemble</span> <strong class="text-right">{{ $product->motorcycle->made_in->name ?? '' }}</strong></li>
-                        <li> <span>Seller </span> <strong class="text-right">{{ $product->supplier->name ?? '' }}</strong></li>
+                        <li> <span>Frame Materials</span> <strong class="text-right">{{ $product->bicycle->frame_material ?? '' }}</strong></li>
+                        <li> <span>Fork</span> <strong class="text-right">{{ $product->bicycle->maximum_power ?? '' }}</strong></li>
+                        <li> <span>No of gears</span> <strong class="text-right">{{ $product->bicycle->gear_no ?? '' }}</strong></li>
+                        <li> <span>Wheel Size</span> <strong class="text-right">{{ $product->bicycle->wheel_size ?? '' }}</strong></li>
+                        <li> <span>Shifter</span> <strong class="text-right">{{ $product->bicycle->shifter ?? '' }}</strong></li>
+                        <li> <span>Made Origin</span> <strong class="text-right">{{ $product->bicycle->made_origin->name ?? '' }}</strong></li>
+                        <li> <span>Weight</span> <strong class="text-right">{{ $product->bicycle->weight ?? '' }}</strong></li>
+                        <li> <span>Seller</span> <strong class="text-right">{{ $product->supplier->name ?? '' }}</strong></li>
+                        <li> <span>Size Available</span> <strong class="text-right">{{ $product->size ?? '' }}</strong></li>
                         <li> <span>Price</span> <strong class="text-right">Tk.{{ $product->msrp ?? '' }}</strong></li>
                         <li> <span>Remarks (any Prob)</span> <strong class="text-justify">{!! $product->note ?? '' !!}</strong></li>
                     </ul>
@@ -221,24 +222,24 @@
                         <div class="details-block details-weight">
                             <ul>
                                 <li>
-                                    <span><i class="fa fa-industry text-red" aria-hidden="true"></i> Displacement: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->displacement->name ?? '' }}cc</strong>
+                                    <span><i class="fa fa-industry text-red" aria-hidden="true"></i> Frame Size: </span>
+                                    <strong class="text-right">{{ $product->bicycle->displacement->name ?? '' }}cc</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-cab text-red" aria-hidden="true"></i> Suspension: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->suspension ?? '' }}</strong>
+                                    <span><i class="fa fa-cab text-red" aria-hidden="true"></i> Shifters: </span>
+                                    <strong class="text-right">{{ $product->bicycle->suspension ?? '' }}</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-fire text-red" aria-hidden="true"></i> Top speed: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->maximum_speed ?? '' }}</strong>
+                                    <span><i class="fa fa-fire text-red" aria-hidden="true"></i> Brake Type: </span>
+                                    <strong class="text-right">{{ $product->bicycle->maximum_speed ?? '' }}</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-balance-scale text-red" aria-hidden="true"></i> FueL tank: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->fuel_tank_capacity ?? '' }}</strong>
+                                    <span><i class="fa fa-balance-scale text-red" aria-hidden="true"></i> Shifter Lever: </span>
+                                    <strong class="text-right">{{ $product->bicycle->fuel_tank_capacity ?? '' }}</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-power-off text-red" aria-hidden="true"></i> Brake system: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->brake_system ?? '' }}</strong>
+                                    <span><i class="fa fa-power-off text-red" aria-hidden="true"></i> Rear Derailleur: </span>
+                                    <strong class="text-right">{{ $product->bicycle->brake_system ?? '' }}</strong>
                                 </li>
                             </ul>
                         </div>
@@ -247,20 +248,20 @@
                         <div class="details-block details-weight">
                             <ul>
                                 <li>
-                                    <span><i class="fa fa-ticket text-red" aria-hidden="true"></i> Kerb Weight: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->kerb_weight ?? '' }}</strong>
+                                    <span><i class="fa fa-ticket text-red" aria-hidden="true"></i> Front Derailleur: </span>
+                                    <strong class="text-right">{{ $product->bicycle->kerb_weight ?? '' }}</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-car text-red" aria-hidden="true"></i> No of gears: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->gear_no ?? '' }}</strong>
+                                    <span><i class="fa fa-car text-red" aria-hidden="true"></i> Rims: </span>
+                                    <strong class="text-right">{{ $product->bicycle->gear_no ?? '' }}</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-gear text-red" aria-hidden="true"></i> Bore: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->bore ?? '' }}</strong>
+                                    <span><i class="fa fa-gear text-red" aria-hidden="true"></i> Hubs Quality: </span>
+                                    <strong class="text-right">{{ $product->bicycle->bore ?? '' }}</strong>
                                 </li>
                                 <li>
-                                    <span><i class="fa fa-money text-red" aria-hidden="true"></i> Stroke: </span>
-                                    <strong class="text-right">{{ $product->motorcycle->stroke ?? '' }}</strong>
+                                    <span><i class="fa fa-money text-red" aria-hidden="true"></i> Geared: </span>
+                                    <strong class="text-right">{{ $product->bicycle->stroke ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-info-circle text-red" aria-hidden="true"></i> After sell service: </span>
@@ -288,59 +289,59 @@
                                 <ul class="smsinner" style="display: block;">
                                     <li class="">
                                         <div class="list-label"> Engine type </div>
-                                        <div class="list-stat">{{ $product->motorcycle->engine_type->name ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->engine_type->name ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Max power </div>
-                                        <div class="list-stat">{{ $product->motorcycle->maximum_power ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->maximum_power ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label"> Max torque </div>
-                                        <div class="list-stat">{{ $product->motorcycle->maximum_torque ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->maximum_torque ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Displacement</div>
-                                        <div class="list-stat">{{ $product->motorcycle->displacement->name ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->displacement->name ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Bore</div>
-                                        <div class="list-stat">{{ $product->motorcycle->bore ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->bore ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Stroke</div>
-                                        <div class="list-stat">{{ $product->motorcycle->stroke ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->stroke ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Top speed </div>
-                                        <div class="list-stat">{{ $product->motorcycle->maximum_speed ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->maximum_speed ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">No of cylinders </div>
-                                        <div class="list-stat">{{ $product->motorcycle->cylinder_no ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->cylinder_no ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">No of gears </div>
-                                        <div class="list-stat">{{ $product->motorcycle->gear_no ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->gear_no ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Comparison ratio </div>
-                                        <div class="list-stat">{{ $product->motorcycle->comparison_ratio ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->comparison_ratio ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Clutch </div>
-                                        <div class="list-stat">{{ $product->motorcycle->clutch_type ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->clutch_type ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Starting system</div>
-                                        <div class="list-stat">{{ $product->motorcycle->starting_system->name ?? '' }}0</div>
+                                        <div class="list-stat">{{ $product->bicycle->starting_system->name ?? '' }}0</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Cooling </div>
-                                        <div class="list-stat">{{ $product->motorcycle->cooling_system->name ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->cooling_system->name ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Ignition </div>
-                                        <div class="list-stat">{{ $product->motorcycle->ignition ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->ignition ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
@@ -350,19 +351,19 @@
                                 <ul class="smsinner">
                                     <li class="">
                                         <div class="list-label">Fuel Supply System</div>
-                                        <div class="list-stat">{{ $product->motorcycle->fuel_supply_system ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->fuel_supply_system ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Fuel tank capacity </div>
-                                        <div class="list-stat">{{ $product->motorcycle->fuel_tank_capacity ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->fuel_tank_capacity ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Millage </div>
-                                        <div class="list-stat">{{ $product->motorcycle->milage ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->milage ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Overall riding range</div>
-                                        <div class="list-stat">{{ $product->motorcycle->riding_range ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->riding_range ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
@@ -371,31 +372,31 @@
                                 <ul class="smsinner">
                                     <li class="">
                                         <div class="list-label">Overall length</div>
-                                        <div class="list-stat">{{ $product->motorcycle->length ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->length ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Overall height</div>
-                                        <div class="list-stat">{{ $product->motorcycle->height ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->height ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Overall width</div>
-                                        <div class="list-stat">{{ $product->motorcycle->width ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->width ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Wheel base </div>
-                                        <div class="list-stat">{{ $product->motorcycle->wheel_base ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->wheel_base ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Seat height </div>
-                                        <div class="list-stat">{{ $product->motorcycle->seat_height ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->seat_height ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Ground clearance</div>
-                                        <div class="list-stat">{{ $product->motorcycle->ground_clearance->name ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->ground_clearance->name ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Kerb weight</div>
-                                        <div class="list-stat">{{ $product->motorcycle->kerb_weight ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->kerb_weight ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
@@ -404,11 +405,11 @@
                                 <ul class="smsinner">
                                     <li class="">
                                         <div class="list-label">Chassis type</div>
-                                        <div class="list-stat">{{ $product->motorcycle->chassis_type ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->chassis_type ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Suspension</div>
-                                        <div class="list-stat">{{ $product->motorcycle->suspension	 ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->suspension	 ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
@@ -417,15 +418,15 @@
                                 <ul class="smsinner">
                                     <li class="">
                                         <div class="list-label">Brake type</div>
-                                        <div class="list-stat">{{ $product->motorcycle->brake_system ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->brake_system ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Tyre type</div>
-                                        <div class="list-stat">{{ $product->motorcycle->tyre_type->name ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->tyre_type->name ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Anti-Lock Braking System </div>
-                                        <div class="list-stat">{{ $product->motorcycle->abs ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->abs ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
@@ -434,11 +435,11 @@
                                 <ul class="smsinner">
                                     <li class="">
                                         <div class="list-label">Battery type </div>
-                                        <div class="list-stat">{{ $product->motorcycle->battery_type ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->battery_type ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Battery Voltage </div>
-                                        <div class="list-stat">{{ $product->motorcycle->battery_voltage ?? '' }}</div>
+                                        <div class="list-stat">{{ $product->bicycle->battery_voltage ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
@@ -449,45 +450,45 @@
                             <ul>
                                 <li class="">
                                     <div class="list-label">Body type </div>
-                                    <div class="list-stat">{{ $product->motorcycle->body_type ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->body_type ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Manufacturing year </div>
-                                    <div class="list-stat">{{ $product->motorcycle->manufacturing_year ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->manufacturing_year ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Displacement </div>
-                                    <div class="list-stat">{{ $product->motorcycle->displacement->name ?? '' }} cc</div>
+                                    <div class="list-stat">{{ $product->bicycle->displacement->name ?? '' }} cc</div>
                                 </li>
                                 @if($product->condition_id == 3)
                                 <li class="">
                                     <div class="list-label">Registration year </div>
-                                    <div class="list-stat">{{ $product->motorcycle->registration_year ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->registration_year ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Kms driven </div>
-                                    <div class="list-stat">{{ $product->motorcycle->kms_driven ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->kms_driven ?? '' }}</div>
                                 </li>
                                 @endif
                                 <li class="">
                                     <div class="list-label">Milleage </div>
-                                    <div class="list-stat">{{ $product->motorcycle->milage ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->milage ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Kerb Weight </div>
-                                    <div class="list-stat">{{ $product->motorcycle->kerb_weight ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->kerb_weight ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">No of gears </div>
-                                    <div class="list-stat">{{ $product->motorcycle->gear_no ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->gear_no ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Max power </div>
-                                    <div class="list-stat">{{ $product->motorcycle->maximum_power ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->maximum_power ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Max torque </div>
-                                    <div class="list-stat">{{ $product->motorcycle->maximum_torque ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->maximum_torque ?? '' }}</div>
                                 </li>
                                 <li class="">
                                     <div class="list-label">Seller type </div>
@@ -499,7 +500,7 @@
                                 </li>
                                 <li class="">
                                     <div class="list-label">Starting Method </div>
-                                    <div class="list-stat">{{ $product->motorcycle->starting_system->name ?? '' }}</div>
+                                    <div class="list-stat">{{ $product->bicycle->starting_system->name ?? '' }}</div>
                                 </li>
                             </ul>
                         </div>
@@ -510,7 +511,7 @@
                                 <a class="smstoggle">Key Features<i class="fa fa-chevron-down"></i></a>
                                 <ul class="smsinner" style="display: block;">
                                     @foreach($key_features as $key_feature)
-                                    @php($array = explode(",", $product->motorcycle->key_feature))
+                                    @php($array = explode(",", $product->bicycle->key_feature))
                                     @if(in_array($key_feature->id, $array))
                                     <li class="">
                                         <div class="list-stat">{{ $key_feature->name }}</div>
@@ -668,7 +669,7 @@
                                                            href="#">{{ $product->supplier->name ?? 'Unnamed' }}</a></span>
                                 <div class="item-date">
                                     <span>Published on: {{ $product->created_at->format('jS M Y') }}</span><br>
-                                    <a href="{{ route('motorcycle-listing') }}" class="link">More Ads</a>
+                                    <a href="{{ route('bicycle-listing') }}" class="link">More Ads</a>
                                 </div>
                                 <div class="user-phone">
                                     <i class="fa fa-mobile" aria-hidden="true"></i><span
@@ -716,7 +717,7 @@
                                 <div class="item">
                                     <div class="featured-car-list">
                                         <div class="featured-car-img">
-                                            <a href=""><img src="{{ url('/') }}/assets/products/{{ $related_product->motorcycle->id }}/{{ $related_product->motorcycle->image1 }}" class="img-responsive" alt="Image"></a>
+                                            <a href=""><img src="{{ url('/') }}/assets/products/{{ $related_product->bicycle->id }}/{{ $related_product->bicycle->image1 }}" class="img-responsive" alt="Image"></a>
                                             <div class="label_icon">{{ $related_product->condition->name }}</div>
                                             <div class="compare_item">
                                                 <div class="checkbox">
@@ -731,12 +732,12 @@
                                                 <div class="car-location"><span><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $related_product->supplier->region->name ?? ''}}, {{ $related_product->supplier->division->name ?? ''}}</span></div>
                                             </div>
                                             <ul>
-                                                <li><i class="fa fa-road" aria-hidden="true"></i>{{ $related_product->motorcycle->kms_driven ?? ''}} km</li>
-                                                <li><i class="fa fa-tachometer" aria-hidden="true"></i>{{ $related_product->motorcycle->milage ?? ''}} miles</li>
-                                                <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $related_product->motorcycle->model->name ?? ''}}</li>
-                                                <li><i class="fa fa-car" aria-hidden="true"></i>{{ $related_product->motorcycle->fuel_supply_system ?? ''}}</li>
-                                                <li><i class="fa fa-user" aria-hidden="true"></i>{{ $related_product->motorcycle->brand->name ?? ''}}</li>
-                                                <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ $related_product->motorcycle->maximum_power ?? ''}} kW</li>
+                                                <li><i class="fa fa-road" aria-hidden="true"></i>{{ $related_product->bicycle->kms_driven ?? ''}} km</li>
+                                                <li><i class="fa fa-tachometer" aria-hidden="true"></i>{{ $related_product->bicycle->milage ?? ''}} miles</li>
+                                                <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $related_product->bicycle->model->name ?? ''}}</li>
+                                                <li><i class="fa fa-car" aria-hidden="true"></i>{{ $related_product->bicycle->fuel_supply_system ?? ''}}</li>
+                                                <li><i class="fa fa-user" aria-hidden="true"></i>{{ $related_product->bicycle->brand->name ?? ''}}</li>
+                                                <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ $related_product->bicycle->maximum_power ?? ''}} kW</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1035,8 +1036,8 @@ html, body {
 <script>
     $(document).ready(function(){
         $("#object").vc3dEye({
-            imagePath:"{{ url('/') }}/assets/products/motorcycles/{{ $product->id }}/",
-            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/motorcycles/".$product->id))-2 }},
+            imagePath:"{{ url('/') }}/assets/products/bicycles/{{ $product->id }}/",
+            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/bicycles/".$product->id))-2 }},
             imageExtension:"jpg",
             autoRotate:500,
             autoRotateInactivityDelay:5000
