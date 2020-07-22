@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row bike-space">
             <div class="col-md-9">
-                <h3>{{ $product->name }}</h3>
+                <h3>{{ $product->name ?? 'Unnamed'}}</h3>
                 <div>{!! $product->note !!}</div>
                 <div class="star mt-2">
                     <i class="fa fa-star @if($product->reviews->avg('score')<1) fa-star-o @endif orange-color"></i>
@@ -275,9 +275,9 @@
                     <ul class="tabs">
                         <li data-tabs="tab1" class="active"> <span aria-hidden="true" class="icon-diamond"></span> Specification
                         </li>
-                        <li data-tabs="tab2"><span aria-hidden="true" class="icon-list"></span>Description
+                        <li data-tabs="tab2"><span aria-hidden="true" class="icon-list"></span>Features
                         </li>
-                        <li data-tabs="tab3"> <span aria-hidden="true" class="icon-equalizer"></span> Features
+                        <li data-tabs="tab3"> <span aria-hidden="true" class="icon-equalizer"></span> Weight and limit
                         </li>
                         <!-- <li data-tabs="tab4"> <span aria-hidden="true" class="icon-equalizer"></span> Finance
                         </li> -->
@@ -285,227 +285,125 @@
                     <div id="tab1" class="tabcontent">
                         <ul class="smsaccordion">
                             <li>
-                                <a class="smstoggle">Engine and transmission<i class="fa fa-chevron-down"></i></a>
+                                <a class="smstoggle">Frame and Suspension<i class="fa fa-chevron-down"></i></a>
                                 <ul class="smsinner" style="display: block;">
                                     <li class="">
-                                        <div class="list-label"> Engine type </div>
-                                        <div class="list-stat">{{ $product->bicycle->engine_type->name ?? '' }}</div>
+                                        <div class="list-label"> Frame size</div>
+                                        <div class="list-stat">{{ $product->bicycle->frame_size ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label">Max power </div>
-                                        <div class="list-stat">{{ $product->bicycle->maximum_power ?? '' }}</div>
+                                        <div class="list-label">Frame metarials</div>
+                                        <div class="list-stat">{{ $product->bicycle->frame_material ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label"> Max torque </div>
-                                        <div class="list-stat">{{ $product->bicycle->maximum_torque ?? '' }}</div>
+                                        <div class="list-label"> Recommended biker height </div>
+                                        <div class="list-stat">{{ $product->bicycle->recommended_biker_height ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label">Displacement</div>
-                                        <div class="list-stat">{{ $product->bicycle->displacement->name ?? '' }}</div>
+                                        <div class="list-label">Fork rear</div>
+                                        <div class="list-stat">{{ $product->bicycle->fork_rear ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label">Bore</div>
-                                        <div class="list-stat">{{ $product->bicycle->bore ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Stroke</div>
-                                        <div class="list-stat">{{ $product->bicycle->stroke ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Top speed </div>
-                                        <div class="list-stat">{{ $product->bicycle->maximum_speed ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">No of cylinders </div>
-                                        <div class="list-stat">{{ $product->bicycle->cylinder_no ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">No of gears </div>
-                                        <div class="list-stat">{{ $product->bicycle->gear_no ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Comparison ratio </div>
-                                        <div class="list-stat">{{ $product->bicycle->comparison_ratio ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Clutch </div>
-                                        <div class="list-stat">{{ $product->bicycle->clutch_type ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Starting system</div>
-                                        <div class="list-stat">{{ $product->bicycle->starting_system->name ?? '' }}0</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Cooling </div>
-                                        <div class="list-stat">{{ $product->bicycle->cooling_system->name ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Ignition </div>
-                                        <div class="list-stat">{{ $product->bicycle->ignition ?? '' }}</div>
+                                        <div class="list-label">Fork front</div>
+                                        <div class="list-stat">{{ $product->bicycle->fork_front ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
 
                             <li>
-                                <a class="smstoggle"> Fuel consumption <i class="fa fa-chevron-down"></i></a>
+                                <a class="smstoggle"> Wheels and Tyres <i class="fa fa-chevron-down"></i></a>
                                 <ul class="smsinner">
                                     <li class="">
-                                        <div class="list-label">Fuel Supply System</div>
-                                        <div class="list-stat">{{ $product->bicycle->fuel_supply_system ?? '' }}</div>
+                                        <div class="list-label">Wheels</div>
+                                        <div class="list-stat">{{ $product->bicycle->wheel_type->name ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label">Fuel tank capacity </div>
-                                        <div class="list-stat">{{ $product->bicycle->fuel_tank_capacity ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Millage </div>
-                                        <div class="list-stat">{{ $product->bicycle->milage ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Overall riding range</div>
-                                        <div class="list-stat">{{ $product->bicycle->riding_range ?? '' }}</div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="smstoggle"> Dimension and weight <i class="fa fa-chevron-down"></i></a>
-                                <ul class="smsinner">
-                                    <li class="">
-                                        <div class="list-label">Overall length</div>
-                                        <div class="list-stat">{{ $product->bicycle->length ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Overall height</div>
-                                        <div class="list-stat">{{ $product->bicycle->height ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Overall width</div>
-                                        <div class="list-stat">{{ $product->bicycle->width ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Wheel base </div>
-                                        <div class="list-stat">{{ $product->bicycle->wheel_base ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Seat height </div>
-                                        <div class="list-stat">{{ $product->bicycle->seat_height ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Ground clearance</div>
-                                        <div class="list-stat">{{ $product->bicycle->ground_clearance->name ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Kerb weight</div>
-                                        <div class="list-stat">{{ $product->bicycle->kerb_weight ?? '' }}</div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="smstoggle"> Chassis and suspension <i class="fa fa-chevron-down"></i></a>
-                                <ul class="smsinner">
-                                    <li class="">
-                                        <div class="list-label">Chassis type</div>
-                                        <div class="list-stat">{{ $product->bicycle->chassis_type ?? '' }}</div>
-                                    </li>
-                                    <li class="">
-                                        <div class="list-label">Suspension</div>
-                                        <div class="list-stat">{{ $product->bicycle->suspension	 ?? '' }}</div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="smstoggle"> Brake and tyre<i class="fa fa-chevron-down"></i></a>
-                                <ul class="smsinner">
-                                    <li class="">
-                                        <div class="list-label">Brake type</div>
-                                        <div class="list-stat">{{ $product->bicycle->brake_system ?? '' }}</div>
+                                        <div class="list-label">Wheel size</div>
+                                        <div class="list-stat">{{ $product->bicycle->wheel_size ?? '' }}</div>
                                     </li>
                                     <li class="">
                                         <div class="list-label">Tyre type</div>
                                         <div class="list-stat">{{ $product->bicycle->tyre_type->name ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label">Anti-Lock Braking System </div>
-                                        <div class="list-stat">{{ $product->bicycle->abs ?? '' }}</div>
+                                        <div class="list-label">Tyre size</div>
+                                        <div class="list-stat">{{ $product->bicycle->tyre_size ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a class="smstoggle"> Electricals<i class="fa fa-chevron-down"></i></a>
+                                <a class="smstoggle"> Drivetrain <i class="fa fa-chevron-down"></i></a>
                                 <ul class="smsinner">
                                     <li class="">
-                                        <div class="list-label">Battery type </div>
-                                        <div class="list-stat">{{ $product->bicycle->battery_type ?? '' }}</div>
+                                        <div class="list-label">Shifters</div>
+                                        <div class="list-stat">{{ $product->bicycle->shifter ?? '' }}</div>
                                     </li>
                                     <li class="">
-                                        <div class="list-label">Battery Voltage </div>
-                                        <div class="list-stat">{{ $product->bicycle->battery_voltage ?? '' }}</div>
+                                        <div class="list-label">Front derailleur</div>
+                                        <div class="list-stat">{{ $product->bicycle->front_derailleur ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Rear derailleur</div>
+                                        <div class="list-stat">{{ $product->bicycle->rear_derailleur ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Crank</div>
+                                        <div class="list-stat">{{ $product->bicycle->crank ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Freewheel</div>
+                                        <div class="list-stat">{{ $product->bicycle->freewheel ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Seat post</div>
+                                        <div class="list-stat">{{ $product->bicycle->seat_post ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Chain </div>
+                                        <div class="list-stat">{{ $product->bicycle->chain ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Pedals</div>
+                                        <div class="list-stat">{{ $product->bicycle->pedal ?? '' }}</div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="smstoggle"> Components <i class="fa fa-chevron-down"></i></a>
+                                <ul class="smsinner">
+                                    <li class="">
+                                        <div class="list-label">Saddle</div>
+                                        <div class="list-stat">{{ $product->bicycle->saddle ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Seat post</div>
+                                        <div class="list-stat">{{ $product->bicycle->seat_post	 ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Headset</div>
+                                        <div class="list-stat">{{ $product->bicycle->headset	 ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Handlebar</div>
+                                        <div class="list-stat">{{ $product->bicycle->handlebar	 ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Grips</div>
+                                        <div class="list-stat">{{ $product->bicycle->grip	 ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Stem</div>
+                                        <div class="list-stat">{{ $product->bicycle->stem	 ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Brake set</div>
+                                        <div class="list-stat">{{ $product->bicycle->brake_system ?? '' }}</div>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                     <div id="tab2" class="tabcontent">
-                        <div>
-                            <ul>
-                                <li class="">
-                                    <div class="list-label">Body type </div>
-                                    <div class="list-stat">{{ $product->bicycle->body_type ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Manufacturing year </div>
-                                    <div class="list-stat">{{ $product->bicycle->manufacturing_year ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Displacement </div>
-                                    <div class="list-stat">{{ $product->bicycle->displacement->name ?? '' }} cc</div>
-                                </li>
-                                @if($product->condition_id == 3)
-                                <li class="">
-                                    <div class="list-label">Registration year </div>
-                                    <div class="list-stat">{{ $product->bicycle->registration_year ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Kms driven </div>
-                                    <div class="list-stat">{{ $product->bicycle->kms_driven ?? '' }}</div>
-                                </li>
-                                @endif
-                                <li class="">
-                                    <div class="list-label">Milleage </div>
-                                    <div class="list-stat">{{ $product->bicycle->milage ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Kerb Weight </div>
-                                    <div class="list-stat">{{ $product->bicycle->kerb_weight ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">No of gears </div>
-                                    <div class="list-stat">{{ $product->bicycle->gear_no ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Max power </div>
-                                    <div class="list-stat">{{ $product->bicycle->maximum_power ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Max torque </div>
-                                    <div class="list-stat">{{ $product->bicycle->maximum_torque ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Seller type </div>
-                                    <div class="list-stat">{{ $product->supplier->user_type->name ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Location </div>
-                                    <div class="list-stat">{{ $product->supplier->division->name ?? '' }}</div>
-                                </li>
-                                <li class="">
-                                    <div class="list-label">Starting Method </div>
-                                    <div class="list-stat">{{ $product->bicycle->starting_system->name ?? '' }}</div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="tab3" class="tabcontent">
                         <ul class="smsaccordion">
                             <li>
                                 <a class="smstoggle">Key Features<i class="fa fa-chevron-down"></i></a>
@@ -514,10 +412,27 @@
                                     @php($array = explode(",", $product->bicycle->key_feature))
                                     @if(in_array($key_feature->id, $array))
                                     <li class="">
-                                        <div class="list-stat">{{ $key_feature->name }}</div>
+                                        <div class="list-stat">{{ $key_feature->name ?? ''}}</div>
                                     </li>
                                     @endif
                                     @endforeach
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="tab3" class="tabcontent">
+                        <ul class="smsaccordion">
+                            <li>
+                                <a class="smstoggle">Weight and limit <i class="fa fa-chevron-down"></i></a>
+                                <ul class="smsinner">
+                                    <li class="">
+                                        <div class="list-label">Bike weight</div>
+                                        <div class="list-stat">{{ $product->bicycle->weight ?? '' }}</div>
+                                    </li>
+                                    <li class="">
+                                        <div class="list-label">Biker weight limit</div>
+                                        <div class="list-stat">{{ $product->bicycle->biker_weight ?? '' }}</div>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -718,7 +633,7 @@
                                     <div class="featured-car-list">
                                         <div class="featured-car-img">
                                             <a href=""><img src="{{ url('/') }}/assets/products/{{ $related_product->bicycle->id }}/{{ $related_product->bicycle->image1 }}" class="img-responsive" alt="Image"></a>
-                                            <div class="label_icon">{{ $related_product->condition->name }}</div>
+                                            <div class="label_icon">{{ $related_product->condition->name ?? 'New'  }}</div>
                                             <div class="compare_item">
                                                 <div class="checkbox">
                                                     <input type="checkbox" class="compare-checkbox" class="compare-checkbox" id="compare3">
@@ -735,9 +650,7 @@
                                                 <li><i class="fa fa-road" aria-hidden="true"></i>{{ $related_product->bicycle->kms_driven ?? ''}} km</li>
                                                 <li><i class="fa fa-tachometer" aria-hidden="true"></i>{{ $related_product->bicycle->milage ?? ''}} miles</li>
                                                 <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $related_product->bicycle->model->name ?? ''}}</li>
-                                                <li><i class="fa fa-car" aria-hidden="true"></i>{{ $related_product->bicycle->fuel_supply_system ?? ''}}</li>
                                                 <li><i class="fa fa-user" aria-hidden="true"></i>{{ $related_product->bicycle->brand->name ?? ''}}</li>
-                                                <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ $related_product->bicycle->maximum_power ?? ''}} kW</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -782,114 +695,106 @@
 @endsection
 @section('style')
 <style>
-html, body {
-  position:relative;
-}
-.float-it {
-	-webkit-transition: all 1000ms ease-out;
-       -moz-transition: all 1000ms ease-out;
-         -o-transition: all 1000ms ease-out;
-            transition: all 1000ms ease-out;
-    z-index: 999999;
-    display: block;
-}
+    html, body {
+        position:relative;
+    }
+    .float-it {
+        -webkit-transition: all 1000ms ease-out;
+        -moz-transition: all 1000ms ease-out;
+        -o-transition: all 1000ms ease-out;
+        transition: all 1000ms ease-out;
+        z-index: 999999;
+        display: block;
+    }
 </style>
 @endsection
 @section('script')
 <script>
 
     var app2 = new Vue({
-      el: '#product',
-      data: {
-    		temp_quantity:1
-      },
-      methods: {
-            floatImage: function (e) {
-                var img = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('img.slick-active');
-                console.log(img);
-                var cloned = img.cloneNode();
-                var coords = this.getCoords(img);
-                var cart_coords = this.getCoords(document.getElementById('cart'));
-                
-                var middle_percent = 100; /* Just enter the middle point size *1/4;*/
-                
-                cloned.style.top = coords.top+"px";
-                cloned.style.left = coords.left+"px";
-                cloned.style.width = img.width+"px";
-                cloned.style.height = img.height+"px";
-                cloned.style.position = "absolute";
-                cloned.classList.add('float-it');
-                document.body.append(cloned);
-                
-                setTimeout(function(){
-                	cloned.style.top = cart_coords.top+"px"; /*This is the middle point */
-                	cloned.style.left = cart_coords.left-100+"px";
-                	cloned.style.width = img.offsetWidth*middle_percent/400+"px";
-                	cloned.style.height = img.offsetHeight*middle_percent/400+"px";
-                	cloned.style.position = "absolute";
-                }, 100);
-                setTimeout(function(){
-                	cloned.style.top = cart_coords.top+10+"px";
-                	cloned.style.left = cart_coords.left+10+"px";
-                	cloned.style.width = "0px";
-                	cloned.style.height = "0px";
-                	cloned.style.opacity = 0;
-                }, 10*middle_percent);
-                var _this = this;
-                setTimeout(function(){
-                    _this.addToCart();
-                }, 1500);
+    el: '#product',
+            data: {
+            temp_quantity:1
             },
-            addToCart: function() {
-    			if(this.temp_quantity<1) {
-    				this.temp_quantity = 1;
-    				return;
-    			}
-    			var is_same = false;
-    			for(let i=0; i<cart.products.length; i++) {
-    				if(cart.products[i].id == {{ $product->id }}) {
-    					cart.products[i].quantity = parseInt(cart.products[i].quantity)+parseInt(this.temp_quantity);
-    					is_same = true;
-    					break;
-    				}
-    			}
-    			if(!is_same) {
-    				let product = {
-    					"id": {{ $product->id }},
-    					"quantity": this.temp_quantity,
-    					"msrp": {{ $product->msrp }},
-    					"name": "{{ $product->name }}",
-    					"image1": "{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg'}}",
-    					"note": @json($product->note)
-    				};
-    				cart.products.unshift(product);
-    			}
-    			localStorage.cart = JSON.stringify(cart.products);
-    		},
-        	getCoords: function(elem) { // crossbrowser version
-        		var box = elem.getBoundingClientRect();
-        
-        		var body = document.body;
-        		var docEl = document.documentElement;
-        
-        		var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-        		var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-        
-        		var clientTop = docEl.clientTop || body.clientTop || 0;
-        		var clientLeft = docEl.clientLeft || body.clientLeft || 0;
-        
-        		var top  = box.top +  scrollTop - clientTop;
-        		var left = box.left + scrollLeft - clientLeft;
-        
-        		return { top: Math.round(top), left: Math.round(left) };
-        	},
-        	limitQuantity: function() {
-        	    if(this.temp_quantity<12)
-        	        this.temp_quantity = 12;
-        	}
-        }
-    });
-</script>
+            methods: {
+            floatImage: function (e) {
+            var img = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('img.slick-active');
+            console.log(img);
+            var cloned = img.cloneNode();
+            var coords = this.getCoords(img);
+            var cart_coords = this.getCoords(document.getElementById('cart'));
+            var middle_percent = 100; /* Just enter the middle point size *1/4;*/
+
+            cloned.style.top = coords.top + "px";
+            cloned.style.left = coords.left + "px";
+            cloned.style.width = img.width + "px";
+            cloned.style.height = img.height + "px";
+            cloned.style.position = "absolute";
+            cloned.classList.add('float-it');
+            document.body.append(cloned);
+            setTimeout(function(){
+            cloned.style.top = cart_coords.top + "px"; /*This is the middle point */
+            cloned.style.left = cart_coords.left - 100 + "px";
+            cloned.style.width = img.offsetWidth * middle_percent / 400 + "px";
+            cloned.style.height = img.offsetHeight * middle_percent / 400 + "px";
+            cloned.style.position = "absolute";
+            }, 100);
+            setTimeout(function(){
+            cloned.style.top = cart_coords.top + 10 + "px";
+            cloned.style.left = cart_coords.left + 10 + "px";
+            cloned.style.width = "0px";
+            cloned.style.height = "0px";
+            cloned.style.opacity = 0;
+            }, 10 * middle_percent);
+            var _this = this;
+            setTimeout(function(){
+            _this.addToCart();
+            }, 1500);
+            },
+                    addToCart: function() {
+                    if (this.temp_quantity < 1) {
+                    this.temp_quantity = 1;
+                    return;
+                    }
+                    var is_same = false;
+                    for (let i = 0; i < cart.products.length; i++) {
+                    if (cart.products[i].id == {{ $product->id }}) {
+                    cart.products[i].quantity = parseInt(cart.products[i].quantity) + parseInt(this.temp_quantity);
+                    is_same = true;
+                    break;
+                    }
+                    }
+                    if (!is_same) {
+                    let product = {
+                    "id": {{ $product->id }},
+                            "quantity": this.temp_quantity,
+                            "msrp": {{ $product->msrp }},
+                            "name": "{{ $product->name ?? 'Unnamed' }}",
+                            "image1": "{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg'}}",
+                            "note": @json($product->note)
+                    };
+                    cart.products.unshift(product);
+                    }
+                    localStorage.cart = JSON.stringify(cart.products);
+                    },
+                    getCoords: function(elem) { // crossbrowser version
+                    var box = elem.getBoundingClientRect();
+                    var body = document.body;
+                    var docEl = document.documentElement;
+                    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+                    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+                    var clientTop = docEl.clientTop || body.clientTop || 0;
+                    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+                    var top = box.top + scrollTop - clientTop;
+                    var left = box.left + scrollLeft - clientLeft;
+                    return { top: Math.round(top), left: Math.round(left) };
+                    },
+                    limitQuantity: function() {
+                    if (this.temp_quantity < 12)
+                            this.temp_quantity = 12;
+                    }
+            }
+    });</script>
 
 <!-- 360-view -->
 <script type="text/javascript" src="{{ url('/') }}/js/jquery.flipper-responsive.js"></script>
@@ -1035,13 +940,13 @@ html, body {
 </script>
 <script>
     $(document).ready(function(){
-        $("#object").vc3dEye({
-            imagePath:"{{ url('/') }}/assets/products/bicycles/{{ $product->id }}/",
-            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/bicycles/".$product->id))-2 }},
+    $("#object").vc3dEye({
+    imagePath:"{{ url('/') }}/assets/products/bicycles/{{ $product->bicycle->id }}/",
+            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/bicycles/".$product->bicycle->id)) - 2 }},
             imageExtension:"jpg",
             autoRotate:500,
             autoRotateInactivityDelay:5000
-        });
+    });
     });
 </script>
 

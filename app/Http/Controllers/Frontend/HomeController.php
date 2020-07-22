@@ -350,11 +350,10 @@ class HomeController extends Controller
 		return view('frontend.single-accessories');
 	}
         public function singleBicycleProduct($id) {
-		$product = Product::has('car')
+		$product = Product::has('bicycle')
 			->with('bicycle.brand', 'bicycle.model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
 			->where('id', $id)
 			->first();
-                dd($product);
 		$key_features = KeyFeature::where('category_id', 3)->get();
 		$after_sell_services = AfterSellService::where('category_id', 3)->get();
 		$related_products = Product::whereHas('bicycle', function($q) use($product) {
@@ -364,7 +363,7 @@ class HomeController extends Controller
 		->with('bicycle', 'bicycle.brand', 'bicycle.model', 'supplier.region')
 		->get();
 		$product->after_sell_service = explode(',', $product->after_sell_service);
-		return view('frontend.single-car-product', compact('product', 'key_features', 'after_sell_services', 'related_products'));
+		return view('frontend.single-bicycle-product', compact('product', 'key_features', 'after_sell_services', 'related_products'));
 	}
 	public function singleMotorcycleProduct($id) {
 		$product = Product::has('motorcycle')

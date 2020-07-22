@@ -20,6 +20,7 @@ Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBi
 Route::get('/auction-product-list', 'Frontend\HomeController@auctionProductList')->name('auction-product-list');
 Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('bicycle-compare');
 Route::get('/bicycle-fit-calculator', 'Frontend\HomeController@bicycleFitCalculator')->name('bicycle-fit-calculator');
+Route::get('/bicycle-listing', 'Frontend\HomeController@motorcycleListing')->name('bicycle-listing');
 Route::get('/motorcycle-cart', 'Frontend\HomeController@motorcycleCart')->name('motorcycle-cart');
 Route::get('/motorcycle-checkout', 'Frontend\HomeController@motorcycleCheckout')->name('motorcycle-checkout');
 Route::get('/motorcycle-compare', 'Frontend\HomeController@motorcycleCompare')->name('motorcycle-compare');

@@ -1035,8 +1035,8 @@ html, body {
 <script>
     $(document).ready(function(){
         $("#object").vc3dEye({
-            imagePath:"{{ url('/') }}/assets/products/motorcycles/{{ $product->id }}/",
-            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/motorcycles/".$product->id))-2 }},
+            imagePath:"{{ url('/') }}/assets/products/motorcycles/{{ $product->motorcycle->id }}/",
+            totalImages:{{ iterator_count(new FilesystemIterator(public_path()."/assets/products/motorcycles/".$product->motorcycle->id))-2 }},
             imageExtension:"jpg",
             autoRotate:500,
             autoRotateInactivityDelay:5000
