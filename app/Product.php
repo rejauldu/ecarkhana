@@ -72,4 +72,7 @@ class Product extends Model
 	public function order_details() {
 		return $this->hasMany('App\OrderDetail');
 	}
+        public function size() {
+		return $this->belongsTo('App\Size');
+	}
 }

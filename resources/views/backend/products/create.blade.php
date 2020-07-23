@@ -154,16 +154,6 @@
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6 form-group">
-                                                    <input type="file" id="picture" name="picture" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'picture-view')" accept="image/*" value="Upload image" @if(!isset($product->picture)) required @endif/>
-                                                    <div class="valid-feedback">Valid.</div>
-                                                    <div class="invalid-feedback">Please fill out this field.</div>
-                                                </div>
-                                                <div class="col-6 form-group">
-                                                    <img id="picture-view" style="width:50px; height:50px" src="{{ asset('/assets/profile') }}/{{ $user->photo }}" class="img-thumbnail" alt="Product">
-                                                </div>
-                                            </div>
                                             <div class="form-group d-cross d-car-used">
                                                 <label for="registration-year">Registration Year</label>
                                                 <input id="registration-year" type="number" class="form-control" name="registration_year" value="{{ $product->registration_year ?? '' }}" placeholder="Enter Registration Year" title="Enter Registration Year" />

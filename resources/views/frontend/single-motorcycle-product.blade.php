@@ -10,7 +10,7 @@
 <!--=================================car-details  -->
 <section class="car-details page-section-ptb" id="product">
     <div class="container">
-        <div class="row bike-space">
+        <div class="row">
             <div class="col-md-9">
                 <h3>{{ $product->name }}</h3>
                 <div>{!! $product->note !!}</div>

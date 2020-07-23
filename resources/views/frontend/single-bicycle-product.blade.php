@@ -10,7 +10,7 @@
 <!--=================================car-details  -->
 <section class="car-details page-section-ptb" id="product">
     <div class="container">
-        <div class="row bike-space">
+        <div class="row">
             <div class="col-md-9">
                 <h3>{{ $product->name ?? 'Unnamed'}}</h3>
                 <div>{!! $product->note !!}</div>
@@ -122,7 +122,7 @@
                         <li> <span>Made Origin</span> <strong class="text-right">{{ $product->bicycle->made_origin->name ?? '' }}</strong></li>
                         <li> <span>Weight</span> <strong class="text-right">{{ $product->bicycle->weight ?? '' }}</strong></li>
                         <li> <span>Seller</span> <strong class="text-right">{{ $product->supplier->name ?? '' }}</strong></li>
-                        <li> <span>Size Available</span> <strong class="text-right">{{ $product->size ?? '' }}</strong></li>
+                        <li> <span>Size</span> <strong class="text-right">{{ $product->size->name ?? '' }}</strong></li>
                         <li> <span>Price</span> <strong class="text-right">Tk.{{ $product->msrp ?? '' }}</strong></li>
                         <li> <span>Remarks (any Prob)</span> <strong class="text-justify">{!! $product->note ?? '' !!}</strong></li>
                     </ul>
@@ -223,23 +223,23 @@
                             <ul>
                                 <li>
                                     <span><i class="fa fa-industry text-red" aria-hidden="true"></i> Frame Size: </span>
-                                    <strong class="text-right">{{ $product->bicycle->displacement->name ?? '' }}cc</strong>
+                                    <strong class="text-right">{{ $product->bicycle->frame_size ?? '' }}cc</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-cab text-red" aria-hidden="true"></i> Shifters: </span>
-                                    <strong class="text-right">{{ $product->bicycle->suspension ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->shifter ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-fire text-red" aria-hidden="true"></i> Brake Type: </span>
-                                    <strong class="text-right">{{ $product->bicycle->maximum_speed ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->brake_type ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-balance-scale text-red" aria-hidden="true"></i> Shifter Lever: </span>
-                                    <strong class="text-right">{{ $product->bicycle->fuel_tank_capacity ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->shifter_lever ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-power-off text-red" aria-hidden="true"></i> Rear Derailleur: </span>
-                                    <strong class="text-right">{{ $product->bicycle->brake_system ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->rear_derailleur ?? '' }}</strong>
                                 </li>
                             </ul>
                         </div>
@@ -249,19 +249,19 @@
                             <ul>
                                 <li>
                                     <span><i class="fa fa-ticket text-red" aria-hidden="true"></i> Front Derailleur: </span>
-                                    <strong class="text-right">{{ $product->bicycle->kerb_weight ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->front_derailleur ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-car text-red" aria-hidden="true"></i> Rims: </span>
-                                    <strong class="text-right">{{ $product->bicycle->gear_no ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->rim ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-gear text-red" aria-hidden="true"></i> Hubs Quality: </span>
-                                    <strong class="text-right">{{ $product->bicycle->bore ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->hub_quality ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-money text-red" aria-hidden="true"></i> Geared: </span>
-                                    <strong class="text-right">{{ $product->bicycle->stroke ?? '' }}</strong>
+                                    <strong class="text-right">{{ $product->bicycle->gear ?? '' }}</strong>
                                 </li>
                                 <li>
                                     <span><i class="fa fa-info-circle text-red" aria-hidden="true"></i> After sell service: </span>
