@@ -40,6 +40,7 @@ class HomeController extends Controller {
     public function index() {
         $home_sliders = HomeSlider::where('type', 'Car')->get();
         $new_products = Product::has('car')->where('condition_id', 1)->with('car')->take(10)->get();
+        $recondition_products = Product::has('car')->where('condition_id', 2)->with('car')->take(10)->get();
         $used_products = Product::has('car')->where('condition_id', 3)->with('car')->take(10)->get();
         $popular_products = Product::has('car')->with('car')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
@@ -49,7 +50,7 @@ class HomeController extends Controller {
         $fuel_types = FuelType::where('category_id', 1)->get();
         $packages = Package::where('category_id', 1)->get();
         $type = 'Car';
-        return view('frontend.index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages'));
+        return view('frontend.index', compact('home_sliders', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages'));
     }
 
     public function motorcycleIndex() {
