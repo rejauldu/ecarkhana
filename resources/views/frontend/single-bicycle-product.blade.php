@@ -115,7 +115,7 @@
                         <li> <span>Kms driven: </span> <strong class="text-right">{{ $product->kms_driven ?? '' }}</strong></li>
                         @endif
                         <li> <span>Frame Materials</span> <strong class="text-right">{{ $product->bicycle->frame_material ?? '' }}</strong></li>
-                        <li> <span>Fork</span> <strong class="text-right">{{ $product->bicycle->maximum_power ?? '' }}</strong></li>
+                        <li> <span>Fork</span> <strong class="text-right">{{ $product->bicycle->fork ?? '' }}</strong></li>
                         <li> <span>No of gears</span> <strong class="text-right">{{ $product->bicycle->gear_no ?? '' }}</strong></li>
                         <li> <span>Wheel Size</span> <strong class="text-right">{{ $product->bicycle->wheel_size ?? '' }}</strong></li>
                         <li> <span>Shifter</span> <strong class="text-right">{{ $product->bicycle->shifter ?? '' }}</strong></li>
@@ -407,7 +407,7 @@
                         <ul class="smsaccordion">
                             <li>
                                 <a class="smstoggle">Key Features<i class="fa fa-chevron-down"></i></a>
-                                <ul class="smsinner" style="display: block;">
+                                <ul class="smsinner d-block">
                                     @foreach($key_features as $key_feature)
                                     @php($array = explode(",", $product->bicycle->key_feature))
                                     @if(in_array($key_feature->id, $array))
@@ -424,7 +424,7 @@
                         <ul class="smsaccordion">
                             <li>
                                 <a class="smstoggle">Weight and limit <i class="fa fa-chevron-down"></i></a>
-                                <ul class="smsinner">
+                                <ul class="smsinner d-block">
                                     <li class="">
                                         <div class="list-label">Bike weight</div>
                                         <div class="list-stat">{{ $product->bicycle->weight ?? '' }}</div>
