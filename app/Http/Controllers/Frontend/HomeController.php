@@ -65,11 +65,11 @@ class HomeController extends Controller {
     public function bicycleIndex() {
         $home_sliders = HomeSlider::where('type', 'Bicycle')->get();
         $new_products = Product::has('bicycle')->where('condition_id', 1)->with('bicycle')->take(10)->get();
-        $used_products = Product::has('bicycle')->where('condition_id', 3)->with('bicycle')->take(10)->get();
         $popular_products = Product::has('bicycle')->with('bicycle')->orderBy('view', 'desc')->take(10)->get();
-        $used_products = Product::has('bicycle')->where('condition_id', 2)->with('bicycle', 'bicycle.model', 'bicycle.brand', 'bicycle.fuel_type', 'supplier.division', 'supplier.region')->take(10)->get();
+        $used_products = Product::has('bicycle')->where('condition_id', 3)->with('bicycle', 'bicycle.model', 'bicycle.brand', 'bicycle.fuel_type', 'supplier.division', 'supplier.region')->take(10)->get();
+        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $type = 'Bicycle';
-        return view('frontend.bicycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'used_products', 'type'));
+        return view('frontend.bicycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'type'));
     }
     public function aboutUs() {
         return view('frontend.about-us');

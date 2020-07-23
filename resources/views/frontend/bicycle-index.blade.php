@@ -239,11 +239,6 @@ Start Used Cars In Your City And Budget -->
                             </div>
                         </div>
                     </div>
-                    <!--<div class="tab-pane fade" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab">-->
-                    <!--    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt-->
-                    <!--    irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit-->
-                    <!--    do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.-->
-                    <!--</div>-->
                 </div>
             </div>
 
@@ -254,16 +249,17 @@ Start Used Cars In Your City And Budget -->
                     <div class="separator"></div>
                 </div>
                 <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    @foreach($new_products as $new_product)
                     <div class="item">
                         <div class="car-item text-center">
                             <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-01.jpg" alt="">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/bicycles/{{ $new_product->bicycle->image1 ?? 'not-found.jpg' }}" alt="">
                                 <div class="car-overlay-banner">
                                     <ul>
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}" id="compare2">
                                                     <label for="compare2">Compare</label>
                                                 </div>
                                             </div>
@@ -273,197 +269,28 @@ Start Used Cars In Your City And Budget -->
                             </div>
                             <div class="car-list">
                                 <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a></li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a></li>
+                                    <li><i class="fa fa-registered"></i> {{ $new_product->bicycle->brand->name ?? ''}}</li>
+                                    <li><i class="fa fa-cog"></i> {{ $new_product->bicycle->model->name ?? ''}}</li>
                                 </ul>
                             </div>
                             <div class="car-content">
                                 <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
+                                    <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
                                 </div>
-                                <a href="single-bike-product.html">Acura Rsx</a>
+                                <a href="{{ route('single-bicycle-product', $new_product->id) }}">{{ $new_product->name }}</a>
                                 <div class="separator"></div>
                                 <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
+                                    <!--<span class="old-price">$35,568</span>-->
+                                    <span class="new-price">৳ {{ $new_product->msrp }} </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-02.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a></li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a></li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">Lexus GS 450h</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-03.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a></li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a></li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">GTA 5 Lowriders DLC</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-01.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a></li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a></li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">Toyota avalon hybrid </a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-02.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a></li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a></li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">Hyundai santa fe sport </a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -651,7 +478,7 @@ start Featured Cars -->
             <div class="col-md-12">
                 <div class="section-title">
                     <span>Upcoming Bike Special Offers</span>
-                    <h2>Upcoming Bicycles </h2>
+                    <h2>Used Bicycles </h2>
                     <div class="separator"></div>
                 </div>
             </div>
@@ -659,215 +486,51 @@ start Featured Cars -->
         <div class="row">
             <div class="col-md-12">
                 <div class="owl-carousel" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    @foreach($used_products as $used_product)
                     <div class="item">
-                        <div class="featured-car-list">
-                            <div class="featured-car-img">
-                                <a href=""><img src="images/bicycle/upcoming-cycles-01.jpg" class="img-responsive" alt="Image"></a>
-                                <div class="label_icon">New</div>
-                                <div class="compare_item">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" id="compare">
-                                        <label for="compare">Compare</label>
-                                    </div>
-                                </div>
-                                <div class="sms-ecommerce-add">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i class="fa fa-cart-plus"></i></a>
-                                    </li>
+                        <div class="car-item text-center">
+                            <div class="car-image">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/bicycles/{{ $used_product->bicycle->image1 ?? 'not-found.jpg' }}" alt="">
+                                <div class="car-overlay-banner">
+                                    <ul>
+                                        <li>
+                                            <div class="compare_item">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}" id="compare2">
+                                                    <label for="compare2">Compare</label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="featured-car-content">
-                                <h6><a href="single-bike-product.html">Maserati QUATTROPORTE 1,6</a></h6>
-                                <div class="price_info">
-                                    <p class="featured-price">$90,000</p>
-                                    <div class="car-location"><span><i class="fa fa-map-marker"
-                                                                       aria-hidden="true"></i> Colorado, USA</span></div>
-                                </div>
-                                <ul>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>0,000 km</li>
-                                    <li><i class="fa fa-tachometer" aria-hidden="true"></i>30.000 miles</li>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>
-                                    <li><i class="fa fa-superpowers" aria-hidden="true"></i>143 kW</li>
-
+                            <div class="car-list">
+                                <ul class="list-inline">
+                                    <li><i class="fa fa-registered"></i> {{ $used_product->bicycle->brand->name ?? ''}}</li>
+                                    <li><i class="fa fa-cog"></i> {{ $used_product->bicycle->model->name ?? ''}}</li>
                                 </ul>
+                            </div>
+                            <div class="car-content">
+                                <div class="star">
+                                    <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                </div>
+                                <a href="{{ route('single-bicycle-product', $used_product->id) }}">{{ $used_product->name }}</a>
+                                <div class="separator"></div>
+                                <div class="price">
+                                    <!--<span class="old-price">$35,568</span>-->
+                                    <span class="new-price">Tk.{{ $used_product->msrp }} </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="featured-car-list">
-                            <div class="featured-car-img">
-                                <a href=""><img src="images/bicycle/upcoming-cycles-02.jpg" class="img-responsive" alt="Image"></a>
-                                <div class="label_icon">Used</div>
-                                <div class="compare_item">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" id="compare2">
-                                        <label for="compare2">Compare</label>
-                                    </div>
-                                </div>
-                                <div class="sms-ecommerce-add">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i class="fa fa-cart-plus"></i></a>
-                                    </li>
-                                </div>
-                            </div>
-                            <div class="featured-car-content">
-                                <h6><a href="single-bike-product.html">Mazda CX-5 SX, V6, ABS, Sunroof</a></h6>
-                                <div class="price_info">
-                                    <p class="featured-price">$90,000</p>
-                                    <div class="car-location"><span><i class="fa fa-map-marker"
-                                                                       aria-hidden="true"></i> Colorado, USA</span></div>
-                                </div>
-                                <ul>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>0,000 km</li>
-                                    <li><i class="fa fa-tachometer" aria-hidden="true"></i>30.000 miles</li>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>
-                                    <li><i class="fa fa-superpowers" aria-hidden="true"></i>143 kW</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="featured-car-list">
-                            <div class="featured-car-img">
-                                <a href=""><img src="images/bicycle/upcoming-cycles-03.jpg" class="img-responsive" alt="Image"></a>
-                                <div class="label_icon">Used</div>
-                                <div class="compare_item">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" id="compare3">
-                                        <label for="compare3">Compare</label>
-                                    </div>
-                                </div>
-                                <div class="sms-ecommerce-add">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i class="fa fa-cart-plus"></i></a>
-                                    </li>
-                                </div>
-                            </div>
-                            <div class="featured-car-content">
-                                <h6><a href="single-bike-product.html">BMW 535i</a></h6>
-                                <div class="price_info">
-                                    <p class="featured-price">$90,000</p>
-                                    <div class="car-location"><span><i class="fa fa-map-marker"
-                                                                       aria-hidden="true"></i> Colorado, USA</span></div>
-                                </div>
-                                <ul>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>0,000 km</li>
-                                    <li><i class="fa fa-tachometer" aria-hidden="true"></i>30.000 miles</li>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>
-                                    <li><i class="fa fa-superpowers" aria-hidden="true"></i>143 kW</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="featured-car-list">
-                            <div class="featured-car-img">
-                                <a href=""><img src="images/bicycle/upcoming-cycles-01.jpg" class="img-responsive" alt="Image"></a>
-                                <div class="label_icon">Used</div>
-                                <div class="compare_item">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" id="compare3">
-                                        <label for="compare3">Compare</label>
-                                    </div>
-                                </div>
-                                <div class="sms-ecommerce-add">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i class="fa fa-cart-plus"></i></a>
-                                    </li>
-                                </div>
-                            </div>
-                            <div class="featured-car-content">
-                                <h6><a href="single-bike-product.html">BMW 535i</a></h6>
-                                <div class="price_info">
-                                    <p class="featured-price">$90,000</p>
-                                    <div class="car-location"><span><i class="fa fa-map-marker"
-                                                                       aria-hidden="true"></i> Colorado, USA</span></div>
-                                </div>
-                                <ul>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>0,000 km</li>
-                                    <li><i class="fa fa-tachometer" aria-hidden="true"></i>30.000 miles</li>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>
-                                    <li><i class="fa fa-superpowers" aria-hidden="true"></i>143 kW</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="featured-car-list">
-                            <div class="featured-car-img">
-                                <a href=""><img src="images/bicycle/upcoming-cycles-02.jpg" class="img-responsive" alt="Image"></a>
-                                <div class="label_icon">Used</div>
-                                <div class="compare_item">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" id="compare2">
-                                        <label for="compare2">Compare</label>
-                                    </div>
-                                </div>
-                                <div class="sms-ecommerce-add">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i class="fa fa-cart-plus"></i></a>
-                                    </li>
-                                </div>
-                            </div>
-                            <div class="featured-car-content">
-                                <h6><a href="single-bike-product.html">Mazda CX-5 SX, V6, ABS, Sunroof</a></h6>
-                                <div class="price_info">
-                                    <p class="featured-price">$90,000</p>
-                                    <div class="car-location"><span><i class="fa fa-map-marker"
-                                                                       aria-hidden="true"></i> Colorado, USA</span></div>
-                                </div>
-                                <ul>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>0,000 km</li>
-                                    <li><i class="fa fa-tachometer" aria-hidden="true"></i>30.000 miles</li>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>
-                                    <li><i class="fa fa-superpowers" aria-hidden="true"></i>143 kW</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="featured-car-list">
-                            <div class="featured-car-img">
-                                <a href=""><img src="images/bicycle/upcoming-cycles-03.jpg" class="img-responsive" alt="Image"></a>
-                                <div class="label_icon">Used</div>
-                                <div class="compare_item">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" id="compare3">
-                                        <label for="compare3">Compare</label>
-                                    </div>
-                                </div>
-                                <div class="sms-ecommerce-add">
-                                    <li><a href="" class="sms-wishlist" data-placement="top" tabindex="0" data-toggle="tooltip" title="Wishlist"><i class="fa fa-heart-o"></i></a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-placement="top" tabindex="0" data-toggle="tooltip" title="Cart"><i class="fa fa-cart-plus"></i></a>
-                                    </li>
-                                </div>
-                            </div>
-                            <div class="featured-car-content">
-                                <h6><a href="single-bike-product.html">BMW 535i</a></h6>
-                                <div class="price_info">
-                                    <p class="featured-price">$90,000</p>
-                                    <div class="car-location"><span><i class="fa fa-map-marker"
-                                                                       aria-hidden="true"></i> Colorado, USA</span></div>
-                                </div>
-                                <ul>
-                                    <li><i class="fa fa-road" aria-hidden="true"></i>0,000 km</li>
-                                    <li><i class="fa fa-tachometer" aria-hidden="true"></i>30.000 miles</li>
-                                    <li><i class="fa fa-calendar" aria-hidden="true"></i>2005 model</li>
-                                    <li><i class="fa fa-superpowers" aria-hidden="true"></i>143 kW</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            <a href="car-listing.html" target="_blank" class="button red">View All<i
-                    class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+            <a href="{{ route('bicycle-listing') }}" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         </div>
     </div>
 </section>
@@ -913,16 +576,17 @@ Start Popular car -->
                     <div class="separator"></div>
                 </div>
                 <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
+                    @foreach($popular_products as $popular_product)
                     <div class="item">
                         <div class="car-item text-center">
                             <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-01.jpg" alt="">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/bicycles/{{ $popular_product->bicycle->image1 ?? 'not-found.jpg' }}" alt="">
                                 <div class="car-overlay-banner">
                                     <ul>
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $popular_product->id }}" id="compare2">
                                                     <label for="compare2">Compare</label>
                                                 </div>
                                             </div>
@@ -932,211 +596,31 @@ Start Popular car -->
                             </div>
                             <div class="car-list">
                                 <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-toggle="tooltip" data-placement="bottom" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a>
-                                    </li>
+                                    <li><i class="fa fa-registered"></i> {{ $popular_product->bicycle->brand->name ?? ''}}</li>
+                                    <li><i class="fa fa-cog"></i> {{ $popular_product->bicycle->model->name ?? ''}}</li>
                                 </ul>
                             </div>
                             <div class="car-content">
                                 <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
+                                    <i class="fa @if($popular_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($popular_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($popular_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($popular_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($popular_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
                                 </div>
-                                <a href="single-bike-product.html">Acura Rsx</a>
+                                <a href="{{ route('single-bicycle-product', $popular_product->id) }}">{{ $popular_product->name }}</a>
                                 <div class="separator"></div>
                                 <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
+                                    <!--<span class="old-price">$35,568</span>-->
+                                    <span class="new-price">Tk.{{ $popular_product->msrp }} </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-02.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-toggle="tooltip" data-placement="bottom" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">Lexus GS 450h</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-03.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-toggle="tooltip" data-placement="bottom" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">GTA 5 Lowriders DLC</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-01.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-toggle="tooltip" data-placement="bottom" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">Toyota avalon hybrid </a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="images/bicycle/new-Cycle-02.jpg" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" id="compare2">
-                                                    <label for="compare2">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><a href="" class="sms-wishlist" data-toggle="tooltip" data-placement="bottom" title="Wishlist"><i
-                                                class="fa fa-heart-o"></i>Wishlist</a>
-                                    </li>
-                                    <li><a href="" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i
-                                                class="fa fa-cart-plus"></i>Cart</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star orange-color"></i>
-                                    <i class="fa fa-star-o orange-color"></i>
-                                </div>
-                                <a href="single-bike-product.html">Hyundai santa fe sport </a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="old-price">$35,568</span>
-                                    <span class="new-price">$32,698 </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            <a href="car-listing.html" target="_blank" class="button red">View All<i
-                    class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+            <a href="{{ route('bicycle-listing') }}" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         </div>
     </div>
 </section>
@@ -1154,102 +638,23 @@ Start business partner -->
                 <div class="owl-carousel owl-loaded owl-drag" data-nav-dots="true" data-items="5" data-md-items="5" data-sm-items="3" data-xs-items="2" data-space="10">
                     <div class="owl-stage-outer">
                         <div class="owl-stage" style="transform: translate3d(-2530px, 0px, 0px); transition: all 0.25s ease 0s; width: 4140px;">
+                            @foreach($suppliers as $supplier)
                             <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
                                 <div class="item">
-                                    <img class="img-fluid center-block" src="images/p1.png" alt="">
+                                    <img class="img-fluid center-block" src="{{ url('/') }}/assets/profile/{{ $supplier->photo }}" alt="">
                                 </div>
                             </div>
-                            <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p2.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p4.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p5.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p6.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p4.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p1.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p2.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p4.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p1.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item active" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p5.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p2.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned active" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p5.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                <div class="item">
-                                    <img class="img-fluid center-block" src="images/p1.png" alt="">
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i
-                                class="fa fa-angle-left fa-2x"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button>
+                    <div class="owl-nav disabled">
+                        <button type="button" role="presentation" class="owl-prev"><i class="fa fa-angle-left fa-2x"></i></button>
+                        <button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button>
                     </div>
-                    <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
+                    <div class="owl-dots">
+                        <button role="button" class="owl-dot"><span></span></button>
+                        <button role="button" class="owl-dot active"><span></span></button>
+                    </div>
                 </div>
             </div>
         </div>

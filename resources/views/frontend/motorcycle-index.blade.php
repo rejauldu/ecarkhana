@@ -270,7 +270,7 @@
                     <div class="item">
                         <div class="car-item text-center">
                             <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/motorcycles/{{ $new_product->motorcycle->image1 }}" alt="">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/motorcycles/{{ $new_product->motorcycle->image1  ?? 'not-found.jpg' }}" alt="">
                                 <div class="car-overlay-banner">
                                     <ul>
                                         <li>
@@ -299,7 +299,7 @@
                                     <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
                                 </div>
-                                <a href="{{ url('/') }}/single-motorcycle-product/{{ $new_product->id }}">{{ $new_product->name }}</a>
+                                <a href="{{ route('single-motorcycle-product', $new_product->id) }}">{{ $new_product->name }}</a>
                                 <div class="separator"></div>
                                 <div class="price">
                                     <!--<span class="old-price">$35,568</span>-->
