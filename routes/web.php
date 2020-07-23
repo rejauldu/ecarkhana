@@ -16,6 +16,8 @@ Route::get('/home', 'Frontend\HomeController@index')->name('home');
 Route::get('/motorcycle-index', 'Frontend\HomeController@motorcycleIndex')->name('motorcycle-index');
 Route::get('/bicycle-index', 'Frontend\HomeController@bicycleIndex')->name('bicycle-index');
 
+Route::get('/about-us', 'Frontend\HomeController@aboutUs')->name('about-us');
+Route::get('/add-to-compare', 'Frontend\HomeController@addToCompare')->name('add-to-compare');
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
 Route::get('/auction-product-list', 'Frontend\HomeController@auctionProductList')->name('auction-product-list');
 Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('bicycle-compare');

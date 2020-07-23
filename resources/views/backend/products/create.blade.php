@@ -177,7 +177,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <div class="row">
                                                     @foreach($after_sell_services as $after_sell_service)
-                                                    <div class="col-6">
+                                                    <div class="col-6 d-cross d-{{ strtolower($after_sell_service->category->name) }}">
                                                         <input type="checkbox" class="custom-control-input" id="after-sell-service-{{ $after_sell_service->id }}" name="after_sell_service[]" value="{{ $after_sell_service->id }}" @if(isset($product) && $product->after_sell_service && in_array($after_sell_service->id, $product->after_sell_service)) checked @endif>
                                                         <label class="custom-control-label" for="after-sell-service-{{ $after_sell_service->id }}">{{ $after_sell_service->name }}</label>
                                                     </div>
@@ -229,6 +229,7 @@
         var car_reconditions = document.getElementsByClassName("d-car-recondition");
         var car_useds = document.getElementsByClassName("d-car-used");
         var motorcycles = document.getElementsByClassName("d-motorcycle");
+        var bicycles = document.getElementsByClassName("d-bicycles");
         for (let i = 0; i < crosses.length; i++) {
             crosses[i].classList.add('d-none');
         }
@@ -246,8 +247,12 @@
                 }
             }
         } else if (category == '2') {
-            for (let i = 0; i < cars.length; i++) {
-                cars[i].classList.remove('d-none');
+            for (let i = 0; i < motorcycles.length; i++) {
+                motorcycles[i].classList.remove('d-none');
+            }
+        } else if (category == '3') {
+            for (let i = 0; i < bicycles.length; i++) {
+                bicycles[i].classList.remove('d-none');
             }
         }
 
