@@ -12,7 +12,7 @@
         <!-- Title -->
         <h3 class="mt-4">{{ $post->title ?? 'No Title' }}</h3>
         <!-- Preview Image -->
-        <div><img class="img-fluid rounded img-thumbnail" src="{{ url('/') }}/assets/blogs/{{ $post->photo }}" alt=""></div>
+        <div><img class="img-fluid rounded img-thumbnail w-100" src="{{ url('/') }}/assets/blogs/{{ $post->photo }}" alt=""></div>
         <div class="mb-4">
             <hr/>
             <span class="text-secondary">By {{ $post->user->name }}</span> <span class="float-right">At {{ $post->created_at->format('jS M Y') }}</span>
