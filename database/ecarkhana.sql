@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2020 at 06:33 AM
+-- Generation Time: Jul 24, 2020 at 03:44 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -283,6 +283,32 @@ INSERT INTO `bids` (`id`, `user_id`, `product_id`, `amount`, `valid_until`, `upd
 (10, 1, 107, 12, '2020-07-08 13:57:36', '2020-07-08 07:57:36', '2020-07-08 07:57:36'),
 (11, 1, 107, 20, '2020-07-08 15:04:46', '2020-07-08 09:04:46', '2020-07-08 09:04:46'),
 (12, 1, 107, 25, '2020-07-08 15:13:18', '2020-07-08 09:13:18', '2020-07-08 09:13:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `thumbnail` varchar(200) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `body`, `thumbnail`, `photo`, `user_id`, `category_id`, `updated_at`, `created_at`) VALUES
+(1, 'PHP | Laravel | WordPress | JavaScript Developer', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati? Lorem ipsm dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>', '300x300.jpg', '900x300.jpg', 1, 1, '2020-07-24 05:33:22', '2020-07-23 23:05:57'),
+(2, 'PHP | Laravel | WordPress | JavaScript Developer', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati? Lorem ipsm dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!<br></p>', '300x300.jpg', '900x300.jpg', 1, 2, '2020-07-24 05:33:30', '2020-07-23 23:21:40');
 
 -- --------------------------------------------------------
 
@@ -5276,7 +5302,8 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1284, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/single-motorcycle-product/17', '2020-07-20 02:18:15', '2020-07-20 02:18:15'),
 (1285, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-20 21:57:11', '2020-07-20 21:57:11'),
 (1286, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-21 22:04:53', '2020-07-21 22:04:53'),
-(1287, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-22 21:01:06', '2020-07-22 21:01:06');
+(1287, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-22 21:01:06', '2020-07-22 21:01:06'),
+(1288, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-23 20:16:37', '2020-07-23 20:16:37');
 
 -- --------------------------------------------------------
 
@@ -10509,7 +10536,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `email_verified_at`, `password`, `phone`, `role_id`, `name_on_card`, `credit_card`, `payment_id`, `card_exp_month`, `card_exp_year`, `cvv`, `address`, `region_id`, `union_id`, `upazila_id`, `district_id`, `division_id`, `billing_address`, `billing_region_id`, `billing_union_id`, `billing_upazila_id`, `billing_district_id`, `billing_division_id`, `shipping_address`, `shipping_region_id`, `shipping_union_id`, `shipping_upazila_id`, `shipping_district_id`, `shipping_division_id`, `user_type_id`, `about`, `website`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', 'u3CTTYPtSIllORSvAY0zXCQwOGOayUh453yM4G43TFmrsrX0tHiKin5i5A0A', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
+(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', 'gppJE6frrmtvEPR8DLLAnuXFVawyiSBiwJIKbHdOxH8cj4B8cDaIm1UhViTv', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
 (2, 'Super Admin', 'admin@gmail.com', '2.jpg', '2020-01-17 02:24:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '741.667.7107 x60100', 3, NULL, '4350', 2, 2, 2019, NULL, '59339 Abernathy Meadows Suite 466\nEast Robynport, AK 60030-0762', 1, 3270, 216, 47, 7, '784 Jenkins Forges\nEast Sigmund, MS 03564', 3, 933, 417, 24, 7, '649 Obie Extension Apt. 112\nEmmerichshire, MN 70568', 1, 2629, 291, 12, 1, 1, NULL, NULL, 'MvPkWggfwCpynrHNosYwRaDTxSkASCb2crN7jchTF9nCtXDy8tlx351lpRm5', '2020-01-17 11:08:11', '2020-02-18 23:25:43'),
 (3, 'Moderator', 'moderator@gmail.com', 'avatar.png', '2020-01-17 11:05:19', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(473) 451-7145 x102', 2, 'Rejaul Karim', '6000', 1, 10, 2023, NULL, '4876 Kelvin Station Apt. 306\nNew Estella, PA 57909', 1, 2109, 25, 33, 4, '1993 Wolff Rapid\nPurdyville, NE 99436', 1, 2753, 43, 56, 8, '76592 Maxwell Village Suite 050\nPort Xanderland, AK 64479', 1, 1621, 279, 28, 3, 1, NULL, NULL, 'Y6f4NllPJFC5IwfriQKaJf9775RodofB6rGxkXEsFsnhGVqBB923OPZ9PoaA', '2020-01-17 11:08:12', '2020-01-22 22:07:41'),
 (4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 4, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
@@ -10871,6 +10898,14 @@ ALTER TABLE `bids`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `body_types`
@@ -11426,6 +11461,12 @@ ALTER TABLE `bids`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `body_types`
 --
 ALTER TABLE `body_types`
@@ -11747,7 +11788,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1288;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1289;
 
 --
 -- AUTO_INCREMENT for table `transmissions`
