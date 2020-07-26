@@ -24,7 +24,7 @@ Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('
 Route::get('/bicycle-fit-calculator', 'Frontend\HomeController@bicycleFitCalculator')->name('bicycle-fit-calculator');
 Route::get('/bicycle-listing', 'Frontend\HomeController@motorcycleListing')->name('bicycle-listing');
 Route::resource('blogs', 'Backend\BlogController');
-Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-index');
+Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-blogs');
 Route::get('/motorcycle-cart', 'Frontend\HomeController@motorcycleCart')->name('motorcycle-cart');
 Route::get('/motorcycle-checkout', 'Frontend\HomeController@motorcycleCheckout')->name('motorcycle-checkout');
 Route::get('/motorcycle-compare', 'Frontend\HomeController@motorcycleCompare')->name('motorcycle-compare');

@@ -29,6 +29,7 @@ use App\Dropdowns\Model;
 use App\Dropdowns\BodyType;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
+use App\Blog;
 
 class HomeController extends Controller {
 
@@ -49,8 +50,9 @@ class HomeController extends Controller {
         $body_types = BodyType::where('category_id', 1)->get();
         $fuel_types = FuelType::where('category_id', 1)->get();
         $packages = Package::where('category_id', 1)->get();
+        $posts = Blog::with('user')->take(2)->get();
         $type = 'Car';
-        return view('frontend.index', compact('home_sliders', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages'));
+        return view('frontend.index', compact('home_sliders', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages', 'posts'));
     }
 
     public function motorcycleIndex() {

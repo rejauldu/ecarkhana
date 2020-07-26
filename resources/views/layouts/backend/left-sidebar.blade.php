@@ -113,6 +113,18 @@
 			<li class="{{ Request::is('chat') ? 'active' : '' }}">
 				<a href="{{ route('chats.index') }}"><i class="fa fa-envelope"></i><span>{{ __('Chat') }}</span></a>
 			</li>
+                        @moderator(Product)
+			<li class="treeview {{ Request::is('blogs*') || Request::is('manage-blogs*') ? 'active' : '' }}">
+				<a href="#">
+					<i class="fa fa-product-hunt" aria-hidden="true"></i> <span>Blog</span>
+					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+					<li class="{{ Request::is('manage-blogs') ? 'active' : '' }}"><a href="{{ route('manage-blogs') }}"><i class="fa fa-circle-o"></i> Manage Blogs</a></li>
+					<li class="{{ Request::is('blogs/create') ? 'active' : '' }}"><a href="{{ route('blogs.create') }}"><i class="fa fa-circle-o"></i> Add New Post</a></li>
+				</ul>
+			</li>
+			@endmoderator
 			@moderator(Dropdown)
 			<li class="treeview {{ Request::is('home-sliders*') ? 'active' : '' }}">
 				<a href="#">
