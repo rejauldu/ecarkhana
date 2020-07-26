@@ -45,11 +45,11 @@
 	<!--=================================
 loading -->
 
-    <div id="loading">
+    <!-- <div id="loading">
         <div id="loading-center">
             <img src="{{ url('/') }}/images/{{ $type ?? 'Car' }}-loader.gif" alt="">
         </div>
-    </div>
+    </div> -->
 
     <!--=================================
 	loading -->

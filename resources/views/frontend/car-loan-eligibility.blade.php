@@ -100,9 +100,33 @@ Start Car Loan  Eligibility-->
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="button red">Check Eligibility</button>
+                                <button class="button red"  data-toggle="modal" href="#ignismyModal">Check Eligibility</button>
                                 <button type="reset" class="btn btn-primary">Reset All</button>
 
+                                <div class="modal fade" id="ignismyModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+                     </div>
+					
+                    <div class="modal-body">
+                       
+						<div class="thank-you-pop">
+							<img src="http://ecarkhana/images/Red-Round-Tick.png" alt="">
+							<h1>Thank You!</h1>
+							<p>Your submission is received and we will contact you soon</p>
+							<div class="alert alert-block alert-danger" style="display:none">
+                  <h4>Error !</h4>
+                  Email already exist !
+                </div>
+ 						</div>
+                         
+                    </div>
+					
+                </div>
+            </div>
+        </div>
                             </div>
                         </form>
                     </div>
