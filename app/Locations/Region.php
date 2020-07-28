@@ -12,7 +12,7 @@ class Region extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'bn_name', 'division_id', 'district_id', 'upazila_id', 'union_id', 'url', 'updated_at', 'created_at'
+        'name', 'bn_name', 'division_id', 'district_id', 'upazila_id', 'union_id', 'url', 'lat', 'lon', 'updated_at', 'created_at'
     ];
 
     /**

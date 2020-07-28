@@ -287,7 +287,7 @@ Start Used Cars In Your City And Budget -->
                                     <div class="img_holder float-left">
                                         <img src="{{ url('/') }}/assets/blogs/{{ $post->thumbnail ?? 'not-found.jpg' }}" alt="" class="img-fluid">
                                         <div class="hover_icon">
-                                            <a href="single-blog" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                            <a href="{{ route('blogs.show', $post->id) }}" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -306,11 +306,6 @@ Start Used Cars In Your City And Budget -->
                         </div>
                         @endforeach
                     </div>
-                    <!--<div class="tab-pane fade" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab">-->
-                    <!--    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt-->
-                    <!--    irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit-->
-                    <!--    do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.-->
-                    <!--</div>-->
                 </div>
             </div>
 
@@ -373,7 +368,7 @@ Start Used Cars In Your City And Budget -->
                     @endforeach
                 </div>
             </div>
-            <a href="car-listing" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+            <a href="{{ route('car-listing') }}" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         </div>
     </div>
 </section>

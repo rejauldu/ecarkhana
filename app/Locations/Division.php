@@ -21,7 +21,7 @@ class Division extends Model
      * @var array
      */
     protected $hidden = [
-        'bn_name', 'url', 'updated_at', 'created_at'
+        'bn_name', 'url', 'lat', 'lon', 'updated_at', 'created_at'
     ];
 
     /**
