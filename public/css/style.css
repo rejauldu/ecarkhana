@@ -2227,7 +2227,12 @@ section.sms-banner {
     margin-top: 30px; }
 
   .list-style-1 {
-    margin-bottom: 20px; } }
+    margin-bottom: 20px; }
+    .recent-post-block {
+      display: none;
+  }
+  
+  }
 /*************************************
         Footer
 **************************************/
@@ -2321,7 +2326,9 @@ footer.footer.bg-2.bg-overlay-black-90 {
 .about-content img {
   height: 55px;
   margin-bottom: 30px; }
-
+.sms-abt-img{
+  overflow:hidden;
+}
 .address {
   margin-top: 20px; }
   .address ul li {
@@ -7222,11 +7229,11 @@ td.pro-out-stoke {
     display: inline-block;
     padding: 0 0 0 0px; }
   .rate-us .female + .female-label {
-    background: url("../images/bicycle/001-man.png") no-repeat;
+    background: url("../images/bicycle/002-woman.png") no-repeat;
     background-position: center;
     background-size: contain; }
   .rate-us .male + .male-label {
-    background: url("../images/bicycle/002-woman.png") no-repeat;
+    background: url("../images/bicycle/001-man.png") no-repeat;
     background-position: center;
     background-size: contain; }
   .rate-us .Mountain + .Mountain-label {

@@ -19,10 +19,10 @@ footer -->
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-12">
-                    <div class="about-content">
+                    <!-- <div class="about-content">
                         <img class="img-fluid" id="logo-footer" src="{{ asset('assets/logo.png') }}" alt="">
                         <p>We provide everything you need to build an amazing dealership website developed especially for car sellers dealers or auto motor retailers.</p>
-                    </div>
+                    </div> -->
                     <div class="address">
                         <ul>
                             <li> <i class="fa fa-map-marker"></i><span>220E Front St. Burlington NC 27215</span> </li>

@@ -363,21 +363,28 @@ Start Car Loan  Insurance-->
                                             <p>Top Tube Length</p>
                                             <p>Seat Tube Range CC</p>
                                             <p>Seat Tube Range CT</p>
+
+                                            <div class="mesarement-res-com-name-second">
                                             <p>Stem Length</p>
                                             <p>BB Saddle Position</p>
                                             <p>Saddle Handlebar</p>
                                             <p>Saddle Setback</p>
                                             <p>Seatpost Type</p>
+                                            </div>
+                                            
                                         </div>
                                         <div class="mesarement-res-com-value">
                                             <p>82.6 - 83 Cm</p>
                                             <p>37.3 - 37.8 Cm</p>
                                             <p>38.4 - 38.9 Cm</p>
+                                            <div class="mesarement-res-com-value-second">
                                             <p>9.6 - 10.2 Cm</p>
                                             <p>129.3 - 131.3 Cm</p>
                                             <p>51.6 - 52.2 Cm</p>
                                             <p>12.3 - 11.9 Cm</p>
                                             <p>Not Setback</p>
+                                            </div>
+                                            
                                         </div>
                                         <div class="bike-shop-btn">
                                             <a id="#" class="button red" href="#">Shop Now</a>
@@ -438,6 +445,14 @@ Start Car Loan  Insurance-->
                                         <div class="save-btn">
                                             <a id="#" class="button red" href="#">Save</a>
                                             <a id="#" class="button red" href="#">Download PDF</a>
+                                        </div>
+                                        <div class="share-sms">
+                                            <a href="#">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#">
+                                            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
