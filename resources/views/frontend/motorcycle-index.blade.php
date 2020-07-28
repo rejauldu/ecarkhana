@@ -204,22 +204,23 @@
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-blog" role="tabpanel" aria-labelledby="nav-blog-tab">
                         <h3 class="blog-title">know more to choose better</h3>
-                        <div class="blog_wrap my-4 p-2 border">
+                        @foreach($posts as $post)
+                        <div class="blog_wrap p-2 border">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="img_holder float-left">
-                                        <img src="images/bike/Bike-image-01.png" alt="" class="img-fluid">
+                                        <img src="{{ url('/') }}/assets/blogs/{{ $post->thumbnail ?? 'not-found.jpg' }}" alt="" class="img-fluid">
                                         <div class="hover_icon">
-                                            <a href="{{ route('single-blog') }}" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                            <a href="{{ route('blogs.show', $post->id) }}" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="blog_info">
-                                        <h6>New Maruti Suzuki Ertiga</h6>
+                                        <h6>{{ $post->title }}</h6>
 
                                         <div class="meta">
-                                            <p>Merry Devas <span>|</span>On 15th november,2018</p>
+                                            <p>{{ $post->user->name }} <span>|</span>{{ $post->created_at->format('jS M Y') }}</p>
                                         </div>
 
                                     </div>
@@ -227,35 +228,8 @@
 
                             </div>
                         </div>
-                        <div class="blog_wrap my-4 p-2 border">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="img_holder float-left">
-                                        <img src="images/bike/Bike-image-02.png" alt="" class="img-fluid">
-                                        <div class="hover_icon">
-                                            <a href="{{ route('single-blog') }}" class="hvr_btn"><i
-                                                    class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="blog_info">
-                                        <h6>Is It Worth Buying A Third Party Car?</h6>
-
-                                        <div class="meta">
-                                            <p>Merry Devas <span>|</span>On 15th november,2018</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <!--<div class="tab-pane fade" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab">-->
-                    <!--    Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt-->
-                    <!--    irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit-->
-                    <!--    do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.-->
-                    <!--</div>-->
                 </div>
             </div>
 

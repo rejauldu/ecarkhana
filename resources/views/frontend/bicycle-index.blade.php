@@ -191,23 +191,23 @@ Start Used Cars In Your City And Budget -->
                 <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-blog" role="tabpanel" aria-labelledby="nav-blog-tab">
                         <h3 class="blog-title">know more to choose better</h3>
-                        <div class="blog_wrap my-4 p-2 border">
+                        @foreach($posts as $post)
+                        <div class="blog_wrap p-2 border">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="img_holder float-left">
-                                        <img src="images/bicycle/new-Cycle-01.jpg" alt="" class="img-fluid">
+                                        <img src="{{ url('/') }}/assets/blogs/{{ $post->thumbnail ?? 'not-found.jpg' }}" alt="" class="img-fluid">
                                         <div class="hover_icon">
-                                            <a href="single-blog.html" class="hvr_btn"><i
-                                                    class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                            <a href="{{ route('blogs.show', $post->id) }}" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="blog_info">
-                                        <h6>New Maruti Suzuki Ertiga</h6>
+                                        <h6>{{ $post->title }}</h6>
 
                                         <div class="meta">
-                                            <p>Merry Devas <span>|</span>On 15th november,2018</p>
+                                            <p>{{ $post->user->name }} <span>|</span>{{ $post->created_at->format('jS M Y') }}</p>
                                         </div>
 
                                     </div>
@@ -215,29 +215,7 @@ Start Used Cars In Your City And Budget -->
 
                             </div>
                         </div>
-                        <div class="blog_wrap my-4 p-2 border">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="img_holder float-left">
-                                        <img src="images/bicycle/new-Cycle-02.jpg" alt="" class="img-fluid">
-                                        <div class="hover_icon">
-                                            <a href="single-blog.html" class="hvr_btn"><i
-                                                    class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="blog_info">
-                                        <h6>Is It Worth Buying A Third Party Car?</h6>
-
-                                        <div class="meta">
-                                            <p>Merry Devas <span>|</span>On 15th november,2018</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -253,7 +231,7 @@ Start Used Cars In Your City And Budget -->
                     <div class="item">
                         <div class="car-item text-center">
                             <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/bicycles/{{ $new_product->bicycle->image1 ?? 'not-found.jpg' }}" alt="">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="">
                                 <div class="car-overlay-banner">
                                     <ul>
                                         <li>
@@ -490,7 +468,7 @@ start Featured Cars -->
                     <div class="item">
                         <div class="car-item text-center">
                             <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/bicycles/{{ $used_product->bicycle->image1 ?? 'not-found.jpg' }}" alt="">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="">
                                 <div class="car-overlay-banner">
                                     <ul>
                                         <li>
@@ -580,7 +558,7 @@ Start Popular car -->
                     <div class="item">
                         <div class="car-item text-center">
                             <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/bicycles/{{ $popular_product->bicycle->image1 ?? 'not-found.jpg' }}" alt="">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $popular_product->id }}/{{ $popular_product->image1 ?? 'not-found.jpg' }}" alt="">
                                 <div class="car-overlay-banner">
                                     <ul>
                                         <li>
