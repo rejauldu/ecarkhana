@@ -1175,6 +1175,9 @@ li.sms-focus {
     left: 50%;
     width: 200px; } }
 @media (max-width: 767px) {
+  .sms-phn-hide {
+    display: none;
+}
   .topbar {
     background: #000; }
     .sms-menu.shrink {
@@ -7440,5 +7443,47 @@ div#four {
 .btn.btn-block:focus {
   color: #ffffff;
   outline: none !important; }
+
+
+  /* add to compare */
+  .m-b30 {
+    margin-bottom: 30px;
+}
+  .icon-bx-wraper {
+    position: relative;
+    text-align: center;
+}
+.icon-bx-wraper.bx-style-1, .icon-bx-wraper.bx-style-2 {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ebedf2;
+}
+.icon-bx-wraper img {
+  border-style: none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+.icon-bx-wraper form {
+  flex-direction: column;
+}
+.icon-bx-wraper .input-group {
+  flex-direction: column;
+  padding: 15px;
+}
+.icon-bx-wraper h4 {
+  font-size: 22px;
+  font-weight: 500;
+}
+.input-group.icon-bx-wraper.bx-style-1.p-a20 {
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
 
 /*# sourceMappingURL=style.css.map */
