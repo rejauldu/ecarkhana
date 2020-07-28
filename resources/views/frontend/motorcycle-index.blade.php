@@ -250,8 +250,8 @@
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}" id="compare2">
-                                                    <label for="compare2">Compare</label>
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}" id="">
+                                                    <label for="">Compare</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -484,8 +484,8 @@ Start Compare -->
                                 <div class="label_icon">Used</div>
                                 <div class="compare_item">
                                     <div class="checkbox">
-                                        <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}" id="compare3">
-                                        <label for="compare3">Compare</label>
+                                        <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}" id="">
+                                        <label for="">Compare</label>
                                     </div>
                                 </div>
                             </div>
@@ -561,8 +561,8 @@ Start Compare -->
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $popular_product->id }}" id="compare2">
-                                                    <label for="compare2">Compare</label>
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $popular_product->id }}" id="">
+                                                    <label for="">Compare</label>
                                                 </div>
                                             </div>
                                         </li>

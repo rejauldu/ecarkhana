@@ -98,8 +98,8 @@
                     </div>
                     <div class="add_compare">
                         <div class="checkbox">
-                            <input type="checkbox" class="compare-checkbox" value="" id="compare14">
-                            <label for="compare14">Compare</label>
+                            <input type="checkbox" class="compare-checkbox" product-id="{{ $product->id }}">
+                            <label for="">Compare</label>
                         </div>
                     </div>
                 </div>
@@ -720,7 +720,7 @@
                                             <div class="label_icon">{{ $related_product->condition->name }}</div>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" class="compare-checkbox" id="compare3">
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $related_product->id }}">
                                                     <label for="compare3">Compare</label>
                                                 </div>
                                             </div>

@@ -237,8 +237,8 @@ Start Used Cars In Your City And Budget -->
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}" id="compare2">
-                                                    <label for="compare2">Compare</label>
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                                    <label for="">Compare</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -474,8 +474,8 @@ start Featured Cars -->
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}" id="compare2">
-                                                    <label for="compare2">Compare</label>
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}" id="">
+                                                    <label for="">Compare</label>
                                                 </div>
                                             </div>
                                         </li>
@@ -564,8 +564,8 @@ Start Popular car -->
                                         <li>
                                             <div class="compare_item">
                                                 <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $popular_product->id }}" id="compare2">
-                                                    <label for="compare2">Compare</label>
+                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $popular_product->id }}" id="">
+                                                    <label for="">Compare</label>
                                                 </div>
                                             </div>
                                         </li>
