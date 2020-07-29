@@ -110,7 +110,7 @@ Start Service -->
                 </div>
                 <ul class="service">
                     <li>
-                        <a href="car-listing">
+                        <a href="#" onclick="return getLocation()">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
                                 <p>Nearby by car </p>
@@ -803,6 +803,13 @@ Start business partner -->
     </div>
 </section>
 
+<form class="ajax-upload d-none" action="{{ route('car-listing') }}" method="post">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="lat" id="lat" />
+    <input type="hidden" name="lon" id="lon" />
+    <button id="lat-lon-submit" class="btn btn-theme" type="submit">Update</button>
+</form>
 
 <!--=================================
 End business partner -->
@@ -870,5 +877,19 @@ End business partner -->
             }
         });
     })(jQuery);
+</script>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+//             Geolocation is not supported by this browser
+        }
+        return false;
+    }
+
+    function showPosition(position) {
+        window.location = "{{ route('car-listing') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude;
+    }
 </script>
 @endsection
