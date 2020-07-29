@@ -187,23 +187,21 @@ class HomeController extends Controller {
             });
             $data['package'] = $request->package;
         }
-	if($request->lat & $request->lon) {
-            $products = $products->with(['supplier' => function($q) {
-                $q->selectRaw('ROUND(('
+	if($request->lat && $request->lon) {
+            $products = $products->with(['supplier' => function($q) use($request) {
+                $q->selectRaw('*, ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
-                        . '* cos( radians(23.01) )'
-                        . '* cos( radians(90.01) - radians(lon)) + sin(radians(lat))'
-                        . '* sin( radians(23.01)))'
+                        . '* cos( radians('.$request->lat.') )'
+                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians('.$request->lat.')))'
                         . '), 3) AS distance');
             }]);
-            echo 'hi';
         } else {
             $products = $products->with('supplier');
-            echo 'hie';
         }
         $data['products'] = $products->paginate(12);
-        dd($data['products'][0]);
+        dd($data['products'][0]->supplier);
         $data['brands'] = Brand::where('category_id', 1)->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
         $data['body_types'] = BodyType::where('category_id', 1)->get();
