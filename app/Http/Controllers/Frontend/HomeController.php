@@ -140,7 +140,7 @@ class HomeController extends Controller {
     }
 
     public function carListing(Request $request) {
-        $products = Product::has('car')->with('car', 'supplier');
+        $products = Product::has('car')->with('car');
         $filters = [];
         if ($request->location) {
             $products = $products->whereHas('supplier', function (Builder $query) use($request) {
@@ -186,6 +186,19 @@ class HomeController extends Controller {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
             });
             $data['package'] = $request->package;
+        }
+	if($request->lat & $request->lon) {
+            $products = $products->with(['supplier' => function($q) {
+                $q->selectRaw('*, ROUND(('
+                        . '6371'
+                        . '* acos( cos( radians(lat) )'
+                        . '* cos( radians(23.01) )'
+                        . '* cos( radians(90.01) - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians(23.01)))'
+                        . '), 3) AS distance');
+            }]);
+        } else {
+            $products = $products->with('supplier');
         }
         $data['products'] = $products->paginate(12);
         $data['brands'] = Brand::where('category_id', 1)->get();
