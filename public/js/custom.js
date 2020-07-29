@@ -71,12 +71,22 @@ var SHOWROV = {};
         });
 
         // Service toggle
-        
-         $(".sms-service-more").click(function(){
+
+        $(".sms-service-more").click(function() {
             $(".sms-view-content").slideToggle(300);
-          });
-          
-          
+        });
+
+
+        $(".ecar-short-phn").click(function() {
+            $(".sortByPanel").slideToggle(300);
+        });
+
+
+        $(".ecar-filter-phn").click(function() {
+            $(".smsphone-list-filter").slideToggle(300);
+        });
+
+
         // Insurance-check toggle
 
         var insuranceToggle = $('.quick-details');
