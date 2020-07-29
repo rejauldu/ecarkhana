@@ -189,7 +189,7 @@ class HomeController extends Controller {
         }
 	if($request->lat & $request->lon) {
             $products = $products->with(['supplier' => function($q) {
-                $q->selectRaw('*, ROUND(('
+                $q->selectRaw('ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
                         . '* cos( radians(23.01) )'
@@ -197,10 +197,13 @@ class HomeController extends Controller {
                         . '* sin( radians(23.01)))'
                         . '), 3) AS distance');
             }]);
+            echo 'hi';
         } else {
             $products = $products->with('supplier');
+            echo 'hie';
         }
         $data['products'] = $products->paginate(12);
+        dd($data['products'][0]);
         $data['brands'] = Brand::where('category_id', 1)->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
         $data['body_types'] = BodyType::where('category_id', 1)->get();
