@@ -92,7 +92,7 @@ product-listing  -->
                             <div class="car-list">
                                 <ul class="list-inline">
                                     <li><i class="fa fa-industry"></i> {{ $product->car->brand->name ?? ''}}</li>
-                                    @if($product->supplier->distance)
+                                    @if($product->supplier && $product->supplier->distance)
                                     <li><i class="fa fa-road"></i> {{ $product->supplier->distance ?? 0 }} km</li>
                                     @else
                                     <li><i class="fa fa-tasks"></i> {{ $product->car->model->name ?? ''}}</li>
