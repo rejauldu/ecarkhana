@@ -141,7 +141,8 @@ class HomeController extends Controller {
     }
 
     public function carListing(Request $request) {
-        $products = Product::has('car')->with('car');
+        $products = Product::select('products.*')
+                ->has('car')->with('car', 'supplier');
         $filters = [];
         if ($request->location) {
             $products = $products->whereHas('supplier', function (Builder $query) use($request) {
@@ -189,30 +190,19 @@ class HomeController extends Controller {
             $data['package'] = $request->package;
         }
 	if($request->lat && $request->lon) {
-            $products = $products->with(['supplier' => function($q) use($request) {
-                $q->selectRaw('id, ROUND(('
+            $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
+                    ->selectRaw('ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
                         . '* cos( radians('.$request->lat.') )'
                         . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
                         . '* sin( radians('.$request->lat.')))'
-                        . '), 3) AS distance')->having('distance', '>', 75);
-            }]);
-        } else {
-            $products = $products->with('supplier');
+                        . '), 3) AS distance')
+                    ->orderBy('distance', 'ASC');
         }
-        
-        $pagination = $products->paginate(12);
-        
-        $products = $pagination->sortBy(function ($product, $key) {
-            if($product->supplier)
-                return $product->supplier->distance;
-            else
-                return 99999999;
-        });
-//        $products = $products->values()->all();
+        $products = $products->paginate(12);
+        $products = $products->appends(Input::except('page'));
         $data['products'] = $products;
-        $data['pagination'] = $pagination->appends(Input::except('page'));
         $data['brands'] = Brand::where('category_id', 1)->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
         $data['body_types'] = BodyType::where('category_id', 1)->get();
