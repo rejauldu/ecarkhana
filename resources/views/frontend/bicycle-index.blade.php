@@ -20,13 +20,14 @@ bike slider -->
         </div>
         @endforeach
     </div>
+    @include('layouts.frontend.bicycle-filter')
 </section>
 
 <!--=================================
 Bike slider -->
 
 
-@include('layouts.frontend.bicycle-filter')
+
 
 
 <!--=================================

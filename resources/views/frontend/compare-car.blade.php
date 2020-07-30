@@ -49,7 +49,7 @@
                     <!--Basic-Info-Table-->
                     <div class="inventory_info_list">
                         <div class="listing_heading">
-                            <div>BASIC INFO</div>
+                            <div>General Information</div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
@@ -58,29 +58,150 @@
                             <li class="info_heading">
                                 <div>Brand</div>
                                 <div>Model</div>
+                                <div>Body type</div>
                                 <div>Package</div>
-                                <div>Manufacturing Year</div>
+                                <div>Displacement</div>
+                                <div>Make Year</div>
+                                <div>Ground Clearance</div>
+                                <div>Drive Type</div>
+                                <div>Dimension</div>
+                                <div>Engine Type</div>
+                                <div>Fuel Type</div>
+                                <div>Condition</div>
+                                <div>Seller Type</div>
+                                <div>Selling Price</div>
+                                <div>On Road Price</div>
                             </li>
                             <li>
                                 <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                                 <div>{{ $product[0]->car->model->name ?? '' }}</div>
                                 <div>{{ $product[0]->car->package->name ?? '' }}</div>
-                                <div>{{ $product[0]->manufacturing_year ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                
                             </li>
                             <li>
                                 <div>{{ $product[1]->car->brand->name ?? '' }}</div>
                                 <div>{{ $product[1]->car->model->name ?? '' }}</div>
                                 <div>{{ $product[1]->car->package->name ?? '' }}</div>
-                                <div>{{ $product[1]->manufacturing_year ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                             </li>
                             <li>
                                 <div>{{ $product[2]->car->brand->name ?? '' }}</div>
                                 <div>{{ $product[2]->car->model->name ?? '' }}</div>
                                 <div>{{ $product[2]->car->package->name ?? '' }}</div>
-                                <div>{{ $product[2]->manufacturing_year ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                             </li>
                         </ul>
                     </div>
+
+
+                    <div class="sms-sys-com">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">Key Features</a> 
+                                  <ul style="display:none">
+                                      <li>
+                                          <div>Transmission</div>
+                                          <div>Gross Weight</div>
+                                          <div>Max Power</div>
+                                          <div>Seating Capacity</div>
+                                          <div>Gear Box</div>
+                                          <div>EMI Start From</div>
+                                          <div>Millage Kmpl</div>
+                                          <div>Boot/Space Cargo</div>
+                                          <div>Fuel Tank Capacity</div>
+                                      </li>
+                                      <li>
+                                          <div>Automatic</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                      </li>
+                                      <li>
+                                          <div>Automatic</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                      </li>
+                                      <li>
+                                          <div>Automatic</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                      </li>
+                                  </ul>
+                                
+                            </li>
+                               
+
+
+
+
+
+                            <li class="list-group-item">
+                                <a href="#">Model</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
 
                     <!--Technical-Specification-Table-->
                     <div class="inventory_info_list">

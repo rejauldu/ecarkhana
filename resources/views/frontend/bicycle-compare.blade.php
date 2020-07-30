@@ -371,38 +371,159 @@ Start Compare -->
                     <!--Basic-Info-Table-->
                     <div class="inventory_info_list">
                         <div class="listing_heading">
-                            <div>BASIC INFO</div>
+                            <div>General Information</div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
                         </div>
                         <ul>
                             <li class="info_heading">
-                                <div>Model Year</div>
-                                <div>No. of Owners</div>
-                                <div>KMs Driven</div>
+                                <div>Brand</div>
+                                <div>Model</div>
+                                <div>Body type</div>
+                                <div>Package</div>
+                                <div>Displacement</div>
+                                <div>Make Year</div>
+                                <div>Ground Clearance</div>
+                                <div>Drive Type</div>
+                                <div>Dimension</div>
+                                <div>Engine Type</div>
                                 <div>Fuel Type</div>
+                                <div>Condition</div>
+                                <div>Seller Type</div>
+                                <div>Selling Price</div>
+                                <div>On Road Price</div>
                             </li>
                             <li>
-                                <div>2010</div>
-                                <div>4</div>
-                                <div>30,000</div>
-                                <div>Diesel</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->model->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->package->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                
                             </li>
                             <li>
-                                <div>2005</div>
-                                <div>2</div>
-                                <div>55,000</div>
-                                <div>Diesel</div>
+                                <div>{{ $product[1]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[1]->car->model->name ?? '' }}</div>
+                                <div>{{ $product[1]->car->package->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                             </li>
                             <li>
-                                <div>2010</div>
-                                <div>1</div>
-                                <div>95,000</div>
-                                <div>Diesel</div>
+                                <div>{{ $product[2]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[2]->car->model->name ?? '' }}</div>
+                                <div>{{ $product[2]->car->package->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                             </li>
                         </ul>
                     </div>
+
+
+                    <div class="sms-sys-com">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">Key Features</a> 
+                                  <ul style="display:none">
+                                      <li>
+                                          <div>Transmission</div>
+                                          <div>Gross Weight</div>
+                                          <div>Max Power</div>
+                                          <div>Seating Capacity</div>
+                                          <div>Gear Box</div>
+                                          <div>EMI Start From</div>
+                                          <div>Millage Kmpl</div>
+                                          <div>Boot/Space Cargo</div>
+                                          <div>Fuel Tank Capacity</div>
+                                      </li>
+                                      <li>
+                                          <div>Automatic</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                      </li>
+                                      <li>
+                                          <div>Automatic</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                      </li>
+                                      <li>
+                                          <div>Automatic</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                          <div>1500kg</div>
+                                      </li>
+                                  </ul>
+                                
+                            </li>
+                               
+
+
+
+
+
+                            <li class="list-group-item">
+                                <a href="#">Model</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
 
                     <!--Technical-Specification-Table-->
                     <div class="inventory_info_list">
@@ -415,43 +536,39 @@ Start Compare -->
                         <ul>
                             <li class="info_heading">
                                 <div>Engine Type</div>
-                                <div>Engine Description</div>
-                                <div>No. of Cylinders</div>
-                                <div>Mileage-City</div>
-                                <div>Mileage-Highway</div>
+                                <div>Cylinder</div>
+                                <div>Bootspace</div>
+                                <div>Front suspension</div>
                                 <div>Fuel Tank Capacity</div>
                                 <div>Seating Capacity</div>
                                 <div>Transmission Type</div>
                             </li>
                             <li>
-                                <div>TDCI Diesel Engine</div>
-                                <div>1.5KW</div>
-                                <div>4</div>
-                                <div>22.4kmpl</div>
-                                <div>25.83kmpl</div>
-                                <div>40 (Liters)</div>
-                                <div>5</div>
-                                <div>Manual</div>
+                                <div>{{ $product[0]->car->engine_type->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->cylinder->name ?? '' }}</div>
+                                <div>{{ $product[0]->car->boot_space ?? '' }}</div>
+                                <div>{{ $product[0]->car->front_suspension ?? '' }}</div>
+                                <div>{{ $product[0]->car->fuel_tank_capacity ?? '' }}</div>
+                                <div>{{ $product[0]->car->seating_capacity ?? '' }}</div>
+                                <div>{{ $product[0]->car->transmission->name ?? '' }}</div>
                             </li>
                             <li>
-                                <div>TDCI Diesel Engine</div>
-                                <div>1.9KW</div>
-                                <div>5</div>
-                                <div>32.4kmpl</div>
-                                <div>48.83kmpl</div>
-                                <div>60 (Liters)</div>
-                                <div>5</div>
-                                <div>Automatic</div>
+                                <div>{{ $product[1]->car->engine_type->name ?? '' }}</div>
+                                <div>{{ $product[1]->car->cylinder->name ?? '' }}</div>
+                                <div>{{ $product[1]->car->boot_space ?? '' }}</div>
+                                <div>{{ $product[1]->car->front_suspension ?? '' }}</div>
+                                <div>{{ $product[1]->car->fuel_tank_capacity ?? '' }}</div>
+                                <div>{{ $product[1]->car->seating_capacity ?? '' }}</div>
+                                <div>{{ $product[1]->car->transmission->name ?? '' }}</div>
                             </li>
                             <li>
-                                <div>TDCI Diesel Engine</div>
-                                <div>1.6KW</div>
-                                <div>6</div>
-                                <div>21.4kmpl</div>
-                                <div>28.83kmpl</div>
-                                <div>42 (Liters)</div>
-                                <div>6</div>
-                                <div>Manual</div>
+                                <div>{{ $product[2]->car->engine_type->name ?? '' }}</div>
+                                <div>{{ $product[2]->car->cylinder->name ?? '' }}</div>
+                                <div>{{ $product[2]->car->boot_space ?? '' }}</div>
+                                <div>{{ $product[2]->car->front_suspension ?? '' }}</div>
+                                <div>{{ $product[2]->car->fuel_tank_capacity ?? '' }}</div>
+                                <div>{{ $product[2]->car->seating_capacity ?? '' }}</div>
+                                <div>{{ $product[2]->car->transmission->name ?? '' }}</div>
                             </li>
                         </ul>
                     </div>
@@ -466,77 +583,45 @@ Start Compare -->
                         </div>
                         <ul>
                             <li class="info_heading">
-                                <div>Air Conditioner</div>
-                                <div>AntiLock Braking System</div>
-                                <div>Power Steering</div>
-                                <div>Power Windows</div>
-                                <div>CD Player</div>
-                                <div>Leather Seats</div>
-                                <div>Central Locking</div>
-                                <div>Power Door Locks</div>
-                                <div>Brake Assist</div>
-                                <div>Driver Airbag</div>
-                                <div>Passenger Airbag</div>
-                                <div>Crash Sensor</div>
-                                <div>Engine Check Warning</div>
-                                <div>Automatic Headlamps</div>
+								@foreach($key_features as $key_feature)
+									<div>{{ ucfirst($key_feature->name) }}</div>
+								@endforeach
                             </li>
                             <li>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
+								@foreach($key_features as $key_feature)
+									@if(in_array($key_feature->id, $product[0]->car->key_feature))
+										<div><i class="fa fa-check" aria-hidden="true"></i></div>
+									@else
+										<div><i class="fa fa-close" aria-hidden="true"></i></div>
+									@endif
+								@endforeach
                             </li>
                             <li>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-close" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                @foreach($key_features as $key_feature)
+									@if(in_array($key_feature->id, $product[1]->car->key_feature))
+										<div><i class="fa fa-check" aria-hidden="true"></i></div>
+									@else
+										<div><i class="fa fa-close" aria-hidden="true"></i></div>
+									@endif
+								@endforeach
                             </li>
                             <li>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-close" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-close" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-close" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                @foreach($key_features as $key_feature)
+									@if(in_array($key_feature->id, $product[2]->car->key_feature))
+										<div><i class="fa fa-check" aria-hidden="true"></i></div>
+									@else
+										<div><i class="fa fa-close" aria-hidden="true"></i></div>
+									@endif
+								@endforeach
                             </li>
                         </ul>
                     </div>
                     <div class="inventory_info_list text-center">
                         <ul>
                             <li>&nbsp;</li>
-                            <li><a href="#" class="button red">View Detail</a></li>
-                            <li><a href="#" class="button red">View Detail</a></li>
-                            <li><a href="#" class="button red">View Detail</a></li>
+                            <li><a href="{{ route('single-car-product', $product[0]->id) }}" class="button red">View Detail</a></li>
+                            <li><a href="{{ route('single-car-product', $product[1]->id) }}" class="button red">View Detail</a></li>
+                            <li><a href="{{ route('single-car-product', $product[2]->id) }}" class="button red">View Detail</a></li>
                         </ul>
                     </div>
                 </div>
