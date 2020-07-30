@@ -196,7 +196,7 @@ class HomeController extends Controller {
                         . '* cos( radians('.$request->lat.') )'
                         . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
                         . '* sin( radians('.$request->lat.')))'
-                        . '), 3) AS distance');
+                        . '), 3) AS distance')->having('distance', '>', 75);
             }]);
         } else {
             $products = $products->with('supplier');
@@ -205,7 +205,10 @@ class HomeController extends Controller {
         $pagination = $products->paginate(12);
         
         $products = $pagination->sortBy(function ($product, $key) {
-            return $product->supplier->distance;
+            if($product->supplier)
+                return $product->supplier->distance;
+            else
+                return 99999999;
         });
 //        $products = $products->values()->all();
         $data['products'] = $products;
