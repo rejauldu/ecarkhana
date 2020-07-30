@@ -199,6 +199,22 @@ class HomeController extends Controller {
                         . '* sin( radians('.$request->lat.')))'
                         . '), 3) AS distance')
                     ->orderBy('distance', 'ASC');
+            if($request->from)
+                $products = $products->whereRaw( '(ROUND(('
+                        . '6371'
+                        . '* acos( cos( radians(lat) )'
+                        . '* cos( radians('.$request->lat.') )'
+                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians('.$request->lat.')))'
+                        . '), 3)) > ?', ['distance' => $request->from]);
+            if($request->to)
+                $products = $products->whereRaw( '(ROUND(('
+                        . '6371'
+                        . '* acos( cos( radians(lat) )'
+                        . '* cos( radians('.$request->lat.') )'
+                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians('.$request->lat.')))'
+                        . '), 3)) < ?', ['distance' => $request->to]);
         }
         $products = $products->paginate(12);
         $products = $products->appends(Input::except('page'));
