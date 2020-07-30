@@ -207,7 +207,7 @@ class HomeController extends Controller {
         $products = $pagination->sortBy(function ($product, $key) {
             return $product->supplier->distance;
         });
-        $products = $products->values()->all();
+//        $products = $products->values()->all();
         $data['products'] = $products;
         $data['pagination'] = $pagination->appends(Input::except('page'));
         $data['brands'] = Brand::where('category_id', 1)->get();
