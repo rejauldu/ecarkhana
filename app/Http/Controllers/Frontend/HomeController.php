@@ -30,6 +30,7 @@ use App\Dropdowns\BodyType;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Blog;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
 
@@ -189,7 +190,7 @@ class HomeController extends Controller {
         }
 	if($request->lat && $request->lon) {
             $products = $products->with(['supplier' => function($q) use($request) {
-                $q->selectRaw('*, ROUND(('
+                $q->selectRaw('id, ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
                         . '* cos( radians('.$request->lat.') )'
@@ -200,8 +201,15 @@ class HomeController extends Controller {
         } else {
             $products = $products->with('supplier');
         }
-        $data['products'] = $products->paginate(12);
-        dd($data['products'][0]->supplier);
+        
+        $pagination = $products->paginate(12);
+        
+        $products = $pagination->sortBy(function ($product, $key) {
+            return $product->supplier->distance;
+        });
+        $products = $products->values()->all();
+        $data['products'] = $products;
+        $data['pagination'] = $pagination->appends(Input::except('page'));
         $data['brands'] = Brand::where('category_id', 1)->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
         $data['body_types'] = BodyType::where('category_id', 1)->get();
