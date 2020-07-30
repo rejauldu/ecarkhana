@@ -19,11 +19,12 @@
         </div>
         @endforeach
     </div>
+    @include('layouts.frontend.motorcycle-filter')
 </section>
 
 <!--=================================Bike slider -->
 
-@include('layouts.frontend.motorcycle-filter')
+
 
 
 <!--=================================Start Service -->
