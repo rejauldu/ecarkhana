@@ -233,10 +233,12 @@
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
+                                            @if(!$profile->lat)
                                             <div class="form-group">
                                                 <label for="geolocation">Your geolocation is not updated yet. </label>
                                                 <a id="geolocation" class="btn btn-light border" href="#"  onclick="getLocation()">Get Current Location</a>
                                             </div>
+                                            @endif
                                             <div class="form-group">
                                                 <button id="other-submit" class="btn btn-theme" type="submit">Update</button>
                                             </div>
@@ -275,5 +277,10 @@
         document.getElementById('lon').value = position.coords.longitude;
         document.getElementById('lat-lon-submit').click();
     }
+    @if(!$profile->lat)
+    (function() {
+        document.getElementById('geolocation').click();
+    })();
+    @endif
 </script>
 @endsection
