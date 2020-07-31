@@ -59,7 +59,7 @@ Start Form -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" />
+                                            <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off"/>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">

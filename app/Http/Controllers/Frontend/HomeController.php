@@ -30,7 +30,6 @@ use App\Dropdowns\BodyType;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Blog;
-use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller {
 
@@ -142,13 +141,11 @@ class HomeController extends Controller {
 
     public function carListing(Request $request) {
         $products = Product::select('products.*')
-                ->has('car')->with('car', 'supplier');
+                ->has('car')->with('car', 'supplier.region');
         $filters = [];
         if ($request->location) {
-            $products = $products->whereHas('supplier', function (Builder $query) use($request) {
-                $query->whereHas('region', function(Builder $q) use ($request) {
-                    $q->where('name', 'like', '"%' . $request->location . '%"');
-                });
+            $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
+                $q->where('name', 'like', '%' . $request->location . '%');
             });
             $data['location'] = $request->location;
         }
@@ -165,10 +162,8 @@ class HomeController extends Controller {
             $data['model'] = $request->model;
         }
         if ($request->body_type && $request->body_type != 'All Body Types') {
-            $products = $products->whereHas('car', function(Builder $query) use($request) {
-                $query->whereHas('body_type', function(Builder $q) use($request) {
-                    $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
-                });
+            $products = $products->whereHas('car.body_type', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
             });
             $data['body_type'] = $request->body_type;
         }
@@ -177,18 +172,14 @@ class HomeController extends Controller {
             $data['msrp'] = $request->msrp;
         }
         if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
-            $products = $products->whereHas('car', function(Builder $query) use($request) {
-                $query->whereHas('fuel_type', function(Builder $q) use($request) {
-                    $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
-                });
+            $products = $products->whereHas('car.fuel_type', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
             });
             $data['fuel_type'] = $request->fuel_type;
         }
         if ($request->package && $request->package != 'All Packages') {
-            $products = $products->whereHas('car', function(Builder $query) use($request) {
-                $query->whereHas('package', function(Builder $q) use($request) {
-                    $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
-                });
+            $products = $products->whereHas('car.package', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
             });
             $data['package'] = $request->package;
         }
@@ -214,7 +205,7 @@ class HomeController extends Controller {
             }
         }
         $products = $products->paginate(12);
-        $products = $products->appends(Input::except('page'));
+        $products = $products->appends($request->except('page'));
         $data['products'] = $products;
         $data['brands'] = Brand::where('category_id', 1)->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
