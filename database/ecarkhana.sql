@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2020 at 04:49 AM
+-- Generation Time: Jul 31, 2020 at 06:21 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -5416,7 +5416,9 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1289, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-27 05:56:48', '2020-07-27 05:56:48'),
 (1290, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-27 20:07:16', '2020-07-27 20:07:16'),
 (1291, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/broadcasting/auth', '2020-07-28 20:03:07', '2020-07-28 20:03:07'),
-(1292, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/broadcasting/auth', '2020-07-28 20:03:07', '2020-07-28 20:03:07');
+(1292, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/broadcasting/auth', '2020-07-28 20:03:07', '2020-07-28 20:03:07'),
+(1293, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/car-listing', '2020-07-29 20:51:38', '2020-07-29 20:51:38'),
+(1294, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-30 19:51:20', '2020-07-30 19:51:20');
 
 -- --------------------------------------------------------
 
@@ -10651,12 +10653,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `email_verified_at`, `password`, `phone`, `role_id`, `name_on_card`, `credit_card`, `payment_id`, `card_exp_month`, `card_exp_year`, `cvv`, `address`, `region_id`, `union_id`, `upazila_id`, `district_id`, `division_id`, `billing_address`, `billing_region_id`, `billing_union_id`, `billing_upazila_id`, `billing_district_id`, `billing_division_id`, `shipping_address`, `shipping_region_id`, `shipping_union_id`, `shipping_upazila_id`, `shipping_district_id`, `shipping_division_id`, `user_type_id`, `about`, `website`, `lat`, `lon`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', NULL, NULL, 'gppJE6frrmtvEPR8DLLAnuXFVawyiSBiwJIKbHdOxH8cj4B8cDaIm1UhViTv', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
-(2, 'Super Admin', 'admin@gmail.com', '2.jpg', '2020-01-17 02:24:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '741.667.7107 x60100', 3, NULL, '4350', 2, 2, 2019, NULL, '59339 Abernathy Meadows Suite 466\nEast Robynport, AK 60030-0762', 1, 3270, 216, 47, 7, '784 Jenkins Forges\nEast Sigmund, MS 03564', 3, 933, 417, 24, 7, '649 Obie Extension Apt. 112\nEmmerichshire, MN 70568', 1, 2629, 291, 12, 1, 1, NULL, NULL, NULL, NULL, 'MvPkWggfwCpynrHNosYwRaDTxSkASCb2crN7jchTF9nCtXDy8tlx351lpRm5', '2020-01-17 11:08:11', '2020-02-18 23:25:43'),
-(3, 'Moderator', 'moderator@gmail.com', 'avatar.png', '2020-01-17 11:05:19', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(473) 451-7145 x102', 2, 'Rejaul Karim', '6000', 1, 10, 2023, NULL, '4876 Kelvin Station Apt. 306\nNew Estella, PA 57909', 1, 2109, 25, 33, 4, '1993 Wolff Rapid\nPurdyville, NE 99436', 1, 2753, 43, 56, 8, '76592 Maxwell Village Suite 050\nPort Xanderland, AK 64479', 1, 1621, 279, 28, 3, 1, NULL, NULL, NULL, NULL, 'Y6f4NllPJFC5IwfriQKaJf9775RodofB6rGxkXEsFsnhGVqBB923OPZ9PoaA', '2020-01-17 11:08:12', '2020-01-22 22:07:41'),
-(4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 4, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, NULL, NULL, 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
-(5, 'Showroom', 'showroom@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1-683-637-9977', 1, NULL, '8084', 3, 11, 2022, NULL, '56889 Jeffrey Overpass\nEleanoreshire, CA 16312-9087', 4, 2523, 198, 2, 2, '45141 Erdman Square Apt. 065\nRueckerstad, MS 74986', 1, 715, 180, 47, 2, '67008 Joanie Crescent\nMarianomouth, DE 72457-4766', 4, 865, 240, 28, 4, 2, 'Hello,\r\nThis is a good showroom. We have many products.', 'https://ecarkhana.com', NULL, NULL, 'awtpDyp0u1', '2020-01-17 11:08:12', '2020-05-15 21:45:21'),
-(6, 'General User', 'user@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '207-813-5481 x0770', 1, NULL, '5291', 3, 10, 2019, NULL, '481 Hazle Forest\nDedricberg, MS 69504', 4, 2043, 439, 19, 8, '7983 Hailie Circle Apt. 398\nLaynebury, TN 23487', 1, 686, 110, 47, 3, '490 Bashirian Estates Suite 558\nCletusview, CT 38740', 3, 2507, 172, 39, 3, 1, NULL, NULL, NULL, NULL, 'YieuZjaOeQ', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
+(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', '23.7860', '90.2124', 'gppJE6frrmtvEPR8DLLAnuXFVawyiSBiwJIKbHdOxH8cj4B8cDaIm1UhViTv', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
+(2, 'Super Admin', 'admin@gmail.com', '2.jpg', '2020-01-17 02:24:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '741.667.7107 x60100', 3, NULL, '4350', 2, 2, 2019, NULL, '59339 Abernathy Meadows Suite 466\nEast Robynport, AK 60030-0762', 1, 3270, 216, 47, 7, '784 Jenkins Forges\nEast Sigmund, MS 03564', 3, 933, 417, 24, 7, '649 Obie Extension Apt. 112\nEmmerichshire, MN 70568', 1, 2629, 291, 12, 1, 1, NULL, NULL, '23.1563', '90.25684', 'MvPkWggfwCpynrHNosYwRaDTxSkASCb2crN7jchTF9nCtXDy8tlx351lpRm5', '2020-01-17 11:08:11', '2020-02-18 23:25:43'),
+(3, 'Moderator', 'moderator@gmail.com', 'avatar.png', '2020-01-17 11:05:19', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(473) 451-7145 x102', 2, 'Rejaul Karim', '6000', 1, 10, 2023, NULL, '4876 Kelvin Station Apt. 306\nNew Estella, PA 57909', 1, 2109, 25, 33, 4, '1993 Wolff Rapid\nPurdyville, NE 99436', 1, 2753, 43, 56, 8, '76592 Maxwell Village Suite 050\nPort Xanderland, AK 64479', 1, 1621, 279, 28, 3, 1, NULL, NULL, '23.5555', '90.3333', 'Y6f4NllPJFC5IwfriQKaJf9775RodofB6rGxkXEsFsnhGVqBB923OPZ9PoaA', '2020-01-17 11:08:12', '2020-01-22 22:07:41'),
+(4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 4, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, '23.7860', '90.2124', 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
+(5, 'Showroom', 'showroom@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1-683-637-9977', 1, NULL, '8084', 3, 11, 2022, NULL, '56889 Jeffrey Overpass\nEleanoreshire, CA 16312-9087', 4, 2523, 198, 2, 2, '45141 Erdman Square Apt. 065\nRueckerstad, MS 74986', 1, 715, 180, 47, 2, '67008 Joanie Crescent\nMarianomouth, DE 72457-4766', 4, 865, 240, 28, 4, 2, 'Hello,\r\nThis is a good showroom. We have many products.', 'https://ecarkhana.com', '25.25648', '91.5486', 'awtpDyp0u1', '2020-01-17 11:08:12', '2020-05-15 21:45:21'),
+(6, 'General User', 'user@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '207-813-5481 x0770', 1, NULL, '5291', 3, 10, 2019, NULL, '481 Hazle Forest\nDedricberg, MS 69504', 4, 2043, 439, 19, 8, '7983 Hailie Circle Apt. 398\nLaynebury, TN 23487', 1, 686, 110, 47, 3, '490 Bashirian Estates Suite 558\nCletusview, CT 38740', 3, 2507, 172, 39, 3, 1, NULL, NULL, '24.10354', '92.54522', 'YieuZjaOeQ', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
 (7, 'Rejaul Karim', 'rejauldu@gmail.com', '7.JPG', '2020-01-17 11:05:22', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1-445-669-0687', 1, NULL, '2721', 2, 1, 2024, NULL, '1998 Mathilde Dam\r\nPourosland, AR 81470', 3, 2035, 49, 1, 8, '9613 Feest Trail Apt. 884\r\nFraneckiview, IL 92774', 3, 1012, 38, 26, 6, '9613 Feest Trail Apt. 884\r\nFraneckiview, IL 92774', 3, 2667, 138, 42, 6, 1, 'I am a Bangladeshi freelancer and developed many ecommerce website around the world. My main platform is Laravel. Hire me to realize your dream through web coding.', NULL, NULL, NULL, 'iKq1ZHlKzrw8yEABCK26KHjO2k4AWuv9IzgH3A6OmcQbeypVBK27uSjWNC6K', '2020-01-17 11:08:12', '2020-06-03 03:57:25'),
 (8, 'Miss Fiona Strosin', 'annabelle.wehner@example.net', 'avatar.png', '2020-01-17 11:05:23', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '675.383.4184', 1, NULL, '1074', 5, 5, 2023, NULL, '512 Keebler Mountains\nNew Bradburgh, HI 48815', 3, 1581, 52, 58, 8, '4617 Erdman Plaza\nKozeytown, WY 31356-5781', 1, 153, 339, 23, 4, '52838 Jack Greens Suite 321\nEast Gene, WA 84307-5957', 4, 119, 86, 6, 1, 2, NULL, NULL, NULL, NULL, 'RSphNxFVzY', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
 (9, 'Rebeka Sipes', 'khalid.tremblay@example.net', 'avatar.png', '2020-01-17 11:05:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(817) 217-4394 x468', 1, NULL, '2334', 1, 7, 2025, NULL, '261 Cruickshank Street Suite 130\nConsidinetown, NC 14030-5972', 3, 3608, 334, 42, 8, '887 Miller Run Apt. 854\nCormiertown, MS 74986-7410', 1, 2106, 225, 61, 8, '21023 Howe Square\nScarlettburgh, AL 64536', 4, 156, 125, 28, 3, 2, NULL, NULL, NULL, NULL, 'b3S1mNnXyj', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
@@ -10968,6 +10970,26 @@ INSERT INTO `wheel_types` (`id`, `category_id`, `name`, `created_at`, `updated_a
 (13, 7, 'Ms. Ayana Weber', '2020-01-21 03:53:31', '2020-02-03 00:29:40'),
 (14, 1, 'Miss Alayna McClure DVM', '2020-01-21 07:18:09', '2020-02-01 08:53:11'),
 (15, 4, 'London Jacobi V', '2020-01-21 21:20:00', '2020-01-29 00:10:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `within_kms`
+--
+
+CREATE TABLE `within_kms` (
+  `id` smallint(6) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `within_kms`
+--
+
+INSERT INTO `within_kms` (`id`, `name`, `updated_at`, `created_at`) VALUES
+(1, 'Less than 10', '2020-07-30 20:43:38', '2020-07-30 20:43:38');
 
 --
 -- Indexes for dumped tables
@@ -11542,6 +11564,12 @@ ALTER TABLE `wheel_types`
   ADD KEY `wheel_types_category_id_index` (`category_id`);
 
 --
+-- Indexes for table `within_kms`
+--
+ALTER TABLE `within_kms`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -11903,7 +11931,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1293;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1295;
 
 --
 -- AUTO_INCREMENT for table `transmissions`
@@ -11964,6 +11992,12 @@ ALTER TABLE `wheel_bases`
 --
 ALTER TABLE `wheel_types`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `within_kms`
+--
+ALTER TABLE `within_kms`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
