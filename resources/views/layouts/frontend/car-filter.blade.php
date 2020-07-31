@@ -24,7 +24,7 @@ Start Form -->
                                 <div class="row">
                                     <div class="col-12">
                                         <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
-                                            <li v-for="region in response" class="list-group-item" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                                            <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@ Start Form -->
                                 <div class="row">
                                     <div class="col-12">
                                         <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
-                                            <li v-for="region in response" class="list-group-item" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                                            <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -264,7 +264,7 @@ Start Form -->
                                 <div class="row">
                                     <div class="col-12">
                                         <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
-                                            <li v-for="region in response" class="list-group-item" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                                            <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>

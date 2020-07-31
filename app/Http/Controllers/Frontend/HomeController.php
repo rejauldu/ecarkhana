@@ -152,19 +152,19 @@ class HomeController extends Controller {
             });
             $data['location'] = $request->location;
         }
-        if ($request->brand) {
+        if ($request->brand && $request->brand != 'All Brands') {
             $products = $products->whereHas('brand', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->brand) . "%'");
             });
             $data['brand'] = $request->brand;
         }
-        if ($request->model) {
+        if ($request->model && $request->model != 'All Models') {
             $products = $products->whereHas('model', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
             });
             $data['model'] = $request->model;
         }
-        if ($request->body_type) {
+        if ($request->body_type && $request->body_type != 'All Body Types') {
             $products = $products->whereHas('car', function(Builder $query) use($request) {
                 $query->whereHas('body_type', function(Builder $q) use($request) {
                     $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
@@ -176,7 +176,7 @@ class HomeController extends Controller {
             $products = $products->where('msrp', $request->msrp);
             $data['msrp'] = $request->msrp;
         }
-        if ($request->fuel_type) {
+        if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
             $products = $products->whereHas('car', function(Builder $query) use($request) {
                 $query->whereHas('fuel_type', function(Builder $q) use($request) {
                     $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
@@ -184,9 +184,11 @@ class HomeController extends Controller {
             });
             $data['fuel_type'] = $request->fuel_type;
         }
-        if ($request->package) {
-            $products = $products->whereHas('package', function(Builder $q) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
+        if ($request->package && $request->package != 'All Packages') {
+            $products = $products->whereHas('car', function(Builder $query) use($request) {
+                $query->whereHas('package', function(Builder $q) use($request) {
+                    $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
+                });
             });
             $data['package'] = $request->package;
         }
