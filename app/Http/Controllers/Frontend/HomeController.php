@@ -165,21 +165,22 @@ class HomeController extends Controller {
             $data['model'] = $request->model;
         }
         if ($request->body_type) {
-            $products = $products->whereHas('body_type', function(Builder $q) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
+            $products = $products->whereHas('car', function(Builder $query) use($request) {
+                $query->whereHas('body_type', function(Builder $q) use($request) {
+                    $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
+                });
             });
             $data['body_type'] = $request->body_type;
-        }
-        if ($request->within_km) {
-            $data['within_km'] = $request->within_km;
         }
         if ($request->msrp) {
             $products = $products->where('msrp', $request->msrp);
             $data['msrp'] = $request->msrp;
         }
         if ($request->fuel_type) {
-            $products = $products->whereHas('fuel_type', function(Builder $q) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
+            $products = $products->whereHas('car', function(Builder $query) use($request) {
+                $query->whereHas('fuel_type', function(Builder $q) use($request) {
+                    $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
+                });
             });
             $data['fuel_type'] = $request->fuel_type;
         }
@@ -199,7 +200,7 @@ class HomeController extends Controller {
                         . '* sin( radians('.$request->lat.')))'
                         . '), 3) AS distance')
                     ->orderBy('distance', 'ASC');
-            if($request->within_km)
+            if($request->within_km) {
                 $products = $products->whereRaw( '(ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
@@ -207,6 +208,8 @@ class HomeController extends Controller {
                         . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
                         . '* sin( radians('.$request->lat.')))'
                         . '), 3)) < ?', ['distance' => $request->within_km]);
+                $data['within_km'] = $request->within_km;
+            }
         }
         $products = $products->paginate(12);
         $products = $products->appends(Input::except('page'));
@@ -500,7 +503,10 @@ class HomeController extends Controller {
     public function termAndCondition() {
         return view('frontend.term-and-condition');
     }
-
+    public function getRegion(Request $request) {
+        $regions = Region::select('id', 'name')->where('name', 'like', '%'.$request->q.'%')->take(10)->get();
+        return (string) $regions;
+    }
     private function getRemaining($datestr = 0) {
         //Convert to date
         $date = strtotime($datestr); //Converted to a PHP date (a second count)

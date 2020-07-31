@@ -46,6 +46,7 @@ Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->nam
 Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
 Route::get('/national-distributor-list', 'Frontend\HomeController@nationalDistributorList')->name('national-distributor-list');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
+Route::get('/get-regions', 'Frontend\HomeController@getRegion')->name('get-regions');
 Route::get('/search-page', 'Frontend\HomeController@searchPage')->name('search-page');
 
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');
@@ -79,9 +80,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::get('/seller-my-ad/{id}', 'Frontend\HomeController@sellerMyAd')->name('seller-my-ad');
 	Route::get('/seller-profile/{id}', 'Frontend\HomeController@sellerProfile')->name('seller-profile');
 
-
 	Route::resource('auctions', 'Backend\AuctionController');
-    Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
+        Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
 	Route::resource('cashbooks', 'Backend\CashbookController');
 	Route::resource('users', 'Backend\UserController');
 	Route::resource('chats', 'Backend\ChatController');

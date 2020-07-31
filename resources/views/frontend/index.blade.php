@@ -918,4 +918,33 @@ End business partner -->
         }
     }
 </script>
+<script>
+    (function() {
+        var filter = new Vue({
+            el: '#filter-form',
+            data: {
+                input: '',
+                response: ''
+            },
+            methods: {
+                floatImage: function (e) {
+
+                }
+            },
+            watch: {
+                input: function(val) {
+                    var _this = this;
+                    $.ajax({
+                        url: "{{ route('get-regions') }}?q="+val,
+                        dataType: "json",
+                        success: function(result){
+                            _this.response = result;
+                        }
+                    });
+                }
+            }
+        });
+    })();
+    
+</script>
 @endsection

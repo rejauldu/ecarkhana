@@ -2,7 +2,7 @@
 Start Form -->
 
 
-<section id="filter_form2">
+<section id="filter-form">
     <div class="container">
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -20,7 +20,14 @@ Start Form -->
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
                             <div class="form-group col-md-3 col-sm-6">
-                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" />
+                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
+                                            <li v-for="region in response" class="list-group-item" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
                                 <div class="select">
@@ -138,7 +145,14 @@ Start Form -->
                     <div class="row">
                         <form id="filter-used" action="{{ route('car-listing') }}" method="get">
                             <div class="form-group col-md-3 col-sm-6">
-                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" />
+                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
+                                            <li v-for="region in response" class="list-group-item" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
                                 <div class="select">
@@ -246,7 +260,14 @@ Start Form -->
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
                             <div class="form-group col-md-3 col-sm-6">
-                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" />
+                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
+                                            <li v-for="region in response" class="list-group-item" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
                                 <div class="select">
