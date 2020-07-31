@@ -882,14 +882,40 @@ End business partner -->
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-//             Geolocation is not supported by this browser
         }
         return false;
     }
 
     function showPosition(position) {
         window.location = "{{ route('car-listing') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude;
+    }
+    function addCoordinate(condition) {
+        var container = '';
+        if(condition == 'new') {
+            container = document.getElementById('filter-new');
+        } else if(condition == 'used') {
+            container = document.getElementById('filter-used');
+        } else if(condition == 'recondition') {
+            container = document.getElementById('filter-recondition');
+        }
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(p) {
+                var lat = container.querySelector('input[name="lat"]')
+                if(!lat) {
+                    var input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "lat";
+                    input.value = p.coords.latitude;
+                    container.appendChild(input);
+                    var inp = document.createElement("input");
+                    inp.type = "hidden";
+                    inp.name = "lon";
+                    inp.value = p.coords.longitude;
+                    container.appendChild(inp);
+                }
+            });
+        }
     }
 </script>
 @endsection

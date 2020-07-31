@@ -66,12 +66,14 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <select class="form-control" name="within_km">
+                                                <select class="form-control" name="within_km" onclick="addCoordinate('new')">
                                                     <option>Within Kilometer</option>
-                                                    <option value="-10" @if(isset($within_km) && $within_km == '-10') selected @endif>Less than 10Km</option>
-                                                    <option value="10-20" @if(isset($within_km) && $within_km == '10-20') selected @endif>10Km - 20Km</option>
-                                                    <option value="20-50" @if(isset($within_km) && $within_km == '20-50') selected @endif>20Km - 50Km</option>
-                                                    <option value="50-" @if(isset($within_km) && $within_km == '50-') selected @endif>More than 50Km</option>
+                                                    <option value="10" @if(isset($within_km) && $within_km == '10') selected @endif>Within 10Km</option>
+                                                    <option value="20" @if(isset($within_km) && $within_km == '20') selected @endif>Within 20Km</option>
+                                                    <option value="50" @if(isset($within_km) && $within_km == '50') selected @endif>Within 50Km</option>
+                                                    <option value="100" @if(isset($within_km) && $within_km == '100') selected @endif>Within 100Km</option>
+                                                    <option value="300" @if(isset($within_km) && $within_km == '300') selected @endif>Within 300Km</option>
+                                                    <option value="600" @if(isset($within_km) && $within_km == '600') selected @endif>Within 600Km</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -182,12 +184,14 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <select class="form-control" name="within_km">
+                                                <select class="form-control" name="within_km" onclick="addCoordinate('used')">
                                                     <option>Within Kilometer</option>
-                                                    <option value="-10" @if(isset($within_km) && $within_km == '-10') selected @endif>Less than 10Km</option>
-                                                    <option value="10-20" @if(isset($within_km) && $within_km == '10-20') selected @endif>10Km - 20Km</option>
-                                                    <option value="20-50" @if(isset($within_km) && $within_km == '20-50') selected @endif>20Km - 50Km</option>
-                                                    <option value="50-" @if(isset($within_km) && $within_km == '50-') selected @endif>More than 50Km</option>
+                                                    <option value="10" @if(isset($within_km) && $within_km == '10') selected @endif>Within 10Km</option>
+                                                    <option value="20" @if(isset($within_km) && $within_km == '20') selected @endif>Within 20Km</option>
+                                                    <option value="50" @if(isset($within_km) && $within_km == '50') selected @endif>Within 50Km</option>
+                                                    <option value="100" @if(isset($within_km) && $within_km == '100') selected @endif>Within 100Km</option>
+                                                    <option value="300" @if(isset($within_km) && $within_km == '300') selected @endif>Within 300Km</option>
+                                                    <option value="600" @if(isset($within_km) && $within_km == '600') selected @endif>Within 600Km</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -288,12 +292,14 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <select class="form-control" name="within_km">
+                                                <select class="form-control" name="within_km" onclick="addCoordinate('recondition')">
                                                     <option>Within Kilometer</option>
-                                                    <option value="-10" @if(isset($within_km) && $within_km == '-10') selected @endif>Less than 10Km</option>
-                                                    <option value="10-20" @if(isset($within_km) && $within_km == '10-20') selected @endif>10Km - 20Km</option>
-                                                    <option value="20-50" @if(isset($within_km) && $within_km == '20-50') selected @endif>20Km - 50Km</option>
-                                                    <option value="50-" @if(isset($within_km) && $within_km == '50-') selected @endif>More than 50Km</option>
+                                                    <option value="10" @if(isset($within_km) && $within_km == '10') selected @endif>Within 10Km</option>
+                                                    <option value="20" @if(isset($within_km) && $within_km == '20') selected @endif>Within 20Km</option>
+                                                    <option value="50" @if(isset($within_km) && $within_km == '50') selected @endif>Within 50Km</option>
+                                                    <option value="100" @if(isset($within_km) && $within_km == '100') selected @endif>Within 100Km</option>
+                                                    <option value="300" @if(isset($within_km) && $within_km == '300') selected @endif>Within 300Km</option>
+                                                    <option value="600" @if(isset($within_km) && $within_km == '600') selected @endif>Within 600Km</option>
                                                 </select>
                                             </div>
                                         </div>
