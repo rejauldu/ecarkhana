@@ -285,6 +285,7 @@
 					<li class="{{ Request::is('dropdowns/wheel-types') ? 'active' : '' }}"><a href="{{ route('wheel-types.index') }}"><i class="fa fa-circle-o"></i> Manage Wheel Type</a></li>
 					<li class="{{ Request::is('dropdowns/user-types') ? 'active' : '' }}"><a href="{{ route('user-types.index') }}"><i class="fa fa-circle-o"></i> Manage User Type</a></li>
 					<li class="{{ Request::is('dropdowns/what-a-news') ? 'active' : '' }}"><a href="{{ route('what-a-news.index') }}"><i class="fa fa-circle-o"></i> Manage What A New</a></li>
+					<!--<li class="{{ Request::is('dropdowns/within-kms') ? 'active' : '' }}"><a href="{{ route('within-kms.index') }}"><i class="fa fa-circle-o"></i> Manage Within Km</a></li>-->
 				</ul>
 			</li>
 			@endmoderator

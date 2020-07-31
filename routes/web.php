@@ -123,6 +123,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 //Dropdowns
 Route::prefix('dropdowns')->group(function () {
 	Route::resource('additional-features', 'Backend\Dropdowns\AdditionalFeatureController')->middleware('moderator:Dropdown');
+	Route::resource('after-sell-services', 'Backend\Dropdowns\AfterSellServiceController')->middleware('moderator:Dropdown');
 	Route::resource('auction-grades', 'Backend\Dropdowns\AuctionGradeController')->middleware('moderator:Dropdown');
 	Route::resource('body-types', 'Backend\Dropdowns\BodyTypeController')->middleware('moderator:Dropdown');
 	Route::resource('brands', 'Backend\Dropdowns\BrandController')->middleware('moderator:Dropdown');
@@ -154,5 +155,5 @@ Route::prefix('dropdowns')->group(function () {
 	Route::resource('user-types', 'Backend\Dropdowns\UserTypeController')->middleware('moderator:Dropdown');
 	Route::resource('what-a-news', 'Backend\Dropdowns\WhatANewController')->middleware('moderator:Dropdown');
 	Route::resource('pros-conses', 'Backend\Dropdowns\ProsConsController')->middleware('moderator:Dropdown');
-	Route::resource('after-sell-services', 'Backend\Dropdowns\AfterSellServiceController')->middleware('moderator:Dropdown');
+	Route::resource('within-kms', 'Backend\Dropdowns\WithinKmController')->middleware('moderator:Dropdown');
 });

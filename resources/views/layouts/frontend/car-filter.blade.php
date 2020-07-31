@@ -65,9 +65,14 @@ Start Form -->
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="within-km" name="within_km" value="1" @if(isset($within_km) && $within_km) checked @endif>
-                                                <label class="custom-control-label" for="within-km">Within Kilometer</label>
+                                            <div class="select">
+                                                <select class="form-control" name="within_km">
+                                                    <option>Within Kilometer</option>
+                                                    <option value="-10" @if(isset($within_km) && $within_km == '-10') selected @endif>Less than 10Km</option>
+                                                    <option value="10-20" @if(isset($within_km) && $within_km == '10-20') selected @endif>10Km - 20Km</option>
+                                                    <option value="20-50" @if(isset($within_km) && $within_km == '20-50') selected @endif>20Km - 50Km</option>
+                                                    <option value="50-" @if(isset($within_km) && $within_km == '50-') selected @endif>More than 50Km</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -176,9 +181,14 @@ Start Form -->
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <div class="ustom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="used-within-km" name="within_km" value="1" @if(isset($within_km) && $within_km) checked @endif>
-                                                <label class="custom-control-label" for="within-km">Within Kilometer</label>
+                                            <div class="select">
+                                                <select class="form-control" name="within_km">
+                                                    <option>Within Kilometer</option>
+                                                    <option value="-10" @if(isset($within_km) && $within_km == '-10') selected @endif>Less than 10Km</option>
+                                                    <option value="10-20" @if(isset($within_km) && $within_km == '10-20') selected @endif>10Km - 20Km</option>
+                                                    <option value="20-50" @if(isset($within_km) && $within_km == '20-50') selected @endif>20Km - 50Km</option>
+                                                    <option value="50-" @if(isset($within_km) && $within_km == '50-') selected @endif>More than 50Km</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -277,9 +287,14 @@ Start Form -->
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <div class="ustom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="recondition-within-km" name="within_km" value="1" @if(isset($within_km) && $within_km) checked @endif>
-                                                <label class="custom-control-label" for="within-km">Within Kilometer</label>
+                                            <div class="select">
+                                                <select class="form-control" name="within_km">
+                                                    <option>Within Kilometer</option>
+                                                    <option value="-10" @if(isset($within_km) && $within_km == '-10') selected @endif>Less than 10Km</option>
+                                                    <option value="10-20" @if(isset($within_km) && $within_km == '10-20') selected @endif>10Km - 20Km</option>
+                                                    <option value="20-50" @if(isset($within_km) && $within_km == '20-50') selected @endif>20Km - 50Km</option>
+                                                    <option value="50-" @if(isset($within_km) && $within_km == '50-') selected @endif>More than 50Km</option>
+                                                </select>
                                             </div>
                                         </div>
 
