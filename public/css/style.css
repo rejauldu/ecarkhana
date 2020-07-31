@@ -1451,9 +1451,43 @@ li.sms-focus {
     }
 }
 
+.sms-sys-com ul li ul li {
+    width: 100%;
+}
+
+.sms-sys-com ul li ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sms-sys-com li.list-group-item a {
+    font-weight: 700;
+    font-size: 20px;
+    color: #000;
+    width: 100%;
+    display: block;
+}
+
+.sms-sys-com ul li ul li div {
+    color: #111;
+    padding: 18px 50px;
+    border: 1px solid #cccccc;
+}
+
+.sms-sys-com ul li ul li div i.fa.fa-times {
+    color: #db3333;
+}
+
 @media (max-width: 767px) {
     .sms-phn-hide {
         display: none;
+    }
+    .inventory_info_list ul li.info_heading div {
+        text-align: center !important;
+    }
+    .inventory_info_list ul li, .listing_heading div {
+        width: 30% !important;
     }
     .compare_info {
         overflow-x: scroll;
@@ -1482,24 +1516,6 @@ li.sms-focus {
     }
     .sorting-options-main #filter_form2 {
         top: 0;
-    }
-    .sms-sys-com ul li ul li {
-        width: 100%;
-    }
-    
-    
-    .sms-sys-com ul li ul {
-        display: flex !important;
-        flex-direction: row;
-        justify-content: space-between !important;
-    }
-    
-    .sms-sys-com li.list-group-item a {
-        font-weight: 700;
-        font-size: 20px;
-        color: #000;
-        border-bottom: 1px solid #dcd7d7;
-        margin-bottom: 20px;
     }
     .sms-phone-footer-filter {
         position: fixed;
