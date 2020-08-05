@@ -321,48 +321,39 @@
 
     <!--=================================
 Start Compare -->
+
     <section class="compare-page inner_pages">
         <div class="container">
             <div class="compare_info">
-                <h4>Compare Hyundai Elantra 1.6 SX and Ford Figo 1.5D Base MT and Hyundai Elantra 2.0 SX</h4>
+                <h4>Compare {{ $product[0]->car->brand->name ?? '' }} {{ $product[0]->car->package->name ?? '' }}, {{ $product[1]->car->brand->name ?? '' }} {{ $product[1]->car->package->name ?? '' }} and {{ $product[2]->car->brand->name ?? '' }} {{ $product[2]->car->package->name ?? '' }}</h4>
                 <div class="compare_product_img">
                     <div class="inventory_info_list">
                         <ul>
                             <li id="filter_toggle" class="search_other_inventory"><i class="fa fa-search" aria-hidden="true"></i> Search Other Inventory</li>
                             <li>
-                                <a href="#"><img src="images/bicycle/upcoming-cycles-01.jpg" alt="image"></a>
+                                <a href="{{ route('single-car-product', $product[0]->id) }}"><img src="{{ url('/assets/products/cars') }}/{{ $product[0]->photo ?? 'not-found.jpg' }}" alt="image"></a>
                             </li>
                             <li>
-                                <a href="#"><img src="images/bicycle/upcoming-cycles-02.jpg" alt="image"></a>
+                                <a href="{{ route('single-car-product', $product[1]->id) }}"><img src="{{ url('/assets/products/cars') }}/{{ $product[1]->photo ?? 'not-found.jpg' }}" alt="image"></a>
                             </li>
                             <li>
-                                <a href="#"><img src="images/bicycle/upcoming-cycles-03.jpg" alt="image"></a>
+                                <a href="{{ route('single-car-product', $product[2]->id) }}"><img src="{{ url('/assets/products/cars') }}/{{ $product[2]->photo ?? 'not-found.jpg' }}" alt="image"></a>
                             </li>
                         </ul>
                     </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
                 <div class="compare_product_title gray-bg">
                     <div class="inventory_info_list">
                         <ul>
                             <li class="listing_heading">Compare <br> Inventorys <span class="td_divider"></span></li>
-                            <li><a href="#">Hyundai Elantra 1.6 SX</a>
-                                <p class="price">$90,000</p>
+                            <li><a href="#">{{ $product[0]->car->brand->name ?? '' }} {{ $product[0]->car->model->name ?? '' }} {{ $product[0]->car->package->name ?? '' }}</a>
+                                <p class="price">${{ $product[0]->msrp ?? '' }}</p>
                                 <span class="vs">V/s</span></li>
-                            <li><a href="#">Ford Figo 1.5D Base MT</a>
-                                <p class="price">$85,000</p>
+                            <li><a href="#">{{ $product[1]->car->brand->name ?? '' }} {{ $product[1]->car->model->name ?? '' }} {{ $product[1]->car->package->name ?? '' }}</a>
+                                <p class="price">${{ $product[1]->msrp ?? '' }}</p>
                                 <span class="vs">V/s</span></li>
-                            <li><a href="#">Hyundai Elantra 2.0 SX</a>
-                                <p class="price">$75,000</p>
+                            <li><a href="#">{{ $product[2]->car->brand->name ?? '' }} {{ $product[2]->car->model->name ?? '' }} {{ $product[2]->car->package->name ?? '' }}</a>
+                                <p class="price">${{ $product[2]->msrp ?? '' }}</p>
                             </li>
                         </ul>
                     </div>
@@ -374,7 +365,7 @@ Start Compare -->
                             <div>General Information</div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
-                            <div>&nbsp;</div>
+                            <div class="sms-phn-hide">&nbsp;</div>
                         </div>
                         <ul>
                             <li class="info_heading">
@@ -429,7 +420,7 @@ Start Compare -->
                                 <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                                 <div>{{ $product[0]->car->brand->name ?? '' }}</div>
                             </li>
-                            <li>
+                            <li class="sms-phn-hide">
                                 <div>{{ $product[2]->car->brand->name ?? '' }}</div>
                                 <div>{{ $product[2]->car->model->name ?? '' }}</div>
                                 <div>{{ $product[2]->car->package->name ?? '' }}</div>
@@ -454,7 +445,7 @@ Start Compare -->
                             <div>Key Features</div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
-                            <div>&nbsp;</div>
+                            <div class="sms-phn-hide">&nbsp;</div>
                         </div>
                         <ul>
                             <li class="info_heading">
@@ -492,7 +483,7 @@ Start Compare -->
                                           <div>1500kg</div>
                                           <div>1500kg</div>
                             </li>
-                            <li>
+                            <li class="sms-phn-hide">
                                           <div>Automatic</div>
                                           <div>1500kg</div>
                                           <div>1500kg</div>
@@ -554,6 +545,20 @@ Start Compare -->
                                          <div>4WD</div>
                                          <div>4WD</div>
                                      </li>
+                                     <li class="sms-phn-hide">
+                                         <div>OTIS Ripin</div>
+                                         <div>1500 (cc)</div>
+                                         <div>1500 (cc)</div>
+                                         <div>1500 (cc)</div>
+                                         <div>1500 (cc)</div>
+                                         <div>200/Kmpl</div>
+                                         <div>Yes</div>
+                                         <div>Automatic</div>
+                                         <div>Automatic</div>
+                                         <div>4 Cylinder</div>
+                                         <div>4WD</div>
+                                         <div>4WD</div>
+                                     </li>
                                  </ul>
                             </li>
 
@@ -578,6 +583,14 @@ Start Compare -->
                                           <div>13</div>
                                       </li>
                                       <li>
+                                          <div>1650kg</div>
+                                          <div>8</div>
+                                          <div>1500mm</div>
+                                          <div>16cc</div>
+                                          <div>21</div>
+                                          <div>14</div>
+                                      </li>
+                                      <li class="sms-phn-hide">
                                           <div>1650kg</div>
                                           <div>8</div>
                                           <div>1500mm</div>
@@ -633,6 +646,19 @@ Start Compare -->
                                           <div>20</div>
                                           <div>13</div>
                                       </li>
+                                      <li class="sms-phn-hide">
+                                          <div>1500kg</div>
+                                          <div>5</div>
+                                          <div>1200mm</div>
+                                          <div>15cc</div>
+                                          <div>20</div>
+                                          <div>13</div>
+                                          <div>5</div>
+                                          <div>1200mm</div>
+                                          <div>15cc</div>
+                                          <div>20</div>
+                                          <div>13</div>
+                                      </li>
                                   </ul>
                             </li>
 
@@ -651,6 +677,11 @@ Start Compare -->
                                           <div>20kmpl</div>
                                       </li>
                                       <li>
+                                          <div>Hybrid</div>
+                                          <div>500cc</div>
+                                          <div>20kmpl</div>
+                                      </li>
+                                      <li class="sms-phn-hide">
                                           <div>Hybrid</div>
                                           <div>500cc</div>
                                           <div>20kmpl</div>
@@ -692,7 +723,7 @@ Start Compare -->
                                           <div><i class="fa fa-times" aria-hidden="true"></i></div>
                                           <div><i class="fa fa-check" aria-hidden="true"></i></div>
                                       </li>
-                                      <li>
+                                      <li class="sms-phn-hide">
                                           <div><i class="fa fa-check" aria-hidden="true"></i></div>
                                           <div><i class="fa fa-times" aria-hidden="true"></i></div>
                                           <div><i class="fa fa-check" aria-hidden="true"></i></div>
@@ -710,7 +741,10 @@ Start Compare -->
                             <li class="list-group-item">
                                 <a href="#">Interior/Exterior</a> 
                                   <ul style="display:none">
-                                
+                                  <li></li>
+                                  <li></li>
+                                  <li></li>
+                                  <li class="sms-phn-hide"></li>                               
                                   </ul>
                             </li>
                                     
