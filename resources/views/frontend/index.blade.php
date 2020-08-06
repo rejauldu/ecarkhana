@@ -308,7 +308,7 @@ Start Used Cars In Your City And Budget -->
                 </div>
             </div>
 
-            <div class="col-lg-8 col-sm-12">
+            <div class="col-lg-8 col-sm-12 text-center">
                 <div class="section-title">
                     <span>What Our Happy Clients say about us</span>
                     <h2>New Cars </h2>
@@ -341,17 +341,17 @@ Start Used Cars In Your City And Budget -->
                                 </ul>
                             </div>
                             <div class="car-content">
-                                <!-- <div class="star">
+                                <div class="star">
                                     <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div> -->
+                                </div>
                                 <div class="location-list">
                                     <ul class="sms-list-inline">
-                                        <li><i class="fa fa-map-marker"></i>Mohammadpur</li>
-                                        <li><i class="fa fa-thermometer-full"></i>PhD</li>
+                                        <li><i class="fa fa-map-marker"></i> {{ $new_product->supplier->region->name ?? ''}}</li>
+                                        <li><i class="fa fa-industry"></i> {{ $new_product->car->brand->name ?? ''}}</li>
                                     </ul>
                                 </div>
 
@@ -366,8 +366,8 @@ Start Used Cars In Your City And Budget -->
                     </div>
                     @endforeach
                 </div>
+                <a href="{{ route('car-listing') }}" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
-            <a href="{{ route('car-listing') }}" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         </div>
     </div>
 </section>
@@ -928,17 +928,17 @@ End business partner -->
             },
             methods: {
                 getCurrentLocation: function () {
-                    this.regionByPosition();
+                    var _this = this;
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(p) {
-                            
+                            _this.regionByPosition(p);
                         });
                     }
                 },
-                regionByPosition: function() {
+                regionByPosition: function(p) {
                     var _this = this;
                     $.ajax({
-                        url: "{{ route('get-region') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude,
+                        url: "{{ route('get-region') }}?lat="+p.coords.latitude+"&lon="+p.coords.longitude,
                         dataType: "json",
                         success: function(result){
                             _this.input = result.name;

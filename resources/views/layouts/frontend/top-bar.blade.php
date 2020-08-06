@@ -1,6 +1,3 @@
-<!--=================================Ajax loader -->
-
-<!--=================================header -->
 <div id='app'></div>
 <header id="header" class="defualt">
     <div class="topbar">

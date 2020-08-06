@@ -90,15 +90,10 @@ product-listing  -->
                                 </div>
                             </div>
                             <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><i class="fa fa-industry"></i> {{ $product->car->brand->name ?? ''}}</li>
-                                    @if($product->distance)
-                                    <li><i class="fa fa-road"></i> {{ $product->distance ?? 0 }} km</li>
-                                    @else
-                                    <li><i class="fa fa-tasks"></i> {{ $product->car->model->name ?? ''}}</li>
-                                    @endif
-                                    
-                                </ul>
+                                <div class="text-left">
+                                    <a class="btn red btn-link border ml-1 text-dark" href="{{ route('single-car-product', $product->id) }}">Dealer Detail</a>
+                                    <a class="btn btn-link border float-right mr-1 text-dark" href="#"><i class="fa fa-whatsapp text-success"></i> Chat</a>
+                                </div>
                             </div>
                             <div class="car-content">
                                 <div class="star">
