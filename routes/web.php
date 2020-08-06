@@ -46,7 +46,8 @@ Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->nam
 Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
 Route::get('/national-distributor-list', 'Frontend\HomeController@nationalDistributorList')->name('national-distributor-list');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
-Route::get('/get-regions', 'Frontend\HomeController@getRegion')->name('get-regions');
+Route::get('/get-regions', 'Frontend\HomeController@getRegions')->name('get-regions');
+Route::get('/get-region', 'Frontend\HomeController@getRegion')->name('get-region');
 Route::get('/search-page', 'Frontend\HomeController@searchPage')->name('search-page');
 
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');

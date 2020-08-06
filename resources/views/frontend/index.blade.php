@@ -927,9 +927,27 @@ End business partner -->
                 response: ''
             },
             methods: {
-                floatImage: function (e) {
-
+                getCurrentLocation: function () {
+                    this.regionByPosition();
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(p) {
+                            
+                        });
+                    }
+                },
+                regionByPosition: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: "{{ route('get-region') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude,
+                        dataType: "json",
+                        success: function(result){
+                            _this.input = result.name;
+                        }
+                    });
                 }
+            },
+            mounted:function(){
+                this.getCurrentLocation();
             },
             watch: {
                 input: function(val) {
@@ -938,7 +956,10 @@ End business partner -->
                         url: "{{ route('get-regions') }}?q="+val,
                         dataType: "json",
                         success: function(result){
-                            _this.response = result;
+                            if(val)
+                                _this.response = result;
+                            else
+                                _this.response = '';
                         }
                     });
                 }

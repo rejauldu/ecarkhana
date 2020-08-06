@@ -15,19 +15,12 @@ Start Form -->
 
         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="sms-bg" class="main_bg white-text">
+                <div class="main_bg white-text">
                     <h3 class="car-title">Find Your Dream Car</h3>
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
                             <div class="form-group col-md-3 col-sm-6">
-                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" />
-                                <div class="row">
-                                    <div class="col-12">
-                                        <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
-                                            <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
                                 <div class="select">
@@ -50,7 +43,7 @@ Start Form -->
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
-                                <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
+                                <button type="submit" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
                             </div>
                             <div class="form-group col-md-12 col-sm-6">
                                 <div class="sms-advance">Advanced Search</div>
@@ -59,7 +52,7 @@ Start Form -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off"/>
+                                            <a class="btn btn-light border" @click.prevent="getCurrentLocation()" href="#">Current Location</a>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
@@ -373,6 +366,42 @@ Start Form -->
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="location-modal">
+        <div class="modal-dialog">
+            <div class="modal-content mb-5">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="text-center w-100">Select Location</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mb-5">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text fa fa-search"></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Write Region Name" v-model="input">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
+                                <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="border-light">
+                    <div class="input-group my-3">
+                        <span class="input-group-text fa fa-map-marker rounded-circle text-danger"></span><a class="btn btn-link text-dark" href="#" @click.prevent="getCurrentLocation()" class="close" data-dismiss="modal">Current Location</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

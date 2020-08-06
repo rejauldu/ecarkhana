@@ -194,7 +194,8 @@ class HomeController extends Controller {
                         . '), 3) AS distance')
                     ->orderBy('distance', 'ASC');
             if($request->within_km) {
-                $products = $products->whereRaw( '(ROUND(('
+                $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
+                        ->whereRaw( '(ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
                         . '* cos( radians('.$request->lat.') )'
@@ -496,9 +497,21 @@ class HomeController extends Controller {
     public function termAndCondition() {
         return view('frontend.term-and-condition');
     }
-    public function getRegion(Request $request) {
+    public function getRegions(Request $request) {
         $regions = Region::select('id', 'name')->where('name', 'like', '%'.$request->q.'%')->take(10)->get();
         return (string) $regions;
+    }
+    public function getRegion(Request $request) {
+        $regions = Region::with('division')->selectRaw('*, ROUND(('
+                        . '6371'
+                        . '* acos( cos( radians(lat) )'
+                        . '* cos( radians('.$request->lat.') )'
+                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians('.$request->lat.')))'
+                        . '), 3) AS distance')
+                    ->orderBy('distance', 'ASC');
+        $region = $regions->first();
+        return (string) $region;
     }
     private function getRemaining($datestr = 0) {
         //Convert to date

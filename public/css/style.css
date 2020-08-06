@@ -49,8 +49,6 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
     color: #363636;
-    margin-top: 0px;
-    text-transform: uppercase;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -3248,42 +3246,6 @@ footer.footer.bg-2.bg-overlay-black-90:before {
     background: url(../images/car-focus.png) no-repeat 0 0;
 }
 
-.modal-dialog {
-    width: 100%;
-}
-
-.modal-content {
-    padding: 0 32px 0px;
-}
-
-.modal-header {
-    padding: 15px 0;
-    margin-bottom: 25px;
-}
-
-.modal-body {
-    padding: 10px 0;
-}
-
-.modal .modal-header .close {
-    background: transparent;
-    border-radius: 50%;
-    color: #000;
-    font-size: 28px;
-    line-height: 0px;
-    margin-top: 5px;
-    opacity: 1;
-    text-align: center;
-    text-shadow: none;
-    width: 30px;
-    height: 30px;
-    position: relative;
-    top: -8px;
-}
-
-.modal-footer {
-    justify-content: center;
-}
 
 /*-------------------------------------------------
 	Login / Register / Forgot password
