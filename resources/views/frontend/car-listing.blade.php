@@ -68,7 +68,7 @@ product-listing  -->
             </div>
             @endcomputer
 
-            <div class="col-lg-9 col-md-8">
+            <div class="col-lg-9 col-md-8" id="products">
 
                 <div class="row">
                     @foreach($products as $product)
@@ -92,7 +92,7 @@ product-listing  -->
                             <div class="car-list">
                                 <div class="text-left">
                                     <a class="btn red btn-link border ml-1 text-dark" href="{{ route('single-car-product', $product->id) }}">Dealer Detail</a>
-                                    <a class="btn btn-link border float-right mr-1 text-dark" href="#"><i class="fa fa-whatsapp text-success"></i> Chat</a>
+                                    <a class="btn btn-link border float-right mr-1 text-dark" href="#" @click.prevent='openWhatsappModal({{ $product->id }})'><i class="fa fa-whatsapp text-success"></i> Chat</a>
                                 </div>
                             </div>
                             <div class="car-content">
@@ -115,6 +115,53 @@ product-listing  -->
                 </div>
                 <div class="pagination-nav d-flex justify-content-center">
                     {{ $products->links() }}
+                </div>
+                <!-- The Modal -->
+                <div class="modal fullscreen-md" id="whatsapp-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Personal Details</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="name">Your Name:</label>
+                                    <input type="name" class="form-control" placeholder="Enter Name" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text btn btn-link bg-white border-right-0 text-dark">+88</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="phone" id="phone" name="phone">
+                                        <div class="input-group-append">
+                                            <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#">Verify Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="demo">OTP:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="OTP" id="otp" name="otp">
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms">
+                                    <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary" href="#">Terms of Service</a> and <a class="btn btn-link text-primary" href="#">Privacy Policy</a></label>
+                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn red">See Seller Details</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -523,4 +570,26 @@ product-listing  -->
 <!--=================================End business partner -->
 
 
+@endsection
+@section('script')
+<script>
+    (function () {
+    var filter = new Vue({
+    el: '#products',
+            data: {
+                id:'',
+                name:'',
+                phone:'',
+                otp:'',
+                terms:''
+            },
+            methods: {
+                openWhatsappModal: function (id) {
+                    this.id = id;
+                    $('#whatsapp-modal').modal('show');
+                }
+            }
+    });
+    })();
+</script>
 @endsection
