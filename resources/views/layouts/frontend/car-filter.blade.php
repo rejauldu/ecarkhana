@@ -6,16 +6,15 @@ Start Form -->
     <div class="container">
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">New</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Used</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Recondition</a>
-
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#tab-new" role="tab" aria-controls="nav-home" aria-selected="true">New</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tab-used" role="tab" aria-controls="nav-profile" aria-selected="false">Used</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#tab-recondition" role="tab" aria-controls="nav-contact" aria-selected="false">Recondition</a>
             </div>
         </nav>
 
         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="main_bg white-text">
+            <div class="tab-pane fade show active" id="tab-new" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="sms-bg">
                     <h3 class="car-title">Find Your Dream Car</h3>
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
@@ -133,9 +132,9 @@ Start Form -->
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-pane fade" id="tab-used" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="sms-bg" class="main_bg white-text">
-                    <h3>Find Your Dream Car3</h3>
+                    <h3>Find Your Dream Car</h3>
                     <div class="row">
                         <form id="filter-used" action="{{ route('car-listing') }}" method="get">
                             <input type="hidden" name="condition" value="used"/>
@@ -242,11 +241,12 @@ Start Form -->
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <div class="tab-pane fade" id="tab-recondition" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <div class="sms-bg" class="main_bg white-text">
-                    <h3>Find Your Dream Car2</h3>
+                    <h3>Find Your Dream Car</h3>
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
+                            <input type="hidden" name="condition" value="reconditioned"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
                             </div>

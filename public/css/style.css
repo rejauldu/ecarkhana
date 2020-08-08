@@ -1751,15 +1751,6 @@ li.sms-focus {
     transition: max-height 0.7s;
 }
 
-.sms-bg .btn {
-    background: #111;
-    color: #fff;
-}
-
-.sms-bg .btn:hover {
-    background: #000;
-}
-
 #filter_form2 nav>div a.nav-item.nav-link.active:after {
     left: -9%;
 }

@@ -29,6 +29,7 @@ use App\Dropdowns\Model;
 use App\Dropdowns\BodyType;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
+use App\Dropdowns\Displacement;
 use App\Blog;
 use App\Otp;
 
@@ -62,9 +63,13 @@ class HomeController extends Controller {
         $used_products = Product::has('motorcycle')->where('condition_id', 3)->with('motorcycle')->take(10)->get();
         $popular_products = Product::has('motorcycle')->with('motorcycle')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $brands = Brand::where('category_id', 1)->get();
+        $models = Model::where('category_id', 1)->get();
+        $body_types = BodyType::where('category_id', 1)->get();
+        $displacements = Displacement::where('category_id', 1)->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Motorcycle';
-        return view('frontend.motorcycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'posts'));
+        return view('frontend.motorcycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'posts'));
     }
 
     public function bicycleIndex() {
@@ -144,6 +149,12 @@ class HomeController extends Controller {
         $products = Product::select('products.*')
                 ->has('car')->with('car', 'supplier.region');
         $filters = [];
+        if ($request->condition) {
+            $products = $products->whereHas('condition', function (Builder $q) use($request) {
+                $q->whereRaw('lower(name) like "%' . strtolower($request->condition) . '%"');
+            });
+            $data['condition'] = $request->condition;
+        }
         if ($request->location) {
             $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
                 $q->where('name', 'like', '%' . $request->location . '%');
