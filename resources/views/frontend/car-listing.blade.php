@@ -131,7 +131,7 @@ product-listing  -->
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="name">Your Name:</label>
-                                    <input type="name" class="form-control" placeholder="Enter Name" id="name">
+                                    <input type="name" class="form-control" placeholder="Enter Name" id="name" v-model="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number:</label>
@@ -139,25 +139,29 @@ product-listing  -->
                                         <div class="input-group-prepend">
                                             <span class="input-group-text btn btn-link bg-white border-right-0 text-dark">+88</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="phone" id="phone" name="phone">
+                                        <input type="text" class="form-control" placeholder="phone" id="phone" name="phone" v-model="phone" @keyup="isPhoneValid" :disabled="otp_sent">
                                         <div class="input-group-append">
-                                            <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#">Verify Now</a>
+                                            <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-if="isPhoneValid() && !otp_sent" @click.prevent="sendOtp">Verify Now</a>
+                                            <span class="input-group-text btn bg-white border-left-0 text-secondary" v-else-if="!otp_sent">Invalid</span>
+                                            <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else>@{{ countDown }}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <label for="demo">OTP:</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="OTP" id="otp" name="otp">
+                                <div class="form-group" v-if="otp_sent">
+                                    <label for="demo">OTP:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="OTP" id="otp" name="otp" v-model="otp">
+                                    </div>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms" v-model="terms">
                                     <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary" href="#">Terms of Service</a> and <a class="btn btn-link text-primary" href="#">Privacy Policy</a></label>
                                 </div>
                             </div>
 
                             <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn red">See Seller Details</button>
+                            <div class="modal-footer" v-if="name && phone && otp_sent && terms">
+                                <a class="btn red border" href="#" @click.prevent="verifyOtp">See Seller Details</a>
                             </div>
 
                         </div>
@@ -528,10 +532,6 @@ product-listing  -->
             @else
 
             @endmobile
-
-
-
-
         </div>
 </section>
 
@@ -574,22 +574,76 @@ product-listing  -->
 @section('script')
 <script>
     (function () {
-    var filter = new Vue({
-    el: '#products',
+        var filter = new Vue({
+            el: '#products',
             data: {
-                id:'',
-                name:'',
-                phone:'',
-                otp:'',
-                terms:''
+                id: '',
+                name: '',
+                phone: '',
+                otp: '',
+                terms: '',
+                otp_sent: false,
+                countDown: 60
             },
             methods: {
                 openWhatsappModal: function (id) {
                     this.id = id;
-                    $('#whatsapp-modal').modal('show');
+                    if (localStorage.getItem("whatsapp_verified")) {
+                        window.location = this.whatsappLink;
+                    } else {
+                        $('#whatsapp-modal').modal('show');
+                    }
+                },
+                isPhoneValid: function () {
+                    var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
+                    return pattern.test(this.phone);
+                },
+                sendOtp: function () {
+                    var _this = this;
+                    this.countDown = 60;
+                    this.countDownTimer();
+                    $.ajax({
+                        url: "{{ route('send-otp') }}",
+                        data: {"name":this.name, "phone":this.phone, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            _this.otp_sent = true;
+                        }
+                    });
+                },
+                countDownTimer() {
+                    if (this.countDown > 0) {
+                        setTimeout(() => {
+                            this.countDown -= 1
+                            this.countDownTimer()
+                        }, 1000)
+                    } else {
+                        this.otp_sent = false;
+                    }
+                },
+                verifyOtp: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: "{{ route('verify-otp') }}",
+                        data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            if(result == 'success') {
+                                localStorage.whatsapp_verified = 1;
+                                window.location = _this.whatsappLink;
+                            }
+                        }
+                    });
+                }
+            },
+            computed: {
+                whatsappLink: function () {
+                    var encodedURL = encodeURIComponent("{{ url('/') }}/single-car-product/" + this.id);
+                    var link = 'https://api.whatsapp.com/send?phone=8801817338234&text=' + encodedURL + '%0a‎Hello%0aI%0aneed%0asome%0ainformation%0aabout%0athis%0avehicle';
+                    return link;
                 }
             }
-    });
+        });
     })();
 </script>
 @endsection

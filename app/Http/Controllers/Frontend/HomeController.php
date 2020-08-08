@@ -30,6 +30,7 @@ use App\Dropdowns\BodyType;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Blog;
+use App\Otp;
 
 class HomeController extends Controller {
 
@@ -525,6 +526,21 @@ class HomeController extends Controller {
 
         //Report
         return [$days, $hours, $minutes, $seconds];
+    }
+    public function sendOtp(Request $request) {
+        $data = $request->except('_token', '_method');
+        $data['otp'] = '1234';
+        Otp::create($data);
+        return 'success';
+    }
+    public function verifyOtp(Request $request) {
+        $otp = Otp::where('phone', $request->phone)->where('otp', $request->otp)->where('created_at', '>', Carbon::now()->subSeconds(60)->toDateTimeString())->first();
+        
+        if($otp) {
+            $otp->update(['is_verified' => 1]);
+            return 'success';
+        } else
+            return 'error';
     }
 
 }

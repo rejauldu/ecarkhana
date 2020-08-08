@@ -5142,7 +5142,6 @@ li.list-group-item .current {
 
 .pagination-nav .pagination li a {
     border: 1px solid #ddd;
-    padding: 10px !important;
 }
 
 .page-item.active .page-link {

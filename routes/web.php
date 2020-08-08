@@ -58,6 +58,8 @@ Route::get('/single-blog', 'Frontend\HomeController@singleBlog')->name('single-b
 Route::get('/single-car-product/{product}', 'Frontend\HomeController@singleCarProduct')->name('single-car-product');
 Route::get('/single-sell-product/{product}', 'Frontend\HomeController@singleSellProduct')->name('single-sell-product');
 Route::get('/term-and-condition', 'Frontend\HomeController@termAndCondition')->name('term-and-condition');
+Route::post('/send-otp', 'Frontend\HomeController@sendOtp')->name('send-otp');
+Route::post('/verify-otp', 'Frontend\HomeController@verifyOtp')->name('verify-otp');
 
 Auth::routes(['verify' => true]);
 //Route::get('contact-us', 'Backend\ContactUsController@create')->name('contact-us.create');
