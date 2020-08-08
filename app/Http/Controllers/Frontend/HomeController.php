@@ -277,6 +277,12 @@ class HomeController extends Controller {
     public function groupBuyingList() {
         return view('frontend.group-buying-list');
     }
+    public function insurance() {
+        return view('frontend.insurance');
+    }
+    public function insuranceList() {
+        return view('frontend.insurance-list');
+    }
 
     public function motorcycleCart() {
         $type = 'Motorcycle';

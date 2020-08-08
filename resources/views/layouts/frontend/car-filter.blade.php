@@ -19,6 +19,7 @@ Start Form -->
                     <h3 class="car-title">Find Your Dream Car</h3>
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
+                            <input type="hidden" name="condition" value="new"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
                             </div>
@@ -43,7 +44,7 @@ Start Form -->
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
-                                <button type="submit" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
+                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
                             </div>
                             <div class="form-group col-md-12 col-sm-6">
                                 <div class="sms-advance">Advanced Search</div>
@@ -52,7 +53,7 @@ Start Form -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <a class="btn btn-light border" @click.prevent="getCurrentLocation()" href="#">Current Location</a>
+                                            <a class="btn btn-light border w-100" @click.prevent="getCurrentLocation()" href="#">Current Location</a>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
@@ -137,15 +138,9 @@ Start Form -->
                     <h3>Find Your Dream Car3</h3>
                     <div class="row">
                         <form id="filter-used" action="{{ route('car-listing') }}" method="get">
+                            <input type="hidden" name="condition" value="used"/>
                             <div class="form-group col-md-3 col-sm-6">
-                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" />
-                                <div class="row">
-                                    <div class="col-12">
-                                        <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
-                                            <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
                                 <div class="select">
@@ -168,7 +163,7 @@ Start Form -->
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
-                                <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
+                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
                             </div>
                             <div class="form-group col-md-12 col-sm-6">
                                 <div class="sms-advance">Advanced Search</div>
@@ -177,7 +172,7 @@ Start Form -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" />
+                                            <a class="btn btn-light border w-100" @click.prevent="getCurrentLocation()" href="#">Current Location</a>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
@@ -253,14 +248,7 @@ Start Form -->
                     <div class="row">
                         <form id="filter-new" action="{{ route('car-listing') }}" method="get">
                             <div class="form-group col-md-3 col-sm-6">
-                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" />
-                                <div class="row">
-                                    <div class="col-12">
-                                        <ul class="list-group w-100 position-absolute" style="padding-right: 30px; z-index: 1;">
-                                            <li v-for="region in response" class="list-group-item list-group-item-action py-1" v-if="input.toLowerCase() != region.name.toLowerCase()"><a href="#" @click.prevent="input=region.name">@{{ region.name }}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
                                 <div class="select">
@@ -283,7 +271,7 @@ Start Form -->
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
-                                <button type="submit" class="btn btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
+                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
                             </div>
                             <div class="form-group col-md-12 col-sm-6">
                                 <div class="sms-advance">Advanced Search</div>
@@ -292,7 +280,7 @@ Start Form -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" />
+                                            <a class="btn btn-light border w-100" @click.prevent="getCurrentLocation()" href="#">Current Location</a>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">

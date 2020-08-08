@@ -43,6 +43,8 @@ Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us
 Route::get('/dealer-detail/{id}', 'Frontend\HomeController@dealerDetail')->name('dealer-detail');
 Route::get('/dealer-list', 'Frontend\HomeController@dealerList')->name('dealer-list');
 Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->name('group-buying-list');
+Route::get('/insurance', 'Frontend\HomeController@insurance')->name('insurance');
+Route::get('/insurance-list', 'Frontend\HomeController@insuranceList')->name('insurance-list');
 Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
 Route::get('/national-distributor-list', 'Frontend\HomeController@nationalDistributorList')->name('national-distributor-list');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
