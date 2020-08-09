@@ -65,6 +65,7 @@ Route::post('/verify-otp', 'Frontend\HomeController@verifyOtp')->name('verify-ot
 
 Auth::routes(['verify' => true]);
 //Route::get('contact-us', 'Backend\ContactUsController@create')->name('contact-us.create');
+Route::resource('banks', 'Backend\BankController');
 Route::post('contact-us', 'Backend\ContactUsController@store')->name('contact-us.store');
 Route::resource('divisions', 'Locations\DivisionController');
 Route::resource('districts', 'Locations\DistrictController');
@@ -86,7 +87,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::get('/seller-profile/{id}', 'Frontend\HomeController@sellerProfile')->name('seller-profile');
 
 	Route::resource('auctions', 'Backend\AuctionController');
-        Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
+	Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
 	Route::resource('cashbooks', 'Backend\CashbookController');
 	Route::resource('users', 'Backend\UserController');
 	Route::resource('chats', 'Backend\ChatController');

@@ -63,13 +63,14 @@ class HomeController extends Controller {
         $used_products = Product::has('motorcycle')->where('condition_id', 3)->with('motorcycle')->take(10)->get();
         $popular_products = Product::has('motorcycle')->with('motorcycle')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
-        $brands = Brand::where('category_id', 1)->get();
-        $models = Model::where('category_id', 1)->get();
-        $body_types = BodyType::where('category_id', 1)->get();
-        $displacements = Displacement::where('category_id', 1)->get();
+        $brands = Brand::where('category_id', 2)->get();
+        $models = Model::where('category_id', 2)->get();
+        $body_types = BodyType::where('category_id', 2)->get();
+        $displacements = Displacement::where('category_id', 2)->get();
+        $packages = Package::where('category_id', 2)->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Motorcycle';
-        return view('frontend.motorcycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'posts'));
+        return view('frontend.motorcycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'packages', 'posts'));
     }
 
     public function bicycleIndex() {
@@ -419,7 +420,12 @@ class HomeController extends Controller {
     }
 
     public function sellProductList() {
-        return view('frontend.sell-product-list');
+        $search = '';
+        $products = Product::has('motorcycle')->orHas('bicycle')->with('motorcycle', 'bicycle', 'supplier');
+        $products = $products->paginate(9);
+        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $type = 'Motorcycle';
+        return view('frontend.sell-product-list', compact('products', 'suppliers', 'type'));
     }
 
     public function singleAccessories() {

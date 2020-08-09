@@ -373,25 +373,26 @@ back to top -->
     var checkboxes;
     checkboxes = document.getElementsByClassName("compare-checkbox");
     for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener('change', function () {
-            
-            if (this.checked) {
-                if (!sessionStorage.compare_count)
-                    sessionStorage.compare_count = 0;
-                sessionStorage.compare_count = Number(sessionStorage.compare_count) + 1;
-                var total = pushToCompare(this.getAttribute("product-id"));
-                console.log(total);
-                if (total.length > 2) {
-                    resetCompare();
-                    document.getElementById("compare-car-form").submit();
-                }
-            } else {
-                sessionStorage.compare_count = Number(sessionStorage.compare_count) - 1;
-                popFromCompare(this.getAttribute("product-id"));
-            }
-        });
+        attachEventListener(checkboxes[i]);
     }
 })();
+function attachEventListener(c) {
+    c.addEventListener('change', function () {
+        if (this.checked) {
+            if (!sessionStorage.compare_count)
+                sessionStorage.compare_count = 0;
+            sessionStorage.compare_count = Number(sessionStorage.compare_count) + 1;
+            var total = pushToCompare(this.getAttribute("product-id"));
+            if (total.length > 2) {
+                resetCompare();
+                document.getElementById("compare-car-form").submit();
+            }
+        } else {
+            sessionStorage.compare_count = Number(sessionStorage.compare_count) - 1;
+            popFromCompare(this.getAttribute("product-id"));
+        }
+    });
+}
 function pushToCompare(x) {
     popFromCompare(x);
     var compare = [];

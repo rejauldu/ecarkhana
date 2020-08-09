@@ -114,7 +114,12 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <input type="text" class="form-control" name="manufacturing_year" value="{{ $manufacturing_year ?? '' }}" placeholder="Manufacturing Year" />
+                                                <select class="form-control" id="package" name="package">
+                                                    <option>All Versions</option>
+                                                    @foreach($packages as $p)
+                                                    <option value="{{ $p->name }}" @if(isset($package) && $package == $p->name) selected @endif>{{ $p->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
