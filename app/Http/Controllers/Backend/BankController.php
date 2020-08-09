@@ -7,20 +7,20 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Bank;
 
-class BankController extends Controller
-{
-	public function __construct() {
+class BankController extends Controller {
+
+    public function __construct() {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		$banks = Bank::orderBy('id', 'desc')->get();
-		return view('backend.banks.index', compact('banks'));
+    public function index() {
+        $banks = Bank::orderBy('id', 'desc')->get();
+        return view('backend.banks.index', compact('banks'));
     }
 
     /**
@@ -28,9 +28,8 @@ class BankController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-		return view('backend.banks.create');
+    public function create() {
+        return view('backend.banks.create');
     }
 
     /**
@@ -39,11 +38,17 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-		$data = $request->except('_token', '_method');
-		Bank::create($data);
-		return redirect(route('banks.index'))->with('message', 'Bank created successfully');
+    public function store(Request $request) {
+        $data = $request->except('_token', '_method', 'is_new', 'is_reconditioned', 'is_used');
+        $file = $request->file('photo');
+        if ($file) {
+            $destination_path = 'assets/banks';
+            $new_name = time() . '.'. $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['photo'] = $new_name;
+        }
+        Bank::create($data);
+        return redirect(route('banks.index'))->with('message', 'Bank created successfully');
     }
 
     /**
@@ -52,10 +57,9 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $bank = Bank::find($id);
-		return view('backend.banks.show', compact('bank'));
+        return view('backend.banks.show', compact('bank'));
     }
 
     /**
@@ -64,10 +68,9 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $bank = Bank::find($id);
-		return view('backend.banks.create', compact('bank'));
+        return view('backend.banks.create', compact('bank'));
     }
 
     /**
@@ -77,16 +80,15 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-		$data = $request->except('_token', '_method');
-		if(!isset($data['is_active'])) {
-			$data['is_active'] = 0;
-		}
-		$bank = Bank::find($id);
-		$bank->update($data);
-		
-		return redirect(route('banks.index'))->with('message', 'Bank updated successfully');
+    public function update(Request $request, $id) {
+        $data = $request->except('_token', '_method');
+        if (!isset($data['is_active'])) {
+            $data['is_active'] = 0;
+        }
+        $bank = Bank::find($id);
+        $bank->update($data);
+
+        return redirect(route('banks.index'))->with('message', 'Bank updated successfully');
     }
 
     /**
@@ -95,10 +97,10 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-		$bank = Bank::find($id);
-		$bank->delete();
-		return redirect()->back()->with('message', 'Bank has been deleted');
+    public function destroy($id) {
+        $bank = Bank::find($id);
+        $bank->delete();
+        return redirect()->back()->with('message', 'Bank has been deleted');
     }
+
 }

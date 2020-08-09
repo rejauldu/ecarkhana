@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2020 at 06:21 AM
+-- Generation Time: Aug 09, 2020 at 04:40 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -81,6 +81,46 @@ CREATE TABLE `auction_grades` (
 
 INSERT INTO `auction_grades` (`id`, `name`, `updated_at`, `created_at`) VALUES
 (1, 4.5, '2020-05-11 00:45:59', '2020-05-11 00:45:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banks`
+--
+
+CREATE TABLE `banks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `salaried_income` int(11) DEFAULT NULL,
+  `business_income` int(11) DEFAULT NULL,
+  `land_lord_income` int(11) DEFAULT NULL,
+  `salaried_duration` smallint(6) DEFAULT NULL,
+  `business_duration` smallint(6) DEFAULT NULL,
+  `land_lord_duration` smallint(6) DEFAULT NULL,
+  `age_min` smallint(6) DEFAULT NULL,
+  `age_max` smallint(6) DEFAULT NULL,
+  `loan_tenure_min` float DEFAULT NULL,
+  `loan_tenure_max` float DEFAULT NULL,
+  `salaried_loan_min` int(11) DEFAULT NULL,
+  `salaried_loan_max` int(11) DEFAULT NULL,
+  `business_loan_min` int(11) DEFAULT NULL,
+  `business_loan_max` int(11) DEFAULT NULL,
+  `land_lord_loan_min` int(11) DEFAULT NULL,
+  `land_lord_loan_max` int(11) DEFAULT NULL,
+  `is_new` tinyint(1) DEFAULT 0,
+  `is_used` tinyint(1) DEFAULT 0,
+  `is_reconditioned` tinyint(1) DEFAULT 0,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `banks`
+--
+
+INSERT INTO `banks` (`id`, `name`, `photo`, `salaried_income`, `business_income`, `land_lord_income`, `salaried_duration`, `business_duration`, `land_lord_duration`, `age_min`, `age_max`, `loan_tenure_min`, `loan_tenure_max`, `salaried_loan_min`, `salaried_loan_max`, `business_loan_min`, `business_loan_max`, `land_lord_loan_min`, `land_lord_loan_max`, `is_new`, `is_used`, `is_reconditioned`, `updated_at`, `created_at`) VALUES
+(1, 'IDLC', '1596983821.png', 40000, 50000, 50000, 2, 3, 3, 22, 60, 1, 6, 3000000, 50000000, 3000000, 60000000, 3000000, 50000000, 1, 0, 1, '2020-08-09 14:37:17', '2020-08-09 08:37:01');
 
 -- --------------------------------------------------------
 
@@ -2355,6 +2395,42 @@ INSERT INTO `loan_applications` (`id`, `name`, `email`, `phone`, `amount`, `cond
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `loan_infos`
+--
+
+CREATE TABLE `loan_infos` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(25) DEFAULT NULL,
+  `gender_id` smallint(6) DEFAULT NULL,
+  `dob` timestamp NULL DEFAULT NULL,
+  `residance_type_id` smallint(6) DEFAULT NULL,
+  `residence_since_id` smallint(6) DEFAULT NULL,
+  `condition_id` smallint(6) DEFAULT NULL,
+  `have_choice` tinyint(1) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `profession_id` smallint(6) DEFAULT NULL,
+  `division_id` smallint(6) DEFAULT NULL,
+  `job_status_id` smallint(6) DEFAULT NULL,
+  `experience` float DEFAULT NULL,
+  `salary` int(11) DEFAULT NULL,
+  `emi` int(11) DEFAULT NULL,
+  `have_loan` tinyint(1) DEFAULT NULL,
+  `type` smallint(6) DEFAULT NULL,
+  `share` smallint(6) DEFAULT NULL,
+  `last_year_transaction` int(11) DEFAULT NULL,
+  `trade_license` tinyint(1) DEFAULT NULL,
+  `have_other_income` tinyint(1) DEFAULT NULL,
+  `have_tin` tinyint(1) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `made_ins`
 --
 
@@ -3318,6 +3394,36 @@ INSERT INTO `order_statuses` (`id`, `name`, `description`, `created_at`, `update
 (6, 'Cancelled', 'Cancelled by an admin or the customer – stock is increased, no further action required.', '2020-01-07 07:07:26', '2020-01-07 07:07:26'),
 (7, 'Refunded', 'Refunded by an admin – no further action required.', '2020-01-07 07:07:26', '2020-01-07 07:07:26'),
 (8, 'Authentication required', 'Awaiting action by the customer to authenticate transaction and/or complete SCA requirements.', '2020-01-07 07:07:26', '2020-01-07 07:07:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otps`
+--
+
+CREATE TABLE `otps` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `phone` varchar(25) DEFAULT NULL,
+  `otp` int(11) DEFAULT NULL,
+  `is_verified` tinyint(1) DEFAULT 0,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `otps`
+--
+
+INSERT INTO `otps` (`id`, `name`, `phone`, `otp`, `is_verified`, `updated_at`, `created_at`) VALUES
+(1, NULL, '01924974960', 1234, 0, '2020-08-07 21:12:26', '2020-08-07 21:12:26'),
+(2, NULL, '01924974960', 1234, 0, '2020-08-07 21:13:13', '2020-08-07 21:13:13'),
+(3, NULL, '01924974960', 1234, 0, '2020-08-07 21:13:41', '2020-08-07 21:13:41'),
+(4, NULL, '01924974960', 1234, 0, '2020-08-07 21:14:41', '2020-08-07 21:14:41'),
+(5, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 21:16:35', '2020-08-07 21:16:35'),
+(6, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 21:17:19', '2020-08-07 21:17:19'),
+(7, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 21:22:34', '2020-08-07 21:22:34'),
+(8, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 22:56:41', '2020-08-07 22:56:41');
 
 -- --------------------------------------------------------
 
@@ -5418,7 +5524,15 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1291, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/broadcasting/auth', '2020-07-28 20:03:07', '2020-07-28 20:03:07'),
 (1292, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/broadcasting/auth', '2020-07-28 20:03:07', '2020-07-28 20:03:07'),
 (1293, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/car-listing', '2020-07-29 20:51:38', '2020-07-29 20:51:38'),
-(1294, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-30 19:51:20', '2020-07-30 19:51:20');
+(1294, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-07-30 19:51:20', '2020-07-30 19:51:20'),
+(1295, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-01 20:47:22', '2020-08-01 20:47:22'),
+(1296, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-02 22:37:22', '2020-08-02 22:37:22'),
+(1297, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-04 07:18:52', '2020-08-04 07:18:52'),
+(1298, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-05 11:20:32', '2020-08-05 11:20:32'),
+(1299, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-05 19:38:12', '2020-08-05 19:38:12'),
+(1300, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-06 20:22:25', '2020-08-06 20:22:25'),
+(1301, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-07 20:48:16', '2020-08-07 20:48:16'),
+(1302, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-08 20:12:32', '2020-08-08 20:12:32');
 
 -- --------------------------------------------------------
 
@@ -10656,9 +10770,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `photo`, `email_verified_at`, `passw
 (1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', '23.7860', '90.2124', 'gppJE6frrmtvEPR8DLLAnuXFVawyiSBiwJIKbHdOxH8cj4B8cDaIm1UhViTv', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
 (2, 'Super Admin', 'admin@gmail.com', '2.jpg', '2020-01-17 02:24:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '741.667.7107 x60100', 3, NULL, '4350', 2, 2, 2019, NULL, '59339 Abernathy Meadows Suite 466\nEast Robynport, AK 60030-0762', 1, 3270, 216, 47, 7, '784 Jenkins Forges\nEast Sigmund, MS 03564', 3, 933, 417, 24, 7, '649 Obie Extension Apt. 112\nEmmerichshire, MN 70568', 1, 2629, 291, 12, 1, 1, NULL, NULL, '23.1563', '90.25684', 'MvPkWggfwCpynrHNosYwRaDTxSkASCb2crN7jchTF9nCtXDy8tlx351lpRm5', '2020-01-17 11:08:11', '2020-02-18 23:25:43'),
 (3, 'Moderator', 'moderator@gmail.com', 'avatar.png', '2020-01-17 11:05:19', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(473) 451-7145 x102', 2, 'Rejaul Karim', '6000', 1, 10, 2023, NULL, '4876 Kelvin Station Apt. 306\nNew Estella, PA 57909', 1, 2109, 25, 33, 4, '1993 Wolff Rapid\nPurdyville, NE 99436', 1, 2753, 43, 56, 8, '76592 Maxwell Village Suite 050\nPort Xanderland, AK 64479', 1, 1621, 279, 28, 3, 1, NULL, NULL, '23.5555', '90.3333', 'Y6f4NllPJFC5IwfriQKaJf9775RodofB6rGxkXEsFsnhGVqBB923OPZ9PoaA', '2020-01-17 11:08:12', '2020-01-22 22:07:41'),
-(4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 4, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, '23.7860', '90.2124', 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
-(5, 'Showroom', 'showroom@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1-683-637-9977', 1, NULL, '8084', 3, 11, 2022, NULL, '56889 Jeffrey Overpass\nEleanoreshire, CA 16312-9087', 4, 2523, 198, 2, 2, '45141 Erdman Square Apt. 065\nRueckerstad, MS 74986', 1, 715, 180, 47, 2, '67008 Joanie Crescent\nMarianomouth, DE 72457-4766', 4, 865, 240, 28, 4, 2, 'Hello,\r\nThis is a good showroom. We have many products.', 'https://ecarkhana.com', '25.25648', '91.5486', 'awtpDyp0u1', '2020-01-17 11:08:12', '2020-05-15 21:45:21'),
-(6, 'General User', 'user@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '207-813-5481 x0770', 1, NULL, '5291', 3, 10, 2019, NULL, '481 Hazle Forest\nDedricberg, MS 69504', 4, 2043, 439, 19, 8, '7983 Hailie Circle Apt. 398\nLaynebury, TN 23487', 1, 686, 110, 47, 3, '490 Bashirian Estates Suite 558\nCletusview, CT 38740', 3, 2507, 172, 39, 3, 1, NULL, NULL, '24.10354', '92.54522', 'YieuZjaOeQ', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
+(4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 1, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, '23.7860', '90.2124', 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
+(5, 'Showroom', 'showroom@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1-683-637-9977', 1, NULL, '8084', 3, 11, 2022, NULL, '56889 Jeffrey Overpass\nEleanoreshire, CA 16312-9087', 1, 2523, 198, 2, 2, '45141 Erdman Square Apt. 065\nRueckerstad, MS 74986', 1, 715, 180, 47, 2, '67008 Joanie Crescent\nMarianomouth, DE 72457-4766', 4, 865, 240, 28, 4, 2, 'Hello,\r\nThis is a good showroom. We have many products.', 'https://ecarkhana.com', '25.25648', '91.5486', 'awtpDyp0u1', '2020-01-17 11:08:12', '2020-05-15 21:45:21'),
+(6, 'General User', 'user@gmail.com', 'avatar.png', '2020-01-17 11:05:21', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '207-813-5481 x0770', 1, NULL, '5291', 3, 10, 2019, NULL, '481 Hazle Forest\nDedricberg, MS 69504', 1, 2043, 439, 19, 8, '7983 Hailie Circle Apt. 398\nLaynebury, TN 23487', 1, 686, 110, 47, 3, '490 Bashirian Estates Suite 558\nCletusview, CT 38740', 3, 2507, 172, 39, 3, 1, NULL, NULL, '24.10354', '92.54522', 'YieuZjaOeQ', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
 (7, 'Rejaul Karim', 'rejauldu@gmail.com', '7.JPG', '2020-01-17 11:05:22', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1-445-669-0687', 1, NULL, '2721', 2, 1, 2024, NULL, '1998 Mathilde Dam\r\nPourosland, AR 81470', 3, 2035, 49, 1, 8, '9613 Feest Trail Apt. 884\r\nFraneckiview, IL 92774', 3, 1012, 38, 26, 6, '9613 Feest Trail Apt. 884\r\nFraneckiview, IL 92774', 3, 2667, 138, 42, 6, 1, 'I am a Bangladeshi freelancer and developed many ecommerce website around the world. My main platform is Laravel. Hire me to realize your dream through web coding.', NULL, NULL, NULL, 'iKq1ZHlKzrw8yEABCK26KHjO2k4AWuv9IzgH3A6OmcQbeypVBK27uSjWNC6K', '2020-01-17 11:08:12', '2020-06-03 03:57:25'),
 (8, 'Miss Fiona Strosin', 'annabelle.wehner@example.net', 'avatar.png', '2020-01-17 11:05:23', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '675.383.4184', 1, NULL, '1074', 5, 5, 2023, NULL, '512 Keebler Mountains\nNew Bradburgh, HI 48815', 3, 1581, 52, 58, 8, '4617 Erdman Plaza\nKozeytown, WY 31356-5781', 1, 153, 339, 23, 4, '52838 Jack Greens Suite 321\nEast Gene, WA 84307-5957', 4, 119, 86, 6, 1, 2, NULL, NULL, NULL, NULL, 'RSphNxFVzY', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
 (9, 'Rebeka Sipes', 'khalid.tremblay@example.net', 'avatar.png', '2020-01-17 11:05:24', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(817) 217-4394 x468', 1, NULL, '2334', 1, 7, 2025, NULL, '261 Cruickshank Street Suite 130\nConsidinetown, NC 14030-5972', 3, 3608, 334, 42, 8, '887 Miller Run Apt. 854\nCormiertown, MS 74986-7410', 1, 2106, 225, 61, 8, '21023 Howe Square\nScarlettburgh, AL 64536', 4, 156, 125, 28, 3, 2, NULL, NULL, NULL, NULL, 'b3S1mNnXyj', '2020-01-17 11:08:12', '2020-01-17 11:08:12'),
@@ -11015,6 +11129,12 @@ ALTER TABLE `auction_grades`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `banks`
+--
+ALTER TABLE `banks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `bicycles`
 --
 ALTER TABLE `bicycles`
@@ -11247,6 +11367,12 @@ ALTER TABLE `loan_applications`
   ADD KEY `loan_applications_condition_id_index` (`condition_id`);
 
 --
+-- Indexes for table `loan_infos`
+--
+ALTER TABLE `loan_infos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `made_ins`
 --
 ALTER TABLE `made_ins`
@@ -11331,6 +11457,12 @@ ALTER TABLE `order_details`
 -- Indexes for table `order_statuses`
 --
 ALTER TABLE `order_statuses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `otps`
+--
+ALTER TABLE `otps`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -11592,6 +11724,12 @@ ALTER TABLE `auction_grades`
   MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `banks`
+--
+ALTER TABLE `banks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `bicycles`
 --
 ALTER TABLE `bicycles`
@@ -11772,6 +11910,12 @@ ALTER TABLE `loan_applications`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `loan_infos`
+--
+ALTER TABLE `loan_infos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `made_ins`
 --
 ALTER TABLE `made_ins`
@@ -11824,6 +11968,12 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `order_statuses`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `otps`
+--
+ALTER TABLE `otps`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -11931,7 +12081,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1295;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1303;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

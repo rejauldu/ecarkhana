@@ -15,20 +15,19 @@ use App\Locations\Region;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
-class UserController extends Controller
-{
-	public function __construct()
-	{
-		$this->middleware('moderatorOrOwner:User');
-	}
+class UserController extends Controller {
+
+    public function __construct() {
+        $this->middleware('moderatorOrOwner:User');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		$users = User::with('district', 'role')->orderBy('users.id', 'desc')->paginate(50);
+    public function index() {
+        $users = User::with('district', 'role')->orderBy('users.id', 'desc')->paginate(50);
         return view('backend.users.index', compact('users'));
     }
 
@@ -37,8 +36,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('backend.emails.create');
     }
 
@@ -48,8 +46,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
-    {
+    public function store(UserRequest $request) {
         //
     }
 
@@ -59,15 +56,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-		$profile = User::with('payment', 'division', 'district', 'upazila', 'union', 'region', 'billing_division', 'billing_district', 'billing_upazila', 'billing_union', 'billing_region', 'shipping_division', 'shipping_district', 'shipping_upazila', 'shipping_union', 'shipping_region')->where('id', $id)->first();
-		$payments = Payment::all();
-		$divisions = Division::all();
-		$districts = District::all();
-		$upazilas = Upazila::all();
-		$unions = Union::all();
-		$regions = Region::all();
+    public function show($id) {
+        $profile = User::with('payment', 'division', 'district', 'upazila', 'union', 'region', 'billing_division', 'billing_district', 'billing_upazila', 'billing_union', 'billing_region', 'shipping_division', 'shipping_district', 'shipping_upazila', 'shipping_union', 'shipping_region')->where('id', $id)->first();
+        $payments = Payment::all();
+        $divisions = Division::all();
+        $districts = District::all();
+        $upazilas = Upazila::all();
+        $unions = Union::all();
+        $regions = Region::all();
         return view('backend.users.show', compact('profile', 'payments', 'divisions', 'districts', 'upazilas', 'unions', 'regions'));
     }
 
@@ -77,15 +73,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-		$profile = User::with('payment', 'division', 'district', 'upazila', 'union', 'region', 'billing_division', 'billing_district', 'billing_upazila', 'billing_union', 'billing_region', 'shipping_division', 'shipping_district', 'shipping_upazila', 'shipping_union', 'shipping_region')->where('id', $id)->first();
-		$payments = Payment::all();
-		$divisions = Division::all();
-		$districts = District::all();
-		$upazilas = Upazila::all();
-		$unions = Union::all();
-		$regions = Region::all();
+    public function edit($id) {
+        $profile = User::with('payment', 'division', 'district', 'upazila', 'union', 'region', 'billing_division', 'billing_district', 'billing_upazila', 'billing_union', 'billing_region', 'shipping_division', 'shipping_district', 'shipping_upazila', 'shipping_union', 'shipping_region')->where('id', $id)->first();
+        $payments = Payment::all();
+        $divisions = Division::all();
+        $districts = District::all();
+        $upazilas = Upazila::all();
+        $unions = Union::all();
+        $regions = Region::all();
         return view('backend.users.edit', compact('profile', 'payments', 'divisions', 'districts', 'upazilas', 'unions', 'regions'));
     }
 
@@ -96,29 +91,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
-    {
-		$file = $request->file('photo');
-		if($file) {
-			$destination_path = 'assets/profile';
-			$new_name = $id.'.'.$file->getClientOriginalExtension();
-			$file->move($destination_path, $new_name);
-			User::where('id', $id)->update(['photo'=>$new_name]);
-			if($request->data_source && $request->data_source == 'frontend') {
-				User::where('id', $id)->update($request->except('_token', '_method', 'data_source', 'photo'));
-			}
-		} elseif($request->password_old) {
-			$user = User::find($id);
-			if(Hash::check($request->password_old, $user->password)) {
-				$user->fill([
-					'password' => Hash::make($request->password)
-				])->save();
-			} else {
-				return 'Password did not match';
-			}
-		} else {
-			User::where('id', $id)->update($request->except('_token', '_method', 'password_old', 'password', 'password_confirmation', 'data_source', 'photo'));
-		}
+    public function update(UserRequest $request, $id) {
+        $file = $request->file('photo');
+        if ($file) {
+            $destination_path = 'assets/profile';
+            $new_name = $id . '.' . $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            User::where('id', $id)->update(['photo' => $new_name]);
+            if ($request->data_source && $request->data_source == 'frontend') {
+                User::where('id', $id)->update($request->except('_token', '_method', 'data_source', 'photo'));
+            }
+        } elseif ($request->password_old) {
+            $user = User::find($id);
+            if (Hash::check($request->password_old, $user->password)) {
+                $user->fill([
+                    'password' => Hash::make($request->password)
+                ])->save();
+            } else {
+                return 'Password did not match';
+            }
+        } else {
+            User::where('id', $id)->update($request->except('_token', '_method', 'password_old', 'password', 'password_confirmation', 'data_source', 'photo'));
+        }
     }
 
     /**
@@ -127,10 +121,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-		$user = User::find($id);
-		$user->delete();
-		return redirect()->back()->with('message', 'User has been deleted');
+    public function destroy($id) {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('message', 'User has been deleted');
     }
+
 }
