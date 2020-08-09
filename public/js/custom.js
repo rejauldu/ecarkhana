@@ -86,6 +86,21 @@ var SHOWROV = {};
             $(".smsphone-list-filter").slideToggle(300);
         });
 
+        $(".get-res").click(function() {
+            $(".get-quo-output").slideToggle(300);
+        });
+
+        // $(function() {
+        //     $('.colorselector').change(function() {
+        //         $('.colors').hide();
+        //         $('#' + $(this).val()).show();
+        //     });
+        //     $('#bidcolorselector').change(function() {
+        //         $('.bidcolors').hide();
+        //         $('#' + $(this).val()).show();
+        //     });
+        // });
+
 
         // Insurance-check toggle
 
