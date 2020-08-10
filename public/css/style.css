@@ -9703,4 +9703,60 @@ span.total-diver-number {
 .new-insurance-car #tabs {
     padding: 15px;
 }
+.coverage {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+}
+
+.cover-circle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    width: 70px;
+    height: 70px;
+    border: 4px solid #db2d2e;
+    border-radius: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cover-circle > div {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: #222;
+    font-weight: 600;
+}
+
+.cover-circle span.cover__title {
+    font-size: 20px;
+}
+.addons-area {
+    width: 100%;
+    display: flex;
+    margin: 0;
+    border-bottom: 1px solid #ededed;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.addon-text {
+    display: inline-block;
+    margin-right: 2rem;
+}
+
+.addon-text h2 {
+    font-size: 25px;
+}
+
+.fix-pre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /*# sourceMappingURL=style.css.map */
