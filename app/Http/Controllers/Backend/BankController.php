@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Bank;
+use Illuminate\Support\Facades\File;
 
 class BankController extends Controller {
 
@@ -82,12 +83,26 @@ class BankController extends Controller {
      */
     public function update(Request $request, $id) {
         $data = $request->except('_token', '_method');
-        if (!isset($data['is_active'])) {
-            $data['is_active'] = 0;
+        if (!isset($data['is_new'])) {
+            $data['is_new'] = 0;
+        }
+        if (!isset($data['is_used'])) {
+            $data['is_used'] = 0;
+        }
+        if (!isset($data['is_reconditioned'])) {
+            $data['is_reconditioned'] = 0;
         }
         $bank = Bank::find($id);
+        $file = $request->file('photo');
+        if ($file) {
+            $destination_path = 'assets/banks';
+            $new_name = time() . '.'. $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['photo'] = $new_name;
+            $directory = 'assets/banks/';
+            File::delete($directory.$bank->photo);
+        }
         $bank->update($data);
-
         return redirect(route('banks.index'))->with('message', 'Bank updated successfully');
     }
 
@@ -99,6 +114,8 @@ class BankController extends Controller {
      */
     public function destroy($id) {
         $bank = Bank::find($id);
+        $directory = 'assets/banks/';
+        File::delete($directory.$bank->photo);
         $bank->delete();
         return redirect()->back()->with('message', 'Bank has been deleted');
     }

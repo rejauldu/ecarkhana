@@ -72,6 +72,7 @@ Route::resource('districts', 'Locations\DistrictController');
 Route::resource('upazilas', 'Locations\UpazilaController');
 Route::resource('unions', 'Locations\UnionController');
 Route::resource('home-sliders', 'Backend\HomeSliderController');
+Route::resource('loan-infos', 'Frontend\LoanInfoController');
 Route::resource('requested-more-infos', 'Frontend\RequestedMoreInfoController');
 Route::get('requested-more-infos-unviewed', 'Frontend\RequestedMoreInfoController@unviewed')->name('requested-more-infos.unviewed');
 Route::resource('make-an-offers', 'Frontend\MakeAnOfferController');

@@ -111,7 +111,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
 		$category = Category::find($id);
-		$directory = '/assets/categories/';
+		$directory = 'assets/categories/';
 		File::delete($directory.$category->picture);
 		$category->delete();
 		return redirect()->back()->with('message', 'Category has been deleted');

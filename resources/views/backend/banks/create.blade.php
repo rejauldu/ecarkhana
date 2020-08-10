@@ -43,30 +43,30 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <input type="file" id="photo" name="photo" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'photo-view')" accept="image/*" value="Upload image" @if(!isset($product->photo)) required @endif/>
+                                            <input type="file" id="photo" name="photo" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'photo-view')" accept="image/*" value="Upload image" @if(!isset($bank->photo)) required @endif/>
                                             <div class="valid-feedback">Valid.</div>
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <img id="photo-view" style="width:50px; height:50px" src="{{ asset('/assets/profile') }}/{{ $user->photo }}" class="img-thumbnail" alt="Product">
+                                            <img id="photo-view" style="width:50px; height:50px" src="{{ asset('/assets/banks') }}/{{ $bank->photo }}" class="img-thumbnail" alt="Product">
                                         </div>
                                     </div>
                                     <div class="row my-3 text-center">
                                         <div class="col-12 col-md-4">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="new" name="is_new" value="1">
+                                                <input type="checkbox" class="custom-control-input" id="new" name="is_new" value="1" @if(isset($bank->is_new) && $bank->is_new) checked @endif>
                                                 <label class="custom-control-label" for="new">Provides loan for new vehicle</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="recondition" name="is_reconditioned" value="1">
+                                                <input type="checkbox" class="custom-control-input" id="recondition" name="is_reconditioned" value="1" @if(isset($bank->is_reconditioned) && $bank->is_reconditioned) checked @endif>
                                                 <label class="custom-control-label" for="recondition">Provides loan for recondition vehicle</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="used" name="is_used" value="1">
+                                                <input type="checkbox" class="custom-control-input" id="used" name="is_used" value="1" @if(isset($bank->is_used) && $bank->is_used) checked @endif>
                                                 <label class="custom-control-label" for="used">Provides loan for used vehicle</label>
                                             </div>
                                         </div>

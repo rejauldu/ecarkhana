@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\LoanInfo;
+use App\Bank;
 
-class LoanInfoController extends Controller
-{
+class LoanInfoController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		//
+    public function index() {
+        //
     }
 
     /**
@@ -24,8 +24,7 @@ class LoanInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,11 +34,27 @@ class LoanInfoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-		$data = $request->except('_token', '_method');
-		LoanInfo::create($data);
-		return redirect()->back()->with('message', 'Thank you for your loan eligibility test');
+    public function store(Request $request) {
+        $data = $request->except('_token', '_method');
+        if(Auth::check()) {
+            $data['user_id'] = Auth::user()->id;
+        }
+        LoanInfo::create($data);
+        $profession = '';
+        if($request->profession_id == 1) {
+            $profession = 'salaried';
+        } elseif($request->profession_id == 2) {
+            $profession = 'business';
+        } else {
+            $profession = 'land_lord';
+        }
+        $age = $this->age($request->dob);
+        Bank::where($profession.'_income', '<=', $request->salary)
+                ->where($profession.'_duration', '<=', $request->experience)
+                ->where('age_min', '<=', $age)
+                ->where('age_max', '>=', $age)
+                ->get();
+        return redirect()->back()->with('message', 'Thank you for your loan eligibility test');
     }
 
     /**
@@ -48,9 +63,8 @@ class LoanInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-		//
+    public function show($id) {
+        //
     }
 
     /**
@@ -59,9 +73,8 @@ class LoanInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-		//
+    public function edit($id) {
+        //
     }
 
     /**
@@ -71,9 +84,8 @@ class LoanInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-		//
+    public function update(Request $request, $id) {
+        //
     }
 
     /**
@@ -82,10 +94,20 @@ class LoanInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-		$loan_info = LoanInfo::find($id);
-		$loan_info->delete();
-		return redirect()->back()->with('message', 'Loan Info has been deleted');
+    public function destroy($id) {
+        $loan_info = LoanInfo::find($id);
+        $loan_info->delete();
+        return redirect()->back()->with('message', 'Loan Info has been deleted');
     }
+    
+    private function age($birthDate) {
+        //date in mm/dd/yyyy format; or it can be in other formats as well
+        //$birthDate = "12/17/1983";
+        //explode the date to get month, day and year
+        $birthDate = explode("/", $birthDate);
+        //get age from date or birthdate
+        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md") ? ((date("Y") - $birthDate[2]) - 1) : (date("Y") - $birthDate[2]));
+        return $age;
+    }
+
 }
