@@ -16,7 +16,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        $loan_infos = LoanInfo::all();
+        return view('frontend.loan-infos.index', compact('loan_infos'));
     }
 
     /**
@@ -25,7 +26,7 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('frontend.loan-infos.create');
     }
 
     /**
@@ -67,7 +68,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $loan_info = LoanInfo::find($id);
+        return view('frontend.loan-infos.index', compact('loan_info'));
     }
 
     /**
@@ -77,7 +79,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        $loan_info = LoanInfo::find($id);
+        return view('frontend.loan-infos.create', compact('loan_info'));
     }
 
     /**
