@@ -1481,6 +1481,20 @@ li.sms-focus {
     .sms-phn-hide {
         display: none;
     }
+    .addons-area {
+        flex-direction: column;
+    }
+    .addon-text {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+    .fix-pre {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+    .coverage {
+        margin: 20px 0;
+    }
     span.total-diver-number {
         display: block;
         width: 50%;
@@ -9739,15 +9753,15 @@ span.total-diver-number {
 .addons-area {
     width: 100%;
     display: flex;
-    margin: 0;
+    margin-bottom: 20px;
     border-bottom: 1px solid #ededed;
     padding: 0;
     justify-content: space-between;
 }
 
 .addon-text {
-    display: inline-block;
     margin-right: 2rem;
+    width: 60%;
 }
 
 .addon-text h2 {
@@ -9756,7 +9770,36 @@ span.total-diver-number {
 
 .fix-pre {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+}
+.totl-prem {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.totl-prem .prem-amt.js-targetfly {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+}
+.add-onblock {
+    padding: 15px;
+}
+
+
+.add-onblock .check-feild {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 0;
+    position: relative;
+    float: left;
+}
+
+h3.listClose {
+    font-size: 18px;
 }
 /*# sourceMappingURL=style.css.map */

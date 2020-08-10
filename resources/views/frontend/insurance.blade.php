@@ -30,7 +30,7 @@
                 <div class="row">
                     <div id="tabs">
                         <ul class="tabs">
-                            <li data-tabs="tab11" class="active"> <span aria-hidden="true" class="icon-diamond"></span> New Car Insurance
+                            <li data-tabs="tab11" class="active"> <span aria-hidden="true" class="icon-diamond"></span> New Insurance
                             </li>
                             <li data-tabs="tab22" class=""><span aria-hidden="true" class="icon-list"></span>Renew Insurance
                             </li>
@@ -874,81 +874,140 @@
                 <div class="modal-body">
                     <div class="row">
 
-                      <div class="col-md-12">
-                           <div class="addons-area">
-                             <div class="addon-text">
-                               <h2>Choose Add-ons</h2> 
-                                <p>Select add-on covers which should be chosen for the complete protection of your car.</p>
-                            </div> 
-                            <div class="fix-pre">
-                               <div class="totl-prem">
-                                  <span class="prem">Total Premium</span>
-                                  <span class="prem-amt js-targetfly">₹ 44187</span>
+                        <div class="col-md-12">
+                            <div class="addons-area">
+                               <div class="addon-text">
+                                   <h2>Choose Add-ons</h2> 
+                                   <p>Select add-on covers which should be chosen for the complete protection of your car.</p>
                                </div> 
-                               <div class="amount addon-btn">
-                                 <a href="#" class="button red">Done</a>
+
+                                <div class="fix-pre">
+                                        <div class="totl-prem">
+                                            <span class="prem">Total Premium</span>
+                                            <span class="prem-amt js-targetfly">৳ 44187</span>
+                                        </div> 
+                                        <div class="amount addon-btn">
+                                            <a href="#" class="button red">Done</a>
+                                        </div>
                                 </div>
                             </div>
                         </div>
-                      </div>
-                        <div class="col-md-6">
-                            <div class="required-title"><i class="fa fa-info-circle"></i>REMEMBER</div>
-                            <div class="required-list">
-                                <ul>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Loan processing will start only after submitting all the documents to the bank you have applied for.</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>If any further document is required please submit it as early as possible otherwise loan processing will not start.</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>In case you submit any fake/false documents , you will be blacklisted by the bank for lifetime.</li>
-                                </ul>
-                            </div>
 
-                            <div class="required-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Watchout</div>
-                            <div class="required-list">
-                                <ul>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Do not submit any fake/false document.</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Each and every document should be up-to-date.</li>
-                                </ul>
-                            </div>
-                        </div>
+
+
+
                         <div class="col-md-6">
-                            <div class="required-title"><i class="fa fa-info-circle"></i>ESSENTIAL DOCUMENTS</div>
-                            <div class="required-list">
-                                <ul>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lab Print Photo 4 Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>NID/ Passport Clear Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>TIN Certificate Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Utility Bill Copy (Update)</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Mutation Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Title Deed Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Update Land Tax Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Holding Tax Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Rental Deed Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Partition Deed Copy (If Needed)</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Bank Statement Last 12 Months</li>
-                                </ul>
-                            </div>
-                            <div class="required-title"><i class="fa fa-info-circle"></i>GUARANTOR DOCUMENTS</div>
-                            <div class="required-list">
-                                <ul>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lab Print Photo 2 Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>NID/ Passport Clear Copy</li>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Personal Information (Address, Mobile Number)</li>
-                                </ul>
-                            </div>
-                            <div class="required-title"><i class="fa fa-info-circle"></i>REFERENCE DOCUMENTS</div>
-                            <div class="required-list">
-                                <ul>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Personal Information (Address, Mobile Number)</li>
-                                </ul>
-                            </div>
-                            <div class="required-title"><i class="fa fa-info-circle"></i>NEW CAR</div>
-                            <div class="required-list">
-                                <ul>
-                                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Car Quotation</li>
-                                </ul>
-                            </div>
+                                    <div class="add-onblock">
+                                     <div class="check-feild">
+                                        <input id="check-addon1" type="checkbox" class="input-check">
+                                         <label class="js-addoncover"></label>
+                                         <span class="js-addoncover1"></span>
+                                     </div> 
+                                        <div class="cover-block js-covertext">
+                                          <h3 class="listClose">Zero Depreciation (ZD)  <span>৳ 18433</span></h3> 
+                                           <div class="mob-slide">
+                                           <p>Every year, your car devaluates due to wear and tear of its parts. 
+                                           The add-on does not consider this, giving you complete coverage.
+                                           </p> 
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
+
+                        <div class="col-md-6">
+                                    <div class="add-onblock">
+                                     <div class="check-feild">
+                                        <input id="check-addon1" type="checkbox" class="input-check">
+                                         <label class="js-addoncover"></label>
+                                         <span class="js-addoncover1"></span>
+                                     </div> 
+                                        <div class="cover-block js-covertext">
+                                          <h3 class="listClose">Zero Depreciation (ZD)  <span>৳ 18433</span></h3> 
+                                           <div class="mob-slide">
+                                           <p>Every year, your car devaluates due to wear and tear of its parts. 
+                                           The add-on does not consider this, giving you complete coverage.
+                                           </p> 
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                                    <div class="add-onblock">
+                                     <div class="check-feild">
+                                        <input id="check-addon1" type="checkbox" class="input-check">
+                                         <label class="js-addoncover"></label>
+                                         <span class="js-addoncover1"></span>
+                                     </div> 
+                                        <div class="cover-block js-covertext">
+                                          <h3 class="listClose">Zero Depreciation (ZD)  <span>৳ 18433</span></h3> 
+                                           <div class="mob-slide">
+                                           <p>Every year, your car devaluates due to wear and tear of its parts. 
+                                           The add-on does not consider this, giving you complete coverage.
+                                           </p> 
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                                    <div class="add-onblock">
+                                     <div class="check-feild">
+                                        <input id="check-addon1" type="checkbox" class="input-check">
+                                         <label class="js-addoncover"></label>
+                                         <span class="js-addoncover1"></span>
+                                     </div> 
+                                        <div class="cover-block js-covertext">
+                                          <h3 class="listClose">Zero Depreciation (ZD)  <span>৳ 18433</span></h3> 
+                                           <div class="mob-slide">
+                                           <p>Every year, your car devaluates due to wear and tear of its parts. 
+                                           The add-on does not consider this, giving you complete coverage.
+                                           </p> 
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="col-md-6">
+                                    <div class="add-onblock">
+                                     <div class="check-feild">
+                                        <input id="check-addon1" type="checkbox" class="input-check">
+                                         <label class="js-addoncover"></label>
+                                         <span class="js-addoncover1"></span>
+                                     </div> 
+                                        <div class="cover-block js-covertext">
+                                          <h3 class="listClose">Zero Depreciation (ZD)  <span>৳ 18433</span></h3> 
+                                           <div class="mob-slide">
+                                           <p>Every year, your car devaluates due to wear and tear of its parts. 
+                                           The add-on does not consider this, giving you complete coverage.
+                                           </p> 
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="add-onblock">
+                                     <div class="check-feild">
+                                        <input id="check-addon1" type="checkbox" class="input-check">
+                                         <label class="js-addoncover"></label>
+                                         <span class="js-addoncover1"></span>
+                                     </div> 
+                                        <div class="cover-block js-covertext">
+                                          <h3 class="listClose">Zero Depreciation (ZD)  <span>৳ 18433</span></h3> 
+                                           <div class="mob-slide">
+                                           <p>Every year, your car devaluates due to wear and tear of its parts. 
+                                           The add-on does not consider this, giving you complete coverage.
+                                           </p> 
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
                 </div>
+            </div>
                 <div class="modal-footer">
                 </div>
             </div>
