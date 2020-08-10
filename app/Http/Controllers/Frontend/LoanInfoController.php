@@ -49,12 +49,15 @@ class LoanInfoController extends Controller {
             $profession = 'land_lord';
         }
         $age = $this->age($request->dob);
-        Bank::where($profession.'_income', '<=', $request->salary)
+        $banks = Bank::where($profession.'_income', '<=', $request->salary)
                 ->where($profession.'_duration', '<=', $request->experience)
                 ->where('age_min', '<=', $age)
                 ->where('age_max', '>=', $age)
                 ->get();
-        return redirect()->back()->with('message', 'Thank you for your loan eligibility test');
+        if($banks) {
+            redirect ()->route('banks.index', compact('banks'));
+        }
+        return redirect()->back()->with('message', 'Sorry! your are not eligible for loan');
     }
 
     /**
