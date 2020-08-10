@@ -18,21 +18,10 @@
 
 <section class="sms-new-Car-insurance page-section-ptb">
         <div class="container">
-
-		<nav>
-                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">CAR</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">BIKE</a>
-                </div>
-            </nav>
-
-            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="sms-bg">
-					<div class="row">
+			<div class="row">
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2>Insurance </h2>
+                        <h2>Car Insurance </h2>
                         <div class="separator"></div>
                     </div>
                 </div>
@@ -48,15 +37,15 @@
                         </ul>
                         <div id="tab11" class="tabcontent" style="">
                            
-                            <form action="" id="form-data">
+                            <form action="" class="form-data">
                                     <div class="row">
                                         <div class="form-group col-md-6 col-sm-12">
                                             <div class="select">
 											<label class="control-label">Insurance Type</label>
-                                                <select class="form-control colorselector">
+                                                <select id="colorselector" class="form-control">
                                                     <option value="">Insurance Type </option>
                                                     <option value="">Act Liabilities / Third Party Insurance </option>
-                                                    <option value="">Comprehensive / First Party Insurance </option>
+                                                    <option value="compress">Comprehensive / First Party Insurance </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -117,51 +106,56 @@
                                             </div>
                                         </div>
 
-
-										<div class="form-group col-md-6 col-sm-12">
-                                            <div class="select">
-											<label class="control-label">Car Price  </label>
-											<input type="number" class="form-control" placeholder="Price">
+                                    <div class="output">
+                                        <div  id="compress" class="colors car" style="display: none;">
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                        <div class="select">
+                                                        <label class="control-label">Car Price  </label>
+                                                        <input type="number" class="form-control" placeholder="Price">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-sm-12">
+                                                        <div class="select">
+                                                        <label class="control-label">Car Registration Year  </label>
+                                                        <input type="number" class="form-control" placeholder="Registration Year">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6  col-sm-12 sms-rad">
+                                                        <label class="control-label">Do you have any extra policy</label>
+                                                        <div class="sms-radio">
+                                                            <input id="radio-1" name="radio" type="radio">
+                                                            <label for="radio-1" class="radio-label">Yes</label>
+                                                            <input id="radio-2" name="radio" type="radio">
+                                                            <label for="radio-2" class="radio-label">No</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6  col-sm-12 sms-rad">
+                                                        <label class="control-label">Do you have any claim</label>
+                                                        <div class="sms-radio">
+                                                            <input id="radio-3" name="radio" type="radio">
+                                                            <label for="radio-3" class="radio-label">Yes</label>
+                                                            <input id="radio-4" name="radio" type="radio">
+                                                            <label for="radio-4" class="radio-label">No</label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
-                                        </div>
-										<div class="form-group col-md-6 col-sm-12">
-                                            <div class="select">
-											<label class="control-label">Car Registration Year  </label>
-											<input type="number" class="form-control" placeholder="Registration Year">
-                                            </div>
-                                        </div>
-										<div class="col-md-6  col-sm-12 sms-rad">
-											<label class="control-label">Do you have any extra policy</label>
-											<div class="sms-radio">
-												<input id="radio-1" name="radio" type="radio">
-												<label for="radio-1" class="radio-label">Yes</label>
-												<input id="radio-2" name="radio" type="radio">
-												<label for="radio-2" class="radio-label">No</label>
-											</div>
-                                        </div>
-										<div class="col-md-6  col-sm-12 sms-rad">
-											<label class="control-label">Do you have any claim</label>
-											<div class="sms-radio">
-												<input id="radio-3" name="radio" type="radio">
-												<label for="radio-3" class="radio-label">Yes</label>
-												<input id="radio-4" name="radio" type="radio">
-												<label for="radio-4" class="radio-label">No</label>
-											</div>
                                         </div>
                                     </div>
                             </form>
                         </div>
-                        <div id="tab22" class="tabcontent" style="display: none;">
-                           
-                        <form action="" id="form-data">
+                    <div id="tab22" class="tabcontent" style="display: none;">
+                    <form action="" class="form-data">
                                     <div class="row">
                                         <div class="form-group col-md-6 col-sm-12">
                                             <div class="select">
 											<label class="control-label">Insurance Type</label>
-                                                <select class="form-control">
+                                                <select id="renewcolorselector" class="form-control">
                                                     <option value="">Insurance Type </option>
                                                     <option value="">Act Liabilities / Third Party Insurance </option>
-                                                    <option value="">Comprehensive / First Party Insurance </option>
+                                                    <option value="renewcompress">Comprehensive / First Party Insurance </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -184,7 +178,7 @@
 											   <div class="passenger-input">
 											      <span class="diver-number">1 Driver +</span>
 											      <input value="4" type="number" placeholder="No of Passenger">
-												  <span class="total-diver-number">Total passenger : <span class="sms-passen-count"> 5</span></span>
+												  <span class="total-diver-number">Total passenger : <span class=sms-passen-count> 5</span></span>
 											   </div>
 											</div> 
                                             </div>
@@ -221,57 +215,51 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    
-                                        
-										<div class="form-group col-md-6 col-sm-12">
-                                            <div class="select">
-											<label class="control-label">Car Price  </label>
-											<input type="number" class="form-control" placeholder="Price">
+
+                                    <div class="output">
+                                        <div  id="renewcompress" class="colors car" style="display: none;">
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                        <div class="select">
+                                                        <label class="control-label">Car Price  </label>
+                                                        <input type="number" class="form-control" placeholder="Price">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-sm-12">
+                                                        <div class="select">
+                                                        <label class="control-label">Car Registration Year  </label>
+                                                        <input type="number" class="form-control" placeholder="Registration Year">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6  col-sm-12 sms-rad">
+                                                        <label class="control-label">Do you have any extra policy</label>
+                                                        <div class="sms-radio">
+                                                            <input id="radio-5" name="radio" type="radio">
+                                                            <label for="radio-5" class="radio-label">Yes</label>
+                                                            <input id="radio-6" name="radio" type="radio">
+                                                            <label for="radio-6" class="radio-label">No</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6  col-sm-12 sms-rad">
+                                                        <label class="control-label">Do you have any claim</label>
+                                                        <div class="sms-radio">
+                                                            <input id="radio-7" name="radio" type="radio">
+                                                            <label for="radio-7" class="radio-label">Yes</label>
+                                                            <input id="radio-8" name="radio" type="radio">
+                                                            <label for="radio-8" class="radio-label">No</label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
-                                        </div>
-										<div class="form-group col-md-6 col-sm-12">
-                                            <div class="select">
-											<label class="control-label">Car Registration Year  </label>
-											<input type="number" class="form-control" placeholder="Registration Year">
-                                            </div>
-                                        </div>
-										<div class="col-md-6  col-sm-12 sms-rad">
-											<label class="control-label">Do you have any extra policy</label>
-											<div class="sms-radio">
-												<input id="radio-5" name="radio" type="radio">
-												<label for="radio-5" class="radio-label">Yes</label>
-												<input id="radio-6" name="radio" type="radio">
-												<label for="radio-6" class="radio-label">No</label>
-											</div>
-                                        </div>
-										<div class="col-md-6  col-sm-12 sms-rad">
-											<label class="control-label">Do you have any claim</label>
-											<div class="sms-radio">
-												<input id="radio-7" name="radio" type="radio">
-												<label for="radio-7" class="radio-label">Yes</label>
-												<input id="radio-8" name="radio" type="radio">
-												<label for="radio-8" class="radio-label">No</label>
-											</div>
                                         </div>
                                     </div>
                             </form>
-                        </div>
-
                     </div>
-
-                </div>
                 <button class="button red get-res">Get Quotes</button>
             </div>
 		</div>
-                </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="sms-bg">
-					
-					</div>
-                </div>
-                
-            </div>
-        </div>
+    </div>
     </section>
 
 	<section class="get-quo-output" style="display:none;">
@@ -574,7 +562,5 @@
 	 </div>
 </div>
 </section>
-    
-
 
 @endsection
