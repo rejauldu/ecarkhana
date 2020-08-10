@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\LoanInfo;
 use App\Bank;
+use App\Dropdowns\Condition;
+use App\Locations\Division;
 
 class LoanInfoController extends Controller {
 
@@ -26,7 +28,9 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('frontend.loan-infos.create');
+        $conditions = Condition::all();
+        $divisions = Division::all();
+        return view('frontend.loan-infos.create', compact('conditions', 'divisions'));
     }
 
     /**
@@ -40,7 +44,7 @@ class LoanInfoController extends Controller {
         if(Auth::check()) {
             $data['user_id'] = Auth::user()->id;
         }
-        LoanInfo::create($data);
+        //LoanInfo::create($data);
         $profession = '';
         if($request->profession_id == 1) {
             $profession = 'salaried';

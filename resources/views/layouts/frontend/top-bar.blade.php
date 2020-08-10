@@ -114,7 +114,7 @@
                                         <li class="carkhana-drop"><a href="#">Loan Info <i class="fa fa-angle-double-down"></i></a>
                                             <ul class='dropdown'>
                                                 <li><a href="{{ route('car-loan') }}">Apply Loan </a></li>
-                                                <li><a href="{{ route('car-loan-eligibility') }}">Loan Eligibility</a></li>
+                                                <li><a href="{{ route('loan-eligibility') }}">Loan Eligibility</a></li>
                                                 <li><a href="{{ route('car-insurance') }}">Insurance</a></li>
                                             </ul>
                                         </li>

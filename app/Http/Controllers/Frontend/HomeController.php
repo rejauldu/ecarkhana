@@ -315,6 +315,9 @@ class HomeController extends Controller {
     public function motorcycleCompare() {
         return view('frontend.motorcycle-compare');
     }
+    public function motorcycleInsurance() {
+        return view('frontend.motorcycle-Insurance');
+    }
 
     public function motorcycleListing() {
         $products = Product::has('motorcycle')->with('brand', 'model')->paginate(20);

@@ -24,6 +24,7 @@ Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('
 Route::get('/bicycle-fit-calculator', 'Frontend\HomeController@bicycleFitCalculator')->name('bicycle-fit-calculator');
 Route::get('/bicycle-listing', 'Frontend\HomeController@motorcycleListing')->name('bicycle-listing');
 Route::resource('blogs', 'Backend\BlogController');
+Route::get('/motorcycle-insurance', 'Frontend\HomeController@motorcycleInsurance')->name('motorcycle-insurance');
 Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-blogs');
 Route::get('/motorcycle-cart', 'Frontend\HomeController@motorcycleCart')->name('motorcycle-cart');
 Route::get('/motorcycle-checkout', 'Frontend\HomeController@motorcycleCheckout')->name('motorcycle-checkout');
@@ -36,7 +37,7 @@ Route::get('/car-listing', 'Frontend\HomeController@carListing')->name('car-list
 Route::get('/car-loan', 'Frontend\HomeController@carLoan')->name('car-loan');
 Route::resource('loan-applications', 'Backend\LoanApplicationController');
 Route::get('loan-applications-unviewed', 'Backend\LoanApplicationController@unviewed')->name('loan-applications.unviewed');
-Route::get('/car-loan-eligibility', 'Frontend\HomeController@carLoanEligibility')->name('car-loan-eligibility');
+Route::get('/loan-eligibility', 'Frontend\LoanInfoController@create')->name('loan-eligibility');
 Route::get('/car-loan-insurance-check', 'Frontend\HomeController@carLoanInsuranceCheck')->name('car-loan-insurance-check');
 Route::post('/compare-car', 'Frontend\HomeController@compareCar')->name('compare-car');
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
