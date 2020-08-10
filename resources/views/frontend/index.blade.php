@@ -176,10 +176,11 @@ Start Service -->
                     </li>
 
 
-
+					@mobile
                     <div class="sms-service-more">View More</div>
 
                     <div class="sms-view-content" style="display:none;">
+					@endmobile
                         <li>
                             <a href="">
                                 <div class="service_box">
@@ -244,9 +245,9 @@ Start Service -->
                                 </div>
                             </a>
                         </li>
-
+@mobile
                     </div>
-
+@endmobile
                 </ul>
 
             </div>

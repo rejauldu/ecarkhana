@@ -16,7 +16,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        $loan_infos = LoanInfo::all();
+        return view('frontend.loan-infos.index', compact('loan_infos'));
     }
 
     /**
@@ -25,7 +26,7 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('frontend.loan-infos.create');
     }
 
     /**
@@ -49,12 +50,15 @@ class LoanInfoController extends Controller {
             $profession = 'land_lord';
         }
         $age = $this->age($request->dob);
-        Bank::where($profession.'_income', '<=', $request->salary)
+        $banks = Bank::where($profession.'_income', '<=', $request->salary)
                 ->where($profession.'_duration', '<=', $request->experience)
                 ->where('age_min', '<=', $age)
                 ->where('age_max', '>=', $age)
                 ->get();
-        return redirect()->back()->with('message', 'Thank you for your loan eligibility test');
+        if($banks) {
+            redirect ()->route('banks.index', compact('banks'));
+        }
+        return redirect()->back()->with('message', 'Sorry! your are not eligible for loan');
     }
 
     /**
@@ -64,7 +68,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $loan_info = LoanInfo::find($id);
+        return view('frontend.loan-infos.index', compact('loan_info'));
     }
 
     /**
@@ -74,7 +79,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        $loan_info = LoanInfo::find($id);
+        return view('frontend.loan-infos.create', compact('loan_info'));
     }
 
     /**

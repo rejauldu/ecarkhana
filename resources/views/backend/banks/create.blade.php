@@ -48,7 +48,7 @@
                                             <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <img id="photo-view" style="width:50px; height:50px" src="{{ asset('/assets/banks') }}/{{ $bank->photo }}" class="img-thumbnail" alt="Product">
+                                            <img id="photo-view" style="width:50px; height:50px" src="{{ asset('/assets/banks') }}/{{ $bank->photo ?? 'not-found.jpg' }}" class="img-thumbnail" alt="Product">
                                         </div>
                                     </div>
                                     <div class="row my-3 text-center">
@@ -71,7 +71,15 @@
                                             </div>
                                         </div>
                                     </div>
-
+									<div class="form-group">
+										<label for="loan_percentage">Loan percentage of total price</label>
+										<div class="input-group">
+											<input id="loan_percentage" type="number" class="form-control" name="loan_percentage" value="{{ $bank->loan_percentage ?? '' }}" placeholder="Loan percentage" title="Enter Loan percentage" />
+											<div class="input-group-append">
+												<span class="input-group-text">%</span>
+											</div>
+										</div>
+									</div>
                                     <div class="row my-3">
                                         <div class="col-12 col-md-6">
                                             <div class="card">

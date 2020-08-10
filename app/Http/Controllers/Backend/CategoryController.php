@@ -8,18 +8,17 @@ use Auth;
 use App\Category;
 use Illuminate\Support\Facades\File;
 
-class CategoryController extends Controller
-{
+class CategoryController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		
-		$categories = Category::orderBy('id', 'desc')->get();
-		return view('backend.categories.index', compact('categories'));
+    public function index() {
+
+        $categories = Category::orderBy('id', 'desc')->get();
+        return view('backend.categories.index', compact('categories'));
     }
 
     /**
@@ -27,10 +26,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        
-		return view('backend.categories.create');
+    public function create() {
+
+        return view('backend.categories.create');
     }
 
     /**
@@ -39,19 +37,18 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-		$file = $request->file('picture');
-		$data = $request->except('_token', '_method', 'files', 'picture');
-		$category = Category::create($data);
-		if($file) {
-			$destination_path = 'assets/categories';
-			$new_name = $category->id.'.'.$file->getClientOriginalExtension();
-			$file->move($destination_path, $new_name);
-			$data['picture'] = $new_name;
-			$category->update($data);
-		}
-		return redirect(route('categories.index'))->with('message', 'Category created successfully');
+    public function store(Request $request) {
+        $file = $request->file('picture');
+        $data = $request->except('_token', '_method', 'files', 'picture');
+        $category = Category::create($data);
+        if ($file) {
+            $destination_path = 'assets/categories';
+            $new_name = $category->id . '.' . $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['picture'] = $new_name;
+            $category->update($data);
+        }
+        return redirect(route('categories.index'))->with('message', 'Category created successfully');
     }
 
     /**
@@ -60,11 +57,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-		
+    public function show($id) {
+
         $category = Category::find($id);
-		return view('backend.categories.show', compact('category'));
+        return view('backend.categories.show', compact('category'));
     }
 
     /**
@@ -73,11 +69,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-		
+    public function edit($id) {
+
         $category = Category::find($id);
-		return view('backend.categories.create', compact('category'));
+        return view('backend.categories.create', compact('category'));
     }
 
     /**
@@ -87,19 +82,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-		$file = $request->file('picture');
-		$data = $request->except('_token', '_method', 'files', 'picture');
-		$category = Category::find($id);
-		if($file) {
-			$destination_path = 'assets/categories/';
-			$new_name = $id.'.'.$file->getClientOriginalExtension();
-			$file->move($destination_path, $new_name);
-			$data['picture'] = $new_name;
-		}
-		$category->update($data);
-		return redirect(route('categories.index'))->with('message', 'Category updated successfully');
+    public function update(Request $request, $id) {
+        $file = $request->file('picture');
+        $data = $request->except('_token', '_method', 'files', 'picture');
+        $category = Category::find($id);
+        if ($file) {
+            $destination_path = 'assets/categories/';
+            $new_name = $id . '.' . $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['picture'] = $new_name;
+        }
+        $category->update($data);
+        return redirect(route('categories.index'))->with('message', 'Category updated successfully');
     }
 
     /**
@@ -108,12 +102,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-		$category = Category::find($id);
-		$directory = 'assets/categories/';
-		File::delete($directory.$category->picture);
-		$category->delete();
-		return redirect()->back()->with('message', 'Category has been deleted');
+    public function destroy($id) {
+        $category = Category::find($id);
+        $directory = 'assets/categories/';
+        File::delete($directory . $category->picture);
+        $category->delete();
+        return redirect()->back()->with('message', 'Category has been deleted');
     }
+
 }
