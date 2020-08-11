@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2020 at 04:40 PM
+-- Generation Time: Aug 11, 2020 at 07:21 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -108,6 +108,7 @@ CREATE TABLE `banks` (
   `business_loan_max` int(11) DEFAULT NULL,
   `land_lord_loan_min` int(11) DEFAULT NULL,
   `land_lord_loan_max` int(11) DEFAULT NULL,
+  `loan_percentage` smallint(6) DEFAULT NULL,
   `is_new` tinyint(1) DEFAULT 0,
   `is_used` tinyint(1) DEFAULT 0,
   `is_reconditioned` tinyint(1) DEFAULT 0,
@@ -119,8 +120,8 @@ CREATE TABLE `banks` (
 -- Dumping data for table `banks`
 --
 
-INSERT INTO `banks` (`id`, `name`, `photo`, `salaried_income`, `business_income`, `land_lord_income`, `salaried_duration`, `business_duration`, `land_lord_duration`, `age_min`, `age_max`, `loan_tenure_min`, `loan_tenure_max`, `salaried_loan_min`, `salaried_loan_max`, `business_loan_min`, `business_loan_max`, `land_lord_loan_min`, `land_lord_loan_max`, `is_new`, `is_used`, `is_reconditioned`, `updated_at`, `created_at`) VALUES
-(1, 'IDLC', '1596983821.png', 40000, 50000, 50000, 2, 3, 3, 22, 60, 1, 6, 3000000, 50000000, 3000000, 60000000, 3000000, 50000000, 1, 0, 1, '2020-08-09 14:37:17', '2020-08-09 08:37:01');
+INSERT INTO `banks` (`id`, `name`, `photo`, `salaried_income`, `business_income`, `land_lord_income`, `salaried_duration`, `business_duration`, `land_lord_duration`, `age_min`, `age_max`, `loan_tenure_min`, `loan_tenure_max`, `salaried_loan_min`, `salaried_loan_max`, `business_loan_min`, `business_loan_max`, `land_lord_loan_min`, `land_lord_loan_max`, `loan_percentage`, `is_new`, `is_used`, `is_reconditioned`, `updated_at`, `created_at`) VALUES
+(1, 'IDLC', '1596986908.png', 40000, 50000, 50000, 2, 3, 3, 22, 60, 1, 6, 3000000, 50000000, 3000000, 60000000, 3000000, 50000000, 80, 1, 1, 1, '2020-08-11 03:40:32', '2020-08-09 08:37:01');
 
 -- --------------------------------------------------------
 
@@ -5532,7 +5533,9 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1299, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-05 19:38:12', '2020-08-05 19:38:12'),
 (1300, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-06 20:22:25', '2020-08-06 20:22:25'),
 (1301, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-07 20:48:16', '2020-08-07 20:48:16'),
-(1302, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-08 20:12:32', '2020-08-08 20:12:32');
+(1302, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-08 20:12:32', '2020-08-08 20:12:32'),
+(1303, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/login', '2020-08-09 20:58:33', '2020-08-09 20:58:33'),
+(1304, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-10 19:50:38', '2020-08-10 19:50:38');
 
 -- --------------------------------------------------------
 
@@ -10767,7 +10770,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `email_verified_at`, `password`, `phone`, `role_id`, `name_on_card`, `credit_card`, `payment_id`, `card_exp_month`, `card_exp_year`, `cvv`, `address`, `region_id`, `union_id`, `upazila_id`, `district_id`, `division_id`, `billing_address`, `billing_region_id`, `billing_union_id`, `billing_upazila_id`, `billing_district_id`, `billing_division_id`, `shipping_address`, `shipping_region_id`, `shipping_union_id`, `shipping_upazila_id`, `shipping_district_id`, `shipping_division_id`, `user_type_id`, `about`, `website`, `lat`, `lon`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', '23.7860', '90.2124', 'gppJE6frrmtvEPR8DLLAnuXFVawyiSBiwJIKbHdOxH8cj4B8cDaIm1UhViTv', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
+(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', '23.7860', '90.2124', 'OzSB4f9hTxhIhLmXc86O50XjXUHDIO4068K8I0BUhdq6hDbNkYXseELMrRTl', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
 (2, 'Super Admin', 'admin@gmail.com', '2.jpg', '2020-01-17 02:24:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '741.667.7107 x60100', 3, NULL, '4350', 2, 2, 2019, NULL, '59339 Abernathy Meadows Suite 466\nEast Robynport, AK 60030-0762', 1, 3270, 216, 47, 7, '784 Jenkins Forges\nEast Sigmund, MS 03564', 3, 933, 417, 24, 7, '649 Obie Extension Apt. 112\nEmmerichshire, MN 70568', 1, 2629, 291, 12, 1, 1, NULL, NULL, '23.1563', '90.25684', 'MvPkWggfwCpynrHNosYwRaDTxSkASCb2crN7jchTF9nCtXDy8tlx351lpRm5', '2020-01-17 11:08:11', '2020-02-18 23:25:43'),
 (3, 'Moderator', 'moderator@gmail.com', 'avatar.png', '2020-01-17 11:05:19', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(473) 451-7145 x102', 2, 'Rejaul Karim', '6000', 1, 10, 2023, NULL, '4876 Kelvin Station Apt. 306\nNew Estella, PA 57909', 1, 2109, 25, 33, 4, '1993 Wolff Rapid\nPurdyville, NE 99436', 1, 2753, 43, 56, 8, '76592 Maxwell Village Suite 050\nPort Xanderland, AK 64479', 1, 1621, 279, 28, 3, 1, NULL, NULL, '23.5555', '90.3333', 'Y6f4NllPJFC5IwfriQKaJf9775RodofB6rGxkXEsFsnhGVqBB923OPZ9PoaA', '2020-01-17 11:08:12', '2020-01-22 22:07:41'),
 (4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 1, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, '23.7860', '90.2124', 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
@@ -12081,7 +12084,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1303;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1305;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

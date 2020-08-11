@@ -41,11 +41,13 @@ class LoanInfoController extends Controller {
      */
     public function store(Request $request) {
         $data = $request->except('_token', '_method');
-        
+        $data['dob'] = date('Y-m-d', strtotime($request->dob));
         if(Auth::check()) {
             $data['user_id'] = Auth::user()->id;
         }
-        //LoanInfo::create($data);
+        $loan_info = LoanInfo::where('email', $request->email)->first();
+        if(!$loan_info)
+            LoanInfo::create($data);
         $profession = '';
         if($request->profession_id == 1) {
             $profession = 'salaried';

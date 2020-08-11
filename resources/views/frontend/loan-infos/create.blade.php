@@ -86,8 +86,12 @@ Start Car Loan  Eligibility-->
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    <label for="residence-since">Residence Since</label>
-                    <input type="text" class="form-control datepicker" name="residence_since" placeholder="mm/dd/yyyy" id="residence-since" autocomplete="off">
+                    <label for="residence-since">Residence Here Since</label>
+                    <select class="form-control" name="residence_since_id" id="residance_since">
+                        <option value="0">--Select Residence Since--</option>
+                        <option value="1">Less than 2 years</option>
+                        <option value="2">More than 2 years</option>
+                    </select>
                 </div>
             </div>
             <div class="col-12 col-md-6">

@@ -173,6 +173,18 @@
 				</ul>
 			</li>
 			@endmoderator
+			@moderator(Payment)
+			<li class="treeview {{ Request::is('banks*') ? 'active' : '' }}">
+				<a href="#">
+					<i class="fa fa-bank" aria-hidden="true"></i> <span>Bank</span>
+					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+					<!--<li class="{{ Request::is('banks') ? 'active' : '' }}"><a href="{{ route('banks.index') }}"><i class="fa fa-circle-o"></i> Manage Payment</a></li>-->
+					<li class="{{ Request::is('banks/create') ? 'active' : '' }}"><a href="{{ route('banks.create') }}"><i class="fa fa-circle-o"></i> Add New Bank</a></li>
+				</ul>
+			</li>
+			@endmoderator
 			@moderator(Unit)
 			<li class="treeview {{ Request::is('units*') ? 'active' : '' }}">
 				<a href="#">
