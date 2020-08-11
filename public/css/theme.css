@@ -380,3 +380,16 @@ table.dataTable thead .sorting_desc_disabled:before {
         overflow-y: auto;
     }
 }
+/* Bootstrap modal vertically center aligned*/
+.modal-dialog-center {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+@media(max-width: 768px) {
+  .modal-dialog-center {
+    min-height: calc(100vh - 20px);
+  }
+}

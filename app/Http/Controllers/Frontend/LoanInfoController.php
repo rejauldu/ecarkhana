@@ -41,6 +41,7 @@ class LoanInfoController extends Controller {
      */
     public function store(Request $request) {
         $data = $request->except('_token', '_method');
+        
         if(Auth::check()) {
             $data['user_id'] = Auth::user()->id;
         }
@@ -59,8 +60,17 @@ class LoanInfoController extends Controller {
                 ->where('age_min', '<=', $age)
                 ->where('age_max', '>=', $age)
                 ->get();
-        if($banks) {
-            redirect ()->route('banks.index', compact('banks'));
+        $profession = '';
+        if($request->profession_id == 1)
+            $profession = 'salaried';
+        elseif($request->profession_id == 2)
+            $profession = 'business';
+        else
+            $profession = 'land_lord';
+        $loan_info = (object) $data;
+        $loan_info->profession = $profession;
+        if($banks->count()) {
+            return view('backend.banks.index', compact('banks', 'loan_info'));
         }
         return redirect()->back()->with('message', 'Sorry! your are not eligible for loan');
     }

@@ -63,12 +63,12 @@ Start Car Loan  Eligibility-->
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    <label for="dob">Date of Birth</label>
+                    <label for="dob">Date of Birth<sup class="text-danger">*</sup></label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-gift"></i></span>
                         </div>
-                        <input type="text" class="form-control datepicker" name="dob" placeholder="Date of Birth" id="dob" required="" autocomplete="off">
+                        <input type="text" class="form-control datepicker" name="dob" placeholder="mm/dd/yyyy" id="dob" required="" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@ Start Car Loan  Eligibility-->
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="residence-since">Residence Since</label>
-                    <input type="text" class="form-control datepicker" name="residence_since" placeholder="Residence since" id="residence-since" required="" autocomplete="off">
+                    <input type="text" class="form-control datepicker" name="residence_since" placeholder="mm/dd/yyyy" id="residence-since" autocomplete="off">
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -105,7 +105,7 @@ Start Car Loan  Eligibility-->
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="have-choice" name="have_choice" value="1">
-                        <label class="custom-control-label" for="have-choice">Do you choice any car?</label>
+                        <label class="custom-control-label" for="have-choice">Do you have any choice car?</label>
                     </div>
                 </div>
             </div>
@@ -122,8 +122,8 @@ Start Car Loan  Eligibility-->
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group select">
-                    <label for="profession">Your Profession</label>
-                    <select class="form-control" name="profession_id" id="profession_id" v-model="profession">
+                    <label for="profession">Your Profession<sup class="text-danger">*</sup></label>
+                    <select class="form-control" name="profession_id" id="profession_id" v-model="profession" required="">
                         <option value="0">--Select Profession--</option>
                         <option value="1">Salaried Job</option>
                         <option value="2">Business</option>
@@ -156,9 +156,9 @@ Start Car Loan  Eligibility-->
             </div>
             <div class="col-12 col-md-6" v-if="profession == 1">
                 <div class="form-group">
-                    <label for="experience">Job Experience</label>
+                    <label for="experience">Job Experience<sup class="text-danger">*</sup></label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="experience" placeholder="Enter job experience" name="experience">
+                        <input type="number" class="form-control" id="experience" placeholder="Enter job experience" name="experience" required="">
                         <div class="input-group-append">
                             <span class="input-group-text">Years</span>
                         </div>
@@ -167,10 +167,10 @@ Start Car Loan  Eligibility-->
             </div>
             <div class="col-12 col-md-6" v-if="profession == 1 || profession == 2">
                 <div class="form-group">
-                    <label for="salary" v-if="profession == 1">Salary Per Month:</label>
-                    <label for="salary" v-if="profession == 2">Your gross monthly income</label>
+                    <label for="salary" v-if="profession == 1">Salary Per Month<sup class="text-danger">*</sup></label>
+                    <label for="salary" v-if="profession == 2">Your gross monthly income<sup class="text-danger">*</sup></label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="salary" placeholder="Enter Salary" name="salary">
+                        <input type="number" class="form-control" id="salary" placeholder="Enter Salary" name="salary" required="">
                         <div class="input-group-append">
                             <span class="input-group-text">TK</span>
                         </div>
@@ -263,14 +263,39 @@ Start Car Loan  Eligibility-->
                     <button type="submit" class="btn button red">Check Eligibility</button>
                 </div>
             </div>
-            
+
         </div>
     </form>
 </section>
 
 <!--=================================
 End  Car Loan Eligibility -->
+<!-- The Modal -->
+<div class="modal" id="not-eligible">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Sorry!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                @if(session()->has('message'))
+                {{ session()->get('message') }}
+                @endif
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 @endsection
 @section('style')
@@ -284,14 +309,21 @@ $(function () {
 });
 </script>
 <script>
-var loan = new Vue({
-    el: '#loan-eligibility',
-    data: {
-        profession: 0
-    },
-    methods: {
-        
-    }
-});
+    var loan = new Vue({
+        el: '#loan-eligibility',
+        data: {
+            profession: 0
+        },
+        methods: {
+            openModal: function() {
+                @if(session()->has('message'))
+                $('#not-eligible').modal('show');
+                @endif
+            }
+        },
+        mounted: function () {
+            this.openModal();
+        }
+    });
 </script>
 @endsection
