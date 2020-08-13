@@ -140,7 +140,10 @@ class HomeController extends Controller {
 
     public function carAdPost() {
         $brands = Brand::where('category_id', 1)->get();
-        return view('frontend.car-ad-post', compact('brands'));
+        $models = Model::where('category_id', 1)->get();
+        $packages = Package::where('category_id', 1)->get();
+        $divisions = Division::all();
+        return view('frontend.car-ad-post', compact('brands', 'models', 'packages', 'divisions'));
     }
 
     public function carInsurance() {
