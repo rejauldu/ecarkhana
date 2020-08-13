@@ -2411,7 +2411,7 @@ a.button.red i {
 }
 
 /*=============================================
-			Compare Items
+                        Compare Items
 =============================================*/
 
 .tg-vstag {
@@ -3257,7 +3257,7 @@ footer.footer.bg-2.bg-overlay-black-90:before {
 
 
 /*-------------------------------------------------
-	Login / Register / Forgot password
+        Login / Register / Forgot password
 -------------------------------------------------------*/
 
 .login_wrap {
@@ -9821,3 +9821,22 @@ h3.listClose {
     width: 100%;
 }
 /*# sourceMappingURL=style.css.map */
+
+/* sell used car */
+.sell-car-bg {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/sell-used-car.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-size: 100% 100%;
+}
+.btn-file-group {
+    width:50px;
+    height:50px;
+    display:inline-block;
+}
+.btn-file-control {
+    width:50px;
+    height:50px;
+    display:inline-block;
+}

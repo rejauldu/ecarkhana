@@ -139,7 +139,8 @@ class HomeController extends Controller {
     }
 
     public function carAdPost() {
-        return view('frontend.car-ad-post');
+        $brands = Brand::where('category_id', 1)->get();
+        return view('frontend.car-ad-post', compact('brands'));
     }
 
     public function carInsurance() {
