@@ -9840,3 +9840,7 @@ h3.listClose {
     height:50px;
     display:inline-block;
 }
+.sms-terms {
+    margin: 0 0 15px 0;
+    display: block;
+}
