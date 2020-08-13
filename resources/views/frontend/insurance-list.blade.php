@@ -21,7 +21,18 @@
 						        Motor Registration Copy ( both side )
 								<span class="has-text-danger">*</span></label> <p class="help is-primary">
 						Hold <kbd>ctrl</kbd> key to select multiple image
-					</p> <div class="control"><input required="required" id="registration_copy" name="registration_copy[]" type="file" placeholder="" multiple="multiple" accept="image/*"></div></div> <div class="field"><label for="previous_insurance_image" class="label">Previous Insurance copy (If Any)</label> <div class="control"><input id="previous_insurance_image" name="previous_insurance_image" type="file" placeholder="" accept="image/*"></div></div> <div class="field"><label for="remarks" class="label">Additional Informations</label> <div class="control"><textarea name="remarks" id="remarks" class="textarea"></textarea></div></div> <button type="submit" class="button is-info">Submit</button></form></div></div>
+					</p> <div class="control"><input required="required" id="registration_copy" type="file"></div>
+                    </div> <div class="field">
+                    <label for="previous_insurance_image" class="label">Previous Insurance copy (If Any)</label> 
+                    <div class="control"><input id="previous_insurance_image" name="previous_insurance_image" type="file" placeholder="" accept="image/*"></div>
+                    </div> <div class="field"><label for="remarks" class="label">Additional Informations</label> 
+                    <div class="control"><textarea name="remarks" id="remarks" class="textarea"></textarea>
+                    </div>
+                    </div> 
+                    <div class="sms-terms">
+                     <a href="#">Terms & Conditions</a>
+                    </div>
+                    <button type="submit" class="button is-info">Submit</button></form></div></div>
 			</div>
      <div class="col-md-4">
 	 <div class="breakdown-content"><div class="some_random_class"><h3 class="my-2 is-size-3">Act Liability Breakdown</h3> <div class="single-block"><div class="block-term"><span>

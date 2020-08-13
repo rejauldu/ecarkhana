@@ -270,7 +270,7 @@
                     <div class="card  border-0  align-items-center">
                         <div class="card-image mt-0"><img class=" " src="images/idic.jpg" style="width: 160px; max-width: 160px;">
                         </div>
-                        <button class="button red" onclick="window.location.href = 'car-loan.html';">Buy @tk  - 454</button>
+                        <button class="button red" onclick="window.location.href = 'http://ecarkhana/insurance-list';">Buy @tk  - 454</button>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -565,7 +565,7 @@
                     <div class="card  border-0  align-items-center">
                         <div class="card-image mt-0"><img class=" " src="images/standard.jpg" style="width: 160px; max-width: 160px;">
                         </div>
-                        <button class="button red" onclick="window.location.href = 'car-loan.html';">Buy @tk  - 454</button>
+                        <button class="button red" onclick="window.location.href = 'http://ecarkhana/insurance-list';">Buy @tk  - 454</button>
                     </div>
                 </div>
                 <div class="col-md-8">
