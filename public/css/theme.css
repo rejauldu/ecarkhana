@@ -463,8 +463,17 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 /* Item positioning */
 .position-center {
-	position:absolute;
+    position:absolute;
     left:50%;
     top:50%;
     transform:translate(-50%, -50%);
+}
+/* modal scrollable */
+/* Important part */
+.modal-scrollable>.modal-dialog {
+    overflow-y: initial !important
+}
+.modal-scrollable .modal-body {
+    height: 425px;
+    overflow-y: auto;
 }
