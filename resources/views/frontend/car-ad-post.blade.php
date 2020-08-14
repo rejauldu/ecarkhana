@@ -42,7 +42,7 @@ Start Post Your Ad-->
                     <div class="row mb-3">
                         <div class="col-12">
                             <h4 class="mb-0">Upload Photos</h4>
-                            <div class="text-secondary"><small>More photos give 5x more verified buyers</small></div>
+                            <div class="text-secondary"><small>More photos give 6x more verified buyers</small></div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -117,19 +117,26 @@ Start Post Your Ad-->
 
                 <!-- Modal body -->
                 <div class="modal-body">
+                    <h4 class="" v-if="page==1">Car Brand</h4>
+                    <h4 class="" v-else-if="page==2">Car Model</h4>
+                    <h4 class="" v-else-if="page==3">Car Make Year</h4>
+                    <h4 class="" v-else-if="page==4">Car Variant</h4>
+                    <h4 class="" v-else-if="page==5">Car Kms Driven</h4>
+                    <h4 class="" v-else-if="page==6">Car Ownership</h4>
+                    <h4 class="" v-else-if="page==7">Car City</h4>
                     <div class="form-group">
                         <input class="form-control" placeholder="Search..." v-model="search" />
                     </div>
                     <ul class="list-group list-group-flush" v-if="page == 1">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b.name)">@{{ b.name }}</li>
                     </ul>
-                    <ul class="list-group list-group-flush" v-if="page == 2">
+                    <ul class="list-group list-group-flush" v-else-if="page == 2">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m.name)">@{{ m.name }}</li>
                     </ul>
-                    <ul class="list-group list-group-flush" v-if="page == 3">
+                    <ul class="list-group list-group-flush" v-else-if="page == 3">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredManufacturingYears" @click.prevent="manufacturingYearSelected(m)">@{{ m }}</li>
                     </ul>
-                    <ul class="list-group list-group-flush" v-if="page == 4">
+                    <ul class="list-group list-group-flush" v-else-if="page == 4">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m.name)">@{{ m.name }}</li>
                     </ul>
                     <button v-if="page == 5" class="btn btn-light m-1" v-for="m in filteredKmsDrivens" @click.prevent="kmsDrivenSelected(m)">@{{ m }}</button>
@@ -151,148 +158,149 @@ End  Post Your Ad -->
     var vuejs = new Vue({
     el: '#sell-car',
             data: {
-            search: '',
-                    page: 1,
-                    brand: '',
-                    brands: @json($brands),
-                    model: '',
-                    models: @json($models),
-                    package: '',
-                    packages: @json($packages),
-                    manufacturing_year: '',
-                    manufacturing_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
-                            1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
-                    kms_driven: '',
-                    kms_drivens: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
-                    ownership: '',
-                    ownerships: ['First', 'Second', 'Third', 'Above'],
-                    division: '',
-                    divisions: @json($divisions),
-                    price: '',
-                    prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000]
+                search: '',
+                page: 1,
+                brand: '',
+                brands: @json($brands),
+                model: '',
+                models: @json($models),
+                package: '',
+                packages: @json($packages),
+                manufacturing_year: '',
+                manufacturing_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
+                        1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
+                kms_driven: '',
+                kms_drivens: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
+                ownership: '',
+                ownerships: ['First', 'Second', 'Third', 'Above'],
+                division: '',
+                divisions: @json($divisions),
+                price: '',
+                prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000]
             },
             methods: {
-            brandSelected: function (b) {
-            this.brand = b;
-            this.page = 2;
-            this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'price');
-            },
-                    modelSelected: function (m) {
+                brandSelected: function (b) {
+                    this.brand = b;
+                    this.page = 2;
+                    this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'price');
+                },
+                modelSelected: function (m) {
                     this.model = m;
                     this.page = 3;
                     this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'price');
-                    },
-                    manufacturingYearSelected: function (m) {
+                },
+                manufacturingYearSelected: function (m) {
                     this.manufacturing_year = m;
                     this.page = 4;
                     this.reset('package', 'kms_driven', 'ownership', 'division', 'price');
-                    },
-                    packageSelected: function (m) {
+                },
+                packageSelected: function (m) {
                     this.package = m;
                     this.page = 5;
                     this.reset('kms_driven', 'ownership', 'division', 'price');
-                    },
-                    kmsDrivenSelected: function (m) {
+                },
+                kmsDrivenSelected: function (m) {
                     this.kms_driven = m;
                     this.page = 6;
                     this.reset('ownership', 'division', 'price');
-                    },
-                    ownershipSelected: function (m) {
+                },
+                ownershipSelected: function (m) {
                     this.ownership = m;
                     this.page = 7;
                     this.reset('division', 'price');
-                    },
-                    divisionSelected: function (m) {
+                },
+                divisionSelected: function (m) {
                     this.division = m;
                     this.page = 8;
                     this.reset('price');
-                    },
-                    priceSelected: function (m) {
+                },
+                priceSelected: function (m) {
                     this.price = m;
                     this.page = 9;
-                    },
-                    photoSelected: function (m) {
+                },
+                photoSelected: function (m) {
                     this.photo = m;
                     this.page = 10;
-                    },
-                    reset: function (...args) {
+                },
+                reset: function (...args) {
                     for (var i = 0; i < args.length; i++) {
-                    if (args[i] == 'brand') {
-                    this.brand = '';
-                    } else if (args[i] == 'model') {
-                    this.model = '';
-                    } else if (args[i] == 'manufacturing_year') {
-                    this.manufacturing_year = '';
-                    } else if (args[i] == 'package') {
-                    this.package = '';
-                    } else if (args[i] == 'kms_driven') {
-                    this.kms_driven = '';
-                    } else if (args[i] == 'ownership') {
-                    this.ownership = '';
-                    } else if (args[i] == 'division') {
-                    this.division = '';
-                    } else if (args[i] == 'price') {
-                    this.price = '';
+                        if (args[i] == 'brand') {
+                            this.brand = '';
+                        } else if (args[i] == 'model') {
+                            this.model = '';
+                        } else if (args[i] == 'manufacturing_year') {
+                            this.manufacturing_year = '';
+                        } else if (args[i] == 'package') {
+                            this.package = '';
+                        } else if (args[i] == 'kms_driven') {
+                            this.kms_driven = '';
+                        } else if (args[i] == 'ownership') {
+                            this.ownership = '';
+                        } else if (args[i] == 'division') {
+                            this.division = '';
+                        } else if (args[i] == 'price') {
+                            this.price = '';
+                        }
                     }
-                    }
-                    }
+                    this.search = '';
+                }
             },
             computed: {
-            filteredBrands() {
-            return this.brands.filter(item => {
-            return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-            })
-            },
-                    filteredModels() {
-            return this.models.filter(item => {
-            return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-            })
-            },
-                    filteredManufacturingYears() {
-            return this.manufacturing_years.filter(item => {
-            return item.toString().startsWith(this.search);
-            })
-            },
-                    filteredPackages() {
-            return this.packages.filter(item => {
-            return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-            })
-            },
-                    filteredKmsDrivens() {
-            return this.kms_drivens.filter(item => {
-            return item.toString().startsWith(this.search);
-            })
-            },
-                    filteredOwnerships() {
-            return this.ownerships.filter(item => {
-            return item.toLowerCase().startsWith(this.search.toLowerCase());
-            })
-            },
-                    filteredDivisions() {
-            return this.divisions.filter(item => {
-            return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-            })
-            },
-                    filteredPrices() {
-            return this.prices.filter(item => {
-            return item.toString().startsWith(this.search);
-            })
-            },
-//            filteredPhotos() {
-//                return this.photos.filter(item => {
-//                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-//                })
-//            },
-                    car() {
-            var car = '';
-            if (this.brand)
-                    car += this.brand + ' ' + this.model + ' ' + this.manufacturing_year;
-            else
-                    return '';
-            if (this.package)
-                    car += ', ' + this.package;
-            return car;
-            },
+                filteredBrands() {
+                    return this.brands.filter(item => {
+                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                    })
+                },
+                filteredModels() {
+                    return this.models.filter(item => {
+                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                    })
+                },
+                filteredManufacturingYears() {
+                    return this.manufacturing_years.filter(item => {
+                        return item.toString().startsWith(this.search);
+                    })
+                },
+                filteredPackages() {
+                    return this.packages.filter(item => {
+                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                    })
+                },
+                filteredKmsDrivens() {
+                    return this.kms_drivens.filter(item => {
+                        return item.toString().startsWith(this.search);
+                    })
+                },
+                filteredOwnerships() {
+                    return this.ownerships.filter(item => {
+                        return item.toLowerCase().startsWith(this.search.toLowerCase());
+                    })
+                },
+                filteredDivisions() {
+                    return this.divisions.filter(item => {
+                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                    })
+                },
+                filteredPrices() {
+                    return this.prices.filter(item => {
+                        return item.toString().startsWith(this.search);
+                    })
+                },
+    //            filteredPhotos() {
+    //                return this.photos.filter(item => {
+    //                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+    //                })
+    //            },
+                car() {
+                    var car = '';
+                    if (this.brand)
+                        car += this.brand + ' ' + this.model + ' ' + this.manufacturing_year;
+                    else
+                        return '';
+                    if (this.package)
+                        car += ', ' + this.package;
+                    return car;
+                },
             }
     })
 </script>
