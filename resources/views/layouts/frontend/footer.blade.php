@@ -365,7 +365,7 @@ back to top -->
 <script type="text/javascript" src="{{ asset('js/revolution/extensions/revolution.extension.video.min.js') }}"></script>
 
 <!-- custom -->
-<script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/custom.js') }}?{{ time() }}"></script>
 <script src="{{ asset('js/theme.js') }}?{{ time() }}"></script>
 <script src="{{ asset('js/script.js') }}?{{ time() }}"></script>
 <script>

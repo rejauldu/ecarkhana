@@ -9,8 +9,7 @@
 @include('layouts.frontend.car-background')
 
 
-<!--=================================
-Start Post Your Ad-->
+<!--=================================Start Post Your Ad-->
 
 <section class="Post-Ad page-section-ptb" id="sell-car">
     <div class="row">
@@ -20,23 +19,23 @@ Start Post Your Ad-->
                 <div class="card-body">
                     <h4 class="mb-3">Sell your car in a click!</h4>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="car" name="field1" placeholder="Select Car" readonly="" v-model="car" data-toggle="modal" data-target="#sell-car-modal"/>
+                        <input type="text" class="form-control bg-light" id="car" name="field1" placeholder="Select Car" readonly="" v-model="car" @click.prevent="openModal(1)" />
                         <label for="car" class=" cursor-pointer">Select Car</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="kms-driven" name="field1" placeholder="Select Car" readonly="" v-model="kms_driven" data-toggle="modal" data-target="#sell-car-modal"/>
+                        <input type="text" class="form-control bg-light" id="kms-driven" name="field1" placeholder="Select Car" readonly="" v-model="kms_driven" @click.prevent="openModal(5)" />
                         <label for="kms-driven" class=" cursor-pointer">Kms driven</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="ownership" name="field1" placeholder="Select Car" readonly="" v-model="ownership" data-toggle="modal" data-target="#sell-car-modal"/>
+                        <input type="text" class="form-control bg-light" id="ownership" name="field1" placeholder="Select Car" readonly="" v-model="ownership" @click.prevent="openModal(6)" />
                         <label for="ownership" class=" cursor-pointer">Ownership</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="city" name="field1" placeholder="Select Car" readonly="" v-model="division" data-toggle="modal" data-target="#sell-car-modal"/>
+                        <input type="text" class="form-control bg-light" id="city" name="field1" placeholder="Select Car" readonly="" v-model="division" @click.prevent="openModal(7)" />
                         <label for="city" class=" cursor-pointer">City</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="price" name="field1" placeholder="Select Car" readonly="" v-model="price" data-toggle="modal" data-target="#sell-car-modal"/>
+                        <input type="text" class="form-control bg-light" id="price" name="field1" placeholder="Select Car" readonly="" v-model="price" @click.prevent="openModal(8)" />
                         <label for="price" class=" cursor-pointer">Expected Price</label>
                     </div>
                     <div class="row mb-3">
@@ -47,42 +46,42 @@ Start Post Your Ad-->
                     </div>
                     <div class="row mb-3">
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border"  data-toggle="modal" data-target="#sell-car-modal">
+                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal(1)">
                                 <div class="size-child">
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border"  data-toggle="modal" data-target="#sell-car-modal">
+                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal()">
                                 <div class="size-child">
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border"  data-toggle="modal" data-target="#sell-car-modal">
+                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
                                 <div class="size-child">
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border"  data-toggle="modal" data-target="#sell-car-modal">
+                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
                                 <div class="size-child">
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border"  data-toggle="modal" data-target="#sell-car-modal">
+                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
                                 <div class="size-child">
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border"  data-toggle="modal" data-target="#sell-car-modal">
+                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
                                 <div class="size-child">
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
@@ -99,10 +98,10 @@ Start Post Your Ad-->
     <!-- The Modal -->
     <div class="modal fullscreen-md modal-scrollable" id="sell-car-modal">
         <div class="modal-dialog modal-dialog-center">
-            <div class="modal-content">
+            <div class="modal-content px-5">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
-                    <i class="fa fa-arrow-left cursor-pointer" class="close height-30" data-dismiss="modal" v-if="page == 1"></i>
+                    <i class="fa fa-arrow-left cursor-pointer height-30" data-dismiss="modal" v-if="page == 1"></i>
                     <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
                     <div class="flex-grow-1 px-3 container-horizontal-scroll" >
                         <div class="target-horizontal-scroll py-1">
@@ -125,8 +124,8 @@ Start Post Your Ad-->
                     <h4 class="" v-else-if="page==4">Car Variant</h4>
                     <h4 class="" v-else-if="page==5">Car Kms Driven</h4>
                     <h4 class="" v-else-if="page==6">Car Ownership</h4>
-                    <h4 class="" v-else-if="page==7">Car City</h4>
-                    <div class="form-group">
+                    
+                    <div class="form-group" v-if="page != 7">
                         <input class="form-control" placeholder="Search..." v-model="search" />
                     </div>
                     <ul class="list-group list-group-flush" v-if="page == 1">
@@ -143,7 +142,20 @@ Start Post Your Ad-->
                     </ul>
                     <button v-if="page == 5" class="btn btn-light m-1" v-for="m in filteredKmsDrivens" @click.prevent="kmsDrivenSelected(m)">@{{ m }}</button>
                     <button v-if="page == 6" class="btn btn-light m-1" v-for="m in filteredOwnerships" @click.prevent="ownershipSelected(m)">@{{ m }}</button>
-                    <button v-if="page == 7" class="btn btn-light m-1" v-for="m in filteredDivisions" @click.prevent="divisionSelected(m.name)">@{{ m.name }}</button>
+                    <div v-if="page == 7">
+                        <h4 class="">Car City</h4>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text fa fa-map-marker text-danger"></span>
+                                </div>
+                                <input class="form-control" placeholder="Search City" v-model="search" />
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredDivisions" @click.prevent="divisionSelected(m.name)" :class="{'text-danger': m.name == division}"><i class="fa fa-check" v-if="m.name == division"></i> @{{ m.name }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -281,6 +293,21 @@ End  Post Your Ad -->
                             _this.scrolledLeft = false;
                     }, 1000);
                     
+                },
+                openModal: function (p) {
+                    if(p == 1) {
+                        this.page = 1;
+                    } else if(p == 5) {
+                        if(this.kms_driven)
+                            this.page = 5;
+                    } else if(p == 6) {
+                        if(this.ownership)
+                            this.page = 6;
+                    } else if(p == 7) {
+                        if(this.division)
+                            this.page = 7;
+                    }
+                    $('#sell-car-modal').modal('show');
                 },
             },
             computed: {
