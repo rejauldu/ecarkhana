@@ -106,18 +106,17 @@ Start Post Your Ad-->
                     <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
                     <div class="flex-grow-1 px-3 container-horizontal-scroll" >
                         <div class="target-horizontal-scroll py-1">
-                            <span class="p-1 border rounded cursor-pointer" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
-                            <span class="p-1 border rounded cursor-pointer" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
-                            <span class="p-1 border rounded cursor-pointer" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
-                            <span class="p-1 border rounded cursor-pointer" v-if="package" @click.prevent="packageSelected(package)">@{{ package }}</span>
-                            <span class="p-1 border rounded cursor-pointer" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
-                            <span class="p-1 border rounded cursor-pointer" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
-                            <span class="p-1 border rounded cursor-pointer" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="package" @click.prevent="packageSelected(package)">@{{ package }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
                         </div>
                     </div>
-                    <span class="float-right width-40 height-30"><i class="fa fa-angle-left cursor-pointer" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer ml-3" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
+                    <span class="float-right nowrap height-30 width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
                 </div>
-
                 <!-- Modal body -->
                 <div class="modal-body">
                     <h4 class="" v-if="page==1">Car Brand</h4>
@@ -131,22 +130,21 @@ Start Post Your Ad-->
                         <input class="form-control" placeholder="Search..." v-model="search" />
                     </div>
                     <ul class="list-group list-group-flush" v-if="page == 1">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b.name)">@{{ b.name }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b.name)" :class="{'text-danger': b.name == brand}"><i class="fa fa-check" v-if="b.name == brand"></i> @{{ b.name }}</li>
                     </ul>
                     <ul class="list-group list-group-flush" v-else-if="page == 2">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m.name)">@{{ m.name }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m.name)" :class="{'text-danger': m.name == model}"><i class="fa fa-check" v-if="m.name == model"></i> @{{ m.name }}</li>
                     </ul>
                     <ul class="list-group list-group-flush" v-else-if="page == 3">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredManufacturingYears" @click.prevent="manufacturingYearSelected(m)">@{{ m }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredManufacturingYears" @click.prevent="manufacturingYearSelected(m)" :class="{'text-danger': m == manufacturing_year}"><i class="fa fa-check" v-if="m == manufacturing_year"></i> @{{ m }}</li>
                     </ul>
                     <ul class="list-group list-group-flush" v-else-if="page == 4">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m.name)">@{{ m.name }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m.name)" :class="{'text-danger': m.name == package}"><i class="fa fa-check" v-if="m.name == package"></i> @{{ m.name }}</li>
                     </ul>
                     <button v-if="page == 5" class="btn btn-light m-1" v-for="m in filteredKmsDrivens" @click.prevent="kmsDrivenSelected(m)">@{{ m }}</button>
                     <button v-if="page == 6" class="btn btn-light m-1" v-for="m in filteredOwnerships" @click.prevent="ownershipSelected(m)">@{{ m }}</button>
                     <button v-if="page == 7" class="btn btn-light m-1" v-for="m in filteredDivisions" @click.prevent="divisionSelected(m.name)">@{{ m.name }}</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -253,24 +251,36 @@ End  Post Your Ad -->
                     setTimeout(function(){
                         if(e.offsetWidth < e.scrollWidth)
                             _this.scrolledRight = false;
+                        else {
+                            _this.scrolledLeft = true;
+                            _this.scrolledRight = true;
+                        }
                     }, 1000);
                     
                 },
                 scrollLeft: function () {
                     var e = document.querySelector('.target-horizontal-scroll');
-                    e.scrollBy(-30, 0);
-                    if(e.scrollLeft == 0)
-                        this.scrolledLeft = true;
-                    if(e.scrollLeft < (e.scrollWidth-e.offsetWidth))
-                        this.scrolledRight = false;
+                    e.scrollBy(-102, 0);
+                    var _this = this;
+                    setTimeout(function(){
+                        if(e.scrollLeft == 0)
+                            _this.scrolledLeft = true;
+                        if(e.scrollLeft < (e.scrollWidth-e.offsetWidth))
+                            _this.scrolledRight = false;
+                    }, 1000);
+                    
                 },
                 scrollRight: function () {
                     var e = document.querySelector('.target-horizontal-scroll');
-                    e.scrollBy(30, 0);
-                    if(e.scrollLeft == (e.scrollWidth-e.offsetWidth))
-                        this.scrolledRight = true;
-                    if(e.scrollLeft > 0)
-                        this.scrolledLeft = false;
+                    e.scrollBy(102, 0);
+                    var _this = this;
+                    setTimeout(function(){
+                        if(e.scrollLeft == (e.scrollWidth-e.offsetWidth))
+                            _this.scrolledRight = true;
+                        if(e.scrollLeft > 0)
+                            _this.scrolledLeft = false;
+                    }, 1000);
+                    
                 },
             },
             computed: {

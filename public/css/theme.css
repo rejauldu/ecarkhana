@@ -477,3 +477,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     height: 425px;
     overflow-y: auto;
 }
+/* Do not break line on space and it a single line */
+.nowrap {
+    white-space: nowrap;
+}
