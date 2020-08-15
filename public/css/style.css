@@ -9844,3 +9844,24 @@ h3.listClose {
     margin: 0 0 15px 0;
     display: block;
 }
+/*Horizontal scroll*/
+.container-horizontal-scroll {
+    overflow: hidden;
+}
+.target-horizontal-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.target-horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.target-horizontal-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.width-40 {
+    width:40px;
+}

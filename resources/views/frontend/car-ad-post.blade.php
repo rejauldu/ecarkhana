@@ -100,19 +100,22 @@ Start Post Your Ad-->
     <div class="modal fullscreen-md modal-scrollable" id="sell-car-modal">
         <div class="modal-dialog modal-dialog-center">
             <div class="modal-content">
-
                 <!-- Modal Header -->
-                <div class="modal-header border-bottom-0">
+                <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
                     <i class="fa fa-arrow-left cursor-pointer" class="close" data-dismiss="modal" v-if="page == 1"></i>
                     <span class="fa fa-arrow-left cursor-pointer" v-else @click.prevent="page--"></span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="package" @click.prevent="packageSelected(package)">@{{ package }}</span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
-                    <span class="p-2 border rounded cursor-pointer" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
-                    <span><i class="fa fa-angle-left cursor-pointer"></i><i class="fa fa-angle-right cursor-pointer ml-3"></i></span>
+                    <div class="flex-grow-1 px-3 container-horizontal-scroll" >
+                        <div class="target-horizontal-scroll p-3">
+                            <span class="p-1 border rounded cursor-pointer" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
+                            <span class="p-1 border rounded cursor-pointer" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
+                            <span class="p-1 border rounded cursor-pointer" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
+                            <span class="p-1 border rounded cursor-pointer" v-if="package" @click.prevent="packageSelected(package)">@{{ package }}</span>
+                            <span class="p-1 border rounded cursor-pointer" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
+                            <span class="p-1 border rounded cursor-pointer" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
+                            <span class="p-1 border rounded cursor-pointer" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
+                        </div>
+                    </div>
+                    <span class="float-right width-40"><i class="fa fa-angle-left cursor-pointer" @click.prevent="scrollLeft()"></i><i class="fa fa-angle-right cursor-pointer ml-3" @click.prevent="scrollRight()"></i></span>
                 </div>
 
                 <!-- Modal body -->
@@ -243,7 +246,18 @@ End  Post Your Ad -->
                         }
                     }
                     this.search = '';
-                }
+                },
+                scrollLeft: function () {
+                    var e = document.querySelector('.target-horizontal-scroll');
+                    e.scrollBy(-30, 0);
+                    if(e.scrollLeft == 0)
+                        this.scrolledLeft = true;
+                },
+                scrollRight: function () {
+                    document.querySelector('.target-horizontal-scroll').scrollBy(30, 0);
+                    if(e.scrollLeft == 0)
+                        this.scrolledRight = true;
+                },
             },
             computed: {
                 filteredBrands() {
