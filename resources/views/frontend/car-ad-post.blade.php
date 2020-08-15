@@ -102,10 +102,10 @@ Start Post Your Ad-->
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
-                    <i class="fa fa-arrow-left cursor-pointer" class="close" data-dismiss="modal" v-if="page == 1"></i>
-                    <span class="fa fa-arrow-left cursor-pointer" v-else @click.prevent="page--"></span>
+                    <i class="fa fa-arrow-left cursor-pointer" class="close height-30" data-dismiss="modal" v-if="page == 1"></i>
+                    <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
                     <div class="flex-grow-1 px-3 container-horizontal-scroll" >
-                        <div class="target-horizontal-scroll p-3">
+                        <div class="target-horizontal-scroll py-1">
                             <span class="p-1 border rounded cursor-pointer" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
                             <span class="p-1 border rounded cursor-pointer" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
                             <span class="p-1 border rounded cursor-pointer" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
@@ -115,7 +115,7 @@ Start Post Your Ad-->
                             <span class="p-1 border rounded cursor-pointer" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
                         </div>
                     </div>
-                    <span class="float-right width-40"><i class="fa fa-angle-left cursor-pointer" @click.prevent="scrollLeft()"></i><i class="fa fa-angle-right cursor-pointer ml-3" @click.prevent="scrollRight()"></i></span>
+                    <span class="float-right width-40 height-30"><i class="fa fa-angle-left cursor-pointer" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer ml-3" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
                 </div>
 
                 <!-- Modal body -->
@@ -179,7 +179,9 @@ End  Post Your Ad -->
                 division: '',
                 divisions: @json($divisions),
                 price: '',
-                prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000]
+                prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
+                scrolledLeft: true,
+                scrolledRight: true,
             },
             methods: {
                 brandSelected: function (b) {
@@ -246,17 +248,29 @@ End  Post Your Ad -->
                         }
                     }
                     this.search = '';
+                    var e = document.querySelector('.target-horizontal-scroll');
+                    var _this = this;
+                    setTimeout(function(){
+                        if(e.offsetWidth < e.scrollWidth)
+                            _this.scrolledRight = false;
+                    }, 1000);
+                    
                 },
                 scrollLeft: function () {
                     var e = document.querySelector('.target-horizontal-scroll');
                     e.scrollBy(-30, 0);
                     if(e.scrollLeft == 0)
                         this.scrolledLeft = true;
+                    if(e.scrollLeft < (e.scrollWidth-e.offsetWidth))
+                        this.scrolledRight = false;
                 },
                 scrollRight: function () {
-                    document.querySelector('.target-horizontal-scroll').scrollBy(30, 0);
-                    if(e.scrollLeft == 0)
+                    var e = document.querySelector('.target-horizontal-scroll');
+                    e.scrollBy(30, 0);
+                    if(e.scrollLeft == (e.scrollWidth-e.offsetWidth))
                         this.scrolledRight = true;
+                    if(e.scrollLeft > 0)
+                        this.scrolledLeft = false;
                 },
             },
             computed: {

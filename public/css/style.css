@@ -9861,7 +9861,15 @@ h3.listClose {
 .target-horizontal-scroll {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  scroll-behavior: smooth;
 }
 .width-40 {
     width:40px;
+}
+.width-80 {
+    width:80px;
+}
+.height-30 {
+    height:30px;
+    line-height: 30px;
 }
