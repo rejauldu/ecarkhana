@@ -35,7 +35,7 @@
                         <label for="city" class=" cursor-pointer">City</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="price" name="field1" placeholder="Select Car" readonly="" v-model="price" @click.prevent="openModal(8)" />
+                        <input type="text" class="form-control bg-light" id="price" name="field1" placeholder="Select Car" readonly="" v-model="price" @click.prevent="openModal(9)" />
                         <label for="price" class=" cursor-pointer">Expected Price</label>
                     </div>
                     <div class="row mb-3">
@@ -103,8 +103,8 @@
                 <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
                     <i class="fa fa-arrow-left cursor-pointer height-30" data-dismiss="modal" v-if="page == 1"></i>
                     <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
-                    <div class="flex-grow-1 px-3 container-horizontal-scroll" >
-                        <div class="target-horizontal-scroll py-1">
+                    <div class="flex-grow-1 px-3 overflow-hidden" >
+                        <div class="horizontal-scroll py-1">
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
@@ -112,8 +112,8 @@
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="registration_year" @click.prevent="registrationYearSelected(registration_year)">@{{ registration_year }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                         </div>
                     </div>
                     <span class="float-right nowrap height-30 width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
@@ -126,9 +126,9 @@
                     <h4 class="" v-else-if="page==4">Car Variant</h4>
                     <h4 class="" v-else-if="page==5">Car Kms Driven</h4>
                     <h4 class="" v-else-if="page==6">Car Ownership</h4>
-                    <h4 class="" v-else-if="page==9">Registration Year</h4>
+                    <h4 class="" v-else-if="page==8">Registration Year</h4>
                     
-                    <div class="form-group" v-if="page != 7 && page != 8">
+                    <div class="form-group" v-if="page != 7 && page != 9">
                         <input class="form-control" placeholder="Search..." v-model="search" />
                     </div>
                     <ul class="list-group list-group-flush" v-if="page == 1">
@@ -143,8 +143,16 @@
                     <ul class="list-group list-group-flush" v-else-if="page == 4">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m.name)" :class="{'text-danger': m.name == package}"><i class="fa fa-check" v-if="m.name == package"></i> @{{ m.name }}</li>
                     </ul>
-                    <button v-else-if="page == 5" class="btn btn-light m-1" v-for="m in filteredKmsDrivens" @click.prevent="kmsDrivenSelected(m)" :class="{'text-danger': m == kms_driven}">@{{ m }}</button>
-                    <button v-else-if="page == 6" class="btn btn-light m-1" v-for="m in filteredOwnerships" @click.prevent="ownershipSelected(m)" :class="{'text-danger': m == ownership}">@{{ m }}</button>
+                    <div v-else-if="page == 5" class="row">
+                        <div class="col-3" v-for="m in filteredKmsDrivens">
+                            <button class="btn btn-light m-1" @click.prevent="kmsDrivenSelected(m)" :class="{'text-danger': m == kms_driven}">@{{ m }}</button>
+                        </div>
+                    </div>
+                    <div v-else-if="page == 6" class="row">
+                        <div class="col-3" v-for="m in filteredOwnerships">
+                            <button class="btn btn-light m-1" @click.prevent="ownershipSelected(m)" :class="{'text-danger': m == ownership}">@{{ m }}</button>
+                        </div>
+                    </div>
                     <div v-else-if="page == 7">
                         <h4 class="">Car City</h4>
                         <div class="form-group">
@@ -159,7 +167,10 @@
                             <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredDivisions" @click.prevent="divisionSelected(m.name)" :class="{'text-danger': m.name == division}"><i class="fa fa-check" v-if="m.name == division"></i> @{{ m.name }}</li>
                         </ul>
                     </div>
-                    <div v-else-if="page == 8">
+                    <ul class="list-group list-group-flush" v-else-if="page == 8">
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredRegistrationYears" @click.prevent="registrationYearSelected(m)" :class="{'text-danger': m == registration_year}"><i class="fa fa-check" v-if="m == registration_year"></i> @{{ m }}</li>
+                    </ul>
+                    <div v-else-if="page == 9">
                         <h4 class="">Car Price</h4>
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -169,11 +180,12 @@
                                 <input class="form-control" placeholder="Enter Price" v-model="price" />
                             </div>
                         </div>
-                        <button class="btn btn-light m-1" v-for="m in filteredPrices" @click.prevent="priceSelected(m)" :class="{'text-danger': m == price}">৳@{{ m }}</button>
+                        <div class="row">
+                            <div class="col-3" v-for="m in filteredPrices">
+                                <button class="btn btn-light m-1" @click.prevent="priceSelected(m)" :class="{'text-danger': m == price}">৳@{{ m }}</button>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="list-group list-group-flush" v-else-if="page == 9">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredRegistrationYears" @click.prevent="registrationYearSelected(m)" :class="{'text-danger': m == registration_year}"><i class="fa fa-check" v-if="m == registration_year"></i> @{{ m }}</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -206,11 +218,11 @@ End  Post Your Ad -->
                 ownerships: ['First', 'Second', 'Third', 'Above'],
                 division: '',
                 divisions: @json($divisions),
-                price: '',
-                prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
                 registration_year: '',
                 registration_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
                         1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
+                price: '',
+                prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
                 scrolledLeft: true,
                 scrolledRight: true,
             },
@@ -218,50 +230,49 @@ End  Post Your Ad -->
                 brandSelected: function (b) {
                     this.brand = b;
                     this.page = 2;
-                    this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'price', 'registration_year');
+                    this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
                 },
                 modelSelected: function (m) {
                     this.model = m;
                     this.page = 3;
-                    this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'price', 'registration_year');
+                    this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
                 },
                 manufacturingYearSelected: function (m) {
                     this.manufacturing_year = m;
                     this.page = 4;
-                    this.reset('package', 'kms_driven', 'ownership', 'division', 'price', 'registration_year');
+                    this.reset('package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
                 },
                 packageSelected: function (m) {
                     this.package = m;
                     this.page = 5;
-                    this.reset('kms_driven', 'ownership', 'division', 'price', 'registration_year');
+                    this.reset('kms_driven', 'ownership', 'division', 'registration_year', 'price');
                 },
                 kmsDrivenSelected: function (m) {
                     this.kms_driven = m;
                     this.page = 6;
-                    this.reset('ownership', 'division', 'price', 'registration_year');
+                    this.reset('ownership', 'division', 'registration_year', 'price');
                 },
                 ownershipSelected: function (m) {
                     this.ownership = m;
                     this.page = 7;
-                    this.reset('division', 'price', 'registration_year');
+                    this.reset('division', 'registration_year', 'price');
                 },
                 divisionSelected: function (m) {
                     this.division = m;
                     this.page = 8;
-                    this.reset('price', 'registration_year');
-                },
-                priceSelected: function (m) {
-                    this.price = m;
-                    this.page = 9;
-                    this.reset('registration_year');
+                    this.reset('registration_year', 'price');
                 },
                 registrationYearSelected: function (m) {
                     this.registration_year = m;
+                    this.page = 9;
+                    this.reset('price');
+                },
+                priceSelected: function (m) {
+                    this.price = m;
                     this.page = 10;
                 },
                 photoSelected: function (m) {
                     this.photo = m;
-                    this.page = 11;
                 },
                 reset: function (...args) {
                     for (var i = 0; i < args.length; i++) {
@@ -279,10 +290,10 @@ End  Post Your Ad -->
                             this.ownership = '';
                         } else if (args[i] == 'division') {
                             this.division = '';
-                        } else if (args[i] == 'price') {
-                            this.price = '';
                         } else if (args[i] == 'registration_year') {
                             this.registration_year = '';
+                        } else if (args[i] == 'price') {
+                            this.price = '';
                         }
                     }
                     this.search = '';
