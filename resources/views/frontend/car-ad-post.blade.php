@@ -46,43 +46,61 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal(1)">
-                                <div class="size-child">
+                            <div class="size-11 cursor-pointer bg-light border">
+                                <div class="size-child" @click.prevent="openModal(10)" v-if="images[0]">
+                                    <img :src="images[0].src" class="rounded" />
+                                </div>
+                                <div class="size-child" @click.prevent="openModal(1)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal()">
-                                <div class="size-child">
+                            <div class="size-11 cursor-pointer bg-light border">
+                                <div class="size-child" @click.prevent="openModal(10)" v-if="images[1]">
+                                    <img :src="images[1].src" class="rounded" />
+                                </div>
+                                <div class="size-child" @click.prevent="openModal(1)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
-                                <div class="size-child">
+                            <div class="size-11 cursor-pointer bg-light border">
+                                <div class="size-child" @click.prevent="openModal(10)" v-if="images[2]">
+                                    <img :src="images[2].src" class="rounded" />
+                                </div>
+                                <div class="size-child" @click.prevent="openModal(1)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
-                                <div class="size-child">
+                            <div class="size-11 cursor-pointer bg-light border">
+                                <div class="size-child" @click.prevent="openModal(10)" v-if="images[3]">
+                                    <img :src="images[3].src" class="rounded" />
+                                </div>
+                                <div class="size-child" @click.prevent="openModal(1)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
-                                <div class="size-child">
+                            <div class="size-11 cursor-pointer bg-light border">
+                                <div class="size-child" @click.prevent="openModal(10)" v-if="images[4]">
+                                    <img :src="images[4].src" class="rounded" />
+                                </div>
+                                <div class="size-child" @click.prevent="openModal(1)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="size-11 cursor-pointer bg-light border" @click.prevent="openModal">
-                                <div class="size-child">
+                            <div class="size-11 cursor-pointer bg-light border">
+                                <div class="size-child" @click.prevent="openModal(10)" v-if="images[5]">
+                                    <img :src="images[5].src" class="rounded" />
+                                </div>
+                                <div class="size-child" @click.prevent="openModal(1)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -98,12 +116,59 @@
     <!-- The Modal -->
     <div class="modal fullscreen-md modal-scrollable" id="sell-car-modal">
         <div class="modal-dialog modal-dialog-center">
-            <div class="modal-content px-5">
+            <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
                     <i class="fa fa-arrow-left cursor-pointer height-30" data-dismiss="modal" v-if="page == 1"></i>
                     <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
-                    <div class="flex-grow-1 px-3 overflow-hidden" >
+                    <div class="flex-grow-1 px-5 container" v-if="page == 9">
+                        <input type="file" class="d-none" id="file-input" @change="processFile($event)" />
+                        <div class="row">
+                            <div class="col-4 col-md-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="page = 10" v-if="images[0]">
+                                        <img :src="images[0].src" class="" />
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="page = 10" v-if="images[1]">
+                                        <img :src="images[1].src" class="" />
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="page = 10" v-if="images[2]">
+                                        <img :src="images[2].src" class="" />
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            @computer
+                            <div class="col-4 col-md-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="page = 10" v-if="images[3]">
+                                        <img :src="images[3].src" class="" />
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            @endcomputer
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 px-3 overflow-hidden" v-else>
                         <div class="horizontal-scroll py-1">
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
@@ -120,40 +185,44 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <h4 class="" v-if="page==1">Car Brand</h4>
-                    <h4 class="" v-else-if="page==2">Car Model</h4>
-                    <h4 class="" v-else-if="page==3">Car Make Year</h4>
-                    <h4 class="" v-else-if="page==4">Car Variant</h4>
-                    <h4 class="" v-else-if="page==5">Car Kms Driven</h4>
-                    <h4 class="" v-else-if="page==6">Car Ownership</h4>
-                    <h4 class="" v-else-if="page==8">Registration Year</h4>
+                    <h4 class="mx-5" v-if="page==1">Car Brand</h4>
+                    <h4 class="mx-5" v-else-if="page==2">Car Model</h4>
+                    <h4 class="mx-5" v-else-if="page==3">Car Make Year</h4>
+                    <h4 class="mx-5" v-else-if="page==4">Car Variant</h4>
+                    <h4 class="mx-5" v-else-if="page==5">Car Kms Driven</h4>
+                    <h4 class="mx-5" v-else-if="page==6">Car Ownership</h4>
+                    <h4 class="mx-5" v-else-if="page==8">Registration Year</h4>
                     
-                    <div class="form-group" v-if="page != 7 && page != 9">
+                    <div class="form-group mx-5" v-if="page != 7 && page != 9 && page != 10">
                         <input class="form-control" placeholder="Search..." v-model="search" />
                     </div>
-                    <ul class="list-group list-group-flush" v-if="page == 1">
+                    <ul class="list-group list-group-flush mx-5" v-if="page == 1">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b.name)" :class="{'text-danger': b.name == brand}"><i class="fa fa-check" v-if="b.name == brand"></i> @{{ b.name }}</li>
                     </ul>
-                    <ul class="list-group list-group-flush" v-else-if="page == 2">
+                    <ul class="list-group list-group-flush mx-5" v-else-if="page == 2">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m.name)" :class="{'text-danger': m.name == model}"><i class="fa fa-check" v-if="m.name == model"></i> @{{ m.name }}</li>
                     </ul>
-                    <ul class="list-group list-group-flush" v-else-if="page == 3">
+                    <ul class="list-group list-group-flush mx-5" v-else-if="page == 3">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredManufacturingYears" @click.prevent="manufacturingYearSelected(m)" :class="{'text-danger': m == manufacturing_year}"><i class="fa fa-check" v-if="m == manufacturing_year"></i> @{{ m }}</li>
                     </ul>
-                    <ul class="list-group list-group-flush" v-else-if="page == 4">
+                    <ul class="list-group list-group-flush mx-5" v-else-if="page == 4">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m.name)" :class="{'text-danger': m.name == package}"><i class="fa fa-check" v-if="m.name == package"></i> @{{ m.name }}</li>
                     </ul>
-                    <div v-else-if="page == 5" class="row">
-                        <div class="col-3" v-for="m in filteredKmsDrivens">
-                            <button class="btn btn-light m-1" @click.prevent="kmsDrivenSelected(m)" :class="{'text-danger': m == kms_driven}">@{{ m }}</button>
+                    <div v-else-if="page == 5" class="container">
+                        <div class="row">
+                            <div class="col-3" v-for="m in filteredKmsDrivens">
+                                <button class="btn btn-light m-1" @click.prevent="kmsDrivenSelected(m)" :class="{'text-danger': m == kms_driven}">@{{ m }}</button>
+                            </div>
                         </div>
                     </div>
-                    <div v-else-if="page == 6" class="row">
-                        <div class="col-3" v-for="m in filteredOwnerships">
-                            <button class="btn btn-light m-1" @click.prevent="ownershipSelected(m)" :class="{'text-danger': m == ownership}">@{{ m }}</button>
+                    <div v-else-if="page == 6" class="container">
+                        <div class="row mx-0">
+                            <div class="col-3" v-for="m in filteredOwnerships">
+                                <button class="btn btn-light m-1" @click.prevent="ownershipSelected(m)" :class="{'text-danger': m == ownership}">@{{ m }}</button>
+                            </div>
                         </div>
                     </div>
-                    <div v-else-if="page == 7">
+                    <div v-else-if="page == 7" class="mx-5">
                         <h4 class="">Car City</h4>
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -167,10 +236,10 @@
                             <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredDivisions" @click.prevent="divisionSelected(m.name)" :class="{'text-danger': m.name == division}"><i class="fa fa-check" v-if="m.name == division"></i> @{{ m.name }}</li>
                         </ul>
                     </div>
-                    <ul class="list-group list-group-flush" v-else-if="page == 8">
+                    <ul class="list-group list-group-flush mx-5" v-else-if="page == 8">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredRegistrationYears" @click.prevent="registrationYearSelected(m)" :class="{'text-danger': m == registration_year}"><i class="fa fa-check" v-if="m == registration_year"></i> @{{ m }}</li>
                     </ul>
-                    <div v-else-if="page == 9">
+                    <div v-else-if="page == 9" class="mx-5">
                         <h4 class="">Car Price</h4>
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -178,11 +247,68 @@
                                     <span class="input-group-text text-danger bg-white">৳</span>
                                 </div>
                                 <input class="form-control" placeholder="Enter Price" v-model="price" />
+                                <div class="input-group-append" v-if="priceValidate">
+                                    <span class="input-group-text text-danger bg-white">Invalid</span>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-3" v-for="m in filteredPrices">
                                 <button class="btn btn-light m-1" @click.prevent="priceSelected(m)" :class="{'text-danger': m == price}">৳@{{ m }}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else-if="page == 10" class="mx-5">
+                        <div class="size-21">
+                            <img :src="images[cover_image].src" class="img-fluid" />
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="cover_image = 0" v-if="images[0]">
+                                        <img :src="images[0].src" class="" />
+                                        <div class="caption" v-if="cover_image == 0">Cover</div>
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="cover_image = 1" v-if="images[1]">
+                                        <img :src="images[1].src" class="" />
+                                        <div class="caption" v-if="cover_image == 1">Cover</div>
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="cover_image = 2" v-if="images[2]">
+                                        <img :src="images[2].src" class="" />
+                                        <div class="caption" v-if="cover_image == 2">Cover</div>
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="size-11 cursor-pointer bg-light border">
+                                    <div class="size-child" @click.prevent="cover_image = 3" v-if="images[3]">
+                                        <img :src="images[3].src" class="" />
+                                        <div class="caption" v-if="cover_image == 3">Cover</div>
+                                    </div>
+                                    <div class="size-child" @click.prevent="selectImage()" v-else>
+                                        <i class="fa fa-plus position-center"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <input type="file"  id="file-input" @change="processFile($event)" />
                             </div>
                         </div>
                     </div>
@@ -225,6 +351,8 @@ End  Post Your Ad -->
                 prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
                 scrolledLeft: true,
                 scrolledRight: true,
+                images: [],
+                cover_image: 0
             },
             methods: {
                 brandSelected: function (b) {
@@ -297,7 +425,7 @@ End  Post Your Ad -->
                         }
                     }
                     this.search = '';
-                    var e = document.querySelector('.target-horizontal-scroll');
+                    var e = document.querySelector('.horizontal-scroll');
                     var _this = this;
                     setTimeout(function(){
                         if(e.offsetWidth < e.scrollWidth)
@@ -310,7 +438,7 @@ End  Post Your Ad -->
                     
                 },
                 scrollLeft: function () {
-                    var e = document.querySelector('.target-horizontal-scroll');
+                    var e = document.querySelector('.horizontal-scroll');
                     e.scrollBy(-102, 0);
                     var _this = this;
                     setTimeout(function(){
@@ -322,7 +450,7 @@ End  Post Your Ad -->
                     
                 },
                 scrollRight: function () {
-                    var e = document.querySelector('.target-horizontal-scroll');
+                    var e = document.querySelector('.horizontal-scroll');
                     e.scrollBy(102, 0);
                     var _this = this;
                     setTimeout(function(){
@@ -348,6 +476,15 @@ End  Post Your Ad -->
                     }
                     $('#sell-car-modal').modal('show');
                 },
+                processFile: function(event) {
+                    var f = event.target.files[0];
+                    f.src = URL.createObjectURL(event.target.files[0]);
+                    this.images.push(f);
+                    this.page = 10;
+                },
+                selectImage: function() {
+                    document.getElementById('file-input').click();
+                }
             },
             computed: {
                 filteredBrands() {
@@ -410,6 +547,11 @@ End  Post Your Ad -->
                         car += ', ' + this.package;
                     return car;
                 },
+                priceValidate() {
+                    if(this.price.length == 0)
+                        return false;
+                    return this.price.length<4 || this.price.length>8;
+                }
             }
     })
 </script>
