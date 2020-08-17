@@ -373,17 +373,6 @@ mark {
     color: #ffffff;
 }
 
-ol {
-    padding: 0px;
-    margin: 0px;
-}
-
-ol li {
-    list-style: decimal inside;
-    padding: 0px;
-    margin: 0px;
-    line-height: 30px;
-}
 
 ol.alpha li {
     list-style: decimal-leading-zero inside;
@@ -399,18 +388,6 @@ ol.roman li {
     list-style: lower-roman;
     padding: 0px;
     margin: 0px;
-}
-
-ul {
-    padding: 0px;
-    margin: 0px;
-}
-
-ul li {
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-    line-height: 30px;
 }
 
 ul.disc li {

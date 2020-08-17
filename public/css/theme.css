@@ -207,6 +207,8 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 /* Bootstrap extension */
 .display-5 {
+    font-size: 2.8rem;
+}.display-6 {
     font-size: 1.2rem;
 }
 /*Bootstrap-datepicker plugin */
@@ -578,4 +580,26 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 .padding-5 {
     padding: 5px;
+}
+.border-dashed {
+    border: 1px dashed #bebebe;
+}
+.border-dotted {
+    border: 1px dotted #bebebe;
+}
+/* place <i class="fa"></i> inside data-toggle="collapse" to show icons*/
+[data-toggle="collapse"] .fa:before {   
+    content: "\f139";
+}
+[data-toggle="collapse"].collapsed .fa:before {
+    content: "\f13a";
+}
+/* Bootstrap list with bullet */
+ul.bullet {
+    list-style-type: disc !important;
+    padding-left: 1em;
+}
+ul.bullet>li {
+    display: list-item;
+    padding-left: 0;
 }

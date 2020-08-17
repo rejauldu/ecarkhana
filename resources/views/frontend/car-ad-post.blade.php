@@ -50,7 +50,7 @@
                                 <div class="size-child" @click.prevent="openModal(10)" v-if="images[0]">
                                     <img :src="images[0].src" class="rounded" />
                                 </div>
-                                <div class="size-child" @click.prevent="openModal(1)" v-else>
+                                <div class="size-child" @click.prevent="openModal(10)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                 <div class="size-child" @click.prevent="openModal(10)" v-if="images[1]">
                                     <img :src="images[1].src" class="rounded" />
                                 </div>
-                                <div class="size-child" @click.prevent="openModal(1)" v-else>
+                                <div class="size-child" @click.prevent="openModal(10)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <div class="size-child" @click.prevent="openModal(10)" v-if="images[2]">
                                     <img :src="images[2].src" class="rounded" />
                                 </div>
-                                <div class="size-child" @click.prevent="openModal(1)" v-else>
+                                <div class="size-child" @click.prevent="openModal(10)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                 <div class="size-child" @click.prevent="openModal(10)" v-if="images[3]">
                                     <img :src="images[3].src" class="rounded" />
                                 </div>
-                                <div class="size-child" @click.prevent="openModal(1)" v-else>
+                                <div class="size-child" @click.prevent="openModal(10)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 <div class="size-child" @click.prevent="openModal(10)" v-if="images[4]">
                                     <img :src="images[4].src" class="rounded" />
                                 </div>
-                                <div class="size-child" @click.prevent="openModal(1)" v-else>
+                                <div class="size-child" @click.prevent="openModal(10)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                 <div class="size-child" @click.prevent="openModal(10)" v-if="images[5]">
                                     <img :src="images[5].src" class="rounded" />
                                 </div>
-                                <div class="size-child" @click.prevent="openModal(1)" v-else>
+                                <div class="size-child" @click.prevent="openModal(10)" v-else>
                                     <i class="fa fa-plus position-center"></i>
                                 </div>
                             </div>
@@ -120,6 +120,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
                     <i class="fa fa-arrow-left cursor-pointer height-30" data-dismiss="modal" v-if="page == 1"></i>
+                    <span class="fa fa-close cursor-pointer height-30" v-else-if="page == 10" @click.prevent="page--"></span>
                     <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
                     <div class="flex-grow-1 px-5 container" v-if="page == 9">
                         <input type="file" class="d-none" id="file-input" @change="processFile($event)" />
@@ -168,7 +169,7 @@
                             @endcomputer
                         </div>
                     </div>
-                    <div class="flex-grow-1 px-3 overflow-hidden" v-else>
+                    <div class="flex-grow-1 px-3 overflow-hidden" v-else-if="page != 10">
                         <div class="horizontal-scroll py-1">
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
@@ -181,7 +182,7 @@
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                         </div>
                     </div>
-                    <span class="float-right nowrap height-30 width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
+                    <span v-if="page != 10" class="float-right nowrap height-30 width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
@@ -259,7 +260,7 @@
                         </div>
                     </div>
                     <div v-else-if="page == 10" class="mx-5">
-                        <div class="size-21">
+                        <div class="size-21 mb-3">
                             <img :src="images[cover_image].src" class="img-fluid" />
                         </div>
                         <div class="row">
@@ -307,8 +308,39 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <input type="file"  id="file-input" @change="processFile($event)" />
+                            <div class="col-12 mt-3 text-center">
+                                <input type="file"  id="file-input" class="d-none" @change="processFile($event)" />
+                                <button class="btn btn-light border-dashed"><i class="fa fa-plus"></i> Select More Photo</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-lightbulb-o display-5 text-danger"></i>
+                            </div>
+                            <div class="col-10 text-secondary">
+                                <div class="cursor-pointer" data-toggle="collapse" data-target="#photo-tips">
+                                    <div>Tips for photos</div>
+                                    <small>More photos gives 5x more verified buyer <i class="fa"></i></small>
+                                </div>
+                                <div id="photo-tips" class="collapse">
+                                    <ul class="list-group list-group-flush bullet">
+                                        <li class="list-group-item py-1">A car with 5+ photos gives you 5 times response</li>
+                                        <li class="list-group-item py-1">Car photo format - .JPG / .PNG</li>
+                                        <li class="list-group-item py-1">Click image in landscape mode (recommended)</li>
+                                        <li class="list-group-item py-1">Upload high resolution images up to 5 MB</li>
+                                        <li class="list-group-item py-1">Upload clear car images without including owner and contact details.</li>
+                                    </ul>
+                                    
+
+
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -397,7 +429,7 @@ End  Post Your Ad -->
                 },
                 priceSelected: function (m) {
                     this.price = m;
-                    this.page = 10;
+                    //this.page = 10;
                 },
                 photoSelected: function (m) {
                     this.photo = m;
@@ -473,7 +505,17 @@ End  Post Your Ad -->
                     } else if(p == 7) {
                         if(this.division)
                             this.page = 7;
+                    } else if(p == 8) {
+                        if(this.registration_year)
+                            this.page = 8;
+                    } else if(p == 9) {
+                        if(this.price)
+                            this.page = 9;
+                    } else if(p == 10) {
+                        if(this.images.length>0)
+                            this.page = 10;
                     }
+                    
                     $('#sell-car-modal').modal('show');
                 },
                 processFile: function(event) {
