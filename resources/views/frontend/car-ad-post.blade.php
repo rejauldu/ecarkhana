@@ -284,7 +284,8 @@
                                         <div class="input-group-append">
                                             <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-if="isPhoneValid() && !otp_sent" @click.prevent="sendOtp">Verify Now</a>
                                             <span class="input-group-text btn bg-white border-left-0 text-secondary" v-else-if="!otp_sent">Invalid</span>
-                                            <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else>@{{ countDown }}</a>
+                                            <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else-if="!otp_verified">@{{ countDown }}</a>
+                                            <span class="input-group-text btn bg-white border-left-0 text-success" v-else>Verified</span>
                                         </div>
                                         <div class="position-center" v-if="otp_sent"><i class="fa fa-spinner fa-spin text-dark"></i></div>
                                     </div>
@@ -292,9 +293,10 @@
                                 <div class="form-group" v-if="otp_sent">
                                     <label for="demo">OTP:</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" :class="{'opacity-5': otp.length == 4}" placeholder="OTP" id="otp" name="otp" v-model="otp" :disabled="otp.length == 4">
+                                        <input type="text" class="form-control" :class="{'opacity-5': otp.length == 4}" placeholder="OTP" id="otp" name="otp" v-model="otp" :disabled="otp.length == 4 || otp_verified">
                                         <div class="input-group-append">
-                                            <span class="input-group-text btn bg-white border-left-0 text-danger" v-if="otp.length != 4">Must be 4 digit</span>
+                                            <span class="input-group-text btn bg-white border-left-0 text-danger" v-if="otp.length != 4 && !otp_verified">Must be 4 digit</span>
+                                            <span class="input-group-text btn bg-white border-left-0 text-success" v-else-if="otp_verified">OTP Verified</span>
                                         </div>
                                         <div class="position-center" v-if="otp.length == 4"><i class="fa fa-spinner fa-spin text-dark"></i></div>
                                     </div>
@@ -408,291 +410,299 @@ End  Post Your Ad -->
 <script>
     var vuejs = new Vue({
     el: '#sell-car',
-            data: {
-                search: '',
-                page: 1,
-                brand: '',
-                brands: @json($brands),
-                model: '',
-                models: @json($models),
-                package: '',
-                packages: @json($packages),
-                manufacturing_year: '',
-                manufacturing_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
-                        1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
-                kms_driven: '',
-                kms_drivens: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
-                ownership: '',
-                ownerships: ['First', 'Second', 'Third', 'Above'],
-                division: '',
-                divisions: @json($divisions),
-                registration_year: '',
-                registration_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
-                        1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
-                price: '',
-                prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
-                scrolledLeft: true,
-                scrolledRight: true,
-                images: [],
-                cover_image: 0,
-                name: '',
-                phone: '',
-                terms: '',
-                otp: '',
-                otp_sent: false,
-                countDown: 60
+        data: {
+            search: '',
+            page: 1,
+            brand: '',
+            brands: @json($brands),
+            model: '',
+            models: @json($models),
+            package: '',
+            packages: @json($packages),
+            manufacturing_year: '',
+            manufacturing_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
+                    1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
+            kms_driven: '',
+            kms_drivens: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
+            ownership: '',
+            ownerships: ['First', 'Second', 'Third', 'Above'],
+            division: '',
+            divisions: @json($divisions),
+            registration_year: '',
+            registration_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
+                    1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
+            price: '',
+            prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
+            scrolledLeft: true,
+            scrolledRight: true,
+            images: [],
+            cover_image: 0,
+            name: '',
+            phone: '',
+            terms: '',
+            otp: '',
+            otp_sent: false,
+            otp_verified: false,
+            countDown: 60
+        },
+        methods: {
+            brandSelected: function (b) {
+                this.brand = b;
+                this.page = 2;
+                this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
             },
-            methods: {
-                brandSelected: function (b) {
-                    this.brand = b;
-                    this.page = 2;
-                    this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
-                },
-                modelSelected: function (m) {
-                    this.model = m;
-                    this.page = 3;
-                    this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
-                },
-                manufacturingYearSelected: function (m) {
-                    this.manufacturing_year = m;
-                    this.page = 4;
-                    this.reset('package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
-                },
-                packageSelected: function (m) {
-                    this.package = m;
-                    this.page = 5;
-                    this.reset('kms_driven', 'ownership', 'division', 'registration_year', 'price');
-                },
-                kmsDrivenSelected: function (m) {
-                    this.kms_driven = m;
-                    this.page = 6;
-                    this.reset('ownership', 'division', 'registration_year', 'price');
-                },
-                ownershipSelected: function (m) {
-                    this.ownership = m;
-                    this.page = 7;
-                    this.reset('division', 'registration_year', 'price');
-                },
-                divisionSelected: function (m) {
-                    this.division = m;
-                    this.page = 8;
-                    this.reset('registration_year', 'price');
-                },
-                registrationYearSelected: function (m) {
-                    this.registration_year = m;
-                    this.page = 9;
-                    this.reset('price');
-                },
-                priceSelected: function (m) {
-                    this.price = m;
-                    //this.page = 10;
-                },
-                photoSelected: function (m) {
-                    this.photo = m;
-                },
-                reset: function (...args) {
-                    for (var i = 0; i < args.length; i++) {
-                        if (args[i] == 'brand') {
-                            this.brand = '';
-                        } else if (args[i] == 'model') {
-                            this.model = '';
-                        } else if (args[i] == 'manufacturing_year') {
-                            this.manufacturing_year = '';
-                        } else if (args[i] == 'package') {
-                            this.package = '';
-                        } else if (args[i] == 'kms_driven') {
-                            this.kms_driven = '';
-                        } else if (args[i] == 'ownership') {
-                            this.ownership = '';
-                        } else if (args[i] == 'division') {
-                            this.division = '';
-                        } else if (args[i] == 'registration_year') {
-                            this.registration_year = '';
-                        } else if (args[i] == 'price') {
-                            this.price = '';
-                        }
+            modelSelected: function (m) {
+                this.model = m;
+                this.page = 3;
+                this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
+            },
+            manufacturingYearSelected: function (m) {
+                this.manufacturing_year = m;
+                this.page = 4;
+                this.reset('package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
+            },
+            packageSelected: function (m) {
+                this.package = m;
+                this.page = 5;
+                this.reset('kms_driven', 'ownership', 'division', 'registration_year', 'price');
+            },
+            kmsDrivenSelected: function (m) {
+                this.kms_driven = m;
+                this.page = 6;
+                this.reset('ownership', 'division', 'registration_year', 'price');
+            },
+            ownershipSelected: function (m) {
+                this.ownership = m;
+                this.page = 7;
+                this.reset('division', 'registration_year', 'price');
+            },
+            divisionSelected: function (m) {
+                this.division = m;
+                this.page = 8;
+                this.reset('registration_year', 'price');
+            },
+            registrationYearSelected: function (m) {
+                this.registration_year = m;
+                this.page = 9;
+                this.reset('price');
+            },
+            priceSelected: function (m) {
+                this.price = m;
+                //this.page = 10;
+            },
+            photoSelected: function (m) {
+                this.photo = m;
+            },
+            reset: function (...args) {
+                for (var i = 0; i < args.length; i++) {
+                    if (args[i] == 'brand') {
+                        this.brand = '';
+                    } else if (args[i] == 'model') {
+                        this.model = '';
+                    } else if (args[i] == 'manufacturing_year') {
+                        this.manufacturing_year = '';
+                    } else if (args[i] == 'package') {
+                        this.package = '';
+                    } else if (args[i] == 'kms_driven') {
+                        this.kms_driven = '';
+                    } else if (args[i] == 'ownership') {
+                        this.ownership = '';
+                    } else if (args[i] == 'division') {
+                        this.division = '';
+                    } else if (args[i] == 'registration_year') {
+                        this.registration_year = '';
+                    } else if (args[i] == 'price') {
+                        this.price = '';
                     }
-                    this.search = '';
-                    var e = document.querySelector('.horizontal-scroll');
-                    var _this = this;
-                    setTimeout(function(){
-                        if(e.offsetWidth < e.scrollWidth)
-                            _this.scrolledRight = false;
-                        else {
-                            _this.scrolledLeft = true;
-                            _this.scrolledRight = true;
-                        }
-                    }, 1000);
-                    
-                },
-                scrollLeft: function () {
-                    var e = document.querySelector('.horizontal-scroll');
-                    e.scrollBy(-102, 0);
-                    var _this = this;
-                    setTimeout(function(){
-                        if(e.scrollLeft == 0)
-                            _this.scrolledLeft = true;
-                        if(e.scrollLeft < (e.scrollWidth-e.offsetWidth))
-                            _this.scrolledRight = false;
-                    }, 1000);
-                    
-                },
-                scrollRight: function () {
-                    var e = document.querySelector('.horizontal-scroll');
-                    e.scrollBy(102, 0);
-                    var _this = this;
-                    setTimeout(function(){
-                        if(e.scrollLeft == (e.scrollWidth-e.offsetWidth))
-                            _this.scrolledRight = true;
-                        if(e.scrollLeft > 0)
-                            _this.scrolledLeft = false;
-                    }, 1000);
-                    
-                },
-                openModal: function (p) {
-                    if(p == 1) {
-                        this.page = 1;
-                    } else if(p == 5) {
-                        if(this.kms_driven)
-                            this.page = 5;
-                    } else if(p == 6) {
-                        if(this.ownership)
-                            this.page = 6;
-                    } else if(p == 7) {
-                        if(this.division)
-                            this.page = 7;
-                    } else if(p == 8) {
-                        if(this.registration_year)
-                            this.page = 8;
-                    } else if(p == 9) {
-                        if(this.price)
-                            this.page = 9;
-                    } else if(p == 10) {
-                        if(this.images.length>0)
-                            this.page = 10;
+                }
+                this.search = '';
+                var e = document.querySelector('.horizontal-scroll');
+                var _this = this;
+                setTimeout(function(){
+                    if(e.offsetWidth < e.scrollWidth)
+                        _this.scrolledRight = false;
+                    else {
+                        _this.scrolledLeft = true;
+                        _this.scrolledRight = true;
                     }
-                    
-                    $('#sell-car-modal').modal('show');
-                },
-                processFile: function(event) {
-                    var f = event.target.files[0];
-                    f.src = URL.createObjectURL(event.target.files[0]);
-                    this.images.push(f);
-                    this.page = 10;
-                },
-                selectImage: function() {
-                    document.getElementById('file-input').click();
-                },
-                isPhoneValid: function () {
-                    var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
-                    return pattern.test(this.phone);
-                },
-                sendOtp: function () {
-                    var _this = this;
-                    this.countDown = 60;
-                    this.countDownTimer();
-                    $.ajax({
-                        url: "{{ route('send-otp') }}",
-                        data: {"name":this.name, "phone":this.phone, "_token":"{{ csrf_token() }}"},
-                        type: "post",
-                        success: function(result){
+                }, 1000);
+
+            },
+            scrollLeft: function () {
+                var e = document.querySelector('.horizontal-scroll');
+                e.scrollBy(-102, 0);
+                var _this = this;
+                setTimeout(function(){
+                    if(e.scrollLeft == 0)
+                        _this.scrolledLeft = true;
+                    if(e.scrollLeft < (e.scrollWidth-e.offsetWidth))
+                        _this.scrolledRight = false;
+                }, 1000);
+
+            },
+            scrollRight: function () {
+                var e = document.querySelector('.horizontal-scroll');
+                e.scrollBy(102, 0);
+                var _this = this;
+                setTimeout(function(){
+                    if(e.scrollLeft == (e.scrollWidth-e.offsetWidth))
+                        _this.scrolledRight = true;
+                    if(e.scrollLeft > 0)
+                        _this.scrolledLeft = false;
+                }, 1000);
+
+            },
+            openModal: function (p) {
+                if(p == 1) {
+                    this.page = 1;
+                } else if(p == 5) {
+                    if(this.kms_driven)
+                        this.page = 5;
+                } else if(p == 6) {
+                    if(this.ownership)
+                        this.page = 6;
+                } else if(p == 7) {
+                    if(this.division)
+                        this.page = 7;
+                } else if(p == 8) {
+                    if(this.registration_year)
+                        this.page = 8;
+                } else if(p == 9) {
+                    if(this.price)
+                        this.page = 9;
+                } else if(p == 10) {
+                    if(this.images.length>0)
+                        this.page = 10;
+                }
+
+                $('#sell-car-modal').modal('show');
+            },
+            processFile: function(event) {
+                var f = event.target.files[0];
+                f.src = URL.createObjectURL(event.target.files[0]);
+                this.images.push(f);
+                this.page = 10;
+            },
+            selectImage: function() {
+                document.getElementById('file-input').click();
+            },
+            isPhoneValid: function () {
+                var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
+                return pattern.test(this.phone);
+            },
+            sendOtp: function () {
+                var _this = this;
+                this.countDown = 60;
+                this.countDownTimer();
+                $.ajax({
+                    url: "{{ route('send-otp') }}",
+                    data: {"name":this.name, "phone":this.phone, "_token":"{{ csrf_token() }}"},
+                    type: "post",
+                    success: function(result){
+                        _this.otp = '';
+                        _this.otp_sent = true;
+                    }
+                });
+            },
+            countDownTimer() {
+                if (this.countDown > 0) {
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        this.countDownTimer()
+                    }, 1000)
+                } else {
+                    this.otp_sent = false;
+                }
+            },
+            verifyOtp: function() {
+                var _this = this;
+                $.ajax({
+                    url: "{{ route('verify-otp') }}",
+                    data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
+                    type: "post",
+                    success: function(result){
+                        if(result == 'success') {
+                            _this.otp_verified = true;
                             _this.otp = '';
-                            _this.otp_sent = true;
+                            localStorage.phone_verified = 1;
                         }
-                    });
-                },
-                countDownTimer() {
-                    if (this.countDown > 0) {
-                        setTimeout(() => {
-                            this.countDown -= 1
-                            this.countDownTimer()
-                        }, 1000)
-                    } else {
-                        this.otp_sent = false;
                     }
-                },
-                verifyOtp: function() {
-                    var _this = this;
-                    $.ajax({
-                        url: "{{ route('verify-otp') }}",
-                        data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
-                        type: "post",
-                        success: function(result){
-                            if(result == 'success') {
-                                localStorage.phone_verified = 1;
-                                window.location = _this.whatsappLink;
-                            }
-                        }
-                    });
-                }
-            },
-            computed: {
-                filteredBrands() {
-                    return this.brands.filter(item => {
-                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-                    })
-                },
-                filteredModels() {
-                    return this.models.filter(item => {
-                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-                    })
-                },
-                filteredManufacturingYears() {
-                    return this.manufacturing_years.filter(item => {
-                        return item.toString().startsWith(this.search);
-                    })
-                },
-                filteredPackages() {
-                    return this.packages.filter(item => {
-                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-                    })
-                },
-                filteredKmsDrivens() {
-                    return this.kms_drivens.filter(item => {
-                        return item.toString().startsWith(this.search);
-                    })
-                },
-                filteredOwnerships() {
-                    return this.ownerships.filter(item => {
-                        return item.toLowerCase().startsWith(this.search.toLowerCase());
-                    })
-                },
-                filteredDivisions() {
-                    return this.divisions.filter(item => {
-                        return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-                    })
-                },
-                filteredPrices() {
-                    return this.prices.filter(item => {
-                        return item.toString().startsWith(this.search);
-                    })
-                },
-                filteredRegistrationYears() {
-                    return this.registration_years.filter(item => {
-                        return item.toString().startsWith(this.search);
-                    })
-                },
-    //            filteredPhotos() {
-    //                return this.photos.filter(item => {
-    //                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-    //                })
-    //            },
-                car() {
-                    var car = '';
-                    if (this.brand)
-                        car += this.brand + ' ' + this.model + ' ' + this.manufacturing_year;
-                    else
-                        return '';
-                    if (this.package)
-                        car += ', ' + this.package;
-                    return car;
-                },
-                priceValidate() {
-                    if(this.price.length == 0)
-                        return false;
-                    return this.price.length<4 || this.price.length>8;
-                }
+                });
             }
+        },
+        computed: {
+            filteredBrands() {
+                return this.brands.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredModels() {
+                return this.models.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredManufacturingYears() {
+                return this.manufacturing_years.filter(item => {
+                    return item.toString().startsWith(this.search);
+                })
+            },
+            filteredPackages() {
+                return this.packages.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredKmsDrivens() {
+                return this.kms_drivens.filter(item => {
+                    return item.toString().startsWith(this.search);
+                })
+            },
+            filteredOwnerships() {
+                return this.ownerships.filter(item => {
+                    return item.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredDivisions() {
+                return this.divisions.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredPrices() {
+                return this.prices.filter(item => {
+                    return item.toString().startsWith(this.search);
+                })
+            },
+            filteredRegistrationYears() {
+                return this.registration_years.filter(item => {
+                    return item.toString().startsWith(this.search);
+                })
+            },
+//            filteredPhotos() {
+//                return this.photos.filter(item => {
+//                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+//                })
+//            },
+            car() {
+                var car = '';
+                if (this.brand)
+                    car += this.brand + ' ' + this.model + ' ' + this.manufacturing_year;
+                else
+                    return '';
+                if (this.package)
+                    car += ', ' + this.package;
+                return car;
+            },
+            priceValidate() {
+                if(this.price.length == 0)
+                    return false;
+                return this.price.length<4 || this.price.length>8;
+            }
+        },
+        watch: {
+            otp: function (val) {
+                if(val.length == 4)
+                    this.verifyOtp();;
+            },
+        }
     })
 </script>
 @endsection
