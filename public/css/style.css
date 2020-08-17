@@ -97,18 +97,6 @@ h6 {
     line-height: 24px;
 }
 
-ul {
-    margin: 0px;
-    padding: 0px;
-}
-
-hr {
-    margin: 0;
-    padding: 0px;
-    border-bottom: 1px solid #232323;
-    border-top: 0px;
-}
-
 hr.gray {
     margin: 0;
     padding: 0px;

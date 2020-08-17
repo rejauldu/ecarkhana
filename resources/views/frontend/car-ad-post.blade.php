@@ -167,6 +167,12 @@
                                 </div>
                             </div>
                             @endcomputer
+                            <div class="col-12"><hr></div>
+                            <div class="col-12">
+                                <div class="text-dark">@{{ brand }} @{{ model }} @{{ manufacturing_year }}, @{{ package }}</div>
+                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                                <a href="#" class="btn btn-link tex-danger pl-0" data-dismiss="modal">Edit details</a>
+                            </div>
                         </div>
                     </div>
                     <div class="flex-grow-1 px-3 overflow-hidden" v-else-if="page != 10">
@@ -241,21 +247,38 @@
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredRegistrationYears" @click.prevent="registrationYearSelected(m)" :class="{'text-danger': m == registration_year}"><i class="fa fa-check" v-if="m == registration_year"></i> @{{ m }}</li>
                     </ul>
                     <div v-else-if="page == 9" class="mx-5">
-                        <h4 class="">Car Price</h4>
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text text-danger bg-white">৳</span>
-                                </div>
-                                <input class="form-control" placeholder="Enter Price" v-model="price" />
-                                <div class="input-group-append" v-if="priceValidate">
-                                    <span class="input-group-text text-danger bg-white">Invalid</span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
-                            <div class="col-3" v-for="m in filteredPrices">
-                                <button class="btn btn-light m-1" @click.prevent="priceSelected(m)" :class="{'text-danger': m == price}">৳@{{ m }}</button>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="note">Car Price</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-danger bg-white">৳</span>
+                                        </div>
+                                        <input class="form-control" placeholder="Enter Price" v-model="price" />
+                                        <div class="input-group-append" v-if="priceValidate">
+                                            <span class="input-group-text text-danger bg-white">Invalid</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="note">Car Description</label>
+                                    <textarea class="form-control" rows="5" id="note" placeholder="Description"></textarea>
+                                </div>
+                                <hr/>
+                                <div class="form-group form-label-group">
+                                    <input class="form-control" placeholder="Enter Price" id="name" v-model="name" />
+                                    <label for="name">Your Name</label>
+                                </div>
+                                <div class="form-group form-label-group">
+                                    <label for="phone">Mobile Number</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Mobile Number" id="phone" v-model="phone" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Invalid</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -313,12 +336,8 @@
                                 <button class="btn btn-light border-dashed"><i class="fa fa-plus"></i> Select More Photo</button>
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <div class="container">
-                        <div class="row">
+                        <hr/>
+                        <div class="row mt-4">
                             <div class="col-2">
                                 <i class="fa fa-lightbulb-o display-5 text-danger"></i>
                             </div>
@@ -335,13 +354,14 @@
                                         <li class="list-group-item py-1">Upload high resolution images up to 5 MB</li>
                                         <li class="list-group-item py-1">Upload clear car images without including owner and contact details.</li>
                                     </ul>
-                                    
-
-
-
-
                                 </div>
                             </div>
+                        </div>
+                        <hr/>
+                        <div class="col-12">
+                            <div class="text-dark">@{{ brand }} @{{ model }} @{{ manufacturing_year }}, @{{ package }}</div>
+                            <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                            <a href="#" class="btn btn-link tex-danger pl-0" data-dismiss="modal">Edit details</a>
                         </div>
                     </div>
                 </div>
@@ -384,7 +404,9 @@ End  Post Your Ad -->
                 scrolledLeft: true,
                 scrolledRight: true,
                 images: [],
-                cover_image: 0
+                cover_image: 0,
+                name: '',
+                phone: ''
             },
             methods: {
                 brandSelected: function (b) {
