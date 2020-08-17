@@ -625,6 +625,7 @@ section.slider {
 
 .sms-seller-dropdown ul li {
     list-style: none;
+    line-height: 30px;
 }
 
 .sms-seller-dropdown ul li a {
@@ -1009,6 +1010,7 @@ li.sms-focus {
     list-style: none;
     padding: 0;
     position: relative;
+    line-height: 30px;
 }
 
 .sms-main-menu ul li a {
@@ -1123,6 +1125,7 @@ li.sms-focus {
 .sms-seller-message-pop ul li {
     list-style: none;
     width: 100%;
+    line-height: 30px;
 }
 
 .sms-seller-message-pop ul li .drop-title {
@@ -1392,6 +1395,7 @@ li.sms-focus {
 
 .sms-sys-com ul li ul li {
     width: 100%;
+    line-height: 30px;
 }
 
 .sms-sys-com ul li ul {
@@ -1782,6 +1786,7 @@ form {
     width: 125px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
     margin: 5px;
+    line-height: 30px;
 }
 
 .service_wrap ul li a {
@@ -2033,6 +2038,7 @@ h3.blog-title {
     list-style: outside none none;
     margin-bottom: 8px;
     width: 50%;
+    line-height: 30px;
 }
 
 .featured-car-content ul li .fa {
@@ -2256,6 +2262,7 @@ h3.blog-title {
 
 .car-item .car-overlay-banner ul li {
     display: inline-block;
+    line-height: 30px;
 }
 
 .car-item .car-overlay-banner ul li a {
@@ -2927,6 +2934,7 @@ footer.footer.bg-2.bg-overlay-black-90:before {
     -ms-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
+    line-height: 30px;
 }
 
 .social ul li a {
@@ -2991,6 +2999,7 @@ footer.footer.bg-2.bg-overlay-black-90:before {
     display: block;
     color: #909090;
     padding-bottom: 15px;
+    line-height: 30px;
 }
 
 .address ul li:last-child {
@@ -3014,6 +3023,7 @@ footer.footer.bg-2.bg-overlay-black-90:before {
     display: block;
     border-bottom: 1px solid rgba(255, 255, 255, 0.11);
     padding: 10px 0px;
+    line-height: 30px;
 }
 
 .usefull-link ul li:last-child {
@@ -3120,6 +3130,7 @@ footer.footer.bg-2.bg-overlay-black-90:before {
 
 .footer .copyright ul li {
     padding: 0px;
+    line-height: 30px;
 }
 
 .footer .copyright ul li a {
@@ -3613,6 +3624,7 @@ ul.page-breadcrumb li span {
 .entry-meta ul li {
     display: inline-block;
     padding-right: 10px;
+    line-height: 30px;
 }
 
 .entry-meta ul li a {
@@ -3705,6 +3717,7 @@ ul.list-style-none li {
 .blog-sidebar .widget-link ul li {
     display: block;
     clear: both;
+    line-height: 30px;
 }
 
 .blog-sidebar .widget-link ul li a {
@@ -3844,6 +3857,7 @@ ul.list-style-none li {
 .details-nav ul li {
     display: inline-block;
     margin-right: 10px;
+    line-height: 30px;
 }
 
 .details-nav ul li a {
@@ -4225,6 +4239,7 @@ ul.smsaccordion {
     padding-bottom: 0px;
     border-bottom: 1px solid #e3e3e3;
     margin-bottom: 5px;
+    line-height: 30px;
 }
 
 .car-details-sidebar .details-block ul li:last-child {
@@ -4248,6 +4263,7 @@ ul.smsaccordion {
 .details-social ul li {
     display: inline-block;
     border-bottom: none;
+    line-height: 30px;
 }
 
 .details-social ul li a {
@@ -4307,6 +4323,7 @@ i.fa.fa-whatsapp {
 .details-nav ul li {
     display: inline-block;
     margin-right: 10px;
+    line-height: 30px;
 }
 
 .details-nav ul li a {
@@ -4942,6 +4959,7 @@ li.comment.sms-reply-comment {
 .product-listing .listing-sidebar .widget-search ul li {
     margin-bottom: 20px;
     list-style: none;
+    line-height: 30px;
 }
 
 .product-listing .listing-sidebar .widget-search ul li i {
@@ -5158,6 +5176,7 @@ li.list-group-item .current {
     list-style: outside none none;
     margin: 0 auto 15px;
     overflow: hidden;
+    line-height: 30px;
 }
 
 .recent_addedcars ul li a {
@@ -6750,6 +6769,7 @@ span.remaining {
     text-align: center;
     width: 24%;
     padding: 10px 0;
+    line-height: 30px;
 }
 
 .dashboard-menu-container ul li:last-child {
@@ -6935,6 +6955,7 @@ button.btn.btn-sm.btn-default {
     list-style: outside none none;
     margin-bottom: 2px;
     width: 50%;
+    line-height: 30px;
 }
 
 .seller-ad-area .sesh-column {
@@ -7431,6 +7452,7 @@ a.active small {
     display: flex;
     padding: 0 20px;
     color: #222;
+    line-height: 30px;
 }
 
 .bidding-area .bid-info-wrap ul li span {

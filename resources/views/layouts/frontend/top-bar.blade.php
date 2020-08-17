@@ -102,7 +102,7 @@
                             </button>
                             <div class="sms-main-menu">
                                 <nav>
-                                    <ul>
+                                    <ul class="m-0 p-0">
                                         <li class="mobile-menu"><a href='{{ url('/') }}'>Car</a></li>
                                         <li class="mobile-menu"><a href='bike-index'>Bike</a> </li>
                                         <li class="mobile-menu"><a href='bicycle-index'>Bicycle</a>
