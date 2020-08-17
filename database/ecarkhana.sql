@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2020 at 07:21 AM
+-- Generation Time: Aug 17, 2020 at 03:25 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -2429,6 +2429,13 @@ CREATE TABLE `loan_infos` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `loan_infos`
+--
+
+INSERT INTO `loan_infos` (`id`, `name`, `email`, `phone`, `gender_id`, `dob`, `residance_type_id`, `residence_since_id`, `condition_id`, `have_choice`, `price`, `profession_id`, `division_id`, `job_status_id`, `experience`, `salary`, `emi`, `have_loan`, `type`, `share`, `last_year_transaction`, `trade_license`, `have_other_income`, `have_tin`, `user_id`, `updated_at`, `created_at`) VALUES
+(1, 'Rejaul Karim', 'rejauldu@gmail.com', '01924974960', 1, '1989-12-31 18:00:00', 1, NULL, 1, 1, 5000000, 1, 1, 1, 3, 40000, 15000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2020-08-11 05:52:57', '2020-08-10 23:49:17');
+
 -- --------------------------------------------------------
 
 --
@@ -3411,20 +3418,6 @@ CREATE TABLE `otps` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `otps`
---
-
-INSERT INTO `otps` (`id`, `name`, `phone`, `otp`, `is_verified`, `updated_at`, `created_at`) VALUES
-(1, NULL, '01924974960', 1234, 0, '2020-08-07 21:12:26', '2020-08-07 21:12:26'),
-(2, NULL, '01924974960', 1234, 0, '2020-08-07 21:13:13', '2020-08-07 21:13:13'),
-(3, NULL, '01924974960', 1234, 0, '2020-08-07 21:13:41', '2020-08-07 21:13:41'),
-(4, NULL, '01924974960', 1234, 0, '2020-08-07 21:14:41', '2020-08-07 21:14:41'),
-(5, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 21:16:35', '2020-08-07 21:16:35'),
-(6, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 21:17:19', '2020-08-07 21:17:19'),
-(7, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 21:22:34', '2020-08-07 21:22:34'),
-(8, 'Rejaul Karim', '01924974960', 1234, 0, '2020-08-07 22:56:41', '2020-08-07 22:56:41');
 
 -- --------------------------------------------------------
 
@@ -5535,7 +5528,13 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1301, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-07 20:48:16', '2020-08-07 20:48:16'),
 (1302, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-08 20:12:32', '2020-08-08 20:12:32'),
 (1303, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/login', '2020-08-09 20:58:33', '2020-08-09 20:58:33'),
-(1304, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-10 19:50:38', '2020-08-10 19:50:38');
+(1304, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-10 19:50:38', '2020-08-10 19:50:38'),
+(1305, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-12 08:14:15', '2020-08-12 08:14:15'),
+(1306, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-12 20:49:34', '2020-08-12 20:49:34'),
+(1307, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-13 21:17:13', '2020-08-13 21:17:13'),
+(1308, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-14 21:21:46', '2020-08-14 21:21:46'),
+(1309, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-15 21:11:09', '2020-08-15 21:11:09'),
+(1310, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-16 21:06:32', '2020-08-16 21:06:32');
 
 -- --------------------------------------------------------
 
@@ -11904,7 +11903,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `key_features`
 --
 ALTER TABLE `key_features`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `loan_applications`
@@ -11916,7 +11915,7 @@ ALTER TABLE `loan_applications`
 -- AUTO_INCREMENT for table `loan_infos`
 --
 ALTER TABLE `loan_infos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `made_ins`
@@ -11976,7 +11975,7 @@ ALTER TABLE `order_statuses`
 -- AUTO_INCREMENT for table `otps`
 --
 ALTER TABLE `otps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -12084,7 +12083,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1305;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1311;
 
 --
 -- AUTO_INCREMENT for table `transmissions`
