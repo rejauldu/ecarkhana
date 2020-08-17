@@ -420,6 +420,7 @@ table.dataTable thead .sorting_desc_disabled:before {
     border: 1px solid transparent;
     border-radius: .25rem;
     transition: all .1s ease-in-out;
+    cursor: text;
 }
 
 .form-label-group input::-webkit-input-placeholder {
@@ -586,6 +587,21 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 .border-dotted {
     border: 1px dotted #bebebe;
+}
+.opacity-1 {
+    opacity: 0.1 !important;
+}
+.opacity-2 {
+    opacity: 0.2 !important;
+}
+.opacity-3 {
+    opacity: 0.3 !important;
+}
+.opacity-4 {
+    opacity: 0.4 !important;
+}
+.opacity-5 {
+    opacity: 0.5 !important;
 }
 /* place <i class="fa"></i> inside data-toggle="collapse" to show icons*/
 [data-toggle="collapse"] .fa:before {   

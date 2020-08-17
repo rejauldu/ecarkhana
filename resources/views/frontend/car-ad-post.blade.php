@@ -11,7 +11,7 @@
 
 <!--=================================Start Post Your Ad-->
 
-<section class="Post-Ad page-section-ptb" id="sell-car">
+<section class="page-section-ptb" id="sell-car">
     <div class="row">
         <div class="col-12 col-md-2 col-lg-3 col-xl-4"></div>
         <div class="col-12 col-md-8 col-lg-6 col-xl-4">
@@ -33,6 +33,10 @@
                     <div class="form-group form-label-group">
                         <input type="text" class="form-control bg-light" id="city" name="field1" placeholder="Select Car" readonly="" v-model="division" @click.prevent="openModal(7)" />
                         <label for="city" class=" cursor-pointer">City</label>
+                    </div>
+                    <div class="form-group form-label-group">
+                        <input type="text" class="form-control bg-light" id="registration_year" name="field1" placeholder="Select Registration Year" readonly="" v-model="registration_year" @click.prevent="openModal(8)" />
+                        <label for="registration_year" class=" cursor-pointer">Registration Year</label>
                     </div>
                     <div class="form-group form-label-group">
                         <input type="text" class="form-control bg-light" id="price" name="field1" placeholder="Select Car" readonly="" v-model="price" @click.prevent="openModal(9)" />
@@ -118,7 +122,7 @@
         <div class="modal-dialog modal-dialog-center">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header border-bottom-0 flex-md-row flex-column justify-content-between">
+                <div class="modal-header flex-md-row flex-column justify-content-between" :class="{'border-bottom-0': page != 9}">
                     <i class="fa fa-arrow-left cursor-pointer height-30" data-dismiss="modal" v-if="page == 1"></i>
                     <span class="fa fa-close cursor-pointer height-30" v-else-if="page == 10" @click.prevent="page--"></span>
                     <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
@@ -270,13 +274,39 @@
                                     <input class="form-control" placeholder="Enter Price" id="name" v-model="name" />
                                     <label for="name">Your Name</label>
                                 </div>
-                                <div class="form-group form-label-group">
-                                    <label for="phone">Mobile Number</label>
-                                    <div class="input-group">
-                                        <input class="form-control" placeholder="Mobile Number" id="phone" v-model="phone" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Invalid</span>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text btn btn-link bg-white border-right-0 text-dark">+88</span>
                                         </div>
+                                        <input type="text" class="form-control" :class="{'opacity-5': otp_sent}" placeholder="phone" id="phone" name="phone" v-model="phone" @keyup="isPhoneValid" :disabled="otp_sent">
+                                        <div class="input-group-append">
+                                            <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-if="isPhoneValid() && !otp_sent" @click.prevent="sendOtp">Verify Now</a>
+                                            <span class="input-group-text btn bg-white border-left-0 text-secondary" v-else-if="!otp_sent">Invalid</span>
+                                            <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else>@{{ countDown }}</a>
+                                        </div>
+                                        <div class="position-center" v-if="otp_sent"><i class="fa fa-spinner fa-spin text-dark"></i></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" v-if="otp_sent">
+                                    <label for="demo">OTP:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" :class="{'opacity-5': otp.length == 4}" placeholder="OTP" id="otp" name="otp" v-model="otp" :disabled="otp.length == 4">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text btn bg-white border-left-0 text-danger" v-if="otp.length != 4">Must be 4 digit</span>
+                                        </div>
+                                        <div class="position-center" v-if="otp.length == 4"><i class="fa fa-spinner fa-spin text-dark"></i></div>
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms" v-model="terms">
+                                    <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="otp_sent">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text border-0 bg-danger text-white"><i class="fa fa-arrow-right"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -406,7 +436,11 @@ End  Post Your Ad -->
                 images: [],
                 cover_image: 0,
                 name: '',
-                phone: ''
+                phone: '',
+                terms: '',
+                otp: '',
+                otp_sent: false,
+                countDown: 60
             },
             methods: {
                 brandSelected: function (b) {
@@ -548,6 +582,48 @@ End  Post Your Ad -->
                 },
                 selectImage: function() {
                     document.getElementById('file-input').click();
+                },
+                isPhoneValid: function () {
+                    var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
+                    return pattern.test(this.phone);
+                },
+                sendOtp: function () {
+                    var _this = this;
+                    this.countDown = 60;
+                    this.countDownTimer();
+                    $.ajax({
+                        url: "{{ route('send-otp') }}",
+                        data: {"name":this.name, "phone":this.phone, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            _this.otp = '';
+                            _this.otp_sent = true;
+                        }
+                    });
+                },
+                countDownTimer() {
+                    if (this.countDown > 0) {
+                        setTimeout(() => {
+                            this.countDown -= 1
+                            this.countDownTimer()
+                        }, 1000)
+                    } else {
+                        this.otp_sent = false;
+                    }
+                },
+                verifyOtp: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: "{{ route('verify-otp') }}",
+                        data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            if(result == 'success') {
+                                localStorage.phone_verified = 1;
+                                window.location = _this.whatsappLink;
+                            }
+                        }
+                    });
                 }
             },
             computed: {

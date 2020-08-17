@@ -155,7 +155,7 @@ product-listing  -->
                                 </div>
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="terms" name="terms" v-model="terms">
-                                    <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary" href="#">Terms of Service</a> and <a class="btn btn-link text-primary" href="#">Privacy Policy</a></label>
+                                    <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
                                 </div>
                             </div>
 
@@ -588,7 +588,7 @@ product-listing  -->
             methods: {
                 openWhatsappModal: function (id) {
                     this.id = id;
-                    if (localStorage.getItem("whatsapp_verified")) {
+                    if (localStorage.getItem("phone_verified")) {
                         window.location = this.whatsappLink;
                     } else {
                         $('#whatsapp-modal').modal('show');
@@ -629,7 +629,7 @@ product-listing  -->
                         type: "post",
                         success: function(result){
                             if(result == 'success') {
-                                localStorage.whatsapp_verified = 1;
+                                localStorage.phone_verified = 1;
                                 window.location = _this.whatsappLink;
                             }
                         }

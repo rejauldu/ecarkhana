@@ -469,22 +469,6 @@ Page section margin padding
   Text Color
 ***********************/
 
-.text-red {
-    color: #db2d2e;
-}
-
-.text-white {
-    color: #ffffff;
-}
-
-.text-black {
-    color: #323232;
-}
-
-.text-gray {
-    color: #626262;
-}
-
 .typography-main h4.title {
     position: relative;
     padding-bottom: 10px;
@@ -1086,10 +1070,6 @@ li.sms-focus {
     width: 200px;
 }
 
-.text-white {
-    font-size: 30px;
-}
-
 .mobile-menu {
     display: none !important;
 }
@@ -1343,10 +1323,6 @@ li.sms-focus {
     .sms-menu.shrink .core-menu {
         top: 25px;
         z-index: 9999;
-    }
-    .text-white {
-        color: #fff !important;
-        font-size: 18px;
     }
     .sms-menu.shrink .logo img {
         height: 40px;
@@ -1969,11 +1945,6 @@ h3.blog-title {
 #popular .red {
     margin: 0 auto;
     margin-top: 15px;
-}
-
-input[type=checkbox] {
-    position: relative;
-    top: 3px;
 }
 
 .featured-car-list {
@@ -5236,50 +5207,6 @@ li.list-group-item .current {
 .widget_price {
     font-size: 13px;
     margin: 0px;
-}
-
-input[type="checkbox"] {
-    position: relative;
-    top: 5px;
-    right: 0;
-    bottom: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    transition: all 0.15s ease-out 0s;
-    background: #cbd1d8;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 5px;
-}
-
-input[type="checkbox"]:checked {
-    background: #40e0d0;
-}
-
-input[type="checkbox"]:checked::before {
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    content: '✔';
-    display: inline-block;
-    font-size: 16px;
-    text-align: center;
-    line-height: 20px;
-    color: #db2d2e;
-}
-
-input[type="checkbox"]:checked::after {
-    animation: click-wave 0.65s;
-    background: #40e0d0;
-    content: '';
-    display: block;
-    position: relative;
 }
 
 @keyframes click-wave {
