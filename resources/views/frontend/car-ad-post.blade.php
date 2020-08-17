@@ -291,7 +291,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group" v-if="otp_sent">
-                                    <label for="demo">OTP:</label>
+                                    <label for="otp">OTP:</label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" :class="{'opacity-5': otp.length == 4}" placeholder="OTP" id="otp" name="otp" v-model="otp" :disabled="otp.length == 4 || otp_verified">
                                         <div class="input-group-append">
@@ -306,7 +306,7 @@
                                     <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="otp_sent">
+                                    <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="!otp_verified">
                                     <div class="input-group-append">
                                         <span class="input-group-text border-0 bg-danger text-white"><i class="fa fa-arrow-right"></i></span>
                                     </div>
@@ -676,11 +676,6 @@ End  Post Your Ad -->
                     return item.toString().startsWith(this.search);
                 })
             },
-//            filteredPhotos() {
-//                return this.photos.filter(item => {
-//                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-//                })
-//            },
             car() {
                 var car = '';
                 if (this.brand)
