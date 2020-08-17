@@ -83,12 +83,15 @@ class HomeController extends Controller {
         $type = 'Bicycle';
         return view('frontend.bicycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'type', 'posts'));
     }
+
     public function aboutUs() {
         return view('frontend.about-us');
     }
+
     public function addToCompare() {
         return view('frontend.add-to-compare');
     }
+
     public function auctionBiddingList($id) {
         $product = Product::with(['bids' => function($q) {
                         $q->with('user')->where('valid_until', '<=', Carbon::now())->latest();
@@ -152,7 +155,7 @@ class HomeController extends Controller {
 
     public function carListing(Request $request) {
         $products = Product::select('products.*')
-                ->has('car')->with('car', 'supplier.region');
+                        ->has('car')->with('car', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
@@ -200,24 +203,24 @@ class HomeController extends Controller {
             });
             $data['package'] = $request->package;
         }
-	if($request->lat && $request->lon) {
+        if ($request->lat && $request->lon) {
             $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
                     ->selectRaw('ROUND(('
-                        . '6371'
-                        . '* acos( cos( radians(lat) )'
-                        . '* cos( radians('.$request->lat.') )'
-                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
-                        . '* sin( radians('.$request->lat.')))'
-                        . '), 3) AS distance')
+                            . '6371'
+                            . '* acos( cos( radians(lat) )'
+                            . '* cos( radians(' . $request->lat . ') )'
+                            . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                            . '* sin( radians(' . $request->lat . ')))'
+                            . '), 3) AS distance')
                     ->orderBy('distance', 'ASC');
-            if($request->within_km) {
+            if ($request->within_km) {
                 $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
-                        ->whereRaw( '(ROUND(('
+                        ->whereRaw('(ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
-                        . '* cos( radians('.$request->lat.') )'
-                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
-                        . '* sin( radians('.$request->lat.')))'
+                        . '* cos( radians(' . $request->lat . ') )'
+                        . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians(' . $request->lat . ')))'
                         . '), 3)) < ?', ['distance' => $request->within_km]);
                 $data['within_km'] = $request->within_km;
             }
@@ -293,9 +296,11 @@ class HomeController extends Controller {
     public function groupBuyingList() {
         return view('frontend.group-buying-list');
     }
+
     public function insurance() {
         return view('frontend.insurance');
     }
+
     public function insuranceList() {
         return view('frontend.insurance-list');
     }
@@ -319,6 +324,7 @@ class HomeController extends Controller {
     public function motorcycleCompare() {
         return view('frontend.motorcycle-compare');
     }
+
     public function motorcycleInsurance() {
         return view('frontend.motorcycle-Insurance');
     }
@@ -528,22 +534,25 @@ class HomeController extends Controller {
     public function termAndCondition() {
         return view('frontend.term-and-condition');
     }
+
     public function getRegions(Request $request) {
-        $regions = Region::select('id', 'name')->where('name', 'like', '%'.$request->q.'%')->take(10)->get();
+        $regions = Region::select('id', 'name')->where('name', 'like', '%' . $request->q . '%')->take(10)->get();
         return (string) $regions;
     }
+
     public function getRegion(Request $request) {
         $regions = Region::with('division')->selectRaw('*, ROUND(('
                         . '6371'
                         . '* acos( cos( radians(lat) )'
-                        . '* cos( radians('.$request->lat.') )'
-                        . '* cos( radians('.$request->lon.') - radians(lon)) + sin(radians(lat))'
-                        . '* sin( radians('.$request->lat.')))'
+                        . '* cos( radians(' . $request->lat . ') )'
+                        . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians(' . $request->lat . ')))'
                         . '), 3) AS distance')
-                    ->orderBy('distance', 'ASC');
+                ->orderBy('distance', 'ASC');
         $region = $regions->first();
         return (string) $region;
     }
+
     private function getRemaining($datestr = 0) {
         //Convert to date
         $date = strtotime($datestr); //Converted to a PHP date (a second count)
@@ -557,20 +566,49 @@ class HomeController extends Controller {
         //Report
         return [$days, $hours, $minutes, $seconds];
     }
+
     public function sendOtp(Request $request) {
         $data = $request->except('_token', '_method');
-        $data['otp'] = '1234';
+        $otp = $this->getOtp();
+        $data['otp'] = $otp;
+        $this->curlSms($request->phone, $otp);
         Otp::create($data);
         return 'success';
     }
+
     public function verifyOtp(Request $request) {
         $otp = Otp::where('phone', $request->phone)->where('otp', $request->otp)->where('created_at', '>', Carbon::now()->subSeconds(60)->toDateTimeString())->first();
-        
-        if($otp) {
+
+        if ($otp) {
             $otp->update(['is_verified' => 1]);
             return 'success';
         } else
             return 'error';
+    }
+
+    private function getOtp() {
+        $digits = 4;
+        return rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+    }
+
+    private function curlSms($phone, $otp) {
+        $m = $otp . ' is your Ecarkhana Phone number verification code.';
+        // create curl resource
+        $ch = curl_init();
+        // set url
+        curl_setopt($ch, CURLOPT_URL, "http://sms.storerepublic.com/smsapi?api_key=C20064485f2f9445414b55.34412796&type=text&contacts='.$phone.'&senderid=8809612446209&msg=" . $this->myUrlEncode($m));
+        //return the transfer as a string
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // $output contains the output string
+        $output = curl_exec($ch);
+        // close curl resource to free up system resources
+        curl_close($ch);
+    }
+
+    private function myUrlEncode($string) {
+        $entities = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
+        $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
+        return str_replace($entities, $replacements, urlencode($string));
     }
 
 }
