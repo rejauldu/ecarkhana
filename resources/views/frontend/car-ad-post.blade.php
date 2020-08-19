@@ -23,16 +23,16 @@
                         <label for="car" class=" cursor-pointer">Select Car</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="kms-driven" name="field1" placeholder="Select Car" readonly="" v-model="kms_driven" @click.prevent="openModal(5)" />
+                        <input type="text" class="form-control bg-light" id="kms-driven" name="field1" placeholder="Select Kms driven" readonly="" v-model="kms_driven" @click.prevent="openModal(5)" />
                         <label for="kms-driven" class=" cursor-pointer">Kms driven</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="ownership" name="field1" placeholder="Select Car" readonly="" v-model="ownership" @click.prevent="openModal(6)" />
+                        <input type="text" class="form-control bg-light" id="ownership" name="field1" placeholder="Select Ownership" readonly="" v-model="ownership" @click.prevent="openModal(6)" />
                         <label for="ownership" class=" cursor-pointer">Ownership</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="city" name="field1" placeholder="Select Car" readonly="" v-model="division" @click.prevent="openModal(7)" />
-                        <label for="city" class=" cursor-pointer">City</label>
+                        <input type="text" class="form-control bg-light" id="city" name="field1" placeholder="Select Area" readonly="" v-model="region.name" @click.prevent="openModal(7)" />
+                        <label for="city" class=" cursor-pointer">Area</label>
                     </div>
                     <div class="form-group form-label-group">
                         <input type="text" class="form-control bg-light" id="registration_year" name="field1" placeholder="Select Registration Year" readonly="" v-model="registration_year" @click.prevent="openModal(8)" />
@@ -173,21 +173,21 @@
                             @endcomputer
                             <div class="col-12"><hr></div>
                             <div class="col-12">
-                                <div class="text-dark">@{{ brand }} @{{ model }} @{{ manufacturing_year }}, @{{ package }}</div>
-                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ region }}, @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                                <div class="text-dark">@{{ brand.name }} @{{ model.name }} @{{ manufacturing_year }}, @{{ package.name }}</div>
+                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ region.name }}, @{{ division.name }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
                                 <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                             </div>
                         </div>
                     </div>
                     <div class="flex-grow-1 px-3 overflow-hidden" v-else-if="page != 10">
                         <div class="horizontal-scroll py-1">
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="brand" @click.prevent="brandSelected(brand)">@{{ brand }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="model" @click.prevent="modelSelected(model)">@{{ model }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(brand)" @click.prevent="brandSelected(brand)">@{{ brand.name }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(model)" @click.prevent="modelSelected(model)">@{{ model.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="package" @click.prevent="packageSelected(package)">@{{ package }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(package)" @click.prevent="packageSelected(package)">@{{ package.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="division" @click.prevent="divisionSelected(division)"> @{{ region }}, @{{ division }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(region)" @click.prevent="divisionSelected(division)"> @{{ region.name }}, @{{ division.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="registration_year" @click.prevent="registrationYearSelected(registration_year)">@{{ registration_year }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                         </div>
@@ -208,16 +208,16 @@
                         <input class="form-control" placeholder="Search..." v-model="search" />
                     </div>
                     <ul class="list-group list-group-flush mx-5" v-if="page == 1">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b.name)" :class="{'text-danger': b.name == brand}"><i class="fa fa-check" v-if="b.name == brand"></i> @{{ b.name }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b)" :class="{'text-danger': b.id == brand.id}"><i class="fa fa-check" v-if="b.id == brand.id"></i> @{{ b.name }}</li>
                     </ul>
                     <ul class="list-group list-group-flush mx-5" v-else-if="page == 2">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m.name)" :class="{'text-danger': m.name == model}"><i class="fa fa-check" v-if="m.name == model"></i> @{{ m.name }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m)" :class="{'text-danger': m.id == model.id}"><i class="fa fa-check" v-if="m.id == model.id"></i> @{{ m.name }}</li>
                     </ul>
                     <ul class="list-group list-group-flush mx-5" v-else-if="page == 3">
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredManufacturingYears" @click.prevent="manufacturingYearSelected(m)" :class="{'text-danger': m == manufacturing_year}"><i class="fa fa-check" v-if="m == manufacturing_year"></i> @{{ m }}</li>
                     </ul>
                     <ul class="list-group list-group-flush mx-5" v-else-if="page == 4">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m.name)" :class="{'text-danger': m.name == package}"><i class="fa fa-check" v-if="m.name == package"></i> @{{ m.name }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m)" :class="{'text-danger': m.id == package.id}"><i class="fa fa-check" v-if="m.id == package.id"></i> @{{ m.name }}</li>
                     </ul>
                     <div v-else-if="page == 5" class="container">
                         <div class="row">
@@ -244,11 +244,11 @@
                             </div>
                         </div>
                         <ul class="list-group list-group-flush" id="cities">
-                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d.name" :class="{'text-danger': d.name == division}">
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d" :class="{'text-danger': d.id == division.id}">
                                 <div>@{{ d.name }}</div>
                                 <div :id="'regions-'+d.id">
                                     <ul class="list-group list-group-flush">
-                                        <li v-for="r in filteredRegions" v-if="r.division_id == d.id" @click.prevent="regionSelected(r.name)" class="list-group-item list-group-item-action py-0 cursor-pointer border-0"  :class="{'text-info': r.name == region}"><i class="fa fa-check" v-if="r.name == region"></i> <small>@{{ r.name }}</small></li>
+                                        <li v-for="r in filteredRegions" v-if="r.division_id == d.id" @click.prevent="regionSelected(r)" class="list-group-item list-group-item-action py-0 cursor-pointer border-0"  :class="{'text-info': r.id == region.id}"><i class="fa fa-check" v-if="r.id == region.id"></i> <small>@{{ r.name }}</small></li>
                                     </ul>
                                 </div>
                             </li>
@@ -312,18 +312,34 @@
                                     <input type="checkbox" class="custom-control-input" id="terms" name="terms" v-model="terms">
                                     <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="!photo || !price || !name || !otp_verified || !terms">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text border-0 bg-danger text-white"><i class="fa fa-arrow-right"></i></span>
+                                <form action="{{ route('products.store') }}" method="post" class="d-block">
+                                    <input type="hidden" name="brand_id" v-model="brand.id" />
+                                    <input type="hidden" name="model_id" v-model="model.id" />
+                                    <input type="hidden" name="manufacturing_year" v-model="manufacturing_year" />
+                                    <input type="hidden" name="package_id" v-model="package.id" />
+                                    <input type="hidden" name="kms_driven" v-model="kms_driven" />
+                                    <input type="hidden" name="ownership" v-model="ownership" />
+                                    <input type="hidden" name="region_id" v-model="region.id" />
+                                    <input type="hidden" name="registration_year" v-model="registration_year" />
+                                    <input type="hidden" name="msrp" v-model="price" />
+                                    <input type="hidden" name="note" v-model="note" />
+                                    <input type="hidden" name="name" v-model="name" />
+                                    <input type="hidden" name="phone" v-model="phone" />
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                    <input type="file" name="images[]" v-for="i in 1" :key="i"/>
+                                    <div class="input-group my-3">
+                                        <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="!photo || !price || !name || !otp_verified || !terms" @click.prevent="submit()">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text border-0 bg-danger text-white"><i class="fa fa-arrow-right"></i></span>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div v-else-if="page == 10" class="mx-5">
                         <div class="size-21 mb-3">
-                            <img :src="images[cover_image].src" class="img-fluid" v-if="images[cover_image]"/>
+                            <img :src="images[cover_image].src" class="img-fluid" v-if="images[cover_image]" />
                             <i class="fa fa-trash position-absolute top-0 right-0 display-6 text-danger cursor-pointer" @click.prevent="deleteImage()" v-if="images.length>0"></i>
                         </div>
                         <div class="text-secondary"><small>Maximum 36 Photos</small></div>
@@ -422,11 +438,11 @@ End  Post Your Ad -->
         data: {
             search: '',
             page: 1,
-            brand: '',
+            brand: {},
             brands: @json($brands),
-            model: '',
+            model: {},
             models: @json($models),
-            package: '',
+            package: {},
             packages: @json($packages),
             manufacturing_year: '',
             manufacturing_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
@@ -435,9 +451,9 @@ End  Post Your Ad -->
             kms_drivens: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
             ownership: '',
             ownerships: ['First', 'Second', 'Third', 'Above'],
-            division: '',
+            division: {},
             divisions: @json($divisions),
-            region:'',
+            region:{},
             regions: [],
             registration_year: '',
             registration_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
@@ -514,21 +530,21 @@ End  Post Your Ad -->
             reset: function (...args) {
                 for (var i = 0; i < args.length; i++) {
                     if (args[i] == 'brand') {
-                        this.brand = '';
+                        this.brand = {};
                     } else if (args[i] == 'model') {
-                        this.model = '';
+                        this.model = {};
                     } else if (args[i] == 'manufacturing_year') {
                         this.manufacturing_year = '';
                     } else if (args[i] == 'package') {
-                        this.package = '';
+                        this.package = {};
                     } else if (args[i] == 'kms_driven') {
                         this.kms_driven = '';
                     } else if (args[i] == 'ownership') {
                         this.ownership = '';
                     } else if (args[i] == 'division') {
-                        this.division = '';
+                        this.division = {};
                     } else if (args[i] == 'region') {
-                        this.region = '';
+                        this.region = {};
                     } else if (args[i] == 'registration_year') {
                         this.registration_year = '';
                     } else if (args[i] == 'price') {
@@ -582,7 +598,7 @@ End  Post Your Ad -->
                     if(this.ownership)
                         this.page = 6;
                 } else if(p == 7) {
-                    if(this.division)
+                    if(!this.isEmpty(this.division))
                         this.page = 7;
                 } else if(p == 8) {
                     if(this.registration_year)
@@ -659,21 +675,21 @@ End  Post Your Ad -->
             },
             getFromStorage: function() {
                 if(localStorage.brand)
-                    this.brand = localStorage.brand;
+                    this.brand = JSON.parse(localStorage.brand);
                 if(localStorage.model)
-                    this.model = localStorage.model;
+                    this.model = JSON.parse(localStorage.model);
                 if(localStorage.manufacturing_year)
                     this.manufacturing_year = localStorage.manufacturing_year;
                 if(localStorage.package)
-                    this.package = localStorage.package;
+                    this.package = JSON.parse(localStorage.package);
                 if(localStorage.kms_driven)
                     this.kms_driven = localStorage.kms_driven;
                 if(localStorage.ownership)
                     this.ownership = localStorage.ownership;
                 if(localStorage.city)
-                    this.city = localStorage.city;
+                    this.city = JSON.parse(localStorage.city);
                 if(localStorage.region)
-                    this.region = localStorage.region;
+                    this.region = JSON.parse(localStorage.region);
                 if(localStorage.registration_year)
                     this.registration_year = localStorage.registration_year;
                 if(localStorage.price)
@@ -703,7 +719,7 @@ End  Post Your Ad -->
                     url: "{{ route('get-region') }}?lat="+p.coords.latitude+"&lon="+p.coords.longitude,
                     dataType: "json",
                     success: function(result){
-                        _this.city = result.name;
+                        _this.city = result;
                     }
                 });
             },
@@ -716,6 +732,39 @@ End  Post Your Ad -->
                         _this.regions = result;
                     }
                 });
+            },
+            submit: function() {
+                var _this = this;
+                $.ajax({
+                    url: "{{ route('verify-otp') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "brand_id": _this.brand.id,
+                        "model_id": _this.model.id,
+                        "manufacturing_year": _this.manufacturing_year,
+                        "package_id": _this.package.id,
+                        "kms_driven": _this.kms_driven,
+                        "ownership": _this.ownership,
+                        "region_id": _this.region.id,
+                        "registration_year": _this.registration_year,
+                        "msrp": _this.price,
+                        "note": _this.note,
+                        "name": _this.name,
+                        "phone": _this.phone
+                    },
+                    type: "post",
+                    success: function(result){
+                        if(result == 'success') {
+                            _this.otp_verified = true;
+                            _this.otp = '';
+                            localStorage.phone_verified = 1;
+                            localStorage.verified_phone = _this.phone;
+                        }
+                    }
+                });
+            },
+            isEmpty: function(obj) {
+                return Object.keys(obj).length === 0;
             }
         },
         computed: {
@@ -771,12 +820,12 @@ End  Post Your Ad -->
             },
             car() {
                 var car = '';
-                if (this.brand)
-                    car += this.brand + ' ' + this.model + ' ' + this.manufacturing_year;
+                if (!this.isEmpty(this.brand))
+                    car += this.brand.name + ' ' + this.model.name + ' ' + this.manufacturing_year;
                 else
                     return '';
-                if (this.package)
-                    car += ', ' + this.package;
+                if (!this.isEmpty(this.package))
+                    car += ', ' + this.package.name;
                 return car;
             },
             priceValidate() {
@@ -791,16 +840,16 @@ End  Post Your Ad -->
                     this.verifyOtp();
             },
             brand: function(v) {
-                localStorage.brand = v;
+                localStorage.brand = JSON.stringify(v);
             },
             model: function(v) {
-                localStorage.model = v;
+                localStorage.model = JSON.stringify(v);
             },
             manufacturing_year: function(v) {
                 localStorage.manufacturing_year = v;
             },
             package: function(v) {
-                localStorage.package = v;
+                localStorage.package = JSON.stringify(v);
             },
             kms_driven: function(v) {
                 localStorage.kms_driven = v;
@@ -809,10 +858,10 @@ End  Post Your Ad -->
                 localStorage.ownership = v;
             },
             city: function(v) {
-                localStorage.city = v;
+                localStorage.city = JSON.stringify(v);
             },
             region: function(v) {
-                localStorage.region = v;
+                localStorage.region = JSON.stringify(v);
             },
             registration_year: function(v) {
                 localStorage.registration_year = v;
