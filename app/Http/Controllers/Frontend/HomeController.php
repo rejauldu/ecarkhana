@@ -538,7 +538,7 @@ class HomeController extends Controller {
     public function getRegions(Request $request) {
         $regions = '';
         if($request->division)
-            $regions = Region::select('id', 'name')->whereHas('division', function($q) use($request) {
+            $regions = Region::select('id', 'name', 'division_id')->whereHas('division', function($q) use($request) {
                 $q->where('name', $request->division);
             })->get();
         else

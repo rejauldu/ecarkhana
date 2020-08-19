@@ -174,8 +174,8 @@
                             <div class="col-12"><hr></div>
                             <div class="col-12">
                                 <div class="text-dark">@{{ brand }} @{{ model }} @{{ manufacturing_year }}, @{{ package }}</div>
-                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
-                                <a href="#" class="btn btn-link tex-danger pl-0" data-dismiss="modal">Edit details</a>
+                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ region }}, @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                                <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="package" @click.prevent="packageSelected(package)">@{{ package }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="division" @click.prevent="divisionSelected(division)">@{{ division }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="division" @click.prevent="divisionSelected(division)"> @{{ region }}, @{{ division }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="registration_year" @click.prevent="registrationYearSelected(registration_year)">@{{ registration_year }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                         </div>
@@ -234,17 +234,24 @@
                         </div>
                     </div>
                     <div v-else-if="page == 7" class="mx-5">
-                        <h4 class="">Car City</h4>
+                        <h4 class="">Car Area</h4>
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text fa fa-map-marker text-danger bg-white"></span>
                                 </div>
-                                <input class="form-control" placeholder="Search City" v-model="search" />
+                                <input class="form-control" placeholder="Search Area" v-model="search" />
                             </div>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredDivisions" @click.prevent="divisionSelected(m.name)" :class="{'text-danger': m.name == division}"><i class="fa fa-check" v-if="m.name == division"></i> @{{ m.name }}</li>
+                        <ul class="list-group list-group-flush" id="cities">
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d.name" :class="{'text-danger': d.name == division}">
+                                <div>@{{ d.name }}</div>
+                                <div :id="'regions-'+d.id">
+                                    <ul class="list-group list-group-flush">
+                                        <li v-for="r in filteredRegions" v-if="r.division_id == d.id" @click.prevent="regionSelected(r.name)" class="list-group-item list-group-item-action py-0 cursor-pointer border-0"  :class="{'text-info': r.name == region}"><i class="fa fa-check" v-if="r.name == region"></i> <small>@{{ r.name }}</small></li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <ul class="list-group list-group-flush mx-5" v-else-if="page == 8">
@@ -394,8 +401,8 @@
                         <hr/>
                         <div class="col-12">
                             <div class="text-dark">@{{ brand }} @{{ model }} @{{ manufacturing_year }}, @{{ package }}</div>
-                            <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
-                            <a href="#" class="btn btn-link tex-danger pl-0" data-dismiss="modal">Edit details</a>
+                            <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i>  @{{ region }}, @{{ division }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                            <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                         </div>
                     </div>
                 </div>
@@ -430,6 +437,8 @@ End  Post Your Ad -->
             ownerships: ['First', 'Second', 'Third', 'Above'],
             division: '',
             divisions: @json($divisions),
+            region:'',
+            regions: [],
             registration_year: '',
             registration_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
                     1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
@@ -451,35 +460,40 @@ End  Post Your Ad -->
             brandSelected: function (b) {
                 this.brand = b;
                 this.page = 2;
-                this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
+                this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
             },
             modelSelected: function (m) {
                 this.model = m;
                 this.page = 3;
-                this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
+                this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
             },
             manufacturingYearSelected: function (m) {
                 this.manufacturing_year = m;
                 this.page = 4;
-                this.reset('package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
+                this.reset('package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
             },
             packageSelected: function (m) {
                 this.package = m;
                 this.page = 5;
-                this.reset('kms_driven', 'ownership', 'division', 'registration_year', 'price');
+                this.reset('kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
             },
             kmsDrivenSelected: function (m) {
                 this.kms_driven = m;
                 this.page = 6;
-                this.reset('ownership', 'division', 'registration_year', 'price');
+                this.reset('ownership', 'division', 'region', 'registration_year', 'price');
             },
             ownershipSelected: function (m) {
                 this.ownership = m;
                 this.page = 7;
-                this.reset('division', 'registration_year', 'price');
+                this.reset('division', 'region', 'registration_year', 'price');
             },
             divisionSelected: function (m) {
                 this.division = m;
+                this.page = 8;
+                this.reset('region', 'registration_year', 'price');
+            },
+            regionSelected: function (m) {
+                this.region = m;
                 this.page = 8;
                 this.reset('registration_year', 'price');
             },
@@ -511,6 +525,8 @@ End  Post Your Ad -->
                         this.ownership = '';
                     } else if (args[i] == 'division') {
                         this.division = '';
+                    } else if (args[i] == 'region') {
+                        this.region = '';
                     } else if (args[i] == 'registration_year') {
                         this.registration_year = '';
                     } else if (args[i] == 'price') {
@@ -651,6 +667,8 @@ End  Post Your Ad -->
                     this.ownership = localStorage.ownership;
                 if(localStorage.city)
                     this.city = localStorage.city;
+                if(localStorage.region)
+                    this.region = localStorage.region;
                 if(localStorage.registration_year)
                     this.registration_year = localStorage.registration_year;
                 if(localStorage.price)
@@ -686,7 +704,7 @@ End  Post Your Ad -->
                     url: "{{ route('get-regions') }}?division="+d,
                     dataType: "json",
                     success: function(result){
-                        _this.city = result.name;
+                        _this.regions = result;
                     }
                 });
             }
@@ -724,6 +742,11 @@ End  Post Your Ad -->
             },
             filteredDivisions() {
                 return this.divisions.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredRegions() {
+                return this.regions.filter(item => {
                     return item.name.toLowerCase().startsWith(this.search.toLowerCase());
                 })
             },
@@ -778,6 +801,9 @@ End  Post Your Ad -->
             },
             city: function(v) {
                 localStorage.city = v;
+            },
+            region: function(v) {
+                localStorage.region = v;
             },
             registration_year: function(v) {
                 localStorage.registration_year = v;
