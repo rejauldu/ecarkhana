@@ -316,8 +316,10 @@
                     </div>
                     <div v-else-if="page == 10" class="mx-5">
                         <div class="size-21 mb-3">
-                            <img :src="images[cover_image].src" class="img-fluid" />
+                            <img :src="images[cover_image].src" class="img-fluid" v-if="images[cover_image]"/>
+                            <i class="fa fa-trash position-absolute top-0 right-0 display-6 text-danger cursor-pointer" @click.prevent="deleteImage()" v-if="images.length>0"></i>
                         </div>
+                        <div class="text-secondary"><small>Maximum 36 Photos</small></div>
                         <div class="row">
                             <div class="col-3">
                                 <div class="size-11 cursor-pointer bg-light border">
@@ -365,7 +367,7 @@
                             </div>
                             <div class="col-12 mt-3 text-center">
                                 <input type="file"  id="file-input" class="d-none" @change="processFile($event)" />
-                                <button class="btn btn-light border-dashed"><i class="fa fa-plus"></i> Select More Photo</button>
+                                <button class="btn btn-light border-dashed" @click.prevent="selectImage()"><i class="fa fa-plus"></i> Select More Photo</button>
                             </div>
                         </div>
                         <hr/>
@@ -628,6 +630,11 @@ End  Post Your Ad -->
                         }
                     }
                 });
+            },
+            deleteImage() {
+                if(this.cover_image > 0)
+                    this.cover_image--;
+                this.images.splice(this.cover_image, 1);
             }
         },
         computed: {
