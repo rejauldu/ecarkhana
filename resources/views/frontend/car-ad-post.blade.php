@@ -274,7 +274,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="note">Car Description</label>
-                                    <textarea class="form-control" rows="5" id="note" placeholder="Description"></textarea>
+                                    <textarea class="form-control" rows="5" id="note" placeholder="Description" v-model="note"></textarea>
                                 </div>
                                 <hr/>
                                 <div class="form-group form-label-group">
@@ -287,7 +287,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text btn btn-link bg-white border-right-0 text-dark">+88</span>
                                         </div>
-                                        <input type="text" class="form-control" :class="{'opacity-5': otp_sent}" placeholder="phone" id="phone" name="phone" v-model="phone" @keyup="isPhoneValid" :disabled="otp_sent">
+                                        <input type="text" class="form-control" :class="{'opacity-5': otp_sent}" placeholder="phone" id="phone" name="phone" v-model="phone" @keyup="isPhoneValid" :disabled="otp_sent || otp_verified">
                                         <div class="input-group-append">
                                             <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-if="isPhoneValid() && !otp_sent" @click.prevent="sendOtp">Verify Now</a>
                                             <span class="input-group-text btn bg-white border-left-0 text-secondary" v-else-if="!otp_sent">Invalid</span>
@@ -313,7 +313,7 @@
                                     <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="!otp_verified">
+                                    <input type="submit" class="form-control border-right-0 btn btn-danger" value="List my car" :disabled="!photo || !price || !name || !otp_verified || !terms">
                                     <div class="input-group-append">
                                         <span class="input-group-text border-0 bg-danger text-white"><i class="fa fa-arrow-right"></i></span>
                                     </div>
@@ -448,8 +448,10 @@ End  Post Your Ad -->
             scrolledRight: true,
             images: [],
             cover_image: 0,
+            photo:'',
             name: '',
             phone: '',
+            note: '',
             terms: '',
             otp: '',
             otp_sent: false,
@@ -599,6 +601,7 @@ End  Post Your Ad -->
                 var f = event.target.files[0];
                 f.src = URL.createObjectURL(event.target.files[0]);
                 this.images.push(f);
+                this.photo = true;
                 this.page = 10;
             },
             selectImage: function() {
@@ -643,6 +646,7 @@ End  Post Your Ad -->
                             _this.otp_verified = true;
                             _this.otp = '';
                             localStorage.phone_verified = 1;
+                            localStorage.verified_phone = _this.phone;
                         }
                     }
                 });
@@ -651,6 +655,7 @@ End  Post Your Ad -->
                 if(this.cover_image > 0)
                     this.cover_image--;
                 this.images.splice(this.cover_image, 1);
+                this.photo = this.images.length;
             },
             getFromStorage: function() {
                 if(localStorage.brand)
@@ -679,6 +684,10 @@ End  Post Your Ad -->
                     this.name = localStorage.name;
                 if(localStorage.phone)
                     this.phone = localStorage.phone;
+                if(localStorage.phone_verified)
+                    this.otp_verified = localStorage.phone_verified;
+                if(localStorage.verified_phone)
+                    this.phone = localStorage.verified_phone;
             },
             getCurrentLocation: function () {
                 var _this = this;
