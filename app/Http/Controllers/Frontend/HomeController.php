@@ -536,7 +536,13 @@ class HomeController extends Controller {
     }
 
     public function getRegions(Request $request) {
-        $regions = Region::select('id', 'name')->where('name', 'like', '%' . $request->q . '%')->take(10)->get();
+        $regions = '';
+        if($request->division)
+            $regions = Region::select('id', 'name')->whereHas('division', function($q) use($request) {
+                $q->where('name', $request->division);
+            })->get();
+        else
+            $regions = Region::select('id', 'name')->where('name', 'like', '%' . $request->q . '%')->take(10)->get();
         return (string) $regions;
     }
 

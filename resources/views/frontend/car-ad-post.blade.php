@@ -635,6 +635,60 @@ End  Post Your Ad -->
                 if(this.cover_image > 0)
                     this.cover_image--;
                 this.images.splice(this.cover_image, 1);
+            },
+            getFromStorage: function() {
+                if(localStorage.brand)
+                    this.brand = localStorage.brand;
+                if(localStorage.model)
+                    this.model = localStorage.model;
+                if(localStorage.manufacturing_year)
+                    this.manufacturing_year = localStorage.manufacturing_year;
+                if(localStorage.package)
+                    this.package = localStorage.package;
+                if(localStorage.kms_driven)
+                    this.kms_driven = localStorage.kms_driven;
+                if(localStorage.ownership)
+                    this.ownership = localStorage.ownership;
+                if(localStorage.city)
+                    this.city = localStorage.city;
+                if(localStorage.registration_year)
+                    this.registration_year = localStorage.registration_year;
+                if(localStorage.price)
+                    this.price = localStorage.price;
+                if(localStorage.note)
+                    this.note = localStorage.note;
+                if(localStorage.name)
+                    this.name = localStorage.name;
+                if(localStorage.phone)
+                    this.phone = localStorage.phone;
+            },
+            getCurrentLocation: function () {
+                var _this = this;
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(p) {
+                        _this.regionByPosition(p);
+                    });
+                }
+            },
+            regionByPosition: function(p) {
+                var _this = this;
+                $.ajax({
+                    url: "{{ route('get-region') }}?lat="+p.coords.latitude+"&lon="+p.coords.longitude,
+                    dataType: "json",
+                    success: function(result){
+                        _this.city = result.name;
+                    }
+                });
+            },
+            regionsByDivision: function(d) {
+                var _this = this;
+                $.ajax({
+                    url: "{{ route('get-regions') }}?division="+d,
+                    dataType: "json",
+                    success: function(result){
+                        _this.city = result.name;
+                    }
+                });
             }
         },
         computed: {
@@ -702,9 +756,48 @@ End  Post Your Ad -->
         watch: {
             otp: function (val) {
                 if(val.length == 4)
-                    this.verifyOtp();;
+                    this.verifyOtp();
             },
-        }
+            brand: function(v) {
+                localStorage.brand = v;
+            },
+            model: function(v) {
+                localStorage.model = v;
+            },
+            manufacturing_year: function(v) {
+                localStorage.manufacturing_year = v;
+            },
+            package: function(v) {
+                localStorage.package = v;
+            },
+            kms_driven: function(v) {
+                localStorage.kms_driven = v;
+            },
+            ownership: function(v) {
+                localStorage.ownership = v;
+            },
+            city: function(v) {
+                localStorage.city = v;
+            },
+            registration_year: function(v) {
+                localStorage.registration_year = v;
+            },
+            price: function(v) {
+                localStorage.price = v;
+            },
+            note: function(v) {
+                localStorage.note = v;
+            },
+            name: function(v) {
+                localStorage.name = v;
+            },
+            phone: function(v) {
+                localStorage.phone = v;
+            }
+        },
+        mounted:function(){
+            this.getFromStorage();
+        },
     })
 </script>
 @endsection
