@@ -57,6 +57,7 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        dd($request->all());
         $data = $request->except('_token', '_method');
         $product = Product::create($data);
         $data = $this->handleImage($request, $data, $product->id);
