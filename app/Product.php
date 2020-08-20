@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'sku', 'brand_id', 'model_id', 'package_id', 'manufacturing_year', 'name', 'description', 'supplier_id', 'category_id', 'quantity_per_unit', 'msrp', 'size_id', 'color_id', 'discount', 'weight', 'stock', 'unit_id', 'unit_on_order', 'reorder_level', 'is_available', 'discount_available', 'picture', 'ranking', 'note', 'condition_id', 'view', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'image11', 'image12', 'image13', 'image14', 'image15', 'image16', 'image17', 'image18', 'image19', 'image20', 'image21', 'image22', 'image23', 'image24', 'image25', 'image26', 'image27', 'image28', 'image29', 'image30', 'image31', 'image32', 'image33', 'image34', 'image35', 'image36', 'registration_year', 'kms_driven', 'ownership', 'auction_grade_id', 'after_sell_service', 'auction_from', 'auction_to', 'auction_amount', 'car_id', 'motorcycle_id', 'bicycle_id', 'deleted_at', 'created_at', 'updated_at'
+        'sku', 'brand_id', 'model_id', 'package_id', 'manufacturing_year', 'name', 'description', 'supplier_id', 'category_id', 'quantity_per_unit', 'msrp', 'size_id', 'color_id', 'discount', 'weight', 'stock', 'unit_id', 'unit_on_order', 'reorder_level', 'is_available', 'discount_available', 'picture', 'ranking', 'note', 'condition_id', 'view', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'image11', 'image12', 'image13', 'image14', 'image15', 'image16', 'image17', 'image18', 'image19', 'image20', 'image21', 'image22', 'image23', 'image24', 'image25', 'image26', 'image27', 'image28', 'image29', 'image30', 'image31', 'image32', 'image33', 'image34', 'image35', 'image36', 'registration_year', 'kms_driven', 'ownership', 'region_id', 'dealer_name', 'phone', 'auction_grade_id', 'after_sell_service', 'auction_from', 'auction_to', 'auction_amount', 'car_id', 'motorcycle_id', 'bicycle_id', 'deleted_at', 'created_at', 'updated_at'
     ];
 
     /**
@@ -72,7 +72,13 @@ class Product extends Model
 	public function order_details() {
 		return $this->hasMany('App\OrderDetail');
 	}
-        public function size() {
+	public function size() {
 		return $this->belongsTo('App\Size');
+	}
+	public function ownership() {
+		return $this->belongsTo('App\Dropdowns\Ownership');
+	}
+	public function region() {
+		return $this->belongsTo('App\Locations\Region');
 	}
 }

@@ -21,6 +21,9 @@ use App\Dropdowns\AfterSellService;
 
 class ProductController extends Controller {
 
+    public function __construct() {
+        $this->middleware('moderator:Product', ['except' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -57,14 +60,22 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        dd($request->all());
         $data = $request->except('_token', '_method');
+        if($request->after_sell_service)
+            $data['after_sell_service'] = implode(',', $data['after_sell_service']);
+        if(Auth::check())
+            $data['user_id'] = Auth::user()->id;
+        if(!$request->name) {
+            $brand = Brand::find($request->brand_id);
+            $model = Model::find($request->brand_id);
+            $data['name'] = $brand->name.' '.$model->name.' '.$request->manufacturing_year;
+        }
         $product = Product::create($data);
         $data = $this->handleImage($request, $data, $product->id);
         $id = $this->getProductDetailId($data);
         $category = Category::find($request->category_id);
         $data[strtolower($category->name) . '_id'] = $id;
-        $data['after_sell_service'] = implode(',', $data['after_sell_service']);
+        
         Product::find($product->id)->update($data);
         return redirect(route('products.index'))->with('message', 'Product created successfully');
     }
@@ -156,9 +167,10 @@ class ProductController extends Controller {
         $serial = explode(',', $request->image_serial);
         $image_names = [];
         for ($i = 0; $i < 36; $i++) {
-            if (isset($request->images[$i])) {
+            if (isset($request->images[$i]) && $request->images[$i]) {
                 $image = $request->file('images.' . $i);
                 $main_img = ($i+1) . '.' . $image->getClientOriginalExtension();
+                
                 $image->move(public_path('assets/products/'.$id), $main_img);
                 $image_names[] = $main_img;
             }
@@ -171,11 +183,10 @@ class ProductController extends Controller {
             if (isset($request->img[$i])) {
                 $array = explode('/', $request->img[$i]);
                 $data[$name] = end($array);
+                $exist = $j;
             } else {
                 @unlink(public_path('assets/products/'.$id.'/') . $request->$name);
                 $data[$name] = null;
-                if (!$exist)
-                    $exist = $i;
             }
         }
         //Save image name to database

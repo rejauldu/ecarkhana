@@ -79,6 +79,7 @@ Route::get('requested-more-infos-unviewed', 'Frontend\RequestedMoreInfoControlle
 Route::resource('make-an-offers', 'Frontend\MakeAnOfferController');
 Route::get('make-an-offers-unviewed', 'Frontend\MakeAnOfferController@unviewed')->name('make-an-offers.unviewed');
 Route::resource('orders', 'Backend\OrderController');
+Route::resource('products', 'Backend\ProductController');
 Route::get('order-complete', 'Backend\OrderController@orderComplete')->name('order-complete');
 Route::get('/panorama', function() {
     return view('frontend.panorama');
@@ -103,7 +104,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 	Route::resource('regions', 'Locations\RegionController')->middleware('moderator:Location');
 	Route::resource('sizes', 'Backend\SizeController')->middleware('moderator:Size');
 	Route::resource('colors', 'Backend\ColorController')->middleware('moderator:Color');
-	Route::resource('products', 'Backend\ProductController')->middleware('moderator:Product');
+	
 	Route::get('products-auction/{id}', 'Backend\ProductController@auction')->name('products.auction');
 	Route::post('products-auction/{id}', 'Backend\ProductController@auctionStore')->name('products.auction.store');
 
@@ -151,6 +152,7 @@ Route::prefix('dropdowns')->group(function () {
 	Route::resource('made-ins', 'Backend\Dropdowns\MadeInController')->middleware('moderator:Dropdown');
 	Route::resource('made-origins', 'Backend\Dropdowns\MadeOriginController')->middleware('moderator:Dropdown');
 	Route::resource('models', 'Backend\Dropdowns\ModelController')->middleware('moderator:Dropdown');
+        Route::resource('ownerships', 'Backend\Dropdowns\OwnershipController')->middleware('moderator:Dropdown');
 	Route::resource('packages', 'Backend\Dropdowns\PackageController')->middleware('moderator:Dropdown');
 	Route::resource('rear-brakes', 'Backend\Dropdowns\RearBrakeController')->middleware('moderator:Dropdown');
 	Route::resource('safety-securities', 'Backend\Dropdowns\SafetySecurityController')->middleware('moderator:Dropdown');

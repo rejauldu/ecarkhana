@@ -151,6 +151,10 @@ product-listing  -->
                                     <label for="demo">OTP:</label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder="OTP" id="otp" name="otp" v-model="otp">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text btn bg-white border-left-0 text-secondary" v-if="otp_sent && !otp_error"><i class="fa fa-spinner fa-spin"></i></span>
+                                            <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else-if="otp_error">Wrong OTP</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="custom-control custom-checkbox">
@@ -583,6 +587,7 @@ product-listing  -->
                 otp: '',
                 terms: '',
                 otp_sent: false,
+                otp_error: false,
                 countDown: 60
             },
             methods: {
@@ -631,7 +636,8 @@ product-listing  -->
                             if(result == 'success') {
                                 localStorage.phone_verified = 1;
                                 window.location = _this.whatsappLink;
-                            }
+                            } else
+                                _this.otp_error = true;
                         }
                     });
                 }

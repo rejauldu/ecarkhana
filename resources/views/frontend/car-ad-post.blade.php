@@ -12,7 +12,7 @@
 <!--=================================Start Post Your Ad-->
 
 <section class="page-section-ptb" id="sell-car">
-    <form action="{{ route('products.store') }}" method="post" class="d-block" @submit="isSubmitable">
+    <form action="{{ route('products.store') }}" method="post" class="d-block" @submit="isSubmitable" enctype="multipart/form-data">
         <div class="row">
             <div class="col-12 col-md-2 col-lg-3 col-xl-4"></div>
             <div class="col-12 col-md-8 col-lg-6 col-xl-4">
@@ -28,7 +28,7 @@
                             <label for="kms-driven" class=" cursor-pointer">Kms driven</label>
                         </div>
                         <div class="form-group form-label-group">
-                            <input type="text" class="form-control bg-light" id="ownership" placeholder="Select Ownership" readonly="" v-model="ownership" @click.prevent="openModal(6)" />
+                            <input type="text" class="form-control bg-light" id="ownership" placeholder="Select Ownership" readonly="" v-model="ownership.name" @click.prevent="openModal(6)" />
                             <label for="ownership" class=" cursor-pointer">Ownership</label>
                         </div>
                         <div class="form-group form-label-group">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 text-right"><button class="btn button red"><span class="mr-3">Continue</span> <i class="fa fa-arrow-right"></i></button></div>
+                            <div class="col-12 text-right"><button type="submit" class="btn button red"  :disabled="!isSubmitable()"><span class="mr-3">Continue</span> <i class="fa fa-arrow-right"></i></button></div>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                                 <div class="col-12"><hr></div>
                                 <div class="col-12">
                                     <div class="text-dark">@{{ brand.name }} @{{ model.name }} @{{ manufacturing_year }}, @{{ package.name }}</div>
-                                    <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i> @{{ region.name }}, @{{ division.name }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                                    <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership.name }} <i class="fa fa-angle-double-right"></i> @{{ region.name }}, @{{ division.name }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
                                     <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                                 </div>
                             </div>
@@ -186,7 +186,7 @@
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(package)" @click.prevent="packageSelected(package)">@{{ package.name }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="kms_driven" @click.prevent="kmsDrivenSelected(kms_driven)">@{{ kms_driven }}</span>
-                                <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="ownership" @click.prevent="ownershipSelected(ownership)">@{{ ownership }}</span>
+                                <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(ownership)" @click.prevent="ownershipSelected(ownership)">@{{ ownership.name }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(region)" @click.prevent="divisionSelected(division)"> @{{ region.name }}, @{{ division.name }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="registration_year" @click.prevent="registrationYearSelected(registration_year)">@{{ registration_year }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
@@ -229,7 +229,7 @@
                         <div v-else-if="page == 6" class="container">
                             <div class="row mx-0">
                                 <div class="col-3" v-for="m in filteredOwnerships">
-                                    <button class="btn btn-light m-1" @click.prevent="ownershipSelected(m)" :class="{'text-danger': m == ownership}">@{{ m }}</button>
+                                    <button class="btn btn-light m-1" @click.prevent="ownershipSelected(m)" :class="{'text-danger': m.id == ownership.id}">@{{ m.name }}</button>
                                 </div>
                             </div>
                         </div>
@@ -312,18 +312,19 @@
                                         <input type="checkbox" class="custom-control-input" id="terms" v-model="terms">
                                         <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
                                     </div>
-
+                                    <input type="hidden" name="category_id" value="1" />
+                                    <input type="hidden" name="condition_id" value="3" />
                                     <input type="hidden" name="brand_id" v-model="brand.id" />
                                     <input type="hidden" name="model_id" v-model="model.id" />
                                     <input type="hidden" name="manufacturing_year" v-model="manufacturing_year" />
                                     <input type="hidden" name="package_id" v-model="package.id" />
                                     <input type="hidden" name="kms_driven" v-model="kms_driven" />
-                                    <input type="hidden" name="ownership" v-model="ownership" />
+                                    <input type="hidden" name="ownership_id" v-model="ownership.id" />
                                     <input type="hidden" name="region_id" v-model="region.id" />
                                     <input type="hidden" name="registration_year" v-model="registration_year" />
                                     <input type="hidden" name="msrp" v-model="price" />
                                     <input type="hidden" name="note" v-model="note" />
-                                    <input type="hidden" name="name" v-model="name" />
+                                    <input type="hidden" name="dealer_name" v-model="name" />
                                     <input type="hidden" name="phone" v-model="phone" />
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="input-group my-3">
@@ -414,7 +415,7 @@
                             <hr/>
                             <div class="col-12">
                                 <div class="text-dark">@{{ brand.name }} @{{ model.name }} @{{ manufacturing_year }}, @{{ package.name }}</div>
-                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership }} <i class="fa fa-angle-double-right"></i>  @{{ region.name }}, @{{ division.name }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
+                                <small class="text-secondary">@{{ kms_driven }}km <i class="fa fa-angle-double-right"></i> @{{ ownership.name }} <i class="fa fa-angle-double-right"></i>  @{{ region.name }}, @{{ division.name }} <i class="fa fa-angle-double-right"></i> @{{ registration_year }}</small><br/>
                                 <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                             </div>
                         </div>
@@ -448,8 +449,8 @@ End  Post Your Ad -->
                     1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
             kms_driven: '',
             kms_drivens: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
-            ownership: '',
-            ownerships: ['First', 'Second', 'Third', 'Above'],
+            ownership: {},
+            ownerships: @json($ownerships),
             division: {},
             divisions: @json($divisions),
             region:{},
@@ -539,7 +540,7 @@ End  Post Your Ad -->
                     } else if (args[i] == 'kms_driven') {
                         this.kms_driven = '';
                     } else if (args[i] == 'ownership') {
-                        this.ownership = '';
+                        this.ownership = {};
                     } else if (args[i] == 'division') {
                         this.division = {};
                     } else if (args[i] == 'region') {
@@ -682,7 +683,7 @@ End  Post Your Ad -->
                 if (localStorage.kms_driven)
                     this.kms_driven = localStorage.kms_driven;
                 if (localStorage.ownership)
-                    this.ownership = localStorage.ownership;
+                    this.ownership = JSON.parse(localStorage.ownership);
                 if (localStorage.city)
                     this.city = JSON.parse(localStorage.city);
                 if (localStorage.region)
@@ -768,7 +769,7 @@ End  Post Your Ad -->
             },
             filteredOwnerships() {
                 return this.ownerships.filter(item => {
-                    return item.toLowerCase().startsWith(this.search.toLowerCase());
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
                 })
             },
             filteredDivisions() {
@@ -828,7 +829,7 @@ End  Post Your Ad -->
                 localStorage.kms_driven = v;
             },
             ownership: function(v) {
-                localStorage.ownership = v;
+                localStorage.ownership = JSON.stringify(v);
             },
             city: function(v) {
                 localStorage.city = JSON.stringify(v);

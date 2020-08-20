@@ -30,6 +30,7 @@ use App\Dropdowns\BodyType;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Dropdowns\Displacement;
+use App\Dropdowns\Ownership;
 use App\Blog;
 use App\Otp;
 
@@ -146,7 +147,8 @@ class HomeController extends Controller {
         $models = Model::where('category_id', 1)->get();
         $packages = Package::where('category_id', 1)->get();
         $divisions = Division::all();
-        return view('frontend.car-ad-post', compact('brands', 'models', 'packages', 'divisions'));
+        $ownerships = Ownership::all();
+        return view('frontend.car-ad-post', compact('brands', 'models', 'packages', 'divisions', 'ownerships'));
     }
 
     public function carInsurance() {
@@ -485,7 +487,7 @@ class HomeController extends Controller {
 
     public function singleCarProduct($id) {
         $product = Product::has('car')
-                ->with('auction_grade', 'car.brand', 'car.model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+                ->with('auction_grade', 'car.brand', 'car.model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'region.division')
                 ->where('id', $id)
                 ->first();
         $key_features = KeyFeature::where('category_id', 1)->get();

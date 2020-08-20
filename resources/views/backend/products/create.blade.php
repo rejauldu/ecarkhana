@@ -162,6 +162,17 @@
                                                 <label for="kms-driven">Kms driven</label>
                                                 <input id="kms-driven" type="number" class="form-control" name="kms_driven" value="{{ $product->kms_driven ?? '' }}" placeholder="Enter Kms driven" title="Enter Kms driven" />
                                             </div>
+                                            <div class="form-group d-cross d-car-used  d-motorcycle-used  d-bicycle-used">
+                                                <label for="ownership">Ownership</label>
+                                                <select id="ownership" name="ownership_id" class="custom-select" required>
+                                                    <option value="0">--Select Ownership--</option>
+                                                    @foreach($ownerships as $ownership)
+                                                    <option value="{{ $ownership->id }}" @if(isset($product) && $product->ownership_id == $ownership->id) selected @endif>{{ $ownership->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="valid-feedback">Valid.</div>
+                                                <div class="invalid-feedback">Please fill out this field.</div>
+                                            </div>
                                             <div class="form-group d-cross d-car-recondition">
                                                 <label for="auction-grade">Auction Grade</label>
                                                 <select id="auction-grade" name="auction_grade_id" class="custom-select" required>
@@ -173,7 +184,7 @@
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
-                                            <div class="display-5">After Sell Service</div>
+                                            <div class="display-6">After Sell Service</div>
                                             <div class="custom-control custom-checkbox">
                                                 <div class="row">
                                                     @foreach($after_sell_services as $after_sell_service)
@@ -257,6 +268,5 @@
         }
 
     }
-    ;
 </script>
 @endsection
