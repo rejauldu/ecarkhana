@@ -20,6 +20,11 @@
         @endif
         <div class="row">
             <div class="col-12">
+                @if($errors->any())
+                {!! implode('', $errors->all('<div class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert">&times;</button>:message</div>')) !!}
+                @endif
+            </div>
+            <div class="col-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-edit"></i> {{ __(isset($product)?'Update product':'Create product') }}</h3>
@@ -222,11 +227,11 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <script>
-    $('.editor-tools').summernote({
-        placeholder: 'Enter note for your product',
-        tabsize: 2,
-        height: 100
-    });
+                                                    $('.editor-tools').summernote({
+                                                        placeholder: 'Enter note for your product',
+                                                        tabsize: 2,
+                                                        height: 100
+                                                    });
 </script>
 <script>
     (function () {

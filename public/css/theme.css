@@ -113,71 +113,6 @@ table.dataTable thead .sorting_desc_disabled:before {
     font-size:15px;
     color:#888;
 }
-/* Fancy Tabs starts; prepared by rejauldu@gmail.com */
-.fancy-tab li {
-    text-align: center;
-    padding:15px 0;
-    background-color: #eee;
-    top:15px;
-    position:relative;
-    border:1px solid #DDD;
-}
-.fancy-tab li.active {
-    top:0;
-    transition:top .2s;
-    border:transparent;
-    background: #fff;
-    box-shadow: 1px 1px 0 1px #fff, 0 0px 0 1px #ddd, -1px 1px 0 0px #ddd inset;
-    padding-bottom:30px;
-}
-.fancy-tab li a {
-    font-family: 'Source Sans Pro';
-    font-weight:300;
-    transition:.2s;
-    color:#333;
-}
-
-.fancy-tab li .fa {
-    width:100%;
-    color:#666;
-}
-.fancy-tab li.active .fa {
-    color: #cfb87c;
-}
-.fancy-tab-content {
-    border-color: transparent;
-    box-shadow: 0 -2px 0 -1px #fff, 0 0 0 1px #ddd;
-    padding: 30px 15px 15px;
-    position:relative;
-    background-color:#fff;
-}
-.fancy-tab li:hover {
-    background-color:#f9f9f9;
-}
-.fancy-tab .arrow-down {
-    display:none;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 22px solid #ddd;
-    position: absolute;
-    top: -1px;
-    left: calc(50% - 20px);
-}
-.fancy-tab .arrow-down-inner {
-    width: 0;
-    height: 0;
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-top: 12px solid #fff;
-    position: absolute;
-    top: -22px;
-    left: -18px;
-}
-.fancy-tab li.active .arrow-down {
-    display: block;
-}
 /*Fixing*/
 .nav-pills.fancy-tab>li.active>a, .nav-pills.fancy-tab>li.active>a:hover, .nav-pills.fancy-tab>li.active>a:focus {
     border-top-color:transparent;
@@ -545,6 +480,39 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 .height-50 {
     height: 50px;
+}
+.line-height-0 {
+    line-height: 0;
+}
+.line-height-5 {
+    line-height: 5px;
+}
+.line-height-10 {
+    line-height: 10px;
+}
+.line-height-15 {
+    line-height: 15px;
+}
+.line-height-20 {
+    line-height: 20px;
+}
+.line-height-25 {
+    line-height: 25px;
+}
+.line-height-30 {
+    line-height: 30px;
+}
+.line-height-35 {
+    line-height: 35px;
+}
+.line-height-40 {
+    line-height: 40px;
+}
+.line-height-45 {
+    line-height: 45px;
+}
+.line-height-50 {
+    line-height: 50px;
 }
 .margin-0 {
     margin: 0;

@@ -14,6 +14,11 @@
 <section class="page-section-ptb" id="sell-car">
     <form action="{{ route('products.store') }}" method="post" class="d-block" @submit="isSubmitable" enctype="multipart/form-data">
         <div class="row">
+            <div class="col-12">
+                @if($errors->any())
+                {!! implode('', $errors->all('<div class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert">&times;</button>:message</div>')) !!}
+                @endif
+            </div>
             <div class="col-12 col-md-2 col-lg-3 col-xl-4"></div>
             <div class="col-12 col-md-8 col-lg-6 col-xl-4">
                 <div class="card">
@@ -124,9 +129,9 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header flex-md-row flex-column justify-content-between" :class="{'border-bottom-0': page != 9}">
-                        <i class="fa fa-arrow-left cursor-pointer height-30" data-dismiss="modal" v-if="page == 1"></i>
-                        <span class="fa fa-close cursor-pointer height-30" v-else-if="page == 10" @click.prevent="page--"></span>
-                        <span class="fa fa-arrow-left cursor-pointer height-30" v-else @click.prevent="page--"></span>
+                        <i class="fa fa-arrow-left cursor-pointer height-30 line-height-30" data-dismiss="modal" v-if="page == 1"></i>
+                        <span class="fa fa-close cursor-pointer height-30 line-height-30" v-else-if="page == 10" @click.prevent="page--"></span>
+                        <span class="fa fa-arrow-left cursor-pointer height-30 line-height-30" v-else @click.prevent="page--"></span>
                         <div class="flex-grow-1 px-5 container" v-if="page == 9">
                             <div class="row">
                                 <div class="col-4 col-md-3">
@@ -204,7 +209,7 @@
                         <h4 class="mx-5" v-else-if="page==6">Car Ownership</h4>
                         <h4 class="mx-5" v-else-if="page==8">Registration Year</h4>
 
-                        <div class="form-group mx-5" v-if="page != 7 && page != 9 && page != 10">
+                        <div class="form-group mx-5" v-if="page != 5 && page != 7 && page != 9 && page != 10">
                             <input class="form-control" placeholder="Search..." v-model="search" />
                         </div>
                         <ul class="list-group list-group-flush mx-5" v-if="page == 1">
@@ -220,6 +225,14 @@
                             <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m)" :class="{'text-danger': m.id == package.id}"><i class="fa fa-check" v-if="m.id == package.id"></i> @{{ m.name }}</li>
                         </ul>
                         <div v-else-if="page == 5" class="container">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input class="form-control" placeholder="Search Area" v-model="search" />
+                                    <div class="input-group-append">
+                                        <span v-if="search.length" class="input-group-text btn-danger cursor-pointer" @click.prevent="kmsDrivenSelected(search)">Continue</span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-3" v-for="m in filteredKmsDrivens">
                                     <button class="btn btn-light m-1" @click.prevent="kmsDrivenSelected(m)" :class="{'text-danger': m == kms_driven}">@{{ m }}</button>
@@ -423,7 +436,7 @@
                 </div>
             </div>
         </div>
-        <input type="file" class="d-none" name="images[]" v-for="i in 36" :key="i" :id="'file-input-'+(i-1)" @change="processFile($event)" v-if="photo>=(i-1)" />
+        <input type="file" class="d-none" name="images[]" v-for="i in 36" :key="i" :id="'file-input-'+(i-1)" @change="processFile($event)" v-if="photo>=(i-1)" accept="image/*" />
     </form>
 </section>
 

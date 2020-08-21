@@ -18,6 +18,7 @@ use App\Dropdowns\Condition;
 use App\Color;
 use App\Size;
 use App\Dropdowns\AfterSellService;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller {
 
@@ -59,7 +60,7 @@ class ProductController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(ProductRequest $request) {
         $data = $request->except('_token', '_method');
         if($request->after_sell_service)
             $data['after_sell_service'] = implode(',', $data['after_sell_service']);
