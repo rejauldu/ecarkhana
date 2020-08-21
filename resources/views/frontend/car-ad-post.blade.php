@@ -746,8 +746,11 @@ End  Post Your Ad -->
             },
             isSubmitable: function(e = null) {
                 $s = !(!this.photo || !this.price || !this.name || !this.otp_verified || !this.terms);
-                if(!$s && e)
+                if(!$s && e) {
                     e.preventDefault();
+                } else if($s) {
+                    this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
+                }
                 return $s;
             },
             isEmpty: function(obj) {
