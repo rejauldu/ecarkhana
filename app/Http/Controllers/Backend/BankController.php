@@ -23,6 +23,16 @@ class BankController extends Controller {
         $banks = Bank::orderBy('id', 'desc')->get();
         return view('backend.banks.index', compact('banks'));
     }
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manageIndex() {
+        $banks = Bank::orderBy('id', 'desc')->get();
+        return view('backend.banks.manage-index', compact('banks'));
+    }
+	
 
     /**
      * Show the form for creating a new resource.

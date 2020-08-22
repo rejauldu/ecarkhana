@@ -276,7 +276,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 /* Bootstrap modal extention */
 @media only screen and (max-width: 768px) {
     .modal.fullscreen-sm {
-        padding: 0 !important; // override inline padding-right added from js
+        padding: 0 !important; /* override inline padding-right added from js */
     }
     .modal.fullscreen-sm .modal-dialog {
         width: 100%;
@@ -295,7 +295,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 @media only screen and (max-width: 992px) {
     .modal.fullscreen-md {
-        padding: 0 !important; // override inline padding-right added from js
+        padding: 0 !important; /* override inline padding-right added from js */
     }
     .modal.fullscreen-md .modal-dialog {
         width: 100%;

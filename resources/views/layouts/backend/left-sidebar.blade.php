@@ -71,7 +71,7 @@
 			</li>
 			@endmoderator
 			@dealeroradmin
-			<li class="treeview {{ Request::is('notifications*') ? 'active' : '' }}" data-toggle="collapse" href="#lm-email">
+			<li class="treeview {{ Request::is('notifications*') ? 'active' : '' }}">
 				<a href="#">
 					<i class="fa fa-bell"></i><span>{{ __('Notification') }}</span>
 					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -116,7 +116,7 @@
                         @moderator(Product)
 			<li class="treeview {{ Request::is('blogs*') || Request::is('manage-blogs*') ? 'active' : '' }}">
 				<a href="#">
-					<i class="fa fa-product-hunt" aria-hidden="true"></i> <span>Blog</span>
+					<i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>Blog</span>
 					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
@@ -174,13 +174,13 @@
 			</li>
 			@endmoderator
 			@moderator(Payment)
-			<li class="treeview {{ Request::is('banks*') ? 'active' : '' }}">
+			<li class="treeview {{ Request::is('banks*') || Request::is('manage-banks') ? 'active' : '' }}">
 				<a href="#">
 					<i class="fa fa-bank" aria-hidden="true"></i> <span>Bank</span>
 					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
-					<!--<li class="{{ Request::is('banks') ? 'active' : '' }}"><a href="{{ route('banks.index') }}"><i class="fa fa-circle-o"></i> Manage Payment</a></li>-->
+					<li class="{{ Request::is('manage-banks') ? 'active' : '' }}"><a href="{{ route('manage-banks') }}"><i class="fa fa-circle-o"></i> Manage Banks</a></li>
 					<li class="{{ Request::is('banks/create') ? 'active' : '' }}"><a href="{{ route('banks.create') }}"><i class="fa fa-circle-o"></i> Add New Bank</a></li>
 				</ul>
 			</li>

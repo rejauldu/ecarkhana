@@ -197,7 +197,7 @@
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                             </div>
                         </div>
-                        <span v-if="page != 10" class="float-right nowrap height-30 width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
+                        <span v-if="page != 10" class="float-right nowrap height-30  width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
@@ -216,13 +216,13 @@
                             <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="b in filteredBrands" @click.prevent="brandSelected(b)" :class="{'text-danger': b.id == brand.id}"><i class="fa fa-check" v-if="b.id == brand.id"></i> @{{ b.name }}</li>
                         </ul>
                         <ul class="list-group list-group-flush mx-5" v-else-if="page == 2">
-                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m)" :class="{'text-danger': m.id == model.id}"><i class="fa fa-check" v-if="m.id == model.id"></i> @{{ m.name }}</li>
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredModels" @click.prevent="modelSelected(m)" :class="{'text-danger': m.id == model.id}" v-if="brand.id == m.brand_id"><i class="fa fa-check" v-if="m.id == model.id"></i> @{{ m.name }}</li>
                         </ul>
                         <ul class="list-group list-group-flush mx-5" v-else-if="page == 3">
                             <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredManufacturingYears" @click.prevent="manufacturingYearSelected(m)" :class="{'text-danger': m == manufacturing_year}"><i class="fa fa-check" v-if="m == manufacturing_year"></i> @{{ m }}</li>
                         </ul>
                         <ul class="list-group list-group-flush mx-5" v-else-if="page == 4">
-                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m)" :class="{'text-danger': m.id == package.id}"><i class="fa fa-check" v-if="m.id == package.id"></i> @{{ m.name }}</li>
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredPackages" @click.prevent="packageSelected(m)" :class="{'text-danger': m.id == package.id}" v-if="model.id == m.model_id"><i class="fa fa-check" v-if="m.id == package.id"></i> @{{ m.name }}</li>
                         </ul>
                         <div v-else-if="page == 5" class="container">
                             <div class="form-group">
@@ -253,10 +253,16 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text fa fa-map-marker text-danger bg-white"></span>
                                     </div>
-                                    <input class="form-control" placeholder="Search Area" v-model="search" />
+                                    <input class="form-control" placeholder="Region" v-model="region.name" disabled="" v-if="!isEmpty(region)"/>
+                                    <input class="form-control" placeholder="Search City" v-model="search" v-else />
+                                    <div class="input-group-append" v-if="!isEmpty(region)">
+                                        <span class="input-group-text btn-danger cursor-pointer text-white bg-danger" @click.prevent="regionSelected(region)">Continue</span>
+                                    </div>
                                 </div>
                             </div>
+                            <div v-if="!isEmpty(region)" class="list-group-item-danger mb-3 px-3">Select Region to change</div>
                             <ul class="list-group list-group-flush" id="cities">
+                                
                                 <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d" :class="{'text-danger': d.id == division.id}">
                                     <div>@{{ d.name }}</div>
                                     <div :id="'regions-'+d.id">
@@ -443,7 +449,7 @@
 <!--=================================
 End  Post Your Ad -->
 
-@endsection                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+@endsection
 @section('script')
 <script>
     var vuejs = new Vue({
@@ -491,37 +497,37 @@ End  Post Your Ad -->
             brandSelected: function (b) {
                 this.brand = b;
                 this.page = 2;
-                this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
+                this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
             },
             modelSelected: function (m) {
                 this.model = m;
                 this.page = 3;
-                this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
+                this.reset('manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
             },
             manufacturingYearSelected: function (m) {
                 this.manufacturing_year = m;
                 this.page = 4;
-                this.reset('package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
+                this.reset('package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
             },
             packageSelected: function (m) {
                 this.package = m;
                 this.page = 5;
-                this.reset('kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
+                this.reset('kms_driven', 'ownership', 'division', 'registration_year', 'price');
             },
             kmsDrivenSelected: function (m) {
                 this.kms_driven = m;
                 this.page = 6;
-                this.reset('ownership', 'division', 'region', 'registration_year', 'price');
+                this.reset('ownership', 'division', 'registration_year', 'price');
             },
             ownershipSelected: function (m) {
                 this.ownership = m;
                 this.page = 7;
-                this.reset('division', 'region', 'registration_year', 'price');
+                this.reset('division', 'registration_year', 'price');
             },
             divisionSelected: function (m) {
                 this.division = m;
                 this.page = 8;
-                this.reset('region', 'registration_year', 'price');
+                this.reset('registration_year', 'price');
             },
             regionSelected: function (m) {
                 this.region = m;
@@ -697,8 +703,8 @@ End  Post Your Ad -->
                     this.kms_driven = localStorage.kms_driven;
                 if (localStorage.ownership)
                     this.ownership = JSON.parse(localStorage.ownership);
-                if (localStorage.city)
-                    this.city = JSON.parse(localStorage.city);
+                if (localStorage.division)
+                    this.city = JSON.parse(localStorage.division);
                 if (localStorage.region)
                     this.region = JSON.parse(localStorage.region);
                 if (localStorage.registration_year)
@@ -730,7 +736,7 @@ End  Post Your Ad -->
                     url: "{{ route('get-region') }}?lat=" + p.coords.latitude + "&lon=" + p.coords.longitude,
                     dataType: "json",
                     success: function(result){
-                        _this.city = result;
+                        _this.region = result;
                     }
                 });
             },
@@ -749,7 +755,7 @@ End  Post Your Ad -->
                 if(!$s && e) {
                     e.preventDefault();
                 } else if($s) {
-                    this.reset('model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'region', 'registration_year', 'price');
+                    this.reset('brand', 'model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
                 }
                 return $s;
             },
@@ -811,9 +817,9 @@ End  Post Your Ad -->
             car() {
                 var car = '';
                 if (!this.isEmpty(this.brand))
-                    car += this.brand.name + ' ' + this.model.name + ' ' + this.manufacturing_year;
-                else
-                    return '';
+                    car += this.brand.name;
+                if (!this.isEmpty(this.model))
+                    car += this.model.name;
                 if (!this.isEmpty(this.package))
                     car += ', ' + this.package.name;
                 return car;
@@ -871,6 +877,7 @@ End  Post Your Ad -->
         },
         mounted:function(){
             this.getFromStorage();
+            this.getCurrentLocation();
         },
     })
 </script>

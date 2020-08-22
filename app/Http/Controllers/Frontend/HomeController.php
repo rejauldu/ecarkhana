@@ -151,10 +151,6 @@ class HomeController extends Controller {
         return view('frontend.car-ad-post', compact('brands', 'models', 'packages', 'divisions', 'ownerships'));
     }
 
-    public function carInsurance() {
-        return view('frontend.car-insurance');
-    }
-
     public function carListing(Request $request) {
         $products = Product::select('products.*')
                         ->has('car')->with('car', 'supplier.region');
@@ -255,10 +251,6 @@ class HomeController extends Controller {
         return view('frontend.car-loan-eligibility');
     }
 
-    public function carLoanInsuranceCheck() {
-        return view('frontend.car-loan-insurance-check');
-    }
-
     public function compareCar(Request $request) {
         $data = $request->except('_token', '_method');
         $product[] = Product::where('id', $data['products'][0])->with('car.brand', 'car.model', 'car.package')->first();
@@ -299,14 +291,6 @@ class HomeController extends Controller {
         return view('frontend.group-buying-list');
     }
 
-    public function insurance() {
-        return view('frontend.insurance');
-    }
-
-    public function insuranceList() {
-        return view('frontend.insurance-list');
-    }
-
     public function motorcycleCart() {
         $type = 'Motorcycle';
         return view('frontend.motorcycle-cart', compact('type'));
@@ -325,10 +309,6 @@ class HomeController extends Controller {
 
     public function motorcycleCompare() {
         return view('frontend.motorcycle-compare');
-    }
-
-    public function motorcycleInsurance() {
-        return view('frontend.motorcycle-Insurance');
     }
 
     public function motorcycleListing() {

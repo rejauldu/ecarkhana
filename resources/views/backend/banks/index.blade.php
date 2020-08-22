@@ -23,8 +23,8 @@ Start Car Loan  Eligibility check-->
                 </div>
             </div>
         </div>
-        @foreach($banks as $bank)
-        <div class="row insurance-area">
+		@foreach($banks as $bank)
+        <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0">
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
                     <div class="card-image mt-0"><img class=" " src="{{ asset('/assets/banks') }}/{{ $bank->photo ?? 'not-found.jpg' }}" style="width: 160px; max-width: 160px;">
@@ -55,7 +55,11 @@ Start Car Loan  Eligibility check-->
                         </div>
                         <div class="col text-center   mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
                             <span class="card-box-title text-uppercase">Loan amount</span>
-                            @php($profession = $loan_info->profession)
+							@if(isset($loan_info))
+							@php($profession = $loan_info->profession)
+							@else
+                            @php($profession = 'salaried')
+							@endif
                             @php($min = $profession.'_loan_min')
                             @php($max = $profession.'_loan_max')
                             <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $bank->$min }} - {{ $bank->$max }} TK</p>
@@ -66,24 +70,21 @@ Start Car Loan  Eligibility check-->
                             <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $bank->$income }} TK (min)</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <p class="text-normal fz-18 text-normal-res res-style pl-2 text-555 mt-lg-2 mt-md-0 pt-4 smallScreenPadding">
-                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> Floating Rate. Rate Varies: 12.25%-13.25%
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="table-grid-1 border-left border-top-0 border-bottom-0 border-right-0 border-dashed col">
                     <div class="card full-height d-flex align-items-center justify-content-center border-0 align-items-center justify-content-streatch">
-                        <img src="images/credit-card-search.png">
-                        <button class="required" data-toggle="modal" data-target="#exampleModalScrollable">Required
-                            Documents
-                        </button>
-                        <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                    </div>
+                        <div class="coverage">
+							<div class="cover-circle">
+								<div>
+									<span class="cover__title">2</span>Covers
+								</div>
+							</div>
+						</div>
+						<button class="required" data-toggle="modal" data-target="#exampleModalScrollable">Required Documents</button>
+						<button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+					</div>
                 </div>
             </div>
 

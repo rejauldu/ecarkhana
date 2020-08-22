@@ -115,7 +115,7 @@
                                             <ul class='dropdown'>
                                                 <li><a href="{{ route('car-loan') }}">Apply Loan </a></li>
                                                 <li><a href="{{ route('loan-eligibility') }}">Loan Eligibility</a></li>
-                                                <li><a href="{{ route('car-insurance') }}">Insurance</a></li>
+                                                <li><a href="{{ route('insurance') }}">Insurance</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="{{ route('car-listing') }}">Buy Cars</a>
