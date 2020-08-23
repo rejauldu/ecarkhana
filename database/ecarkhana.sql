@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2020 at 04:32 PM
+-- Generation Time: Aug 23, 2020 at 06:38 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -1538,6 +1538,19 @@ INSERT INTO `cooling_systems` (`id`, `category_id`, `name`, `created_at`, `updat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `coverages`
+--
+
+CREATE TABLE `coverages` (
+  `id` smallint(6) NOT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cylinders`
 --
 
@@ -1605,6 +1618,41 @@ INSERT INTO `displacements` (`id`, `category_id`, `model_id`, `name`, `created_a
 (13, 3, 6, '100', '2020-01-21 19:07:24', '2020-02-14 08:35:10'),
 (14, 7, 1, 'Nina Volkman PhD', '2020-01-21 11:22:19', '2020-02-02 06:45:52'),
 (15, 2, 7, 'Laurie Stokes', '2020-01-21 05:56:21', '2020-02-01 07:25:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `displacement_ranges`
+--
+
+CREATE TABLE `displacement_ranges` (
+  `id` smallint(5) UNSIGNED NOT NULL,
+  `category_id` smallint(5) UNSIGNED DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `displacement_ranges`
+--
+
+INSERT INTO `displacement_ranges` (`id`, `category_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 7, 'Santiago Vandervort', '2020-01-21 11:24:43', '2020-02-01 19:48:25'),
+(2, 1, '353', '2020-01-21 07:47:53', '2020-02-14 11:22:10'),
+(3, 7, 'Dr. Letha Barton', '2020-01-21 01:54:17', '2020-01-23 07:19:35'),
+(4, 5, 'Ivy Aufderhar I', '2020-01-21 15:04:12', '2020-01-30 04:39:49'),
+(5, 2, '150', '2020-01-21 07:10:23', '2020-02-14 08:35:47'),
+(6, 2, 'Heidi Wisozk', '2020-01-21 02:03:35', '2020-01-26 21:10:40'),
+(7, 1, 'Geovany Nolan', '2020-01-21 19:30:45', '2020-02-02 22:15:24'),
+(8, 7, 'Dr. Bernadette Cruickshank III', '2020-01-21 01:02:23', '2020-01-26 11:23:12'),
+(9, 2, 'Mr. Dangelo Graham', '2020-01-21 03:55:12', '2020-01-22 22:00:29'),
+(10, 2, 'Edd Streich', '2020-01-21 13:25:30', '2020-01-25 17:32:00'),
+(11, 7, 'Ozella Schmeler', '2020-01-21 13:22:34', '2020-01-24 12:41:56'),
+(12, 6, 'Meaghan Stanton', '2020-01-21 17:40:42', '2020-01-27 01:40:02'),
+(13, 3, '100', '2020-01-21 19:07:24', '2020-02-14 08:35:10'),
+(14, 7, 'Nina Volkman PhD', '2020-01-21 11:22:19', '2020-02-02 06:45:52'),
+(15, 2, 'Laurie Stokes', '2020-01-21 05:56:21', '2020-02-01 07:25:38');
 
 -- --------------------------------------------------------
 
@@ -2024,6 +2072,80 @@ INSERT INTO `home_sliders` (`id`, `type`, `number`, `image1`, `image2`, `image3`
 (8, 'Bicycle', 3, '8-image1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-03-02 07:53:03', '2020-03-02 07:53:03'),
 (9, 'Bicycle', 3, '9-image1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-03-02 07:53:26', '2020-03-02 07:53:26'),
 (10, 'Bicycle', 3, '10-image1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-03-02 07:53:50', '2020-03-02 07:53:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `insurances`
+--
+
+CREATE TABLE `insurances` (
+  `id` bigint(20) NOT NULL,
+  `category_id` smallint(6) DEFAULT NULL,
+  `type` varchar(200) DEFAULT NULL,
+  `displacement` smallint(6) DEFAULT NULL,
+  `passengers` smallint(6) DEFAULT NULL,
+  `brand_id` smallint(6) DEFAULT NULL,
+  `model_id` smallint(6) DEFAULT NULL,
+  `vehicle_type` varchar(50) DEFAULT NULL,
+  `coverages` varchar(100) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `registration_year` smallint(6) DEFAULT NULL,
+  `extra_policy` tinyint(4) DEFAULT 0,
+  `claim` tinyint(4) DEFAULT 0,
+  `insurance_company_id` smallint(6) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `insurance_companies`
+--
+
+CREATE TABLE `insurance_companies` (
+  `id` smallint(6) NOT NULL,
+  `supported_type` varchar(40) DEFAULT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `logo` varchar(100) DEFAULT NULL,
+  `insurance_feature` varchar(100) DEFAULT NULL,
+  `promo` varchar(20) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `insurance_companies`
+--
+
+INSERT INTO `insurance_companies` (`id`, `supported_type`, `name`, `logo`, `insurance_feature`, `promo`, `updated_at`, `created_at`) VALUES
+(1, '1,2', 'Bangladesh National Insurance Company Limited', '1.png', '1,2', NULL, '2020-08-22 22:29:27', '2020-08-22 22:12:54'),
+(2, '1', 'Bangladesh Co-Operative Insurance Ltd.', '1598157290.png', '3,4', NULL, '2020-08-22 22:34:50', '2020-08-22 22:34:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `insurance_features`
+--
+
+CREATE TABLE `insurance_features` (
+  `id` smallint(6) NOT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `insurance_features`
+--
+
+INSERT INTO `insurance_features` (`id`, `name`, `updated_at`, `created_at`) VALUES
+(1, 'Estimated delivery within 2 working days inside Dhaka', '2020-08-22 21:35:20', '2020-08-22 21:35:20'),
+(2, 'Use Promo code \"BIMABD10\" for 10% platform discount', '2020-08-22 21:35:33', '2020-08-22 21:35:33'),
+(3, 'Smart Card', '2020-08-22 21:35:44', '2020-08-22 21:35:44'),
+(4, 'Estimated delivery within 5 working days inside Dhaka.', '2020-08-22 21:35:57', '2020-08-22 21:35:57');
 
 -- --------------------------------------------------------
 
@@ -3793,7 +3915,8 @@ INSERT INTO `products` (`id`, `brand_id`, `model_id`, `package_id`, `manufacturi
 (132, 1, 5, 5, 2020, NULL, '2020 Mitsubishi Rodolfo Waelchi', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', NULL, NULL, NULL, 3, 0, 2019, 10000, 'Second', 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 07:45:26', '2020-08-20 01:45:26', '2020-08-20 01:45:26'),
 (133, 1, 5, 5, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1235', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 1, NULL, NULL, 3, 0, 2018, 10000, 'Second', 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 10:06:30', '2020-08-20 04:06:30', '2020-08-20 04:06:30'),
 (134, 1, 5, 9, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 0, NULL, NULL, 3, 0, 2018, 30000, NULL, 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 13:00:49', '2020-08-20 07:00:49', '2020-08-20 07:00:49'),
-(135, 1, 5, 5, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'this is description', 1, NULL, NULL, 3, 0, 2020, 10000, NULL, 67, 'Rejaul Karim', '01924974960', NULL, NULL, NULL, NULL, 0, '2020-08-20 13:45:25', '2020-08-20 07:45:25', '2020-08-20 07:45:25');
+(135, 1, 5, 5, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'this is description', 1, NULL, NULL, 3, 0, 2020, 10000, NULL, 67, 'Rejaul Karim', '01924974960', NULL, NULL, NULL, NULL, 0, '2020-08-20 13:45:25', '2020-08-20 07:45:25', '2020-08-20 07:45:25'),
+(136, 1, 5, 9, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.sql', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 0, NULL, NULL, 3, 0, 2018, 10000, NULL, 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-21 02:36:57', '2020-08-20 20:36:57', '2020-08-20 20:36:57');
 
 -- --------------------------------------------------------
 
@@ -5604,7 +5727,10 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1310, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-16 21:06:32', '2020-08-16 21:06:32'),
 (1311, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-17 20:23:11', '2020-08-17 20:23:11'),
 (1312, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-18 21:10:35', '2020-08-18 21:10:35'),
-(1313, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-19 21:23:03', '2020-08-19 21:23:03');
+(1313, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-19 21:23:03', '2020-08-19 21:23:03'),
+(1314, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-20 19:52:34', '2020-08-20 19:52:34'),
+(1315, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-21 20:38:09', '2020-08-21 20:38:09'),
+(1316, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-22 19:52:11', '2020-08-22 19:52:11');
 
 -- --------------------------------------------------------
 
@@ -11319,6 +11445,12 @@ ALTER TABLE `cooling_systems`
   ADD KEY `cooling_systems_category_id_index` (`category_id`);
 
 --
+-- Indexes for table `coverages`
+--
+ALTER TABLE `coverages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cylinders`
 --
 ALTER TABLE `cylinders`
@@ -11332,6 +11464,13 @@ ALTER TABLE `displacements`
   ADD PRIMARY KEY (`id`),
   ADD KEY `displacements_category_id_index` (`category_id`),
   ADD KEY `displacements_model_id_index` (`model_id`);
+
+--
+-- Indexes for table `displacement_ranges`
+--
+ALTER TABLE `displacement_ranges`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `displacements_category_id_index` (`category_id`);
 
 --
 -- Indexes for table `districts`
@@ -11409,6 +11548,29 @@ ALTER TABLE `guests`
 -- Indexes for table `home_sliders`
 --
 ALTER TABLE `home_sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `insurances`
+--
+ALTER TABLE `insurances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `brand_id` (`brand_id`),
+  ADD KEY `model_id` (`model_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `insurance_company_id` (`insurance_company_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `insurance_companies`
+--
+ALTER TABLE `insurance_companies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `insurance_features`
+--
+ALTER TABLE `insurance_features`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -11886,6 +12048,12 @@ ALTER TABLE `cooling_systems`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `coverages`
+--
+ALTER TABLE `coverages`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cylinders`
 --
 ALTER TABLE `cylinders`
@@ -11895,6 +12063,12 @@ ALTER TABLE `cylinders`
 -- AUTO_INCREMENT for table `displacements`
 --
 ALTER TABLE `displacements`
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `displacement_ranges`
+--
+ALTER TABLE `displacement_ranges`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
@@ -11962,6 +12136,24 @@ ALTER TABLE `guests`
 --
 ALTER TABLE `home_sliders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `insurances`
+--
+ALTER TABLE `insurances`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `insurance_companies`
+--
+ALTER TABLE `insurance_companies`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `insurance_features`
+--
+ALTER TABLE `insurance_features`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `interior_features`
@@ -12081,7 +12273,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `pros_conses`
@@ -12165,7 +12357,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1314;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1317;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

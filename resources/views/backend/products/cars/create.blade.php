@@ -349,7 +349,7 @@
                                                             <option value="Manual" @if(isset($car) && $car->rear_suspension == 'Manual') selected @endif>Manual</option>
                                                         </select>
                                                     </div>
-                                                    <div class="display-5">What a new</div>
+                                                    <div class="display-6">What a new</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($what_a_news as $what_a_new)
@@ -360,7 +360,7 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">Pros and Cons</div>
+                                                    <div class="display-6">Pros and Cons</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($pros_conses as $pros_cons)
@@ -371,7 +371,7 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">Key Feature</div>
+                                                    <div class="display-6">Key Feature</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($key_features as $key_feature)
@@ -382,7 +382,7 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">Exterior Feature</div>
+                                                    <div class="display-6">Exterior Feature</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($exterior_features as $exterior_feature)
@@ -393,7 +393,7 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">Interior Feature</div>
+                                                    <div class="display-6">Interior Feature</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($interior_features as $interior_feature)
@@ -404,7 +404,7 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">Safety & Security</div>
+                                                    <div class="display-6">Safety & Security</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($safety_securities as $safety_security)
@@ -415,7 +415,7 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
-                                                    <div class="display-5">Additional Feature</div>
+                                                    <div class="display-6">Additional Feature</div>
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="row">
                                                             @foreach($additional_features as $additional_feature)

@@ -1,18 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend\Dropdowns;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
-use App\Insurance;
-use App\Category;
-use App\Dropdowns\Brand;
-use App\Dropdowns\Model;
-use App\Dropdowns\Displacement;
+use App\Dropdowns\InsuranceFeature;
 
-
-class InsuranceController extends Controller {
+class InsuranceFeatureController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -20,9 +14,8 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $insurances = Insurance::all();
-        
-        return view('frontend.insurances.index', compact('insurances'));
+        $insurance_features = InsuranceFeature::all();
+        return view('backend.dropdowns.insurance-features.index', compact('insurance_features'));
     }
 
     /**
@@ -31,11 +24,7 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $categories = Category::all();
-        $brands = Brand::all();
-        $models = Model::all();
-        $displacements = Displacement::all();
-        return view('frontend.insurances.create', compact('categories', 'brands', 'models', 'displacements'));
+        return view('backend.dropdowns.insurance-features.create');
     }
 
     /**
@@ -45,14 +34,9 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $user_id = Auth::user()->id;
-        $review = Review::where('product_id', $request->product_id)->where('user_id', $user_id)->first();
-        if ($review)
-            return redirect()->back()->with('message', 'Sorry. We have received your review before.');
         $data = $request->except('_token', '_method');
-        $data['user_id'] = $user_id;
-        Review::create($data);
-        return redirect()->back()->with('message', 'Thank you for your review');
+        InsuranceFeature::create($data);
+        return redirect(route('insurance-features.index'))->with('message', 'Insurance Feature created successfully');
     }
 
     /**
@@ -62,7 +46,8 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $insurance_feature = InsuranceFeature::find($id);
+        return view('backend.dropdowns.insurance-features.show', compact('insurance_feature'));
     }
 
     /**
@@ -72,7 +57,8 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        $insurance_feature = InsuranceFeature::find($id);
+        return view('backend.dropdowns.insurance-features.create', compact('insurance_feature'));
     }
 
     /**
@@ -83,7 +69,11 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+        $data = $request->except('_token', '_method');
+        $insurance_feature = InsuranceFeature::find($id);
+        $insurance_feature->update($data);
+
+        return redirect(route('insurance-features.index'))->with('message', 'Insurance Feature updated successfully');
     }
 
     /**
@@ -93,9 +83,9 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $review = Review::find($id);
-        $review->delete();
-        return redirect()->back()->with('message', 'Review has been deleted');
+        $insurance_feature = InsuranceFeature::find($id);
+        $insurance_feature->delete();
+        return redirect()->back()->with('message', 'Insurance Feature has been deleted');
     }
 
 }

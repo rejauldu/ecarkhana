@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Dropdowns;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ownership extends Model {
-
+class InsuranceCompany extends Model
+{
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'updated_at', 'created_at'
+        'id', 'supported_type', 'name', 'logo', 'insurance_feature', 'promo', 'updated_at', 'created_at'
     ];
 
     /**
@@ -21,6 +21,7 @@ class Ownership extends Model {
      * @var array
      */
     protected $hidden = [
+        
     ];
 
     /**
@@ -30,11 +31,6 @@ class Ownership extends Model {
      */
     protected $casts = [
         'updated_at' => 'datetime',
-        'created_at' => 'datetime',
+		'created_at' => 'datetime',
     ];
-
-    public function category() {
-        return $this->belongsTo('App\Category');
-    }
-
 }

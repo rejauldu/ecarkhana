@@ -4,8 +4,8 @@ namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ownership extends Model {
-
+class InsuranceFeature extends Model
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +21,7 @@ class Ownership extends Model {
      * @var array
      */
     protected $hidden = [
+        
     ];
 
     /**
@@ -30,11 +31,6 @@ class Ownership extends Model {
      */
     protected $casts = [
         'updated_at' => 'datetime',
-        'created_at' => 'datetime',
+		'created_at' => 'datetime',
     ];
-
-    public function category() {
-        return $this->belongsTo('App\Category');
-    }
-
 }

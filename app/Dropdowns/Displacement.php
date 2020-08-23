@@ -4,8 +4,8 @@ namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Displacement extends Model
-{
+class Displacement extends Model {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +21,6 @@ class Displacement extends Model
      * @var array
      */
     protected $hidden = [
-        
     ];
 
     /**
@@ -31,14 +30,15 @@ class Displacement extends Model
      */
     protected $casts = [
         'updated_at' => 'datetime',
-		'created_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
-	
-	public function category() {
-		return $this->belongsTo('App\Category');
-	}
-	
-	public function model() {
-		return $this->belongsTo('App\Dropdowns\Model');
-	}
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function model() {
+        return $this->belongsTo('App\Dropdowns\Model');
+    }
+
 }

@@ -4,7 +4,7 @@ namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ownership extends Model {
+class DisplacementRange extends Model {
 
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Ownership extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'updated_at', 'created_at'
+        'category_id', 'name', 'updated_at', 'created_at'
     ];
 
     /**

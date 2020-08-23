@@ -71,15 +71,15 @@
                                             </div>
                                         </div>
                                     </div>
-									<div class="form-group">
-										<label for="loan_percentage">Loan percentage of total price</label>
-										<div class="input-group">
-											<input id="loan_percentage" type="number" class="form-control" name="loan_percentage" value="{{ $bank->loan_percentage ?? '' }}" placeholder="Loan percentage" title="Enter Loan percentage" />
-											<div class="input-group-append">
-												<span class="input-group-text">%</span>
-											</div>
-										</div>
-									</div>
+                                    <div class="form-group">
+                                        <label for="loan_percentage">Loan percentage of total price</label>
+                                        <div class="input-group">
+                                            <input id="loan_percentage" type="number" class="form-control" name="loan_percentage" value="{{ $bank->loan_percentage ?? '' }}" placeholder="Loan percentage" title="Enter Loan percentage" />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row my-3">
                                         <div class="col-12 col-md-6">
                                             <div class="card">
@@ -283,10 +283,10 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <script>
-    $('.editor-tools').summernote({
-        placeholder: 'Enter email body',
-        tabsize: 2,
-        height: 100
-    });
+                                                $('.editor-tools').summernote({
+                                                    placeholder: 'Enter email body',
+                                                    tabsize: 2,
+                                                    height: 100
+                                                });
 </script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Product;
+use App\Dropdowns\Ownership;
 use App\Car;
 use App\Motorcycle;
 use App\Bicycle;
@@ -25,6 +26,7 @@ class ProductController extends Controller {
     public function __construct() {
         $this->middleware('moderator:Product', ['except' => ['store']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,6 +52,7 @@ class ProductController extends Controller {
         $dropdowns['sizes'] = Size::all();
         $dropdowns['after_sell_services'] = AfterSellService::all();
         $dropdowns['auction_grades'] = AuctionGrade::all();
+        $dropdowns['ownerships'] = Ownership::all();
 
         return view('backend.products.create', $dropdowns);
     }
@@ -62,21 +65,21 @@ class ProductController extends Controller {
      */
     public function store(ProductRequest $request) {
         $data = $request->except('_token', '_method');
-        if($request->after_sell_service)
+        if ($request->after_sell_service)
             $data['after_sell_service'] = implode(',', $data['after_sell_service']);
-        if(Auth::check())
+        if (Auth::check())
             $data['user_id'] = Auth::user()->id;
-        if(!$request->name) {
+        if (!$request->name) {
             $brand = Brand::find($request->brand_id);
             $model = Model::find($request->brand_id);
-            $data['name'] = $brand->name.' '.$model->name.' '.$request->manufacturing_year;
+            $data['name'] = $brand->name . ' ' . $model->name . ' ' . $request->manufacturing_year;
         }
         $product = Product::create($data);
         $data = $this->handleImage($request, $data, $product->id);
         $id = $this->getProductDetailId($data);
         $category = Category::find($request->category_id);
         $data[strtolower($category->name) . '_id'] = $id;
-        
+
         Product::find($product->id)->update($data);
         return redirect(route('products.index'))->with('message', 'Product created successfully');
     }
@@ -108,6 +111,7 @@ class ProductController extends Controller {
         $dropdowns['sizes'] = Size::all();
         $dropdowns['after_sell_services'] = AfterSellService::all();
         $dropdowns['auction_grades'] = AuctionGrade::all();
+        $dropdowns['ownerships'] = Ownership::all();
         $product = Product::with('condition', 'brand', 'model', 'package')->where('id', $id)->first();
         if (isset($product->after_sell_service))
             $product->after_sell_service = explode(',', $product->after_sell_service);
@@ -144,7 +148,7 @@ class ProductController extends Controller {
         $data[strtolower($category->name) . '_id'] = $id;
 
         $product = Product::find($request->id);
-        if(isset($data['after_sell_service']))
+        if (isset($data['after_sell_service']))
             $data['after_sell_service'] = implode(',', $data['after_sell_service']);
         $product->update($data);
         return redirect()->back();
@@ -170,9 +174,9 @@ class ProductController extends Controller {
         for ($i = 0; $i < 36; $i++) {
             if (isset($request->images[$i]) && $request->images[$i]) {
                 $image = $request->file('images.' . $i);
-                $main_img = ($i+1) . '.' . $image->getClientOriginalExtension();
-                
-                $image->move(public_path('assets/products/'.$id), $main_img);
+                $main_img = ($i + 1) . '.' . $image->getClientOriginalExtension();
+
+                $image->move(public_path('assets/products/' . $id), $main_img);
                 $image_names[] = $main_img;
             }
         }
@@ -186,7 +190,7 @@ class ProductController extends Controller {
                 $data[$name] = end($array);
                 $exist = $j;
             } else {
-                @unlink(public_path('assets/products/'.$id.'/') . $request->$name);
+                @unlink(public_path('assets/products/' . $id . '/') . $request->$name);
                 $data[$name] = null;
             }
         }
