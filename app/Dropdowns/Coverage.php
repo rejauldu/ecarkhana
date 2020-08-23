@@ -4,15 +4,15 @@ namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Coverage extends Model
-{
+class Coverage extends Model {
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'updated_at', 'created_at'
+        'name', 'description', 'rate', 'updated_at', 'created_at'
     ];
 
     /**
@@ -21,7 +21,6 @@ class Coverage extends Model
      * @var array
      */
     protected $hidden = [
-        
     ];
 
     /**
@@ -31,6 +30,7 @@ class Coverage extends Model
      */
     protected $casts = [
         'updated_at' => 'datetime',
-		'created_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
+
 }

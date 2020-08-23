@@ -18,16 +18,16 @@ Start Car Loan  Eligibility check-->
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h4>We Have Found {{ $insurances->count() }} Vehicle Loan of Amount 10.00 Lac (BDT) for 5 Years </h4>
+                    <h4>We Have Found {{ $insurance_companies->count() }} Vehicle Loan of Amount 10.00 Lac (BDT) for 5 Years </h4>
                     <div class="separator"></div>
                 </div>
             </div>
         </div>
-        @foreach($insurances as $insurance)
+        @foreach($insurance_companies as $insurance)
         <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0">
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
-                    <div class="card-image mt-0"><img class=" " src="{{ asset('/assets/insurances') }}/{{ $insurance->photo ?? 'not-found.jpg' }}" style="width: 160px; max-width: 160px;">
+                    <div class="card-image mt-0"><img class=" " src="{{ asset('/assets/insurance-company') }}/{{ $insurance->logo ?? 'not-found.jpg' }}" style="width: 160px; max-width: 160px;">
                     </div>
                     <a class="btn button red" href="{{ route('car-loan') }}">Apply Now</a>
                 </div>
@@ -41,33 +41,13 @@ Start Car Loan  Eligibility check-->
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pl-0 text-center">
+                        <div class="col mt-lg-3 mt-md-2 border-right border-left-0 border-top-0 border-bottom-0 border-dashed pl-0 text-center">
                             <span class="card-box-title">Loan Percentage</span>
                             <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $insurance->loan_percentage ?? 0 }}%</p>
                         </div>
                         <div class="col text-center  mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
                             <span class="card-box-title">Loan tenure</span>
                             <p class="mb-0 font-weight-bold text-1e6  ff-roboto card-box-content ">{{ $insurance->loan_tenure_min ?? 0 }} - {{ $insurance->loan_tenure_max ?? 0 }} Years</p>
-                        </div>
-                        <div class="col text-center   mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
-                            <span class="card-box-title text-capitalize">Customer Age</span>
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto card-box-content ">{{ $insurance->age_min ?? 0 }} - {{ $insurance->age_max ?? 0 }} Years</p>
-                        </div>
-                        <div class="col text-center   mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
-                            <span class="card-box-title text-uppercase">Loan amount</span>
-                            @if(isset($loan_info))
-                            @php($profession = $loan_info->profession)
-                            @else
-                            @php($profession = 'salaried')
-                            @endif
-                            @php($min = $profession.'_loan_min')
-                            @php($max = $profession.'_loan_max')
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $insurance->$min }} - {{ $insurance->$max }} TK</p>
-                        </div>
-                        <div class="col text-center   mt-lg-3 mt-md-2  border-left-0 pt-lg-3 pt-md-2 ">
-                            <span class="fz-15  fw-medium letter-spacing-07 card-box-title text-capitalize">Monthly Income</span>
-                            @php($income = $profession.'_income')
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $insurance->$income }} TK (min)</p>
                         </div>
                     </div>
                 </div>
@@ -76,15 +56,15 @@ Start Car Loan  Eligibility check-->
                 <div class="table-grid-1 border-left border-top-0 border-bottom-0 border-right-0 border-dashed col">
                     <div class="card full-height d-flex align-items-center justify-content-center border-0 align-items-center justify-content-streatch">
                         <div class="coverage">
-							<div class="cover-circle">
-								<div>
-									<span class="cover__title">2</span>Covers
-								</div>
-							</div>
-						</div>
-						<button class="required" data-toggle="modal" data-target="#exampleModalScrollable">Required Documents</button>
-						<button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-					</div>
+                            <div class="cover-circle">
+                                <div>
+                                    <span class="cover__title">2</span>Covers
+                                </div>
+                            </div>
+                        </div>
+                        <button class="required" data-toggle="modal" data-target="#exampleModalScrollable">Required Documents</button>
+                        <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
                 </div>
             </div>
 
@@ -128,6 +108,9 @@ Start Car Loan  Eligibility check-->
             </div>
         </div>
         @endforeach
+        <div class="pagination-nav d-flex justify-content-center mt-5">
+            {{ $insurance_companies->links() }}
+        </div>
     </div>
 </section>
 

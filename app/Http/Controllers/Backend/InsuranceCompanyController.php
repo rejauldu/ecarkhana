@@ -16,8 +16,8 @@ class InsuranceCompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $insurance_companies = InsuranceCompany::orderBy('id', 'desc')->get();
-        return view('backend.insurance-companies.manage-index', compact('insurance_companies'));
+        $insurance_companies = InsuranceCompany::paginate(10);
+        return view('backend.insurance-companies.index', compact('insurance_companies'));
     }
     /**
      * Display a listing of the resource.

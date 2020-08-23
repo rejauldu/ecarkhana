@@ -12,7 +12,7 @@ class DisplacementRange extends Model {
      * @var array
      */
     protected $fillable = [
-        'category_id', 'name', 'updated_at', 'created_at'
+        'category_id', 'name', 'basic', 'act_liability', 'updated_at', 'created_at'
     ];
 
     /**

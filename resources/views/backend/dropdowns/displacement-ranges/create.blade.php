@@ -37,8 +37,25 @@
                                     @method('PUT')
                                     @endif
                                     <div class="form-group">
+                                        <label for="card-type">Category</label>
+                                        <select id="category" name="category_id" class="custom-select">
+                                            <option value="0" selected>--Select Category--</option>
+                                            @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" @if(isset($displacement) && $category->id == $displacement->category_id) selected @endif>{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ $displacement->name ?? '' }}" placeholder="First name" title="Enter your first name if any." />
+                                        <input id="name" type="text" class="form-control" name="name" value="{{ $displacement->name ?? '' }}" placeholder="Displacement range" title="Enter name" />
+                                    </div>
+									<div class="form-group">
+                                        <label for="basic">Basic</label>
+                                        <input id="basic" type="text" class="form-control" name="basic" value="{{ $displacement->basic ?? '' }}" placeholder="Basic" title="Enter basic" />
+                                    </div>
+									<div class="form-group">
+                                        <label for="act-liability">Act Liability</label>
+                                        <input id="act-liability" type="text" class="form-control" name="act_liability" value="{{ $displacement->act_liability ?? '' }}" placeholder="Act Liability" title="Enter act liability" />
                                     </div>
                                     <div class="form-group mt-3">
                                         <button class="btn btn-success btn-theme" type="submit">{{ __(isset($displacement)?'Update':'Save') }}</button>

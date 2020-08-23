@@ -15,7 +15,7 @@ class CoverageController extends Controller
      */
     public function index()
     {
-		$coverages = Coverage::with('category')->get();
+		$coverages = Coverage::all();
         return view('backend.dropdowns.coverages.index', compact('coverages'));
     }
 
