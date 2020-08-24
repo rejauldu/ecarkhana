@@ -14,6 +14,9 @@ use App\Dropdowns\DisplacementRange;
 
 class InsuranceController extends Controller {
 
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['index', 'create']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,14 +47,11 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $user_id = Auth::user()->id;
-        $review = Review::where('product_id', $request->product_id)->where('user_id', $user_id)->first();
-        if ($review)
-            return redirect()->back()->with('message', 'Sorry. We have received your review before.');
+        dd($request->all());
         $data = $request->except('_token', '_method');
-        $data['user_id'] = $user_id;
-        Review::create($data);
-        return redirect()->back()->with('message', 'Thank you for your review');
+        $data['user_id'] = Auth::user()->id;
+        Insurance::create($data);
+        return redirect()->back()->with('message', 'Thank you! We have received your application');
     }
 
     /**

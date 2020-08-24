@@ -28,7 +28,7 @@ Start Car Loan  Eligibility check-->
                 <div class="card  border-0  align-items-center">
                     <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+company.logo" style="width: 160px; max-width: 160px;">
                     </div>
-                    <a class="btn button red" href="#">Buy @Tk.@{{ grandTotal }}</a>
+                    <a class="btn button red" href="#" @click.prevent="formSubmit(company)">Buy @Tk.@{{ grandTotal }}</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -164,6 +164,19 @@ Start Car Loan  Eligibility check-->
             </div>
         </div>
     </div>
+    <form action="{{ route('insurances.store') }}" method="post">
+        @csrf
+        <input type="hidden" name="category_id" v-model="category.id" />
+        <input type="hidden" name="type" v-model="type" />
+        <input type="hidden" name="displacement_id" v-model="displacement.id" />
+        <input type="hidden" name="passengers" v-model="passenger" />
+        <input type="hidden" name="brand_id" v-model="brand.id" />
+        <input type="hidden" name="model_id" v-model="model.id" />
+        <input type="hidden" name="coverages" v-model="company.basic_coverage" />
+        <input type="hidden" name="price" v-model="price" />
+        <input type="hidden" name="insurance_company_id" v-model="company.id" />
+        <input type="submit" id="insurance-submit" class="d-none" />
+    </form>
     <!-- Required Document -->
 </section>
 
@@ -174,8 +187,8 @@ Start Car Loan  Eligibility check-->
         el: '#insurance-company',
         data: {
             category: '',
-            brand: '',
-            model: '',
+            brand: {},
+            model:  {},
             type: '',
             types: ['Act Liabilities / Third Party Insurance', 'Comprehensive / First Party Insurance'],
             displacement: {},
@@ -219,8 +232,14 @@ Start Car Loan  Eligibility check-->
             },
             openModal: function(company) {
                 this.company = company;
+                
                 $('#insurance-company-modal').modal('show');
             },
+            formSubmit: function(company) {
+                this.company = company;
+                setTimeout(function(){ document.getElementById('insurance-submit').click(); }, 300);
+                
+            }
             
         },
         computed: {

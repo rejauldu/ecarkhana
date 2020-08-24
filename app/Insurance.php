@@ -12,7 +12,7 @@ class Insurance extends Model
      * @var array
      */
     protected $fillable = [
-        'insurance_id', 'type', 'displacement', 'passengers', 'brand_id', 'model_id', 'vehicle_type', 'coverages', 'price', 'registration_year', 'extra_policy', 'claim', 'insurance_company_id', 'user_id', 'updated_at', 'created_at'
+        'insurance_id', 'type', 'displacement_id', 'passengers', 'brand_id', 'model_id', 'vehicle_type', 'coverages', 'price', 'registration_year', 'extra_policy', 'claim', 'insurance_company_id', 'user_id', 'updated_at', 'created_at'
     ];
 
     /**

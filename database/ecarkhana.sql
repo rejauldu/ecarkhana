@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2020 at 06:38 AM
+-- Generation Time: Aug 24, 2020 at 08:06 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -1544,9 +1544,24 @@ INSERT INTO `cooling_systems` (`id`, `category_id`, `name`, `created_at`, `updat
 CREATE TABLE `coverages` (
   `id` smallint(6) NOT NULL,
   `name` varchar(256) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `rate` float DEFAULT 0,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `coverages`
+--
+
+INSERT INTO `coverages` (`id`, `name`, `description`, `rate`, `updated_at`, `created_at`) VALUES
+(1, 'Explosion, self-ignition or lighting.', NULL, 0.1, '2020-08-23 08:38:28', '2020-08-23 02:25:51'),
+(2, 'Robbery, house-breaking or theft.', NULL, 0.1, '2020-08-23 08:38:32', '2020-08-23 02:30:54'),
+(3, 'Riot & strike including malicious and terrorist activities.', NULL, 0.1, '2020-08-23 08:38:36', '2020-08-23 02:31:05'),
+(4, 'Tremor (fire and shock damage).', NULL, 0.1, '2020-08-23 08:38:42', '2020-08-23 02:31:16'),
+(5, 'Flood, typhoon, inundation, cyclone, hailstorm, frost hurricane, storm, tempest.', NULL, 0.1, '2020-08-23 08:38:46', '2020-08-23 02:31:27'),
+(6, 'Accidental outdoor means.', NULL, 0.1, '2020-08-23 08:38:50', '2020-08-23 02:31:42'),
+(7, 'Whilst in transit by domestic waterway, lift, elevator or air road, rail.', NULL, 0.1, '2020-08-23 08:38:55', '2020-08-23 02:31:56');
 
 -- --------------------------------------------------------
 
@@ -1629,6 +1644,8 @@ CREATE TABLE `displacement_ranges` (
   `id` smallint(5) UNSIGNED NOT NULL,
   `category_id` smallint(5) UNSIGNED DEFAULT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `basic` int(11) DEFAULT 0,
+  `act_liability` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1637,22 +1654,14 @@ CREATE TABLE `displacement_ranges` (
 -- Dumping data for table `displacement_ranges`
 --
 
-INSERT INTO `displacement_ranges` (`id`, `category_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 7, 'Santiago Vandervort', '2020-01-21 11:24:43', '2020-02-01 19:48:25'),
-(2, 1, '353', '2020-01-21 07:47:53', '2020-02-14 11:22:10'),
-(3, 7, 'Dr. Letha Barton', '2020-01-21 01:54:17', '2020-01-23 07:19:35'),
-(4, 5, 'Ivy Aufderhar I', '2020-01-21 15:04:12', '2020-01-30 04:39:49'),
-(5, 2, '150', '2020-01-21 07:10:23', '2020-02-14 08:35:47'),
-(6, 2, 'Heidi Wisozk', '2020-01-21 02:03:35', '2020-01-26 21:10:40'),
-(7, 1, 'Geovany Nolan', '2020-01-21 19:30:45', '2020-02-02 22:15:24'),
-(8, 7, 'Dr. Bernadette Cruickshank III', '2020-01-21 01:02:23', '2020-01-26 11:23:12'),
-(9, 2, 'Mr. Dangelo Graham', '2020-01-21 03:55:12', '2020-01-22 22:00:29'),
-(10, 2, 'Edd Streich', '2020-01-21 13:25:30', '2020-01-25 17:32:00'),
-(11, 7, 'Ozella Schmeler', '2020-01-21 13:22:34', '2020-01-24 12:41:56'),
-(12, 6, 'Meaghan Stanton', '2020-01-21 17:40:42', '2020-01-27 01:40:02'),
-(13, 3, '100', '2020-01-21 19:07:24', '2020-02-14 08:35:10'),
-(14, 7, 'Nina Volkman PhD', '2020-01-21 11:22:19', '2020-02-02 06:45:52'),
-(15, 2, 'Laurie Stokes', '2020-01-21 05:56:21', '2020-02-01 07:25:38');
+INSERT INTO `displacement_ranges` (`id`, `category_id`, `name`, `basic`, `act_liability`, `created_at`, `updated_at`) VALUES
+(1, 1, '800 - 1300', 2795, 150, '2020-08-23 01:48:32', '2020-08-23 02:54:11'),
+(2, 1, '1301 - 1800', 2873, 250, '2020-08-23 01:49:09', '2020-08-23 02:54:28'),
+(3, 1, '1801 - 3000', 2925, 350, '2020-08-23 01:49:49', '2020-08-23 02:54:54'),
+(4, 1, 'Over 3000', 2990, 450, '2020-08-23 01:50:13', '2020-08-23 02:55:10'),
+(5, 2, '50 - 150', 200, 100, '2020-08-24 03:22:34', '2020-08-24 03:22:34'),
+(6, 2, '151 - 250', 275, 130, '2020-08-24 03:23:00', '2020-08-24 03:23:00'),
+(7, 2, '251 - 350', 350, 160, '2020-08-24 03:23:19', '2020-08-24 03:23:19');
 
 -- --------------------------------------------------------
 
@@ -2083,7 +2092,7 @@ CREATE TABLE `insurances` (
   `id` bigint(20) NOT NULL,
   `category_id` smallint(6) DEFAULT NULL,
   `type` varchar(200) DEFAULT NULL,
-  `displacement` smallint(6) DEFAULT NULL,
+  `displacement_id` smallint(6) DEFAULT NULL,
   `passengers` smallint(6) DEFAULT NULL,
   `brand_id` smallint(6) DEFAULT NULL,
   `model_id` smallint(6) DEFAULT NULL,
@@ -2099,6 +2108,13 @@ CREATE TABLE `insurances` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `insurances`
+--
+
+INSERT INTO `insurances` (`id`, `category_id`, `type`, `displacement_id`, `passengers`, `brand_id`, `model_id`, `vehicle_type`, `coverages`, `price`, `registration_year`, `extra_policy`, `claim`, `insurance_company_id`, `user_id`, `updated_at`, `created_at`) VALUES
+(1, NULL, 'Comprehensive / First Party Insurance', 2, 4, 1, 2, NULL, '', 1000000, NULL, 0, 0, NULL, NULL, '2020-08-24 11:18:17', '2020-08-24 11:18:17');
+
 -- --------------------------------------------------------
 
 --
@@ -2112,6 +2128,7 @@ CREATE TABLE `insurance_companies` (
   `logo` varchar(100) DEFAULT NULL,
   `insurance_feature` varchar(100) DEFAULT NULL,
   `promo` varchar(20) DEFAULT NULL,
+  `basic_coverage` varchar(40) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -2120,9 +2137,9 @@ CREATE TABLE `insurance_companies` (
 -- Dumping data for table `insurance_companies`
 --
 
-INSERT INTO `insurance_companies` (`id`, `supported_type`, `name`, `logo`, `insurance_feature`, `promo`, `updated_at`, `created_at`) VALUES
-(1, '1,2', 'Bangladesh National Insurance Company Limited', '1.png', '1,2', NULL, '2020-08-22 22:29:27', '2020-08-22 22:12:54'),
-(2, '1', 'Bangladesh Co-Operative Insurance Ltd.', '1598157290.png', '3,4', NULL, '2020-08-22 22:34:50', '2020-08-22 22:34:50');
+INSERT INTO `insurance_companies` (`id`, `supported_type`, `name`, `logo`, `insurance_feature`, `promo`, `basic_coverage`, `updated_at`, `created_at`) VALUES
+(1, '1,2', 'Bangladesh National Insurance Company Limited', '1.png', '1,2', NULL, '1,2', '2020-08-23 10:33:30', '2020-08-22 22:12:54'),
+(2, '1', 'Bangladesh Co-Operative Insurance Ltd.', '1598157290.png', '3,4', NULL, '3,4', '2020-08-23 10:33:36', '2020-08-22 22:34:50');
 
 -- --------------------------------------------------------
 
@@ -5730,7 +5747,8 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1313, NULL, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-19 21:23:03', '2020-08-19 21:23:03'),
 (1314, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-20 19:52:34', '2020-08-20 19:52:34'),
 (1315, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-21 20:38:09', '2020-08-21 20:38:09'),
-(1316, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-22 19:52:11', '2020-08-22 19:52:11');
+(1316, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-22 19:52:11', '2020-08-22 19:52:11'),
+(1317, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-companies', '2020-08-23 21:06:57', '2020-08-23 21:06:57');
 
 -- --------------------------------------------------------
 
@@ -11559,7 +11577,8 @@ ALTER TABLE `insurances`
   ADD KEY `model_id` (`model_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `insurance_company_id` (`insurance_company_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `displacement_id` (`displacement_id`);
 
 --
 -- Indexes for table `insurance_companies`
@@ -12051,7 +12070,7 @@ ALTER TABLE `cooling_systems`
 -- AUTO_INCREMENT for table `coverages`
 --
 ALTER TABLE `coverages`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `cylinders`
@@ -12069,7 +12088,7 @@ ALTER TABLE `displacements`
 -- AUTO_INCREMENT for table `displacement_ranges`
 --
 ALTER TABLE `displacement_ranges`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -12141,7 +12160,7 @@ ALTER TABLE `home_sliders`
 -- AUTO_INCREMENT for table `insurances`
 --
 ALTER TABLE `insurances`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `insurance_companies`
@@ -12357,7 +12376,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1317;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1318;
 
 --
 -- AUTO_INCREMENT for table `transmissions`
