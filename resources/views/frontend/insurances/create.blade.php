@@ -61,7 +61,7 @@
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(brand)" @click.prevent="brandSelected(brand)">@{{ brand.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(model)" @click.prevent="modelSelected(model)">@{{ model.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="type" @click.prevent="typeSelected(type)">@{{ type }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(displacement)" @click.prevent="displacementSelected(displacement)">@{{ displacement.name }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(displacement)" @click.prevent="displacementSelected(displacement)">@{{ displacement.name }} cc</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="passenger" @click.prevent="passengerSelected(passenger)" v-if="category.id == 1">@{{ passenger }}</span>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                             <div v-if="category.id == 1" class="col-2" v-for="p in filteredPassengers">
                                 <button class="btn btn-light m-1" @click.prevent="passengerSelected(p)" :class="{'text-danger': p == passenger}">@{{ p }}</button>
                             </div>
-                            <div class="col-12" v-if="category.id == 2">
+                            <div class="col-12" v-if="type == types[1]">
                                 <div class="form-group mb-1">
                                     <label class="" for="price">@{{ category.name }} Value</label>
                                     <div class="input-group">
@@ -128,7 +128,7 @@
                             <div class="col-12">
                                 <div class=" border list-group-item-light my-1 px-3 img-thumbnail">
                                     <div class="text-dark">@{{ brand.name }} @{{ model.name }}</div>
-                                    <small class="text-secondary">@{{ type }} <i class="fa fa-angle-double-right"></i> @{{ displacement.name }}</small><br/>
+                                    <small class="text-secondary">@{{ type }} <i class="fa fa-angle-double-right"></i> @{{ displacement.name }} cc</small><br/>
                                     <a href="#" class="btn btn-link text-danger p-0" data-dismiss="modal">Edit details</a>
                                 </div>
                             </div>

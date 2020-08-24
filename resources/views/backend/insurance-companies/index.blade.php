@@ -28,7 +28,7 @@ Start Car Loan  Eligibility check-->
                 <div class="card  border-0  align-items-center">
                     <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+company.logo" style="width: 160px; max-width: 160px;">
                     </div>
-                    <a class="btn button red" href="#">Apply Now</a>
+                    <a class="btn button red" href="#">Buy @Tk.@{{ grandTotal }}</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -123,16 +123,16 @@ Start Car Loan  Eligibility check-->
                 <div class="modal-body">
                     <div class="container text-dark">
                         <div class="row">
-                            <div class="col-7">
+                            <div class="col-7" :class="{'col-12': type == types[0]}">
                                 <div class="row">
                                     <div class="col-6">Insurance Policy</div><div class="col-6">@{{ type }}</div>
                                     <div class="col-6">Insurance Provider Company</div><div class="col-6">@{{ company.name }}</div>
                                     <div class="col-6">CC Type</div><div class="col-6">@{{ displacement.name }} cc</div>
-                                    <div class="col-6">Sum Insured</div><div class="col-6">Tk. @{{ price }}</div>
+                                    <div class="col-6" v-if="type == types[1]">Sum Insured</div><div class="col-6" v-if="type == types[1]">Tk. @{{ price }}</div>
                                     <hr class="w-100 my-0">
-                                    <div class="col-6">Basic</div><div class="col-6">Tk. @{{ displacement.basic }}</div>
-                                    <div class="col-6">+ @{{ in_rate.toFixed(2) }}% of full value</div><div class="col-6 border-bottom">Tk. @{{ price*in_rate.toFixed(2)/100 }}</div>
-                                    <div class="col-6"><strong>Own Damage</strong></div><div class="col-6"><strong>Tk. @{{ ownDamage }}</strong></div>
+                                    <div class="col-6" v-if="type == types[1]">Basic</div><div class="col-6" v-if="type == types[1]">Tk. @{{ displacement.basic }}</div>
+                                    <div class="col-6" v-if="type == types[1]">+ @{{ in_rate.toFixed(2) }}% of full value</div><div class="col-6 border-bottom" v-if="type == types[1]">Tk. @{{ price*in_rate.toFixed(2)/100 }}</div>
+                                    <div class="col-6" v-if="type == types[1]"><strong>Own Damage</strong></div><div class="col-6" v-if="type == types[1]"><strong>Tk. @{{ ownDamage }}</strong></div>
                                     <div class="col-6">Act Liabilities</div><div class="col-6">Tk. @{{ displacement.act_liability }}</div>
                                     <div class="col-6">+ @{{ passenger }} Passenger @ 45</div><div class="col-6">Tk. @{{ passenger*45 }}</div>
                                     <div class="col-6">+ 1 Driver</div><div class="col-6 border-bottom">Tk. @{{ 30 }}</div>
@@ -143,7 +143,7 @@ Start Car Loan  Eligibility check-->
                                     <div class="col-6 display-6"><strong>Grand Total</strong></div><div class="col-6 display-6"><strong>Tk. @{{ grandTotal }}</strong></div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5" v-if="type == types[1]">
                                 <div class="display-6">Select Coverages</div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item py-0" v-for="coverage in coverages">
@@ -177,6 +177,7 @@ Start Car Loan  Eligibility check-->
             brand: '',
             model: '',
             type: '',
+            types: ['Act Liabilities / Third Party Insurance', 'Comprehensive / First Party Insurance'],
             displacement: {},
             passenger: 1,
             price: '',
@@ -218,7 +219,6 @@ Start Car Loan  Eligibility check-->
             },
             openModal: function(company) {
                 this.company = company;
-                this.calculateRate;
                 $('#insurance-company-modal').modal('show');
             },
             
@@ -241,7 +241,10 @@ Start Car Loan  Eligibility check-->
                 }
             },
             ownDamage: function() {
-                return this.displacement.basic + this.price*this.in_rate/100;
+                if(this.type == this.types[1])
+                    return this.displacement.basic + this.price*this.in_rate/100;
+                else
+                    return 0;
             },
             netPremium: function() {
                 return this.ownDamage + this.displacement.act_liability + this.passenger*45 + 30;
@@ -259,6 +262,7 @@ Start Car Loan  Eligibility check-->
         mounted: function() {
             this.getFromStorage();
             this.coverageStringToArray();
+            this.pageSetting();
         },
     });
 </script>
