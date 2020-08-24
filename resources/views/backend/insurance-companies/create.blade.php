@@ -76,6 +76,17 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="display-6">Basic Coverages</div>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <div class="row">
+                                            @foreach($coverages as $coverage)
+                                            <div class="col-6">
+                                                <input type="checkbox" class="custom-control-input" id="insurance-feature-{{ $coverage->id }}" name="insurance_feature[]" value="{{ $coverage->id }}" @if(isset($insurance_company) && $insurance_company->basic_coverage && in_array($coverage->id, $insurance_company->basic_coverage)) checked @endif>
+                                                <label class="custom-control-label" for="insurance-feature-{{ $coverage->id }}">{{ $coverage->name }}</label>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     <div class="form-group mt-3 text-right">
                                         <button class="btn btn-success btn-theme" type="submit">{{ __(isset($insurance_company)?'Update':'Save') }}</button>
                                     </div>

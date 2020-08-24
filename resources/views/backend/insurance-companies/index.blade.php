@@ -13,41 +13,42 @@
 <!--=================================
 Start Car Loan  Eligibility check-->
 
-<section class="Car-eligibility-check page-section-ptb">
+<section class="Car-eligibility-check page-section-ptb" id="insurance-company">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h4>We Have Found {{ $insurance_companies->count() }} Vehicle Loan of Amount 10.00 Lac (BDT) for 5 Years </h4>
+                    <h4>We Have Found @{{ companies.length }} Vehicle Loan of Amount 10.00 Lac (BDT) for 5 Years </h4>
                     <div class="separator"></div>
                 </div>
             </div>
         </div>
-        @foreach($insurance_companies as $insurance)
-        <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0">
+        <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0" v-for="company in companies">
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
-                    <div class="card-image mt-0"><img class=" " src="{{ asset('/assets/insurance-company') }}/{{ $insurance->logo ?? 'not-found.jpg' }}" style="width: 160px; max-width: 160px;">
+                    <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+company.logo" style="width: 160px; max-width: 160px;">
                     </div>
-                    <a class="btn button red" href="{{ route('car-loan') }}">Apply Now</a>
+                    <a class="btn button red" href="#">Apply Now</a>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card border-0">
                     <div class="row">
                         <div class="col">
-                            <h4 class=" fz-22  pb-3 " style="text-align: center">{{ $insurance->name }}</h4>
+                            <h4 class=" fz-22  pb-3 " style="text-align: center">@{{ company.name }}</h4>
                             <hr class=" mt-0 mb-0" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col mt-lg-3 mt-md-2 border-right border-left-0 border-top-0 border-bottom-0 border-dashed pl-0 text-center">
-                            <span class="card-box-title">Loan Percentage</span>
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $insurance->loan_percentage ?? 0 }}%</p>
+                        <div class="col border-right border-left-0 border-top-0 border-bottom-0 border-dashed text-center pt-2">
+                            <ul class="list-group list-group-flush bullet">
+                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="company.basic_coverage.includes(coverage.id.toString())">@{{ coverage.name }}</li>
+                            </ul>
                         </div>
-                        <div class="col text-center  mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
-                            <span class="card-box-title">Loan tenure</span>
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto card-box-content ">{{ $insurance->loan_tenure_min ?? 0 }} - {{ $insurance->loan_tenure_max ?? 0 }} Years</p>
+                        <div class="col text-center pt-2">
+                            <ul class="list-group list-group-flush bullet">
+                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="company.insurance_feature.includes(feature.id.toString())">@{{ feature.name }}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -58,11 +59,11 @@ Start Car Loan  Eligibility check-->
                         <div class="coverage">
                             <div class="cover-circle">
                                 <div>
-                                    <span class="cover__title">2</span>Covers
+                                    <span class="cover__title" v-if="company">@{{ company.basic_coverage.length }}</span>Covers
                                 </div>
                             </div>
                         </div>
-                        <button class="required" data-toggle="modal" data-target="#exampleModalScrollable">Required Documents</button>
+                        <button class="required" @click.prevent="openModal(company)">Add Coverage</button>
                         <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -107,93 +108,158 @@ Start Car Loan  Eligibility check-->
                 </div>
             </div>
         </div>
-        @endforeach
-        <div class="pagination-nav d-flex justify-content-center mt-5">
-            {{ $insurance_companies->links() }}
-        </div>
     </div>
-</section>
-
-<!--=================================
-End  Car Loan Eligibility Check-->
-
-
-
-<!-- Required Document -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">Required Documents</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="required-title"><i class="fa fa-info-circle"></i>REMEMBER</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Loan processing will start only after submitting all the documents to the insurance you have applied for.</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>If any further document is required please submit it as early as possible otherwise loan processing will not start.</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>In case you submit any fake/false documents , you will be blacklisted by the insurance for lifetime.</li>
-                            </ul>
-                        </div>
-
-                        <div class="required-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Watchout</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Do not submit any fake/false document.</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Each and every document should be up-to-date.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="required-title"><i class="fa fa-info-circle"></i>ESSENTIAL DOCUMENTS</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lab Print Photo 4 Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>NID/ Passport Clear Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>TIN Certificate Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Utility Bill Copy (Update)</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Mutation Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Title Deed Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Update Land Tax Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Holding Tax Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Rental Deed Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Partition Deed Copy (If Needed)</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Bank Statement Last 12 Months</li>
-                            </ul>
-                        </div>
-                        <div class="required-title"><i class="fa fa-info-circle"></i>GUARANTOR DOCUMENTS</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lab Print Photo 2 Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>NID/ Passport Clear Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Personal Information (Address, Mobile Number)</li>
-                            </ul>
-                        </div>
-                        <div class="required-title"><i class="fa fa-info-circle"></i>REFERENCE DOCUMENTS</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Personal Information (Address, Mobile Number)</li>
-                            </ul>
-                        </div>
-                        <div class="required-title"><i class="fa fa-info-circle"></i>NEW CAR</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Car Quotation</li>
-                            </ul>
+    <!--=================================End  Car Loan Eligibility Check-->
+    <!-- Required Document -->
+    <div class="modal fade fullscreen-md" id="insurance-company-modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Required Documents</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container text-dark">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="row">
+                                    <div class="col-6">Insurance Policy</div><div class="col-6">@{{ type }}</div>
+                                    <div class="col-6">Insurance Provider Company</div><div class="col-6">@{{ company.name }}</div>
+                                    <div class="col-6">CC Type</div><div class="col-6">@{{ displacement.name }} cc</div>
+                                    <div class="col-6">Sum Insured</div><div class="col-6">Tk. @{{ price }}</div>
+                                    <hr class="w-100 my-0">
+                                    <div class="col-6">Basic</div><div class="col-6">Tk. @{{ displacement.basic }}</div>
+                                    <div class="col-6">+ @{{ in_rate.toFixed(2) }}% of full value</div><div class="col-6 border-bottom">Tk. @{{ price*in_rate.toFixed(2)/100 }}</div>
+                                    <div class="col-6"><strong>Own Damage</strong></div><div class="col-6"><strong>Tk. @{{ ownDamage }}</strong></div>
+                                    <div class="col-6">Act Liabilities</div><div class="col-6">Tk. @{{ displacement.act_liability }}</div>
+                                    <div class="col-6">+ @{{ passenger }} Passenger @ 45</div><div class="col-6">Tk. @{{ passenger*45 }}</div>
+                                    <div class="col-6">+ 1 Driver</div><div class="col-6 border-bottom">Tk. @{{ 30 }}</div>
+                                    <div class="col-6"><strong>Net Premium</strong></div><div class="col-6"><strong>Tk. @{{ netPremium }}</strong></div>
+                                    <div class="col-6 border-bottom">+ 15% Vat</div><div class="col-6 border-bottom">Tk. @{{ netPremium*15/100 }}</div>
+                                    <div class="col-6"><strong>Total Premium</strong></div><div class="col-6"><strong>Tk. @{{ totalPremium }}</strong></div>
+                                    <div class="col-6 border-bottom">+ Service Delivery Cost</div><div class="col-6 border-bottom">Tk. @{{ 40 }}</div>
+                                    <div class="col-6 display-6"><strong>Grand Total</strong></div><div class="col-6 display-6"><strong>Tk. @{{ grandTotal }}</strong></div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="display-6">Select Coverages</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item py-0" v-for="coverage in coverages">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" :id="'coverage-'+coverage.id" v-model.number="company.basic_coverage" :value="coverage.id">
+                                            <label class="custom-control-label" :for="'coverage-'+coverage.id"><small>@{{ coverage.name }}</small></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <span v-if="company.name">@{{ calculateRate }}</span>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Buy Now</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Required Document -->
+</section>
 
-<!-- Required Document -->
-
-
+@endsection
+@section('script')
+<script>
+    var vuejs = new Vue({
+        el: '#insurance-company',
+        data: {
+            category: '',
+            brand: '',
+            model: '',
+            type: '',
+            displacement: {},
+            passenger: 1,
+            price: '',
+            company: {},
+            companies: @json($insurance_companies),
+            coverages: @json($coverages),
+            features: @json($insurance_features),
+            in_rate:0,
+            ex_rate:0
+        },
+        methods: {
+            getFromStorage: function() {
+                if (localStorage.category)
+                    this.category = JSON.parse(localStorage.category);
+                if (localStorage.brand)
+                    this.brand = JSON.parse(localStorage.brand);
+                if (localStorage.model)
+                    this.model = JSON.parse(localStorage.model);
+                if (localStorage.type)
+                    this.type = localStorage.type;
+                if (localStorage.displacement)
+                    this.displacement = JSON.parse(localStorage.displacement);
+                if (localStorage.passenger)
+                    this.passenger = localStorage.passenger;
+                if (localStorage.price)
+                    this.price = localStorage.price;
+            },
+            coverageStringToArray: function() {
+                for(let i=0; i<this.companies.length; i++) {
+                    this.companies[i].basic_coverage = this.companies[i].basic_coverage.split(',');
+                    this.companies[i].insurance_feature = this.companies[i].insurance_feature.split(',');
+                }
+            },
+            pageSetting: function() {
+                if(this.category.id == 2) {
+                    this.passenger = 1;
+                    localStorage.passenger = 1;
+                }
+            },
+            openModal: function(company) {
+                this.company = company;
+                this.calculateRate;
+                $('#insurance-company-modal').modal('show');
+            },
+            
+        },
+        computed: {
+            calculateRate: function() {
+                this.in_rate = 0;
+                this.ex_rate = 0;
+                for(j=0; j<this.coverages.length; j++) {
+                    let temp = false;
+                    for(i = 0; i < this.company.basic_coverage.length; i++) {
+                        if(this.company.basic_coverage[i] == this.coverages[j].id) {
+                            this.in_rate += Number(this.coverages[j].rate);
+                            temp = true;
+                            break;
+                        }
+                    }
+                    if(!temp)
+                        this.ex_rate += Number(this.coverages[j].rate);
+                }
+            },
+            ownDamage: function() {
+                return this.displacement.basic + this.price*this.in_rate/100;
+            },
+            netPremium: function() {
+                return this.ownDamage + this.displacement.act_liability + this.passenger*45 + 30;
+            },
+            totalPremium: function() {
+                return this.netPremium + this.netPremium * 15/100;
+            },
+            grandTotal: function() {
+                return this.totalPremium + 40;
+            }
+        },
+        watch: {
+            
+        },
+        mounted: function() {
+            this.getFromStorage();
+            this.coverageStringToArray();
+        },
+    });
+</script>
 @endsection

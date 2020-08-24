@@ -12,7 +12,7 @@ class InsuranceCompany extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'supported_type', 'name', 'logo', 'insurance_feature', 'promo', 'updated_at', 'created_at'
+        'id', 'supported_type', 'name', 'logo', 'insurance_feature', 'promo', 'basic_coverage', 'updated_at', 'created_at'
     ];
 
     /**

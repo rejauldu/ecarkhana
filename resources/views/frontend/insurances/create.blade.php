@@ -25,23 +25,23 @@
                         <label for="category" class=" cursor-pointer">Vehicle Type</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="car" placeholder="Select Car" readonly="" v-model="car" @click.prevent="openModal(2)" />
-                        <label for="car" class=" cursor-pointer">Select Vehicle</label>
+                        <input type="text" class="form-control bg-light" id="vehicle" placeholder="Select Vehicle" readonly="" v-model="vehicle" @click.prevent="openModal(2)" />
+                        <label for="vehicle" class=" cursor-pointer">Select Vehicle</label>
                     </div>
                     <div class="form-group form-label-group">
                         <input type="text" class="form-control bg-light" id="type" placeholder="Select Insurance Type" readonly="" v-model="type" @click.prevent="openModal(4)" />
                         <label for="type" class=" cursor-pointer">Insurance Type</label>
                     </div>
                     <div class="form-group form-label-group">
-                        <input type="text" class="form-control bg-light" id="displacement" placeholder="Select Displacement" readonly="" v-model="displacement" @click.prevent="openModal(5)" />
+                        <input type="text" class="form-control bg-light" id="displacement" placeholder="Select Displacement" readonly="" v-model="displacement.name" @click.prevent="openModal(5)" />
                         <label for="displacement" class=" cursor-pointer">Displacement</label>
                     </div>
-                    <div class="form-group form-label-group">
+                    <div class="form-group form-label-group" v-if="category.id == 1">
                         <input type="text" class="form-control bg-light" id="passenger" placeholder="Select Passenger" readonly="" v-model="passenger" @click.prevent="openModal(6)" />
                         <label for="passenger" class=" cursor-pointer">Passenger</label>
                     </div>
                     <div class="row">
-                        <div class="col-12 text-right"><a href="#" class="btn button red"  @click="isSubmitable"><span class="mr-3">Continue</span> <i class="fa fa-arrow-right"></i></a></div>
+                        <div class="col-12 text-right"><a href="{{ route('insurance-companies.index') }}" class="btn button red"  @click="isSubmitable"><span class="mr-3">Continue</span> <i class="fa fa-arrow-right"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -61,8 +61,8 @@
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(brand)" @click.prevent="brandSelected(brand)">@{{ brand.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(model)" @click.prevent="modelSelected(model)">@{{ model.name }}</span>
                             <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="type" @click.prevent="typeSelected(type)">@{{ type }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="displacement" @click.prevent="displacementSelected(displacement)">@{{ displacement }}</span>
-                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="passenger" @click.prevent="passengerSelected(passenger)">@{{ passenger }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(displacement)" @click.prevent="displacementSelected(displacement)">@{{ displacement.name }}</span>
+                            <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="passenger" @click.prevent="passengerSelected(passenger)" v-if="category.id == 1">@{{ passenger }}</span>
                         </div>
                     </div>
                     <span class="float-right nowrap height-30  width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
@@ -93,11 +93,11 @@
                         <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredTypes" @click.prevent="typeSelected(m)" :class="{'text-danger': m == type}"><i class="fa fa-check" v-if="m == type"></i> @{{ m }}</li>
                     </ul>
                     <ul class="list-group list-group-flush mx-5" v-else-if="page == 5">
-                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredDisplacements" @click.prevent="displacementSelected(m)" :class="{'text-danger': m == displacement}"><i class="fa fa-check" v-if="m == displacement"></i> @{{ m }}</li>
+                        <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="m in filteredDisplacements" @click.prevent="displacementSelected(m)" :class="{'text-danger': m.id == displacement.id}" v-if="m.category_id == category.id"><i class="fa fa-check" v-if="m.id == displacement.id"></i> @{{ m.name }} cc</li>
                     </ul>
                     <div v-else-if="page == 6" class="container">
                         <div class="row mx-0">
-                            <div class="col-12">
+                            <div class="col-12" v-if="category.id == 1">
                                 <div class="form-group mb-1">
                                     <label class="" for="pasengers">No. of Passengers</label>
                                     <div class="input-group">
@@ -111,13 +111,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2" v-for="p in filteredPassengers">
+                            <div v-if="category.id == 1" class="col-2" v-for="p in filteredPassengers">
                                 <button class="btn btn-light m-1" @click.prevent="passengerSelected(p)" :class="{'text-danger': p == passenger}">@{{ p }}</button>
+                            </div>
+                            <div class="col-12" v-if="category.id == 2">
+                                <div class="form-group mb-1">
+                                    <label class="" for="price">@{{ category.name }} Value</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text border-right-0 bg-white">Tk.</span>
+                                        </div>
+                                        <input type="text" class="form-control bg-white border-left-0" id="price" placeholder="Price" v-model="price" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <div class=" border list-group-item-light my-1 px-3 img-thumbnail">
                                     <div class="text-dark">@{{ brand.name }} @{{ model.name }}</div>
-                                    <small class="text-secondary">@{{ type }} <i class="fa fa-angle-double-right"></i> @{{ displacement }}</small><br/>
+                                    <small class="text-secondary">@{{ type }} <i class="fa fa-angle-double-right"></i> @{{ displacement.name }}</small><br/>
                                     <a href="#" class="btn btn-link text-danger p-0" data-dismiss="modal">Edit details</a>
                                 </div>
                             </div>
@@ -127,7 +138,7 @@
                                     <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary p-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary p-0" href="#">Privacy Policy</a></label>
                                 </div>
                                 <div class="input-group my-3">
-                                    <a href="#" class="form-control border-right-0 btn btn-danger" @click="isSubmitable">Continue</a>
+                                    <a href="{{ route('insurance-companies.index') }}" class="form-control border-right-0 btn btn-danger" @click="isSubmitable">Continue</a>
                                     <div class="input-group-append">
                                         <span class="input-group-text border-0 bg-danger text-white"><i class="fa fa-arrow-right"></i></span>
                                     </div>
@@ -159,11 +170,12 @@
             model: {},
             models: @json($models),
             type: '',
-            types: ['Act Liabilities / Third Party Insurance ', 'Comprehensive / First Party Insurance '],
-            displacement: '',
-            displacements: ['800-1000', '1000-1200'],
+            types: ['Act Liabilities / Third Party Insurance', 'Comprehensive / First Party Insurance'],
+            displacement: {},
+            displacements: @json($displacement_ranges),
             passenger: 4,
             passengers: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+            price: '',
             scrolledLeft: true,
             scrolledRight: true,
             terms: '',
@@ -172,30 +184,33 @@
             categorySelected: function (c) {
                 this.category = c;
                 this.page = 2;
-                this.reset('brand', 'model', 'type', 'displacement', 'passenger');
+                this.reset('brand', 'model', 'type', 'displacement', 'passenger', 'price');
             },
             brandSelected: function (b) {
                 this.brand = b;
                 this.page = 3;
-                this.reset('model', 'type', 'displacement', 'passenger');
+                this.reset('model', 'type', 'displacement', 'passenger', 'price');
             },
             modelSelected: function (m) {
                 this.model = m;
                 this.page = 4;
-                this.reset('type', 'displacement', 'passenger');
+                this.reset('type', 'displacement', 'passenger', 'price');
             },
             typeSelected: function (m) {
                 this.type = m;
                 this.page = 5;
-                this.reset('displacement', 'passenger');
+                this.reset('displacement', 'passenger', 'price');
             },
             displacementSelected: function (m) {
                 this.displacement = m;
                 this.page = 6;
-                this.reset('passenger');
+                this.reset('passenger', 'price');
             },
             passengerSelected: function (m) {
                 this.passenger = m;
+            },
+            priceSelected: function (p) {
+                this.price = p;
             },
             openModal: function (p) {
                 if (p == 1) {
@@ -225,9 +240,11 @@
                     } else if (args[i] == 'type') {
                         this.type = '';
                     } else if (args[i] == 'displacement') {
-                        this.displacement = '';
+                        this.displacement = {};
                     } else if (args[i] == 'passenger') {
                         this.passenger = '';
+                    } else if (args[i] == 'price') {
+                        this.price = '';
                     }
                 }
                 this.search = '';
@@ -265,7 +282,7 @@
                 }, 1000);
             },
             isSubmitable: function(e) {
-                $s = this.type && this.displacement && this.passenger && this.terms;
+                $s = this.type && !this.isEmpty(this.displacement) && (this.passenger || this.price) && this.terms;
                 if(!$s)
                     e.preventDefault();
             },
@@ -282,13 +299,15 @@
                 if (localStorage.type)
                     this.type = localStorage.type;
                 if (localStorage.displacement)
-                    this.displacement = localStorage.displacement;
+                    this.displacement = JSON.parse(localStorage.displacement);
                 if (localStorage.passenger)
                     this.passenger = localStorage.passenger;
+                if (localStorage.price)
+                    this.price = localStorage.price;
             },
         },
         computed: {
-            car() {
+            vehicle() {
                 var car = '';
                 if (!this.isEmpty(this.brand))
                     car += this.brand.name;
@@ -313,7 +332,7 @@
             },
             filteredDisplacements() {
                 return this.displacements.filter(item => {
-                    return item.toString().startsWith(this.search);
+                    return item.name.startsWith(this.search);
                 })
             },
             filteredPassengers() {
@@ -339,10 +358,13 @@
                 localStorage.type = v;
             },
             displacement: function(v) {
-                localStorage.displacement = v;
+                localStorage.displacement = JSON.stringify(v);
             },
             passenger: function(v) {
                 localStorage.passenger = v;
+            },
+            price: function(v) {
+                localStorage.price = v;
             },
         }
     });

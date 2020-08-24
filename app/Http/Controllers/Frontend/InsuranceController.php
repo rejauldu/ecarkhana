@@ -9,7 +9,7 @@ use App\Insurance;
 use App\Category;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
-use App\Dropdowns\Displacement;
+use App\Dropdowns\DisplacementRange;
 
 
 class InsuranceController extends Controller {
@@ -21,7 +21,6 @@ class InsuranceController extends Controller {
      */
     public function index() {
         $insurances = Insurance::all();
-        
         return view('frontend.insurances.index', compact('insurances'));
     }
 
@@ -34,8 +33,8 @@ class InsuranceController extends Controller {
         $categories = Category::all();
         $brands = Brand::all();
         $models = Model::all();
-        $displacements = Displacement::all();
-        return view('frontend.insurances.create', compact('categories', 'brands', 'models', 'displacements'));
+        $displacement_ranges = DisplacementRange::all();
+        return view('frontend.insurances.create', compact('categories', 'brands', 'models', 'displacement_ranges'));
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\InsuranceCompany;
 use App\Dropdowns\InsuranceFeature;
+use App\Dropdowns\Coverage;
 
 class InsuranceCompanyController extends Controller {
 
@@ -16,8 +17,10 @@ class InsuranceCompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $insurance_companies = InsuranceCompany::paginate(10);
-        return view('backend.insurance-companies.index', compact('insurance_companies'));
+        $insurance_companies = InsuranceCompany::all();
+        $coverages = Coverage::select('id', 'name', 'rate')->get();
+        $insurance_features = InsuranceFeature::select('id', 'name')->get();
+        return view('backend.insurance-companies.index', compact('insurance_companies', 'coverages', 'insurance_features'));
     }
     /**
      * Display a listing of the resource.
@@ -36,7 +39,8 @@ class InsuranceCompanyController extends Controller {
      */
     public function create() {
         $insurance_features = InsuranceFeature::all();
-        return view('backend.insurance-companies.create', compact('insurance_features'));
+        $coverages = Coverage::select('id', 'name')->get();
+        return view('backend.insurance-companies.create', compact('insurance_features', 'coverages'));
     }
 
     /**
@@ -51,6 +55,8 @@ class InsuranceCompanyController extends Controller {
             $data['insurance_feature'] = implode(',', $data['insurance_feature']);
         if (isset($data['supported_type']))
             $data['supported_type'] = implode(',', $data['supported_type']);
+        if (isset($data['basic_coverage']))
+            $data['basic_coverage'] = implode(',', $data['basic_coverage']);
         $file = $request->file('logo');
         if ($file) {
             $destination_path = 'assets/insurance-company';
@@ -87,8 +93,11 @@ class InsuranceCompanyController extends Controller {
             $insurance_company->insurance_feature = explode(',', $insurance_company->insurance_feature);
         if(isset($insurance_company->supported_type))
             $insurance_company->supported_type = explode(',', $insurance_company->supported_type);
+        if(isset($insurance_company->basic_coverage))
+            $insurance_company->basic_coverage = explode(',', $insurance_company->basic_coverage);
         $insurance_features = InsuranceFeature::all();
-        return view('backend.insurance-companies.create', compact('insurance_company', 'insurance_features'));
+        $coverages = Coverage::select('id', 'name')->get();
+        return view('backend.insurance-companies.create', compact('insurance_company', 'insurance_features', 'coverages'));
     }
 
     /**
@@ -106,6 +115,8 @@ class InsuranceCompanyController extends Controller {
             $data['insurance_feature'] = implode(',', $data['insurance_feature']);
         if (isset($data['supported_type']))
             $data['supported_type'] = implode(',', $data['supported_type']);
+        if (isset($data['basic_coverage']))
+            $data['basic_coverage'] = implode(',', $data['basic_coverage']);
         $file = $request->file('logo');
         if ($file) {
             $destination_path = 'assets/insurance-company';
