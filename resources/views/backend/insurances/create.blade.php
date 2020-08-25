@@ -282,7 +282,7 @@
                 }, 1000);
             },
             isSubmitable: function(e) {
-                $s = this.type && !this.isEmpty(this.displacement) && (this.passenger || this.price) && this.terms;
+                $s = this.type && !this.isEmpty(this.displacement) && (this.passenger || this.price || this.category.id == this.categories[1].id) && this.terms;
                 if(!$s)
                     e.preventDefault();
             },

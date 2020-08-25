@@ -1,15 +1,15 @@
 @extends('layouts.dashboard')
 @section('title')
-{{ __('Cashbook') }}
+{{ __('All Insurances') }}
 @endsection
 @section('content')
 <div class="content-wrapper">
     <div class="container-fluid">
         <section class="content-header">
-            <h3>Cashbook <small>transactions</small></h3>
+            <h3>Insurance <small>all</small></h3>
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active">Cashbook</li>
+                <li class="active">Insurances</li>
             </ol>
         </section>
         @if(session()->has('message'))
@@ -20,8 +20,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="box box-info">
-                    <div class="box-header with-bcashbook">
-                        <h3 class="box-title"><i class="fa fa-credit-card mr-1"></i> {{ __('Cashbook') }}</h3>
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-credit-card mr-1"></i> {{ __('All Insurances') }}</h3>
                         <div class="box-tools float-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                             </button>
@@ -33,44 +33,45 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Action</th>
-                                    <th>Order ID</th>
-                                    <th>Amount</th>
-                                    <th>Total</th>
-                                    <th>User</th>
-                                    <th>Date</th>
+                                    <th>Vehicle</th>
+                                    <th>Displacement</th>
+                                    <th>Policy</th>
+                                    <th>Company</th>
+                                    <th>Created</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($cashbooks as $cashbook)
+                                @foreach($insurances as $insurance)
                                 <tr>
-                                    <td>{{ $cashbook->id }}</td>
-                                    <td>{{ $cashbook->action }}</td>
-                                    <td>{{ $cashbook->order_id ?? '(empty)' }}</td>
-                                    <td>{{ $cashbook->amount ?? '0' }}</td>
-                                    <td>{{ $cashbook->cumulative_amount ?? '0' }}</td>
-                                    <td>{{ $cashbook->user->name ?? '(empty)' }}</td>
-                                    <td>{{ $cashbook->created_at->format('jS M Y') ?? '' }}</td>
+                                    <td>{{ $insurance->id }}</td>
+                                    <td>{{ $insurance->category->name ?? '' }}</td>
+                                    <td>{{ $insurance->displacement->name ?? '' }}cc</td>
+                                    <td>{{ $insurance->type ?? '' }}</td>
+                                    <td>{{ $insurance->company->name ?? '' }}</td>
+                                    <td>{{ $insurance->created_at->format('jS M Y') }}</td>
+                                    <td><a href="{{ route('insurances.show', $insurance->id) }}" class="text-success fa fa-eye"></a></td>
+                                    <td><a href="{{ route('insurances.destroy', $insurance->id) }}" onclick="event.preventDefault(); document.getElementById('delete-form').action = this.href; document.getElementById('delete-form').submit.click();" class="text-danger fa fa-trash"></button></td>
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Action</th>
-                                    <th>Order ID</th>
-                                    <th>Amount</th>
-                                    <th>Total</th>
-                                    <th>User</th>
-                                    <th>Date</th>
+                                    <th>Vehicle</th>
+                                    <th>Displacement</th>
+                                    <th>Policy</th>
+                                    <th>Company</th>
+                                    <th>Created</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-12 text-right"><a class="btn btn-theme" href="{{ route('cashbooks.create') }}">Add transaction</a></div>
-            <div class="col-12"><div class="d-flex"><div class="mx-auto">{{ $cashbooks->links() }}</div></div></div>
         </div>
     </div>
 </div>

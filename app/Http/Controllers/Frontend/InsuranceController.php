@@ -10,12 +10,13 @@ use App\Category;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
 use App\Dropdowns\DisplacementRange;
+use App\Dropdowns\Coverage;
 
 
 class InsuranceController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['index', 'create']]);
+        $this->middleware('auth', ['except' => ['create']]);
     }
     /**
      * Display a listing of the resource.
@@ -23,8 +24,17 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $insurances = Insurance::all();
-        return view('frontend.insurances.index', compact('insurances'));
+        $insurances = Insurance::with('category', 'displacement', 'company')->latest()->get();
+        return view('backend.insurances.index', compact('insurances'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function incompleteIndex() {
+        $insurances = Insurance::with('category', 'displacement', 'company')->latest()->get();
+        return view('backend.insurances.index', compact('insurances'));
     }
 
     /**
@@ -37,7 +47,7 @@ class InsuranceController extends Controller {
         $brands = Brand::all();
         $models = Model::all();
         $displacement_ranges = DisplacementRange::all();
-        return view('frontend.insurances.create', compact('categories', 'brands', 'models', 'displacement_ranges'));
+        return view('backend.insurances.create', compact('categories', 'brands', 'models', 'displacement_ranges'));
     }
 
     /**
@@ -60,7 +70,9 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $insurance = Insurance::with('category', 'brand', 'model', 'displacement', 'company')->where('id', $id)->first();
+        $coverages = Coverage::all();
+        return view('backend.insurances.show', compact('insurance', 'coverages'));
     }
 
     /**
@@ -81,7 +93,12 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+        $insurance = Insurance::find($id);
+        $complete = 0;
+        if($request->is_complete)
+            $complete = $request->is_complete;
+        $insurance->update(['is_complete' => $complete]);
+        return redirect()->back()->with('message', 'Insurance have been updated successfully');
     }
 
     /**

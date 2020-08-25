@@ -63,7 +63,7 @@ Start Car Loan  Eligibility check-->
                                 </div>
                             </div>
                         </div>
-                        <button class="required" @click.prevent="openModal(c)">Add Coverage</button>
+                        <button class="required" @click.prevent="openModal(c)"><span v-if="type == types[1]">Add Coverage</span><span v-else>View Pricing</span></button>
                         <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -123,7 +123,19 @@ Start Car Loan  Eligibility check-->
                 <div class="modal-body">
                     <div class="container text-dark">
                         <div class="row">
-                            <div class="col-7" :class="{'col-12': type == types[0]}">
+                            <div class="col-12 col-md-5 order-md-2 mb-3" v-if="type == types[1]">
+                                <div class="display-6">Select Coverages</div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item py-0" v-for="coverage in coverages">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" :id="'coverage-'+coverage.id" v-model.number="company.basic_coverage" :value="coverage.id">
+                                            <label class="custom-control-label" :for="'coverage-'+coverage.id"><small>@{{ coverage.name }}</small></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr class="w-100 d-md-none"/>
+                            <div class="col-12 col-md-7" :class="{'col-12': type == types[0]}">
                                 <div class="row">
                                     <div class="col-6">Insurance Policy</div><div class="col-6">@{{ type }}</div>
                                     <div class="col-6">Insurance Provider Company</div><div class="col-6">@{{ company.name }}</div>
@@ -143,17 +155,6 @@ Start Car Loan  Eligibility check-->
                                     <div class="col-6 display-6"><strong>Grand Total</strong></div><div class="col-6 display-6"><strong>Tk. @{{ grandTotal }}</strong></div>
                                 </div>
                             </div>
-                            <div class="col-5" v-if="type == types[1]">
-                                <div class="display-6">Select Coverages</div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item py-0" v-for="coverage in coverages">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" :id="'coverage-'+coverage.id" v-model.number="company.basic_coverage" :value="coverage.id">
-                                            <label class="custom-control-label" :for="'coverage-'+coverage.id"><small>@{{ coverage.name }}</small></label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,7 +169,7 @@ Start Car Loan  Eligibility check-->
         @csrf
         <input type="hidden" name="category_id" v-model="category.id" />
         <input type="hidden" name="type" v-model="type" />
-        <input type="hidden" name="displacement_id" v-model="displacement.id" />
+        <input type="hidden" name="displacement_range_id" v-model="displacement.id" />
         <input type="hidden" name="passengers" v-model="passenger" />
         <input type="hidden" name="brand_id" v-model="brand.id" />
         <input type="hidden" name="model_id" v-model="model.id" />

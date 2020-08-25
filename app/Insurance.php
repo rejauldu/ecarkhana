@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Insurance extends Model
-{
+class Insurance extends Model {
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'insurance_id', 'type', 'displacement_id', 'passengers', 'brand_id', 'model_id', 'vehicle_type', 'coverages', 'price', 'registration_year', 'extra_policy', 'claim', 'insurance_company_id', 'user_id', 'updated_at', 'created_at'
+        'category_id', 'type', 'displacement_range_id', 'passengers', 'brand_id', 'model_id', 'vehicle_type', 'coverages', 'price', 'registration_year', 'extra_policy', 'claim', 'insurance_company_id', 'user_id', 'is_complete', 'updated_at', 'created_at'
     ];
 
     /**
@@ -21,7 +21,6 @@ class Insurance extends Model
      * @var array
      */
     protected $hidden = [
-        
     ];
 
     /**
@@ -31,18 +30,31 @@ class Insurance extends Model
      */
     protected $casts = [
         'updated_at' => 'datetime',
-		'created_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
-	public function brand() {
-		return $this->belongsTo('App\Brand');
-	}
-	public function model() {
-		return $this->belongsTo('App\Model');
-	}
-	public function insurance_company() {
-		return $this->belongsTo('App\InsuranceCompany');
-	}
-	public function user() {
-		return $this->belongsTo('App\User');
-	}
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
+
+    public function displacement() {
+        return $this->belongsTo('App\Dropdowns\DisplacementRange', 'displacement_range_id', 'id');
+    }
+
+    public function brand() {
+        return $this->belongsTo('App\Dropdowns\Brand');
+    }
+
+    public function model() {
+        return $this->belongsTo('App\Dropdowns\Model');
+    }
+
+    public function company() {
+        return $this->belongsTo('App\InsuranceCompany', 'insurance_company_id', 'id');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
 }

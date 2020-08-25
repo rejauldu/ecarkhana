@@ -283,10 +283,10 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <script>
-                                                $('.editor-tools').summernote({
-                                                    placeholder: 'Enter email body',
-                                                    tabsize: 2,
-                                                    height: 100
-                                                });
+    $('.editor-tools').summernote({
+        placeholder: 'Enter email body',
+        tabsize: 2,
+        height: 100
+    });
 </script>
 @endsection

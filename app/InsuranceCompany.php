@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InsuranceCompany extends Model
-{
+class InsuranceCompany extends Model {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +21,6 @@ class InsuranceCompany extends Model
      * @var array
      */
     protected $hidden = [
-        
     ];
 
     /**
@@ -31,6 +30,7 @@ class InsuranceCompany extends Model
      */
     protected $casts = [
         'updated_at' => 'datetime',
-		'created_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
+
 }
