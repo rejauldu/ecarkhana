@@ -23,31 +23,31 @@ Start Car Loan  Eligibility check-->
                 </div>
             </div>
         </div>
-        <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0" v-for="company in companies">
+        <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0" v-for="c in companies">
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
-                    <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+company.logo" style="width: 160px; max-width: 160px;">
+                    <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+c.logo" style="width: 160px; max-width: 160px;">
                     </div>
-                    <a class="btn button red" href="#" @click.prevent="formSubmit(company)">Buy @Tk.@{{ grandTotal }}</a>
+                    <a class="btn button red" href="#" @click.prevent="formSubmit(c)">Buy @Tk.@{{ grandTotal }}</a>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card border-0">
                     <div class="row">
                         <div class="col">
-                            <h4 class=" fz-22  pb-3 " style="text-align: center">@{{ company.name }}</h4>
+                            <h4 class=" fz-22  pb-3 " style="text-align: center">@{{ c.name }}</h4>
                             <hr class=" mt-0 mb-0" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col border-right border-left-0 border-top-0 border-bottom-0 border-dashed text-center pt-2">
                             <ul class="list-group list-group-flush bullet">
-                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="company.basic_coverage.includes(coverage.id.toString())">@{{ coverage.name }}</li>
+                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="c.basic_coverage.includes(coverage.id.toString())">@{{ coverage.name }}</li>
                             </ul>
                         </div>
                         <div class="col text-center pt-2">
                             <ul class="list-group list-group-flush bullet">
-                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="company.insurance_feature.includes(feature.id.toString())">@{{ feature.name }}</li>
+                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="c.insurance_feature.includes(feature.id.toString())">@{{ feature.name }}</li>
                             </ul>
                         </div>
                     </div>
@@ -59,11 +59,11 @@ Start Car Loan  Eligibility check-->
                         <div class="coverage">
                             <div class="cover-circle">
                                 <div>
-                                    <span class="cover__title" v-if="company">@{{ company.basic_coverage.length }}</span>Covers
+                                    <span class="cover__title" v-if="c">@{{ c.basic_coverage.length }}</span>Covers
                                 </div>
                             </div>
                         </div>
-                        <button class="required" @click.prevent="openModal(company)">Add Coverage</button>
+                        <button class="required" @click.prevent="openModal(c)">Add Coverage</button>
                         <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ Start Car Loan  Eligibility check-->
             </div>
         </div>
     </div>
-    <form action="{{ route('insurances.store') }}" method="post">
+    <form action="{{ route('insurances.store') }}" method="post" ref="form">
         @csrf
         <input type="hidden" name="category_id" v-model="category.id" />
         <input type="hidden" name="type" v-model="type" />
@@ -174,8 +174,7 @@ Start Car Loan  Eligibility check-->
         <input type="hidden" name="model_id" v-model="model.id" />
         <input type="hidden" name="coverages" v-model="company.basic_coverage" />
         <input type="hidden" name="price" v-model="price" />
-        <input type="hidden" name="insurance_company_id" v-model="company.id" />
-        <input type="submit" id="insurance-submit" class="d-none" />
+        <input type="hidden" name="insurance_company_id" v-model="company.id"/>
     </form>
     <!-- Required Document -->
 </section>
@@ -237,10 +236,10 @@ Start Car Loan  Eligibility check-->
             },
             formSubmit: function(company) {
                 this.company = company;
-                setTimeout(function(){ document.getElementById('insurance-submit').click(); }, 300);
-                
+                Vue.nextTick(function() {
+                    vuejs.$refs.form.submit();
+                });
             }
-            
         },
         computed: {
             calculateRate: function() {

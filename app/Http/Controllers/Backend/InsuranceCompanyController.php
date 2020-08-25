@@ -17,7 +17,7 @@ class InsuranceCompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $insurance_companies = InsuranceCompany::select('name', 'logo', 'insurance_feature', 'basic_coverage')->get();
+        $insurance_companies = InsuranceCompany::select('id', 'name', 'logo', 'insurance_feature', 'basic_coverage')->get();
         $coverages = Coverage::select('id', 'name', 'rate')->get();
         $insurance_features = InsuranceFeature::select('id', 'name')->get();
         return view('backend.insurance-companies.index', compact('insurance_companies', 'coverages', 'insurance_features'));

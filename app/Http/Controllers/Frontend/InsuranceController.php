@@ -47,7 +47,6 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        dd($request->all());
         $data = $request->except('_token', '_method');
         $data['user_id'] = Auth::user()->id;
         Insurance::create($data);
@@ -92,9 +91,9 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $review = Review::find($id);
-        $review->delete();
-        return redirect()->back()->with('message', 'Review has been deleted');
+        $insurance = Insurance::find($id);
+        $insurance->delete();
+        return redirect()->back()->with('message', 'Insurance has been deleted');
     }
 
 }
