@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2020 at 08:06 PM
+-- Generation Time: Aug 25, 2020 at 04:53 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -2092,7 +2092,7 @@ CREATE TABLE `insurances` (
   `id` bigint(20) NOT NULL,
   `category_id` smallint(6) DEFAULT NULL,
   `type` varchar(200) DEFAULT NULL,
-  `displacement_id` smallint(6) DEFAULT NULL,
+  `displacement_range_id` smallint(6) DEFAULT NULL,
   `passengers` smallint(6) DEFAULT NULL,
   `brand_id` smallint(6) DEFAULT NULL,
   `model_id` smallint(6) DEFAULT NULL,
@@ -2104,6 +2104,7 @@ CREATE TABLE `insurances` (
   `claim` tinyint(4) DEFAULT 0,
   `insurance_company_id` smallint(6) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
+  `is_complete` tinyint(4) NOT NULL DEFAULT 0,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -2112,8 +2113,8 @@ CREATE TABLE `insurances` (
 -- Dumping data for table `insurances`
 --
 
-INSERT INTO `insurances` (`id`, `category_id`, `type`, `displacement_id`, `passengers`, `brand_id`, `model_id`, `vehicle_type`, `coverages`, `price`, `registration_year`, `extra_policy`, `claim`, `insurance_company_id`, `user_id`, `updated_at`, `created_at`) VALUES
-(1, NULL, 'Comprehensive / First Party Insurance', 2, 4, 1, 2, NULL, '', 1000000, NULL, 0, 0, NULL, NULL, '2020-08-24 11:18:17', '2020-08-24 11:18:17');
+INSERT INTO `insurances` (`id`, `category_id`, `type`, `displacement_range_id`, `passengers`, `brand_id`, `model_id`, `vehicle_type`, `coverages`, `price`, `registration_year`, `extra_policy`, `claim`, `insurance_company_id`, `user_id`, `is_complete`, `updated_at`, `created_at`) VALUES
+(1, 1, 'Comprehensive / First Party Insurance', 2, 4, 1, 2, NULL, '', 1000000, NULL, 0, 0, 1, NULL, 1, '2020-08-25 08:51:20', '2020-08-24 11:18:17');
 
 -- --------------------------------------------------------
 
@@ -5748,7 +5749,8 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1314, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-20 19:52:34', '2020-08-20 19:52:34'),
 (1315, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-21 20:38:09', '2020-08-21 20:38:09'),
 (1316, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-22 19:52:11', '2020-08-22 19:52:11'),
-(1317, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-companies', '2020-08-23 21:06:57', '2020-08-23 21:06:57');
+(1317, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-companies', '2020-08-23 21:06:57', '2020-08-23 21:06:57'),
+(1318, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-24 20:30:29', '2020-08-24 20:30:29');
 
 -- --------------------------------------------------------
 
@@ -11578,7 +11580,7 @@ ALTER TABLE `insurances`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `insurance_company_id` (`insurance_company_id`),
   ADD KEY `category_id` (`category_id`),
-  ADD KEY `displacement_id` (`displacement_id`);
+  ADD KEY `displacement_id` (`displacement_range_id`);
 
 --
 -- Indexes for table `insurance_companies`
@@ -12376,7 +12378,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1318;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1319;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

@@ -18,7 +18,7 @@ Start Car Loan  Eligibility check-->
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h4>We Have Found @{{ companies.length }} Vehicle Loan of Amount 10.00 Lac (BDT) for 5 Years </h4>
+                    <h4>We Have Found @{{ companies.length }} Vehicle Loan</h4>
                     <div class="separator"></div>
                 </div>
             </div>
@@ -26,9 +26,8 @@ Start Car Loan  Eligibility check-->
         <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0" v-for="c in companies">
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
-                    <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+c.logo" style="width: 160px; max-width: 160px;">
-                    </div>
-                    <a class="btn button red" href="#" @click.prevent="formSubmit(c)">Buy @Tk.@{{ grandTotal }}</a>
+                    <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+c.logo" style="width: 160px; max-width: 160px;"></div>
+                    <a class="btn button red" href="#" @click.prevent="formSubmit(c)">Buy @Tk.@{{ grandTotal(c) }}</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -40,14 +39,17 @@ Start Car Loan  Eligibility check-->
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col border-right border-left-0 border-top-0 border-bottom-0 border-dashed text-center pt-2">
+                        <div class="col-12 col-md-6 border-right border-left-0 border-top-0 border-bottom-0 border-dashed text-center pt-2">
                             <ul class="list-group list-group-flush bullet">
-                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="c.basic_coverage.includes(coverage.id.toString())">@{{ coverage.name }}</li>
+                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="c.basic_coverage.includes(coverage.id.toString()) || c.basic_coverage.includes(coverage.id)">@{{ coverage.name }}</li>
                             </ul>
                         </div>
-                        <div class="col text-center pt-2">
+                        <div class="col-12 d-md-none text-right">
+                            <button class="required" @click.prevent="openModal(c)"><span v-if="type == types[1]">Add Coverage</span><span v-else>View Pricing</span></button>
+                        </div>
+                        <div class="col-12 col-md-6 text-center pt-2">
                             <ul class="list-group list-group-flush bullet">
-                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="c.insurance_feature.includes(feature.id.toString())">@{{ feature.name }}</li>
+                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="c.insurance_feature.includes(feature.id.toString()) || c.insurance_feature.includes(feature.id)">@{{ feature.name }}</li>
                             </ul>
                         </div>
                     </div>
@@ -58,18 +60,17 @@ Start Car Loan  Eligibility check-->
                     <div class="card full-height d-flex align-items-center justify-content-center border-0 align-items-center justify-content-streatch">
                         <div class="coverage">
                             <div class="cover-circle">
-                                <div>
+                                <div v-if="type == types[1]">
                                     <span class="cover__title" v-if="c">@{{ c.basic_coverage.length }}</span>Covers
                                 </div>
                             </div>
                         </div>
-                        <button class="required" @click.prevent="openModal(c)"><span v-if="type == types[1]">Add Coverage</span><span v-else>View Pricing</span></button>
+                        <button class="required d-none d-md-inline" @click.prevent="openModal(c)"><span v-if="type == types[1]">Add Coverage</span><span v-else>View Pricing</span></button>
                         <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
-
-            <div class="card-features border-top border-dashed mt-0 " style="display: none;">
+            <div class="card-features border-top border-dashed mt-0" style="display: none;">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card border-0">
@@ -128,7 +129,7 @@ Start Car Loan  Eligibility check-->
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item py-0" v-for="coverage in coverages">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" :id="'coverage-'+coverage.id" v-model.number="company.basic_coverage" :value="coverage.id">
+                                            <input type="checkbox" class="custom-control-input" :id="'coverage-'+coverage.id" v-model="company.basic_coverage" :value="coverage.id" @change="calculateRate()">
                                             <label class="custom-control-label" :for="'coverage-'+coverage.id"><small>@{{ coverage.name }}</small></label>
                                         </div>
                                     </li>
@@ -143,23 +144,22 @@ Start Car Loan  Eligibility check-->
                                     <div class="col-6" v-if="type == types[1]">Sum Insured</div><div class="col-6" v-if="type == types[1]">Tk. @{{ price }}</div>
                                     <hr class="w-100 my-0">
                                     <div class="col-6" v-if="type == types[1]">Basic</div><div class="col-6" v-if="type == types[1]">Tk. @{{ displacement.basic }}</div>
-                                    <div class="col-6" v-if="type == types[1]">+ @{{ in_rate.toFixed(2) }}% of full value</div><div class="col-6 border-bottom" v-if="type == types[1]">Tk. @{{ price*in_rate.toFixed(2)/100 }}</div>
-                                    <div class="col-6" v-if="type == types[1]"><strong>Own Damage</strong></div><div class="col-6" v-if="type == types[1]"><strong>Tk. @{{ ownDamage }}</strong></div>
+                                    <div class="col-6" v-if="type == types[1] && company.total_rate">+ @{{ company.total_rate.toFixed(2) }}% of full value</div><div class="col-6 border-bottom" v-if="type == types[1] && company.total_rate">Tk. @{{ price*company.total_rate.toFixed(2)/100 }}</div>
+                                    <div class="col-6" v-if="type == types[1]"><strong>Own Damage</strong></div><div class="col-6" v-if="type == types[1]"><strong>Tk. @{{ ownDamage(company) }}</strong></div>
                                     <div class="col-6">Act Liabilities</div><div class="col-6">Tk. @{{ displacement.act_liability }}</div>
                                     <div class="col-6">+ @{{ passenger }} Passenger @ 45</div><div class="col-6">Tk. @{{ passenger*45 }}</div>
                                     <div class="col-6">+ 1 Driver</div><div class="col-6 border-bottom">Tk. @{{ 30 }}</div>
-                                    <div class="col-6"><strong>Net Premium</strong></div><div class="col-6"><strong>Tk. @{{ netPremium }}</strong></div>
-                                    <div class="col-6 border-bottom">+ 15% Vat</div><div class="col-6 border-bottom">Tk. @{{ netPremium*15/100 }}</div>
-                                    <div class="col-6"><strong>Total Premium</strong></div><div class="col-6"><strong>Tk. @{{ totalPremium }}</strong></div>
+                                    <div class="col-6"><strong>Net Premium</strong></div><div class="col-6"><strong>Tk. @{{ netPremium(company) }}</strong></div>
+                                    <div class="col-6 border-bottom">+ 15% Vat</div><div class="col-6 border-bottom">Tk. @{{ netPremium(company)*15/100 }}</div>
+                                    <div class="col-6"><strong>Total Premium</strong></div><div class="col-6"><strong>Tk. @{{ totalPremium(company) }}</strong></div>
                                     <div class="col-6 border-bottom">+ Service Delivery Cost</div><div class="col-6 border-bottom">Tk. @{{ 40 }}</div>
-                                    <div class="col-6 display-6"><strong>Grand Total</strong></div><div class="col-6 display-6"><strong>Tk. @{{ grandTotal }}</strong></div>
+                                    <div class="col-6 display-6"><strong>Grand Total</strong></div><div class="col-6 display-6"><strong>Tk. @{{ grandTotal(company) }}</strong></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <span v-if="company.name">@{{ calculateRate }}</span>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Buy Now</button>
                 </div>
             </div>
@@ -197,9 +197,7 @@ Start Car Loan  Eligibility check-->
             company: {},
             companies: @json($insurance_companies),
             coverages: @json($coverages),
-            features: @json($insurance_features),
-            in_rate:0,
-            ex_rate:0
+            features: @json($insurance_features)
         },
         methods: {
             getFromStorage: function() {
@@ -240,43 +238,45 @@ Start Car Loan  Eligibility check-->
                 Vue.nextTick(function() {
                     vuejs.$refs.form.submit();
                 });
-            }
-        },
-        computed: {
-            calculateRate: function() {
-                this.in_rate = 0;
-                this.ex_rate = 0;
-                for(j=0; j<this.coverages.length; j++) {
-                    let temp = false;
-                    for(i = 0; i < this.company.basic_coverage.length; i++) {
-                        if(this.company.basic_coverage[i] == this.coverages[j].id) {
-                            this.in_rate += Number(this.coverages[j].rate);
-                            temp = true;
-                            break;
-                        }
-                    }
-                    if(!temp)
-                        this.ex_rate += Number(this.coverages[j].rate);
-                }
             },
-            ownDamage: function() {
+            ownDamage: function(c) {
+                
                 if(this.type == this.types[1])
-                    return this.displacement.basic + this.price*this.in_rate/100;
+                    return this.displacement.basic + this.price*c.total_rate/100;
                 else
                     return 0;
             },
-            netPremium: function() {
-                return this.ownDamage + this.displacement.act_liability + this.passenger*45 + 30;
+            netPremium: function(c) {
+                return this.ownDamage(c) + this.displacement.act_liability + this.passenger*45 + 30;
             },
-            totalPremium: function() {
-                return this.netPremium + this.netPremium * 15/100;
+            totalPremium: function(c) {
+                return this.netPremium(c) + this.netPremium(c) * 15/100;
             },
-            grandTotal: function() {
-                return this.totalPremium + 40;
+            grandTotal: function(c) {
+                return this.totalPremium(c) + 40;
+            },
+            calculateRate: function() {
+                for(let c = 0; c < this.companies.length; c++) {
+                    this.companies[c].total_rate = 0;
+                    for(let i = 0; i < this.companies[c].basic_coverage.length; i++) {
+                        for(let j=0; j<this.coverages.length; j++) {
+                            if(this.companies[c].basic_coverage[i] == this.coverages[j].id) {
+                                this.companies[c].total_rate += Number(this.coverages[j].rate);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
+        },
+        computed: {
+            
         },
         watch: {
             
+        },
+        created: function() {
+            this.calculateRate();
         },
         mounted: function() {
             this.getFromStorage();
