@@ -148,7 +148,7 @@ Start Car Loan  Eligibility check-->
                                     <div class="col-6" v-if="type == types[1]"><strong>Own Damage</strong></div><div class="col-6" v-if="type == types[1]"><strong>Tk. @{{ ownDamage(company) }}</strong></div>
                                     <div class="col-6">Act Liabilities</div><div class="col-6">Tk. @{{ displacement.act_liability }}</div>
                                     <div class="col-6">+ @{{ passenger }} Passenger @ 45</div><div class="col-6">Tk. @{{ passenger*45 }}</div>
-                                    <div class="col-6">+ 1 Driver</div><div class="col-6 border-bottom">Tk. @{{ 30 }}</div>
+                                    <div class="col-6">+ 1 Driver</div><div class="col-6 border-bottom">Tk. 30</div>
                                     <div class="col-6"><strong>Net Premium</strong></div><div class="col-6"><strong>Tk. @{{ netPremium(company) }}</strong></div>
                                     <div class="col-6 border-bottom">+ 15% Vat</div><div class="col-6 border-bottom">Tk. @{{ netPremium(company)*15/100 }}</div>
                                     <div class="col-6"><strong>Total Premium</strong></div><div class="col-6"><strong>Tk. @{{ totalPremium(company) }}</strong></div>
@@ -273,7 +273,9 @@ Start Car Loan  Eligibility check-->
             
         },
         watch: {
-            
+            company: function(v) {
+                localStorage.company = JSON.stringify(v);
+            }
         },
         created: function() {
             this.calculateRate();

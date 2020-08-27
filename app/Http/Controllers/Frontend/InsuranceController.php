@@ -11,6 +11,11 @@ use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
 use App\Dropdowns\DisplacementRange;
 use App\Dropdowns\Coverage;
+use App\InsuranceCompany;
+use App\Dropdowns\InsuranceFeature;
+use App\Locations\Division;
+use App\Locations\Region;
+use App\User;
 
 
 class InsuranceController extends Controller {
@@ -36,6 +41,20 @@ class InsuranceController extends Controller {
         $insurances = Insurance::with('category', 'displacement', 'company')->latest()->get();
         return view('backend.insurances.index', compact('insurances'));
     }
+	
+    public function photos() {
+        $insurance_companies = InsuranceCompany::select('id', 'name', 'logo', 'insurance_feature', 'basic_coverage')->get();
+        $coverages = Coverage::select('id', 'name', 'rate')->get();
+        $insurance_features = InsuranceFeature::select('id', 'name')->get();
+        return view('backend.insurances.photos', compact('insurance_companies', 'coverages', 'insurance_features'));
+    }
+    public function checkout() {
+        $divisions = Division::all();
+        $regions = Region::all();
+        $type = 'Car';
+        $profile = User::with('billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', Auth::user()->id)->first();
+        return view('backend.insurances.checkout', compact('divisions', 'regions', 'type', 'profile'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -59,8 +78,11 @@ class InsuranceController extends Controller {
     public function store(Request $request) {
         $data = $request->except('_token', '_method');
         $data['user_id'] = Auth::user()->id;
-        Insurance::create($data);
-        return redirect()->back()->with('message', 'Thank you! We have received your application');
+        $insurance = Insurance::create($data);
+        $insurance_companies = InsuranceCompany::select('id', 'name', 'logo', 'insurance_feature', 'basic_coverage')->get();
+        $coverages = Coverage::select('id', 'name', 'rate')->get();
+        $insurance_features = InsuranceFeature::select('id', 'name')->get();
+        return view('backend.insurances.photos', compact('insurance_companies', 'coverages', 'insurance_features', 'insurance'));
     }
 
     /**
@@ -93,12 +115,36 @@ class InsuranceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
+        $data = $request->except('_token', '_method');
         $insurance = Insurance::find($id);
-        $complete = 0;
-        if($request->is_complete)
-            $complete = $request->is_complete;
-        $insurance->update(['is_complete' => $complete]);
-        return redirect()->back()->with('message', 'Insurance have been updated successfully');
+//        $complete = 0;
+//        if($request->is_complete)
+//            $complete = $request->is_complete;
+//        if(isset($request->is_complete))
+//            $insurance->update(['is_complete' => $complete]);
+        $file = $request->file('registration_copy_front');
+        if ($file) {
+            $destination_path = 'assets/insurances';
+            $new_name = time() . '-front.'. $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['registration_copy_front'] = $new_name;
+        }
+        $file = $request->file('registration_copy_back');
+        if ($file) {
+            $destination_path = 'assets/insurances';
+            $new_name = time() . '-back.'. $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['registration_copy_back'] = $new_name;
+        }
+        $file = $request->file('previous_copy');
+        if ($file) {
+            $destination_path = 'assets/insurances';
+            $new_name = time() . '-previous.'. $file->getClientOriginalExtension();
+            $file->move($destination_path, $new_name);
+            $data['previous_copy'] = $new_name;
+        }
+        $insurance->update($data);
+        return view('backend.insurances.insurance-checkout', ['insurance_id' => $id]);
     }
 
     /**

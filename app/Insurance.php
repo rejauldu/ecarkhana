@@ -12,7 +12,7 @@ class Insurance extends Model {
      * @var array
      */
     protected $fillable = [
-        'category_id', 'type', 'displacement_range_id', 'passengers', 'brand_id', 'model_id', 'vehicle_type', 'coverages', 'price', 'registration_year', 'extra_policy', 'claim', 'insurance_company_id', 'user_id', 'is_complete', 'updated_at', 'created_at'
+        'category_id', 'type', 'displacement_range_id', 'passengers', 'brand_id', 'model_id', 'vehicle_type', 'coverages', 'price', 'registration_year', 'extra_policy', 'claim', 'insurance_company_id', 'registration_copy_front', 'registration_copy_back', 'previous_copy', 'note', 'starting_date', 'user_id', 'is_complete', 'updated_at', 'created_at'
     ];
 
     /**

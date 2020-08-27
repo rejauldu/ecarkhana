@@ -12,6 +12,7 @@
  */
 
 Route::get('/', 'Frontend\HomeController@index')->name('index');
+Route::get('/insurance-list', 'Frontend\HomeController@insuranceList');
 Route::get('/home', 'Frontend\HomeController@index')->name('home');
 Route::get('/motorcycle-index', 'Frontend\HomeController@motorcycleIndex')->name('motorcycle-index');
 Route::get('/bicycle-index', 'Frontend\HomeController@bicycleIndex')->name('bicycle-index');
@@ -48,6 +49,8 @@ Route::get('/dealer-list', 'Frontend\HomeController@dealerList')->name('dealer-l
 Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->name('group-buying-list');
 Route::resource('insurances', 'Frontend\InsuranceController');
 Route::get('/insurance', 'Frontend\InsuranceController@create')->name('insurance');
+Route::get('/insurance-photos', 'Frontend\InsuranceController@photos')->name('insurance-photos');
+Route::get('/insurance-checkout', 'Frontend\InsuranceController@checkout')->name('insurance-checkout');
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
 Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
 Route::get('/national-distributor-list', 'Frontend\HomeController@nationalDistributorList')->name('national-distributor-list');

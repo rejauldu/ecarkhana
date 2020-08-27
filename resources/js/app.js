@@ -35,3 +35,6 @@ Vue.prototype.$eventBus = new Vue(); // Global event bus
 const app = new Vue({
     el: '#app',
 });
+new Vue({
+	el: '#app2'
+});

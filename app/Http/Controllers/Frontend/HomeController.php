@@ -88,6 +88,9 @@ class HomeController extends Controller {
     public function aboutUs() {
         return view('frontend.about-us');
     }
+	public function insuranceList() {
+        return view('frontend.insurance-list');
+    }
 
     public function addToCompare() {
         return view('frontend.add-to-compare');
