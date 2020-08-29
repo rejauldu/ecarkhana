@@ -13,7 +13,7 @@
 <section id="insurance-photos">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-content" id="app2">
                         <form action="{{ route('insurances.update', $insurance->id) }}" method="post" enctype="multipart/form-data">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 <div class="breakdown-content">
                     <div class="some_random_class">
                         <div class="single-block">

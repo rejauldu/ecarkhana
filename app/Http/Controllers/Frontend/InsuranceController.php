@@ -48,12 +48,20 @@ class InsuranceController extends Controller {
         $insurance_features = InsuranceFeature::select('id', 'name')->get();
         return view('backend.insurances.photos', compact('insurance_companies', 'coverages', 'insurance_features'));
     }
-    public function checkout() {
-        $divisions = Division::all();
-        $regions = Region::all();
-        $type = 'Car';
-        $profile = User::with('billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', Auth::user()->id)->first();
-        return view('backend.insurances.checkout', compact('divisions', 'regions', 'type', 'profile'));
+    public function checkoutStore(Request $request) {
+        $inputs = ['name' => $request->name, 'billing_division_id' => $request->billing_division_id, 'billing_region_id' => $request->billing_region_id, 'billing_address' => $request->billing_address, 'phone' => $request->phone];
+        if ($request->different_shipping == 'true') {
+            $inputs['shipping_division_id'] = $request->shipping_division_id;
+            $inputs['shipping_region_id'] = $request->shipping_region_id;
+            $inputs['shipping_address'] = $request->shipping_address;
+        } else {
+            $inputs['shipping_division_id'] = $request->billing_division_id;
+            $inputs['shipping_region_id'] = $request->billing_region_id;
+            $inputs['shipping_address'] = $request->billing_address;
+        }
+        Auth::user()->update($inputs);
+            
+        return redirect()->route('order-complete')->with('message', 'Order created successfully');
     }
 
     /**
@@ -144,7 +152,14 @@ class InsuranceController extends Controller {
             $data['previous_copy'] = $new_name;
         }
         $insurance->update($data);
-        return view('backend.insurances.insurance-checkout', ['insurance_id' => $id]);
+        $divisions = Division::all();
+        $regions = Region::all();
+        $type = 'Car';
+        $profile = User::with('billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', Auth::user()->id)->first();
+        $insurance_companies = InsuranceCompany::select('id', 'name', 'logo', 'insurance_feature', 'basic_coverage')->get();
+        $coverages = Coverage::select('id', 'name', 'rate')->get();
+        $insurance_features = InsuranceFeature::select('id', 'name')->get();
+        return view('backend.insurances.checkout', compact('divisions', 'regions', 'type', 'profile', 'insurance_companies', 'coverages', 'insurance_features', 'insurance'));
     }
 
     /**

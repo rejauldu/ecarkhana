@@ -51,6 +51,7 @@ Route::resource('insurances', 'Frontend\InsuranceController');
 Route::get('/insurance', 'Frontend\InsuranceController@create')->name('insurance');
 Route::get('/insurance-photos', 'Frontend\InsuranceController@photos')->name('insurance-photos');
 Route::get('/insurance-checkout', 'Frontend\InsuranceController@checkout')->name('insurance-checkout');
+Route::post('/insurance-checkout-store', 'Frontend\InsuranceController@checkoutStore')->name('insurance-checkout-store');
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
 Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
 Route::get('/national-distributor-list', 'Frontend\HomeController@nationalDistributorList')->name('national-distributor-list');

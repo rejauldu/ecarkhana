@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2020 at 04:53 PM
+-- Generation Time: Aug 27, 2020 at 03:40 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -2103,6 +2103,11 @@ CREATE TABLE `insurances` (
   `extra_policy` tinyint(4) DEFAULT 0,
   `claim` tinyint(4) DEFAULT 0,
   `insurance_company_id` smallint(6) DEFAULT NULL,
+  `registration_copy_front` varchar(30) DEFAULT NULL,
+  `registration_copy_back` varchar(30) DEFAULT NULL,
+  `previous_copy` varchar(30) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `starting_date` timestamp NULL DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `is_complete` tinyint(4) NOT NULL DEFAULT 0,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -2113,8 +2118,9 @@ CREATE TABLE `insurances` (
 -- Dumping data for table `insurances`
 --
 
-INSERT INTO `insurances` (`id`, `category_id`, `type`, `displacement_range_id`, `passengers`, `brand_id`, `model_id`, `vehicle_type`, `coverages`, `price`, `registration_year`, `extra_policy`, `claim`, `insurance_company_id`, `user_id`, `is_complete`, `updated_at`, `created_at`) VALUES
-(1, 1, 'Comprehensive / First Party Insurance', 2, 4, 1, 2, NULL, '', 1000000, NULL, 0, 0, 1, NULL, 1, '2020-08-25 08:51:20', '2020-08-24 11:18:17');
+INSERT INTO `insurances` (`id`, `category_id`, `type`, `displacement_range_id`, `passengers`, `brand_id`, `model_id`, `vehicle_type`, `coverages`, `price`, `registration_year`, `extra_policy`, `claim`, `insurance_company_id`, `registration_copy_front`, `registration_copy_back`, `previous_copy`, `note`, `starting_date`, `user_id`, `is_complete`, `updated_at`, `created_at`) VALUES
+(1, 1, 'Comprehensive / First Party Insurance', 2, 4, 1, 2, NULL, '', 1000000, NULL, 0, 0, 1, '1598513389-front.png', '1598513389-back.jpg', '1598513389-previous.png', 'nnnnnn', NULL, NULL, 1, '2020-08-27 01:29:49', '2020-08-24 11:18:17'),
+(2, 1, 'Comprehensive / First Party Insurance', 2, 1, 1, 5, NULL, '1,2,3,4,5', 1000, NULL, 0, 0, 1, '1598534803-front.png', '1598534803-back.jpg', '1598534803-previous.png', 'description', NULL, 1, 0, '2020-08-27 07:26:43', '2020-08-25 09:33:14');
 
 -- --------------------------------------------------------
 
@@ -5750,7 +5756,9 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1315, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-21 20:38:09', '2020-08-21 20:38:09'),
 (1316, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-22 19:52:11', '2020-08-22 19:52:11'),
 (1317, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-companies', '2020-08-23 21:06:57', '2020-08-23 21:06:57'),
-(1318, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-24 20:30:29', '2020-08-24 20:30:29');
+(1318, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-24 20:30:29', '2020-08-24 20:30:29'),
+(1319, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-25 22:05:04', '2020-08-25 22:05:04'),
+(1320, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-photos', '2020-08-26 20:28:32', '2020-08-26 20:28:32');
 
 -- --------------------------------------------------------
 
@@ -12162,7 +12170,7 @@ ALTER TABLE `home_sliders`
 -- AUTO_INCREMENT for table `insurances`
 --
 ALTER TABLE `insurances`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `insurance_companies`
@@ -12378,7 +12386,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1319;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1321;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

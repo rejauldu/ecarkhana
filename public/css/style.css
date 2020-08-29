@@ -9110,7 +9110,8 @@ td.pro-out-stoke {
 }
 
 .sms-checkout-form .checkout-form-list.create-acc label {
-    margin-top: 18px;
+    margin-top: 10px;
+	margin-left: 10px;
 }
 
 .sms-checkout-form .checkbox-form h3 {

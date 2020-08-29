@@ -12,7 +12,7 @@
 
 <!--=================================
 checkout-listing  -->
-<section class="bike-checkout">
+<section class="bike-checkout" id="checkout">
     <div class="checkout-area">
         <div class="container">
 
@@ -50,23 +50,10 @@ checkout-listing  -->
                         </div>
                         <!-- ACCORDION END -->
                         @endguest
-                        <!-- ACCORDION START -->
-                        <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                        <div id="checkout_coupon" class="coupon-checkout-content" style="display: none;">
-                            <div class="coupon-info">
-                                <form action="#">
-                                    <p class="checkout-coupon">
-                                        <input type="text" name="coupon" placeholder="Coupon code">
-                                        <input type="submit" value="Apply Coupon">
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- ACCORDION END -->
                     </div>
                 </div>
             </div>
-            <form class="d-block" action="{{ route('orders.store') }}" method="post">
+            <form class="d-block" action="{{ route('insurance-checkout-store', $insurance->id) }}" method="post">
                 @csrf
                 <div class="row sms-checkout-form">
                     <div class="col-lg-6 col-md-12 col-12">
@@ -113,20 +100,37 @@ checkout-listing  -->
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email Address <span class="required">*</span></label>
-                                        <input type="email" name="email" value="{{ $profile->email ?? '' }}">
+                                        <input type="email" value="{{ $profile->email ?? '' }}" readonly="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Phone  <span class="required">*</span></label>
-                                        <input type="text" name="phone" value="{{ $profile->phone ?? '' }}">
+                                    <div class="form-group">
+                                        <label for="phone">Phone<span class="required">*</span></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text btn btn-link bg-white border-right-0 text-dark pr-0">+88</span>
+                                            </div>
+                                            <input type="text" class="form-control border-left-0 pl-0" :class="{'opacity-5': otp_sent, 'border-right-0': phone != new_phone && isPhoneValid()}" name="phone" id="phone" v-model="new_phone" :disabled="otp_sent || otp_verified">
+                                            <div class="input-group-append">
+                                                <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-if="isPhoneValid() && !otp_sent && phone != new_phone" @click.prevent="sendOtp">Verify Now</a>
+                                                <span class="input-group-text btn bg-white border-left-0 text-secondary" v-else-if="!otp_sent && phone != new_phone">Invalid</span>
+                                                <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else-if="!otp_verified && phone != new_phone">@{{ countDown }}</a>
+                                                <span class="input-group-text btn bg-white border-left-0 text-success" v-else>Verified</span>
+                                            </div>
+                                            <div class="position-center" v-if="otp_sent"><i class="fa fa-spinner fa-spin text-dark"></i></div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <label for="note">Note:</label>
-                                    <textarea class="form-control" name="note" id="note" placeholder="Enter Note" title="Enter Note"></textarea>
+                                    <div class="form-group" v-if="otp_sent">
+                                        <label for="otp">OTP:</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" :class="{'opacity-5': otp.length == 4}" placeholder="OTP" id="otp" v-model="otp" :disabled="otp.length == 4 || otp_verified">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text btn bg-white border-left-0 text-danger" v-if="otp.length != 4 && !otp_verified">Must be 4 digit</span>
+                                                <span class="input-group-text btn bg-white border-left-0 text-success" v-else-if="otp_verified">OTP Verified</span>
+                                            </div>
+                                            <div class="position-center" v-if="otp.length == 4"><i class="fa fa-spinner fa-spin text-dark"></i></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -178,67 +182,166 @@ checkout-listing  -->
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-12" id="checkout">
-                        <div class="your-order">
-                            <h3>Your order</h3>
-                            <div class="your-order-table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-total">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="cart_item" v-for="product in products">
-                                            <td class="product-name">
-                                                @{{ product.name }} <strong class="product-quantity"> × @{{ product.quantity }}</strong>
-                                                <input type="hidden" name="product_id[]" v-model="product.id" />
-                                                <input type="hidden" name="quantity[]" v-model="product.quantity" />
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">? @{{ product.msrp*product.quantity }}</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount">? @{{ subTotal }}</span></td>
-                                        </tr>
-                                        <tr class="order-total">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">? @{{ total }}</span></strong>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment-method">
-                                <div class="payment-accordion">
-                                    <div class="panel-group" id="faq">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h5 class="panel-title">Select payment method</h5>
-                                            </div>
-                                            <div id="payment">
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="cash" name="payment_method" value="cash" checked>
-                                                    <label class="custom-control-label" for="cash">Cash on Delivery</label>
-                                                </div>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" id="ssl" name="payment_method" value="ssl">
-                                                    <label class="custom-control-label" for="ssl">Credit/Debit Card</label>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="breakdown-content">
+                            <div class="some_random_class">
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Type</span>
                                     </div>
-                                    <div class="order-button-payment">
-                                        <button type="submit" class="button red">Place Order</button>
+                                    <div class="block-detail">
+                                        <span>@{{ type }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Insurance Provider Company</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>@{{ company.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>CC Type</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>@{{ displacement.name }} cc</span>
+                                    </div>
+                                </div>
+                                <div class="single-block" v-if="type == types[1]">
+                                    <div class="block-term">
+                                        <span>Sum Insured</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ price }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block has-full-line" v-if="type == types[1]">
+                                    <div class="block-term">
+                                        <span></span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="single-block" v-if="type == types[1] && company.total_rate">
+                                    <div class="block-term">
+                                        <span>Basic</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ displacement.basic }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block" v-if="type == types[1]">
+                                    <div class="block-term">
+                                        <span>+ @{{ company.total_rate.toFixed(2) }}% of full value</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ price*company.total_rate.toFixed(2)/100 }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Own Damage</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ ownDamage(company) }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Act Liabilities</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ displacement.act_liability }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>+ @{{ passenger }} Passenger @ 45</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ passenger*45 }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>+ 1 Driver</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. 30</span>
+                                    </div>
+                                </div>
+                                <div class="single-block has-half-line">
+                                    <div class="block-term">
+                                        <span></span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Net Premium</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ netPremium(company) }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>+ 15% Vat</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ netPremium(company)*15/100 }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block has-full-line">
+                                    <div class="block-term">
+                                        <span></span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Total Premium</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ totalPremium(company) }}</span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>+ Service Delivery Cost</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. 40</span>
+                                    </div>
+                                </div>
+                                <div class="single-block has-full-line">
+                                    <div class="block-term">
+                                        <span></span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="single-block">
+                                    <div class="block-term">
+                                        <span>Grand Total</span>
+                                    </div>
+                                    <div class="block-detail">
+                                        <span>Tk. @{{ grandTotal(company) }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12">
+                        <input type="submit" class="btn button red" value="Update" :disabled="(phone == new_phone || otp_verified) && isPhoneValid()"/>
                     </div>
                 </div>
             </form>
@@ -251,23 +354,150 @@ checkout-listing  -->
 @endsection
 @section('script')
 <script>
-    var app2 = new Vue({
+    var vuejs = new Vue({
         el: '#checkout',
         data: {
-            products: cart.products
+            category: '',
+            brand: {},
+            model:  {},
+            type: '',
+            types: ['Act Liabilities / Third Party Insurance', 'Comprehensive / First Party Insurance'],
+            displacement: {},
+            passenger: 1,
+            price: '',
+            company: {},
+            companies: @json($insurance_companies),
+            coverages: @json($coverages),
+            features: @json($insurance_features),
+            phone: '{{ $profile->phone ?? "" }}',
+            new_phone: '{{ $profile->phone ?? "" }}',
+            otp: '',
+            otp_sent: false,
+            otp_verified: false,
+            countDown: 60
+        },
+        methods: {
+            getFromStorage: function() {
+                if (localStorage.category)
+                    this.category = JSON.parse(localStorage.category);
+                if (localStorage.brand)
+                    this.brand = JSON.parse(localStorage.brand);
+                if (localStorage.model)
+                    this.model = JSON.parse(localStorage.model);
+                if (localStorage.type)
+                    this.type = localStorage.type;
+                if (localStorage.displacement)
+                    this.displacement = JSON.parse(localStorage.displacement);
+                if (localStorage.passenger)
+                    this.passenger = localStorage.passenger;
+                if (localStorage.price)
+                    this.price = localStorage.price;
+                if (localStorage.company)
+                    this.company = JSON.parse(localStorage.company);
+            },
+            coverageStringToArray: function() {
+                for(let i=0; i<this.companies.length; i++) {
+                    this.companies[i].basic_coverage = this.companies[i].basic_coverage.split(',');
+                    this.companies[i].insurance_feature = this.companies[i].insurance_feature.split(',');
+                }
+            },
+            openModal: function(company) {
+                this.company = company;
+                
+                $('#insurance-company-modal').modal('show');
+            },
+            formSubmit: function(company) {
+                this.company = company;
+                Vue.nextTick(function() {
+                    vuejs.$refs.form.submit();
+                });
+            },
+            ownDamage: function(c) {
+                if(this.type == this.types[1])
+                    return this.displacement.basic + this.price*c.total_rate/100;
+                else
+                    return 0;
+            },
+            netPremium: function(c) {
+                return this.ownDamage(c) + this.displacement.act_liability + this.passenger*45 + 30;
+            },
+            totalPremium: function(c) {
+                return this.netPremium(c) + this.netPremium(c) * 15/100;
+            },
+            grandTotal: function(c) {
+                return this.totalPremium(c) + 40;
+            },
+            calculateRate: function() {
+                for(let c = 0; c < this.companies.length; c++) {
+                    this.companies[c].total_rate = 0;
+                    for(let i = 0; i < this.companies[c].basic_coverage.length; i++) {
+                        for(let j=0; j<this.coverages.length; j++) {
+                            if(this.companies[c].basic_coverage[i] == this.coverages[j].id) {
+                                this.companies[c].total_rate += Number(this.coverages[j].rate);
+                                break;
+                            }
+                        }
+                    }
+                }
+            },
+            isPhoneValid: function () {
+                var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
+                return pattern.test(this.new_phone);
+            },
+            sendOtp: function () {
+                var _this = this;
+                this.countDown = 60;
+                this.countDownTimer();
+                $.ajax({
+                    url: "{{ route('send-otp') }}",
+                    data: {"phone":this.new_phone, "_token":"{{ csrf_token() }}"},
+                    type: "post",
+                    success: function(result){
+                        _this.otp = '';
+                        _this.otp_sent = true;
+                    }
+                });
+            },
+            countDownTimer() {
+                if (this.countDown > 0) {
+                    setTimeout(() => {
+                        this.countDown -= 1;
+                        this.countDownTimer();
+                    }, 1000)
+                } else {
+                    this.otp_sent = false;
+                }
+            },
+            verifyOtp: function() {
+                var _this = this;
+                $.ajax({
+                    url: "{{ route('verify-otp') }}",
+                    data: {"phone":this.new_phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
+                    type: "post",
+                    success: function(result) {
+                        if (result == 'success') {
+                            _this.otp_verified = true;
+                            _this.otp = '';
+                            localStorage.phone_verified = 1;
+                            localStorage.verified_phone = _this.new_phone;
+                        }
+                    }
+                });
+            },
         },
         computed: {
-            subTotal: function () {
-                var price = 0;
-                for (let i = 0; i < this.products.length; i++) {
-                    price += this.products[i].msrp * this.products[i].quantity;
-                }
-                return price;
-            },
-            total: function () {
-                return this.subTotal;
-            }
-        }
+            
+        },
+        watch: {
+            
+        },
+        created: function() {
+            this.calculateRate();
+        },
+        mounted: function() {
+            this.getFromStorage();
+            this.coverageStringToArray();
+        },
     });
 </script>
 @endsection
