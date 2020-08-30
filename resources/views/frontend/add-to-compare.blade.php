@@ -9,7 +9,7 @@
 
 @include('layouts.frontend.car-background')
 
-<section class="section-full content-inner-2">
+<section class="section-full content-inner-2" id="compare">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -23,40 +23,66 @@
         </div>
         <div class="row">
             <!-- Side bar start -->
-            <div class="col-md-4 col-sm-6 m-b30">
-                <div class="icon-bx-wraper bx-style-1 p-a20 text-center">
-                    <div>
-                        <img class="hover-opacity-5 cursor-pointer" src="http://ecarkhana/images/add-car.jpg" alt="">
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card" @click.prevent="openModal(2)" v-if="page == 1">
+                    <img class="card-img-top img-fluid cursor-pointer hover-opacity-5" src="{{ url('/') }}/images/add-car.jpg" alt="Card image">
+                    <div class="card-body">
+                        <div class="input-group rounded-0 rounded-top" @click="openModal(2)">
+                            <input type="text" class="form-control border-right-0 rounded-0 border-bottom-0" placeholder="Select Brand/Model">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-white border-left-0  border-bottom-0 rounded-0"><i class="fa fa-caret-down"></i></span>
+                            </div>
+                        </div>
+                        <div class="input-group rounded-0" @click="openModal(3)">
+                            <input type="text" class="form-control border-right-0 rounded-0" placeholder="Select Package">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-white border-left-0 rounded-0"><i class="fa fa-caret-down"></i></span>
+                            </div>
+                        </div>
                     </div>
-                    <form>
-                        <h4>Add to compare</h4>	
-                        <div class="input-group m-b20">
-                            <select class="form-control bs-select-hidden">
-                                <option>-Select Brand-</option>
-                                @foreach($brands as $brand)
-                                                            <option value="{{ $brand->id }}" @if(isset($car) && $car->brand_id == $brand->id) selected @endif>{{ $brand->name }}</option>
-                                                            @endforeach
-                            </select>
+                </div>
+                <div class="card" v-if="page == 2">
+                    <div class="card-header bg-white">
+                        <a class="btn btn-link text-danger" href="#" @click.prevent="page=2">Brand/Modal</a> <a class="btn btn-link text-dark" href="#" @click.prevent="page=3">Package</a>
+                        <i class="fa fa-close position-absolute right-10 top-10 cursor-pointer btn-light text-danger" @click.prevent="page=1"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Select Brand/Model" v-model="search">
                         </div>
-                        <div class="input-group m-b20">
-                            <select class="form-control bs-select-hidden">
-                                <option>-Select Model-</option>
-                                <option>Creta</option>
-                                <option>Elantra</option>
-                                <option>EON</option>
-                                <option>Grand i10</option>
-                            </select>
+                        <ul class="list-group compare-scroll" v-if="filteredBrands.length">
+                            <li class="list-group-item py-1 cursor-pointer border-0" v-for="b in filteredBrands" :class="{'text-danger': b.id == brand.id}">
+                                <strong><i class="fa fa-check" v-if="b.id == brand.id"></i> @{{ b.name }}</strong>
+                                <ul class="list-group list-group-flush border-left">
+                                    <li class="list-group-item list-group-item-action py-1 cursor-pointer border-0" v-for="m in models" @click.prevent="modelSelected(m)" :class="{'text-danger': m.id == model.id}" v-if="b.id == m.brand_id"><i class="fa fa-check" v-if="m.id == model.id"></i> @{{ m.name }}</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="list-group compare-scroll" v-else>
+                            <li class="list-group-item py-1 cursor-pointer border-0" v-for="b in brands" :class="{'text-danger': b.id == brand.id}">
+                                <strong><i class="fa fa-check" v-if="b.id == brand.id"></i> @{{ b.name }}</strong>
+                                <ul class="list-group list-group-flush border-left">
+                                    <li class="list-group-item list-group-item-action py-1 cursor-pointer border-0" v-for="m in filteredModels" @click.prevent="modelSelected(m)" :class="{'text-danger': m.id == model.id}" v-if="b.id == m.brand_id"><i class="fa fa-check" v-if="m.id == model.id"></i> @{{ m.name }}</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" v-if="page == 3">
+                    <div class="card-header bg-white">
+                        <a class="btn btn-link text-dark" href="#" @click.prevent="page=2">Brand/Model</a> <a class="btn btn-link text-danger" href="#" @click.prevent="page=3">Package</a>
+                        <i class="fa fa-close position-absolute right-10 top-10 cursor-pointer btn-light text-danger" @click.prevent="page=1"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Select Package" v-model="search">
                         </div>
-                        <div class="input-group m-b20">
-                            <select class="form-control bs-select-hidden">
-                                <option>-Select Variant-</option>
-                                <option>Creta</option>
-                                <option>Elantra</option>
-                                <option>EON</option>
-                                <option>Grand i10</option>
-                            </select>
-                        </div>
-                    </form>
+                        <ul class="list-group list-group-flush compare-scroll">
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="p in filteredPackages" :class="{'text-danger': p.id == package.id}" v-if="p.model_id == model.id" @click.prevent="packageSelected(p)">
+                                <i class="fa fa-check" v-if="p.id == package.id"></i> @{{ p.name }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 m-b30">
@@ -635,7 +661,7 @@
                                 </div>
                             </div>
                             <div class="owl-item cloned" style="width: 262.5px; margin-right: 20px;">
-                                    <div class="item">
+                                <div class="item">
                                     <div class="car-item text-center">
                                         <div class="car-image">
                                             <img class="img-fluid" src="images/14.jpg" alt="">
@@ -691,97 +717,77 @@
 @section('script')
 <script>
     var vuejs = new Vue({
-        el: '#insurance-company',
+        el: '#compare',
         data: {
+            products: [],
+            search:"",
             brand: {},
+            brands: @json($brands),
             model:  {},
+            models: @json($models),
             package: {},
+            packages: @json($packages),
+            page: 1
         },
         methods: {
-            getFromStorage: function() {
-                if (localStorage.category)
-                    this.category = JSON.parse(localStorage.category);
-                if (localStorage.brand)
-                    this.brand = JSON.parse(localStorage.brand);
-                if (localStorage.model)
-                    this.model = JSON.parse(localStorage.model);
-                if (localStorage.type)
-                    this.type = localStorage.type;
-                if (localStorage.displacement)
-                    this.displacement = JSON.parse(localStorage.displacement);
-                if (localStorage.passenger)
-                    this.passenger = localStorage.passenger;
-                if (localStorage.price)
-                    this.price = localStorage.price;
-            },
-            coverageStringToArray: function() {
-                for(let i=0; i<this.companies.length; i++) {
-                    this.companies[i].basic_coverage = this.companies[i].basic_coverage.split(',');
-                    this.companies[i].insurance_feature = this.companies[i].insurance_feature.split(',');
+            openModal: function (p) {
+                if (p == 1) {
+                    this.page = 1;
+                } else if (p == 2) {
+                    this.page = 2;
+                } else if (p == 3) {
+                    if (this.model)
+                        this.page = 3;
                 }
+
+                $('#sell-car-modal').modal('show');
             },
-            pageSetting: function() {
-                if(this.category.id == 2) {
-                    this.passenger = 1;
-                    localStorage.passenger = 1;
-                }
+            
+            modelSelected: function (m) {
+                this.model = m;
+                this.search = '';
+                this.page = 3;
             },
-            openModal: function(company) {
-                this.company = company;
-                
-                $('#insurance-company-modal').modal('show');
+            packageSelected: function (p) {
+                this.package = p;
             },
-            formSubmit: function(company) {
-                this.company = company;
-                Vue.nextTick(function() {
-                    vuejs.$refs.form.submit();
+            isEmpty: function(obj) {
+                return Object.keys(obj).length === 0;
+            },
+            getProduct: function() {
+                var _this = this;
+                $.ajax({
+                    url: "{{ route('get-regions') }}?brand_id=" + _this.brand.id + "&model_id=" + _this.model.id + "&package_id=" + _this.package.id,
+                    dataType: "json",
+                    success: function(result){
+                        console.log(result);
+                        _this.products[] = result;
+                    }
                 });
             },
-            ownDamage: function(c) {
-                
-                if(this.type == this.types[1])
-                    return this.displacement.basic + this.price*c.total_rate/100;
-                else
-                    return 0;
-            },
-            netPremium: function(c) {
-                return this.ownDamage(c) + this.displacement.act_liability + this.passenger*45 + 30;
-            },
-            totalPremium: function(c) {
-                return this.netPremium(c) + this.netPremium(c) * 15/100;
-            },
-            grandTotal: function(c) {
-                return this.totalPremium(c) + 40;
-            },
-            calculateRate: function() {
-                for(let c = 0; c < this.companies.length; c++) {
-                    this.companies[c].total_rate = 0;
-                    for(let i = 0; i < this.companies[c].basic_coverage.length; i++) {
-                        for(let j=0; j<this.coverages.length; j++) {
-                            if(this.companies[c].basic_coverage[i] == this.coverages[j].id) {
-                                this.companies[c].total_rate += Number(this.coverages[j].rate);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
         },
         computed: {
-            
-        },
-        watch: {
-            company: function(v) {
-                localStorage.company = JSON.stringify(v);
+            filteredBrands() {
+                return this.brands.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredModels() {
+                return this.models.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredPackages() {
+                return this.packages.filter(item => {
+                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
             }
         },
+        watch: {
+        },
         created: function() {
-            this.calculateRate();
         },
         mounted: function() {
-            this.getFromStorage();
-            this.coverageStringToArray();
-            this.pageSetting();
         },
     });
 </script>

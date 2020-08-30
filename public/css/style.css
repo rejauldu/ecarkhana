@@ -9782,3 +9782,7 @@ h3.listClose {
     color: #FFF;
     text-shadow: 0 0 5px #000;
 }
+.compare-scroll {
+	height:150px;
+	overflow-y: scroll;
+}
