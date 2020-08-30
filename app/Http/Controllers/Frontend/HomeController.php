@@ -93,7 +93,10 @@ class HomeController extends Controller {
     }
 
     public function addToCompare() {
-        return view('frontend.add-to-compare');
+        $brands = Brand::select('id', 'name')->where('category_id', 1)->get();
+        $models = Model::select('id', 'brand_id', 'name')->where('category_id', 1)->get();
+        $packages = Package::select('id', 'model_id', 'name')->where('category_id', 1)->get();
+        return view('frontend.add-to-compare', compact('brands', 'models', 'packages'));
     }
 
     public function auctionBiddingList($id) {

@@ -60,7 +60,7 @@ class InsuranceController extends Controller {
             $inputs['shipping_address'] = $request->billing_address;
         }
         Auth::user()->update($inputs);
-            
+        
         return redirect()->route('order-complete')->with('message', 'Order created successfully');
     }
 

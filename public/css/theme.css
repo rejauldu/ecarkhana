@@ -574,6 +574,21 @@ table.dataTable thead .sorting_desc_disabled:before {
 .opacity-5 {
     opacity: 0.5 !important;
 }
+.hover-opacity-1:hover {
+    opacity: 0.1 !important;
+}
+.hover-opacity-2:hover {
+    opacity: 0.2 !important;
+}
+.hover-opacity-3:hover {
+    opacity: 0.3 !important;
+}
+.hover-opacity-4:hover {
+    opacity: 0.4 !important;
+}
+.hover-opacity-5:hover {
+    opacity: 0.5 !important;
+}
 .top-0 {
     top:0;
 }
