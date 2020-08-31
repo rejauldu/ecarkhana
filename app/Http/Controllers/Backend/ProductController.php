@@ -24,7 +24,7 @@ use App\Http\Requests\ProductRequest;
 class ProductController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['store']]);
+        $this->middleware('moderator:Product', ['except' => ['store', 'getProduct']]);
     }
 
     /**
@@ -237,6 +237,10 @@ class ProductController extends Controller {
         $product = Product::find($id);
         $product->update($data);
         return redirect()->route('products.index')->with('message', 'This product has been added to auction');
+    }
+    public function getProduct(Request $request) {
+        $product = Product::where('category_id', $request->category_id)->where('brand_id', $request->brand_id)->where('model_id', $request->model_id)->where('package_id', $request->package_id)->with('brand', 'model', 'package')->first();
+        return $product;
     }
 
 }
