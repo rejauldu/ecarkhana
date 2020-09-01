@@ -42,6 +42,7 @@ Route::resource('loan-applications', 'Backend\LoanApplicationController');
 Route::get('loan-applications-unviewed', 'Backend\LoanApplicationController@unviewed')->name('loan-applications.unviewed');
 Route::get('/loan-eligibility', 'Frontend\LoanInfoController@create')->name('loan-eligibility');
 Route::get('/car-loan-insurance-check', 'Frontend\HomeController@carLoanInsuranceCheck')->name('car-loan-insurance-check');
+Route::get('/compare/{url?}', 'Frontend\HomeController@compare')->name('compare');
 Route::post('/compare-car', 'Frontend\HomeController@compareCar')->name('compare-car');
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
 Route::get('/dealer-detail/{id}', 'Frontend\HomeController@dealerDetail')->name('dealer-detail');

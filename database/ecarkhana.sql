@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2020 at 03:40 PM
+-- Generation Time: Sep 01, 2020 at 05:40 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -406,20 +406,20 @@ CREATE TABLE `brands` (
 
 INSERT INTO `brands` (`id`, `category_id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Mitsubishi', '2020-01-21 14:51:43', '2020-02-14 07:55:41'),
-(2, 5, 'Mr. Archibald Nikolaus', '2020-01-21 16:51:37', '2020-01-23 02:59:32'),
+(2, 2, 'Mr. Archibald Nikolaus', '2020-01-21 16:51:37', '2020-08-30 14:37:41'),
 (3, 2, 'Hunda', '2020-01-21 20:50:52', '2020-02-14 07:57:00'),
 (4, 3, 'Duranta', '2020-01-21 04:58:07', '2020-02-14 07:59:37'),
 (5, 3, 'Angellena Ladies', '2020-01-20 23:01:47', '2020-02-14 08:00:14'),
-(6, 4, 'Rae Zemlak V', '2020-01-21 16:08:49', '2020-01-28 14:55:27'),
+(6, 1, 'Rae Zemlak V', '2020-01-21 16:08:49', '2020-08-30 14:37:48'),
 (7, 2, 'Hero', '2020-01-21 14:09:14', '2020-02-14 07:57:39'),
 (8, 1, 'Hi-ACE', '2020-01-21 10:02:28', '2020-02-14 07:56:11'),
-(9, 4, 'Daphne Greenholt', '2020-01-21 18:35:21', '2020-02-03 07:46:01'),
-(10, 8, 'Timmothy Oberbrunner V', '2020-01-21 07:08:16', '2020-01-27 21:22:40'),
-(11, 4, 'Mr. Kris Nitzsche', '2020-01-21 16:54:10', '2020-01-30 18:48:35'),
-(12, 4, 'Dr. Jessie Farrell II', '2020-01-21 15:01:03', '2020-01-29 06:37:38'),
-(13, 5, 'Melvin Deckow', '2020-01-21 02:14:27', '2020-01-31 03:17:46'),
-(14, 5, 'Kaia Leffler', '2020-01-21 15:37:26', '2020-01-24 15:38:08'),
-(15, 7, 'Murray Reichel IV', '2020-01-21 04:51:59', '2020-02-04 15:19:10');
+(9, 1, 'Daphne Greenholt', '2020-01-21 18:35:21', '2020-08-30 14:37:55'),
+(10, 2, 'Timmothy Oberbrunner V', '2020-01-21 07:08:16', '2020-08-30 14:38:00'),
+(11, 1, 'Mr. Kris Nitzsche', '2020-01-21 16:54:10', '2020-08-30 14:38:04'),
+(12, 1, 'Dr. Jessie Farrell II', '2020-01-21 15:01:03', '2020-08-30 14:38:08'),
+(13, 2, 'Melvin Deckow', '2020-01-21 02:14:27', '2020-08-30 14:38:13'),
+(14, 2, 'Kaia Leffler', '2020-01-21 15:37:26', '2020-08-30 14:38:17'),
+(15, 1, 'Murray Reichel IV', '2020-01-21 04:51:59', '2020-08-30 14:38:21');
 
 -- --------------------------------------------------------
 
@@ -2787,21 +2787,21 @@ CREATE TABLE `models` (
 --
 
 INSERT INTO `models` (`id`, `category_id`, `brand_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 4, 12, 'Rodolfo Waelchi', '2020-01-21 04:09:25', '2020-02-02 09:44:05'),
-(2, 7, 1, 'Angus Rau', '2020-01-21 00:52:26', '2020-02-02 06:33:46'),
+(1, 3, 1, 'Rodolfo Waelchi', '2020-01-21 04:09:25', '2020-08-30 14:35:34'),
+(2, 1, 1, 'Angus Rau', '2020-01-21 00:52:26', '2020-08-30 14:35:16'),
 (3, 2, 3, '2020 Model', '2020-01-21 05:29:39', '2020-02-14 08:31:47'),
-(4, 4, 9, 'Mrs. Bailee Durgan I', '2020-01-21 19:07:39', '2020-01-29 19:17:03'),
-(5, 1, 1, '2020 Model', '2020-01-21 10:55:15', '2020-02-14 08:30:25'),
+(4, 1, 3, 'Mrs. Bailee Durgan I', '2020-01-21 19:07:39', '2020-08-30 14:35:38'),
+(5, 1, 1, '2020 Model', '2020-01-21 10:55:15', '2020-08-30 14:34:09'),
 (6, 3, 4, '2018 Model', '2020-01-21 08:03:53', '2020-02-14 08:32:49'),
-(7, 7, 4, 'Marcellus Murray', '2020-01-21 18:19:04', '2020-02-04 20:19:55'),
-(8, 8, 3, 'Rodger Spinka I', '2020-01-20 21:52:02', '2020-01-30 02:15:33'),
-(9, 7, 4, 'Enrico Kris', '2020-01-21 19:16:28', '2020-02-01 22:09:20'),
-(10, 5, 7, 'Mrs. Brenna Miller IV', '2020-01-21 17:41:04', '2020-01-28 17:56:19'),
-(11, 4, 12, 'Dr. Savanna Schinner', '2020-01-21 11:48:04', '2020-01-28 19:26:49'),
-(12, 7, 8, 'Marjory Von', '2020-01-21 19:14:19', '2020-02-04 02:16:23'),
-(13, 2, 3, 'Oceane Boehm', '2020-01-21 05:03:41', '2020-02-02 07:40:21'),
-(14, 7, 2, 'Mable Torphy', '2020-01-21 13:28:54', '2020-01-25 16:56:40'),
-(15, 1, 8, '2019 Model', '2020-01-21 19:06:29', '2020-02-14 08:31:02');
+(7, 1, 4, 'Marcellus Murray', '2020-01-21 18:19:04', '2020-08-30 14:39:07'),
+(8, 1, 7, 'Rodger Spinka I', '2020-01-20 21:52:02', '2020-08-30 14:39:37'),
+(9, 1, 4, 'Enrico Kris', '2020-01-21 19:16:28', '2020-08-30 14:34:49'),
+(10, 2, 5, 'Mrs. Brenna Miller IV', '2020-01-21 17:41:04', '2020-08-30 14:39:15'),
+(11, 1, 5, 'Dr. Savanna Schinner', '2020-01-21 11:48:04', '2020-08-30 14:39:20'),
+(12, 2, 2, 'Marjory Von', '2020-01-21 19:14:19', '2020-08-30 14:35:49'),
+(13, 2, 8, 'Oceane Boehm', '2020-01-21 05:03:41', '2020-08-30 14:39:45'),
+(14, 1, 2, 'Mable Torphy', '2020-01-21 13:28:54', '2020-08-30 14:35:06'),
+(15, 1, 6, '2019 Model', '2020-01-21 19:06:29', '2020-08-30 14:39:29');
 
 -- --------------------------------------------------------
 
@@ -3912,7 +3912,7 @@ INSERT INTO `products` (`id`, `brand_id`, `model_id`, `package_id`, `manufacturi
 (105, NULL, NULL, NULL, NULL, NULL, '55', NULL, NULL, '1', 1, '555', 1, 1, 555, NULL, 555, NULL, 0, 0, 1, 0, 'C:\\xampp\\tmp\\php6480.tmp', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 0, 0, '<p>Test</p>', NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-04-02 08:59:22', '2020-03-17 07:00:27', '2020-03-17 07:00:27'),
 (106, NULL, NULL, NULL, NULL, NULL, '55', NULL, NULL, '1', 1, '555', 1, 1, 555, NULL, 555, NULL, 0, 0, 1, 0, '106.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 0, 0, '<p>Test</p>', NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-20 18:00:00', '2020-05-12 18:00:00', 120, '2020-05-23 10:47:40', '2020-03-17 07:01:16', '2020-05-23 04:47:40'),
 (107, 1, 5, 11, 2012, NULL, 'Test', NULL, 1, '1', 1, '258963', 1, 3, 0, NULL, 5, NULL, 0, 0, 1, 0, '1.jpg', '2.png', '3.jpg', '4.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '<p>No problem at all.</p>', 0, NULL, NULL, 2, 0, 2019, 125, NULL, NULL, NULL, NULL, 1, '1', '2020-05-19 18:00:00', '2020-07-09 18:00:00', 25, '2020-08-20 10:05:46', '2020-05-10 00:39:16', '2020-08-20 04:05:46'),
-(108, 1, 5, 5, 2020, NULL, '2020 Model', NULL, NULL, '1', 1, '568888', 1, 1, 10, NULL, 2, NULL, 0, 0, 1, 0, NULL, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '<p>test</p>', 1, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', NULL, NULL, 0, '2020-08-20 05:02:11', '2020-08-19 23:02:11', '2020-08-19 23:02:11'),
+(108, 1, 5, 5, 2020, NULL, '2020 Model', NULL, NULL, '1', 1, '568888', 1, 1, 10, NULL, 2, NULL, 0, 0, 1, 0, NULL, '1.png', '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '<p>test</p>', 1, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, '1', NULL, NULL, 0, '2020-08-30 16:44:02', '2020-08-19 23:02:11', '2020-08-19 23:02:11'),
 (109, 1, 5, 5, 2020, NULL, 'Rejaul Karim', NULL, NULL, NULL, 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', NULL, NULL, NULL, NULL, 0, 2018, 10000, 'Second', 67, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 06:20:21', '2020-08-20 00:20:21', '2020-08-20 00:20:21'),
 (110, 1, 5, 5, 2020, NULL, '2020 Mitsubishi Rodolfo Waelchi', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', NULL, NULL, NULL, 3, 0, 2018, 10000, 'Second', 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 06:20:53', '2020-08-20 00:20:53', '2020-08-20 00:20:53'),
 (111, 1, 5, 5, 2020, NULL, '2020 Mitsubishi Rodolfo Waelchi', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', NULL, NULL, NULL, 3, 0, 2019, 10000, 'Second', 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 06:25:34', '2020-08-20 00:25:34', '2020-08-20 00:25:34'),
@@ -5758,7 +5758,12 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1317, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-companies', '2020-08-23 21:06:57', '2020-08-23 21:06:57'),
 (1318, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-24 20:30:29', '2020-08-24 20:30:29'),
 (1319, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-25 22:05:04', '2020-08-25 22:05:04'),
-(1320, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-photos', '2020-08-26 20:28:32', '2020-08-26 20:28:32');
+(1320, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/insurance-photos', '2020-08-26 20:28:32', '2020-08-26 20:28:32'),
+(1321, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-27 22:46:20', '2020-08-27 22:46:20'),
+(1322, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-28 23:19:08', '2020-08-28 23:19:08'),
+(1323, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-29 21:36:24', '2020-08-29 21:36:24'),
+(1324, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-31 01:13:22', '2020-08-31 01:13:22'),
+(1325, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-08-31 20:39:58', '2020-08-31 20:39:58');
 
 -- --------------------------------------------------------
 
@@ -12386,7 +12391,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1321;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1326;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

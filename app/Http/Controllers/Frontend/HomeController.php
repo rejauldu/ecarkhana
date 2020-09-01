@@ -256,7 +256,33 @@ class HomeController extends Controller {
     public function carLoanEligibility() {
         return view('frontend.car-loan-eligibility');
     }
-
+    public function compare($url = null) {
+        $brands = Brand::select('id', 'name')->where('category_id', 1)->get();
+        $models = Model::select('id', 'brand_id', 'name')->where('category_id', 1)->get();
+        $packages = Package::select('id', 'model_id', 'name')->where('category_id', 1)->get();
+        $data = array_filter(explode("-and-", $url));
+        $vehicles = [];
+        foreach($data as $d) {
+            $temp = array_filter(explode('-', $d));
+            array_push($vehicles, $temp);
+        }
+        $products = [];
+        foreach($vehicles as $vehicle) {
+            $v = Product::whereHas('brand', function (Builder $query) use($vehicle) {
+                    $query->where('name', $vehicle[0]);
+                })->whereHas('model', function (Builder $query) use($vehicle) {
+                    $query->where('name', $vehicle[1]);
+                });
+            if(isset($vehicle[2]))
+                $v = $v->whereHas('package', function (Builder $query) use($vehicle) {
+                        $query->where('name', $vehicle[2]);
+                    });
+            $v = $v->with('brand', 'model', 'package');
+            $v = $v->first();
+            array_push($products, $v);
+        }
+        return view('frontend.compare', compact('brands', 'models', 'packages', 'products'));
+    }
     public function compareCar(Request $request) {
         $data = $request->except('_token', '_method');
         $product[] = Product::where('id', $data['products'][0])->with('car.brand', 'car.model', 'car.package')->first();
