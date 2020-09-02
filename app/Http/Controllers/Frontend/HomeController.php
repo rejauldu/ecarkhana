@@ -290,13 +290,25 @@ class HomeController extends Controller {
             $v = $v->first();
             if (isset($v->$category->key_feature))
                 $v->$category->key_feature = explode(',', $v->$category->key_feature);
+            if (isset($v->$category->interior_feature))
+                $v->$category->interior_feature = explode(',', $v->$category->interior_feature);
+            if (isset($v->$category->exterior_feature))
+                $v->$category->exterior_feature = explode(',', $v->$category->exterior_feature);
+            if (isset($v->$category->safety_security))
+                $v->$category->safety_security = explode(',', $v->$category->safety_security);
+            if (isset($v->$category->additional_feature))
+                $v->$category->additional_feature = explode(',', $v->$category->additional_feature);
             array_push($products, $v);
         }
         if(isset($p)) {
             $type = ucfirst($category);
             $key_features = KeyFeature::where('category_id', $p->category_id)->get();
+            $interior_features = InteriorFeature::all();
+            $exterior_features = ExteriorFeature::all();
+            $safety_securities = SafetySecurity::all();
+            $additional_features = AdditionalFeature::all();
             
-            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', $type.'.brand', $type.'.model', $type.'.package', $type.'.body_type', $type.'.displacement', $type.'.ground_clearance', $type.'.drive_type', $type.'.engine_type', $type.'.fuel_type', 'condition', 'key_features'));
+            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', $type.'.brand', $type.'.model', $type.'.package', $type.'.body_type', $type.'.displacement', $type.'.ground_clearance', $type.'.drive_type', $type.'.engine_type', $type.'.fuel_type', 'condition', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
         }
         return view('frontend.compare', compact('brands', 'models', 'packages', 'products'));
     }

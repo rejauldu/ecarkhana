@@ -291,15 +291,19 @@
             <div class="col-12">
                 <div class="compare_product_info">
                     <!--Basic-Info-Table-->
-                    <div class="inventory_info_list">
-                        <div class="listing_heading">
-                            <div>General Information</div>
-                            <div>&nbsp;</div>
-                            <div>&nbsp;</div>
-                            <div class="sms-phn-hide">&nbsp;</div>
+                    <div class="inventory_info_list container-fluid">
+                        <div class="listing_heading row mx-0">
+                            <div class="col">General Information</div>
+                            <div class="col">&nbsp;</div>
+                            @if(isset($products) && count($products)>1)
+                            <div class="col">&nbsp;</div>
+                            @endif
+                            @if(isset($products) && count($products)>2)
+                            <div class="sms-phn-hide col">&nbsp;</div>
+                            @endif
                         </div>
-                        <ul>
-                            <li class="info_heading">
+                        <ul class="row">
+                            <li class="info_heading col px-0">
                                 <div>Brand</div>
                                 <div>Model</div>
                                 <div>Body type</div>
@@ -313,7 +317,7 @@
                                 <div>Selling Price</div>
                             </li>
                             @foreach($products as $product)
-                            <li>
+                            <li class="col px-0">
                                 <div>{{ $product->$category->brand->name ?? '' }}</div>
                                 <div>{{ $product->$category->model->name ?? '' }}</div>
                                 <div>{{ $product->$category->body_type->name ?? '' }}</div>
@@ -333,8 +337,12 @@
                         <div class="listing_heading">
                             <div>Key Features</div>
                             <div>&nbsp;</div>
-                            <div>&nbsp;</div>
-                            <div class="sms-phn-hide">&nbsp;</div>
+                            @if(isset($products) && count($products)>1)
+                            <div class="col">&nbsp;</div>
+                            @endif
+                            @if(isset($products) && count($products)>2)
+                            <div class="sms-phn-hide col">&nbsp;</div>
+                            @endif
                         </div>
                         <ul>
                             <li class="info_heading">
@@ -345,7 +353,7 @@
                             @foreach($products as $product)
                             <li>
                                 @foreach($key_features as $key_feature)
-                                <div class="text-center">@if($product->$category->key_feature && in_array($key_feature->id, $product->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close"></i> @endif</div>
+                                <div class="text-center">@if($product->$category->key_feature && in_array($key_feature->id, $product->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
                                 @endforeach
                             </li>
                             @endforeach
@@ -355,7 +363,7 @@
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <a href="#">Engine & Transmission</a>
-                                <ul style="display:none" class="list-group">
+                                <ul style="display:none" class="list-group list-style-type-none">
                                     <li>
                                         <div>Engine Type</div>
                                         <div>Engine Capacity</div>
@@ -390,175 +398,136 @@
                             </li>
                             <li class="list-group-item">
                                 <a href="#">Weight & Dimension</a>
-                                <ul style="display:none;">
+                                <ul style="display:none;" class="list-group list-style-type-none">
                                     <li>
                                         <div>Gross Weight</div>
-                                        <div>Seating Capacity</div>
+                                        <div>Ground Clearance</div>
                                         <div>Wheel Base</div>
+                                        <div>No of Door</div>
                                         <div>Length</div>
                                         <div>Width</div>
                                         <div>Height</div>
                                     </li>
+                                    @foreach($products as $product)
                                     <li>
-                                        <div>1500kg</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
+                                        <div>{{ $product->car->weight ?? '' }} kg</div>
+                                        <div>{{ $product->car->ground_clearance->name ?? '' }}</div>
+                                        <div>{{ $product->car->wheel_base->name ?? 'No' }}</div>
+                                        <div>{{ $product->car->no_of_door ?? 0 }}</div>
+                                        <div>{{ $product->car->length ?? 0 }}</div>
+                                        <div>{{ $product->car->width ?? 0 }}</div>
+                                        <div>{{ $product->car->height ?? 0 }}</div>
                                     </li>
-                                    <li>
-                                        <div>1650kg</div>
-                                        <div>8</div>
-                                        <div>1500mm</div>
-                                        <div>16cc</div>
-                                        <div>21</div>
-                                        <div>14</div>
-                                    </li>
-                                    <li class="sms-phn-hide">
-                                        <div>1650kg</div>
-                                        <div>8</div>
-                                        <div>1500mm</div>
-                                        <div>16cc</div>
-                                        <div>21</div>
-                                        <div>14</div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="list-group-item">
                                 <a href="#">Wheels Tyre & Seating Capacity</a>
-                                <ul style="display:none;">
+                                <ul style="display:none;" class="list-group list-style-type-none">
                                     <li>
                                         <div>Front Suspension</div>
                                         <div>Rear Suspension</div>
                                         <div>Wheel Type</div>
                                         <div>Wheel Size</div>
+                                        <div>Turning Radius</div>
                                         <div>Tyre Type</div>
                                         <div>Front Tyre Size</div>
                                         <div>Rear Tyre Size</div>
                                         <div>Stearing Type</div>
-                                        <div>Stearing Column</div>
-                                        <div>Front Break Type</div>
-                                        <div>Rear Break Type</div>
+                                        <div>Seating Capacity</div>
+                                        <div>Front Brake Type</div>
+                                        <div>Rear Brake Type</div>
                                     </li>
+                                    @foreach($products as $product)
                                     <li>
-                                        <div>1500kg</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
+                                        <div>{{ $product->car->front_suspension ?? '' }}</div>
+                                        <div>{{ $product->car->rear_suspension ?? '' }}</div>
+                                        <div>{{ $product->car->wheel_type->name ?? '' }}</div>
+                                        <div>{{ $product->car->wheel_size ?? '' }}</div>
+                                        <div>{{ $product->car->turning_radius ?? '' }}</div>
+                                        <div>{{ $product->car->tyre_type->name ?? '' }}</div>
+                                        <div>{{ $product->car->front_tyre_size ?? '' }}</div>
+                                        <div>{{ $product->car->rear_tyre_size ?? '' }}</div>
+                                        <div>{{ $product->car->steering_type ?? '' }}</div>
+                                        <div>{{ $product->car->seating_capacity ?? '' }}</div>
+                                        <div>{{ $product->car->front_brake->name ?? '' }}</div>
+                                        <div>{{ $product->car->rear_brake->name ?? '' }}</div>
                                     </li>
-                                    <li>
-                                        <div>1500kg</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
-                                    </li>
-                                    <li class="sms-phn-hide">
-                                        <div>1500kg</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
-                                        <div>5</div>
-                                        <div>1200mm</div>
-                                        <div>15cc</div>
-                                        <div>20</div>
-                                        <div>13</div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="list-group-item">
                                 <a href="#">Fuel & Consumption</a>
-                                <ul style="display:none;">
+                                <ul style="display:none;" class="list-group list-style-type-none">
                                     <li>
                                         <div>Fuel Type</div>
                                         <div>Fuel Tank Capacity</div>
                                         <div>Millage Kmpl</div>
                                     </li>
+                                    @foreach($products as $product)
                                     <li>
-                                        <div>Hybrid</div>
-                                        <div>500cc</div>
-                                        <div>20kmpl</div>
+                                        <div>{{ $product->car->fuel_type->name ?? '' }}</div>
+                                        <div>{{ $product->car->fuel_tank_capacity ?? '' }}</div>
+                                        <div>{{ $product->car->milage ?? '' }}</div>
                                     </li>
-                                    <li>
-                                        <div>Hybrid</div>
-                                        <div>500cc</div>
-                                        <div>20kmpl</div>
-                                    </li>
-                                    <li class="sms-phn-hide">
-                                        <div>Hybrid</div>
-                                        <div>500cc</div>
-                                        <div>20kmpl</div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="list-group-item">
-                                <a href="#">Features</a> 
-                                <ul style="display:none">
+                                <a href="#">Interior/Exterior</a>
+                                <ul style="display:none;" class="list-group list-style-type-none">
                                     <li>
-                                        <div>Power Streaming</div>
-                                        <div>Duel Front Car Bag</div>
-                                        <div>Passenger Air Bag</div>
-                                        <div>Automatic Climate</div>
-                                        <div>Power Windows Form</div>
-                                        <div>Fog Light Form</div>
-                                        <div>4WD</div>
-                                        <div>Anti-thief Device</div>
+                                        @foreach($interior_features as $interior_feature)
+                                        <div>{{ ucwords($interior_feature->name) }}</div>
+                                        @endforeach
+                                        @foreach($exterior_features as $exterior_feature)
+                                        <div>{{ ucwords($exterior_feature->name) }}</div>
+                                        @endforeach
                                     </li>
+                                    @foreach($products as $product)
                                     <li>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        @foreach($interior_features as $interior_feature)
+                                        <div class="text-center">@if($product->$category->interior_feature && in_array($interior_feature->id, $product->$category->interior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
+                                        @endforeach
+                                        @foreach($exterior_features as $exterior_feature)
+                                        <div class="text-center">@if($product->$category->exterior_feature && in_array($exterior_feature->id, $product->$category->exterior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
+                                        @endforeach
                                     </li>
-                                    <li>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                    </li>
-                                    <li class="sms-phn-hide">
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="list-group-item">
-                                <a href="#">Interior/Exterior</a> 
-                                <ul style="display:none">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li class="sms-phn-hide"></li>                               
+                                <a href="#">Safety and Security</a>
+                                <ul style="display:none;" class="list-group list-style-type-none">
+                                    <li>
+                                        @foreach($safety_securities as $safety_security)
+                                        <div>{{ ucwords($safety_security->name) }}</div>
+                                        @endforeach
+                                    </li>
+                                    @foreach($products as $product)
+                                    <li>
+                                        @foreach($safety_securities as $safety_security)
+                                        <div class="text-center">@if($product->$category->safety_security && in_array($safety_security->id, $product->$category->safety_security)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
+                                        @endforeach
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Additional Feature</a>
+                                <ul style="display:none;" class="list-group list-style-type-none">
+                                    <li>
+                                        @foreach($additional_features as $additional_feature)
+                                        <div>{{ ucwords($additional_feature->name) }}</div>
+                                        @endforeach
+                                    </li>
+                                    @foreach($products as $product)
+                                    <li>
+                                        @foreach($additional_features as $additional_feature)
+                                        <div class="text-center">@if($product->$category->additional_feature && in_array($additional_feature->id, $product->$category->additional_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
+                                        @endforeach
+                                    </li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
@@ -650,7 +619,7 @@
                 this.search = '';
             },
             compare: function() {
-                var url = '';
+                var url = '{{ route("compare") }}/';
                 for(let i=0; i<this.products.length; i++) {
                     if(i != 0)
                         url += '-and-';

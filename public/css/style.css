@@ -9786,3 +9786,9 @@ h3.listClose {
 	height:150px;
 	overflow-y: scroll;
 }
+.sms-sys-com ul li ul.display-none {
+    display:none;
+}
+.list-style-type-none {
+    list-style-type: none;
+}
