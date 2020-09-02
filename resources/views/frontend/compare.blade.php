@@ -286,253 +286,428 @@
             <div class="col-md-12 col-sm-12 text-center py-4">
                 <a class="btn btn-danger" href="#" @click.prevent="compare()">Compare Now</a>
             </div>
-            @if(isset($type))
+            @if(isset($products) && count($products)>0)
+            @php($three = array_chunk($products, 3)[0])
             @php($category = strtolower($type))
             <div class="col-12">
-                <div class="compare_product_info">
-                    <!--Basic-Info-Table-->
-                    <div class="inventory_info_list container-fluid">
-                        <div class="listing_heading row mx-0">
-                            <div class="col">General Information</div>
-                            <div class="col">&nbsp;</div>
-                            @if(isset($products) && count($products)>1)
-                            <div class="col">&nbsp;</div>
-                            @endif
-                            @if(isset($products) && count($products)>2)
-                            <div class="sms-phn-hide col">&nbsp;</div>
-                            @endif
-                        </div>
-                        <ul class="row mx-0">
-                            <li class="info_heading col px-0">
-                                <div>Brand</div>
-                                <div>Model</div>
-                                <div>Body type</div>
-                                <div>Package</div>
-                                <div>Displacement</div>
-                                <div>Make Year</div>
-                                <div>Ground Clearance</div>
-                                <div>Drive Type</div>
-                                <div>Engine Type</div>
-                                <div>Fuel Type</div>
-                                <div>Selling Price</div>
-                            </li>
-                            @foreach($products as $product)
-                            <li class="col px-0">
-                                <div>{{ $product->$category->brand->name ?? '' }}</div>
-                                <div>{{ $product->$category->model->name ?? '' }}</div>
-                                <div>{{ $product->$category->body_type->name ?? '' }}</div>
-                                <div>{{ $product->$category->package->name ?? '' }}</div>
-                                <div>{{ $product->$category->displacement->name ?? '' }}cc</div>
-                                <div>{{ $product->$category->manufacturing_year ?? '' }}</div>
-                                <div>{{ $product->$category->ground_clearance->name ?? '' }}</div>
-                                <div>{{ $product->$category->drive_type->name ?? '' }}</div>
-                                <div>{{ $product->$category->engine_type->name ?? '' }}</div>
-                                <div>{{ $product->$category->fuel_type->name ?? '' }}</div>
-                                <div>Tk.{{ $product->msrp ?? '' }}</div>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="inventory_info_list container-fluid">
-                        <div class="listing_heading row mx-0">
-                            <div class="col px-0"><span class="mx-3">Key Features</span></div>
-                            <div class="col px-0">&nbsp;</div>
-                            @if(isset($products) && count($products)>1)
-                            <div class="col px-0">&nbsp;</div>
-                            @endif
-                            @if(isset($products) && count($products)>2)
-                            <div class="sms-phn-hide col px-0">&nbsp;</div>
-                            @endif
-                        </div>
-                        <ul class="row mx-0">
-                            <li class="info_heading col px-0">
-                                @foreach($key_features as $key_feature)
-                                <div>{{ ucwords($key_feature->name) }}</div>
-                                @endforeach
-                            </li>
-                            @foreach($products as $product)
-                            <li class="col px-0">
-                                @foreach($key_features as $key_feature)
-                                <div class="text-center">@if($product->$category->key_feature && in_array($key_feature->id, $product->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
-                                @endforeach
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="sms-sys-com">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <a href="#">Engine & Transmission</a>
-                                <ul style="display:none" class="list-group list-style-type-none">
-                                    <li>
-                                        <div>Engine Type</div>
-                                        <div>Engine Capacity</div>
-                                        <div>Displacement</div>
-                                        <div>Max Power</div>
-                                        <div>Max Torque</div>
-                                        <div>Milage Kmpl</div>
-                                        <div>Engine Check & Warning</div>
-                                        <div>Gear Box</div>
-                                        <div>Transmission</div>
-                                        <div>Cylinder</div>
-                                        <div>Drive Type</div>
-                                        <div>Min Turning Radius</div>
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        <div>{{ $product->$category->engine_type->name ?? '' }}</div>
-                                        <div>{{ $product->$category->engine_capacity ?? 0 }}cc</div>
-                                        <div>{{ $product->$category->displacement->name ?? '' }}cc</div>
-                                        <div>{{ $product->$category->maximum_power ?? '' }}</div>
-                                        <div>{{ $product->$category->maximum_torque ?? '' }}</div>
-                                        <div>{{ $product->$category->milage ?? '' }} kmpl</div>
-                                        <div>{{ $product->$category->engine_check_warning ?? '' }}</div>
-                                        <div>{{ $product->$category->gear_box->name ?? '' }}</div>
-                                        <div>{{ $product->$category->transmission->name ?? '' }}</div>
-                                        <div>{{ $product->$category->cylinder->name ?? '' }}</div>
-                                        <div>{{ $product->$category->drive_type->name ?? '' }}</div>
-                                        <div>{{ $product->$category->turning_radius ?? '' }}</div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Weight & Dimension</a>
-                                <ul style="display:none;" class="list-group list-style-type-none">
-                                    <li>
-                                        <div>Gross Weight</div>
-                                        <div>Ground Clearance</div>
-                                        <div>Wheel Base</div>
-                                        <div>No of Door</div>
-                                        <div>Length</div>
-                                        <div>Width</div>
-                                        <div>Height</div>
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        <div>{{ $product->$category->weight ?? '' }} kg</div>
-                                        <div>{{ $product->$category->ground_clearance->name ?? '' }}</div>
-                                        <div>{{ $product->$category->wheel_base->name ?? 'No' }}</div>
-                                        <div>{{ $product->$category->no_of_door ?? 0 }}</div>
-                                        <div>{{ $product->$category->length ?? 0 }}</div>
-                                        <div>{{ $product->$category->width ?? 0 }}</div>
-                                        <div>{{ $product->$category->height ?? 0 }}</div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Wheels Tyre & Seating Capacity</a>
-                                <ul style="display:none;" class="list-group list-style-type-none">
-                                    <li>
-                                        <div>Front Suspension</div>
-                                        <div>Rear Suspension</div>
-                                        <div>Wheel Type</div>
-                                        <div>Wheel Size</div>
-                                        <div>Turning Radius</div>
-                                        <div>Tyre Type</div>
-                                        <div>Front Tyre Size</div>
-                                        <div>Rear Tyre Size</div>
-                                        <div>Stearing Type</div>
-                                        <div>Seating Capacity</div>
-                                        <div>Front Brake Type</div>
-                                        <div>Rear Brake Type</div>
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        <div>{{ $product->$category->front_suspension ?? '' }}</div>
-                                        <div>{{ $product->$category->rear_suspension ?? '' }}</div>
-                                        <div>{{ $product->$category->wheel_type->name ?? '' }}</div>
-                                        <div>{{ $product->$category->wheel_size ?? '' }}</div>
-                                        <div>{{ $product->$category->turning_radius ?? '' }}</div>
-                                        <div>{{ $product->$category->tyre_type->name ?? '' }}</div>
-                                        <div>{{ $product->$category->front_tyre_size ?? '' }}</div>
-                                        <div>{{ $product->$category->rear_tyre_size ?? '' }}</div>
-                                        <div>{{ $product->$category->steering_type ?? '' }}</div>
-                                        <div>{{ $product->$category->seating_capacity ?? '' }}</div>
-                                        <div>{{ $product->$category->front_brake->name ?? '' }}</div>
-                                        <div>{{ $product->$category->rear_brake->name ?? '' }}</div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Fuel & Consumption</a>
-                                <ul style="display:none;" class="list-group list-style-type-none">
-                                    <li>
-                                        <div>Fuel Type</div>
-                                        <div>Fuel Tank Capacity</div>
-                                        <div>Millage Kmpl</div>
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        <div>{{ $product->$category->fuel_type->name ?? '' }}</div>
-                                        <div>{{ $product->$category->fuel_tank_capacity ?? '' }}</div>
-                                        <div>{{ $product->$category->milage ?? '' }}</div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Interior/Exterior</a>
-                                <ul style="display:none;" class="list-group list-style-type-none">
-                                    <li>
-                                        @foreach($interior_features as $interior_feature)
-                                        <div>{{ ucwords($interior_feature->name) }}</div>
-                                        @endforeach
-                                        @foreach($exterior_features as $exterior_feature)
-                                        <div>{{ ucwords($exterior_feature->name) }}</div>
-                                        @endforeach
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        @foreach($interior_features as $interior_feature)
-                                        <div class="text-center">@if($product->$category->interior_feature && in_array($interior_feature->id, $product->$category->interior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
-                                        @endforeach
-                                        @foreach($exterior_features as $exterior_feature)
-                                        <div class="text-center">@if($product->$category->exterior_feature && in_array($exterior_feature->id, $product->$category->exterior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
-                                        @endforeach
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Safety and Security</a>
-                                <ul style="display:none;" class="list-group list-style-type-none">
-                                    <li>
-                                        @foreach($safety_securities as $safety_security)
-                                        <div>{{ ucwords($safety_security->name) }}</div>
-                                        @endforeach
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        @foreach($safety_securities as $safety_security)
-                                        <div class="text-center">@if($product->$category->safety_security && in_array($safety_security->id, $product->$category->safety_security)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
-                                        @endforeach
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#">Additional Feature</a>
-                                <ul style="display:none;" class="list-group list-style-type-none">
-                                    <li>
-                                        @foreach($additional_features as $additional_feature)
-                                        <div>{{ ucwords($additional_feature->name) }}</div>
-                                        @endforeach
-                                    </li>
-                                    @foreach($products as $product)
-                                    <li>
-                                        @foreach($additional_features as $additional_feature)
-                                        <div class="text-center">@if($product->$category->additional_feature && in_array($additional_feature->id, $product->$category->additional_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
-                                        @endforeach
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>General Specification</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Brand</td>
+                            <td>{{ $three[0]->$category->brand->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->brand->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->brand->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Model</td>
+                            <td>{{ $three[0]->$category->model->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->model->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->model->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Body type</td>
+                            <td>{{ $three[0]->$category->body_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->body_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->body_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Package</td>
+                            <td>{{ $three[0]->$category->package->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->package->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->package->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Displacement</td>
+                            <td>{{ $three[0]->$category->displacement->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->displacement->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->displacement->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Make Year</td>
+                            <td>{{ $three[0]->$category->manufacturing_year ?? '' }}</td>
+                            <td>{{ $three[1]->$category->manufacturing_year ?? '' }}</td>
+                            <td>{{ $three[2]->$category->manufacturing_year ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ground Clearance</td>
+                            <td>{{ $three[0]->$category->ground_clearance->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->ground_clearance->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->ground_clearance->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Drive Type</td>
+                            <td>{{ $three[0]->$category->drive_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->drive_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->drive_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Engine Type</td>
+                            <td>{{ $three[0]->$category->engine_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->engine_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->engine_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fuel Type</td>
+                            <td>{{ $three[0]->$category->fuel_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->fuel_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->fuel_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Selling Price</td>
+                            <td>{{ $three[0]->msrp ?? '' }}</td>
+                            <td>{{ $three[1]->msrp ?? '' }}</td>
+                            <td>{{ $three[2]->msrp ?? '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Key Features</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($key_features as $key_feature)
+                        <tr>
+                            <td>{{ ucwords($key_feature->name) }}</td>
+                            <td>@if($three[0]->$category->key_feature && in_array($key_feature->id, $three[0]->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[1]) && $three[1]->$category->key_feature && in_array($key_feature->id, $three[1]->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[2]) && $three[2]->$category->key_feature && in_array($key_feature->id, $three[2]->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Engine & Transmission</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Engine Type</td>
+                            <td>{{ $three[0]->$category->engine_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->engine_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->engine_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Engine Capacity</td>
+                            <td>{{ $three[0]->$category->engine_capacity->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->engine_capacity->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->engine_capacity->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Displacement</td>
+                            <td>{{ $three[0]->$category->displacement->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->displacement->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->displacement->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Max Power</td>
+                            <td>{{ $three[0]->$category->maximum_power ?? '' }}</td>
+                            <td>{{ $three[1]->$category->maximum_power ?? '' }}</td>
+                            <td>{{ $three[2]->$category->maximum_power ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Max Torque</td>
+                            <td>{{ $three[0]->$category->maximum_torque ?? '' }}</td>
+                            <td>{{ $three[1]->$category->maximum_torque ?? '' }}</td>
+                            <td>{{ $three[2]->$category->maximum_torque ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Milage Kmpl</td>
+                            <td>{{ $three[0]->$category->milage ?? '' }}</td>
+                            <td>{{ $three[1]->$category->milage ?? '' }}</td>
+                            <td>{{ $three[2]->$category->milage ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Engine Check & Warning</td>
+                            <td>{{ $three[0]->$category->engine_check_warning ?? '' }}</td>
+                            <td>{{ $three[1]->$category->engine_check_warning ?? '' }}</td>
+                            <td>{{ $three[2]->$category->engine_check_warning ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gear Box</td>
+                            <td>{{ $three[0]->$category->gear_box->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->gear_box->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->gear_box->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Transmission</td>
+                            <td>{{ $three[0]->$category->transmission->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->transmission->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->transmission->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Cylinder</td>
+                            <td>{{ $three[0]->$category->cylinder->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->cylinder->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->cylinder->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Drive Type</td>
+                            <td>{{ $three[0]->$category->drive_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->drive_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->drive_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Min Turning Radius</td>
+                            <td>{{ $three[0]->$category->turning_radius ?? '' }}</td>
+                            <td>{{ $three[1]->$category->turning_radius ?? '' }}</td>
+                            <td>{{ $three[2]->$category->turning_radius ?? '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Weight & Dimension</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gross Weight</td>
+                            <td>{{ $three[0]->$category->weight ?? '' }}</td>
+                            <td>{{ $three[1]->$category->weight ?? '' }}</td>
+                            <td>{{ $three[2]->$category->weight ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ground Clearance</td>
+                            <td>{{ $three[0]->$category->ground_clearance->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->ground_clearance->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->ground_clearance->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Wheel Base</td>
+                            <td>{{ $three[0]->$category->wheel_base->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->wheel_base->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->wheel_base->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>No of Door</td>
+                            <td>{{ $three[0]->$category->no_of_door ?? '' }}</td>
+                            <td>{{ $three[1]->$category->no_of_door ?? '' }}</td>
+                            <td>{{ $three[2]->$category->no_of_door ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Length</td>
+                            <td>{{ $three[0]->$category->length ?? '' }}</td>
+                            <td>{{ $three[1]->$category->length ?? '' }}</td>
+                            <td>{{ $three[2]->$category->length ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Width</td>
+                            <td>{{ $three[0]->$category->width ?? '' }}</td>
+                            <td>{{ $three[1]->$category->width ?? '' }}</td>
+                            <td>{{ $three[2]->$category->width ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td>{{ $three[0]->$category->height ?? '' }}</td>
+                            <td>{{ $three[1]->$category->height ?? '' }}</td>
+                            <td>{{ $three[2]->$category->height ?? '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Wheels Tyre & Seating Capacity</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Front Suspension</td>
+                            <td>{{ $three[0]->$category->front_suspension ?? '' }}</td>
+                            <td>{{ $three[1]->$category->front_suspension ?? '' }}</td>
+                            <td>{{ $three[2]->$category->front_suspension ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Rear Suspension</td>
+                            <td>{{ $three[0]->$category->rear_suspension ?? '' }}</td>
+                            <td>{{ $three[1]->$category->rear_suspension ?? '' }}</td>
+                            <td>{{ $three[2]->$category->rear_suspension ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Wheel Type</td>
+                            <td>{{ $three[0]->$category->wheel_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->wheel_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->wheel_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Wheel Size</td>
+                            <td>{{ $three[0]->$category->wheel_size ?? '' }}</td>
+                            <td>{{ $three[1]->$category->wheel_size ?? '' }}</td>
+                            <td>{{ $three[2]->$category->wheel_size ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Turning Radius</td>
+                            <td>{{ $three[0]->$category->turning_radius ?? '' }}</td>
+                            <td>{{ $three[1]->$category->turning_radius ?? '' }}</td>
+                            <td>{{ $three[2]->$category->turning_radius ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tyre Type</td>
+                            <td>{{ $three[0]->$category->tyre_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->tyre_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->tyre_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Front Tyre Size</td>
+                            <td>{{ $three[0]->$category->front_tyre_size ?? '' }}</td>
+                            <td>{{ $three[1]->$category->front_tyre_size ?? '' }}</td>
+                            <td>{{ $three[2]->$category->front_tyre_size ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Rear Tyre Size</td>
+                            <td>{{ $three[0]->$category->rear_tyre_size ?? '' }}</td>
+                            <td>{{ $three[1]->$category->rear_tyre_size ?? '' }}</td>
+                            <td>{{ $three[2]->$category->rear_tyre_size ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Stearing Type</td>
+                            <td>{{ $three[0]->$category->steering_type ?? '' }}</td>
+                            <td>{{ $three[1]->$category->steering_type ?? '' }}</td>
+                            <td>{{ $three[2]->$category->steering_type ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Seating Capacity</td>
+                            <td>{{ $three[0]->$category->seating_capacity ?? '' }}</td>
+                            <td>{{ $three[1]->$category->seating_capacity ?? '' }}</td>
+                            <td>{{ $three[2]->$category->seating_capacity ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Front Brake Type</td>
+                            <td>{{ $three[0]->$category->front_brake->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->front_brake->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->front_brake->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Rear Brake Type</td>
+                            <td>{{ $three[0]->$category->rear_brake->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->rear_brake->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->rear_brake->name ?? '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fuel & Consumption</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fuel Type</td>
+                            <td>{{ $three[0]->$category->fuel_type->name ?? '' }}</td>
+                            <td>{{ $three[1]->$category->fuel_type->name ?? '' }}</td>
+                            <td>{{ $three[2]->$category->fuel_type->name ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fuel Tank Capacity</td>
+                            <td>{{ $three[0]->$category->fuel_tank_capacity ?? '' }}</td>
+                            <td>{{ $three[1]->$category->fuel_tank_capacity ?? '' }}</td>
+                            <td>{{ $three[2]->$category->fuel_tank_capacity ?? '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Millage Kmpl</td>
+                            <td>{{ $three[0]->$category->milage ?? '' }}</td>
+                            <td>{{ $three[1]->$category->milage ?? '' }}</td>
+                            <td>{{ $three[2]->$category->milage ?? '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Interior/Exterior</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($interior_features as $interior_feature)
+                        <tr>
+                            <td>{{ ucwords($interior_feature->name) }}</td>
+                            <td>@if($three[0]->$category->interior_feature && in_array($interior_feature->id, $three[0]->$category->interior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[1]) && $three[1]->$category->interior_feature && in_array($interior_feature->id, $three[1]->$category->interior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[2]) && $three[2]->$category->interior_feature && in_array($interior_feature->id, $three[2]->$category->interior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                        </tr>
+                        @endforeach
+                        @foreach($exterior_features as $exterior_feature)
+                        <tr>
+                            <td>{{ ucwords($exterior_feature->name) }}</td>
+                            <td>@if($three[0]->$category->exterior_feature && in_array($exterior_feature->id, $three[0]->$category->exterior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[1]) && $three[1]->$category->exterior_feature && in_array($exterior_feature->id, $three[1]->$category->exterior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[2]) && $three[2]->$category->exterior_feature && in_array($exterior_feature->id, $three[2]->$category->exterior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Safety and Security</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($safety_securities as $safety_security)
+                        <tr>
+                            <td>{{ ucwords($safety_security->name) }}</td>
+                            <td>@if($three[0]->$category->safety_security && in_array($safety_security->id, $three[0]->$category->safety_security)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[1]) && $three[1]->$category->safety_security && in_array($safety_security->id, $three[1]->$category->safety_security)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[2]) && $three[2]->$category->safety_security && in_array($safety_security->id, $three[2]->$category->safety_security)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Additional Feature</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($additional_features as $additional_feature)
+                        <tr>
+                            <td>{{ ucwords($additional_feature->name) }}</td>
+                            <td>@if($three[0]->$category->additional_feature && in_array($additional_feature->id, $three[0]->$category->additional_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[1]) && $three[1]->$category->additional_feature && in_array($additional_feature->id, $three[1]->$category->additional_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                            <td>@if(isset($three[2]) && $three[2]->$category->additional_feature && in_array($additional_feature->id, $three[2]->$category->additional_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
             @endif
         </div>
