@@ -81,7 +81,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="w-100 h-parent position-absolute dark-opacity-3" v-if="true"><i class="fa fa-spinner fa-spin text-white position-center"></i></div>
+                    <div class="w-100 h-parent position-absolute dark-opacity-3" v-if="loading"><i class="fa fa-spinner fa-spin text-white position-center"></i></div>
                 </div>
                 <div class="card" v-else-if="configuration > 1 || products.length > 0">
                     <div class="size-32">
@@ -302,7 +302,7 @@
                             <div class="sms-phn-hide col">&nbsp;</div>
                             @endif
                         </div>
-                        <ul class="row">
+                        <ul class="row mx-0">
                             <li class="info_heading col px-0">
                                 <div>Brand</div>
                                 <div>Model</div>
@@ -333,25 +333,25 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="inventory_info_list">
-                        <div class="listing_heading">
-                            <div>Key Features</div>
-                            <div>&nbsp;</div>
+                    <div class="inventory_info_list container-fluid">
+                        <div class="listing_heading row mx-0">
+                            <div class="col px-0"><span class="mx-3">Key Features</span></div>
+                            <div class="col px-0">&nbsp;</div>
                             @if(isset($products) && count($products)>1)
-                            <div class="col">&nbsp;</div>
+                            <div class="col px-0">&nbsp;</div>
                             @endif
                             @if(isset($products) && count($products)>2)
-                            <div class="sms-phn-hide col">&nbsp;</div>
+                            <div class="sms-phn-hide col px-0">&nbsp;</div>
                             @endif
                         </div>
-                        <ul>
-                            <li class="info_heading">
+                        <ul class="row mx-0">
+                            <li class="info_heading col px-0">
                                 @foreach($key_features as $key_feature)
                                 <div>{{ ucwords($key_feature->name) }}</div>
                                 @endforeach
                             </li>
                             @foreach($products as $product)
-                            <li>
+                            <li class="col px-0">
                                 @foreach($key_features as $key_feature)
                                 <div class="text-center">@if($product->$category->key_feature && in_array($key_feature->id, $product->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif</div>
                                 @endforeach
@@ -380,18 +380,18 @@
                                     </li>
                                     @foreach($products as $product)
                                     <li>
-                                        <div>{{ $product->car->engine_type->name ?? '' }}</div>
-                                        <div>{{ $product->car->engine_capacity ?? 0 }}cc</div>
-                                        <div>{{ $product->car->displacement->name ?? '' }}cc</div>
-                                        <div>{{ $product->car->maximum_power ?? '' }}</div>
-                                        <div>{{ $product->car->maximum_torque ?? '' }}</div>
-                                        <div>{{ $product->car->milage ?? '' }} kmpl</div>
-                                        <div>{{ $product->car->engine_check_warning ?? '' }}</div>
-                                        <div>{{ $product->car->gear_box->name ?? '' }}</div>
-                                        <div>{{ $product->car->transmission->name ?? '' }}</div>
-                                        <div>{{ $product->car->cylinder->name ?? '' }}</div>
-                                        <div>{{ $product->car->drive_type->name ?? '' }}</div>
-                                        <div>{{ $product->car->turning_radius ?? '' }}</div>
+                                        <div>{{ $product->$category->engine_type->name ?? '' }}</div>
+                                        <div>{{ $product->$category->engine_capacity ?? 0 }}cc</div>
+                                        <div>{{ $product->$category->displacement->name ?? '' }}cc</div>
+                                        <div>{{ $product->$category->maximum_power ?? '' }}</div>
+                                        <div>{{ $product->$category->maximum_torque ?? '' }}</div>
+                                        <div>{{ $product->$category->milage ?? '' }} kmpl</div>
+                                        <div>{{ $product->$category->engine_check_warning ?? '' }}</div>
+                                        <div>{{ $product->$category->gear_box->name ?? '' }}</div>
+                                        <div>{{ $product->$category->transmission->name ?? '' }}</div>
+                                        <div>{{ $product->$category->cylinder->name ?? '' }}</div>
+                                        <div>{{ $product->$category->drive_type->name ?? '' }}</div>
+                                        <div>{{ $product->$category->turning_radius ?? '' }}</div>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -410,13 +410,13 @@
                                     </li>
                                     @foreach($products as $product)
                                     <li>
-                                        <div>{{ $product->car->weight ?? '' }} kg</div>
-                                        <div>{{ $product->car->ground_clearance->name ?? '' }}</div>
-                                        <div>{{ $product->car->wheel_base->name ?? 'No' }}</div>
-                                        <div>{{ $product->car->no_of_door ?? 0 }}</div>
-                                        <div>{{ $product->car->length ?? 0 }}</div>
-                                        <div>{{ $product->car->width ?? 0 }}</div>
-                                        <div>{{ $product->car->height ?? 0 }}</div>
+                                        <div>{{ $product->$category->weight ?? '' }} kg</div>
+                                        <div>{{ $product->$category->ground_clearance->name ?? '' }}</div>
+                                        <div>{{ $product->$category->wheel_base->name ?? 'No' }}</div>
+                                        <div>{{ $product->$category->no_of_door ?? 0 }}</div>
+                                        <div>{{ $product->$category->length ?? 0 }}</div>
+                                        <div>{{ $product->$category->width ?? 0 }}</div>
+                                        <div>{{ $product->$category->height ?? 0 }}</div>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -440,18 +440,18 @@
                                     </li>
                                     @foreach($products as $product)
                                     <li>
-                                        <div>{{ $product->car->front_suspension ?? '' }}</div>
-                                        <div>{{ $product->car->rear_suspension ?? '' }}</div>
-                                        <div>{{ $product->car->wheel_type->name ?? '' }}</div>
-                                        <div>{{ $product->car->wheel_size ?? '' }}</div>
-                                        <div>{{ $product->car->turning_radius ?? '' }}</div>
-                                        <div>{{ $product->car->tyre_type->name ?? '' }}</div>
-                                        <div>{{ $product->car->front_tyre_size ?? '' }}</div>
-                                        <div>{{ $product->car->rear_tyre_size ?? '' }}</div>
-                                        <div>{{ $product->car->steering_type ?? '' }}</div>
-                                        <div>{{ $product->car->seating_capacity ?? '' }}</div>
-                                        <div>{{ $product->car->front_brake->name ?? '' }}</div>
-                                        <div>{{ $product->car->rear_brake->name ?? '' }}</div>
+                                        <div>{{ $product->$category->front_suspension ?? '' }}</div>
+                                        <div>{{ $product->$category->rear_suspension ?? '' }}</div>
+                                        <div>{{ $product->$category->wheel_type->name ?? '' }}</div>
+                                        <div>{{ $product->$category->wheel_size ?? '' }}</div>
+                                        <div>{{ $product->$category->turning_radius ?? '' }}</div>
+                                        <div>{{ $product->$category->tyre_type->name ?? '' }}</div>
+                                        <div>{{ $product->$category->front_tyre_size ?? '' }}</div>
+                                        <div>{{ $product->$category->rear_tyre_size ?? '' }}</div>
+                                        <div>{{ $product->$category->steering_type ?? '' }}</div>
+                                        <div>{{ $product->$category->seating_capacity ?? '' }}</div>
+                                        <div>{{ $product->$category->front_brake->name ?? '' }}</div>
+                                        <div>{{ $product->$category->rear_brake->name ?? '' }}</div>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -466,9 +466,9 @@
                                     </li>
                                     @foreach($products as $product)
                                     <li>
-                                        <div>{{ $product->car->fuel_type->name ?? '' }}</div>
-                                        <div>{{ $product->car->fuel_tank_capacity ?? '' }}</div>
-                                        <div>{{ $product->car->milage ?? '' }}</div>
+                                        <div>{{ $product->$category->fuel_type->name ?? '' }}</div>
+                                        <div>{{ $product->$category->fuel_tank_capacity ?? '' }}</div>
+                                        <div>{{ $product->$category->milage ?? '' }}</div>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -575,6 +575,7 @@
                 this.model = m;
                 this.search = '';
                 this.page = 3;
+                console.log(this.loading);
             },
             packageSelected: function (p, i=0) {
                 this.package = p;

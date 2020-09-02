@@ -286,7 +286,7 @@ class HomeController extends Controller {
                 $category = 'motorcycle';
             elseif($p->category_id == 3)
                 $category = 'bicycle';
-            $v = $v->with('brand', 'model', 'package', $category);
+            $v = $v->with('brand', 'model', 'package', $category.'.brand', $category.'.model', $category.'.package', $category.'.body_type', $category.'.displacement', $category.'.ground_clearance', $category.'.drive_type', $category.'.engine_type', $category.'.fuel_type');
             $v = $v->first();
             if (isset($v->$category->key_feature))
                 $v->$category->key_feature = explode(',', $v->$category->key_feature);
@@ -308,7 +308,7 @@ class HomeController extends Controller {
             $safety_securities = SafetySecurity::all();
             $additional_features = AdditionalFeature::all();
             
-            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', $type.'.brand', $type.'.model', $type.'.package', $type.'.body_type', $type.'.displacement', $type.'.ground_clearance', $type.'.drive_type', $type.'.engine_type', $type.'.fuel_type', 'condition', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
+            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', 'condition', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
         }
         return view('frontend.compare', compact('brands', 'models', 'packages', 'products'));
     }
