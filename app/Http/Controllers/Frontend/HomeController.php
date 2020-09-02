@@ -267,19 +267,36 @@ class HomeController extends Controller {
             array_push($vehicles, $temp);
         }
         $products = [];
+        $category = '';
         foreach($vehicles as $vehicle) {
+            $category = 'car';
             $v = Product::whereHas('brand', function (Builder $query) use($vehicle) {
                     $query->where('name', $vehicle[0]);
-                })->whereHas('model', function (Builder $query) use($vehicle) {
-                    $query->where('name', $vehicle[1]);
                 });
+            if(isset($vehicle[1]))
+                $v = $v->whereHas('model', function (Builder $query) use($vehicle) {
+                        $query->where('name', $vehicle[1]);
+                    });
             if(isset($vehicle[2]))
                 $v = $v->whereHas('package', function (Builder $query) use($vehicle) {
                         $query->where('name', $vehicle[2]);
                     });
-            $v = $v->with('brand', 'model', 'package');
+            $p = $v->first();
+            if($p->category_id == 2)
+                $category = 'motorcycle';
+            elseif($p->category_id == 3)
+                $category = 'bicycle';
+            $v = $v->with('brand', 'model', 'package', $category);
             $v = $v->first();
+            if (isset($v->$category->key_feature))
+                $v->$category->key_feature = explode(',', $v->$category->key_feature);
             array_push($products, $v);
+        }
+        if(isset($p)) {
+            $type = ucfirst($category);
+            $key_features = KeyFeature::where('category_id', $p->category_id)->get();
+            
+            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', $type.'.brand', $type.'.model', $type.'.package', $type.'.body_type', $type.'.displacement', $type.'.ground_clearance', $type.'.drive_type', $type.'.engine_type', $type.'.fuel_type', 'condition', 'key_features'));
         }
         return view('frontend.compare', compact('brands', 'models', 'packages', 'products'));
     }

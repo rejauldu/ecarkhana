@@ -8,7 +8,6 @@
 @endif
 
 @include('layouts.frontend.car-background')
-
 <section class="section-full content-inner-2" id="compare">
     <div class="container">
         <div class="row">
@@ -82,6 +81,7 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="w-100 h-parent position-absolute dark-opacity-3" v-if="true"><i class="fa fa-spinner fa-spin text-white position-center"></i></div>
                 </div>
                 <div class="card" v-else-if="configuration > 1 || products.length > 0">
                     <div class="size-32">
@@ -92,7 +92,6 @@
                         <div><span>@{{ products[0].brand.name }} @{{ products[0].model.name }} @{{ products[0].manufacturing_year }}, @{{ products[0].package.name }}</span> <i class="fa fa-pencil cursor-pointer btn-light text-danger" @click.prevent="page=1; configuration=1; removeProduct(0)"></i></div>
                         <div class="display-6 text-dark">Tk. @{{ products[0].msrp }}</div>
                     </div>
-                    <div class="w-100 h-100" v-if="true"><i class="fa fa-spinner fa-spin text-dark position-center"></i></div>
                 </div>
             </div>
             <!-- Side bar start -->
@@ -177,6 +176,7 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="w-100 h-parent position-absolute dark-opacity-3" v-if="loading == 2"><i class="fa fa-spinner fa-spin text-white position-center"></i></div>
                 </div>
                 <div class="card" v-else-if="configuration > 2 || products.length > 1">
                     <div class="size-32">
@@ -270,6 +270,7 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="w-100 h-parent position-absolute dark-opacity-3" v-if="loading == 3"><i class="fa fa-spinner fa-spin text-white position-center"></i></div>
                 </div>
                 <div class="card" v-else-if="configuration > 3 || products.length > 2">
                     <div class="size-32">
@@ -282,11 +283,289 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-sm-12 text-center">
-                <div class="input-group icon-bx-wraper bx-style-1 p-a20">
-                    <a class="btn btn-danger" href="#" @click.prevent="compare()">Compare Now</a>
+            <div class="col-md-12 col-sm-12 text-center py-4">
+                <a class="btn btn-danger" href="#" @click.prevent="compare()">Compare Now</a>
+            </div>
+            @if(isset($type))
+            @php($category = strtolower($type))
+            <div class="col-12">
+                <div class="compare_product_info">
+                    <!--Basic-Info-Table-->
+                    <div class="inventory_info_list">
+                        <div class="listing_heading">
+                            <div>General Information</div>
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <div class="sms-phn-hide">&nbsp;</div>
+                        </div>
+                        <ul>
+                            <li class="info_heading">
+                                <div>Brand</div>
+                                <div>Model</div>
+                                <div>Body type</div>
+                                <div>Package</div>
+                                <div>Displacement</div>
+                                <div>Make Year</div>
+                                <div>Ground Clearance</div>
+                                <div>Drive Type</div>
+                                <div>Engine Type</div>
+                                <div>Fuel Type</div>
+                                <div>Selling Price</div>
+                            </li>
+                            @foreach($products as $product)
+                            <li>
+                                <div>{{ $product->$category->brand->name ?? '' }}</div>
+                                <div>{{ $product->$category->model->name ?? '' }}</div>
+                                <div>{{ $product->$category->body_type->name ?? '' }}</div>
+                                <div>{{ $product->$category->package->name ?? '' }}</div>
+                                <div>{{ $product->$category->displacement->name ?? '' }}cc</div>
+                                <div>{{ $product->$category->manufacturing_year ?? '' }}</div>
+                                <div>{{ $product->$category->ground_clearance->name ?? '' }}</div>
+                                <div>{{ $product->$category->drive_type->name ?? '' }}</div>
+                                <div>{{ $product->$category->engine_type->name ?? '' }}</div>
+                                <div>{{ $product->$category->fuel_type->name ?? '' }}</div>
+                                <div>Tk.{{ $product->msrp ?? '' }}</div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="inventory_info_list">
+                        <div class="listing_heading">
+                            <div>Key Features</div>
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <div class="sms-phn-hide">&nbsp;</div>
+                        </div>
+                        <ul>
+                            <li class="info_heading">
+                                @foreach($key_features as $key_feature)
+                                <div>{{ ucwords($key_feature->name) }}</div>
+                                @endforeach
+                            </li>
+                            @foreach($products as $product)
+                            <li>
+                                @foreach($key_features as $key_feature)
+                                <div class="text-center">@if($product->$category->key_feature && in_array($key_feature->id, $product->$category->key_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close"></i> @endif</div>
+                                @endforeach
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="sms-sys-com">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">Engine & Transmission</a>
+                                <ul style="display:none" class="list-group">
+                                    <li>
+                                        <div>Engine Type</div>
+                                        <div>Engine Capacity</div>
+                                        <div>Displacement</div>
+                                        <div>Max Power</div>
+                                        <div>Max Torque</div>
+                                        <div>Milage Kmpl</div>
+                                        <div>Engine Check & Warning</div>
+                                        <div>Gear Box</div>
+                                        <div>Transmission</div>
+                                        <div>Cylinder</div>
+                                        <div>Drive Type</div>
+                                        <div>Min Turning Radius</div>
+                                    </li>
+                                    @foreach($products as $product)
+                                    <li>
+                                        <div>{{ $product->car->engine_type->name ?? '' }}</div>
+                                        <div>{{ $product->car->engine_capacity ?? 0 }}cc</div>
+                                        <div>{{ $product->car->displacement->name ?? '' }}cc</div>
+                                        <div>{{ $product->car->maximum_power ?? '' }}</div>
+                                        <div>{{ $product->car->maximum_torque ?? '' }}</div>
+                                        <div>{{ $product->car->milage ?? '' }} kmpl</div>
+                                        <div>{{ $product->car->engine_check_warning ?? '' }}</div>
+                                        <div>{{ $product->car->gear_box->name ?? '' }}</div>
+                                        <div>{{ $product->car->transmission->name ?? '' }}</div>
+                                        <div>{{ $product->car->cylinder->name ?? '' }}</div>
+                                        <div>{{ $product->car->drive_type->name ?? '' }}</div>
+                                        <div>{{ $product->car->turning_radius ?? '' }}</div>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Weight & Dimension</a>
+                                <ul style="display:none;">
+                                    <li>
+                                        <div>Gross Weight</div>
+                                        <div>Seating Capacity</div>
+                                        <div>Wheel Base</div>
+                                        <div>Length</div>
+                                        <div>Width</div>
+                                        <div>Height</div>
+                                    </li>
+                                    <li>
+                                        <div>1500kg</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                    </li>
+                                    <li>
+                                        <div>1650kg</div>
+                                        <div>8</div>
+                                        <div>1500mm</div>
+                                        <div>16cc</div>
+                                        <div>21</div>
+                                        <div>14</div>
+                                    </li>
+                                    <li class="sms-phn-hide">
+                                        <div>1650kg</div>
+                                        <div>8</div>
+                                        <div>1500mm</div>
+                                        <div>16cc</div>
+                                        <div>21</div>
+                                        <div>14</div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Wheels Tyre & Seating Capacity</a>
+                                <ul style="display:none;">
+                                    <li>
+                                        <div>Front Suspension</div>
+                                        <div>Rear Suspension</div>
+                                        <div>Wheel Type</div>
+                                        <div>Wheel Size</div>
+                                        <div>Tyre Type</div>
+                                        <div>Front Tyre Size</div>
+                                        <div>Rear Tyre Size</div>
+                                        <div>Stearing Type</div>
+                                        <div>Stearing Column</div>
+                                        <div>Front Break Type</div>
+                                        <div>Rear Break Type</div>
+                                    </li>
+                                    <li>
+                                        <div>1500kg</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                    </li>
+                                    <li>
+                                        <div>1500kg</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                    </li>
+                                    <li class="sms-phn-hide">
+                                        <div>1500kg</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                        <div>5</div>
+                                        <div>1200mm</div>
+                                        <div>15cc</div>
+                                        <div>20</div>
+                                        <div>13</div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Fuel & Consumption</a>
+                                <ul style="display:none;">
+                                    <li>
+                                        <div>Fuel Type</div>
+                                        <div>Fuel Tank Capacity</div>
+                                        <div>Millage Kmpl</div>
+                                    </li>
+                                    <li>
+                                        <div>Hybrid</div>
+                                        <div>500cc</div>
+                                        <div>20kmpl</div>
+                                    </li>
+                                    <li>
+                                        <div>Hybrid</div>
+                                        <div>500cc</div>
+                                        <div>20kmpl</div>
+                                    </li>
+                                    <li class="sms-phn-hide">
+                                        <div>Hybrid</div>
+                                        <div>500cc</div>
+                                        <div>20kmpl</div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Features</a> 
+                                <ul style="display:none">
+                                    <li>
+                                        <div>Power Streaming</div>
+                                        <div>Duel Front Car Bag</div>
+                                        <div>Passenger Air Bag</div>
+                                        <div>Automatic Climate</div>
+                                        <div>Power Windows Form</div>
+                                        <div>Fog Light Form</div>
+                                        <div>4WD</div>
+                                        <div>Anti-thief Device</div>
+                                    </li>
+                                    <li>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                    </li>
+                                    <li>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                    </li>
+                                    <li class="sms-phn-hide">
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Interior/Exterior</a> 
+                                <ul style="display:none">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li class="sms-phn-hide"></li>                               
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </section>
@@ -307,8 +586,7 @@
             package: {},
             packages: @json($packages),
             page: 1,
-            index: 0,
-            isReplace: false
+            loading: 0
         },
         methods: {
             openModal: function (p) {
@@ -331,6 +609,11 @@
             },
             packageSelected: function (p, i=0) {
                 this.package = p;
+                console.log(this.loading);
+                this.loading = i+1;
+                Vue.nextTick(function() {
+                    setParentsHeight();
+                });
                 this.getProduct(i);
             },
             isEmpty: function(obj) {
@@ -338,20 +621,20 @@
             },
             getProduct: function(i) {
                 var _this = this;
+                
                 $.ajax({
-                    url: "{{ route('get-product') }}?category_id=1&brand_id=" + _this.brand.id + "&model_id=" + _this.model.id + "&package_id=" + _this.package.id,
+                    url: "{{ route('get-product') }}?brand_id=" + _this.brand.id + "&model_id=" + _this.model.id + "&package_id=" + _this.package.id,
                     dataType: "json",
                     success: function(result){
                         _this.page = 1;
                         _this.products[i] = result;
                         _this.configuration = _this.products.length+1;
                         _this.reset('brand', 'model', 'package');
+                        _this.loading = 0;
                     }
                 });
             },
             removeProduct: function(i) {
-                this.index = i;
-                this.isReplace = true;
                 this.reset('brand', 'model', 'package');
             },
             reset: function (...args) {
