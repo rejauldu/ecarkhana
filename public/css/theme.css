@@ -697,3 +697,7 @@ ul.bullet>li {
 .h-parent {
     z-index: 1;
 }
+/* Bootstrap extent */
+.striped>div:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
