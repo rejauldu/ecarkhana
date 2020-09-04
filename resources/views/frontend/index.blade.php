@@ -969,4 +969,9 @@ End business partner -->
     })();
     
 </script>
+<script>
+    (function() {
+        localStorage.category_id = 1;
+    })();
+</script>
 @endsection

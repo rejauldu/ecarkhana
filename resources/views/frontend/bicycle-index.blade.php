@@ -646,3 +646,10 @@ End business partner -->
 
 
 @endsection
+@section('script')
+<script>
+    (function() {
+        localStorage.category_id = 3;
+    })();
+</script>
+@endsection

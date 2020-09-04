@@ -701,3 +701,13 @@ ul.bullet>li {
 .striped>div:nth-of-type(odd) {
     background-color: rgba(0,0,0,.05);
 }
+.bg-dark-transparent,.bg-dark-transparent-fixed {
+	background:#000000cc;
+}
+.bg-white-transparent,.bg-white-transparent-fixed {
+	background:#ffffffcc;
+}
+/*Trigger stuck event */
+.sticky-top {
+    top:-1px !important;
+}

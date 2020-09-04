@@ -651,22 +651,22 @@ Start Compare -->
     }
 
     function showPosition(position) {
-        window.location = "{{ route('car-listing') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude;
+        window.location = "{{ route('car-listing') }}?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
     }
     function addCoordinate(condition) {
         var container = '';
-        if(condition == 'new') {
+        if (condition == 'new') {
             container = document.getElementById('filter-new');
-        } else if(condition == 'used') {
+        } else if (condition == 'used') {
             container = document.getElementById('filter-used');
-        } else if(condition == 'recondition') {
+        } else if (condition == 'recondition') {
             container = document.getElementById('filter-recondition');
         }
-        
+
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(p) {
+            navigator.geolocation.getCurrentPosition(function (p) {
                 var lat = container.querySelector('input[name="lat"]')
-                if(!lat) {
+                if (!lat) {
                     var input = document.createElement("input");
                     input.type = "hidden";
                     input.name = "lat";
@@ -683,7 +683,7 @@ Start Compare -->
     }
 </script>
 <script>
-    (function() {
+    (function () {
         var filter = new Vue({
             el: '#filter-form',
             data: {
@@ -694,33 +694,33 @@ Start Compare -->
                 getCurrentLocation: function () {
                     var _this = this;
                     if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(p) {
+                        navigator.geolocation.getCurrentPosition(function (p) {
                             _this.regionByPosition(p);
                         });
                     }
                 },
-                regionByPosition: function(p) {
+                regionByPosition: function (p) {
                     var _this = this;
                     $.ajax({
-                        url: "{{ route('get-region') }}?lat="+p.coords.latitude+"&lon="+p.coords.longitude,
+                        url: "{{ route('get-region') }}?lat=" + p.coords.latitude + "&lon=" + p.coords.longitude,
                         dataType: "json",
-                        success: function(result){
+                        success: function (result) {
                             _this.input = result.name;
                         }
                     });
                 }
             },
-            mounted:function(){
+            mounted: function () {
                 this.getCurrentLocation();
             },
             watch: {
-                input: function(val) {
+                input: function (val) {
                     var _this = this;
                     $.ajax({
-                        url: "{{ route('get-regions') }}?q="+val,
+                        url: "{{ route('get-regions') }}?q=" + val,
                         dataType: "json",
-                        success: function(result){
-                            if(val)
+                        success: function (result) {
+                            if (val)
                                 _this.response = result;
                             else
                                 _this.response = '';
@@ -730,6 +730,11 @@ Start Compare -->
             }
         });
     })();
-    
+
+</script>
+<script>
+    (function() {
+        localStorage.category_id = 2;
+    })();
 </script>
 @endsection

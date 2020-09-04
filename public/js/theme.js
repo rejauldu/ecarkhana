@@ -121,22 +121,6 @@ function displayPhotoOnSelect(input, id = 'display-photo-on-select') {
     if (w > 768 && vp_h_55_md)
         vp_h_55_md.style.height = (h - 55) + 'px';
 })();
-/* Fancy Tabs starts */
-(function () {
-    var classname = document.querySelectorAll(".fancy-tab li");
-    for (var i = 0; i < classname.length; i++) {
-        classname[i].style.width = 100 / classname.length + '%';
-    }
-    var myFunction = function (e) {
-        document.querySelector('.fancy-tab li.active').classList.remove('active');
-        e.currentTarget.classList.add('active');
-    };
-
-    for (var i = 0; i < classname.length; i++) {
-        classname[i].addEventListener('click', myFunction, true);
-    }
-})();
-/* Fancy Tabs ends */
 /* Location control */
 (function () {
     locationHandle('division', 'district', 'upazila', 'union', 'region');
@@ -265,3 +249,15 @@ function setParentsHeight() {
     }
     
 }
+/*sticky-top event */
+(function() {
+    // get the sticky element
+    window.observer = new IntersectionObserver(
+        ([e]) => {
+            e.target.classList.toggle('stuck', e.intersectionRatio < 1);
+        },
+        {
+            threshold: [1]
+        }
+    );
+})();

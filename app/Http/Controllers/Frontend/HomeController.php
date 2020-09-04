@@ -88,7 +88,8 @@ class HomeController extends Controller {
     public function aboutUs() {
         return view('frontend.about-us');
     }
-	public function insuranceList() {
+
+    public function insuranceList() {
         return view('frontend.insurance-list');
     }
 
@@ -256,37 +257,38 @@ class HomeController extends Controller {
     public function carLoanEligibility() {
         return view('frontend.car-loan-eligibility');
     }
+
     public function compare($url = null) {
-        $brands = Brand::select('id', 'name')->where('category_id', 1)->get();
-        $models = Model::select('id', 'brand_id', 'name')->where('category_id', 1)->get();
-        $packages = Package::select('id', 'model_id', 'name')->where('category_id', 1)->get();
+        $brands = Brand::select('id', 'category_id', 'name')->get();
+        $models = Model::select('id', 'category_id', 'brand_id', 'name')->get();
+        $packages = Package::select('id', 'category_id', 'model_id', 'name')->get();
         $data = array_filter(explode("-and-", $url));
         $vehicles = [];
-        foreach($data as $d) {
+        foreach ($data as $d) {
             $temp = array_filter(explode('-', $d));
             array_push($vehicles, $temp);
         }
         $products = [];
         $category = '';
-        foreach($vehicles as $vehicle) {
+        foreach ($vehicles as $vehicle) {
             $category = 'car';
             $v = Product::whereHas('brand', function (Builder $query) use($vehicle) {
-                    $query->where('name', $vehicle[0]);
-                });
-            if(isset($vehicle[1]))
+                        $query->where('name', $vehicle[0]);
+                    });
+            if (isset($vehicle[1]))
                 $v = $v->whereHas('model', function (Builder $query) use($vehicle) {
-                        $query->where('name', $vehicle[1]);
-                    });
-            if(isset($vehicle[2]))
+                    $query->where('name', $vehicle[1]);
+                });
+            if (isset($vehicle[2]))
                 $v = $v->whereHas('package', function (Builder $query) use($vehicle) {
-                        $query->where('name', $vehicle[2]);
-                    });
+                    $query->where('name', $vehicle[2]);
+                });
             $p = $v->first();
-            if($p->category_id == 2)
+            if ($p->category_id == 2)
                 $category = 'motorcycle';
-            elseif($p->category_id == 3)
+            elseif ($p->category_id == 3)
                 $category = 'bicycle';
-            $v = $v->with('brand', 'model', 'package', $category.'.brand', $category.'.model', $category.'.package', $category.'.body_type', $category.'.displacement', $category.'.ground_clearance', $category.'.drive_type', $category.'.engine_type', $category.'.fuel_type');
+            $v = $v->with('brand', 'model', 'package', $category . '.brand', $category . '.model', $category . '.package', $category . '.body_type', $category . '.displacement', $category . '.ground_clearance', $category . '.drive_type', $category . '.engine_type', $category . '.fuel_type');
             $v = $v->first();
             if (isset($v->$category->key_feature))
                 $v->$category->key_feature = explode(',', $v->$category->key_feature);
@@ -300,18 +302,19 @@ class HomeController extends Controller {
                 $v->$category->additional_feature = explode(',', $v->$category->additional_feature);
             array_push($products, $v);
         }
-        if(isset($p)) {
+        if (isset($p)) {
             $type = ucfirst($category);
             $key_features = KeyFeature::where('category_id', $p->category_id)->get();
             $interior_features = InteriorFeature::all();
             $exterior_features = ExteriorFeature::all();
             $safety_securities = SafetySecurity::all();
             $additional_features = AdditionalFeature::all();
-            
-            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', 'condition', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
+
+            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
         }
         return view('frontend.compare', compact('brands', 'models', 'packages', 'products'));
     }
+
     public function compareCar(Request $request) {
         $data = $request->except('_token', '_method');
         $product[] = Product::where('id', $data['products'][0])->with('car.brand', 'car.model', 'car.package')->first();
@@ -580,10 +583,10 @@ class HomeController extends Controller {
 
     public function getRegions(Request $request) {
         $regions = '';
-        if($request->division)
+        if ($request->division)
             $regions = Region::select('id', 'name', 'division_id')->whereHas('division', function($q) use($request) {
-                $q->where('name', $request->division);
-            })->get();
+                        $q->where('name', $request->division);
+                    })->get();
         else
             $regions = Region::select('id', 'name')->where('name', 'like', '%' . $request->q . '%')->take(10)->get();
         return (string) $regions;
