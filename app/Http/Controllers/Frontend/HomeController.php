@@ -284,11 +284,15 @@ class HomeController extends Controller {
                     $query->where('name', $vehicle[2]);
                 });
             $p = $v->first();
-            if ($p->category_id == 2)
+            if ($p->category_id == 1)
+                $v = $v->with('brand', 'model', 'package', $category . '.brand', $category . '.model', $category . '.package', $category . '.body_type', $category . '.displacement', $category . '.ground_clearance', $category . '.drive_type', $category . '.engine_type', $category . '.fuel_type');
+            elseif ($p->category_id == 2) {
                 $category = 'motorcycle';
-            elseif ($p->category_id == 3)
+                $v = $v->with('brand', 'model', $category . '.brand', $category . '.model', $category . '.displacement', $category . '.ground_clearance', $category . '.engine_type', $category . '.made_in', $category . '.made_origin', $category . '.starting_system', $category . '.cooling_system', $category . '.condition', $category . '.tyre_type', $category . '.front_brake', $category . '.rear_brake');
+            } elseif ($p->category_id == 3) {
                 $category = 'bicycle';
-            $v = $v->with('brand', 'model', 'package', $category . '.brand', $category . '.model', $category . '.package', $category . '.body_type', $category . '.displacement', $category . '.ground_clearance', $category . '.drive_type', $category . '.engine_type', $category . '.fuel_type');
+                $v = $v->with('brand', 'model', $category . '.brand', $category . '.model', $category . '.wheel_type', $category . '.made_origin', $category . '.tyre_type');
+            }
             $v = $v->first();
             if (isset($v->$category->key_feature))
                 $v->$category->key_feature = explode(',', $v->$category->key_feature);
@@ -309,10 +313,15 @@ class HomeController extends Controller {
             $exterior_features = ExteriorFeature::all();
             $safety_securities = SafetySecurity::all();
             $additional_features = AdditionalFeature::all();
-
-            return view('frontend.compare', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
+            if ($p->category_id == 1)
+                return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
+            elseif ($p->category_id == 2) {
+                return view('frontend.compare.compare-motorcycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
+            } elseif ($p->category_id == 3) {
+                return view('frontend.compare.compare-bicycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
+            }
         }
-        return view('frontend.compare', compact('brands', 'models', 'packages', 'products'));
+        return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products'));
     }
 
     public function compareCar(Request $request) {

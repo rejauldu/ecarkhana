@@ -32,48 +32,28 @@
             <div class="col-md-8">
                 <div class="slider-slick">
                     <div class="slider slider-for detail-big-car-gallery">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image2 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image3 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image4 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image5 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image6 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image7 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image8 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image9 }}"
-                             alt="">
-                        <img class="img-fluid"
-                             src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image10 }}">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image2 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image3 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image4 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image5 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image6 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image7 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image8 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image9 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image10 }}" alt="">
                     </div>
                     <div class="slider slider-nav">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image2 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image3 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image4 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image5 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image6 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image7 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image8 }}"
-                             alt="">
-                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image9 }}"
-                             alt="">
-                        <img class="img-fluid"
-                             src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image10 }}">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image2 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image3 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image4 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image5 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image6 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image7 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image8 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image9 }}" alt="">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image10 }}">
                     </div>
 
                     <div class="sms-360-view">

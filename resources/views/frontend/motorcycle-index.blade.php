@@ -90,7 +90,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('car-insurance') }}">
+                        <a href="{{ route('insurance') }}">
                             <div class="service_box">
                                 <i class="flaticon-umbrella"></i><br>
                                 <p>Eshowroom </p>

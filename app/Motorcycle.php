@@ -31,7 +31,7 @@ class Motorcycle extends Model
      */
     protected $casts = [
         'updated_at' => 'datetime',
-		'created_at' => 'datetime',
+	'created_at' => 'datetime',
     ];
 	
 	public function brand() {
