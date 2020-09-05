@@ -66,6 +66,26 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12"><h4 class="text-center">Do you have any physical discomfort?</h4></div>
+        <div class="col-sm-1 col-md-3"></div>
+        <div class="col-6 col-sm-5 col-md-3">
+            <div class="card bg-transparent border-0 hover-opacity-8 hover-border cursor-pointer p-3">
+                <img class="card-img-top" src="{{ url('/images/bicycle/well.png') }}" alt="Road">
+                <div class="card-body p-1">
+                    <h4 class="text-center m-0">No</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-5 col-md-3">
+            <div class="card bg-transparent border-0 hover-opacity-8 hover-border cursor-pointer p-3">
+                <img class="card-img-top" src="{{ url('/images/bicycle/sick.png') }}" alt="Mountain">
+                <div class="card-body p-1">
+                    <h4 class="text-center m-0">Yes</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection
 @section('script')
