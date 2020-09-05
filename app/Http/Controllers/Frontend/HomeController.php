@@ -258,7 +258,7 @@ class HomeController extends Controller {
         return view('frontend.car-loan-eligibility');
     }
 
-    public function compare($url = null) {
+    public function compare(Request $request, $url = null) {
         $brands = Brand::select('id', 'category_id', 'name')->get();
         $models = Model::select('id', 'category_id', 'brand_id', 'name')->get();
         $packages = Package::select('id', 'category_id', 'model_id', 'name')->get();
@@ -269,9 +269,12 @@ class HomeController extends Controller {
             array_push($vehicles, $temp);
         }
         $products = [];
-        $category = '';
+        $category = 'car';
+        if(isset($request->category))
+            $category = strtolower($request->category);
+        $type = ucfirst($category);
+        
         foreach ($vehicles as $vehicle) {
-            $category = 'car';
             $v = Product::whereHas('brand', function (Builder $query) use($vehicle) {
                         $query->where('name', $vehicle[0]);
                     });
@@ -321,7 +324,7 @@ class HomeController extends Controller {
                 return view('frontend.compare.compare-bicycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
             }
         }
-        return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products'));
+        return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products', 'type'));
     }
 
     public function compareCar(Request $request) {

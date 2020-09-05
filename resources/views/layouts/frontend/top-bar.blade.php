@@ -120,7 +120,7 @@
                                         <li><a href="{{ route('car-listing') }}">Buy Cars</a>
                                         </li>
                                         <li><a href="{{ route('sell-product-list') }}">Sell Cars</a> </li>
-                                        <li><a href="{{ route('compare') }}">Comparison</a> </li>
+                                        <li><a href="{{ route('compare') }}@if(isset($type) && $type == 'Motorcycle')?category=Motorcycle @elseif(isset($type) && $type == 'Bicycle')?category=Bicycle @endif">Comparison</a> </li>
                                         <li><a href="{{ route('auction-product-list') }}">Auction</a> </li>
                                         <li><a href="{{ route('group-buying-list') }}">Group Buying</a> </li>
                                     </ul>

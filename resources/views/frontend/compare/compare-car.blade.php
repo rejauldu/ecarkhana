@@ -6,8 +6,8 @@
     {{ session()->get('message') }}
 </div>
 @endif
-
-@include('layouts.frontend.car-background')
+@php($type = isset($type)?$type:'car')
+@include('layouts.frontend.'.strtolower($type).'-background')
 <section class="section-full content-inner-2 text-dark" id="compare">
     <div class="container">
         <div class="row">
