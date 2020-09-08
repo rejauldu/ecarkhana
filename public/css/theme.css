@@ -207,8 +207,15 @@ table.dataTable thead .sorting_desc_disabled:before {
 /* Bootstrap extension */
 .display-5 {
     font-size: 2.8rem;
-}.display-6 {
+}
+.display-6 {
     font-size: 1.2rem;
+}
+.text-light-secondary {
+    color:#CCC !important;
+}
+.bg-light-secondary {
+    background: #CCC !important;
 }
 /*Bootstrap-datepicker plugin */
 .datepicker {

@@ -24,7 +24,6 @@ Route::get('/auction-product-list', 'Frontend\HomeController@auctionProductList'
 Route::resource('banks', 'Backend\BankController');
 Route::get('/manage-banks', 'Backend\BankController@manageIndex')->name('manage-banks');
 Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('bicycle-compare');
-Route::get('/bicycle-fit-calculator', 'Frontend\HomeController@bicycleFitCalculator')->name('bicycle-fit-calculator');
 Route::get('/bicycle-listing', 'Frontend\HomeController@motorcycleListing')->name('bicycle-listing');
 Route::resource('blogs', 'Backend\BlogController');
 Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-blogs');
@@ -48,7 +47,7 @@ Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us
 Route::get('/dealer-detail/{id}', 'Frontend\HomeController@dealerDetail')->name('dealer-detail');
 Route::get('/dealer-list', 'Frontend\HomeController@dealerList')->name('dealer-list');
 Route::resource('fit-calculators', 'Frontend\FitCalculatorController');
-Route::get('/fit-calculator/{detail}', 'Frontend\FitCalculatorController@fitCalculator')->name('fit-calculator');
+Route::get('/fit-calculator/{detail?}', 'Frontend\FitCalculatorController@fitCalculator')->name('fit-calculator');
 Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->name('group-buying-list');
 Route::resource('insurances', 'Frontend\InsuranceController');
 Route::get('/insurance', 'Frontend\InsuranceController@create')->name('insurance');
