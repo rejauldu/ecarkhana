@@ -87,11 +87,11 @@
         data: {
             contents: @json($contents),
             page:1,
-            gender: 'male',
-            type: 'road',
-            measurement: 'inch',
-            discomfort: 'no',
-            pain: 'achilles-tendon',
+            gender: "{{ $gender }}",
+            type:  "{{ $type }}",
+            measurement:  "{{ $measurement }}",
+            discomfort: "{{ $discomfort }}",
+            pain: "{{ $pain }}",
             inseam:'',
             trunk:'',
             forearm:'',
@@ -126,7 +126,7 @@
                 var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
                 if(this.tab == 'basic')
                     url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.arm+'-and-'+this.height;
-                window.location = url;
+                window.location = "{{ url('/') }}/fit-calculator/"+url;
                 
             }
         },

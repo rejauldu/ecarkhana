@@ -32,9 +32,26 @@ class FitCalculatorController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function fitCalculator() {
-        $contents = FitCalculatorContent::all();
-        return view('frontend.fit-calculators.fit-calculator', compact('contents'));
+    public function fitCalculator($url = null) {
+        if($url) {
+            $exploded = array_filter(explode("-and-", $url));
+            if(count($exploded) == 5) {
+                $contents = FitCalculatorContent::all();
+                $data=[];
+                $data['gender'] = $exploded[0];
+                $data['type'] = $exploded[1];
+                $data['measurement'] = $exploded[2];
+                $data['discomfort'] = $exploded[3];
+                $data['pain'] = $exploded[4];
+                $data['contents'] = $contents;
+                return view('frontend.fit-calculators.fit-calculator', $data);
+            } elseif(count($exploded) == 8) {
+                
+            } elseif(count($exploded) == 13) {
+                
+            }
+        }
+        return view('frontend.fit-calculators.create');
     }
 
     /**
