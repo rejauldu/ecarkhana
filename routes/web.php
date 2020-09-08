@@ -48,6 +48,7 @@ Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us
 Route::get('/dealer-detail/{id}', 'Frontend\HomeController@dealerDetail')->name('dealer-detail');
 Route::get('/dealer-list', 'Frontend\HomeController@dealerList')->name('dealer-list');
 Route::resource('fit-calculators', 'Frontend\FitCalculatorController');
+Route::get('/fit-calculator/{detail}', 'Frontend\FitCalculatorController@fitCalculator')->name('fit-calculator');
 Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->name('group-buying-list');
 Route::resource('insurances', 'Frontend\InsuranceController');
 Route::get('/insurance', 'Frontend\InsuranceController@create')->name('insurance');

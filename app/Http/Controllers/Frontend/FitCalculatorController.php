@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\FitCalculator;
+use App\FitCalculatorContent;
 
 class FitCalculatorController extends Controller {
 
@@ -24,8 +25,16 @@ class FitCalculatorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        
         return view('frontend.fit-calculators.create');
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fitCalculator() {
+        $contents = FitCalculatorContent::all();
+        return view('frontend.fit-calculators.fit-calculator', compact('contents'));
     }
 
     /**
