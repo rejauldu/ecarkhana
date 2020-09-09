@@ -33,25 +33,42 @@ class FitCalculatorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function fitCalculator($url = null) {
+        $data=[];
+        $data['type'] = 'Bicycle';
         if($url) {
             $exploded = array_filter(explode("-and-", $url));
-            if(count($exploded) == 5) {
-                $contents = FitCalculatorContent::all();
-                $data=[];
+            if(count($exploded) >= 5) {
+                
                 $data['gender'] = $exploded[0];
-                $data['type'] = $exploded[1];
+                $data['bicycle_type'] = $exploded[1];
                 $data['measurement'] = $exploded[2];
                 $data['discomfort'] = $exploded[3];
                 $data['pain'] = $exploded[4];
-                $data['contents'] = $contents;
-                return view('frontend.fit-calculators.fit-calculator', $data);
-            } elseif(count($exploded) == 8) {
-                
-            } elseif(count($exploded) == 13) {
-                
+                if(count($exploded) == 5) {
+                    $contents = FitCalculatorContent::all();
+                    $data['contents'] = $contents;
+                    return view('frontend.fit-calculators.fit-calculator', $data);
+                } elseif(count($exploded) == 8) {
+                    $data['inseam'] = $exploded[5];
+                    $data['arm'] = $exploded[6];
+                    $data['height'] = $exploded[7];
+                    $data['tab'] = 'basic';
+                    return view('frontend.fit-calculators.result', $data);
+                } elseif(count($exploded) == 13) {
+                    $data['inseam'] = $exploded[5];
+                    $data['trunk'] = $exploded[6];
+                    $data['forearm'] = $exploded[7];
+                    $data['arm'] = $exploded[8];
+                    $data['thigh'] = $exploded[9];
+                    $data['leg'] = $exploded[10];
+                    $data['sternal_notch'] = $exploded[11];
+                    $data['height'] = $exploded[12];
+                    $data['tab'] = 'advance';
+                    return view('frontend.fit-calculators.result', $data);
+                }
             }
         }
-        return view('frontend.fit-calculators.create');
+        return view('frontend.fit-calculators.create', $data);
     }
 
     /**

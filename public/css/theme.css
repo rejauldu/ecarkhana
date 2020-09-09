@@ -217,6 +217,12 @@ table.dataTable thead .sorting_desc_disabled:before {
 .bg-light-secondary {
     background: #CCC !important;
 }
+.text-deep-light {
+    color:#EBEBEB !important;
+}
+.bg-deep-light {
+    background: #EBEBEB !important;
+}
 /*Bootstrap-datepicker plugin */
 .datepicker {
     box-shadow:0 0 5px #DDD;

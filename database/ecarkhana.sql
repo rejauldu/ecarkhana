@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2020 at 08:53 AM
+-- Generation Time: Sep 08, 2020 at 07:03 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -1872,6 +1872,36 @@ INSERT INTO `exterior_features` (`id`, `name`, `created_at`, `updated_at`) VALUE
 (2, 'fog light control', '2020-01-28 06:44:10', '2020-04-05 04:23:06'),
 (3, 'exterior rear view mirror', '2020-01-24 01:25:42', '2020-09-02 03:44:34'),
 (4, 'sunroof', '2020-01-30 04:38:16', '2020-04-05 04:23:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fit_calculator_contents`
+--
+
+CREATE TABLE `fit_calculator_contents` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
+  `video` varchar(256) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `fit_calculator_contents`
+--
+
+INSERT INTO `fit_calculator_contents` (`id`, `name`, `description`, `image`, `video`, `updated_at`, `created_at`) VALUES
+(1, 'INSEAM', 'Wear your cycling shorts, and take the measurements in bare feet. Set your feet approximately 8\" apart and straddle a straight edge - something like a square or a 2\" level is ideal. Put as much pressure on your crotch as you feel when sitting on your bike seat. Measure the distance from the top of the level to the ground. Alternatively, mark the wall, then step away and take the measurement of the mark to the ground. And whatever you do, please don\'t use the inseam measurement from your Levi\'s! Pants inseams are at least 2\" shorter than your actual inseam.', 'inseam.jpg', 'https://www.youtube.com/embed/6_-zpSXQzsA', '2020-09-08 11:15:27', '2020-09-08 10:47:20'),
+(2, 'TRUNK', 'Sit on a stool with your back straight and your pelvis hard against the wall. Make sure your back is straight and your pelvis is against the wall. Place the level on top of your AC (Acromioclavicular) joint and against the wall. The AC is the bony bump on top of your shoulder. Measure from the bottom of the level to the top of the stool. Measure both sides of your body and average the measurements.', 'trunk.jpg', 'https://www.youtube.com/embed/ktnHPu8Uy0c', '2020-09-08 11:10:12', '2020-09-08 10:50:08'),
+(3, 'FOREARM', 'Hold a cylindrical object (a magic marker is ideal) in your fist. Lower your arm so that it is to your side, and extend your forearm in ahead of you. Keep the object in your hand perpendicular to your forearm, and measure from the center of the object, which should fall in line with your knuckles, to the boney protrusion at your elbow pivot.', 'forearm.jpg', 'https://www.youtube.com/embed/YQ6iM5EGmPg', '2020-09-08 11:10:38', '2020-09-08 10:50:08'),
+(4, 'ARM', 'Continue to hold the cylindrical object and extend your arm in front of you, holding your arm parallel to the ground. Try not to allow your shoulder to come forward. Make sure that the object in your hand is perpendicular to your arm. Locate the Pivot of the arm to shoulder point and measure from this point to the center of the object, which should fall in line with your knuckles. Measure both arms and average the measurements.', 'arm.jpg', 'https://www.youtube.com/embed/M_TUSEMIY_g', '2020-09-08 11:11:58', '2020-09-08 10:52:24'),
+(5, 'THIGH', 'Sit on a stool again making sure your back is straight and your pelvis is hard against the wall. Make sure your femur is parallel to the ground and your tibia is perpendicular to the ground. Place the level across the front of both of your kneecaps, then measure from the inside face of the straight edge to the wall. Take this measurement from both legs, then take the average.', 'thigh.jpg', 'https://www.youtube.com/embed/rHbA9qgKIYk', '2020-09-08 11:12:28', '2020-09-08 10:52:24'),
+(6, 'LOWER LEG', 'Remain seated. Place the level across the top edge of your kneecaps (where they connect to the bottom of your inner quadriceps muscles). Measure from the bottom of the level to the ground.', 'leg.jpg', 'https://www.youtube.com/embed/aeoMJj53ujQ', '2020-09-08 11:13:04', '2020-09-08 10:53:57'),
+(7, 'STERNAL NOTCH', 'Stand up against the wall. Set your feet approximately 8\" apart. Find the sternal notch in your neck - it\'s the bony \"V\" immediately beneath your Adam\'s apple. Measure the distance from the apex of the notch to the floor.', 'sternal-notch.jpg', 'https://www.youtube.com/embed/DgLBwA7n-Ug', '2020-09-08 11:13:28', '2020-09-08 10:53:57'),
+(8, 'TOTAL HEIGHT', 'Remain standing against the wall with your feet 8\" apart. Set a hardback book or a ruler on top of your head and make sure it touches the wall without sagging. Mark the wall at the point where the book or ruler meets your head. Measure from this point to the floor.', 'height.jpg', 'https://www.youtube.com/embed/mz2UxbRCmbs', '2020-09-08 11:13:52', '2020-09-08 10:54:31');
 
 -- --------------------------------------------------------
 
@@ -5767,7 +5797,9 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1326, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-01 20:06:35', '2020-09-01 20:06:35'),
 (1327, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-02 20:39:33', '2020-09-02 20:39:33'),
 (1328, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-03 20:35:46', '2020-09-03 20:35:46'),
-(1329, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-04 19:53:35', '2020-09-04 19:53:35');
+(1329, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-04 19:53:35', '2020-09-04 19:53:35'),
+(1330, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-07 08:34:16', '2020-09-07 08:34:16'),
+(1331, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/fit-calculators/create', '2020-09-07 20:16:45', '2020-09-07 20:16:45');
 
 -- --------------------------------------------------------
 
@@ -11543,6 +11575,12 @@ ALTER TABLE `exterior_features`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `fit_calculator_contents`
+--
+ALTER TABLE `fit_calculator_contents`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `front_brakes`
 --
 ALTER TABLE `front_brakes`
@@ -12140,6 +12178,12 @@ ALTER TABLE `exterior_features`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `fit_calculator_contents`
+--
+ALTER TABLE `fit_calculator_contents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `front_brakes`
 --
 ALTER TABLE `front_brakes`
@@ -12395,7 +12439,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1330;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1332;
 
 --
 -- AUTO_INCREMENT for table `transmissions`
