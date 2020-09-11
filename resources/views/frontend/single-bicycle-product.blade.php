@@ -506,7 +506,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment-form-rating"><label for="rating">Your Rating</label>
+                            <div class="comment-form-rating">
+                                <label for="rating">Your Rating</label>
                                 <p class="stars">
                                     <span>
                                         <a class="star-1 score" href="#" onclick="feedbackScore(this);">1</a>

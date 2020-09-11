@@ -25,8 +25,8 @@ Start Car Loan  Insurance-->
             </div>
             <div class="insurance-car fit-bike">
                 <div class="row">
-                    <div class="progress" style="height: 40px; background: transparent; width: 100%;">
-                        <div class="progress-bar rounded" role="progressbar" style="width: 100%;" id="progressBar">
+                    <div class="progress h-40 w-100 bg-transparent">
+                        <div class="progress-bar rounded w-100" role="progressbar" id="progressBar">
                             <b class="lead" id="progressText">GENDER</b>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 07:03 PM
+-- Generation Time: Sep 10, 2020 at 10:21 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -5799,7 +5799,9 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1328, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-03 20:35:46', '2020-09-03 20:35:46'),
 (1329, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-04 19:53:35', '2020-09-04 19:53:35'),
 (1330, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-07 08:34:16', '2020-09-07 08:34:16'),
-(1331, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/fit-calculators/create', '2020-09-07 20:16:45', '2020-09-07 20:16:45');
+(1331, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/fit-calculators/create', '2020-09-07 20:16:45', '2020-09-07 20:16:45'),
+(1332, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-08 20:07:30', '2020-09-08 20:07:30'),
+(1333, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-09 20:38:03', '2020-09-09 20:38:03');
 
 -- --------------------------------------------------------
 
@@ -12439,7 +12441,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1332;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1334;
 
 --
 -- AUTO_INCREMENT for table `transmissions`

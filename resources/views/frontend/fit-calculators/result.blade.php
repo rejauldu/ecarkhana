@@ -48,16 +48,18 @@
             </div>
         </div>
         <div class="col-12 col-md-4 mb-3">
-            <div class="bg-deep-light rounded display-6 mb-3 pl-3">Save Results</div>
+            <div class="bg-deep-light rounded display-6 mb-3 pl-3">Save Result</div>
             <div class="p-lg-3 h-100">
                 <p class="font-weight-bold">Never take your measurements again.</p>
                 <p class="text-justify">Lose the measuring tape. Your measurements will be stored safe with us on your account page. Review and edit them at anytime.</p>
-                <a href="#" class="btn btn-danger">Save <i class="fa fa-sign-in ml-lg-3"></i></a> <a href="#" class="btn btn-secondary">Download <i class="fa fa-file-pdf-o ml-lg-3"></i></a>
+                <a href="#" class="btn btn-danger">Save <i class="fa fa-sign-in ml-lg-3"></i></a> <a href="#" class="btn btn-secondary" @click.prevent="download()">Download <i class="fa fa-file-pdf-o ml-lg-3"></i></a>
             </div>
         </div>
         <div class="col-12 col-md-4 mb-3">
             <div class="bg-deep-light rounded display-6 mb-3 pl-3">Email This Result</div>
-            <form action="/action_page.php" class="w-100">
+            <form action="{{ route('bicycle-fit-result') }}" class="d-block" method="post">
+                @csrf
+                <input type="hidden" name="url" value="{{ Request::url() }}">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" placeholder="Enter email" id="email">
@@ -72,6 +74,31 @@
                 </div>
                 <button type="submit" class="btn btn-danger mt-2">Send <i class="fa fa-envelope ml-3"></i></button>
             </form>
+        </div>
+        <div class="col-12">
+            <div class="mt-5">
+                <h5>Share now</h5>
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item text-center bg-facebook hover-opacity-8 p-0">
+                        <a class="text-white p-0" href="https://www.facebook.com/sharer.php?u={{ Request::url() }}" target="_blank"><i class="fa fa-facebook px-3 line-height-40"></i></a>
+                    </li>
+                    <li class="list-group-item text-center bg-twitter hover-opacity-8 p-0">
+                        <a class="text-white p-0" href="https://twitter.com/intent/tweet?text=I%20have%20calculated%20Bicycle%20fit%20for%20myself&url={{ Request::url() }}" data-size="large"><i class="fa fa-twitter px-3 line-height-40"></i></a>
+                    </li>
+                    <li class="list-group-item text-center bg-whatsapp hover-opacity-8 p-0">
+                        <a class="text-white p-0" href="whatsapp://send?text={{ Request::url() }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp px-3 line-height-40"></i></a>
+                    </li>
+                    <li class="list-group-item text-center bg-linkedin hover-opacity-8 p-0">
+                        <a class="text-white p-0" href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url() }}" target="_blank"><i class="fa fa-linkedin px-3 line-height-40"></i></a>
+                    </li>
+                    <li class="list-group-item text-center bg-pinterest hover-opacity-8 p-0">
+                        <a class="text-white p-0" href="https://pinterest.com/pin/create/button?url={{ Request::url() }}&media={{ url('/') }}/images/bicycle/result.png&description=I%20have%20calculated%20Bicycle%20fit%20for%20myself" class="pin-it-button" count-layout="horizontal"><i class="fa fa-pinterest px-3 line-height-40"></i></a>
+                    </li>
+                    <li class="list-group-item text-center bg-reddit hover-opacity-8 p-0">
+                        <a class="text-white p-0" href="https://reddit.com/submit?url={{ Request::url() }}&title=Bicycle%20Fit" target="_blank"><i class="fa fa-whatsapp px-3 line-height-40"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -99,8 +126,9 @@
             tab:"{{ $tab ?? ''}}",
         },
         methods: {
-            continues: function() {
-                
+            download: function() {
+                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
+                window.location = "{{ url('/') }}/fit-result/"+url+".pdf";
             }
         },
         computed: {

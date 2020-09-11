@@ -223,6 +223,48 @@ table.dataTable thead .sorting_desc_disabled:before {
 .bg-deep-light {
     background: #EBEBEB !important;
 }
+.text-facebook {
+    color: #3b5998 !important;
+}
+.bg-facebook {
+    background: #3b5998 !important;
+}
+.text-twitter {
+    color: #00acee !important;
+}
+.bg-twitter {
+    background: #00acee !important;
+}
+.text-whatsapp {
+    color: #4fce5d !important;
+}
+.bg-whatsapp {
+    background: #4fce5d !important;
+}
+.text-whatsapp {
+    color: #4fce5d !important;
+}
+.bg-whatsapp {
+    background: #4fce5d !important;
+}
+.text-linkedin {
+    color: #0e76a8 !important;
+}
+.bg-linkedin {
+    background: #0e76a8 !important;
+}
+.text-pinterest {
+    color: #E60023 !important;
+}
+.bg-pinterest {
+    background: #E60023 !important;
+}
+.text-reddit {
+    color: #FF4500 !important;
+}
+.bg-reddit {
+    background: #FF4500 !important;
+}
 /*Bootstrap-datepicker plugin */
 .datepicker {
     box-shadow:0 0 5px #DDD;
@@ -839,4 +881,23 @@ ul.bullet>li {
 /*Trigger stuck event */
 .sticky-top {
     top:-1px !important;
+}
+/* Bootstrap tooltip overrrite */
+.tooltip-inner {
+    background-color: #EDD;
+    color:#300;
+    text-align:justify;
+    padding: 0.75rem;
+}
+.tooltip.bs-tooltip-right .arrow:before {
+    border-right-color: #EDD !important;
+}
+.tooltip.bs-tooltip-left .arrow:before {
+    border-left-color: #EDD !important;
+}
+.tooltip.bs-tooltip-bottom .arrow:before {
+    border-bottom-color: #EDD !important;
+}
+.tooltip.bs-tooltip-top .arrow:before {
+    border-top-color: #EDD !important;
 }

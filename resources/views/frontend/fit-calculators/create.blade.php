@@ -91,117 +91,20 @@
     </div>
     <div class="row text-dark" v-if="page == 5">
         <div class="col-12"><h3 class="text-center pb-3">Select Discomfort</h3></div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'achilles-tendon'}" @click.prevent="pain = 'achilles-tendon'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Achilles-Tendon.jpg') }}" alt="Achilles Tendon">
+        @foreach($discomforts as $discomfort)
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div class="card hover-opacity-8 hover-border cursor-pointer pl-3 pt-3 pr-3 my-2 bg-transparent" :class="{'border-0': !pain.includes('-{{ str_replace(" ", "", $discomfort->name) }}'), 'bg-light-secondary': pain.includes('-{{ str_replace(" ", "", $discomfort->name) }}')}" @click.prevent="painSelected('-{{ str_replace(" ", "", $discomfort->name) }}')" data-toggle="tooltip" title="{{ $discomfort->description }}">
+                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/') }}/{{ $discomfort->image }}" alt="{{ $discomfort->name }}">
                 <div class="card-body p-1">
-                    <div class="text-center">Achilles Tendon</div>
+                    <div class="text-center">{{ $discomfort->name }}</div>
                 </div>
+                
             </div>
         </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'ankles'}" @click.prevent="pain = 'ankles'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Ankles_.jpg') }}" alt="Ankles">
-                <div class="card-body p-1">
-                    <div class="text-center">Ankles</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'knees'}" @click.prevent="pain = 'knees'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Knees.jpg') }}" alt="Knees">
-                <div class="card-body p-1">
-                    <div class="text-center">Knees</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'feet'}" @click.prevent="pain = 'feed'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Feet_.jpg') }}" alt="Feet">
-                <div class="card-body p-1">
-                    <div class="text-center">Feet</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'bottom'}" @click.prevent="pain = 'bottom'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Bottom.jpg') }}" alt="Bottom">
-                <div class="card-body p-1">
-                    <div class="text-center">Bottom</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'hip'}" @click.prevent="pain = 'hip'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/hip.jpg') }}" alt="Hip">
-                <div class="card-body p-1">
-                    <div class="text-center">Hip</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'back'}" @click.prevent="pain = 'back'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Back.jpg') }}" alt="Back">
-                <div class="card-body p-1">
-                    <div class="text-center">Back</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'fingers'}" @click.prevent="pain = 'fingers'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Fingers.jpg') }}" alt="Fingers">
-                <div class="card-body p-1">
-                    <div class="text-center">Fingers</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'neck'}" @click.prevent="pain = 'neck'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Neck.jpg') }}" alt="Neck">
-                <div class="card-body p-1">
-                    <div class="text-center">Neck</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'shoulders'}" @click.prevent="pain = 'shoulders'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Shoulders.jpg') }}" alt="Shoulders">
-                <div class="card-body p-1">
-                    <div class="text-center">Shoulders</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'thighs'}" @click.prevent="pain = 'thighs'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Thighs.jpg') }}" alt="Thighs">
-                <div class="card-body p-1">
-                    <div class="text-center">Thighs</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'wrists'}" @click.prevent="pain = 'wrists'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Wrists.jpg') }}" alt="Wrists">
-                <div class="card-body p-1">
-                    <div class="text-center">Wrists</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'muscles'}" @click.prevent="pain = 'muscles'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Muscles.jpg') }}" alt="Muscles">
-                <div class="card-body p-1">
-                    <div class="text-center">Muscles</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-3">
-            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': pain != 'hands'}" @click.prevent="pain = 'hands'; continues()">
-                <img class="card-img-top img-thumbnail" src="{{ url('/images/bicycle/discomforts/Hands.jpg') }}" alt="Hands">
-                <div class="card-body p-1">
-                    <div class="text-center">Hands</div>
-                </div>
-            </div>
+        @endforeach
+        <div class="col-12 text-right">
+            
+            <a href="#" class="btn btn-danger mr-5" @click.prevent="continues()">Continue <i class="fa fa-arrow-right ml-3"></i></a>
         </div>
     </div>
 </section>
@@ -216,24 +119,39 @@
             type: 'road',
             measurement: 'inch',
             discomfort: 'no',
-            pain: 'achilles-tendon'
+            pain: ''
         },
         methods: {
+            painSelected: function(p) {
+                if(!this.pain.includes(p)) {
+                    this.pain += p;
+                } else {
+                    this.pain = this.pain.replace(p, '');
+                }
+            },
             continues: function() {
                 if(this.discomfort == 'no')
-                    this.pain = 'well';
-                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain;
+                    this.pain = '-well';
+                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and'+this.pain;
                 window.location = "{{ url('/') }}/fit-calculator/"+url;
             } 
         },
         computed: {
         },
         watch: {
+            page() {
+                if(this.page == 5) {
+                    Vue.nextTick(function () {
+                        $('[data-toggle="tooltip"]').tooltip({animation: true, delay: {show: 1500, hide: 100}, html: true});
+                    });
+                }
+            }
         },
         created: function () {
         },
         mounted: function () {
         },
     });
+    
 </script>
 @endsection

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\FitCalculator;
 use App\FitCalculatorContent;
+use PDF;
+use App\Discomfort;
 
 class FitCalculatorController extends Controller {
 
@@ -25,7 +27,8 @@ class FitCalculatorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('frontend.fit-calculators.create');
+        $discomforts = Discomfort::all();
+        return view('frontend.fit-calculators.create', compact('discomforts'));
     }
     /**
      * Show the form for creating a new resource.
@@ -38,7 +41,6 @@ class FitCalculatorController extends Controller {
         if($url) {
             $exploded = array_filter(explode("-and-", $url));
             if(count($exploded) >= 5) {
-                
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
                 $data['measurement'] = $exploded[2];
@@ -68,6 +70,7 @@ class FitCalculatorController extends Controller {
                 }
             }
         }
+        $data['discomforts'] = Discomfort::all();
         return view('frontend.fit-calculators.create', $data);
     }
 
@@ -129,6 +132,41 @@ class FitCalculatorController extends Controller {
         $review = Review::find($id);
         $review->delete();
         return redirect()->back()->with('message', 'Review has been deleted');
+    }
+    
+    public function download($url = null) {
+        $data=[];
+        if($url) {
+            $url = substr($url, 0, -4);
+            $exploded = array_filter(explode("-and-", $url));
+            if(count($exploded) >= 5) {
+                $data['gender'] = $exploded[0];
+                $data['bicycle_type'] = $exploded[1];
+                $data['measurement'] = $exploded[2];
+                $data['discomfort'] = $exploded[3];
+                $data['pain'] = $exploded[4];
+                $pdf = PDF::loadView('frontend.fit-calculators.fit-result', $data);
+                if(count($exploded) == 8) {
+                    $data['inseam'] = $exploded[5];
+                    $data['arm'] = $exploded[6];
+                    $data['height'] = $exploded[7];
+                    $data['tab'] = 'basic';
+                    return $pdf->download('ecarkhana-bicycle-fit.pdf');
+                } elseif(count($exploded) == 13) {
+                    $data['inseam'] = $exploded[5];
+                    $data['trunk'] = $exploded[6];
+                    $data['forearm'] = $exploded[7];
+                    $data['arm'] = $exploded[8];
+                    $data['thigh'] = $exploded[9];
+                    $data['leg'] = $exploded[10];
+                    $data['sternal_notch'] = $exploded[11];
+                    $data['height'] = $exploded[12];
+                    $data['tab'] = 'advance';
+                    return $pdf->download('ecarkhana-bicycle-fit.pdf');
+                }
+            }
+        }
+        return view('frontend.fit-calculators.create');
     }
 
 }

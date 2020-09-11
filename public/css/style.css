@@ -1706,6 +1706,14 @@ h3.car-title {
     font-size: 20px !important;
 }
 
+form {
+    display: flex;
+    margin-top: 0em;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+}
+
 .select {
     position: relative;
 }
