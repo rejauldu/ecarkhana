@@ -40,31 +40,32 @@ class FitCalculatorController extends Controller {
         $data['type'] = 'Bicycle';
         if($url) {
             $exploded = array_filter(explode("-and-", $url));
-            if(count($exploded) >= 5) {
+            if(count($exploded) >= 6) {
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
                 $data['measurement'] = $exploded[2];
-                $data['discomfort'] = $exploded[3];
-                $data['pain'] = $exploded[4];
-                if(count($exploded) == 5) {
+                $data['position'] = $exploded[3];
+                $data['discomfort'] = $exploded[4];
+                $data['pain'] = $exploded[5];
+                if(count($exploded) == 6) {
                     $contents = FitCalculatorContent::all();
                     $data['contents'] = $contents;
                     return view('frontend.fit-calculators.fit-calculator', $data);
-                } elseif(count($exploded) == 8) {
-                    $data['inseam'] = $exploded[5];
-                    $data['arm'] = $exploded[6];
-                    $data['height'] = $exploded[7];
+                } elseif(count($exploded) == 9) {
+                    $data['inseam'] = $exploded[6];
+                    $data['arm'] = $exploded[7];
+                    $data['height'] = $exploded[8];
                     $data['tab'] = 'basic';
                     return view('frontend.fit-calculators.result', $data);
-                } elseif(count($exploded) == 13) {
-                    $data['inseam'] = $exploded[5];
-                    $data['trunk'] = $exploded[6];
-                    $data['forearm'] = $exploded[7];
-                    $data['arm'] = $exploded[8];
-                    $data['thigh'] = $exploded[9];
-                    $data['leg'] = $exploded[10];
-                    $data['sternal_notch'] = $exploded[11];
-                    $data['height'] = $exploded[12];
+                } elseif(count($exploded) == 14) {
+                    $data['inseam'] = $exploded[6];
+                    $data['trunk'] = $exploded[7];
+                    $data['forearm'] = $exploded[8];
+                    $data['arm'] = $exploded[9];
+                    $data['thigh'] = $exploded[10];
+                    $data['leg'] = $exploded[11];
+                    $data['sternal_notch'] = $exploded[12];
+                    $data['height'] = $exploded[13];
                     $data['tab'] = 'advance';
                     return view('frontend.fit-calculators.result', $data);
                 }
@@ -139,28 +140,29 @@ class FitCalculatorController extends Controller {
         if($url) {
             $url = substr($url, 0, -4);
             $exploded = array_filter(explode("-and-", $url));
-            if(count($exploded) >= 5) {
+            if(count($exploded) >= 6) {
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
                 $data['measurement'] = $exploded[2];
-                $data['discomfort'] = $exploded[3];
-                $data['pain'] = $exploded[4];
+                $data['position'] = $exploded[3];
+                $data['discomfort'] = $exploded[4];
+                $data['pain'] = $exploded[5];
                 $pdf = PDF::loadView('frontend.fit-calculators.fit-result', $data);
-                if(count($exploded) == 8) {
-                    $data['inseam'] = $exploded[5];
-                    $data['arm'] = $exploded[6];
-                    $data['height'] = $exploded[7];
+                if(count($exploded) == 9) {
+                    $data['inseam'] = $exploded[6];
+                    $data['arm'] = $exploded[7];
+                    $data['height'] = $exploded[8];
                     $data['tab'] = 'basic';
                     return $pdf->download('ecarkhana-bicycle-fit.pdf');
-                } elseif(count($exploded) == 13) {
-                    $data['inseam'] = $exploded[5];
-                    $data['trunk'] = $exploded[6];
-                    $data['forearm'] = $exploded[7];
-                    $data['arm'] = $exploded[8];
-                    $data['thigh'] = $exploded[9];
-                    $data['leg'] = $exploded[10];
-                    $data['sternal_notch'] = $exploded[11];
-                    $data['height'] = $exploded[12];
+                } elseif(count($exploded) == 14) {
+                    $data['inseam'] = $exploded[6];
+                    $data['trunk'] = $exploded[7];
+                    $data['forearm'] = $exploded[8];
+                    $data['arm'] = $exploded[9];
+                    $data['thigh'] = $exploded[10];
+                    $data['leg'] = $exploded[11];
+                    $data['sternal_notch'] = $exploded[12];
+                    $data['height'] = $exploded[13];
                     $data['tab'] = 'advance';
                     return $pdf->download('ecarkhana-bicycle-fit.pdf');
                 }

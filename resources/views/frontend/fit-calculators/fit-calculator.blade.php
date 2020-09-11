@@ -88,8 +88,9 @@
             contents: @json($contents),
             page:1,
             gender: "{{ $gender }}",
-            type:  "{{ $type }}",
+            type:  "{{ $bicycle_type }}",
             measurement:  "{{ $measurement }}",
+            position:  "{{ $position }}",
             discomfort: "{{ $discomfort }}",
             pain: "{{ $pain }}",
             inseam:'',
@@ -113,7 +114,7 @@
             },
             continues: function() {
                 this.error = true;
-                if(this.gender && this.type && this.measurement && this.discomfort && this.pain && this.inseam && this.arm && this.height) {
+                if(this.gender && this.type && this.measurement && this.position && this.discomfort && this.pain && this.inseam && this.arm && this.height) {
                     if(this.tab == 'advance') {
                         if(!(this.trunk && this.forearm && this.thigh && this.leg && this.sternal_notch)) {
                             return false;
@@ -123,9 +124,9 @@
                     return false;
                 }
                         
-                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
+                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
                 if(this.tab == 'basic')
-                    url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.arm+'-and-'+this.height;
+                    url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.arm+'-and-'+this.height;
                 window.location = "{{ url('/') }}/fit-calculator/"+url;
                 
             }
