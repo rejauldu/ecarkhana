@@ -70,6 +70,33 @@
         </div>
     </div>
     <div class="row" v-if="page == 4">
+        <div class="col-12"><h3 class="text-center pb-3">Select Riding Position</h3></div>
+        <div class="col-12 col-sm-4">
+            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': measurement != 'inch'}" @click.prevent="measurement = 'inch'; page++">
+                <img class="card-img-top" src="{{ url('/images/bicycle/60.png') }}" alt="Moderate">
+                <div class="card-body p-1">
+                    <h4 class="text-center m-0">Moderate</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': gender != 'centimeter'}" @click.prevent="measurement = 'centimeter'; page++">
+                <img class="card-img-top" src="{{ url('/images/bicycle/45.png') }}" alt="Athletic">
+                <div class="card-body p-1">
+                    <h4 class="text-center m-0">Athletic</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="card bg-transparent hover-opacity-8 hover-border cursor-pointer p-3" :class="{'border-0': gender != 'centimeter'}" @click.prevent="measurement = 'centimeter'; page++">
+                <img class="card-img-top" src="{{ url('/images/bicycle/90.png') }}" alt="Relaxed">
+                <div class="card-body p-1">
+                    <h4 class="text-center m-0">Relaxed</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" v-if="page == 5">
         <div class="col-12"><h3 class="text-center pb-3">Do you have any physical discomfort?</h3></div>
         <div class="col-sm-1 col-md-3"></div>
         <div class="col-6 col-sm-5 col-md-3">
@@ -89,7 +116,7 @@
             </div>
         </div>
     </div>
-    <div class="row text-dark" v-if="page == 5">
+    <div class="row text-dark" v-if="page == 6">
         <div class="col-12"><h3 class="text-center pb-3">Select Discomfort</h3></div>
         @foreach($discomforts as $discomfort)
         <div class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -140,7 +167,7 @@
         },
         watch: {
             page() {
-                if(this.page == 5) {
+                if(this.page == 6) {
                     Vue.nextTick(function () {
                         $('[data-toggle="tooltip"]').tooltip({animation: true, delay: {show: 1500, hide: 100}, html: true});
                     });
