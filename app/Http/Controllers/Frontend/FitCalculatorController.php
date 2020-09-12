@@ -149,6 +149,7 @@ class FitCalculatorController extends Controller {
 
     public function download($url = null) {
         $data = [];
+        $data['type'] = 'Bicycle';
         if ($url) {
             $url = substr($url, 0, -4);
             $exploded = array_filter(explode("-and-", $url));
@@ -180,7 +181,9 @@ class FitCalculatorController extends Controller {
                 }
             }
         }
-        return view('frontend.fit-calculators.create');
+        $discomforts = Discomfort::all();
+        $data['discomforts'] = $discomforts;
+        return view('frontend.fit-calculators.create', $data);
     }
     private function getResult($data) {
         $total = ($data['sternal_notch'] - $data['inseam'] + $data['arm'])/2+4;

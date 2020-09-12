@@ -131,6 +131,7 @@
             gender: "{{ $gender ?? ''}}",
             type:  "{{ $bicycle_type ?? ''}}",
             measurement:  "{{ $measurement ?? ''}}",
+            position:  "{{ $position ?? ''}}",
             discomfort: "{{ $discomfort ?? ''}}",
             pain: "{{ $pain ?? ''}}",
             inseam:{{ $inseam ?? 0 }},
@@ -145,7 +146,7 @@
         },
         methods: {
             download: function() {
-                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
+                var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
                 window.location = "{{ url('/') }}/fit-result/"+url+".pdf";
             }
         },
