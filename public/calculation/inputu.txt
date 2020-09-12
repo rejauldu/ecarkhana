@@ -1,0 +1,8 @@
+Actual Inseam = 63.5
+Trunk = 40.64
+Forearm = 43.18
+Arm = 76.2
+Thigh = 48.26
+Lower Leg = 45.72
+Sternal Notch = 157.48
+Total Height = 170.18

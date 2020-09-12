@@ -15,6 +15,12 @@
             <p>Measure Up And Get The Right Fit For You</p>
         </div>
         <div class="col-12 mb-3 bg-deep-light rounded display-6">Your Fit Summary</div>
+        <div class="col-12 mb-3">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <div><strong>Warning:</strong> {{ $pain_detail->tips ?? '' }}</div>
+            </div>
+        </div>
         <div class="col-12 col-md-6 col-lg-5 col-xl-4">
             <div class="p-lg-3 h-100">
                 <p class="display-6"><span class="font-weight-bold">Top Tube Length</span> <span class="float-right">55.9-56.3 Cm</span></p>
@@ -34,6 +40,18 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12 col-md-4 mb-3">
+            <div class="bg-deep-light rounded display-6 mb-3 pl-3">Discomfort Detail</div>
+            <p class="text-justify">{{ $pain_detail->description }}</p>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+            <div class="bg-deep-light rounded display-6 mb-3 pl-3">Causes of {{ $pain_detail->name }} Pain</div>
+            <p class="text-justify">{{ $pain_detail->cause }}</p>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+            <div class="bg-deep-light rounded display-6 mb-3 pl-3">Treatment of {{ $pain_detail->name }} Pain</div>
+            <p class="text-justify">{{ $pain_detail->treatment }}</p>
+        </div>
         <div class="col-12 col-md-4 mb-3">
             <div class="bg-deep-light rounded display-6 mb-3 pl-3">Your Measurements</div>
             <div class="p-lg-3 h-100">

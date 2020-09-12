@@ -1,0 +1,41 @@
+achellis tendon>no mountain
+desc: Riding uphill places your Achilles tendons at greater risk for inflammation since climbing engages your calf muscles more than riding on flat road.
+
+ankles> no mountain
+Avoid mountain biycle riding. Even if the ankle pain is minimal, it’s safest to cut down your riding, let your joint heal, and work on addressing the problem rather than trying to ride through it.
+
+knee pain> no atheletic, racing aggressive
+Study estimated that 65% of cyclists have experienced knee pain. You should avoid bicycle racing during this injuries. Knee pain can also be one of the most difficult injuries to solve because there are a number of muscles and tendons running through and within your knees, any of which could contribute to pain.
+
+feet> all
+Avoid long riding. Foot pain can feel unavoidable, especially on long, hot rides when your feet begin to swell. It may materialize slowly, maybe as numbness or tingling, before progressing to a dull and finally a sharp pain.
+
+Bottom> all
+​Pain in the rear when cycling shouldn’t come as a surprise – just one look at most saddle designs is enough to make you cringe at the thought of actually sitting on it for hours at a time. But while bottom pain is unavoidable to some extent, it shouldn’t prevent you from riding or force you to shorten your ride.
+
+Hips> all
+One of the major causes of hip pain in cyclists is overuse combined with a muscle imbalance in the upper thighs. Even a small imbalance in the way you rock back and forth across the saddle when peddling can add up to noticeable pain over the course of days of riding.
+
+back>all
+The most common cause of back pain on the bike is a poor bike fit. A proper bike fit is everything when it comes to keeping your back happy.
+
+Fingers>all
+Finger pain isn’t common among cyclists, but riders who do experience it will tell you that the pain, numbness, or tingling can be crippling to your ride. Trying to avoid using your fingers can make a ride difficult if you’re avoiding changing gears, or dangerous if you wince at using the brake levers.
+
+Nect> all
+Your head is effectively a giant weight which, if not aligned in a stable position relative to your neck when riding, can quickly cause strain.
+
+Shoulders>all
+Your shoulders are primarily responsible for holding up your head when cycling – no small task considering that your head is effectively a heavy object extended away from your body.
+
+Thigh>all
+Thigh pain can range greatly in severity, but if it keeps you from completing your rides then it’s time to get serious about treating what ails you.
+
+Wrists>all
+Avoid long rides. Wrist pain is one of the most common pains that occur among cyclists, and it’s not always a sign of serious issues – on especially long rides, wrist pain is almost certain to occur.
+
+Muscles>all
+Muscle pain is a complex and much-discussed issue among cyclists, but there are some common threads among all the different types of muscle pains out there.
+
+Hands>all
+Your hands are one of the main contact points between your body and the bike, and keeping them pain-free throughout your ride is extremely important.

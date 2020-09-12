@@ -1,0 +1,19 @@
+Top Tube Length = 0.63 * total
+Seat Tube Range CC = inseam * 0.65
+Seat Tube Range CT = inseam * 0.67
+Stem Length = 0.37 * total
+BB Saddle Position = inseam * 0.883
+Saddle Handlebar = 32.3+0.6*arm
+Saddle Setback = 
+Seatpost Type = Not setback
+
+total = Top tube length + Stem length = (sternal notch - inseam + arm)/2 + 4
+
+TT = 53.9
+SL = 9.7
+
+Top tube length + Stem length = 95.25cm (37.5inch)
+
+sternal notch = 157.48
+inseam = 63.5
+arm = 76.2

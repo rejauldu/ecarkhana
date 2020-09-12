@@ -30,34 +30,45 @@ class FitCalculatorController extends Controller {
         $discomforts = Discomfort::all();
         return view('frontend.fit-calculators.create', compact('discomforts'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function fitCalculator($url = null) {
-        $data=[];
+        $data = [];
         $data['type'] = 'Bicycle';
-        if($url) {
+        $discomforts = Discomfort::all();
+        if ($url) {
             $exploded = array_filter(explode("-and-", $url));
-            if(count($exploded) >= 6) {
+            if (count($exploded) >= 6) {
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
                 $data['measurement'] = $exploded[2];
                 $data['position'] = $exploded[3];
                 $data['discomfort'] = $exploded[4];
                 $data['pain'] = $exploded[5];
-                if(count($exploded) == 6) {
+                if ($data['discomfort'] == 'yes') {
+                    foreach ($discomforts as $discomfort) {
+                        if (strpos(strtoupper($data['pain']), strtoupper(str_replace(" ", "", $discomfort->name))) !== false) {
+                            $data['pain_detail'] = $discomfort;
+                            break;
+                        }
+                    }
+                }
+                if (count($exploded) == 6) {
                     $contents = FitCalculatorContent::all();
                     $data['contents'] = $contents;
                     return view('frontend.fit-calculators.fit-calculator', $data);
-                } elseif(count($exploded) == 9) {
+                } elseif (count($exploded) == 9) {
                     $data['inseam'] = $exploded[6];
                     $data['arm'] = $exploded[7];
                     $data['height'] = $exploded[8];
                     $data['tab'] = 'basic';
+                    $data = $this->getResult($data);
                     return view('frontend.fit-calculators.result', $data);
-                } elseif(count($exploded) == 14) {
+                } elseif (count($exploded) == 14) {
                     $data['inseam'] = $exploded[6];
                     $data['trunk'] = $exploded[7];
                     $data['forearm'] = $exploded[8];
@@ -67,11 +78,12 @@ class FitCalculatorController extends Controller {
                     $data['sternal_notch'] = $exploded[12];
                     $data['height'] = $exploded[13];
                     $data['tab'] = 'advance';
+                    $data = $this->getResult($data);
                     return view('frontend.fit-calculators.result', $data);
                 }
             }
         }
-        $data['discomforts'] = Discomfort::all();
+        $data['discomforts'] = $discomforts;
         return view('frontend.fit-calculators.create', $data);
     }
 
@@ -134,13 +146,13 @@ class FitCalculatorController extends Controller {
         $review->delete();
         return redirect()->back()->with('message', 'Review has been deleted');
     }
-    
+
     public function download($url = null) {
-        $data=[];
-        if($url) {
+        $data = [];
+        if ($url) {
             $url = substr($url, 0, -4);
             $exploded = array_filter(explode("-and-", $url));
-            if(count($exploded) >= 6) {
+            if (count($exploded) >= 6) {
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
                 $data['measurement'] = $exploded[2];
@@ -148,13 +160,13 @@ class FitCalculatorController extends Controller {
                 $data['discomfort'] = $exploded[4];
                 $data['pain'] = $exploded[5];
                 $pdf = PDF::loadView('frontend.fit-calculators.fit-result', $data);
-                if(count($exploded) == 9) {
+                if (count($exploded) == 9) {
                     $data['inseam'] = $exploded[6];
                     $data['arm'] = $exploded[7];
                     $data['height'] = $exploded[8];
                     $data['tab'] = 'basic';
                     return $pdf->download('ecarkhana-bicycle-fit.pdf');
-                } elseif(count($exploded) == 14) {
+                } elseif (count($exploded) == 14) {
                     $data['inseam'] = $exploded[6];
                     $data['trunk'] = $exploded[7];
                     $data['forearm'] = $exploded[8];
@@ -169,6 +181,18 @@ class FitCalculatorController extends Controller {
             }
         }
         return view('frontend.fit-calculators.create');
+    }
+    private function getResult($data) {
+        $total = ($data['sternal_notch'] - $data['inseam'] + $data['arm'])/2+4;
+        $data['top_tube'] = $total * 0.63;
+        $data['seat_tube_cc'] = $data['inseam'] * 0.65;
+        $data['seat_tube_ct'] = $data['inseam'] * 0.67;
+        $data['stem'] = $data['inseam'] * 0.37;
+        $data['bb_saddle'] = $data['inseam'] *0.883;
+        $data['saddle_handlebar'] = $data['inseam'];
+        $data['saddle_seatback'] = $data['inseam'];
+        $data['seatpost_type'] = $data['inseam'];
+        return $data;
     }
 
 }
