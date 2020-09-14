@@ -212,8 +212,8 @@
                     <p class="display-6"><span class="font-weight-bold">Arm</span> <span class="float-right">@{{ arm }} Cm</span></p>
                     <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Thigh</span> <span class="float-right">@{{ thigh }} Cm</span></p>
                     <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Lower Leg</span> <span class="float-right">@{{ leg }} Cm</span></p>
-                    <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Sternal Notch</span> <span class="float-right">@{{ sternal_notch }} Cm</span></p>
-                    <p class="display-6"><span class="font-weight-bold">Total Height</span> <span class="float-right">@{{ height }} Cm</span></p>
+                    <p class="display-6"><span class="font-weight-bold">Sternal Notch</span> <span class="float-right">@{{ sternal_notch }} Cm</span></p>
+                    <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Total Height</span> <span class="float-right">@{{ height }} Cm</span></p>
                 </div>
             </div>
         </div>

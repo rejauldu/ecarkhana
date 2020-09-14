@@ -41,7 +41,7 @@ class FitCalculatorController extends Controller {
         $data['type'] = 'Bicycle';
         $discomforts = Discomfort::all();
         if ($url) {
-            $exploded = array_filter(explode("-and-", $url));
+            $exploded = explode("-and-", $url);
             if (count($exploded) >= 6) {
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
@@ -64,7 +64,7 @@ class FitCalculatorController extends Controller {
                 } elseif (count($exploded) == 9) {
                     $data['inseam'] = $exploded[6];
                     $data['arm'] = $exploded[7];
-                    $data['height'] = $exploded[8];
+                    $data['sternal_notch'] = $exploded[8];
                     $data['tab'] = 'basic';
                     $data = $this->getResult($data);
                     return view('frontend.fit-calculators.result', $data);
@@ -152,7 +152,7 @@ class FitCalculatorController extends Controller {
         $data['type'] = 'Bicycle';
         if ($url) {
             $url = substr($url, 0, -4);
-            $exploded = array_filter(explode("-and-", $url));
+            $exploded = explode("-and-", $url);
             if (count($exploded) >= 6) {
                 $data['gender'] = $exploded[0];
                 $data['bicycle_type'] = $exploded[1];
@@ -164,7 +164,7 @@ class FitCalculatorController extends Controller {
                 if (count($exploded) == 9) {
                     $data['inseam'] = $exploded[6];
                     $data['arm'] = $exploded[7];
-                    $data['height'] = $exploded[8];
+                    $data['sternal_notch'] = $exploded[8];
                     $data['tab'] = 'basic';
                     return $pdf->download('ecarkhana-bicycle-fit.pdf');
                 } elseif (count($exploded) == 14) {

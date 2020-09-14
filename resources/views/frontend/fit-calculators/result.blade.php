@@ -15,12 +15,14 @@
             <p>Measure Up And Get The Right Fit For You</p>
         </div>
         <div class="col-12 mb-3 bg-deep-light rounded display-6">Your Fit Summary</div>
+        @if(isset($pain_detail))
         <div class="col-12 mb-3">
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <div><strong>Warning:</strong> {{ $pain_detail->tips ?? '' }}</div>
             </div>
         </div>
+        @endif
         <div class="col-12 col-md-6 col-lg-5 col-xl-4">
             <div class="p-lg-3 h-100">
                 <p class="display-6"><span class="font-weight-bold">Top Tube Length</span> <span class="float-right">55.9-56.3 Cm</span></p>
@@ -40,6 +42,7 @@
         </div>
     </div>
     <div class="row">
+        @if(isset($pain_detail))
         <div class="col-12 col-md-4 mb-3">
             <div class="bg-deep-light rounded display-6 mb-3 pl-3">Discomfort Detail</div>
             <p class="text-justify">{{ $pain_detail->description }}</p>
@@ -52,6 +55,7 @@
             <div class="bg-deep-light rounded display-6 mb-3 pl-3">Treatment of {{ $pain_detail->name }} Pain</div>
             <p class="text-justify">{{ $pain_detail->treatment }}</p>
         </div>
+        @endif
         <div class="col-12 col-md-4 mb-3">
             <div class="bg-deep-light rounded display-6 mb-3 pl-3">Your Measurements</div>
             <div class="p-lg-3 h-100">
@@ -61,8 +65,8 @@
                 <p class="display-6"><span class="font-weight-bold">Arm</span> <span class="float-right">@{{ arm }} Cm</span></p>
                 <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Thigh</span> <span class="float-right">@{{ thigh }} Cm</span></p>
                 <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Lower Leg</span> <span class="float-right">@{{ leg }} Cm</span></p>
-                <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Sternal Notch</span> <span class="float-right">@{{ sternal_notch }} Cm</span></p>
-                <p class="display-6"><span class="font-weight-bold">Total Height</span> <span class="float-right">@{{ height }} Cm</span></p>
+                <p class="display-6"><span class="font-weight-bold">Sternal Notch</span> <span class="float-right">@{{ sternal_notch }} Cm</span></p>
+                <p class="display-6" v-if="tab == 'advance'"><span class="font-weight-bold">Total Height</span> <span class="float-right">@{{ height }} Cm</span></p>
             </div>
         </div>
         <div class="col-12 col-md-4 mb-3">
@@ -147,6 +151,8 @@
         methods: {
             download: function() {
                 var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
+                if(this.tab != 'advance')
+                    url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.arm+'-and-'+this.sternal_notch;
                 window.location = "{{ url('/') }}/fit-result/"+url+".pdf";
             }
         },

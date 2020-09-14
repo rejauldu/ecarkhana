@@ -47,12 +47,12 @@
                 <input type="number" name="leg" class="form-control m-0 w-45 pr-0 font-14 font-sm-11 bg-light" :placeholder="measurement" id="leg" @focus="focus(5)" v-model="leg">
                 <div class="invalid-feedback w-45 ml-auto mr-2 nowrap" :class="{'d-block':!leg && error}">Please fill out this field.</div>
             </div>
-            <div class="form-inline mb-2" v-if="tab=='advance'">
+            <div class="form-inline mb-2">
                 <label for="sternal-notch" class="w-50 m-0 nowrap text-dark font-14 font-sm-11">Sternal notch</label>
                 <input type="number" name="sternal_notch" class="form-control m-0 w-45 pr-0 font-14 font-sm-11 bg-light" :placeholder="measurement" id="sternal-notch" @focus="focus(6)" v-model="sternal_notch">
                 <div class="invalid-feedback w-45 ml-auto mr-2 nowrap" :class="{'d-block':!sternal_notch && error}">Please fill out this field.</div>
             </div>
-            <div class="form-inline mb-2">
+            <div class="form-inline mb-2" v-if="tab=='advance'">
                 <label for="height" class="w-50 m-0 nowrap text-dark font-14 font-sm-11">Total height</label>
                 <input type="number" name="height" class="form-control m-0 w-45 pr-0 font-14 font-sm-11 bg-light" :placeholder="measurement" id="height" @focus="focus(7)" v-model="height">
                 <div class="invalid-feedback w-45 ml-auto mr-2 nowrap" :class="{'d-block':!height && error}">Please fill out this field.</div>
@@ -114,9 +114,9 @@
             },
             continues: function() {
                 this.error = true;
-                if(this.gender && this.type && this.measurement && this.position && this.discomfort && this.pain && this.inseam && this.arm && this.height) {
+                if(this.gender && this.type && this.measurement && this.position && this.discomfort && this.pain && this.inseam && this.arm && this.sternal_notch) {
                     if(this.tab == 'advance') {
-                        if(!(this.trunk && this.forearm && this.thigh && this.leg && this.sternal_notch)) {
+                        if(!(this.trunk && this.forearm && this.thigh && this.leg && this.height)) {
                             return false;
                         }
                     }
@@ -126,7 +126,7 @@
                         
                 var url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.trunk+'-and-'+this.forearm+'-and-'+this.arm+'-and-'+this.thigh+'-and-'+this.leg+'-and-'+this.sternal_notch+'-and-'+this.height;
                 if(this.tab == 'basic')
-                    url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.arm+'-and-'+this.height;
+                    url = this.gender+'-and-'+this.type+'-and-'+this.measurement+'-and-'+this.position+'-and-'+this.discomfort+'-and-'+this.pain+'-and-'+this.inseam+'-and-'+this.arm+'-and-'+this.sternal_notch;
                 window.location = "{{ url('/') }}/fit-calculator/"+url;
                 
             }
