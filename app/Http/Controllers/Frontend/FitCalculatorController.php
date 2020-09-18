@@ -197,5 +197,4 @@ class FitCalculatorController extends Controller {
         $data['seatpost_type'] = $data['inseam'];
         return $data;
     }
-
 }

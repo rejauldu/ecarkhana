@@ -131,6 +131,8 @@ class HomeController extends Controller {
         }
         $products = $products->where('auction_from', '<=', Carbon::now())->where('auction_to', '>=', Carbon::now())->paginate(9);
 
+        dd($products);
+
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $type = 'Car';
         $brands = Brand::where('category_id', 1)->get();
@@ -270,10 +272,10 @@ class HomeController extends Controller {
         }
         $products = [];
         $category = 'car';
-        if(isset($request->category))
+        if (isset($request->category))
             $category = strtolower($request->category);
         $type = ucfirst($category);
-        
+
         foreach ($vehicles as $vehicle) {
             $v = Product::whereHas('brand', function (Builder $query) use($vehicle) {
                         $query->where('name', $vehicle[0]);
@@ -517,7 +519,13 @@ class HomeController extends Controller {
                 ->with('bicycle', 'bicycle.brand', 'bicycle.model', 'supplier.region')
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
-        return view('frontend.single-bicycle-product', compact('product', 'key_features', 'after_sell_services', 'related_products'));
+        $today = strtotime(date("Y-m-d"));
+        $from = strtotime($product->auction_from);
+        $to = strtotime($product->auction_to);
+        $auction = false;
+        if ($from <= $today && $to >= $today)
+            $auction = true;
+        return view('frontend.single-bicycle-product', compact('product', 'key_features', 'after_sell_services', 'related_products', 'auction'));
     }
 
     public function singleMotorcycleProduct($id) {
@@ -534,7 +542,13 @@ class HomeController extends Controller {
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         $type = 'Motorcycle';
-        return view('frontend.single-motorcycle-product', compact('product', 'key_features', 'after_sell_services', 'related_products', 'type'));
+        $today = strtotime(date("Y-m-d"));
+        $from = strtotime($product->auction_from);
+        $to = strtotime($product->auction_to);
+        $auction = false;
+        if ($from <= $today && $to >= $today)
+            $auction = true;
+        return view('frontend.single-motorcycle-product', compact('product', 'key_features', 'after_sell_services', 'related_products', 'type', 'auction'));
     }
 
     public function singleBlog() {
@@ -562,31 +576,14 @@ class HomeController extends Controller {
         return view('frontend.single-car-product', compact('product', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features', 'after_sell_services', 'related_products'));
     }
 
-    public function singleSellProduct($id) {
-        $product = Product::has('car')
-                ->with('auction_grade', 'car.brand', 'car.model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
-                ->where('id', $id)
-                ->first();
-        $key_features = KeyFeature::where('category_id', 1)->get();
-        $interior_features = InteriorFeature::all();
-        $exterior_features = ExteriorFeature::all();
-        $safety_securities = SafetySecurity::all();
-        $additional_features = AdditionalFeature::all();
-        $after_sell_services = AfterSellService::all();
-        $related_products = Product::whereHas('car', function($q) use($product) {
-                    $q->where('brand_id', $product->car->brand_id);
-                    //->where('model_id', $product->model_id);
-                })
-                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
-                ->get();
-        $product->after_sell_service = explode(',', $product->after_sell_service);
-        $today = strtotime(date("Y-m-d"));
-        $from = strtotime($product->auction_from);
-        $to = strtotime($product->auction_to);
-        $auction = false;
-        if ($from <= $today && $to >= $today)
-            $auction = true;
-        return view('frontend.single-car-product', compact('product', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features', 'after_sell_services', 'related_products', 'auction'));
+    public function product($id) {
+        $product = Product::find($id);
+        if($product->category_id == 1)
+            return $this->singleCarProduct($id);
+        elseif($product->category_id == 2)
+            return $this->singleMotorcycleProduct($id);
+        elseif($product->category_id == 3)
+            return $this->singleBicycleProduct($id);
     }
 
     public function termAndCondition() {
@@ -617,19 +614,7 @@ class HomeController extends Controller {
         return (string) $region;
     }
 
-    private function getRemaining($datestr = 0) {
-        //Convert to date
-        $date = strtotime($datestr); //Converted to a PHP date (a second count)
-        //Calculate difference
-        $diff = $date - time(); //time returns current time in seconds
-        $days = floor($diff / (60 * 60 * 24)); //seconds/minute*minutes/hour*hours/day)
-        $hours = floor(($diff - $days * 60 * 60 * 24) / (60 * 60));
-        $minutes = floor(($diff - $days * 60 * 60 * 24 - $hours * 60 * 60) / 60);
-        $seconds = $diff - $days * 60 * 60 * 24 - $hours * 60 * 60 - $minutes * 60;
-
-        //Report
-        return [$days, $hours, $minutes, $seconds];
-    }
+    
 
     public function sendOtp(Request $request) {
         $data = $request->except('_token', '_method');

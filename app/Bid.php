@@ -12,7 +12,7 @@ class Bid extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'product_id', 'amount', 'valid_until', 'updated_at', 'created_at'
+        'user_id', 'product_id', 'amount', 'type', 'valid_until', 'updated_at', 'created_at'
     ];
 
     /**

@@ -1,90 +1,77 @@
-@extends('layouts.dashboard')
-@section('title')
-{{ __('All Auctions') }}
-@endsection
+@extends('layouts.index')
+
 @section('content')
-<div class="content-wrapper">
-	<div class="container-fluid">
-		<section class="content-header">
-			<h3>Auction <small>all</small></h3>
-			<ol class="breadcrumb">
-				<li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-				<li class="active">Auctions</li>
-			</ol>
-		</section>
-		@if(session()->has('message'))
-		<div class="alert alert-warning">
-			{{ session()->get('message') }}
-		</div>
-		@endif
-		<div class="row">
-			<div class="col-12">
-				<div class="box box-info">
-					<div class="box-header with-border">
-						<h3 class="box-title"><i class="fa fa-credit-card mr-1"></i> {{ __('All Auctions') }}</h3>
-						<div class="box-tools float-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-							</button>
-							<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-						</div>
-					</div>
-					<div class="box-body">
-						<table id="dataTables" class="display nowrap" cellspacing="0" width="100%">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Created</th>
-									<th>Edit</th>
-									<th>Delete</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($auctions as $auction)
-								<tr>
-									<td>{{ $auction->id }}</td>
-									<td>{{ $auction->name }}</td>
-									<td>{{ $auction->created_at->format('jS M Y') }}</td>
-									<td><a href="{{ route('auctions.edit', $auction->id) }}" class="text-success fa fa-edit"></a></td>
-									<td><a href="{{ route('auctions.destroy', $auction->id) }}" onclick="event.preventDefault(); document.getElementById('delete-form').action = this.href; document.getElementById('delete-form').submit.click();" class="text-danger fa fa-trash"></button></td>
-								</tr>
-								@endforeach
-							</tbody>
-							<tfoot>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Created</th>
-									<th>Edit</th>
-									<th>Delete</th>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+@if(session()->has('message'))
+<div class="alert alert-warning">
+    {{ session()->get('message') }}
 </div>
+@endif
+@include('layouts.frontend.car-background')
+<!--=================================Auction product-listing  -->
+<section id="Auction-products" class="product-listing page-section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="sorting-options-main">
+                    @include('layouts.frontend.car-filter')
+                </div>
+                <div class="row">
+                    @foreach($products as $product)
+                    <div class="col-lg-4">
+                        <div class="car-item gray-bg text-center">
+                            <div class="car-image">
+                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="">
+                                <div class="car-overlay-banner">
+                                    <ul>
+                                        <li>
+                                            <div class="compare_item">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="compare2">
+                                                    <label for="compare2">Compare</label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="car-list">
+                                <ul class="list-inline">
+                                    <li><i class="fa fa-registered"></i> {{ $product->brand->name ?? ''}}</li>
+                                    <li><i class="fa fa-cog"></i> {{ $product->model->name ?? ''}} </li>
+                                </ul>
+                            </div>
+                            <div class="car-content">
+                                <div class="star">
+                                    <i class="fa @if($product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                </div>
+                                <a href="{{ route('single-sell-product', $product->id) }}">{{ $product->name }}</a>
+                                <div class="separator"></div>
+                                <div class="price">
+                                    <span class="new-price">৳ {{ $product->msrp }} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="pagination-nav d-flex justify-content-center">
+                    {{ $products->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--=================================product-listing  -->
 @endsection
 @section('style')
-	<!-- dataTables plugin -->
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" media="all"/>
-	<link href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css" rel="stylesheet" media="screen">
-	<link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet" media="all"/>
-	<!-- /dataTables plugin -->
-@endsection
-@section('script')
-	<!---dataTables plugin JavaScript -->
-	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
-	<!--/dataTables plugin JavaScript -->
+<style>
+    #Auction-products .car-item .car-list {
+        bottom: 123px;
+    }
+</style>
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
 @if(session()->has('message'))
 <div class="alert alert-warning">
-	{{ session()->get('message') }}
+       {{ session()->get('message') }}
 </div>
 @endif
 

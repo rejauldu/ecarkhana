@@ -3,15 +3,15 @@
 @section('content')
 @if(session()->has('message'))
 <div class="alert alert-warning">
-	{{ session()->get('message') }}
+    {{ session()->get('message') }}
 </div>
 @endif
 
 @include('layouts.frontend.car-background')
 
 
-    <!--=================================
-Privacy Policy  -->
+<!--=================================
+    Privacy Policy  -->
 
     <section class="privacy-policy page-section-ptb">
         <div class="container">
@@ -29,7 +29,7 @@ Privacy Policy  -->
                     <p>You will begin to realize why, consectetur adipisicing elit. Quidem error quae illo excepturi nostrum blanditiis laboriosam magnam explicabo.
                     </p>
                     <p> eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis. You will begin to realize why, consectetur adipisicing elit. Quidem error quae illo excepturi nostrum blanditiis laboriosam magnam explicabo. Molestias,
-                        eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis.</p>
+                    eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis.</p>
                     <p>You will begin to realize why, consectetur adipisicing elit. Quidem error quae illo excepturi nostrum blanditiis laboriosam magnam explicabo. Molestias, eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis.</p>
 
                     <h5 class="text-red">Personal Information</h5>
@@ -45,7 +45,7 @@ Privacy Policy  -->
                     <h5 class="text-red">Use of User Information.</h5>
                     <p>You will begin to realize why, consectetur adipisicing elit. Possimus, ex, quisquam. Nulla excepturi sint iusto incidunt sed omnis expedita, commodi dolores. Debitis nemo animi quia deleniti commodi nesciunt illo. Deserunt.You will
                         begin to realize why, consectetur adipisicing elit. Possimus, ex, quisquam. Nulla excepturi sint iusto incidunt sed omnis expedita, commodi dolores. Debitis nemo animi quia deleniti commodi nesciunt illo. Deserunt.You will begin
-                        to realize why, consectetur adipisicing elit. Possimus, ex, quisquam. Nulla excepturi sint iusto incidunt sed omnis expedita, commodi dolores. Debitis nemo animi quia deleniti commodi nesciunt illo. Deserunt.</p>.
+                    to realize why, consectetur adipisicing elit. Possimus, ex, quisquam. Nulla excepturi sint iusto incidunt sed omnis expedita, commodi dolores. Debitis nemo animi quia deleniti commodi nesciunt illo. Deserunt.</p>.
 
                     <h5 class="text-red">Disclosure of User Information.</h5>
                     <p>You will begin to realize why, consectetur adipisicing elit. Autem ullam nostrum dolor alias aspernatur nobis suscipit eaque cumque distinctio eos, beatae deserunt, nihil nam maiores vero, eius harum. Reprehenderit, aspernatur.<a href="#">support@website.com</a>                        </p>
@@ -62,9 +62,8 @@ Privacy Policy  -->
         </div>
     </section>
 
-    <!--=================================
-   Privacy Policy  -->
+    <!--=================================Privacy Policy  -->
 
 
 
-@endsection
+    @endsection

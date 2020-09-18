@@ -22,6 +22,7 @@ Route::get('/add-to-compare', 'Frontend\HomeController@addToCompare')->name('add
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
 Route::get('/auction-product-list', 'Frontend\HomeController@auctionProductList')->name('auction-product-list');
 Route::resource('banks', 'Backend\BankController');
+Route::resource('bids', 'Frontend\BidController');
 Route::get('/manage-banks', 'Backend\BankController@manageIndex')->name('manage-banks');
 Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('bicycle-compare');
 Route::get('/bicycle-listing', 'Frontend\HomeController@motorcycleListing')->name('bicycle-listing');
@@ -71,7 +72,7 @@ Route::get('/single-bicycle-product/{product}', 'Frontend\HomeController@singleB
 Route::get('/single-motorcycle-product/{product}', 'Frontend\HomeController@singleMotorcycleProduct')->name('single-motorcycle-product');
 Route::get('/single-blog', 'Frontend\HomeController@singleBlog')->name('single-blog');
 Route::get('/single-car-product/{product}', 'Frontend\HomeController@singleCarProduct')->name('single-car-product');
-Route::get('/single-sell-product/{product}', 'Frontend\HomeController@singleSellProduct')->name('single-sell-product');
+Route::get('/product/{product}', 'Frontend\HomeController@product')->name('product');
 Route::get('/term-and-condition', 'Frontend\HomeController@termAndCondition')->name('term-and-condition');
 Route::post('/send-otp', 'Frontend\HomeController@sendOtp')->name('send-otp');
 Route::post('/verify-otp', 'Frontend\HomeController@verifyOtp')->name('verify-otp');
