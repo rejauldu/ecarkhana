@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2020 at 06:28 AM
+-- Generation Time: Sep 18, 2020 at 04:28 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -302,6 +302,7 @@ CREATE TABLE `bids` (
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `product_id` bigint(20) UNSIGNED DEFAULT NULL,
   `amount` int(11) DEFAULT 0,
+  `type` varchar(15) DEFAULT 'bid',
   `valid_until` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -311,19 +312,30 @@ CREATE TABLE `bids` (
 -- Dumping data for table `bids`
 --
 
-INSERT INTO `bids` (`id`, `user_id`, `product_id`, `amount`, `valid_until`, `updated_at`, `created_at`) VALUES
-(1, 1, 1, 12, '2020-05-29 18:00:00', '2020-05-26 04:22:06', '2020-05-26 04:22:06'),
-(2, 1, 1, 14, '2020-05-29 18:00:00', '2020-05-26 04:50:05', '2020-05-26 04:50:05'),
-(3, 1, 1, 14, '2020-05-26 07:20:53', '2020-05-26 01:20:53', '2020-05-26 01:20:53'),
-(4, 1, 1, 15, '2020-05-26 07:25:32', '2020-05-26 01:25:32', '2020-05-26 01:25:32'),
-(5, 1, 1, 16, '2020-05-26 07:26:57', '2020-05-26 01:26:57', '2020-05-26 01:26:57'),
-(6, 1, 1, 18, '2020-05-26 08:22:50', '2020-05-26 02:22:50', '2020-05-26 02:22:50'),
-(7, 4, 1, 20, '2020-05-26 08:32:04', '2020-05-26 02:32:04', '2020-05-26 02:32:04'),
-(8, 1, 2, 15, '2020-05-26 08:45:42', '2020-05-26 02:45:42', '2020-05-26 02:45:42'),
-(9, 1, 1, 22, '2020-05-26 08:47:21', '2020-05-26 02:47:21', '2020-05-26 02:47:21'),
-(10, 1, 107, 12, '2020-07-08 13:57:36', '2020-07-08 07:57:36', '2020-07-08 07:57:36'),
-(11, 1, 107, 20, '2020-07-08 15:04:46', '2020-07-08 09:04:46', '2020-07-08 09:04:46'),
-(12, 1, 107, 25, '2020-07-08 15:13:18', '2020-07-08 09:13:18', '2020-07-08 09:13:18');
+INSERT INTO `bids` (`id`, `user_id`, `product_id`, `amount`, `type`, `valid_until`, `updated_at`, `created_at`) VALUES
+(1, 1, 1, 12, 'bid', '2020-05-29 18:00:00', '2020-05-26 04:22:06', '2020-05-26 04:22:06'),
+(2, 1, 1, 14, 'bid', '2020-05-29 18:00:00', '2020-05-26 04:50:05', '2020-05-26 04:50:05'),
+(3, 1, 1, 14, 'bid', '2020-05-26 07:20:53', '2020-05-26 01:20:53', '2020-05-26 01:20:53'),
+(4, 1, 1, 15, 'bid', '2020-05-26 07:25:32', '2020-05-26 01:25:32', '2020-05-26 01:25:32'),
+(5, 1, 1, 16, 'bid', '2020-05-26 07:26:57', '2020-05-26 01:26:57', '2020-05-26 01:26:57'),
+(6, 1, 1, 18, 'bid', '2020-05-26 08:22:50', '2020-05-26 02:22:50', '2020-05-26 02:22:50'),
+(7, 4, 1, 20, 'bid', '2020-05-26 08:32:04', '2020-05-26 02:32:04', '2020-05-26 02:32:04'),
+(8, 1, 2, 15, 'bid', '2020-05-26 08:45:42', '2020-05-26 02:45:42', '2020-05-26 02:45:42'),
+(9, 1, 1, 22, 'bid', '2020-05-26 08:47:21', '2020-05-26 02:47:21', '2020-05-26 02:47:21'),
+(10, 1, 17, 12, 'bid', '2020-07-08 13:57:36', '2020-09-18 02:15:29', '2020-07-08 07:57:36'),
+(11, 1, 107, 20, 'bid', '2020-07-08 15:04:46', '2020-07-08 09:04:46', '2020-07-08 09:04:46'),
+(12, 1, 107, 25, 'bid', '2020-07-08 15:13:18', '2020-07-08 09:13:18', '2020-07-08 09:13:18'),
+(13, 1, 17, 12, 'bid', '2020-09-17 03:43:31', '2020-09-18 04:51:38', '2020-09-17 21:43:31'),
+(14, 1, 17, 14, 'bid', '2020-09-17 03:48:33', '2020-09-18 04:51:34', '2020-09-17 21:48:33'),
+(15, 1, 17, 16, 'bid', '2020-09-17 03:50:14', '2020-09-18 04:51:30', '2020-09-17 21:50:14'),
+(16, 1, 17, 50, 'upto', '2020-09-17 08:56:28', '2020-09-18 08:57:16', '2020-09-18 02:56:28'),
+(17, 1, 17, 40, 'upto', '2020-09-17 10:19:18', '2020-09-18 10:19:32', '2020-09-18 04:19:18'),
+(18, 1, 17, 40, 'upto', '2020-09-17 10:32:17', '2020-09-18 11:06:23', '2020-09-18 04:32:17'),
+(19, 1, 17, 42, 'bid', '2020-09-17 11:05:10', '2020-09-18 11:06:27', '2020-09-18 05:05:10'),
+(20, 1, 17, 45, 'upto', '2020-09-17 11:07:12', '2020-09-18 11:07:22', '2020-09-18 05:07:12'),
+(21, 1, 17, 49, 'upto', '2020-09-17 11:27:30', '2020-09-18 11:27:48', '2020-09-18 05:27:30'),
+(22, 1, 17, 52, 'upto', '2020-09-17 11:28:16', '2020-09-18 11:28:37', '2020-09-18 05:28:16'),
+(23, 1, 17, 52, 'bid', '2020-09-17 13:36:02', '2020-09-18 13:37:50', '2020-09-18 07:36:02');
 
 -- --------------------------------------------------------
 
@@ -3889,7 +3901,7 @@ INSERT INTO `products` (`id`, `brand_id`, `model_id`, `package_id`, `manufacturi
 (14, NULL, NULL, NULL, NULL, '693248', 'Eula Emmerich', 'Blanditiis sapiente sint neque cumque voluptas eos. Quam omnis quae animi commodi. Qui accusamus sunt reprehenderit.', 1, '2', 5, '97', 5, 1, 30, 10, 9, 1, 5, 83, 1, 0, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 55, 0, 'Ipsa dolorem assumenda aut voluptatem est. Dolorem inventore quia dolorem est laudantium. Ratione odit qui voluptatem corrupti explicabo nihil est velit. Commodi quidem suscipit id ea consequatur vitae nisi.', 14, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-04-02 08:59:22', '2020-01-13 12:17:04', '2020-01-17 11:20:03'),
 (15, 2, 2, NULL, NULL, '657378', 'Itzel Cormier', 'Est enim deserunt sed et voluptas ipsum eum. Aperiam et voluptatem ut enim. Inventore earum autem nulla.', 4, '8', 10, '92', 1, 4, 34, 7, 5, 2, 5, 95, 1, 1, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 34, 0, 'Delectus ut tenetur nisi et. Optio qui voluptas nobis illo. Maxime totam placeat possimus maxime consequatur libero.', NULL, 1, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-06-04 13:04:11', '2020-01-05 00:42:28', '2020-01-17 11:20:03'),
 (16, 2, 2, NULL, NULL, '821077', 'Dr. Christopher Paucek Sr.', 'Aspernatur perferendis voluptatem consequatur nostrum. Iusto qui molestiae temporibus in harum recusandae. Magni voluptatem aperiam recusandae quibusdam.', 3, '4', 8, '81', 4, 3, 13, 8, 10, 2, 4, 77, 0, 1, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 53, 0, 'Eum rerum dolore culpa cumque. Quas accusantium et fugit debitis incidunt autem. Explicabo quis blanditiis ab quam voluptatibus doloribus optio. Est expedita dolorum possimus atque culpa quasi. Cum ab delectus eos aut aut quia.', NULL, 2, NULL, 3, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-06-04 13:04:11', '2020-01-11 19:24:18', '2020-01-17 11:20:03'),
-(17, 3, 3, NULL, NULL, '445117', 'Ibrahim Wiegand', 'Rerum hic praesentium quis aperiam exercitationem et. Consectetur enim magni neque illo doloremque placeat et.', 4, '2', 6, '89', 2, 5, 30, 7, 9, 2, 5, 63, 1, 0, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 52, 0, 'Eveniet accusamus ut alias dolorum. Dignissimos est alias voluptatum sunt. Et voluptas possimus cumque voluptatem. Excepturi rerum ut cum corporis aut sint.', NULL, 3, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-09-05 03:23:09', '2020-01-04 21:28:50', '2020-01-17 11:20:04'),
+(17, 3, 3, NULL, NULL, '445117', 'Ibrahim Wiegand', 'Rerum hic praesentium quis aperiam exercitationem et. Consectetur enim magni neque illo doloremque placeat et.', 4, '2', 6, '89', 2, 5, 30, 7, 9, 2, 5, 63, 1, 0, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 52, 0, 'Eveniet accusamus ut alias dolorum. Dignissimos est alias voluptatum sunt. Et voluptas possimus cumque voluptatem. Excepturi rerum ut cum corporis aut sint.', NULL, 3, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-09-13 18:00:00', '2020-10-22 16:49:15', 52, '2020-09-18 13:36:02', '2020-01-04 21:28:50', '2020-09-18 07:36:02'),
 (18, 5, 7, NULL, NULL, '198333', 'Flavio Sipes Sr.', 'Impedit laborum corrupti aspernatur praesentium omnis. Autem non quod aut. Laboriosam iure dolor neque recusandae et mollitia id nulla. Est id ducimus voluptatem nostrum ullam et.', 2, '3', 7, '58', 5, 1, 12, 9, 6, 1, 3, 29, 0, 0, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 56, 0, 'Similique maxime at vitae consequatur quaerat distinctio vero. Quis ut qui iusto error fugiat praesentium distinctio vel. Saepe ab est molestiae unde atque minus.', NULL, 4, NULL, 3, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-09-04 10:53:17', '2020-01-16 17:05:46', '2020-01-17 11:20:04'),
 (19, 2, 2, NULL, NULL, '114365', 'Hollis Roob', 'Aut eum neque consequatur et quam qui ut recusandae. Deleniti dolor veritatis culpa nesciunt officia. Qui illum placeat saepe laudantium amet.', 1, '8', 7, '64', 1, 3, 44, 9, 5, 3, 1, 93, 0, 1, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 30, 0, 'Magni totam nostrum unde. Nobis sed eos amet ab odit est ad. Natus dolorem rerum incidunt vel reprehenderit officiis et. Voluptas et et qui accusamus nobis.', NULL, 5, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-06-04 04:27:40', '2020-01-09 22:46:53', '2020-01-17 11:20:04'),
 (20, 2, 2, NULL, NULL, '226378', 'Ilene Pfannerstill', 'Laborum magni et in vel eligendi maxime. Rem eius voluptatibus deserunt consequatur quia officiis. Error minima quibusdam doloribus inventore fugiat totam.', 3, '1', 10, '58', 2, 5, 19, 10, 5, 3, 4, 28, 1, 1, NULL, '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg', '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', NULL, '30.jpg', '31.jpg', '32.jpg', '33.jpg', '34.jpg', '35.jpg', '36.jpg', 61, 0, 'Quod vitae suscipit et. Tempora ad reprehenderit enim cupiditate. Laborum repellendus adipisci optio corrupti impedit. Voluptatibus a accusantium autem nostrum a.', NULL, 6, NULL, 3, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2020-06-04 13:04:11', '2020-01-14 18:30:09', '2020-01-17 11:20:04'),
@@ -4009,7 +4021,7 @@ INSERT INTO `products` (`id`, `brand_id`, `model_id`, `package_id`, `manufacturi
 (133, 1, 5, 5, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1235', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 1, NULL, NULL, 3, 0, 2018, 10000, 'Second', 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 10:06:30', '2020-08-20 04:06:30', '2020-08-20 04:06:30'),
 (134, 1, 5, 9, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 0, NULL, NULL, 3, 0, 2018, 30000, NULL, 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-20 13:00:49', '2020-08-20 07:00:49', '2020-08-20 07:00:49'),
 (135, 1, 5, 5, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'this is description', 1, NULL, NULL, 3, 0, 2020, 10000, NULL, 67, 'Rejaul Karim', '01924974960', NULL, NULL, NULL, NULL, 0, '2020-08-20 13:45:25', '2020-08-20 07:45:25', '2020-08-20 07:45:25'),
-(136, 1, 5, 9, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.sql', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 0, NULL, NULL, 3, 0, 2018, 10000, NULL, 67, 'Rejaul Karim', NULL, NULL, NULL, NULL, NULL, 0, '2020-08-21 02:36:57', '2020-08-20 20:36:57', '2020-08-20 20:36:57');
+(136, 1, 5, 9, 2020, NULL, 'Mitsubishi Rodolfo Waelchi 2020', NULL, NULL, '1', 1, '1234', NULL, NULL, 0, NULL, 0, NULL, 0, 0, 1, 0, NULL, '1.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 'desc', 0, NULL, NULL, 3, 0, 2018, 10000, NULL, 67, 'Rejaul Karim', NULL, NULL, NULL, '2020-09-13 18:00:00', '2020-09-17 18:00:00', 50, '2020-09-15 16:11:01', '2020-08-20 20:36:57', '2020-09-15 07:28:01');
 
 -- --------------------------------------------------------
 
@@ -5842,7 +5854,13 @@ INSERT INTO `traffic` (`id`, `user_id`, `ip`, `latitude`, `longitude`, `browser`
 (1332, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-08 20:07:30', '2020-09-08 20:07:30'),
 (1333, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-09 20:38:03', '2020-09-09 20:38:03'),
 (1334, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-10 19:59:31', '2020-09-10 19:59:31'),
-(1335, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-11 20:04:52', '2020-09-11 20:04:52');
+(1335, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-11 20:04:52', '2020-09-11 20:04:52'),
+(1336, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-13 10:26:44', '2020-09-13 10:26:44'),
+(1337, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-13 19:09:51', '2020-09-13 19:09:51'),
+(1338, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-15 06:25:53', '2020-09-15 06:25:53'),
+(1339, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana/motorcycle-index', '2020-09-15 21:01:38', '2020-09-15 21:01:38'),
+(1340, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-16 20:10:50', '2020-09-16 20:10:50'),
+(1341, 1, '127.0.0.1', NULL, NULL, 'Chrome', NULL, 'Windows 10', 'Computer', 'http://ecarkhana', '2020-09-17 20:11:47', '2020-09-17 20:11:47');
 
 -- --------------------------------------------------------
 
@@ -11077,7 +11095,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `photo`, `email_verified_at`, `password`, `phone`, `role_id`, `name_on_card`, `credit_card`, `payment_id`, `card_exp_month`, `card_exp_year`, `cvv`, `address`, `region_id`, `union_id`, `upazila_id`, `district_id`, `division_id`, `billing_address`, `billing_region_id`, `billing_union_id`, `billing_upazila_id`, `billing_district_id`, `billing_division_id`, `shipping_address`, `shipping_region_id`, `shipping_union_id`, `shipping_upazila_id`, `shipping_district_id`, `shipping_division_id`, `user_type_id`, `about`, `website`, `lat`, `lon`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', '23.7860', '90.2124', 'OzSB4f9hTxhIhLmXc86O50XjXUHDIO4068K8I0BUhdq6hDbNkYXseELMrRTl', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
+(1, 'Ecarkhana', 'ecarkhana@gmail.com', '1.jpg', '2020-01-17 11:05:17', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '01924974960', 3, 'Ecarkhana', '5212', 4, 9, 2021, 123, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 176, 15, 1, 1, '60843 Kurt Crossroad Suite 893\r\nEinarstad, IA 44042', 1, 3322, 368, 47, 1, 1, 'Hello,\r\nI\'m a web developer.', 'https://ecarkhana.com', '23.7860', '90.2124', 'PWUhMsOI2VKSQyTcHi2PSlkfcRwIDjmq9clbFNoamPgDlCaM29aWYhqFDINX', '2020-01-17 11:08:11', '2020-07-20 22:21:14'),
 (2, 'Super Admin', 'admin@gmail.com', '2.jpg', '2020-01-17 02:24:00', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '741.667.7107 x60100', 3, NULL, '4350', 2, 2, 2019, NULL, '59339 Abernathy Meadows Suite 466\nEast Robynport, AK 60030-0762', 1, 3270, 216, 47, 7, '784 Jenkins Forges\nEast Sigmund, MS 03564', 3, 933, 417, 24, 7, '649 Obie Extension Apt. 112\nEmmerichshire, MN 70568', 1, 2629, 291, 12, 1, 1, NULL, NULL, '23.1563', '90.25684', 'MvPkWggfwCpynrHNosYwRaDTxSkASCb2crN7jchTF9nCtXDy8tlx351lpRm5', '2020-01-17 11:08:11', '2020-02-18 23:25:43'),
 (3, 'Moderator', 'moderator@gmail.com', 'avatar.png', '2020-01-17 11:05:19', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '(473) 451-7145 x102', 2, 'Rejaul Karim', '6000', 1, 10, 2023, NULL, '4876 Kelvin Station Apt. 306\nNew Estella, PA 57909', 1, 2109, 25, 33, 4, '1993 Wolff Rapid\nPurdyville, NE 99436', 1, 2753, 43, 56, 8, '76592 Maxwell Village Suite 050\nPort Xanderland, AK 64479', 1, 1621, 279, 28, 3, 1, NULL, NULL, '23.5555', '90.3333', 'Y6f4NllPJFC5IwfriQKaJf9775RodofB6rGxkXEsFsnhGVqBB923OPZ9PoaA', '2020-01-17 11:08:12', '2020-01-22 22:07:41'),
 (4, 'National Distributor', 'national@gmail.com', '4.jpg', '2020-01-17 11:05:20', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+1.830.559.0640', 1, NULL, '9641', 1, 3, 2025, NULL, '1738 Thiel Trail Suite 497\nAuerview, KY 97248-4709', 1, 1499, 350, 17, 2, '3188 Effertz Village Apt. 642\nNorth Johannfurt, ME 09921-0888', 1, 3203, 456, 29, 2, '596 Elisha Roads\nPort Heleneberg, RI 43829', 1, 1260, 149, 17, 3, 3, NULL, NULL, '23.7860', '90.2124', 'ith2nXNZ904ouBM0BjGLrlmsBEA5WUS44LlYthy7HX7a45nOfVC4ZwZ4bQLb', '2020-01-17 11:08:12', '2020-02-24 09:07:26'),
@@ -12104,7 +12122,7 @@ ALTER TABLE `bicycles`
 -- AUTO_INCREMENT for table `bids`
 --
 ALTER TABLE `bids`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -12494,7 +12512,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `traffic`
 --
 ALTER TABLE `traffic`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1336;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1342;
 
 --
 -- AUTO_INCREMENT for table `transmissions`
