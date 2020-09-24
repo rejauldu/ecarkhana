@@ -93,6 +93,7 @@ Route::get('make-an-offers-unviewed', 'Frontend\MakeAnOfferController@unviewed')
 Route::resource('orders', 'Backend\OrderController');
 Route::resource('products', 'Backend\ProductController');
 Route::get('order-complete', 'Backend\OrderController@orderComplete')->name('order-complete');
+
 Route::get('/panorama', function() {
     return view('frontend.panorama');
 })->name('panorama');
@@ -100,7 +101,7 @@ Route::get('/panorama', function() {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/seller-my-ad/{id}', 'Frontend\HomeController@sellerMyAd')->name('seller-my-ad');
     Route::get('/seller-profile/{id}', 'Frontend\HomeController@sellerProfile')->name('seller-profile');
-
+    Route::resource('advertisements', 'Backend\AdvertisementController')->middleware('moderator:Product');
     Route::resource('auctions', 'Backend\AuctionController');
     Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
     Route::resource('cashbooks', 'Backend\CashbookController');
@@ -134,7 +135,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('comments', 'Backend\CommentController');
     Route::resource('sub-comments', 'Backend\SubCommentController');
     Route::resource('reviews', 'Frontend\ReviewController');
-
+    Route::resource('versus-sliders', 'Backend\VersusSliderController')->middleware('moderator:Product');
     Route::get('/clear-cache', function() {
         Artisan::call('cache:clear');
         Artisan::call('view:clear');

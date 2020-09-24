@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\HomeSlider;
+use App\VersusSlider;
 use App\Product;
 use App\Car;
 use App\Dropdowns\UserType;
@@ -33,6 +34,7 @@ use App\Dropdowns\Displacement;
 use App\Dropdowns\Ownership;
 use App\Blog;
 use App\Otp;
+use App\Advertisement;
 
 class HomeController extends Controller {
 
@@ -43,6 +45,8 @@ class HomeController extends Controller {
      */
     public function index() {
         $home_sliders = HomeSlider::where('type', 'Car')->get();
+        $versus_sliders = VersusSlider::where('category_id', 1)->with('product1.brand', 'product2.brand')->get();
+        $advertisements = Advertisement::where('category_id', 1)->with('category')->get();
         $new_products = Product::has('car')->where('condition_id', 1)->with('car')->take(10)->get();
         $recondition_products = Product::has('car')->where('condition_id', 2)->with('car')->take(10)->get();
         $used_products = Product::has('car')->where('condition_id', 3)->with('car')->take(10)->get();
@@ -55,7 +59,7 @@ class HomeController extends Controller {
         $packages = Package::where('category_id', 1)->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Car';
-        return view('frontend.index', compact('home_sliders', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages', 'posts'));
+        return view('frontend.index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages', 'posts'));
     }
 
     public function motorcycleIndex() {
