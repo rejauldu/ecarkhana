@@ -72,10 +72,14 @@ class BidController extends Controller {
         $bidder_product = Product::with(['bids' => function($q) {
                         $q->where('valid_until', '<=', Carbon::now())->groupBy('user_id')->latest();
                     }])->where('id', $id)->first();
-        $bid_product = Product::with(['bids' => function($q) {
+        $upto = 0;
+        if(Auth::check()) {
+            $bid_product = Product::with(['bids' => function($q) {
                         $q->where('valid_until', '<=', Carbon::now())->where('user_id', Auth::user()->id)->where('type', 'upto')->first();
                     }])->where('id', $id)->first();
-        $upto = $bid_product->bids[0]->amount;
+            $upto = $bid_product->bids[0]->amount;
+        }
+        
         $remaining = $this->getRemaining($product->auction_to);
         return view('frontend.bids.show', compact('product', 'bidder_product', 'remaining', 'upto'));
     }

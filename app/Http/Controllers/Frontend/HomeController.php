@@ -131,8 +131,6 @@ class HomeController extends Controller {
         }
         $products = $products->where('auction_from', '<=', Carbon::now())->where('auction_to', '>=', Carbon::now())->paginate(9);
 
-        dd($products);
-
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $type = 'Car';
         $brands = Brand::where('category_id', 1)->get();

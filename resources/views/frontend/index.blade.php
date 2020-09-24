@@ -26,67 +26,67 @@
 
                         <!-- LAYER NR. 1 -->
                         <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-6" data-x="center" data-hoffset="" data-y="270" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
-                         data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;" data-start="1400" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 5; white-space: nowrap; font-size: 30px; line-height: 30px; font-weight: 400; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
-                         {{ $home_slider->title }}</div>
+                           data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;" data-start="1400" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 5; white-space: nowrap; font-size: 30px; line-height: 30px; font-weight: 400; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                           {{ $home_slider->title }}</div>
 
-                         <!-- LAYER NR. 2 -->
-                         <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-7" data-x="center" data-hoffset="" data-y="center" data-voffset="-140" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
-                             data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="1700" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 6; white-space: nowrap; font-size: 70px; line-height: 70px; font-weight: 700; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
-                             {{ $home_slider->description }}</div>
+                           <!-- LAYER NR. 2 -->
+                           <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-7" data-x="center" data-hoffset="" data-y="center" data-voffset="-140" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
+                               data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="1700" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 6; white-space: nowrap; font-size: 70px; line-height: 70px; font-weight: 700; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                               {{ $home_slider->description }}</div>
 
 
-                             <!-- LAYER NR. 4 -->
-                             <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-12" data-x="right" data-hoffset="70" data-y="center" data-voffset="135" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:800;e:Power2.easeInOut;"
-                                 data-transform_out="opacity:0;s:300;" data-start="620" data-responsive_offset="on" style="z-index: 8;"><img src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                               <!-- LAYER NR. 4 -->
+                               <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-12" data-x="right" data-hoffset="70" data-y="center" data-voffset="135" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:800;e:Power2.easeInOut;"
+                                   data-transform_out="opacity:0;s:300;" data-start="620" data-responsive_offset="on" style="z-index: 8;"><img src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                 <!-- LAYER NR. 5 -->
-                                 <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-11" data-x="120" data-y="center" data-voffset="130" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:800;e:Power2.easeInOut;"
-                                     data-transform_out="opacity:0;s:300;" data-start="200" data-responsive_offset="on" style="z-index: 9;"><img src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
-                                 </li>
-                                 @elseif($home_slider->number == 6)
-                                 <li data-index="rs-{{ $home_slider->id }}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="revolution/assets/100x50_3176d-road-bg.jpg"
+                                   <!-- LAYER NR. 5 -->
+                                   <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-11" data-x="120" data-y="center" data-voffset="130" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:800;e:Power2.easeInOut;"
+                                       data-transform_out="opacity:0;s:300;" data-start="200" data-responsive_offset="on" style="z-index: 9;"><img src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                   </li>
+                                   @elseif($home_slider->number == 6)
+                                   <li data-index="rs-{{ $home_slider->id }}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="revolution/assets/100x50_3176d-road-bg.jpg"
                                     data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                                     <!-- MAIN IMAGE -->
                                     <img src="assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
                                     <!-- LAYERS -->
                                     <!-- LAYER NR. 1 -->
                                     <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-4" data-x="3" data-y="center" data-voffset="50" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                     data-transform_out="opacity:0;s:300;" data-start="2060" data-responsive_offset="on" style="z-index: 5;"><img src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                       data-transform_out="opacity:0;s:300;" data-start="2060" data-responsive_offset="on" style="z-index: 5;"><img src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                     <!-- LAYER NR. 2 -->
-                                     <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-5" data-x="right" data-hoffset="-10" data-y="center" data-voffset="60" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="2060" data-responsive_offset="on" style="z-index: 6;"><img src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                       <!-- LAYER NR. 2 -->
+                                       <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-5" data-x="right" data-hoffset="-10" data-y="center" data-voffset="60" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                           data-transform_out="opacity:0;s:300;" data-start="2060" data-responsive_offset="on" style="z-index: 6;"><img src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                         <!-- LAYER NR. 3 -->
-                                         <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-6" data-x="center" data-hoffset="" data-y="270" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
-                                             data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;" data-start="3260" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 7; white-space: nowrap; font-size: 30px; line-height: 30px; font-weight: 400; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
-                                             {{ $home_slider->title }} </div>
+                                           <!-- LAYER NR. 3 -->
+                                           <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-6" data-x="center" data-hoffset="" data-y="270" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
+                                               data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;" data-start="3260" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 7; white-space: nowrap; font-size: 30px; line-height: 30px; font-weight: 400; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                                               {{ $home_slider->title }} </div>
 
-                                             <!-- LAYER NR. 4 -->
-                                             <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-7" data-x="center" data-hoffset="" data-y="center" data-voffset="-140" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
-                                                 data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="4290" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 8; white-space: nowrap; font-size: 70px; line-height: 70px; font-weight: 700; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
-                                                 {{ $home_slider->description }} </div>
+                                               <!-- LAYER NR. 4 -->
+                                               <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-7" data-x="center" data-hoffset="" data-y="center" data-voffset="-140" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
+                                                   data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="4290" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 8; white-space: nowrap; font-size: 70px; line-height: 70px; font-weight: 700; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                                                   {{ $home_slider->description }} </div>
 
 
-                                                 <!-- LAYER NR. 6 -->
-                                                 <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-3" data-x="right" data-hoffset="159" data-y="center" data-voffset="81" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                                     data-transform_out="opacity:0;s:300;" data-start="1220" data-responsive_offset="on" style="z-index: 10;"><img src="assets/home-sliders/{{ $home_slider->image4 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                                   <!-- LAYER NR. 6 -->
+                                                   <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-3" data-x="right" data-hoffset="159" data-y="center" data-voffset="81" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                                       data-transform_out="opacity:0;s:300;" data-start="1220" data-responsive_offset="on" style="z-index: 10;"><img src="assets/home-sliders/{{ $home_slider->image4 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                                     <!-- LAYER NR. 7 -->
-                                                     <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-2" data-x="202" data-y="center" data-voffset="80" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                                         data-transform_out="opacity:0;s:300;" data-start="1200" data-responsive_offset="on" style="z-index: 11;"><img src="assets/home-sliders/{{ $home_slider->image5 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                                       <!-- LAYER NR. 7 -->
+                                                       <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-2" data-x="202" data-y="center" data-voffset="80" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                                           data-transform_out="opacity:0;s:300;" data-start="1200" data-responsive_offset="on" style="z-index: 11;"><img src="assets/home-sliders/{{ $home_slider->image5 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                                         <!-- LAYER NR. 8 -->
-                                                         <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-1" data-x="center" data-hoffset="" data-y="center" data-voffset="100" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:670;e:Power3.easeInOut;"
-                                                             data-transform_out="opacity:0;s:300;" data-start="500" data-responsive_offset="on" style="z-index: 12;"><img src="assets/home-sliders/{{ $home_slider->image6 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
-                                                             @endif
-                                                         </li>
-                                                         @endforeach
-                                                     </ul>
-                                                     <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
-                                                 </div>
-                                             </div>
-                                         </section>
+                                                           <!-- LAYER NR. 8 -->
+                                                           <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-1" data-x="center" data-hoffset="" data-y="center" data-voffset="100" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:670;e:Power3.easeInOut;"
+                                                               data-transform_out="opacity:0;s:300;" data-start="500" data-responsive_offset="on" style="z-index: 12;"><img src="assets/home-sliders/{{ $home_slider->image6 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                                               @endif
+                                                           </li>
+                                                           @endforeach
+                                                       </ul>
+                                                       <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                                                   </div>
+                                               </div>
+                                           </section>
 
 <!--=================================
     rev slider -->
@@ -105,10 +105,9 @@
 
                     <div class="col-md-12">
                         <div class="section-title">
-                            <span>What Our Happy Clients say about us</span>
                             <h2>Services For Your Cars </h2>
                         </div>
-                        <ul class="service">
+                        <ul class="service pl-0">
                             <li>
                                 <a href="#" onclick="return getLocation()">
                                     <div class="service_box">
@@ -180,8 +179,8 @@
                             <div class="sms-service-more">View More</div>
 
                             <div class="sms-view-content" style="display:none;">
-                             @endmobile
-                             <li>
+                               @endmobile
+                               <li>
                                 <a href="">
                                     <div class="service_box">
                                         <i class="flaticon-car"></i><br>
@@ -271,11 +270,10 @@
     <section id="used-car-by-cat">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-sm-12">
+                <div class="col-lg-4 col-12">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-blog-tab" data-toggle="tab" href="#nav-blog" role="tab" aria-controls="nav-blog" aria-selected="true">Blog</a>
-                            <!--<a class="nav-item nav-link" id="nav-chat-tab" data-toggle="tab" href="#nav-chat" role="tab" aria-controls="nav-chat" aria-selected="false">Top Chats</a>-->
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -284,20 +282,20 @@
                             @foreach($posts as $post)
                             <div class="blog_wrap p-2 border">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="img_holder float-left">
+                                    <div class="col-6">
+                                        <div class="float-left size-11">
                                             <img src="{{ url('/') }}/assets/blogs/{{ $post->thumbnail ?? 'not-found.jpg' }}" alt="" class="img-fluid">
-                                            <div class="hover_icon">
-                                                <a href="{{ route('blogs.show', $post->id) }}" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                                            </div>
+                                        </div>
+                                        <div class="hover_icon">
+                                            <a href="{{ route('blogs.show', $post->id) }}" class="hvr_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-6">
                                         <div class="blog_info">
                                             <h6>{{ $post->title }}</h6>
 
                                             <div class="meta">
-                                                <p>{{ $post->user->name }} <span>|</span>{{ $post->created_at->format('jS M Y') }}</p>
+                                                <p>{{ $post->user->name }} <span>|</span> {{ $post->created_at->format('jS M Y') }}</p>
                                             </div>
 
                                         </div>
@@ -309,65 +307,53 @@
                     </div>
                 </div>
 
-                <div class="col-lg-8 col-sm-12 text-center">
+                <div class="col-lg-8 col-12 text-center">
                     <div class="section-title">
-                        <span>What Our Happy Clients say about us</span>
-                        <h2>New Cars </h2>
+                        <h2>New Cars</h2>
                         <div class="separator"></div>
                     </div>
                     <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
-                        @foreach($new_products as $new_product)
+                    @foreach($new_products as $new_product)
                         <div class="item">
-                            <div class="car-item text-center">
-                                <div class="car-image">
-                                    <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="">
-                                    <div class="car-overlay-banner">
-                                        <ul>
-                                            <li>
-                                                <div class="compare_item">
-                                                    <div class="checkbox">
-                                                        <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}">
-                                                        <label for="">Compare</label>
-                                                    </div>
-                                                </div>
-                                            </li>
+                            <div class="bg-white product-hover-effect shadow-sm car-item">
+                                <div class="size-32">
+                                    <div class="size-child overflow-hidden">
+                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                    </div>
+                                    <div class="size-child product-hover-show">
+                                        <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                            <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                            <label for="new-{{ $new_product->id }}">Compare</label>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
+                                        <ul class="list-inline">
+                                            <li><i class="fa fa-registered"></i> {{ $new_product->car->manufacturing_year ?? ''}}</li>
+                                            <li><i class="fa fa-cog"></i> {{ $new_product->car->steering_gear_type ?? ''}}</li>
+                                            <li><i class="fa fa-dashboard"></i> {{ $new_product->car->milage ?? ''}} mi</li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="car-list">
-                                    <ul class="list-inline">
-                                        <li><i class="fa fa-registered"></i> {{ $new_product->car->manufacturing_year ?? ''}}</li>
-                                        <li><i class="fa fa-cog"></i> {{ $new_product->car->steering_gear_type ?? ''}}</li>
-                                        <li><i class="fa fa-dashboard"></i> {{ $new_product->car->milage ?? ''}} mi</li>
-                                    </ul>
-                                </div>
-                                <div class="car-content">
-                                    <div class="star">
+                                <div class="text-dark clearfix px-3 py-1">
+                                    <div>
                                         <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
                                         <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
                                         <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
                                         <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
                                         <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
                                     </div>
-                                    <div class="location-list">
-                                        <ul class="sms-list-inline">
-                                            <li><i class="fa fa-map-marker"></i> {{ $new_product->supplier->region->name ?? ''}}</li>
-                                            <li><i class="fa fa-industry"></i> {{ $new_product->car->brand->name ?? ''}}</li>
-                                        </ul>
+                                    <div class="text-left clearfix">
+                                        <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
                                     </div>
-
-                                    <a href="{{ route('single-car-product', $new_product->id) }}">{{ $new_product->name }}</a>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
-                                    <div class="price">
-                                        <!--<span class="old-price">$35,568</span>-->
-                                        <span class="new-price">Tk.{{ $new_product->msrp }} </span>
-                                    </div>
+                                    <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
+                    @endforeach
                     </div>
-                    <a href="{{ route('car-listing') }}" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -548,55 +534,67 @@
 <!--=================================
     start Featured Cars -->
 
-    <section class="upcoming">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <span>Used Cars Special Offers</span>
-                        <h2>Used Cars </h2>
+                <div class="col-md-12 text-center">
+                    <span>Used Cars Special Offers</span>
+                    <h2>Used Cars</h2>
+                    <div class="car-item">
                         <div class="separator"></div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="owl-carousel" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
-                        @foreach($used_products as $used_product)
-                        <div class="item">
-                            <div class="featured-car-list">
-                                <div class="featured-car-img">
-                                    <a href=""><img src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 }}" class="img-responsive" alt="Image"></a>
-                                    <div class="label_icon">Used</div>
-                                    <div class="compare_item">
-                                        <div class="checkbox">
-                                            <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}">
-                                            <label for="">Compare</label>
-                                        </div>
-                                    </div>
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    @foreach($used_products as $used_product)
+                    <div class="item">
+                        <div class="bg-white shadow-sm car-item">
+                            <div class="size-32">
+                                <div class="size-child overflow-hidden">
+                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
                                 </div>
-                                <div class="featured-car-content">
-                                    <h6><a href="{{ route('single-car-product', $used_product->id) }}">{{ $used_product->car->brand->name ?? ''}}</a></h6>
-                                    <div class="price_info">
-                                        <p class="featured-price">Tk.{{ $used_product->msrp ?? ''}}</p>
-                                        <div class="car-location"><span><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span></div>
+                                <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                    <input type="checkbox" id="used-{{ $used_product->id }}" class="compare-checkbox" product-id="{{ $used_product->id }}">
+                                    <label for="used-{{ $used_product->id }}">Compare</label>
+                                </div>
+                            </div>
+                            <div class="text-dark clearfix px-3 py-1">
+                                <div>
+                                    <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                </div>
+                                <div class="text-left clearfix">
+                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->car->brand->name ?? ''}}</span>
+                                </div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                <div class="separator"></div>
+                                <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 text-left my-1">
+                                        <i class="fa fa-road"></i> {{ $used_product->kms_driven ?? ''}} km driven
                                     </div>
-                                    <ul>
-                                        <li><i class="fa fa-road" aria-hidden="true"></i>{{ $used_product->car->kms_driven ?? ''}} km</li>
-                                        <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $used_product->car->milage ?? ''}} Registration Year</li>
-                                        <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $used_product->car->model->name ?? ''}} model</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i>{{ $used_product->car->fuel_type->name ?? ''}} Displacement</li>
-                                        <li><i class="fa fa-hourglass-end" aria-hidden="true"></i>{{ $used_product->car->brand->name ?? ''}} Fuel type</li>
-                                        <li><i class="fa fa-superpowers" aria-hidden="true"></i>{{ $used_product->car->maximum_power ?? ''}} Body type</li>
-                                    </ul>
+                                    <div class="col-12 col-md-6 text-left my-1">
+                                        <i class="fa fa-calendar"></i> {{ $used_product->car->milage ?? ''}} km milage
+                                    </div>
+                                    <div class="col-12 col-md-6 text-left my-1">
+                                        <i class="fa fa-calendar"></i> {{ $used_product->car->model->name ?? ''}} model
+                                    </div>
+                                    <div class="col-12 col-md-6 text-left my-1">
+                                        <i class="fa fa-car"></i> {{ $used_product->car->fuel_type->name ?? ''}}
+                                    </div>
+                                    <div class="col-12 col-md-6 text-left my-1">
+                                        <i class="fa fa-hourglass-end"></i> {{ $used_product->car->brand->name ?? ''}} brand
+                                    </div>
+                                    <div class="col-12 col-md-6 text-left my-1">
+                                        <i class="fa fa-superpowers"></i> {{ $used_product->car->maximum_power ?? ''}} Watt
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-                </div>
-                <a href="car-listing" target="_blank" class="button red">View All<i
-                    class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -687,11 +685,10 @@
                         @endforeach
                     </div>
                 </div>
-                <a href="car-listing" target="_blank" class="button red">View All<i
-                    class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
-                </div>
+                <a href="car-listing" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
-        </section>
+        </div>
+    </section>
 <!--=================================
     End Popular car -->
 
@@ -974,4 +971,29 @@
             localStorage.category_id = 1;
         })();
     </script>
+    @endsection
+    @section('style')
+    <style>
+        .product-hover-show, .product-hover-show2 {
+            height:0 !important;
+            background: #db2d2eb3;
+            transition: all 0.5s ease-out 0s;
+            -webkit-transition: all 0.5s ease-out 0s;
+            -moz-transition: all 0.5s ease-out 0s;
+            -ms-transition: all 0.5s ease-out 0s;
+            -o-transition: all 0.5s ease-out 0s;
+            overflow: hidden;
+            border-color: #EEE;
+        }
+        .product-hover-effect:hover .product-hover-show {
+            height:100% !important;
+        }
+        .product-hover-effect:hover .product-hover-show2 {
+            height:30px !important;
+            border: 1px solid #EEE;
+        }
+        .bottom-0 {
+            bottom: 0;
+        }
+    </style>
     @endsection

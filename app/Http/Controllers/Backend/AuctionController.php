@@ -136,15 +136,14 @@ class AuctionController extends Controller {
     }
 
     private function smsNotify($product) {
-        $data = $request->except('_token', '_method');
         $this->curlSms($product);
     }
     private function curlSms($product) {
-        $m = $product->bids[0]->user->email.' has bid Tk.'.$product->bids[0]->amount.' on a product at '.url();
+        $m = 'Another interested buyer has placed a bid at BDT '.$product->bids[0]->amount.' at '.url('/').'/bids/'.$product->id;
         // create curl resource
         $ch = curl_init();
         // set url
-        curl_setopt($ch, CURLOPT_URL, "http://sms.storerepublic.com/smsapi?api_key=C20064485f2f9445414b55.34412796&type=text&contacts='.$phone.'&senderid=8809612446209&msg=" . $this->myUrlEncode($m));
+        curl_setopt($ch, CURLOPT_URL, "http://sms.storerepublic.com/smsapi?api_key=C20064485f2f9445414b55.34412796&type=text&contacts=".$product->bids[0]->user->phone."&senderid=8809612446209&msg=" . $this->myUrlEncode($m));
         //return the transfer as a string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         // $output contains the output string
@@ -152,5 +151,9 @@ class AuctionController extends Controller {
         // close curl resource to free up system resources
         curl_close($ch);
     }
-
+    private function myUrlEncode($string) {
+        $entities = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
+        $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
+        return str_replace($entities, $replacements, urlencode($string));
+    }
 }
