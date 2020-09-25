@@ -9765,3 +9765,24 @@ h3.listClose {
 .list-style-type-none {
     list-style-type: none;
 }
+.product-hover-show, .product-hover-show2 {
+    height:0 !important;
+    background: #db2d2eb3;
+    transition: all 0.5s ease-out 0s;
+    -webkit-transition: all 0.5s ease-out 0s;
+    -moz-transition: all 0.5s ease-out 0s;
+    -ms-transition: all 0.5s ease-out 0s;
+    -o-transition: all 0.5s ease-out 0s;
+    overflow: hidden;
+    border-color: #EEE;
+}
+.product-hover-effect:hover .product-hover-show {
+    height:100% !important;
+}
+.product-hover-effect:hover .product-hover-show2 {
+    height:30px !important;
+    border: 1px solid #EEE;
+}
+.bottom-0 {
+    bottom: 0;
+}

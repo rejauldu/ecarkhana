@@ -137,27 +137,28 @@
                 </ul>
             </li>
             @endmoderator
+            
             @moderator(Product)
-            <li class="treeview {{ Request::is('advertisements*') ? 'active' : '' }}">
+            <li class="treeview {{ Request::is('versus-sliders*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-paint-brush" aria-hidden="true"></i> <span>Vs View Slider</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('advertisements') ? 'active' : '' }}"><a href="{{ route('advertisements.index') }}"><i class="fa fa-circle-o"></i> Manage Advertisements</a></li>
-                    <li class="{{ Request::is('advertisements/create') ? 'active' : '' }}"><a href="{{ route('advertisements.create') }}"><i class="fa fa-circle-o"></i> Add New Advertisement</a></li>
+                    <li class="{{ Request::is('versus-sliders') ? 'active' : '' }}"><a href="{{ route('versus-sliders.index') }}"><i class="fa fa-circle-o"></i> Manage Versus Sliders</a></li>
+                    <li class="{{ Request::is('versus-sliders/create') ? 'active' : '' }}"><a href="{{ route('versus-sliders.create') }}"><i class="fa fa-circle-o"></i> Add New Slider</a></li>
                 </ul>
             </li>
             @endmoderator
             @moderator(Product)
-            <li class="treeview {{ Request::is('versus-sliders*') ? 'active' : '' }}">
+            <li class="treeview {{ Request::is('advertisements*') ? 'active' : '' }}">
                 <a href="#">
-                    <i class="fa fa-paint-brush" aria-hidden="true"></i> <span>Advertisement</span>
+                    <i class="fa fa-audio-description" aria-hidden="true"></i> <span>Advertisement</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('versus-sliders') ? 'active' : '' }}"><a href="{{ route('versus-sliders.index') }}"><i class="fa fa-circle-o"></i> Manage Versus Sliders</a></li>
-                    <li class="{{ Request::is('versus-sliders/create') ? 'active' : '' }}"><a href="{{ route('versus-sliders.create') }}"><i class="fa fa-circle-o"></i> Add New Slider</a></li>
+                    <li class="{{ Request::is('advertisements') ? 'active' : '' }}"><a href="{{ route('advertisements.index') }}"><i class="fa fa-circle-o"></i> Manage Advertisements</a></li>
+                    <li class="{{ Request::is('advertisements/create') ? 'active' : '' }}"><a href="{{ route('advertisements.create') }}"><i class="fa fa-circle-o"></i> Add New Advertisement</a></li>
                 </ul>
             </li>
             @endmoderator

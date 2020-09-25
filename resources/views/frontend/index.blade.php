@@ -368,7 +368,7 @@
                 <div class="tg-border-heading">
                     <h3>vs</h3>
                 </div>
-                <a href="{{ url('/compare') }}" target="_blank">view now</a>
+                <a href="{{ route('compare') }}" target="_blank">view now</a>
             </div>
         </div>
         <div id="tg-compare-slider" class="tg-compare-slider tg-comparebox swiper-container-horizontal swiper-container-fade">
@@ -510,7 +510,7 @@
                 @foreach($advertisements as $advertisement)
                 <div class="item">
                     <div class="wpb_single_image">
-                        <img src="{{ asset('assets/advertisements') }}/{{ $advertisement->image }}">
+                        <a href="{{ $advertisement->url }}"><img src="{{ asset('assets/advertisements') }}/{{ $advertisement->image }}"></a>
                     </div>
                 </div>
                 @endforeach
@@ -531,7 +531,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="section-title">
-                        <span>Top 10 Popular car in Dhaka</span>
+                        <span>Top 10 Popular car</span>
                         <h2>Popular Cars</h2>
                         <div class="separator"></div>
                     </div>
@@ -842,29 +842,4 @@
             localStorage.category_id = 1;
         })();
     </script>
-    @endsection
-    @section('style')
-    <style>
-        .product-hover-show, .product-hover-show2 {
-            height:0 !important;
-            background: #db2d2eb3;
-            transition: all 0.5s ease-out 0s;
-            -webkit-transition: all 0.5s ease-out 0s;
-            -moz-transition: all 0.5s ease-out 0s;
-            -ms-transition: all 0.5s ease-out 0s;
-            -o-transition: all 0.5s ease-out 0s;
-            overflow: hidden;
-            border-color: #EEE;
-        }
-        .product-hover-effect:hover .product-hover-show {
-            height:100% !important;
-        }
-        .product-hover-effect:hover .product-hover-show2 {
-            height:30px !important;
-            border: 1px solid #EEE;
-        }
-        .bottom-0 {
-            bottom: 0;
-        }
-    </style>
     @endsection

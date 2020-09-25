@@ -40,10 +40,9 @@ Start Service -->
 
             <div class="col-md-12">
                 <div class="section-title">
-                    <span>What Our Happy Clients say about us</span>
                     <h2>Services For Your Bicycle </h2>
                 </div>
-                <ul class="service">
+                <ul class="service pl-0">
                     <li>
                         <a href="car-listing.html">
                             <div class="service_box">
@@ -110,8 +109,11 @@ Start Service -->
                         </a>
                     </li>
 
+                    @mobile
                     <div class="sms-service-more">View More</div>
+
                     <div class="sms-view-content" style="display:none;">
+                       @endmobile
 
                         <li>
                             <a href="">
@@ -161,7 +163,9 @@ Start Service -->
                                 </div>
                             </a>
                         </li>
-                    </div>
+                    @mobile
+                        </div>
+                        @endmobile
 
                 </ul>
 
@@ -221,56 +225,53 @@ Start Used Cars In Your City And Budget -->
                 </div>
             </div>
 
-            <div class="col-lg-8 col-sm-12">
+            <div class="col-lg-8 col-12 text-center">
                 <div class="section-title">
-                    <span>What Our Happy Clients say about us</span>
-                    <h2>New Bicycles </h2>
+                    <h2>New Bicycles</h2>
                     <div class="separator"></div>
                 </div>
                 <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
                     @foreach($new_products as $new_product)
                     <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $new_product->id }}">
-                                                    <label for="">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
+                        <div class="bg-white product-hover-effect shadow-sm car-item">
+                            <div class="size-53">
+                                <div class="size-child overflow-hidden">
+                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                </div>
+                                <div class="size-child product-hover-show">
+                                    <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                        <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                        <label for="new-{{ $new_product->id }}">Compare</label>
+                                    </div>
+                                </div>
+                                <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
+                                    <ul class="list-inline">
+                                        <li><i class="fa fa-registered"></i> {{ $new_product->bicycle->made_origin->name ?? ''}}</li>
+                                        <li><i class="fa fa-cog"></i> {{ $new_product->bicycle->gear ?? ''}} gear</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><i class="fa fa-registered"></i> {{ $new_product->bicycle->brand->name ?? ''}}</li>
-                                    <li><i class="fa fa-cog"></i> {{ $new_product->bicycle->model->name ?? ''}}</li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
+                            <div class="text-dark clearfix px-3 py-1">
+                                <div>
                                     <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
                                 </div>
-                                <a href="{{ route('single-bicycle-product', $new_product->id) }}">{{ $new_product->name }}</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <!--<span class="old-price">$35,568</span>-->
-                                    <span class="new-price">৳ {{ $new_product->msrp }} </span>
+                                <div class="text-left clearfix">
+                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->bicycle->brand->name ?? ''}}</span>
                                 </div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                <div class="separator"></div>
+                                <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
+                <a href="car-listing" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
@@ -293,150 +294,44 @@ Start Compare -->
     </div>
     <div id="tg-compare-slider" class="tg-compare-slider tg-comparebox swiper-container-horizontal swiper-container-fade">
         <div class="swiper-wrapper" style="transition-duration: 0ms;">
+            @foreach($versus_sliders as $slider)
             <div class="swiper-slide swiper-slide-prev" style="width: 1149px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                 <div class="tg-compare tg-compare-left">
                     <figure class="tg-leftimginout">
-                        <img src="images/bicycle/compare-cycle-02.png" alt="image description">
+                        <img src="{{ url('assets/versus-sliders') }}/{{ $slider->product1_image }}" alt="{{ $slider->product1->name }}">
                     </figure>
                     <div class="tg-carfeatures">
-                        <span class="tg-icon icon-krop-big-logo">SmS</span>
+                        <span class="tg-icon icon-krop-big-logo">{{ $slider->product1->brand->name ?? ''}}</span>
                         <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
+                            <h3>{{ $slider->product1->name }}</h3>
                         </div>
                         <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
+                            <p class="text-justify">{{ $slider->product1->note }}</p>
                         </div>
                         <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
+                            <span class="tg-price">BDT {{ $slider->product1->msrp }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="tg-compare tg-compare-right">
                     <div class="tg-carfeatures">
-                        <span class="tg-icon icon-web">SmS</span>
+                        <span class="tg-icon icon-web">{{ $slider->product2->brand->name ?? ''}}</span>
                         <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
+                            <h3>{{ $slider->product2->name }}</h3>
                         </div>
                         <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
+                            <p class="text-justify">{{ $slider->product2->note }}</p>
                         </div>
                         <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
+                            <span class="tg-price">BDT {{ $slider->product2->msrp }}</span>
                         </div>
                     </div>
                     <figure class="tg-rightimginout">
-                        <img src="images/bicycle/compare-cycle.png" alt="image description">
+                        <img src="{{ url('assets/versus-sliders') }}/{{ $slider->product2_image }}" alt="{{ $slider->product2->brand->name ?? ''}}">
                     </figure>
                 </div>
             </div>
-            <div class="swiper-slide swiper-slide-active" style="width: 1149px; opacity: 1; transform: translate3d(-1149px, 0px, 0px); transition-duration: 0ms;">
-                <div class="tg-compare tg-compare-left">
-                    <figure>
-                        <img src="images/bicycle/compare-cycle-02.png" alt="image description">
-                    </figure>
-                    <div class="tg-carfeatures">
-                        <span class="tg-icon icon-krop-big-logo">SmS</span>
-                        <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
-                        </div>
-                        <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
-                        </div>
-                        <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tg-compare tg-compare-right">
-                    <div class="tg-carfeatures">
-                        <span class="tg-icon icon-web">SmS</span>
-                        <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
-                        </div>
-                        <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
-                        </div>
-                        <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
-                        </div>
-                    </div>
-                    <figure>
-                        <img src="images/bicycle/compare-cycle.png" alt="image description">
-                    </figure>
-                </div>
-            </div>
-            <div class="swiper-slide swiper-slide-next" style="width: 1149px; opacity: 0; transform: translate3d(-2298px, 0px, 0px); transition-duration: 0ms;">
-                <div class="tg-compare tg-compare-left">
-                    <figure>
-                        <img src="images/bicycle/compare-cycle-02.png" alt="image description">
-                    </figure>
-                    <div class="tg-carfeatures">
-                        <span class="tg-icon icon-krop-big-logo">SmS</span>
-                        <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
-                        </div>
-                        <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
-                        </div>
-                        <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tg-compare tg-compare-right">
-                    <div class="tg-carfeatures">
-                        <span class="tg-icon icon-web">SmS</span>
-                        <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
-                        </div>
-                        <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
-                        </div>
-                        <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
-                        </div>
-                    </div>
-                    <figure>
-                        <img src="images/bicycle/compare-cycle.png" alt="image description">
-                    </figure>
-                </div>
-            </div>
-            <div class="swiper-slide" style="width: 1149px; opacity: 0; transform: translate3d(-3447px, 0px, 0px); transition-duration: 0ms;">
-                <div class="tg-compare tg-compare-left">
-                    <figure>
-                        <img src="images/bicycle/compare-cycle-02.png" alt="image description">
-                    </figure>
-                    <div class="tg-carfeatures">
-                        <span class="tg-icon icon-krop-big-logo">SmS</span>
-                        <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
-                        </div>
-                        <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
-                        </div>
-                        <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tg-compare tg-compare-right">
-                    <div class="tg-carfeatures">
-                        <span class="tg-icon icon-web">SmS</span>
-                        <div class="tg-border-heading">
-                            <h3>vehicle title </h3>
-                        </div>
-                        <div class="tg-description">
-                            <p>Sed do eiusmod tempoar inont ut labore agua enimad minim veniam nostrn amco laboris nisi ut aliquip commodo.</p>
-                        </div>
-                        <div class="tg-price-rating">
-                            <span class="tg-price">$ 3.4m</span>
-                        </div>
-                    </div>
-                    <figure>
-                        <img src="images/bicycle/compare-cycle.png" alt="image description">
-                    </figure>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="tg-prev"><span class="fa fa-angle-left"></span></div>
         <div class="tg-next"><span class="fa fa-angle-right"></span></div>
@@ -451,68 +346,67 @@ End Compare -->
 <!--=================================
 start Featured Cars -->
 
-<section class="upcoming">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title">
-                    <span>Upcoming Bike Special Offers</span>
-                    <h2>Used Bicycles </h2>
-                    <div class="separator"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="owl-carousel" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
-                    @foreach($used_products as $used_product)
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $used_product->id }}" id="">
-                                                    <label for="">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <span>Used Bicycles Special Offers</span>
+                    <h2>Used Bicycles</h2>
+                    <div class="car-item">
+                        <div class="separator"></div>
+                    </div>
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                        @foreach($used_products as $used_product)
+                        <div class="item">
+                            <div class="bg-white shadow-sm car-item">
+                                <div class="size-53">
+                                    <div class="size-child overflow-hidden">
+                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
+                                    </div>
+                                    <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                        <input type="checkbox" id="used-{{ $used_product->id }}" class="compare-checkbox" product-id="{{ $used_product->id }}">
+                                        <label for="used-{{ $used_product->id }}">Compare</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><i class="fa fa-registered"></i> {{ $used_product->bicycle->brand->name ?? ''}}</li>
-                                    <li><i class="fa fa-cog"></i> {{ $used_product->bicycle->model->name ?? ''}}</li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div>
-                                <a href="{{ route('single-bicycle-product', $used_product->id) }}">{{ $used_product->name }}</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <!--<span class="old-price">$35,568</span>-->
-                                    <span class="new-price">Tk.{{ $used_product->msrp }} </span>
+                                <div class="text-dark clearfix px-3 py-1">
+                                    <div>
+                                        <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                    </div>
+                                    <div class="text-left clearfix">
+                                        <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->bicycle->brand->name ?? ''}}</span>
+                                    </div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                    <div class="separator"></div>
+                                    <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
+                                    <div class="row text-left">
+                                        <div class="col-6 my-1">
+                                            <i class="fa fa-user"></i> {{ $used_product->bicycle->brand->name ?? ''}}
+                                        </div>
+                                        <div class="col-6 my-1">
+                                            <i class="fa fa-calendar"></i> {{ $used_product->bicycle->model->name ?? ''}}
+                                        </div>
+                                        <div class="col-6 my-1">
+                                            <i class="fa fa-road"></i> {{ $used_product->bicycle->weight ?? ''}} kg
+                                        </div>
+                                        <div class="col-6 my-1">
+                                            <i class="fa fa-industry"></i> {{ $used_product->bicycle->made_origin->name ?? ''}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
+                    <a href="car-listing" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-            <a href="{{ route('bicycle-listing') }}" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         </div>
-    </div>
-</section>
+    </section>
 
 <!--=================================
 End Featured Cars -->
@@ -521,21 +415,18 @@ End Featured Cars -->
 <!--=================================
 Start Banner -->
 <section class="sms-banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="wpb_single_image">
-                    <img src="images/bicycle/Cycle-ad-01.jpg">
+        <div class="container">
+            <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-space="20">
+                @foreach($advertisements as $advertisement)
+                <div class="item">
+                    <div class="wpb_single_image">
+                        <a href="{{ $advertisement->url }}"><img src="{{ asset('assets/advertisements') }}/{{ $advertisement->image }}"></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="wpb_single_image">
-                    <img src="images/bicycle/Cycle-ad-02.jpg">
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 <!--=================================
 End Banner -->
@@ -546,63 +437,61 @@ End Banner -->
 Start Popular car -->
 
 <section id="popular">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title">
-                    <span>Top 10 Popular bike in Dhaka</span>
-                    <h2>Popular Bicycles </h2>
-                    <div class="separator"></div>
-                </div>
-                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
-                    @foreach($popular_products as $popular_product)
-                    <div class="item">
-                        <div class="car-item text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $popular_product->id }}/{{ $popular_product->image1 ?? 'not-found.jpg' }}" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $popular_product->id }}" id="">
-                                                    <label for="">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <span>Top 10 Popular bicycle</span>
+                        <h2>Popular Bicycles</h2>
+                        <div class="separator"></div>
+                    </div>
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
+                        @foreach($popular_products as $new_product)
+                        <div class="item">
+                            <div class="bg-white product-hover-effect shadow-sm car-item">
+                                <div class="size-53">
+                                    <div class="size-child overflow-hidden">
+                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                    </div>
+                                    <div class="size-child product-hover-show">
+                                        <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                            <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                            <label for="new-{{ $new_product->id }}">Compare</label>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
+                                        <ul class="list-inline">
+                                            <li><i class="fa fa-registered"></i> {{ $new_product->car->manufacturing_year ?? ''}}</li>
+                                            <li><i class="fa fa-cog"></i> {{ $new_product->car->steering_gear_type ?? ''}}</li>
+                                            <li><i class="fa fa-dashboard"></i> {{ $new_product->car->milage ?? ''}} mi</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="car-list">
-                                <ul class="list-inline">
-                                    <li><i class="fa fa-registered"></i> {{ $popular_product->bicycle->brand->name ?? ''}}</li>
-                                    <li><i class="fa fa-cog"></i> {{ $popular_product->bicycle->model->name ?? ''}}</li>
-                                </ul>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
-                                    <i class="fa @if($popular_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($popular_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($popular_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($popular_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($popular_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div>
-                                <a href="{{ route('single-bicycle-product', $popular_product->id) }}">{{ $popular_product->name }}</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <!--<span class="old-price">$35,568</span>-->
-                                    <span class="new-price">Tk.{{ $popular_product->msrp }} </span>
+                                <div class="text-dark clearfix px-3 py-1">
+                                    <div class="text-center">
+                                        <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                        <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                    </div>
+                                    <div class="text-left clearfix">
+                                        <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
+                                    </div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                    <div class="separator"></div>
+                                    <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
+                    <a href="car-listing" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
-            <a href="{{ route('bicycle-listing') }}" target="_blank" class="button red">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
         </div>
-    </div>
-</section>
+    </section>
 <!--=================================
 End Popular car -->
 

@@ -65,6 +65,8 @@ class HomeController extends Controller {
     public function motorcycleIndex() {
         $home_sliders = HomeSlider::where('type', 'Motorcycle')->get();
         $new_products = Product::has('motorcycle')->where('condition_id', 1)->with('motorcycle')->take(10)->get();
+        $versus_sliders = VersusSlider::where('category_id', 2)->with('product1.brand', 'product2.brand')->get();
+        $advertisements = Advertisement::where('category_id', 2)->with('category')->get();
         $used_products = Product::has('motorcycle')->where('condition_id', 3)->with('motorcycle')->take(10)->get();
         $popular_products = Product::has('motorcycle')->with('motorcycle')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
@@ -75,18 +77,20 @@ class HomeController extends Controller {
         $packages = Package::where('category_id', 2)->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Motorcycle';
-        return view('frontend.motorcycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'packages', 'posts'));
+        return view('frontend.motorcycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'packages', 'posts'));
     }
 
     public function bicycleIndex() {
         $home_sliders = HomeSlider::where('type', 'Bicycle')->get();
         $new_products = Product::has('bicycle')->where('condition_id', 1)->with('bicycle')->take(10)->get();
+        $versus_sliders = VersusSlider::where('category_id', 3)->with('product1.brand', 'product2.brand')->get();
+        $advertisements = Advertisement::where('category_id', 3)->with('category')->get();
         $popular_products = Product::has('bicycle')->with('bicycle')->orderBy('view', 'desc')->take(10)->get();
         $used_products = Product::has('bicycle')->where('condition_id', 3)->with('bicycle', 'bicycle.model', 'bicycle.brand', 'bicycle.fuel_type', 'supplier.division', 'supplier.region')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Bicycle';
-        return view('frontend.bicycle-index', compact('home_sliders', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'type', 'posts'));
+        return view('frontend.bicycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'type', 'posts'));
     }
 
     public function aboutUs() {
