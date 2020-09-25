@@ -270,32 +270,16 @@ class HomeController extends Controller {
         return view('frontend.contact-us');
     }
 
-    public function dealerDetail($id) {
-        $u = User::find($id);
-        $related_products = Product::where('supplier_id', $id)
-                ->whereNotNull('car_id')
-                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
-                ->get();
-        return view('frontend.dealer-detail', compact('u', 'related_products'));
-    }
-
-    public function dealerList() {
-        $users = User::where('user_type_id', 2)
-                ->with('products')
-                ->paginate(10);
-        return view('frontend.dealer-list', compact('users'));
-    }
-
     public function groupBuyingList() {
         return view('frontend.group-buying-list');
     }
 
-    public function motorcycleCart() {
+    public function cart() {
         $type = 'Motorcycle';
-        return view('frontend.motorcycle-cart', compact('type'));
+        return view('frontend.cart', compact('type'));
     }
 
-    public function motorcycleCheckout() {
+    public function checkout() {
         $divisions = Division::all();
         $regions = Region::all();
         $type = 'Motorcycle';
@@ -303,7 +287,7 @@ class HomeController extends Controller {
             $profile = User::with('billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', Auth::user()->id)->first();
             return view('frontend.motorcycle-checkout', compact('divisions', 'regions', 'type', 'profile'));
         }
-        return view('frontend.motorcycle-checkout', compact('divisions', 'regions', 'type'));
+        return view('frontend.checkout', compact('divisions', 'regions', 'type'));
     }
 
     public function motorcycleCompare() {

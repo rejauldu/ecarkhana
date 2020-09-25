@@ -14,11 +14,12 @@ use App\Locations\Union;
 use App\Locations\Region;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Product;
 
 class UserController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderatorOrOwner:User');
+        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers']]);
     }
 
     /**
@@ -125,6 +126,22 @@ class UserController extends Controller {
         $user = User::find($id);
         $user->delete();
         return redirect()->back()->with('message', 'User has been deleted');
+    }
+
+    public function dealerDetail($id) {
+        $u = User::find($id);
+        $related_products = Product::where('supplier_id', $id)
+                ->whereNotNull('car_id')
+                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
+                ->get();
+        return view('frontend.dealer-detail', compact('u', 'related_products'));
+    }
+
+    public function dealers() {
+        $users = User::where('user_type_id', 2)
+                ->with('products')
+                ->paginate(10);
+        return view('frontend.dealers', compact('users'));
     }
 
 }

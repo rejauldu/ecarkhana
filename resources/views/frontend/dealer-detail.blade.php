@@ -61,7 +61,7 @@
 													</div>
 												</div>
 												<div class="featured-car-content">
-													<h6><a href="{{ route('single-car-product', $related_product->id) }}">{{ $related_product->car->brand->name ?? ''}}</a></h6>
+													<h6><a href="{{ route('products.show', $related_product->id) }}">{{ $related_product->car->brand->name ?? ''}}</a></h6>
 													<div class="price_info">
 														<p class="featured-price">$ {{ $related_product->msrp ?? ''}}</p>
 														<div class="car-location"><span><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $related_product->supplier->region->name ?? ''}}, {{ $related_product->supplier->division->name ?? ''}}</span></div>

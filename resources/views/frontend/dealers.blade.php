@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="col-sm-3 col-xs-12">
-                            <div class="view_profile"> <a href="{{ route('dealer-detail', $user->id) }}" class="button red">View Profile</a>
+                            <div class="view_profile"> <a href="{{ route('dealers.show', $user->id) }}" class="button red">View Profile</a>
                                 <p>({{ $user->products->count() }} products)</p>
                             </div>
                         </div>

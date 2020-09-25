@@ -31,9 +31,9 @@ Route::post('bicycle', 'Backend\NotificationController@bicycleFitResult')->name(
 Route::resource('blogs', 'Backend\BlogController');
 
 
-Route::get('/cart', 'Frontend\HomeController@motorcycleCart')->name('cart');
+Route::get('/cart', 'Frontend\HomeController@cart')->name('cart');
 Route::resource('cars', 'Backend\CarController');
-Route::get('/checkout', 'Frontend\HomeController@motorcycleCheckout')->name('checkout');
+Route::get('/checkout', 'Frontend\HomeController@checkout')->name('checkout');
 Route::get('/manage-banks', 'Backend\BankController@manageIndex')->name('manage-banks');
 Route::get('/manage-bicycles', 'Backend\BicycleController@manageIndex')->name('manage-bicycles');
 Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-blogs');
@@ -56,8 +56,8 @@ Route::get('/car-loan-insurance-check', 'Frontend\HomeController@carLoanInsuranc
 Route::get('/compare/{url?}', 'Frontend\HomeController@compare')->name('compare');
 Route::post('/compare-car', 'Frontend\HomeController@compareCar')->name('compare-car');
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
-Route::get('/dealer-detail/{id}', 'Frontend\HomeController@dealerDetail')->name('dealer-detail');
-Route::get('/dealers', 'Frontend\HomeController@dealerList')->name('dealers');
+Route::get('/dealers/{id}', 'Backend\UserController@dealerDetail')->name('dealers.show');
+Route::get('/dealers', 'Backend\UserController@dealers')->name('dealers.index');
 Route::resource('fit-calculators', 'Frontend\FitCalculatorController');
 Route::get('/fit-calculator/{detail?}', 'Frontend\FitCalculatorController@fitCalculator')->name('fit-calculator');
 Route::get('/fit-result/{url?}', 'Frontend\FitCalculatorController@download')->name('fit-result');

@@ -85,7 +85,7 @@ cart-listing  -->
                         </div>
 
                         <div class="proceed-to-checkout section mt-30">
-                            <a href="{{ route('motorcycle-checkout') }}">Proceed to Checkout</a>
+                            <a href="{{ route('checkout') }}">Proceed to Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -120,6 +120,8 @@ cart-listing  -->
         computed: {
             subTotal: function () {
                 var price = 0;
+                if(!this.products)
+                    return 0;
                 for (let i = 0; i < this.products.length; i++) {
                     price += this.products[i].msrp * this.products[i].quantity;
                 }
