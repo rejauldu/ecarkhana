@@ -40,7 +40,7 @@
                 </div>
                 <ul class="service pl-0">
                     <li>
-                        <a href="{{ route('motorcycle-listing') }}">
+                        <a href="{{ route('motorcycles.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
                                 <p>Nearby bike</p>
@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dealer-list') }}">
+                        <a href="{{ route('dealers') }}">
                             <div class="service_box">
                                 <i class="flaticon-friend"></i><br>
                                 <p>Sell bike</p>
@@ -276,7 +276,7 @@
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->motorcycle->brand->name ?? ''}}</span>
                                 </div>
-                                <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                 <div class="separator"></div>
                                 <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                             </div>
@@ -284,7 +284,7 @@
                     </div>
                     @endforeach
                 </div>
-                <a href="car-listing" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
@@ -390,7 +390,7 @@ Start Compare -->
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->motorcycle->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
                                     <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
                                     <div class="row text-left">
@@ -418,7 +418,7 @@ Start Compare -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="car-listing" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -489,7 +489,7 @@ Start Compare -->
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
                                     <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                                 </div>
@@ -497,7 +497,7 @@ Start Compare -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="car-listing" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -552,7 +552,7 @@ Start Compare -->
     }
 
     function showPosition(position) {
-        window.location = "{{ route('car-listing') }}?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+        window.location = "{{ route('motorcycles.index') }}?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
     }
     function addCoordinate(condition) {
         var container = '';

@@ -727,7 +727,7 @@
                                         <a href="" class="sms-wishlist" data-toggle="tooltip" data-placement="bottom" title="Wishlist"><i class="fa fa-heart-o"></i>Wishlist</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('motorcycle-cart') }}" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i class="fa fa-cart-plus"></i>Cart</a>
+                                        <a href="{{ route('cart') }}" class="sms-cart" data-toggle="tooltip" data-placement="bottom" title="Cart"><i class="fa fa-cart-plus"></i>Cart</a>
                                     </li>
                                 </ul>
                             </div>
@@ -791,7 +791,7 @@
     var product_list = new Vue({
     el: '#product-list',
             data: {
-            products: {!! json_encode(json_decode($products - > toJson()) - > data) !!}
+            products: {!! json_encode(json_decode($products->toJson())->data) !!}
             }
     });
 </script>

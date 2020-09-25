@@ -166,91 +166,6 @@ class HomeController extends Controller {
         return view('frontend.car-ad-post', compact('brands', 'models', 'packages', 'divisions', 'ownerships'));
     }
 
-    public function carListing(Request $request) {
-        $products = Product::select('products.*')
-                        ->has('car')->with('car', 'supplier.region');
-        $filters = [];
-        if ($request->condition) {
-            $products = $products->whereHas('condition', function (Builder $q) use($request) {
-                $q->whereRaw('lower(name) like "%' . strtolower($request->condition) . '%"');
-            });
-            $data['condition'] = $request->condition;
-        }
-        if ($request->location) {
-            $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
-                $q->where('name', 'like', '%' . $request->location . '%');
-            });
-            $data['location'] = $request->location;
-        }
-        if ($request->brand && $request->brand != 'All Brands') {
-            $products = $products->whereHas('brand', function(Builder $q) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->brand) . "%'");
-            });
-            $data['brand'] = $request->brand;
-        }
-        if ($request->model && $request->model != 'All Models') {
-            $products = $products->whereHas('model', function(Builder $q) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
-            });
-            $data['model'] = $request->model;
-        }
-        if ($request->body_type && $request->body_type != 'All Body Types') {
-            $products = $products->whereHas('car.body_type', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
-            });
-            $data['body_type'] = $request->body_type;
-        }
-        if ($request->msrp) {
-            $products = $products->where('msrp', $request->msrp);
-            $data['msrp'] = $request->msrp;
-        }
-        if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
-            $products = $products->whereHas('car.fuel_type', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
-            });
-            $data['fuel_type'] = $request->fuel_type;
-        }
-        if ($request->package && $request->package != 'All Packages') {
-            $products = $products->whereHas('car.package', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
-            });
-            $data['package'] = $request->package;
-        }
-        if ($request->lat && $request->lon) {
-            $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
-                    ->selectRaw('ROUND(('
-                            . '6371'
-                            . '* acos( cos( radians(lat) )'
-                            . '* cos( radians(' . $request->lat . ') )'
-                            . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
-                            . '* sin( radians(' . $request->lat . ')))'
-                            . '), 3) AS distance')
-                    ->orderBy('distance', 'ASC');
-            if ($request->within_km) {
-                $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
-                        ->whereRaw('(ROUND(('
-                        . '6371'
-                        . '* acos( cos( radians(lat) )'
-                        . '* cos( radians(' . $request->lat . ') )'
-                        . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
-                        . '* sin( radians(' . $request->lat . ')))'
-                        . '), 3)) < ?', ['distance' => $request->within_km]);
-                $data['within_km'] = $request->within_km;
-            }
-        }
-        $products = $products->paginate(12);
-        $products = $products->appends($request->except('page'));
-        $data['products'] = $products;
-        $data['brands'] = Brand::where('category_id', 1)->get();
-        $data['models'] = Model::where('category_id', 1)->with('brand')->get();
-        $data['body_types'] = BodyType::where('category_id', 1)->get();
-        $data['fuel_types'] = FuelType::where('category_id', 1)->get();
-        $data['packages'] = Package::where('category_id', 1)->with('model')->get();
-        $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
-        $data['type'] = 'Car';
-        return view('frontend.car-listing', $data);
-    }
-
     public function carLoan() {
         $conditions = Condition::all();
         return view('frontend.car-loan', compact('conditions'));
@@ -393,13 +308,6 @@ class HomeController extends Controller {
 
     public function motorcycleCompare() {
         return view('frontend.motorcycle-compare');
-    }
-
-    public function motorcycleListing() {
-        $products = Product::has('motorcycle')->with('brand', 'model')->paginate(20);
-        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
-        $type = 'Motorcycle';
-        return view('frontend.motorcycle-listing', compact('products', 'suppliers', 'type'));
     }
 
     public function motorcycleWishlist() {

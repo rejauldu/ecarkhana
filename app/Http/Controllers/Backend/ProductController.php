@@ -20,6 +20,10 @@ use App\Color;
 use App\Size;
 use App\Dropdowns\AfterSellService;
 use App\Http\Requests\ProductRequest;
+use App\User;
+use App\Http\Controllers\Backend\CarController;
+use App\Http\Controllers\Backend\MotorcycleController;
+use App\Http\Controllers\Backend\BicycleController;
 
 class ProductController extends Controller {
 
@@ -33,8 +37,19 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        $products = Product::has('motorcycle')->with('brand', 'model')->paginate(20);
+        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $type = 'Motorcycle';
+        return view('frontend.motorcycle-listing', compact('products', 'suppliers', 'type'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manageIndex() {
         $products = Product::with('category')->orderBy('id', 'desc')->get();
-        return view('backend.products.index', compact('products'));
+        return view('backend.products.manage-index', compact('products'));
     }
 
     /**
@@ -81,7 +96,7 @@ class ProductController extends Controller {
         $data[strtolower($category->name) . '_id'] = $id;
 
         Product::find($product->id)->update($data);
-        return redirect(route('products.index'))->with('message', 'Product created successfully');
+        return redirect(route('products.manage-index'))->with('message', 'Product created successfully');
     }
 
     /**
@@ -92,7 +107,14 @@ class ProductController extends Controller {
      */
     public function show($id) {
         $product = Product::find($id);
-        return view('backend.products.show', compact('product'));
+        if($product->category_id == 1) {
+            return (new CarController)->show($id);
+        } elseif ($product->category_id == 2) {
+            return (new MotorcycleController)->show($id);
+        } elseif ($product->category_id == 3) {
+            return (new BicycleController)->show($id);
+        }
+        return redirect(route('car'));
     }
 
     /**

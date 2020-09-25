@@ -23,17 +23,33 @@ use App\Dropdowns\RearBrake;
 use App\Dropdowns\KeyFeature;
 use App\Dropdowns\WhatANew;
 use App\Dropdowns\ProsCons;
+use App\Dropdowns\AfterSellService;
+use App\User;
 
 class MotorcycleController extends Controller {
 
+    public function __construct() {
+        $this->middleware('moderator:Product', ['except' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        $products = Product::has('motorcycle')->with('brand', 'model')->paginate(20);
+        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $type = 'Motorcycle';
+        return view('backend.products.motorcycles.index', compact('products', 'suppliers', 'type'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manageIndex() {
         $motorcycles = Motorcycle::with('condition', 'brand', 'model')->orderBy('id', 'desc')->get();
-        return view('backend.products.motorcycles.index', compact('motorcycles'));
+        return view('backend.products.motorcycles.manage-index', compact('motorcycles'));
     }
 
     /**
@@ -84,7 +100,7 @@ class MotorcycleController extends Controller {
             }
         }
         
-        return redirect(route('motorcycles.index'))->with('message', 'Motorcycle created successfully');
+        return redirect(route('motorcycles.manage-motorcycles'))->with('message', 'Motorcycle created successfully');
     }
 
     /**
@@ -94,7 +110,26 @@ class MotorcycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $product = Product::has('motorcycle')
+                ->with('auction_grade', 'brand', 'model', 'motorcycle.displacement', 'motorcycle.ground_clearance', 'motorcycle.engine_type', 'motorcycle.condition', 'motorcycle.front_brake', 'motorcycle.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+                ->where('id', $id)
+                ->first();
+        $key_features = KeyFeature::where('category_id', 2)->get();
+        $after_sell_services = AfterSellService::where('category_id', 2)->get();
+        $related_products = Product::whereHas('motorcycle', function($q) use($product) {
+                    $q->where('brand_id', $product->motorcycle->brand_id);
+                })
+                ->with('motorcycle', 'motorcycle.brand', 'motorcycle.model', 'supplier.region')
+                ->get();
+        $product->after_sell_service = explode(',', $product->after_sell_service);
+        $type = 'Motorcycle';
+        $today = strtotime(date("Y-m-d"));
+        $from = strtotime($product->auction_from);
+        $to = strtotime($product->auction_to);
+        $auction = false;
+        if ($from <= $today && $to >= $today)
+            $auction = true;
+        return view('backend.products.motorcycles.show', compact('product', 'key_features', 'after_sell_services', 'related_products', 'type', 'auction'));
     }
 
     /**

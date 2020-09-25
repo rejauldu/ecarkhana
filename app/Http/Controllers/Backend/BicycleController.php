@@ -15,6 +15,8 @@ use App\Dropdowns\TyreType;
 use App\Dropdowns\KeyFeature;
 use App\Dropdowns\WhatANew;
 use App\Dropdowns\ProsCons;
+use App\Dropdowns\AfterSellService;
+use App\User;
 
 class BicycleController extends Controller {
 
@@ -24,8 +26,19 @@ class BicycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        $products = Product::has('bicycle')->with('brand', 'model')->paginate(20);
+        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $type = 'Bicycle';
+        return view('backend.products.bicycles.index', compact('products', 'suppliers', 'type'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manageIndex() {
         $bicycles = Bicycle::with('condition', 'brand', 'model')->orderBy('id', 'desc')->get();
-        return view('backend.products.bicycles.index', compact('bicycles'));
+        return view('backend.products.bicycles.manage-index', compact('bicycles'));
     }
 
     /**
@@ -68,7 +81,7 @@ class BicycleController extends Controller {
             }
         }
         
-        return redirect(route('bicycles.index'))->with('message', 'Bicycle created successfully');
+        return redirect(route('bicycles.manage-bicycles'))->with('message', 'Bicycle created successfully');
     }
 
     /**
@@ -78,7 +91,26 @@ class BicycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $product = Product::has('bicycle')
+                ->with('bicycle.brand', 'bicycle.model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+                ->where('id', $id)
+                ->first();
+        $key_features = KeyFeature::where('category_id', 3)->get();
+        $after_sell_services = AfterSellService::where('category_id', 3)->get();
+        $related_products = Product::whereHas('bicycle', function($q) use($product) {
+                    $q->where('brand_id', $product->bicycle->brand_id);
+                })
+                ->with('bicycle', 'bicycle.brand', 'bicycle.model', 'supplier.region')
+                ->get();
+        $product->after_sell_service = explode(',', $product->after_sell_service);
+        $today = strtotime(date("Y-m-d"));
+        $from = strtotime($product->auction_from);
+        $to = strtotime($product->auction_to);
+        $auction = false;
+        if ($from <= $today && $to >= $today)
+            $auction = true;
+        $type = 'Bicycle';
+        return view('backend.products.bicycles.show', compact('product', 'key_features', 'after_sell_services', 'related_products', 'type', 'auction'));
     }
 
     /**
@@ -128,7 +160,7 @@ class BicycleController extends Controller {
             }
         }
         Bicycle::find($id)->update($data);
-        return redirect(route('bicycles.index'))->with('message', 'Bicycle updated successfully');
+        return redirect(route('bicycles.manage-bicycles'))->with('message', 'Bicycle updated successfully');
     }
 
     /**

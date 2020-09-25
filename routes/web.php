@@ -12,26 +12,36 @@
  */
 
 Route::get('/', 'Frontend\HomeController@index')->name('index');
-Route::get('/insurance-list', 'Frontend\HomeController@insuranceList');
+Route::get('/insurances', 'Frontend\HomeController@insuranceList');
 Route::get('/home', 'Frontend\HomeController@index')->name('home');
-Route::get('/motorcycle-index', 'Frontend\HomeController@motorcycleIndex')->name('motorcycle-index');
-Route::get('/bicycle-index', 'Frontend\HomeController@bicycleIndex')->name('bicycle-index');
+Route::get('/', 'Frontend\HomeController@index')->name('car');
+Route::get('/motorcycle', 'Frontend\HomeController@motorcycleIndex')->name('motorcycle');
+Route::get('/bicycle', 'Frontend\HomeController@bicycleIndex')->name('bicycle');
 
 Route::get('/about-us', 'Frontend\HomeController@aboutUs')->name('about-us');
 Route::get('/add-to-compare', 'Frontend\HomeController@addToCompare')->name('add-to-compare');
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
-Route::get('/auction-product-list', 'Frontend\HomeController@auctionProductList')->name('auction-product-list');
+Route::get('/auction-products', 'Frontend\HomeController@auctionProductList')->name('auction-products');
 Route::resource('banks', 'Backend\BankController');
 Route::resource('bids', 'Frontend\BidController');
-Route::get('/manage-banks', 'Backend\BankController@manageIndex')->name('manage-banks');
+Route::resource('bicycles', 'Backend\BicycleController');
 Route::get('/bicycle-compare', 'Frontend\HomeController@bicycleCompare')->name('bicycle-compare');
 Route::get('/bicycle-listing', 'Frontend\HomeController@motorcycleListing')->name('bicycle-listing');
 Route::post('bicycle', 'Backend\NotificationController@bicycleFitResult')->name('bicycle-fit-result');
 Route::resource('blogs', 'Backend\BlogController');
+
+
+Route::get('/cart', 'Frontend\HomeController@motorcycleCart')->name('cart');
+Route::resource('cars', 'Backend\CarController');
+Route::get('/checkout', 'Frontend\HomeController@motorcycleCheckout')->name('checkout');
+Route::get('/manage-banks', 'Backend\BankController@manageIndex')->name('manage-banks');
+Route::get('/manage-bicycles', 'Backend\BicycleController@manageIndex')->name('manage-bicycles');
 Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-blogs');
+Route::get('/manage-cars', 'Backend\CarController@manageIndex')->name('manage-cars');
 Route::get('/manage-insurance-companies', 'Backend\InsuranceCompanyController@manageIndex')->name('manage-insurance-companies');
-Route::get('/motorcycle-cart', 'Frontend\HomeController@motorcycleCart')->name('motorcycle-cart');
-Route::get('/motorcycle-checkout', 'Frontend\HomeController@motorcycleCheckout')->name('motorcycle-checkout');
+Route::get('/manage-motorcycles', 'Backend\MotorcycleController@manageIndex')->name('manage-motorcycles');
+Route::get('/manage-products', 'Backend\ProductController@manageIndex')->name('manage-products');
+Route::resource('motorcycles', 'Backend\MotorcycleController');
 Route::get('/motorcycle-compare', 'Frontend\HomeController@motorcycleCompare')->name('motorcycle-compare');
 Route::get('/motorcycle-listing', 'Frontend\HomeController@motorcycleListing')->name('motorcycle-listing');
 Route::get('/motorcycle-wishlist', 'Frontend\HomeController@motorcycleWishlist')->name('motorcycle-wishlist');
@@ -47,11 +57,11 @@ Route::get('/compare/{url?}', 'Frontend\HomeController@compare')->name('compare'
 Route::post('/compare-car', 'Frontend\HomeController@compareCar')->name('compare-car');
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
 Route::get('/dealer-detail/{id}', 'Frontend\HomeController@dealerDetail')->name('dealer-detail');
-Route::get('/dealer-list', 'Frontend\HomeController@dealerList')->name('dealer-list');
+Route::get('/dealers', 'Frontend\HomeController@dealerList')->name('dealers');
 Route::resource('fit-calculators', 'Frontend\FitCalculatorController');
 Route::get('/fit-calculator/{detail?}', 'Frontend\FitCalculatorController@fitCalculator')->name('fit-calculator');
 Route::get('/fit-result/{url?}', 'Frontend\FitCalculatorController@download')->name('fit-result');
-Route::get('/group-buying-list', 'Frontend\HomeController@groupBuyingList')->name('group-buying-list');
+Route::get('/group-buying-products', 'Frontend\HomeController@groupBuyingList')->name('group-buying-products');
 Route::resource('insurances', 'Frontend\InsuranceController');
 Route::get('/insurance', 'Frontend\InsuranceController@create')->name('insurance');
 Route::get('/insurance-photos', 'Frontend\InsuranceController@photos')->name('insurance-photos');
@@ -59,12 +69,12 @@ Route::get('/insurance-checkout', 'Frontend\InsuranceController@checkout')->name
 Route::post('/insurance-checkout-store', 'Frontend\InsuranceController@checkoutStore')->name('insurance-checkout-store');
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
 Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
-Route::get('/national-distributor-list', 'Frontend\HomeController@nationalDistributorList')->name('national-distributor-list');
+Route::get('/national-distributors', 'Frontend\HomeController@nationalDistributorList')->name('national-distributors');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
 Route::get('/get-product', 'Backend\ProductController@getProduct')->name('get-product');
 Route::get('/get-regions', 'Frontend\HomeController@getRegions')->name('get-regions');
 Route::get('/get-region', 'Frontend\HomeController@getRegion')->name('get-region');
-Route::get('/search-page', 'Frontend\HomeController@searchPage')->name('search-page');
+Route::get('/search', 'Frontend\HomeController@searchPage')->name('search');
 
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');
 Route::get('/single-accessories', 'Frontend\HomeController@singleAccessories')->name('single-accessories');
@@ -99,8 +109,8 @@ Route::get('/panorama', function() {
 })->name('panorama');
 //Routes for dashboard
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/seller-my-ad/{id}', 'Frontend\HomeController@sellerMyAd')->name('seller-my-ad');
-    Route::get('/seller-profile/{id}', 'Frontend\HomeController@sellerProfile')->name('seller-profile');
+    Route::get('/my-ads/{id}', 'Frontend\HomeController@sellerMyAd')->name('my-ads');
+    Route::get('/seller/{id}', 'Frontend\HomeController@sellerProfile')->name('seller');
     Route::resource('advertisements', 'Backend\AdvertisementController')->middleware('moderator:Product');
     Route::resource('auctions', 'Backend\AuctionController');
     Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
@@ -121,9 +131,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('products-auction/{id}', 'Backend\ProductController@auction')->name('products.auction');
     Route::post('products-auction/{id}', 'Backend\ProductController@auctionStore')->name('products.auction.store');
 
-    Route::resource('cars', 'Backend\CarController')->middleware('moderator:Product');
-    Route::resource('motorcycles', 'Backend\MotorcycleController')->middleware('moderator:Product');
-    Route::resource('bicycles', 'Backend\BicycleController')->middleware('moderator:Product');
     Route::resource('units', 'Backend\UnitController')->middleware('moderator:Unit');
     Route::resource('order-statuses', 'Backend\OrderStatusController')->middleware('moderator:Order Status');
     Route::resource('shippers', 'Backend\ShipperController')->middleware('moderator:Shipper');

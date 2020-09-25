@@ -59,13 +59,13 @@
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::is('products') ? 'active' : '' }}"><a href="{{ route('products.index') }}"><i class="fa fa-circle-o"></i> Manage Product</a></li>
+                    <li class="{{ Request::is('manage-products') ? 'active' : '' }}"><a href="{{ route('manage-products') }}"><i class="fa fa-circle-o"></i> Manage Product</a></li>
                     <li class="{{ Request::is('products/create') ? 'active' : '' }}"><a href="{{ route('products.create') }}"><i class="fa fa-circle-o"></i> Add New Product</a></li>
-                    <li class="{{ Request::is('cars') ? 'active' : '' }}"><a href="{{ route('cars.index') }}"><i class="fa fa-circle-o"></i> Manage Car</a></li>
+                    <li class="{{ Request::is('manage-cars') ? 'active' : '' }}"><a href="{{ route('manage-cars') }}"><i class="fa fa-circle-o"></i> Manage Car</a></li>
                     <li class="{{ Request::is('cars/create') ? 'active' : '' }}"><a href="{{ route('cars.create') }}"><i class="fa fa-circle-o"></i> Add New Car</a></li>
-                    <li class="{{ Request::is('motorcycles') ? 'active' : '' }}"><a href="{{ route('motorcycles.index') }}"><i class="fa fa-circle-o"></i> Manage Motorcycle</a></li>
+                    <li class="{{ Request::is('manage-motorcycles') ? 'active' : '' }}"><a href="{{ route('manage-motorcycles') }}"><i class="fa fa-circle-o"></i> Manage Motorcycle</a></li>
                     <li class="{{ Request::is('motorcycles/create') ? 'active' : '' }}"><a href="{{ route('motorcycles.create') }}"><i class="fa fa-circle-o"></i> Add New Motorcycle</a></li>
-                    <li class="{{ Request::is('bicycles') ? 'active' : '' }}"><a href="{{ route('bicycles.index') }}"><i class="fa fa-circle-o"></i> Manage Bicycle</a></li>
+                    <li class="{{ Request::is('manage-bicycles') ? 'active' : '' }}"><a href="{{ route('manage-bicycles') }}"><i class="fa fa-circle-o"></i> Manage Bicycle</a></li>
                     <li class="{{ Request::is('bicycles/create') ? 'active' : '' }}"><a href="{{ route('bicycles.create') }}"><i class="fa fa-circle-o"></i> Add New Bicycle</a></li>
                 </ul>
             </li>

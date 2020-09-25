@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Color;
 use App\Car;
+use App\User;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
 use App\Dropdowns\BodyType;
@@ -37,14 +38,106 @@ use App\Dropdowns\AfterSellService;
 
 class CarController extends Controller {
 
+    public function __construct() {
+        $this->middleware('moderator:Product', ['except' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index(Request $request) {
+        $products = Product::select('products.*')->has('car')->with('car', 'supplier.region');
+        $filters = [];
+        if ($request->condition) {
+            $products = $products->whereHas('condition', function (Builder $q) use($request) {
+                $q->whereRaw('lower(name) like "%' . strtolower($request->condition) . '%"');
+            });
+            $data['condition'] = $request->condition;
+        }
+        if ($request->location) {
+            $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
+                $q->where('name', 'like', '%' . $request->location . '%');
+            });
+            $data['location'] = $request->location;
+        }
+        if ($request->brand && $request->brand != 'All Brands') {
+            $products = $products->whereHas('brand', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->brand) . "%'");
+            });
+            $data['brand'] = $request->brand;
+        }
+        if ($request->model && $request->model != 'All Models') {
+            $products = $products->whereHas('model', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
+            });
+            $data['model'] = $request->model;
+        }
+        if ($request->body_type && $request->body_type != 'All Body Types') {
+            $products = $products->whereHas('car.body_type', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
+            });
+            $data['body_type'] = $request->body_type;
+        }
+        if ($request->msrp) {
+            $products = $products->where('msrp', $request->msrp);
+            $data['msrp'] = $request->msrp;
+        }
+        if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
+            $products = $products->whereHas('car.fuel_type', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
+            });
+            $data['fuel_type'] = $request->fuel_type;
+        }
+        if ($request->package && $request->package != 'All Packages') {
+            $products = $products->whereHas('car.package', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
+            });
+            $data['package'] = $request->package;
+        }
+        if ($request->lat && $request->lon) {
+            $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
+                    ->selectRaw('ROUND(('
+                            . '6371'
+                            . '* acos( cos( radians(lat) )'
+                            . '* cos( radians(' . $request->lat . ') )'
+                            . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                            . '* sin( radians(' . $request->lat . ')))'
+                            . '), 3) AS distance')
+                    ->orderBy('distance', 'ASC');
+            if ($request->within_km) {
+                $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
+                        ->whereRaw('(ROUND(('
+                        . '6371'
+                        . '* acos( cos( radians(lat) )'
+                        . '* cos( radians(' . $request->lat . ') )'
+                        . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians(' . $request->lat . ')))'
+                        . '), 3)) < ?', ['distance' => $request->within_km]);
+                $data['within_km'] = $request->within_km;
+            }
+        }
+        $products = $products->paginate(12);
+        $products = $products->appends($request->except('page'));
+        $data['products'] = $products;
+        $data['brands'] = Brand::where('category_id', 1)->get();
+        $data['models'] = Model::where('category_id', 1)->with('brand')->get();
+        $data['body_types'] = BodyType::where('category_id', 1)->get();
+        $data['fuel_types'] = FuelType::where('category_id', 1)->get();
+        $data['packages'] = Package::where('category_id', 1)->with('model')->get();
+        $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $data['type'] = 'Car';
+        return view('backend.products.cars.index', $data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manageIndex() {
         $cars = Car::with('brand', 'model', 'package')->orderBy('id', 'desc')->get();
-        return view('backend.products.cars.index', compact('cars'));
+        return view('backend.products.cars.manage-cars', compact('cars'));
     }
 
     /**
@@ -122,7 +215,7 @@ class CarController extends Controller {
             }
         }
         
-        return redirect(route('cars.index'))->with('message', 'Car created successfully');
+        return redirect(route('cars.manage-cars'))->with('message', 'Car created successfully');
     }
 
     /**
@@ -132,7 +225,23 @@ class CarController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $product = Product::has('car')
+                ->with('auction_grade', 'car.brand', 'car.model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'region.division')
+                ->where('id', $id)
+                ->first();
+        $key_features = KeyFeature::where('category_id', 1)->get();
+        $interior_features = InteriorFeature::all();
+        $exterior_features = ExteriorFeature::all();
+        $safety_securities = SafetySecurity::all();
+        $additional_features = AdditionalFeature::all();
+        $after_sell_services = AfterSellService::where('category_id', 1)->get();
+        $related_products = Product::whereHas('car', function($q) use($product) {
+                    $q->where('brand_id', $product->car->brand_id);
+                })
+                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
+                ->get();
+        $product->after_sell_service = explode(',', $product->after_sell_service);
+        return view('backend.products.cars.show', compact('product', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features', 'after_sell_services', 'related_products'));
     }
 
     /**
@@ -229,7 +338,7 @@ class CarController extends Controller {
             }
         }
         Car::find($id)->update($data);
-        return redirect(route('cars.index'))->with('message', 'Car updated successfully');
+        return redirect(route('cars.manage-cars'))->with('message', 'Car updated successfully');
     }
 
     /**
