@@ -285,6 +285,8 @@ function setParentsHeight() {
     }
     document.addEventListener('mousemove', event => {
         event = getMouseEvent(event);
+		if(!slide)
+			return false;
         var left = slide.getBoundingClientRect().left;
         
         var position = event.pageX-left;
