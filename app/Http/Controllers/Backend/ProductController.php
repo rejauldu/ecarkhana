@@ -28,7 +28,7 @@ use App\Http\Controllers\Backend\BicycleController;
 class ProductController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['store', 'getProduct']]);
+        $this->middleware('moderator:Product', ['except' => ['store', 'getProduct', 'show']]);
     }
 
     /**

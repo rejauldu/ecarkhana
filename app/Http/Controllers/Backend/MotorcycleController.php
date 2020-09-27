@@ -29,7 +29,7 @@ use App\User;
 class MotorcycleController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['index']]);
+        $this->middleware('moderator:Product', ['except' => ['index', 'show']]);
     }
     /**
      * Display a listing of the resource.

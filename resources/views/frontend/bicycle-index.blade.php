@@ -230,10 +230,10 @@ Start Used Cars In Your City And Budget -->
                     <h2>New Bicycles</h2>
                     <div class="separator"></div>
                 </div>
-                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                     @foreach($new_products as $new_product)
                     <div class="item">
-                        <div class="bg-white product-hover-effect shadow-sm car-item">
+                        <div class="bg-white product-hover-effect shadow m-3">
                             <div class="size-53">
                                 <div class="size-child overflow-hidden">
                                     <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -355,12 +355,12 @@ start Featured Cars -->
                     <div class="car-item">
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($used_products as $used_product)
                         <div class="item">
-                            <div class="bg-white shadow-sm car-item">
-                                <div class="size-53">
-                                    <div class="size-child overflow-hidden">
+                            <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                                <div class="size-53 clearfix">
+                                    <div class="size-child overflow-hidden zoom-target-1">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
                                     </div>
                                     <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
@@ -445,10 +445,10 @@ Start Popular car -->
                         <h2>Popular Bicycles</h2>
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($popular_products as $new_product)
                         <div class="item">
-                            <div class="bg-white product-hover-effect shadow-sm car-item">
+                            <div class="bg-white product-hover-effect shadow m-3">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -479,7 +479,7 @@ Start Popular car -->
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
                                     <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                                 </div>

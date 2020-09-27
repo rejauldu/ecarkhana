@@ -603,44 +603,64 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="feature-car">
-                    <h6>Related Bikes</h6>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="owl-carousel" data-nav-arrow="true" data-nav-dots="true" data-items="3" data-md-items="3" data-sm-items="2" data-space="15">
-                                @foreach($related_products as $related_product)
-                                <div class="item">
-                                    <div class="featured-car-list">
-                                        <div class="featured-car-img">
-                                            <a href=""><img src="{{ url('/') }}/assets/products/{{ $related_product->id }}/{{ $related_product->image1 }}" class="img-responsive" alt="Image"></a>
-                                            <div class="label_icon">{{ $related_product->condition->name ?? 'New'  }}</div>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $related_product->id }}">
-                                                    <label for="compare3">Compare</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="featured-car-content">
-                                            <div class="price_info">
-                                                <p class="featured-price">Tk.{{ $related_product->msrp ?? ''}}</p>
-                                                <div class="car-location"><span><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $related_product->supplier->region->name ?? ''}}, {{ $related_product->supplier->division->name ?? ''}}</span></div>
-                                            </div>
-                                            <ul>
-                                                <li><i class="fa fa-road" aria-hidden="true"></i>{{ $related_product->bicycle->kms_driven ?? ''}} km</li>
-                                                <li><i class="fa fa-tachometer" aria-hidden="true"></i>{{ $related_product->bicycle->milage ?? ''}} miles</li>
-                                                <li><i class="fa fa-calendar" aria-hidden="true"></i>{{ $related_product->bicycle->model->name ?? ''}}</li>
-                                                <li><i class="fa fa-user" aria-hidden="true"></i>{{ $related_product->bicycle->brand->name ?? ''}}</li>
-                                            </ul>
-                                        </div>
+            <div class="col-md-12 text-center">
+                <h2>Related Bicycles</h2>
+                <div class="car-item">
+                    <div class="separator"></div>
+                </div>
+                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
+                    @foreach($related_products as $related_product)
+                    <div class="item">
+                        <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                            <div class="size-53 clearfix">
+                                <div class="size-child overflow-hidden zoom-target-1">
+                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $related_product->id }}/{{ $related_product->image1 ?? 'not-found.jpg' }}" alt="{{ $related_product->name }}">
+                                </div>
+                                <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                    <input type="checkbox" id="used-{{ $related_product->id }}" class="compare-checkbox" product-id="{{ $related_product->id }}">
+                                    <label for="used-{{ $related_product->id }}">Compare</label>
+                                </div>
+                                @if($related_product->condition_id == 3)
+                                <div class="float-right form-control bg-danger text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                    Used
+                                </div>
+                                @endif
+                            </div>
+                            <div class="text-dark clearfix px-3 py-1">
+                                <div>
+                                    <i class="fa @if($related_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($related_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($related_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($related_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($related_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                </div>
+                                <div class="text-left clearfix">
+                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $related_product->supplier->region->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $related_product->motorcycle->brand->name ?? ''}}</span>
+                                </div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $related_product->id) }}" class="">{{ $related_product->name }}</a></div>
+                                <div class="separator"></div>
+                                <h3 class="owl-heading">Tk.{{ $related_product->msrp }}</h3>
+                                <div class="row text-left">
+                                    <div class="col-6 my-1">
+                                        <i class="fa fa-road"></i> {{ $related_product->bicycle->kms_driven ?? ''}} km
+                                    </div>
+                                    <div class="col-6 my-1">
+                                        <i class="fa fa-calendar"></i> {{ $related_product->bicycle->milage ?? ''}} miles
+                                    </div>
+                                    <div class="col-6 my-1">
+                                        <i class="fa fa-calendar"></i> {{ $related_product->bicycle->model->name ?? ''}} model
+                                    </div>
+                                    <div class="col-6 my-1">
+                                        <i class="fa fa-hourglass-end"></i> {{ $related_product->bicycle->brand->name ?? ''}} brand
                                     </div>
                                 </div>
-                                @endforeach
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
+                <a href="{{ route('bicycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>

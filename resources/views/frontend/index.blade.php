@@ -308,10 +308,10 @@
                         <h2>New Cars</h2>
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($new_products as $new_product)
                         <div class="item">
-                            <div class="bg-white product-hover-effect shadow-sm car-item">
+                            <div class="bg-white product-hover-effect shadow m-3">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -439,12 +439,12 @@
                     <div class="car-item">
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($used_products as $used_product)
                         <div class="item">
-                            <div class="bg-white shadow-sm car-item">
-                                <div class="size-53">
-                                    <div class="size-child overflow-hidden">
+                            <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                                <div class="size-53 clearfix">
+                                    <div class="size-child overflow-hidden zoom-target-1">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
                                     </div>
                                     <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
@@ -535,10 +535,10 @@
                         <h2>Popular Cars</h2>
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($popular_products as $new_product)
                         <div class="item">
-                            <div class="bg-white product-hover-effect shadow-sm car-item">
+                            <div class="bg-white product-hover-effect shadow m-3">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -594,10 +594,10 @@
                     <h2>Recondition Cars</h2>
                     <div class="separator"></div>
                 </div>
-                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                     @foreach($recondition_products as $new_product)
                     <div class="item">
-                        <div class="bg-white product-hover-effect shadow-sm car-item">
+                        <div class="bg-white product-hover-effect shadow m-3">
                             <div class="size-53">
                                 <div class="size-child overflow-hidden">
                                     <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">

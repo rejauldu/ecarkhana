@@ -53,8 +53,8 @@
                                     </li>
                                 </ul>
                                 <div class="sms-ecommerce-btn">
-                                    <a href="{{ route('motorcycle-cart') }}" class="button red">View Cart  <i class="fa fa-chevron-right"></i></a>
-                                    <a href="{{ route('motorcycle-checkout') }}" class="button red">Checkout <i class="fa fa-chevron-right"></i></a>
+                                    <a href="{{ route('cart') }}" class="button red">View Cart  <i class="fa fa-chevron-right"></i></a>
+                                    <a href="{{ route('checkout') }}" class="button red">Checkout <i class="fa fa-chevron-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                             <a href="car-ad-post" class="button red">Sell Car</a>
                         </div>
                         <div>
-                            <form action="{{ route('search-page') }}">
+                            <form action="{{ route('search') }}">
                                 <div class="searchBox">
                                     <input class="searchInput" type="text" name="search" placeholder="Search" value="{{ $search ?? '' }}">
                                     <button class="searchButton" type="submit">
@@ -87,9 +87,9 @@
                 <div class='container-menu'>
                     <nav class='navigation'>
                         <ul class='core-menu'>
-                            <li class="@if((isset($type) && $type == 'Car') || !isset($type)) current @endif sms-focus"><a href='{{ url('/') }}'><i class="fa fa-car"></i>Car</a></li>
-                            <li class="@if(isset($type) && $type == 'Motorcycle') current @endif sms-focus"><a href='{{ route("motorcycle-index") }}'><i class="fa fa-motorcycle"></i>Bike</a></li>
-                            <li class="@if(isset($type) && $type == 'Bicycle') current @endif sms-focus"><a href='{{ route("bicycle-index") }}'><i class="fa fa-bicycle"></i>Bicycle</a></li>
+                            <li class="@if((isset($type) && $type == 'Car') || !isset($type)) current @endif sms-focus"><a href='{{ route("car") }}'><i class="fa fa-car"></i>Car</a></li>
+                            <li class="@if(isset($type) && $type == 'Motorcycle') current @endif sms-focus"><a href='{{ route("motorcycle") }}'><i class="fa fa-motorcycle"></i>Bike</a></li>
+                            <li class="@if(isset($type) && $type == 'Bicycle') current @endif sms-focus"><a href='{{ route("bicycle") }}'><i class="fa fa-bicycle"></i>Bicycle</a></li>
                             <li class="slide"></li>
                         </ul>
 
@@ -102,13 +102,13 @@
                             <div class="sms-main-menu">
                                 <nav>
                                     <ul class="m-0 p-0">
-                                        <li class="mobile-menu"><a href='{{ url('/') }}'>Car</a></li>
-                                        <li class="mobile-menu"><a href='bike-index'>Bike</a> </li>
-                                        <li class="mobile-menu"><a href='bicycle-index'>Bicycle</a>
+                                        <li class="mobile-menu"><a href='{{ route("car") }}'>Car</a></li>
+                                        <li class="mobile-menu"><a href='{{ route("motorcycle") }}'>Bike</a> </li>
+                                        <li class="mobile-menu"><a href='{{ route("bicycle") }}'>Bicycle</a>
                                         </li>
-                                        <li><a href="{{ route('dealer-list') }}" class="current-hover">EShowroom</a>
+                                        <li><a href="{{ route('dealers.index') }}" class="current-hover">EShowroom</a>
                                         </li>
-                                        <li><a href="{{ route('national-distributor-list') }}">National Distributor </a>
+                                        <li><a href="{{ route('national-distributors.index') }}">National Distributor </a>
                                         </li>
                                         <li class="carkhana-drop"><a href="#">Loan Info <i class="fa fa-angle-double-down"></i></a>
                                             <ul class='dropdown'>
@@ -117,12 +117,12 @@
                                                 <li><a href="{{ route('insurance') }}">Insurance</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{ route('car-listing') }}">Buy Cars</a>
+                                        <li><a href="{{ route('cars.index') }}">Buy Cars</a>
                                         </li>
                                         <li><a href="{{ route('sell-product-list') }}">Sell Cars</a> </li>
                                         <li><a href="{{ route('compare-car') }}">Comparison</a> </li>
-                                        <li><a href="{{ route('auction-product-list') }}">Auction</a> </li>
-                                        <li><a href="{{ route('group-buying-list') }}">Group Buying</a> </li>
+                                        <li><a href="{{ route('auction-products') }}">Auction</a> </li>
+                                        <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li>
                                     </ul>
                                 </nav>
                             </div>

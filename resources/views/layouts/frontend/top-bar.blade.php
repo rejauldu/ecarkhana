@@ -106,7 +106,7 @@
                                         <li class="mobile-menu"><a href='{{ route("motorcycle") }}'>Bike</a> </li>
                                         <li class="mobile-menu"><a href='{{ route("bicycle") }}'>Bicycle</a></li>
                                         <li><a href="{{ route('dealers.index') }}" class="current-hover">EShowroom</a></li>
-                                        <li><a href="{{ route('national-distributors') }}">National Distributor </a></li>
+                                        <li><a href="{{ route('national-distributors.index') }}">National Distributor </a></li>
                                         <li class="carkhana-drop"><a href="#">Loan Info <i class="fa fa-angle-double-down"></i></a>
                                             <ul class='dropdown'>
                                                 <li><a href="{{ route('car-loan') }}">Apply Loan </a></li>

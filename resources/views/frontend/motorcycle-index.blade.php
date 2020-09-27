@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dealers') }}">
+                        <a href="{{ route('dealers.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-friend"></i><br>
                                 <p>Sell bike</p>
@@ -243,10 +243,10 @@
                     <h2>New Bikes</h2>
                     <div class="separator"></div>
                 </div>
-                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                     @foreach($new_products as $new_product)
                     <div class="item">
-                        <div class="bg-white product-hover-effect shadow-sm car-item">
+                        <div class="bg-white product-hover-effect shadow m-3">
                             <div class="size-53">
                                 <div class="size-child overflow-hidden">
                                     <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -276,7 +276,7 @@
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->motorcycle->brand->name ?? ''}}</span>
                                 </div>
-                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                 <div class="separator"></div>
                                 <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                             </div>
@@ -365,12 +365,12 @@ Start Compare -->
                     <div class="car-item">
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($used_products as $used_product)
                         <div class="item">
-                            <div class="bg-white shadow-sm car-item">
-                                <div class="size-53">
-                                    <div class="size-child overflow-hidden">
+                            <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                                <div class="size-53 clearfix">
+                                    <div class="size-child overflow-hidden zoom-target-1">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
                                     </div>
                                     <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
@@ -390,7 +390,7 @@ Start Compare -->
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->motorcycle->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
                                     <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
                                     <div class="row text-left">
@@ -455,10 +455,10 @@ Start Compare -->
                         <h2>Popular Bikes</h2>
                         <div class="separator"></div>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="20">
+                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($popular_products as $new_product)
                         <div class="item">
-                            <div class="bg-white product-hover-effect shadow-sm car-item">
+                            <div class="bg-white product-hover-effect shadow m-3">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -489,7 +489,7 @@ Start Compare -->
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
                                     <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                                 </div>

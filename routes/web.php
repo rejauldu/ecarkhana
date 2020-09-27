@@ -68,8 +68,8 @@ Route::get('/insurance-photos', 'Frontend\InsuranceController@photos')->name('in
 Route::get('/insurance-checkout', 'Frontend\InsuranceController@checkout')->name('insurance-checkout');
 Route::post('/insurance-checkout-store', 'Frontend\InsuranceController@checkoutStore')->name('insurance-checkout-store');
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
-Route::get('/national-distributor-detail/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributor-detail');
-Route::get('/national-distributors', 'Frontend\HomeController@nationalDistributorList')->name('national-distributors');
+Route::get('/national-distributors/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributors.show');
+Route::get('/national-distributors', 'Frontend\HomeController@nationalDistributorList')->name('national-distributors.index');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
 Route::get('/get-product', 'Backend\ProductController@getProduct')->name('get-product');
 Route::get('/get-regions', 'Frontend\HomeController@getRegions')->name('get-regions');
