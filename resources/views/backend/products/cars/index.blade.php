@@ -9,8 +9,7 @@
 @include('layouts.frontend.car-background')
 
 
-<!--=================================
-product-listing  -->
+<!--=================================product-listing  -->
 
 <section class="product-listing page-section-ptb">
     <div class="container">
@@ -69,45 +68,40 @@ product-listing  -->
             @endcomputer
 
             <div class="col-lg-9 col-md-8" id="products">
-
                 <div class="row">
                     @foreach($products as $product)
-                    <div class="col-lg-4">
-                        <div class="car-item gray-bg text-center">
-                            <div class="car-image">
-                                <img class="img-fluid" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="">
-                                <div class="car-overlay-banner">
-                                    <ul>
-                                        <li>
-                                            <div class="compare_item">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" class="compare-checkbox" product-id="{{ $product->id }}">
-                                                    <label for="">Compare</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                    <div class="col-12 col-md-6 col-lg-4 px-2">
+                        <div class="bg-white product-hover-effect shadow-sm mb-3">
+                            <div class="size-53">
+                                <div class="size-child overflow-hidden">
+                                    <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $product->name }}">
+                                </div>
+                                <div class="size-child product-hover-show">
+                                    <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative py-1 height-30">
+                                        <input type="checkbox" id="new-{{ $product->id }}" class="compare-checkbox" product-id="{{ $product->id }}">
+                                        <label for="new-{{ $product->id }}">Compare</label>
+                                    </div>
+                                </div>
+                                <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
+                                    <a class="btn btn-link border ml-1 text-dark py-1" href="{{ route('single-car-product', $product->id) }}">Dealer Detail</a>
+                                    <a class="btn btn-link border float-right mr-1 text-dark py-1" href="#" @click.prevent='openWhatsappModal({{ $product->id }})'><i class="fa fa-whatsapp text-success"></i> Chat</a>
                                 </div>
                             </div>
-                            <div class="car-list">
-                                <div class="text-left">
-                                    <a class="btn red btn-link border ml-1 text-dark" href="{{ route('single-car-product', $product->id) }}">Dealer Detail</a>
-                                    <a class="btn btn-link border float-right mr-1 text-dark" href="#" @click.prevent='openWhatsappModal({{ $product->id }})'><i class="fa fa-whatsapp text-success"></i> Chat</a>
-                                </div>
-                            </div>
-                            <div class="car-content">
-                                <div class="star">
+                            <div class="text-dark clearfix px-3 py-1">
+                                <div class="text-center">
                                     <i class="fa @if($product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
                                     <i class="fa @if($product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div> 
-                                <a href="{{ route('single-car-product', $product->id) }}">{{ $product->name }}</a>
-                                <div class="separator"></div>
-                                <div class="price">
-                                    <span class="new-price">Tk.{{ $product->msrp }} </span>
                                 </div>
+                                <div class="text-left clearfix">
+                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $product->supplier->region->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $product->car->brand->name ?? ''}}</span>
+                                </div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $product->id) }}" class="">{{ $product->name }}</a></div>
+                                <div class="separator"></div>
+                                <h3 class="owl-heading">Tk.{{ $product->msrp }}</h3>
                             </div>
                         </div>
                     </div>
@@ -118,7 +112,7 @@ product-listing  -->
                 </div>
                 <!-- The Modal -->
                 <div class="modal fullscreen-md" id="whatsapp-modal">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
@@ -159,7 +153,7 @@ product-listing  -->
                                 </div>
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="terms" name="terms" v-model="terms">
-                                    <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
+                                    <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary p-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary p-0" href="#">Privacy Policy</a></label>
                                 </div>
                             </div>
 
@@ -201,7 +195,7 @@ product-listing  -->
                     <li>
                         <div class="listTitle">Popularity</div>
                         <div class="listText">
-                            <div class=""">Popular</div>
+                            <div class="">Popular</div>
                         </div>
                     </li>
                     <li>
@@ -215,6 +209,18 @@ product-listing  -->
 
             <div class="smsphone-list-filter" style="display:none;"> 
                 <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="#">Price</a>
+                        <ul>
+                            <li>
+                                <span class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> All Conditions
+                                    </label>
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="list-group-item">
                         <a href="#">Year</a>
                         <ul>
@@ -644,12 +650,17 @@ product-listing  -->
             },
             computed: {
                 whatsappLink: function () {
-                    var encodedURL = encodeURIComponent("{{ url('/') }}/single-car-product/" + this.id);
+                    var encodedURL = encodeURIComponent("{{ url('/products') }}/" + this.id);
                     var link = 'https://api.whatsapp.com/send?phone=8801817338234&text=' + encodedURL + '%0a‎Hello%0aI%0aneed%0asome%0ainformation%0aabout%0athis%0avehicle';
                     return link;
                 }
             }
         });
     })();
+    function priceUpdate() {
+        var minimum = document.getElementById("minimum-price").value;
+        var maximum = document.getElementById("maximum-price").value;
+        console.log(minimum+", "+maximum);
+    }
 </script>
 @endsection

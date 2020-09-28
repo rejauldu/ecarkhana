@@ -263,102 +263,116 @@ function setParentsHeight() {
 })();
 /* Multi handle slide starts */
 (function() {
-    var handle1Clicked = false;
-    var handle2Clicked = false;
-    var handle1Position = 0;
-    var handle2Position = 0;
+var slides = document.getElementsByClassName("multi-handle-slide");
+if(!slides.length)
+    return false;
+var handle1Clicked = false;
+var handle2Clicked = false;
+
+var slide = slides[0];
+
+for(let i=0; i<slides.length; i++) {
+    slides[i].setAttribute("data-handle-1-position", updateHandle1(slides[i]));
+    slides[i].setAttribute("data-handle-2-position", updateHandle2(slides[i]));
+    slides[i].querySelector(".handle-1").addEventListener('mousedown', e => {
+        slide = e.target.parentElement || e.srcElement.parentElement;
+        handle1Clicked = true;
+    });
+    slides[i].querySelector(".handle-2").addEventListener('mousedown', e => {
+        slide = e.target.parentElement || e.srcElement.parentElement;
+        handle2Clicked = true;
+    });
+}
+document.addEventListener('mousemove', event => {
+    event = getMouseEvent(event);
+    var left = slide.getBoundingClientRect().left;
     
-    var slides = document.getElementsByClassName("multi-handle-slide");
-    var slide = slides[0];
-    
-    for(let i=0; i<slides.length; i++) {
-        slides[i].setAttribute("data-handle-1", handle1Position);
-        slides[i].setAttribute("data-handle-2", handle2Position);
-        slides[i].querySelector(".handle-1").addEventListener('mousedown', e => {
-            slide = e.target.parentElement || e.srcElement.parentElement;
-            handle1Clicked = true;
-        });
-        slides[i].querySelector(".handle-2").addEventListener('mousedown', e => {
-            slide = e.target.parentElement || e.srcElement.parentElement;
-            handle2Clicked = true;
-        });
+    var position = event.pageX-left-10;
+    if(handle1Clicked) {
+        updateHandle1(slide, position);
+    } else if(handle2Clicked) {
+        updateHandle2(slide, position);
     }
-    document.addEventListener('mousemove', event => {
-        event = getMouseEvent(event);
-		if(!slide)
-			return false;
-        var left = slide.getBoundingClientRect().left;
-        
-        var position = event.pageX-left;
-        if(handle1Clicked) {
-            handle1Position = updateHandle1(slide, position);
-        } else if(handle2Clicked) {
-            handle2Position = updateHandle2(slide, position);
-        }
-    });
-    document.addEventListener('mouseup', e => {
-        handle1Clicked = false;
-        handle2Clicked = false;
-    });
+});
+document.addEventListener('mouseup', e => {
+    let updated = slide.getAttribute("data-updated");
+    if(updated && (handle1Clicked || handle2Clicked)) {
+        window[updated]();
+    }
+    handle1Clicked = false;
+    handle2Clicked = false;
+});
 })();
 function getMouseEvent(event) {
-    var eventDoc, doc, body;
-    event = event || window.event;
-    if (event.pageX == null && event.clientX != null) {
-        eventDoc = (event.target && event.target.ownerDocument) || document;
-        doc = eventDoc.documentElement;
-        body = eventDoc.body;
-        event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
-    }
-    return event;
+var eventDoc, doc, body;
+event = event || window.event;
+if (event.pageX == null && event.clientX != null) {
+    eventDoc = (event.target && event.target.ownerDocument) || document;
+    doc = eventDoc.documentElement;
+    body = eventDoc.body;
+    event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
 }
-function updateHandle1(slide, position) {
-    let width = slide.offsetWidth;
-    position = position<0?0:position;
-    let handle1 = slide.querySelector(".handle-1");
-    let highlight = slide.querySelector(".highlight");
-    let min = slide.getAttribute("data-min");
-    let max = slide.getAttribute("data-max");
-    let callback = slide.getAttribute("data-callback");
-    let handle2Position = slide.getAttribute("data-handle-2");
-    let range = max-min;
-    let unit = width/range;
-    let value = Math.round(position/unit);
-    let handle1Position = value*unit;
-    let minimum = slide.querySelector(".minimum");
-    handle1Position = handle1Position>width-handle2Position-20?width-handle2Position-20:handle1Position;
-    handle1.style.transform = "translate("+handle1Position+"px, 0)";
-    highlight.style.left = handle1Position+"px";
-    highlight.style.width = width-handle1Position-handle2Position+"px";
-    if(minimum)
-        minimum.value = Math.round(handle1Position/unit);
-    if(callback)
-        window[callback](Math.round(handle1Position/unit), Math.round(handle2Position/unit));
-    slide.setAttribute("data-handle-1", handle1Position);
-    return handle1Position;
+return event;
 }
-function updateHandle2(slide, position) {
-    let width = slide.offsetWidth;
-    position = position>width-20?width-20:position;
-    let handle2 = slide.querySelector(".handle-2");
-    let highlight = slide.querySelector(".highlight");
-    let min = slide.getAttribute("data-min");
-    let max = slide.getAttribute("data-max");
-    let callback = slide.getAttribute("data-callback");
-    let handle1Position = slide.getAttribute("data-handle-1");
-    let range = max-min;
-    let unit = width/range;
-    let value = Math.round((width-position-20)/unit);
-    let handle2Position = value*unit;
-    let maximum = slide.querySelector(".maximum");
-    handle2Position = handle2Position>width-handle1Position-20?width-handle1Position-20:handle2Position;
-    handle2.style.transform = "translate(-"+handle2Position+"px, 0)";
-    highlight.style.width = width-handle1Position-handle2Position+"px";
-    if(maximum)
-        maximum.value = range-Math.round(handle2Position/unit);
-    if(callback)
-        window[callback](Math.round(handle1Position/unit), range-Math.round(handle2Position/unit));
-    slide.setAttribute("data-handle-2", handle2Position);
-    return handle2Position;
+function updateHandle1(slide, position = null) {
+let handle_1 = slide.getAttribute("data-handle-1");
+if(position == null && !handle_1)
+    return 0;
+let width = slide.offsetWidth;
+
+let handle1 = slide.querySelector(".handle-1");
+let highlight = slide.querySelector(".highlight");
+let min = slide.getAttribute("data-min");
+let max = slide.getAttribute("data-max");
+
+let onchange = slide.getAttribute("data-onchange");
+let handle2Position = slide.getAttribute("data-handle-2-position");
+let range = max-min;
+let unit = width/range;
+if(position == null)
+    position = handle_1 *unit;
+position = position<0?0:position;
+let value = Math.round(position/unit);
+let handle1Position = value*unit;
+let minimum = slide.querySelector(".minimum");
+handle1Position = handle1Position>width-handle2Position-20?width-handle2Position-20:handle1Position;
+handle1.style.transform = "translate("+handle1Position+"px, 0)";
+highlight.style.left = handle1Position+"px";
+highlight.style.width = width-handle1Position-handle2Position+"px";
+if(minimum)
+    minimum.value = Math.round(handle1Position/unit);
+if(onchange)
+    window[onchange](Math.round(handle1Position/unit), Math.round(handle2Position/unit));
+slide.setAttribute("data-handle-1-position", handle1Position);
+return handle1Position;
+}
+function updateHandle2(slide, position = null) {
+let handle_2 = slide.getAttribute("data-handle-2");
+if(position == null && !handle_2)
+    return 0;
+let width = slide.offsetWidth;
+let handle2 = slide.querySelector(".handle-2");
+let highlight = slide.querySelector(".highlight");
+let min = slide.getAttribute("data-min");
+let max = slide.getAttribute("data-max");
+let onchange = slide.getAttribute("data-onchange");
+let handle1Position = slide.getAttribute("data-handle-1-position");
+let range = max-min;
+let unit = width/range;
+if(position == null)
+    position = handle_2 *unit;
+position = position>width-20?width-20:position;
+let value = Math.round((width-position-20)/unit);
+let handle2Position = value*unit;
+let maximum = slide.querySelector(".maximum");
+handle2Position = handle2Position>width-handle1Position-20?width-handle1Position-20:handle2Position;
+handle2.style.transform = "translate(-"+handle2Position+"px, 0)";
+highlight.style.width = width-handle1Position-handle2Position+"px";
+if(maximum)
+    maximum.value = range-Math.round(handle2Position/unit);
+if(onchange)
+    window[onchange](Math.round(handle1Position/unit), range-Math.round(handle2Position/unit));
+slide.setAttribute("data-handle-2-position", handle2Position);
+return handle2Position;
 }
 /* Multi handle slide ends */
