@@ -627,6 +627,16 @@ function makeYearUpdate() {
     products.updateMakeYear(minimum, maximum);
     products.searchSubmit();
 }
+function kmsDrivenOnchange(min, max) {
+    var show = document.getElementById("kms-driven-show");
+    show.innerHTML = integerWithCommasIndian(min)+" Kms - "+integerWithCommasIndian(max)+" Kms";
+}
+function kmsDrivenUpdate() {
+    var minimum = document.getElementById("minimum-kms-driven").value;
+    var maximum = document.getElementById("maximum-kms-driven").value;
+    products.updateKmsDriven(minimum, maximum);
+    products.searchSubmit();
+}
 </script>
 @endsection
 @section('script')
@@ -650,6 +660,8 @@ function makeYearUpdate() {
                 body_types: '{{ $body_type_search ?? '' }}',
                 make_year_min: {{ $minimum_make_year ?? 0 }},
                 make_year_max: {{ $maximum_make_year ?? 0 }},
+                kms_driven_min: {{ $minimum_kms_driven ?? 0 }},
+                kms_driven_max: {{ $maximum_kms_driven ?? 0 }},
                 conditions: '{{ $condition_search ?? '' }}'
             },
             methods: {
@@ -735,6 +747,10 @@ function makeYearUpdate() {
                         this.conditions += '-and-'+name;
                     this.searchSubmit();
                 },
+                updateKmsDriven: function(min, max) {
+                    this.kms_driven_min = min;
+                    this.kms_driven_max = max;
+                },
                 searchSubmit: function() {
                     var url = "{{ url('/cars') }}?";
                     if(this.price_min)
@@ -757,6 +773,10 @@ function makeYearUpdate() {
                         this.conditions = this.conditions.replace(/^(-and-)+/g, "");
                         url += "&conditions="+this.conditions;
                     }
+                    if(this.kms_driven_min)
+                        url += "&minimum-kms-driven="+this.kms_driven_min;
+                    if(this.kms_driven_max)
+                        url += "&maximum-kms-driven="+this.kms_driven_max;
                     url = url.replace("?&", "?");
                     url = url.replace(/\?+$/g, "");
                     window.location = url;

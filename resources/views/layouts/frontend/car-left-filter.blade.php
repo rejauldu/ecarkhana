@@ -71,12 +71,12 @@
   </div>
   <div class="card">
     <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
-      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-body-type">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-body-type" @if(isset($body_type_search)) aria-expanded="true" @endif>
         <i class="fa fa-collapse-icon"></i>
         Body Type
       </a>
     </div>
-    <div id="left-filter-body-type" class="collapse" data-parent="#left-filter">
+    <div id="left-filter-body-type" class="collapse @if(isset($body_type_search)) show @endif" data-parent="#left-filter">
       <div class="card-body py-1 text-dark">
         <ul class="list-group list-group-flush">
           @foreach($body_types as $body_type)
@@ -111,6 +111,26 @@
           </li>
           @endforeach
         </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-kms-driven" aria-expanded="true">
+        <i class="fa fa-collapse-icon"></i>
+        Kilometers Driven
+      </a>
+    </div>
+    <div id="left-filter-kms-driven" class="collapse show" data-parent="#left-filter">
+      <div class="card-body">
+        <div id="kms-driven-show" class="text-center mb-3">5,000 kms - 2,00,000 kms</div>
+        <div class="multi-handle-slider" data-min="5000" data-max="200000" data-handle-1="{{ $minimum_kms_driven ?? 5000 }}" data-handle-2="{{ $maximum_kms_driven ?? 200000 }}" data-updated="kmsDrivenUpdate" data-onchange="kmsDrivenOnchange" data-logarithm="true">
+          <span class="handle-1"></span>
+          <span class="highlight"></span>
+          <span class="handle-2"></span>
+          <input type="hidden" id="minimum-kms-driven" class="minimum" value="5000">
+          <input type="hidden" id="maximum-kms-driven" class="maximum" value="200000">
+        </div>
       </div>
     </div>
   </div>

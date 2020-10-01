@@ -56,15 +56,6 @@ class CarController extends Controller {
             });
             $data['condition'] = $request->condition;
         }
-        if (Input::get('conditions')) {
-            $conditions = explode('-and-', Input::get('conditions'));
-            foreach ($conditions as $condition) {
-                $products = $products->whereHas('condition', function($q) use($condition) {
-                    $q->where('name', str_replace('-', ' ', $condition));
-                });
-            }
-            $data['condition_search'] = Input::get('conditions');
-        }
         if ($request->location) {
             $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
                 $q->where('name', 'like', '%' . $request->location . '%');
@@ -89,6 +80,20 @@ class CarController extends Controller {
             });
             $data['body_type'] = $request->body_type;
         }
+        if ($request->msrp) {
+            $products = $products->where('msrp', $request->msrp);
+            $data['msrp'] = $request->msrp;
+        }
+        /* Car list left filter */
+        if (Input::get('conditions')) {
+            $conditions = explode('-and-', Input::get('conditions'));
+            foreach ($conditions as $condition) {
+                $products = $products->whereHas('condition', function($q) use($condition) {
+                    $q->where('name', str_replace('-', ' ', $condition));
+                });
+            }
+            $data['condition_search'] = Input::get('conditions');
+        }
         if (Input::get('body-types')) {
             $body_types = explode('-and-', Input::get('body-types'));
             foreach ($body_types as $body_type) {
@@ -100,11 +105,6 @@ class CarController extends Controller {
             }
             $data['body_type_search'] = Input::get('body-types');
         }
-        if ($request->msrp) {
-            $products = $products->where('msrp', $request->msrp);
-            $data['msrp'] = $request->msrp;
-        }
-        /* Car list left filter */
         if (Input::get('minimum-price')) {
             $products = $products->where('msrp', '>=', Input::get('minimum-price'));
             $data['minimum_price'] = Input::get('minimum-price');
@@ -128,8 +128,15 @@ class CarController extends Controller {
                     $q->where('name', str_replace('-', ' ', $model));
                 });
             }
-            
             $data['model_search'] = Input::get('models');
+        }
+        if (Input::get('minimum-kms-driven')) {
+            $products = $products->where('kms_driven', '>=', Input::get('minimum-kms-driven'));
+            $data['minimum_kms_driven'] = Input::get('minimum-kms-driven');
+        }
+        if (Input::get('maximum-kms-driven')) {
+            $products = $products->where('kms_driven', '<=', Input::get('maximum-kms-driven'));
+            $data['maximum_kms_driven'] = Input::get('maximum-kms-driven');
         }
         /* Car list left filter ends */
         if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
