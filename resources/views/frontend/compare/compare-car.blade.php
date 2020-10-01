@@ -33,7 +33,7 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="row">
-                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-32 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[0]->id }}/{{ $products[0]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
+                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-53 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[0]->id }}/{{ $products[0]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
                             <div class="col-6 @mobile px-0 @endmobile overflow-hidden">
                                 <div class="text-dark @mobile text-small @endmobile">{{ $products[0]->name }}</div>
                                 <div class="text-secondary"><small>TK.{{ $products[0]->msrp }}</small></div>
@@ -43,7 +43,7 @@
                     @if($total>1)
                     <div class="col">
                         <div class="row">
-                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-32 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[1]->id }}/{{ $products[1]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
+                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-53 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[1]->id }}/{{ $products[1]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
                             <div class="col-6 @mobile px-0 @endmobile overflow-hidden">
                                 <div class="text-dark @mobile text-small @endmobile">{{ $products[1]->name }}</div>
                                 <div class="text-secondary"><small>TK.{{ $products[1]->msrp }}</small></div>
@@ -54,7 +54,7 @@
                     @if($total>2)
                     <div class="col d-none d-md-block">
                         <div class="row">
-                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-32 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[2]->id }}/{{ $products[2]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
+                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-53 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[2]->id }}/{{ $products[2]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
                             <div class="col-6 @mobile px-0 @endmobile overflow-hidden">
                                 <div class="text-dark @mobile text-small @endmobile">{{ $products[2]->name }}</div>
                                 <div class="text-secondary"><small>TK.{{ $products[2]->msrp }}</small></div>

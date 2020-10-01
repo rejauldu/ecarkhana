@@ -69,6 +69,7 @@
       </div>
     </div>
   </div>
+  @if($category == 'Car')
   <div class="card">
     <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
       <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-body-type" @if(isset($body_type_search)) aria-expanded="true" @endif>
@@ -92,6 +93,7 @@
       </div>
     </div>
   </div>
+  @endif
   <div class="card">
     <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
       <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-condition" @if(isset($condition_search)) aria-expanded="true" @endif>
@@ -105,7 +107,7 @@
           @foreach($conditions as $condition)
           <li class="list-group-item py-1">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="condition-{{ $condition->id }}" onclick="products.updateCondition('{{ $condition->name }}')" @if(isset($condition_search) && strpos($condition_search, $condition->name) !== false) checked @endif>
+              <input type="checkbox" class="custom-control-input" id="condition-{{ $condition->id }}" onclick="products.updateCondition('{{ $condition->name }}')" @if(isset($condition_search) && strpos(strtolower($condition_search), strtolower($condition->name)) !== false) checked @endif>
               <label class="custom-control-label" for="condition-{{ $condition->id }}">{{ $condition->name ?? 'Unnamed' }}</label>
             </div>
           </li>
@@ -114,6 +116,7 @@
       </div>
     </div>
   </div>
+  @if($category != 'Bicycle')
   <div class="card">
     <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
       <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-kms-driven" aria-expanded="true">
@@ -134,4 +137,5 @@
       </div>
     </div>
   </div>
+  @endif
 </div>

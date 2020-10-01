@@ -87,8 +87,12 @@ class CarController extends Controller {
         /* Car list left filter */
         if (Input::get('conditions')) {
             $conditions = explode('-and-', Input::get('conditions'));
+            $condition = array_shift($conditions);
+            $products = $products->whereHas('condition', function($q) use($condition) {
+                $q->where('name', str_replace('-', ' ', $condition));
+            });
             foreach ($conditions as $condition) {
-                $products = $products->whereHas('condition', function($q) use($condition) {
+                $products = $products->orWhereHas('condition', function($q) use($condition) {
                     $q->where('name', str_replace('-', ' ', $condition));
                 });
             }
@@ -96,8 +100,14 @@ class CarController extends Controller {
         }
         if (Input::get('body-types')) {
             $body_types = explode('-and-', Input::get('body-types'));
+            $body_type = array_shift($body_types);
+            $products = $products->whereHas('car', function($q) use($body_type) {
+                $q->whereHas('body_type', function($q) use($body_type) {
+                    $q->where('name', str_replace('-', ' ', $body_type));
+                });
+            });
             foreach ($body_types as $body_type) {
-                $products = $products->whereHas('car', function($q) use($body_type) {
+                $products = $products->orWhereHas('car', function($q) use($body_type) {
                     $q->whereHas('body_type', function($q) use($body_type) {
                         $q->where('name', str_replace('-', ' ', $body_type));
                     });
@@ -123,8 +133,12 @@ class CarController extends Controller {
         }
         if (Input::get('models')) {
             $models = explode('-and-', Input::get('models'));
+            $model = array_shift($models);
+            $products = $products->whereHas('model', function($q) use($model) {
+                $q->where('name', str_replace('-', ' ', $model));
+            });
             foreach ($models as $model) {
-                $products = $products->whereHas('model', function($q) use($model) {
+                $products = $products->orWhereHas('model', function($q) use($model) {
                     $q->where('name', str_replace('-', ' ', $model));
                 });
             }
