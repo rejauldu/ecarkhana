@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
-                                    <a class="btn btn-link border ml-1 text-dark py-1" href="{{ route('single-car-product', $product->id) }}">Dealer Detail</a>
+                                    <a class="btn btn-link border ml-1 text-dark py-1" href="{{ route('products.show', $product->id) }}">Dealer Detail</a>
                                     <a class="btn btn-link border float-right mr-1 text-dark py-1" href="#" @click.prevent='openWhatsappModal({{ $product->id }})'><i class="fa fa-whatsapp text-success"></i> Chat</a>
                                 </div>
                             </div>
@@ -114,13 +114,11 @@
                 <div class="modal fullscreen-md" id="whatsapp-modal">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <h4 class="modal-title">Personal Details</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <div class="form-group">
@@ -581,10 +579,61 @@
 
 
 @endsection
+@section('style')
+<script>
+function priceOnchange(min, max) {
+    var show = document.getElementById("price-show");
+    if(min>10000000) {
+        min /= 10000000;
+        min = Math.round(min);
+        min += ' Crore';
+    } else if(min>100000) {
+        min /= 100000;
+        min = Math.round(min);
+        min += ' Lakh';
+    } else {
+        min /= 1000;
+        min = Math.round(min);
+        min += ' K';
+    }
+    if(max>10000000) {
+        max /= 10000000;
+        max = Math.round(max);
+        max += ' Crore';
+    } else if(max>100000) {
+        max /= 100000;
+        max = Math.round(max);
+        max += ' Lakh';
+    } else {
+        max /= 1000;
+        max = Math.round(max);
+        max += ' K';
+    }
+    show.innerHTML = "BDT "+min+" - BDT "+max;
+}
+function priceUpdate() {
+    var minimum = document.getElementById("minimum-price").value;
+    var maximum = document.getElementById("maximum-price").value;
+    products.updatePrice(minimum, maximum);
+    products.searchSubmit();
+}
+function makeYearOnchange(min, max) {
+    var show = document.getElementById("make-year-show");
+    show.innerHTML = min+" - "+max;
+}
+function makeYearUpdate() {
+    var minimum = document.getElementById("minimum-make-year").value;
+    var maximum = document.getElementById("maximum-make-year").value;
+    products.updateMakeYear(minimum, maximum);
+    products.searchSubmit();
+}
+</script>
+@endsection
 @section('script')
 <script>
-    (function () {
-        var filter = new Vue({
+    var products;
+    (function() {
+        products = new Vue({
             el: '#products',
             data: {
                 id: '',
@@ -594,7 +643,14 @@
                 terms: '',
                 otp_sent: false,
                 otp_error: false,
-                countDown: 60
+                countDown: 60,
+                price_min: {{ $minimum_price ?? 0 }},
+                price_max: {{ $maximum_price ?? 0 }},
+                models: '{{ $model_search ?? '' }}',
+                body_types: '{{ $body_type_search ?? '' }}',
+                make_year_min: {{ $minimum_make_year ?? 0 }},
+                make_year_max: {{ $maximum_make_year ?? 0 }},
+                conditions: '{{ $condition_search ?? '' }}'
             },
             methods: {
                 openWhatsappModal: function (id) {
@@ -627,7 +683,7 @@
                         setTimeout(() => {
                             this.countDown -= 1
                             this.countDownTimer()
-                        }, 1000)
+                        }, 1000);
                     } else {
                         this.otp_sent = false;
                     }
@@ -646,6 +702,64 @@
                                 _this.otp_error = true;
                         }
                     });
+                },
+                updatePrice: function(min, max) {
+                    this.price_min = min;
+                    this.price_max = max;
+                },
+                updateModels: function(name) {
+                    if(this.models.includes(name)) {
+                        this.models = this.models.replace('-and-'+name, '');
+                        this.models = this.models.replace(name, '');
+                    } else
+                        this.models += '-and-'+name;
+                    this.searchSubmit();
+                },
+                updateMakeYear: function(min, max) {
+                    this.make_year_min = min;
+                    this.make_year_max = max;
+                },
+                updateBodyType: function(name) {
+                    if(this.body_types.includes(name)) {
+                        this.body_types = this.body_types.replace('-and-'+name, '');
+                        this.body_types = this.body_types.replace(name, '');
+                    } else
+                        this.body_types += '-and-'+name;
+                    this.searchSubmit();
+                },
+                updateCondition: function(name) {
+                    if(this.conditions.includes(name)) {
+                        this.conditions = this.conditions.replace('-and-'+name, '');
+                        this.conditions = this.conditions.replace(name, '');
+                    } else
+                        this.conditions += '-and-'+name;
+                    this.searchSubmit();
+                },
+                searchSubmit: function() {
+                    var url = "{{ url('/cars') }}?";
+                    if(this.price_min)
+                        url += "&minimum-price="+this.price_min;
+                    if(this.price_max)
+                        url += "&maximum-price="+this.price_max;
+                    if(this.models) {
+                        this.models = this.models.replace(/^(-and-)+/g, "");
+                        url += "&models="+this.models;
+                    }
+                    if(this.make_year_min)
+                        url += "&minimum-make-year="+this.make_year_min;
+                    if(this.make_year_max)
+                        url += "&maximum-make-year="+this.make_year_max;
+                    if(this.body_types) {
+                        this.body_types = this.body_types.replace(/^(-and-)+/g, "");
+                        url += "&body-types="+this.body_types;
+                    }
+                    if(this.conditions) {
+                        this.conditions = this.conditions.replace(/^(-and-)+/g, "");
+                        url += "&conditions="+this.conditions;
+                    }
+                    url = url.replace("?&", "?");
+                    url = url.replace(/\?+$/g, "");
+                    window.location = url;
                 }
             },
             computed: {
@@ -657,10 +771,5 @@
             }
         });
     })();
-    function priceUpdate() {
-        var minimum = document.getElementById("minimum-price").value;
-        var maximum = document.getElementById("maximum-price").value;
-        console.log(minimum+", "+maximum);
-    }
 </script>
 @endsection

@@ -37,4 +37,8 @@ class Brand extends Model
 	public function category() {
 		return $this->belongsTo('App\Category');
 	}
+
+    public function models() {
+        return $this->hasMany('App\Dropdowns\Model');
+    }
 }

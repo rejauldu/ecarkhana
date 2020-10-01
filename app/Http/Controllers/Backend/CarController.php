@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Product;
 use App\Color;
 use App\Car;
@@ -55,6 +56,15 @@ class CarController extends Controller {
             });
             $data['condition'] = $request->condition;
         }
+        if (Input::get('conditions')) {
+            $conditions = explode('-and-', Input::get('conditions'));
+            foreach ($conditions as $condition) {
+                $products = $products->whereHas('condition', function($q) use($condition) {
+                    $q->where('name', str_replace('-', ' ', $condition));
+                });
+            }
+            $data['condition_search'] = Input::get('conditions');
+        }
         if ($request->location) {
             $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
                 $q->where('name', 'like', '%' . $request->location . '%');
@@ -79,10 +89,49 @@ class CarController extends Controller {
             });
             $data['body_type'] = $request->body_type;
         }
+        if (Input::get('body-types')) {
+            $body_types = explode('-and-', Input::get('body-types'));
+            foreach ($body_types as $body_type) {
+                $products = $products->whereHas('car', function($q) use($body_type) {
+                    $q->whereHas('body_type', function($q) use($body_type) {
+                        $q->where('name', str_replace('-', ' ', $body_type));
+                    });
+                });
+            }
+            $data['body_type_search'] = Input::get('body-types');
+        }
         if ($request->msrp) {
             $products = $products->where('msrp', $request->msrp);
             $data['msrp'] = $request->msrp;
         }
+        /* Car list left filter */
+        if (Input::get('minimum-price')) {
+            $products = $products->where('msrp', '>=', Input::get('minimum-price'));
+            $data['minimum_price'] = Input::get('minimum-price');
+        }
+        if (Input::get('maximum-price')) {
+            $products = $products->where('msrp', '<=', Input::get('maximum-price'));
+            $data['maximum_price'] = Input::get('maximum-price');
+        }
+        if (Input::get('minimum-make-year')) {
+            $products = $products->where('manufacturing_year', '>=', Input::get('minimum-make-year'));
+            $data['minimum_make_year'] = Input::get('minimum-make-year');
+        }
+        if (Input::get('maximum-make-year')) {
+            $products = $products->where('manufacturing_year', '<=', Input::get('maximum-make-year'));
+            $data['maximum_make_year'] = Input::get('maximum-make-year');
+        }
+        if (Input::get('models')) {
+            $models = explode('-and-', Input::get('models'));
+            foreach ($models as $model) {
+                $products = $products->whereHas('model', function($q) use($model) {
+                    $q->where('name', str_replace('-', ' ', $model));
+                });
+            }
+            
+            $data['model_search'] = Input::get('models');
+        }
+        /* Car list left filter ends */
         if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
             $products = $products->whereHas('car.fuel_type', function(Builder $query) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
@@ -120,7 +169,8 @@ class CarController extends Controller {
         $products = $products->paginate(12);
         $products = $products->appends($request->except('page'));
         $data['products'] = $products;
-        $data['brands'] = Brand::where('category_id', 1)->get();
+        $data['conditions'] = Condition::all();
+        $data['brands'] = Brand::where('category_id', 1)->with('models')->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
         $data['body_types'] = BodyType::where('category_id', 1)->get();
         $data['fuel_types'] = FuelType::where('category_id', 1)->get();

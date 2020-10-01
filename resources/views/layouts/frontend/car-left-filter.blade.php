@@ -1,72 +1,116 @@
 <div id="left-filter">
   <div class="card">
-    <div class="card-header bg-white font-16 font-weight-bold position-relative">
-      <a class="card-link text-dark" data-toggle="collapse" href="#left-filter-price" aria-expanded="true">
+    <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-price" aria-expanded="true">
         <i class="fa fa-collapse-icon"></i>
         Price
       </a>
     </div>
     <div id="left-filter-price" class="collapse show" data-parent="#left-filter">
       <div class="card-body">
-        <div class="multi-handle-slide" data-min="0" data-max="100" data-updated="priceUpdate">
+        <div id="price-show" class="text-center mb-3">BDT 0 Lakh - BDT 10 Crore </div>
+        <div class="multi-handle-slider" data-min="50000" data-max="50000000" data-handle-1="{{ $minimum_price ?? 50000 }}" data-handle-2="{{ $maximum_price ?? 50000000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
           <span class="handle-1"></span>
           <span class="highlight"></span>
           <span class="handle-2"></span>
-          <input type="hidden" id="minimum-price" class="minimum" value="0">
-          <input type="hidden" id="maximum-price" class="maximum" value="100">
+          <input type="hidden" id="minimum-price" class="minimum" value="50000">
+          <input type="hidden" id="maximum-price" class="maximum" value="50000000">
         </div>
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header bg-white font-16 font-weight-bold position-relative">
-      <a class="card-link text-dark" data-toggle="collapse" href="#left-filter-brand">
+    <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-brand" aria-expanded="true">
         <i class="fa fa-collapse-icon"></i>
-        Brand
+        Brand & Model
       </a>
     </div>
-    <div id="left-filter-brand" class="collapse" data-parent="#left-filter">
-      <div class="card-body">
-        
+    <div id="left-filter-brand" class="collapse show" data-parent="#left-filter">
+      <div class="card-body py-1 text-dark">
+        <ul class="list-group list-group-flush">
+          @foreach($brands as $brand)
+          <li class="list-group-item py-1">
+            <a href="#" class="font-weight-normal">{{ $brand->name ?? 'Unnamed' }}</a>
+            <ul class="list-group list-group-flush">
+              @foreach($brand->models as $model)
+              @php($m = str_replace(' ', '-', $model->name))
+              <li class="list-group-item py-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="model-{{ $model->id }}" onclick="products.updateModels('{{ $m }}')" @if(isset($model_search) && strpos($model_search, $m) !== false) checked @endif>
+                  <label class="custom-control-label" for="model-{{ $model->id }}">{{ $model->name ?? 'Unnamed' }}</label>
+                </div>
+              </li>
+              @endforeach
+            </ul>
+          </li>
+          @endforeach
+        </ul>
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header bg-white font-16 font-weight-bold position-relative">
-      <a class="card-link text-dark" data-toggle="collapse" href="#left-filter-model">
+    <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-make-year" aria-expanded="true">
         <i class="fa fa-collapse-icon"></i>
-        Model
+        Model year
       </a>
     </div>
-    <div id="left-filter-model" class="collapse" data-parent="#left-filter">
+    <div id="left-filter-make-year" class="collapse show" data-parent="#left-filter">
       <div class="card-body">
-        
+        <div id="make-year-show" class="text-center mb-3">1980 - 2020</div>
+        <div class="multi-handle-slider" data-min="1980" data-max="2020" data-handle-1="{{ $minimum_make_year ?? 1980 }}" data-handle-2="{{ $maximum_make_year ?? 2020 }}" data-updated="makeYearUpdate" data-onchange="makeYearOnchange">
+          <span class="handle-1"></span>
+          <span class="highlight"></span>
+          <span class="handle-2"></span>
+          <input type="hidden" id="minimum-make-year" class="minimum" value="1980">
+          <input type="hidden" id="maximum-make-year" class="maximum" value="2020">
+        </div>
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header bg-white font-16 font-weight-bold position-relative">
-      <a class="card-link text-dark" data-toggle="collapse" href="#left-filter-make-year">
+    <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-body-type">
         <i class="fa fa-collapse-icon"></i>
-        Make year
+        Body Type
       </a>
     </div>
-    <div id="left-filter-make-year" class="collapse" data-parent="#left-filter">
-      <div class="card-body">
-        
+    <div id="left-filter-body-type" class="collapse" data-parent="#left-filter">
+      <div class="card-body py-1 text-dark">
+        <ul class="list-group list-group-flush">
+          @foreach($body_types as $body_type)
+          @php($body = str_replace(' ', '-', $body_type->name))
+          <li class="list-group-item py-1">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="body-type-{{ $body_type->id }}" onclick="products.updateBodyType('{{ $body }}')" @if(isset($body_type_search) && strpos($body_type_search, $body) !== false) checked @endif>
+              <label class="custom-control-label" for="body-type-{{ $body_type->id }}">{{ $body_type->name ?? 'Unnamed' }}</label>
+            </div>
+          </li>
+          @endforeach
+        </ul>
       </div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header bg-white font-16 font-weight-bold position-relative">
-      <a class="card-link text-dark" data-toggle="collapse" href="#left-filter-displacement">
+    <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+      <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-condition" @if(isset($condition_search)) aria-expanded="true" @endif>
         <i class="fa fa-collapse-icon"></i>
-        Displacement
+        Condition
       </a>
     </div>
-    <div id="left-filter-displacement" class="collapse" data-parent="#left-filter">
-      <div class="card-body">
-        
+    <div id="left-filter-condition" class="collapse @if(isset($condition_search)) show @endif" data-parent="#left-filter">
+      <div class="card-body py-1 text-dark">
+        <ul class="list-group list-group-flush">
+          @foreach($conditions as $condition)
+          <li class="list-group-item py-1">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="condition-{{ $condition->id }}" onclick="products.updateCondition('{{ $condition->name }}')" @if(isset($condition_search) && strpos($condition_search, $condition->name) !== false) checked @endif>
+              <label class="custom-control-label" for="condition-{{ $condition->id }}">{{ $condition->name ?? 'Unnamed' }}</label>
+            </div>
+          </li>
+          @endforeach
+        </ul>
       </div>
     </div>
   </div>

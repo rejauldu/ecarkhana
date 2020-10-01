@@ -1073,7 +1073,7 @@ ul.bullet>li {
 #slide>div {
 	margin-bottom:50px;
 }
-.multi-handle-slide {
+.multi-handle-slider {
 	height:6px;
 	background:#FD5;
 	position:relative;
@@ -1082,8 +1082,8 @@ ul.bullet>li {
 .handle-1, .handle-2 {
 	position:absolute;
 	top:-7px;
-	width:20px;
-	height:20px;
+	width:18px;
+	height:18px;
 	background:#FFF;
 	border: 1px solid #DDD;
 	z-index:2;
