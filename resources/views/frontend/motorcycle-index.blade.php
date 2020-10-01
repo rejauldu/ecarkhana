@@ -239,14 +239,14 @@
             </div>
 
             <div class="col-lg-8 col-12 text-center">
-                <div class="section-title">
+                <div class="section-title mb-2">
                     <h2>New Bikes</h2>
                     <div class="separator"></div>
                 </div>
                 <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                     @foreach($new_products as $new_product)
                     <div class="item">
-                        <div class="bg-white product-hover-effect shadow m-3">
+                        <div class="bg-white product-hover-effect shadow-sm mx-1">
                             <div class="size-53">
                                 <div class="size-child overflow-hidden">
                                     <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -284,7 +284,7 @@
                     </div>
                     @endforeach
                 </div>
-                <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a href="{{ route('motorcycles.index') }}?conditions=new" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
@@ -302,7 +302,7 @@ Start Compare -->
             <div class="tg-border-heading">
                 <h3>vs</h3>
             </div>
-            <a href="{{ route('compare') }}" target="_blank">view now</a>
+            <a href="{{ route('compare') }}">view now</a>
         </div>
     </div>
     <div id="tg-compare-slider" class="tg-compare-slider tg-comparebox swiper-container-horizontal swiper-container-fade">
@@ -368,7 +368,7 @@ Start Compare -->
                     <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($used_products as $used_product)
                         <div class="item">
-                            <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                            <div class="bg-white shadow-sm mb-2 mx-2 zoom-parent overflow-hidden shadow-hover-10">
                                 <div class="size-53 clearfix">
                                     <div class="size-child overflow-hidden zoom-target-1">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
@@ -418,7 +418,7 @@ Start Compare -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('motorcycles.index') }}?conditions=Used" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -450,7 +450,7 @@ Start Compare -->
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <div class="section-title">
+                    <div class="section-title mb-2">
                         <span>Top 10 Popular bike</span>
                         <h2>Popular Bikes</h2>
                         <div class="separator"></div>
@@ -458,7 +458,7 @@ Start Compare -->
                     <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($popular_products as $new_product)
                         <div class="item">
-                            <div class="bg-white product-hover-effect shadow m-3">
+                            <div class="bg-white product-hover-effect shadow-sm mx-1">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
@@ -497,7 +497,7 @@ Start Compare -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('motorcycles.index') }}" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

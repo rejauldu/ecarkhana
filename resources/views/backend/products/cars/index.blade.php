@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $product->supplier->region->name ?? ''}}</span>
-                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $product->car->brand->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $product->brand->name ?? ''}}</span>
                                 </div>
                                 <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $product->id) }}" class="">{{ $product->name }}</a></div>
                                 <div class="separator"></div>
