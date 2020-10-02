@@ -6,7 +6,7 @@ inner-intro -->
         <div class="row text-center intro-title">
             <div class="col-md-6 text-md-left d-inline-block">
                 @php($url = explode('/', Request::path()))
-                <h1 class="text-white">{{ str_replace('-', ' ', $url[0]) }}</h1>
+                <h1 class="text-white">{{ ucwords(str_replace('-', ' ', $url[0])) }}</h1>
             </div>
             <div class="col-md-6 text-md-right float-right">
                 <ul class="page-breadcrumb">

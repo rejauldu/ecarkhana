@@ -350,7 +350,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('cars.index') }}?conditions=New" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('cars.index') }}?conditions=new" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -492,7 +492,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('cars.index') }}?conditions=Used" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('cars.index') }}?conditions=used" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -636,7 +636,7 @@
                     </div>
                     @endforeach
                 </div>
-                <a href="{{ route('cars.index') }}?conditions=Recondition" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a href="{{ route('cars.index') }}?conditions=reconditioned" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>

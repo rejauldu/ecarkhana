@@ -110,9 +110,8 @@ back to top -->
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Login</h3>
+                <h3 class="modal-title text-center w-100">Login</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="row login_wrap">
@@ -145,8 +144,7 @@ back to top -->
                 </div>
             </div>
             <div class="modal-footer text-center">
-                <p>Don't have an account? <a href="#signupform" data-toggle="modal" data-dismiss="modal">Signup
-                        Here</a></p>
+                <p>Don't have an account? <a href="#signupform" data-toggle="modal" data-dismiss="modal" class="btn btn-link m-0">Signup Here</a></p>
                 <p><a href="#forgotpassword" data-toggle="modal" data-dismiss="modal">Forgot Password ?</a></p>
             </div>
         </div>

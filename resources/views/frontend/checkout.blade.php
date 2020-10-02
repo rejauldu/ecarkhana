@@ -21,7 +21,7 @@ checkout-listing  -->
                     <div class="coupon-accordion">
                         @guest
                         <!-- ACCORDION START -->
-                        <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
+                        <h3>Returning customer? <span id="showlogin" class="text-danger">Click here to login</span></h3>
                         <div id="checkout-login" class="coupon-content" style="display: none;">
                             <div class="coupon-info">
                                 <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
@@ -51,7 +51,7 @@ checkout-listing  -->
                         <!-- ACCORDION END -->
                         @endguest
                         <!-- ACCORDION START -->
-                        <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
+                        <h3>Have a coupon? <span id="showcoupon" class="text-danger">Click here to enter your code</span></h3>
                         <div id="checkout_coupon" class="coupon-checkout-content" style="display: none;">
                             <div class="coupon-info">
                                 <form action="#">

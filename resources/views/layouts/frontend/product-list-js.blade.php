@@ -98,11 +98,11 @@
                     this.searchSubmit();
                 },
                 updateCondition: function(name) {
-                    if(this.conditions.includes(name)) {
-                        this.conditions = this.conditions.replace('-and-'+name, '');
-                        this.conditions = this.conditions.replace(name, '');
+                    if(this.conditions.toLowerCase().includes(name.toLowerCase())) {
+                        this.conditions = this.conditions.toLowerCase().replace('-and-'+name.toLowerCase(), '');
+                        this.conditions = this.conditions.replace(name.toLowerCase(), '');
                     } else
-                        this.conditions += '-and-'+name;
+                        this.conditions += '-and-'+name.toLowerCase();
                     this.searchSubmit();
                 },
                 updateKmsDriven: function(min, max) {

@@ -271,7 +271,7 @@ Start Used Cars In Your City And Budget -->
                     </div>
                     @endforeach
                 </div>
-                <a href="{{ route('bicycles.index') }}?conditions=New" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                <a href="{{ route('bicycles.index') }}?conditions=new" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </div>
@@ -402,7 +402,7 @@ start Featured Cars -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('bicycles.index') }}?conditions=Used" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('bicycles.index') }}?conditions=used" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
