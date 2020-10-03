@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            @include('frontend.compare.configuration')
+            @include('frontend.compares.configuration-motorcycle')
             @php($total = 0)
             @if(isset($products))
             @php($total = count($products))

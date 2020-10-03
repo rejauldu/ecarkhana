@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use App\Bid as Auction;
 use Auth;
@@ -10,6 +11,7 @@ use App\Product;
 use App\Http\Requests\AuctionRequest;
 use Carbon\Carbon;
 use App\User;
+use App\Dropdowns\Condition;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
 use App\Dropdowns\BodyType;
@@ -45,9 +47,9 @@ class AuctionController extends Controller {
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $type = 'Motorcycle';
         $brands = Brand::where('category_id', 2)->orWhere('category_id', 3)->get();
-        $models = Model::where('category_id', 2)->orWhere('category_id', 3)->get();
+        $models = Model::where('category_id', 2)->orWhere('category_id', 3)->with('brand')->get();
         $body_types = BodyType::where('category_id', 2)->orWhere('category_id', 3)->get();
-        $packages = Package::where('category_id', 2)->orWhere('category_id', 3)->get();
+        $packages = Package::where('category_id', 2)->orWhere('category_id', 3)->with('model')->get();
         $fuel_types = FuelType::where('category_id', 2)->orWhere('category_id', 3)->get();
         return view('backend.auctions.index', compact('products', 'suppliers', 'type', 'brands', 'models', 'body_types', 'fuel_types', 'packages'));
     }
@@ -155,5 +157,91 @@ class AuctionController extends Controller {
         $entities = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
         $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
         return str_replace($entities, $replacements, urlencode($string));
+    }
+
+    public function auctionProduct(Request $request) {
+        $products = Product::with('brand', 'supplier.region');
+        $filters = [];
+        /* Car list left filter */
+        if (Input::get('conditions')) {
+            $conditions = explode('-and-', Input::get('conditions'));
+            $condition = array_shift($conditions);
+            $products = $products->whereHas('condition', function($q) use($condition) {
+                $q->where('name', str_replace('-', ' ', $condition));
+            });
+            foreach ($conditions as $condition) {
+                $products = $products->orWhereHas('condition', function($q) use($condition) {
+                    $q->where('name', str_replace('-', ' ', $condition));
+                });
+            }
+            $data['condition_search'] = Input::get('conditions');
+        }
+        if (Input::get('body-types')) {
+            $body_types = explode('-and-', Input::get('body-types'));
+            $body_type = array_shift($body_types);
+            $products = $products->whereHas('car', function($q) use($body_type) {
+                $q->whereHas('body_type', function($q) use($body_type) {
+                    $q->where('name', str_replace('-', ' ', $body_type));
+                });
+            });
+            foreach ($body_types as $body_type) {
+                $products = $products->orWhereHas('car', function($q) use($body_type) {
+                    $q->whereHas('body_type', function($q) use($body_type) {
+                        $q->where('name', str_replace('-', ' ', $body_type));
+                    });
+                });
+            }
+            $data['body_type_search'] = Input::get('body-types');
+        }
+        if (Input::get('minimum-price')) {
+            $products = $products->where('msrp', '>=', Input::get('minimum-price'));
+            $data['minimum_price'] = Input::get('minimum-price');
+        }
+        if (Input::get('maximum-price')) {
+            $products = $products->where('msrp', '<=', Input::get('maximum-price'));
+            $data['maximum_price'] = Input::get('maximum-price');
+        }
+        if (Input::get('minimum-make-year')) {
+            $products = $products->where('manufacturing_year', '>=', Input::get('minimum-make-year'));
+            $data['minimum_make_year'] = Input::get('minimum-make-year');
+        }
+        if (Input::get('maximum-make-year')) {
+            $products = $products->where('manufacturing_year', '<=', Input::get('maximum-make-year'));
+            $data['maximum_make_year'] = Input::get('maximum-make-year');
+        }
+        if (Input::get('models')) {
+            $models = explode('-and-', Input::get('models'));
+            $model = array_shift($models);
+            $products = $products->whereHas('model', function($q) use($model) {
+                $q->where('name', str_replace('-', ' ', $model));
+            });
+            foreach ($models as $model) {
+                $products = $products->orWhereHas('model', function($q) use($model) {
+                    $q->where('name', str_replace('-', ' ', $model));
+                });
+            }
+            $data['model_search'] = Input::get('models');
+        }
+        if (Input::get('minimum-kms-driven')) {
+            $products = $products->where('kms_driven', '>=', Input::get('minimum-kms-driven'));
+            $data['minimum_kms_driven'] = Input::get('minimum-kms-driven');
+        }
+        if (Input::get('maximum-kms-driven')) {
+            $products = $products->where('kms_driven', '<=', Input::get('maximum-kms-driven'));
+            $data['maximum_kms_driven'] = Input::get('maximum-kms-driven');
+        }
+        /* Car list left filter ends */
+        $products = $products->where('auction_from', '<=', Carbon::now())->where('auction_to', '>=', Carbon::now())->paginate(12);
+        $products = $products->appends($request->except('page'));
+        $data['products'] = $products;
+        $data['conditions'] = Condition::all();
+        $data['brands'] = Brand::where('category_id', 1)->with('models')->get();
+        $data['models'] = Model::where('category_id', 1)->with('brand')->get();
+        $data['body_types'] = BodyType::where('category_id', 1)->get();
+        $data['fuel_types'] = FuelType::where('category_id', 1)->get();
+        $data['packages'] = Package::where('category_id', 1)->with('model')->get();
+        $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $data['type'] = 'Motorcycle';
+        return view('backend.products.cars.index', $data);
     }
 }

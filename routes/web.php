@@ -19,12 +19,8 @@ Route::get('/motorcycle', 'Frontend\HomeController@motorcycleIndex')->name('moto
 Route::get('/bicycle', 'Frontend\HomeController@bicycleIndex')->name('bicycle');
 
 Route::get('/about-us', 'Frontend\HomeController@aboutUs')->name('about-us');
-Route::get('/add-to-compare', 'Frontend\CompareController@addToCompare')->name('add-to-compare');
-Route::get('/add-car-to-compare', 'Frontend\CompareController@addToCompare')->name('add-car-to-compare');
-Route::get('/add-motorcycle-to-compare', 'Frontend\CompareController@addMotorcycleToCompare')->name('add-motorcycle-to-compare');
-Route::get('/add-bicycle-to-compare', 'Frontend\CompareController@addBicycleToCompare')->name('add-bicycle-to-compare');
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
-Route::get('/auction-products', 'Frontend\HomeController@auctionProductList')->name('auction-products');
+Route::get('/auction-products', 'Backend\AuctionController@auctionProduct')->name('auction-products');
 Route::resource('banks', 'Backend\BankController');
 Route::resource('bids', 'Frontend\BidController');
 Route::resource('bicycles', 'Backend\BicycleController');
@@ -58,6 +54,9 @@ Route::get('/loan-eligibility', 'Frontend\LoanInfoController@create')->name('loa
 Route::get('/car-loan-insurance-check', 'Frontend\HomeController@carLoanInsuranceCheck')->name('car-loan-insurance-check');
 Route::get('/compare/{url?}', 'Frontend\CompareController@compare')->name('compare');
 Route::post('/compare-product', 'Frontend\CompareController@compareProduct')->name('compare-product');
+Route::get('/compare-car', 'Frontend\CompareController@addToCompare')->name('compare-car');
+Route::get('/compare-motorcycle', 'Frontend\CompareController@addMotorcycleToCompare')->name('compare-motorcycle');
+Route::get('/compare-bicycle', 'Frontend\CompareController@addBicycleToCompare')->name('compare-bicycle');
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
 Route::get('/dealers/{id}', 'Backend\UserController@dealerDetail')->name('dealers.show');
 Route::get('/dealers', 'Backend\UserController@dealers')->name('dealers.index');

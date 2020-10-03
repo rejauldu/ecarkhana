@@ -116,35 +116,6 @@ class HomeController extends Controller {
         return view('frontend.auction-bidding-list', compact('product', 'bidder_product', 'remaining'));
     }
 
-    public function auctionProductList(Request $request) {
-        $products = Product::has('car')->with('car', 'supplier', 'bids');
-        if ($request->region_id) {
-            $products = $products->whereHas('supplier', function (Builder $query) {
-                $query->where('region_id', $request->region_id);
-            });
-        }
-        if ($request->brand_id) {
-            $products = $products->whereHas('car', function (Builder $query) {
-                $query->where('brand_id', $request->brand_id);
-            });
-        }
-        if ($request->model_id) {
-            $products = $products->whereHas('car', function (Builder $query) {
-                $query->where('model_id', $request->model_id);
-            });
-        }
-        $products = $products->where('auction_from', '<=', Carbon::now())->where('auction_to', '>=', Carbon::now())->paginate(9);
-
-        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
-        $type = 'Car';
-        $brands = Brand::where('category_id', 1)->get();
-        $models = Model::where('category_id', 1)->get();
-        $body_types = BodyType::where('category_id', 1)->get();
-        $fuel_types = FuelType::where('category_id', 1)->get();
-        $packages = Package::where('category_id', 1)->get();
-        return view('frontend.auction-product-list', compact('products', 'suppliers', 'type', 'brands', 'models', 'body_types', 'fuel_types', 'packages'));
-    }
-
     public function bicycleCompare() {
         return view('frontend.bicycle-compare');
     }

@@ -48,7 +48,7 @@ class CarController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::select('products.*')->has('car')->with('car', 'brand', 'supplier.region');
+        $products = Product::has('car')->with('car', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {

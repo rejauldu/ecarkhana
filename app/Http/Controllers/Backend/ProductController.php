@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Product;
@@ -14,6 +15,8 @@ use App\Category;
 use App\Dropdowns\AuctionGrade;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
+use App\Dropdowns\BodyType;
+use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Dropdowns\Condition;
 use App\Color;
@@ -36,11 +39,158 @@ class ProductController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $products = Product::has('motorcycle')->with('brand', 'model')->paginate(20);
-        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
-        $type = 'Motorcycle';
-        return view('frontend.motorcycle-listing', compact('products', 'suppliers', 'type'));
+    public function index(Request $request) {
+        $products = Product::with('brand', 'supplier.region');
+        $filters = [];
+        if ($request->condition) {
+            $products = $products->whereHas('condition', function (Builder $q) use($request) {
+                $q->whereRaw('lower(name) like "%' . strtolower($request->condition) . '%"');
+            });
+            $data['condition'] = $request->condition;
+        }
+        if ($request->location) {
+            $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
+                $q->where('name', 'like', '%' . $request->location . '%');
+            });
+            $data['location'] = $request->location;
+        }
+        if ($request->brand && $request->brand != 'All Brands') {
+            $products = $products->whereHas('brand', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->brand) . "%'");
+            });
+            $data['brand'] = $request->brand;
+        }
+        if ($request->model && $request->model != 'All Models') {
+            $products = $products->whereHas('model', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
+            });
+            $data['model'] = $request->model;
+        }
+        if ($request->body_type && $request->body_type != 'All Body Types') {
+            $products = $products->whereHas('car.body_type', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
+            });
+            $data['body_type'] = $request->body_type;
+        }
+        if ($request->msrp) {
+            $products = $products->where('msrp', $request->msrp);
+            $data['msrp'] = $request->msrp;
+        }
+        /* Car list left filter */
+        if (Input::get('conditions')) {
+            $conditions = explode('-and-', Input::get('conditions'));
+            $condition = array_shift($conditions);
+            $products = $products->whereHas('condition', function($q) use($condition) {
+                $q->where('name', str_replace('-', ' ', $condition));
+            });
+            foreach ($conditions as $condition) {
+                $products = $products->orWhereHas('condition', function($q) use($condition) {
+                    $q->where('name', str_replace('-', ' ', $condition));
+                });
+            }
+            $data['condition_search'] = Input::get('conditions');
+        }
+        if (Input::get('body-types')) {
+            $body_types = explode('-and-', Input::get('body-types'));
+            $body_type = array_shift($body_types);
+            $products = $products->whereHas('car', function($q) use($body_type) {
+                $q->whereHas('body_type', function($q) use($body_type) {
+                    $q->where('name', str_replace('-', ' ', $body_type));
+                });
+            });
+            foreach ($body_types as $body_type) {
+                $products = $products->orWhereHas('car', function($q) use($body_type) {
+                    $q->whereHas('body_type', function($q) use($body_type) {
+                        $q->where('name', str_replace('-', ' ', $body_type));
+                    });
+                });
+            }
+            $data['body_type_search'] = Input::get('body-types');
+        }
+        if (Input::get('minimum-price')) {
+            $products = $products->where('msrp', '>=', Input::get('minimum-price'));
+            $data['minimum_price'] = Input::get('minimum-price');
+        }
+        if (Input::get('maximum-price')) {
+            $products = $products->where('msrp', '<=', Input::get('maximum-price'));
+            $data['maximum_price'] = Input::get('maximum-price');
+        }
+        if (Input::get('minimum-make-year')) {
+            $products = $products->where('manufacturing_year', '>=', Input::get('minimum-make-year'));
+            $data['minimum_make_year'] = Input::get('minimum-make-year');
+        }
+        if (Input::get('maximum-make-year')) {
+            $products = $products->where('manufacturing_year', '<=', Input::get('maximum-make-year'));
+            $data['maximum_make_year'] = Input::get('maximum-make-year');
+        }
+        if (Input::get('models')) {
+            $models = explode('-and-', Input::get('models'));
+            $model = array_shift($models);
+            $products = $products->whereHas('model', function($q) use($model) {
+                $q->where('name', str_replace('-', ' ', $model));
+            });
+            foreach ($models as $model) {
+                $products = $products->orWhereHas('model', function($q) use($model) {
+                    $q->where('name', str_replace('-', ' ', $model));
+                });
+            }
+            $data['model_search'] = Input::get('models');
+        }
+        if (Input::get('minimum-kms-driven')) {
+            $products = $products->where('kms_driven', '>=', Input::get('minimum-kms-driven'));
+            $data['minimum_kms_driven'] = Input::get('minimum-kms-driven');
+        }
+        if (Input::get('maximum-kms-driven')) {
+            $products = $products->where('kms_driven', '<=', Input::get('maximum-kms-driven'));
+            $data['maximum_kms_driven'] = Input::get('maximum-kms-driven');
+        }
+        /* Car list left filter ends */
+        if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
+            $products = $products->whereHas('car.fuel_type', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
+            });
+            $data['fuel_type'] = $request->fuel_type;
+        }
+        if ($request->package && $request->package != 'All Packages') {
+            $products = $products->whereHas('car.package', function(Builder $query) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
+            });
+            $data['package'] = $request->package;
+        }
+        if ($request->lat && $request->lon) {
+            $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
+                    ->selectRaw('ROUND(('
+                            . '6371'
+                            . '* acos( cos( radians(lat) )'
+                            . '* cos( radians(' . $request->lat . ') )'
+                            . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                            . '* sin( radians(' . $request->lat . ')))'
+                            . '), 3) AS distance')
+                    ->orderBy('distance', 'ASC');
+            if ($request->within_km) {
+                $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
+                        ->whereRaw('(ROUND(('
+                        . '6371'
+                        . '* acos( cos( radians(lat) )'
+                        . '* cos( radians(' . $request->lat . ') )'
+                        . '* cos( radians(' . $request->lon . ') - radians(lon)) + sin(radians(lat))'
+                        . '* sin( radians(' . $request->lat . ')))'
+                        . '), 3)) < ?', ['distance' => $request->within_km]);
+                $data['within_km'] = $request->within_km;
+            }
+        }
+        $products = $products->paginate(12);
+        $products = $products->appends($request->except('page'));
+        $data['products'] = $products;
+        $data['conditions'] = Condition::all();
+        $data['brands'] = Brand::where('category_id', 1)->with('models')->get();
+        $data['models'] = Model::where('category_id', 1)->with('brand')->get();
+        $data['body_types'] = BodyType::where('category_id', 1)->get();
+        $data['fuel_types'] = FuelType::where('category_id', 1)->get();
+        $data['packages'] = Package::where('category_id', 1)->with('model')->get();
+        $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $data['type'] = 'Car';
+        return view('backend.products.index', $data);
     }
     /**
      * Display a listing of the resource.

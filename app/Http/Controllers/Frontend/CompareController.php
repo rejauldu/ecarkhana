@@ -22,21 +22,26 @@ class CompareController extends Controller
         $models = Model::select('id', 'brand_id', 'name')->where('category_id', 1)->get();
         $packages = Package::select('id', 'model_id', 'name')->where('category_id', 1)->get();
         $type = 'Car';
-        return view('frontend.add-to-compare', compact('brands', 'models', 'packages', 'type'));
+        $products = [];
+        $key_features = [];
+        return view('frontend.compares.compare-car', compact('brands', 'models', 'packages', 'type', 'products', 'key_features'));
     }
     public function addMotorcycleToCompare() {
         $brands = Brand::select('id', 'name')->where('category_id', 2)->get();
         $models = Model::select('id', 'brand_id', 'name')->where('category_id', 2)->get();
         $packages = Package::select('id', 'model_id', 'name')->where('category_id', 2)->get();
         $type = 'Motorcycle';
-        return view('frontend.add-to-compare', compact('brands', 'models', 'packages', 'type'));
+        $products = [];
+        $key_features = [];
+        return view('frontend.compares.compare-motorcycle', compact('brands', 'models', 'packages', 'type', 'products', 'key_features'));
     }
     public function addBicycleToCompare() {
         $brands = Brand::select('id', 'name')->where('category_id', 3)->get();
         $models = Model::select('id', 'brand_id', 'name')->where('category_id', 3)->get();
-        $packages = Package::select('id', 'model_id', 'name')->where('category_id', 3)->get();
         $type = 'Bicycle';
-        return view('frontend.add-to-compare', compact('brands', 'models', 'packages', 'type'));
+        $products = [];
+        $key_features = [];
+        return view('frontend.compares.compare-bicycle', compact('brands', 'models', 'products', 'type', 'key_features', 'packages'));
     }
     public function compare(Request $request, $url = null) {
         $brands = Brand::select('id', 'category_id', 'name')->get();
@@ -101,14 +106,14 @@ class CompareController extends Controller
                 $exterior_features = ExteriorFeature::all();
                 $safety_securities = SafetySecurity::all();
                 $additional_features = AdditionalFeature::all();
-                return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
+                return view('frontend.compares.compare-car', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
             } elseif ($p->category_id == 2) {
-                return view('frontend.compare.compare-motorcycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
+                return view('frontend.compares.compare-motorcycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
             } elseif ($p->category_id == 3) {
-                return view('frontend.compare.compare-bicycle', compact('brands', 'models', 'products', 'type', 'key_features'));
+                return view('frontend.compares.compare-bicycle', compact('brands', 'models', 'products', 'type', 'key_features'));
             }
         }
-        return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products', 'type'));
+        return view('frontend.compares.compare-car', compact('brands', 'models', 'packages', 'products', 'type'));
     }
     public function compareProduct(Request $request) {
         $data = $request->except('_token', '_method');

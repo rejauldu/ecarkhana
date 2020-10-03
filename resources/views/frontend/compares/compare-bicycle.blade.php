@@ -6,19 +6,19 @@
     {{ session()->get('message') }}
 </div>
 @endif
-@php($type = isset($type)?$type:'car')
-@include('layouts.frontend.'.strtolower($type).'-background')
+
+@include('layouts.frontend.bicycle-background')
 <section class="section-full content-inner-2 text-dark" id="compare">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <div class="m-b30">
-                    <h4 class="h4 m-t0">Compare to choose the right car! </h4>
+                    <h4 class="h4 m-t0">Compare to choose the right Bicycle!</h4>
                 </div>
             </div>
         </div>
         <div class="row">
-            @include('frontend.compare.configuration')
+            @include('frontend.compares.configuration-bicycle')
             @php($total = 0)
             @if(isset($products))
             @php($total = count($products))
@@ -33,13 +33,7 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="row">
-                            <div class="col-6 @mobile px-0 @endmobile">
-                                <div class="size-53 position-relative">
-                                    <div class="size-child overflow-hidden">
-                                        <img src="{{ url('/') }}/assets/products/{{ $products[0]->id }}/{{ $products[0]->image1 ?? 'not-found.jpg'}}" class="position-center w-100" />
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-32 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[0]->id }}/{{ $products[0]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
                             <div class="col-6 @mobile px-0 @endmobile overflow-hidden">
                                 <div class="text-dark @mobile text-small @endmobile">{{ $products[0]->name }}</div>
                                 <div class="text-secondary"><small>TK.{{ $products[0]->msrp }}</small></div>
@@ -49,13 +43,7 @@
                     @if($total>1)
                     <div class="col">
                         <div class="row">
-                            <div class="col-6 @mobile px-0 @endmobile">
-                                <div class="size-53 position-relative">
-                                    <div class="size-child overflow-hidden">
-                                        <img src="{{ url('/') }}/assets/products/{{ $products[1]->id }}/{{ $products[1]->image1 ?? 'not-found.jpg'}}" class="position-center w-100" />
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-32 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[1]->id }}/{{ $products[1]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
                             <div class="col-6 @mobile px-0 @endmobile overflow-hidden">
                                 <div class="text-dark @mobile text-small @endmobile">{{ $products[1]->name }}</div>
                                 <div class="text-secondary"><small>TK.{{ $products[1]->msrp }}</small></div>
@@ -66,13 +54,7 @@
                     @if($total>2)
                     <div class="col d-none d-md-block">
                         <div class="row">
-                            <div class="col-6 @mobile px-0 @endmobile">
-                                <div class="size-53 position-relative">
-                                    <div class="size-child overflow-hidden">
-                                        <img src="{{ url('/') }}/assets/products/{{ $products[2]->id }}/{{ $products[2]->image1 ?? 'not-found.jpg'}}" class="position-center w-100" />
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-6 @mobile px-0 @endmobile"><div class="size-32 position-relative"><img src="{{ url('/') }}/assets/products/{{ $products[2]->id }}/{{ $products[2]->image1 ?? 'not-found.jpg'}}" class="img-fluid" /></div></div>
                             <div class="col-6 @mobile px-0 @endmobile overflow-hidden">
                                 <div class="text-dark @mobile text-small @endmobile">{{ $products[2]->name }}</div>
                                 <div class="text-secondary"><small>TK.{{ $products[2]->msrp }}</small></div>
@@ -122,81 +104,81 @@
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Body Type</div>
+                                <div>Frame Size</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->body_type->name ?? '' }}
+                                    {{ $products[$i]->$category->frame_size ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Package</div>
+                                <div>Frame Materials</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->package->name ?? '' }}
+                                    {{ $products[$i]->$category->frame_material ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Displacement</div>
+                                <div>Fork</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->displacement->name ?? '' }}
+                                    {{ $products[$i]->$category->fork ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Make Year</div>
+                                <div>No of gears</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->manufacturing_year ?? '' }}
+                                    {{ $products[$i]->$category->gear_no ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Ground Clearance</div>
+                                <div>Wheel Size</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->ground_clearance->name ?? '' }}
+                                    {{ $products[$i]->$category->wheel_size ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Drive Type</div>
+                                <div>Shifter</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->drive_type->name ?? '' }}
+                                    {{ $products[$i]->$category->shifter ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Engine Type</div>
+                                <div>Made Origin</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->engine_type->name ?? '' }}
+                                    {{ $products[$i]->$category->made_origin->name ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Fuel Type</div>
+                                <div>Weight</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->fuel_type->name ?? '' }}
+                                    {{ $products[$i]->$category->weight ?? '' }}
                                 </div>
                             @endfor
                         </div>
@@ -215,7 +197,7 @@
                 <div class="row">
                     <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#key-feature">
                         <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Key Feature</strong></div>
+                            <div class="col py-2"><strong>Feature</strong></div>
                             <div class="col py-2"></div>
                             @if($total>1)
                             <div class="col py-2"></div>
@@ -226,7 +208,6 @@
                         </div>
                     </div>
                     <div class="col-12 striped collapse show" id="key-feature" data-parent="#compare">
-                        
                         @foreach($key_features as $key_feature)
                         <div class="row mx-0">
                             <div class="col py-2">
@@ -242,9 +223,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#engine-transmission">
+                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#frame-suspension">
                         <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Engine & Transmission</strong></div>
+                            <div class="col py-2"><strong>Frame & Suspension</strong></div>
                             <div class="col py-2"></div>
                             @if($total>1)
                             <div class="col py-2"></div>
@@ -254,133 +235,63 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12 collapse striped" id="engine-transmission" data-parent="#compare">
+                    <div class="col-12 collapse striped" id="frame-suspension" data-parent="#compare">
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Engine Type</div>
+                                <div>Frame size</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->engine_type->name ?? '' }}
+                                    {{ $products[$i]->$category->frame_size ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Engine Capacity</div>
+                                <div>Frame metarials</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->engine_capacity->name ?? '' }}
+                                    {{ $products[$i]->$category->frame_material ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Displacement</div>
+                                <div>Recommended biker height</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->displacement->name ?? '' }}cc
+                                    {{ $products[$i]->$category->recommended_biker_height ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Maximum Power</div>
+                                <div>Fork rear</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->maximum_power ?? '' }}
+                                    {{ $products[$i]->$category->fork_rear ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Maximum Torque</div>
+                                <div>Fork front</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->maximum_torque ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Milage kmpl</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->milage ?? '' }}kmpl
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Engine Check Warning</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->engine_check_warning ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Gear Box</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->gear_box->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Transmission</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->transmission->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Cylinder</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->cylinder->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Drive Type</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->drive_type->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Turning Radius</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->turning_radius ?? '' }}
+                                    {{ $products[$i]->$category->fork_front ?? '' }}
                                 </div>
                             @endfor
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#weight-dimension">
+                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#wheels-tyres">
                         <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Weight & Dimension</strong></div>
+                            <div class="col py-2"><strong>Wheels & Tyres</strong></div>
                             <div class="col py-2"></div>
                             @if($total>1)
                             <div class="col py-2"></div>
@@ -390,116 +301,10 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12 collapse striped" id="weight-dimension" data-parent="#compare">
+                    <div class="col-12 collapse striped" id="wheels-tyres" data-parent="#compare">
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Gross Weight</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->weight ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Ground Clearance</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->ground_clearance->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Wheel Base</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->wheel_base->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>No of Door</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->no_of_door ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Length</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->length ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Width</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->width ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Height</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->height ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#wheel-tyre">
-                        <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Wheels Tyre & Seating Capacity</strong></div>
-                            <div class="col py-2"></div>
-                            @if($total>1)
-                            <div class="col py-2"></div>
-                            @endif
-                            @if($total>2)
-                            <div class="col py-2"></div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-12 collapse striped" id="wheel-tyre" data-parent="#compare">
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Front Suspension</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->front_suspension ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Rear Suspension</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->rear_suspension ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Wheel Type</div>
+                                <div>Wheels</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
@@ -509,100 +314,40 @@
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Wheel Size</div>
+                                <div>Wheel size</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->wheel_size->name ?? '' }}
+                                    {{ $products[$i]->$category->wheel_size ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Turning Radius</div>
+                                <div>Tyre type</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->turning_radius ?? '' }}
+                                    {{ $products[$i]->$category->tyre_type->name ?? '' }} kmpl
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Tyre Type</div>
+                                <div>Tyre size</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->tyre_type->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Front Tyre Size</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->front_tyre_size ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Rear Tyre Size</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->rear_tyre_size ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Stearing Type</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->steering_type ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Seating Capacity</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->seating_capacity ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Front Brake Type</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->front_brake->name ?? '' }}
-                                </div>
-                            @endfor
-                        </div>
-                        <div class="row mx-0">
-                            <div class="col py-2">
-                                <div>Rear Brake Type</div>
-                            </div>
-                            @for ($i = 0; $i < $total; $i++)
-                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->rear_brake->name ?? '' }}
+                                    {{ $products[$i]->$category->tyre_size ?? '' }}
                                 </div>
                             @endfor
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#fuel-consumption">
+                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#drivetrain">
                         <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Fuel & Consumption</strong></div>
+                            <div class="col py-2"><strong>Drivetrain</strong></div>
                             <div class="col py-2"></div>
                             @if($total>1)
                             <div class="col py-2"></div>
@@ -612,43 +357,93 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12 collapse striped" id="fuel-consumption" data-parent="#compare">
+                    <div class="col-12 collapse striped" id="drivetrain" data-parent="#compare">
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Fuel Type</div>
+                                <div>Shifters</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->fuel_type->name ?? '' }}
+                                    {{ $products[$i]->$category->shifter ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Fuel Tank Capacity</div>
+                                <div>Front derailleur</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->fuel_tank_capacity->name ?? '' }}
+                                    {{ $products[$i]->$category->front_derailleur ?? '' }}
                                 </div>
                             @endfor
                         </div>
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>Millage Kmpl</div>
+                                <div>Rear derailleur</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->milage ?? '' }}kmpl
+                                    {{ $products[$i]->$category->rear_derailleur ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Crank</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->crank ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Freewheel</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->freewheel ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Seat post</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->seat_post ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Chain</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->chain ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Pedals</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->pedal ?? '' }}
                                 </div>
                             @endfor
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#interior-exterior">
+                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#component">
                         <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Interior/Exterior</strong></div>
+                            <div class="col py-2"><strong>Component</strong></div>
                             <div class="col py-2"></div>
                             @if($total>1)
                             <div class="col py-2"></div>
@@ -658,37 +453,73 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12 striped collapse" id="interior-exterior" data-parent="#compare">
-                        @foreach($interior_features as $interior_feature)
+                    <div class="col-12 collapse striped" id="component" data-parent="#compare">
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>{{ ucwords($interior_feature->name) }}</div>
+                                <div>Saddle</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    @if($products[$i]->$category->interior_feature && in_array($interior_feature->id, $products[$i]->$category->interior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif
+                                    {{ $products[$i]->$category->saddle ?? '' }}
                                 </div>
                             @endfor
                         </div>
-                        @endforeach
-                        @foreach($exterior_features as $exterior_feature)
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>{{ ucwords($exterior_feature->name) }}</div>
+                                <div>Headset</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    @if($products[$i]->$category->exterior_feature && in_array($exterior_feature->id, $products[$i]->$category->exterior_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif
+                                    {{ $products[$i]->$category->headset ?? '' }}
                                 </div>
                             @endfor
                         </div>
-                        @endforeach
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Handlebar</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->handlebar ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Grips</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->grip ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Stem</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->stem ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="row mx-0">
+                            <div class="col py-2">
+                                <div>Brake set</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->brake_system ?? '' }}
+                                </div>
+                            @endfor
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#safety-security">
+                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#weight">
                         <div class="row mx-0 list-group-item-danger border border-light">
-                            <div class="col py-2"><strong>Safety and Security</strong></div>
+                            <div class="col py-2"><strong>Weight & Limit</strong></div>
                             <div class="col py-2"></div>
                             @if($total>1)
                             <div class="col py-2"></div>
@@ -698,46 +529,26 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-12 collapse striped" id="safety-security" data-parent="#compare">
-                    @foreach($safety_securities as $safety_security)
+                    <div class="col-12 collapse striped" id="weight" data-parent="#compare">
                         <div class="row mx-0">
                             <div class="col py-2">
-                                <div>{{ ucwords($safety_security->name) }}</div>
+                                <div>Bike weight</div>
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    @if($products[$i]->$category->safety_security && in_array($safety_security->id, $products[$i]->$category->safety_security)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif
+                                    {{ $products[$i]->$category->weight ?? '' }}
                                 </div>
                             @endfor
                         </div>
-                    @endforeach
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 cursor-pointer collapsed" data-toggle="collapse" data-target="#additional-feature">
-                        <div class="row mx-0 list-group-item-danger">
-                            <div class="col py-2"><strong>Additional Feature</strong></div>
-                            <div class="col py-2"></div>
-                            @if($total>1)
-                            <div class="col py-2"></div>
-                            @endif
-                            @if($total>2)
-                            <div class="col py-2"></div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-12 collapse" id="additional-feature" data-parent="#compare">
                         <div class="row mx-0">
-                            @foreach($additional_features as $additional_feature)
-                                <div class="col py-2">
-                                    <div>{{ ucwords($additional_feature->name) }}</div>
+                            <div class="col py-2">
+                                <div>Biker weight limit</div>
+                            </div>
+                            @for ($i = 0; $i < $total; $i++)
+                                <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
+                                    {{ $products[$i]->$category->biker_weight ?? '' }}
                                 </div>
-                                @for ($i = 0; $i < $total; $i++)
-                                    <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                        @if($products[$i]->$category->additional_feature && in_array($additional_feature->id, $products[$i]->$category->additional_feature)) <i class="fa fa-check text-success"></i> @else <i class="fa fa-close text-danger"></i> @endif
-                                    </div>
-                                @endfor
-                            @endforeach
+                            @endfor
                         </div>
                     </div>
                 </div>
@@ -783,24 +594,13 @@
                 this.brand = b;
                 this.model = m;
                 this.search = '';
-                this.page = 3;
-                if( this.category_id >= 2) {
-                    this.page = 2;
-                    this.loading = i+1;
-                    Vue.nextTick(function() {
-                        setParentsHeight();
-                    });
-                    this.getProduct(i);
-                }
-                console.log(this.category_id);
-            },
-            packageSelected: function (p, i=0) {
-                this.package = p;
+                this.page = 2;
                 this.loading = i+1;
                 Vue.nextTick(function() {
                     setParentsHeight();
                 });
                 this.getProduct(i);
+                
             },
             isEmpty: function(obj) {
                 if(obj)
@@ -810,24 +610,20 @@
             getProduct: function(i) {
                 var _this = this;
                 var u = "{{ route('get-product') }}?brand_id=" + _this.brand.id + "&model_id=" + _this.model.id;
-                if(!this.isEmpty(this.package) && this.package.id>0)
-                    u += "&package_id=" + this.package.id;
-                    
                 $.ajax({
                     url: u,
                     dataType: "json",
                     success: function(result){
                         _this.page = 1;
                         _this.products[i] = result;
-                        console.log(_this.products.length);
                         _this.configuration = _this.products.length+1;
-                        _this.reset('brand', 'model', 'package');
+                        _this.reset('brand', 'model');
                         _this.loading = 0;
                     }
                 });
             },
             removeProduct: function(i) {
-                this.reset('brand', 'model', 'package');
+                this.reset('brand', 'model');
             },
             reset: function (...args) {
                 for (var i = 0; i < args.length; i++) {
@@ -835,8 +631,6 @@
                         this.brand = {};
                     } else if (args[i] == 'model') {
                         this.model = {};
-                    } else if (args[i] == 'package') {
-                        this.package = {};
                     }
                 }
                 this.search = '';
@@ -847,8 +641,6 @@
                     if(i != 0)
                         url += '-and-';
                     url += this.products[i].brand.name + '-' + this.products[i].model.name;
-                    if(!this.isEmpty(this.products[i].package))
-                        url += '-' + this.products[i].package.name
                 }
                 window.location = url;
             },
@@ -869,11 +661,6 @@
             },
             filteredModels() {
                 return this.models.filter(item => {
-                    return item.name.toLowerCase().startsWith(this.search.toLowerCase());
-                })
-            },
-            filteredPackages() {
-                return this.packages.filter(item => {
                     return item.name.toLowerCase().startsWith(this.search.toLowerCase());
                 })
             }
