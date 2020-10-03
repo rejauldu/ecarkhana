@@ -3,9 +3,11 @@
 namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
+use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class ProsCons extends Model
 {
+    use DisableLazyLoad;
 	protected $table="pros_conses";
     /**
      * The attributes that are mass assignable.

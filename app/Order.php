@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Order extends Model
 {
+	use DisableLazyLoad;
     /**
      * The attributes that are mass assignable.
      *

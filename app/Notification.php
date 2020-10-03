@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Notification extends Model
 {
+    use DisableLazyLoad;
 	protected $primaryKey = 'id';
 	protected $keyType = 'string';
 	public $incrementing = false;

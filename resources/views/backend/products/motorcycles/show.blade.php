@@ -107,8 +107,8 @@
                     <h5>General Specification</h5>
                     <ul>
                         <li> <span>Bike type </span> <strong class="text-right">{{ $product->condition->name ?? '' }}</strong></li>
-                        <li> <span>Brand </span> <strong class="text-right">{{ $product->motorcycle->brand->name ?? '' }}</strong></li>
-                        <li> <span>Model</span> <strong class="text-right">{{ $product->motorcycle->model->name ?? '' }}</strong></li>
+                        <li> <span>Brand </span> <strong class="text-right">{{ $product->brand->name ?? '' }}</strong></li>
+                        <li> <span>Model</span> <strong class="text-right">{{ $product->model->name ?? '' }}</strong></li>
                         <li> <span>Displacement</span> <strong class="text-right">{{ $product->motorcycle->displacement->name ?? '' }}</strong></li>
                         @if($product->condition_id == 3)
                         <li> <span>Registration year: </span> <strong class="text-right">{{ $product->registration_year ?? '' }}</strong></li>
@@ -652,7 +652,7 @@
                     <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                         @foreach($related_products as $used_product)
                         <div class="item">
-                            <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                            <div class="bg-white shadow-sm mx-1 zoom-parent overflow-hidden shadow-hover-10">
                                 <div class="size-53 clearfix">
                                     <div class="size-child overflow-hidden zoom-target-1">
                                         <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
@@ -672,7 +672,7 @@
                                     </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->motorcycle->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
@@ -685,10 +685,10 @@
                                             <i class="fa fa-calendar"></i> {{ $used_product->motorcycle->milage ?? ''}} km milage
                                         </div>
                                         <div class="col-12 my-1">
-                                            <i class="fa fa-calendar"></i> {{ $used_product->motorcycle->model->name ?? ''}} model
+                                            <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
                                         </div>
                                         <div class="col-12 my-1">
-                                            <i class="fa fa-hourglass-end"></i> {{ $used_product->motorcycle->brand->name ?? ''}} brand
+                                            <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
                                         </div>
                                     </div>
                                 </div>

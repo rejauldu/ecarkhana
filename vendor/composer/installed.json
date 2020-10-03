@@ -5283,5 +5283,48 @@
             "check",
             "validate"
         ]
+    },
+    {
+        "name": "ybaruchel/laravel-disable-lazyload",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ybaruchel/laravel-disable-lazyload.git",
+            "reference": "52cd505bcd0c427276d51054163c566a250fc364"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ybaruchel/laravel-disable-lazyload/zipball/52cd505bcd0c427276d51054163c566a250fc364",
+            "reference": "52cd505bcd0c427276d51054163c566a250fc364",
+            "shasum": ""
+        },
+        "require": {
+            "laravel/framework": "^5.0"
+        },
+        "time": "2018-10-26T20:16:17+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Ybaruchel\\DisableLazyLoad\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Yohanan Baruchel",
+                "email": "ybaruchel@gmail.com"
+            }
+        ],
+        "description": "Disable lazy load on Laravel",
+        "keywords": [
+            "eloquent",
+            "laravel",
+            "lazyload"
+        ]
     }
 ]

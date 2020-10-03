@@ -1,0 +1,25 @@
+{
+  "name": "ybaruchel/laravel-disable-lazyload",
+  "description": "Disable lazy load on Laravel",
+  "type": "library",
+  "require": {
+    "laravel/framework": "^5.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Yohanan Baruchel",
+      "email": "ybaruchel@gmail.com"
+    }
+  ],
+  "keywords": [
+    "laravel",
+    "lazyload",
+    "eloquent"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Ybaruchel\\DisableLazyLoad\\": "src/"
+    }
+  }
+}

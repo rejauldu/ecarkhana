@@ -19,7 +19,10 @@ Route::get('/motorcycle', 'Frontend\HomeController@motorcycleIndex')->name('moto
 Route::get('/bicycle', 'Frontend\HomeController@bicycleIndex')->name('bicycle');
 
 Route::get('/about-us', 'Frontend\HomeController@aboutUs')->name('about-us');
-Route::get('/add-to-compare', 'Frontend\HomeController@addToCompare')->name('add-to-compare');
+Route::get('/add-to-compare', 'Frontend\CompareController@addToCompare')->name('add-to-compare');
+Route::get('/add-car-to-compare', 'Frontend\CompareController@addToCompare')->name('add-car-to-compare');
+Route::get('/add-motorcycle-to-compare', 'Frontend\CompareController@addMotorcycleToCompare')->name('add-motorcycle-to-compare');
+Route::get('/add-bicycle-to-compare', 'Frontend\CompareController@addBicycleToCompare')->name('add-bicycle-to-compare');
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
 Route::get('/auction-products', 'Frontend\HomeController@auctionProductList')->name('auction-products');
 Route::resource('banks', 'Backend\BankController');
@@ -53,8 +56,8 @@ Route::resource('loan-applications', 'Backend\LoanApplicationController');
 Route::get('loan-applications-unviewed', 'Backend\LoanApplicationController@unviewed')->name('loan-applications.unviewed');
 Route::get('/loan-eligibility', 'Frontend\LoanInfoController@create')->name('loan-eligibility');
 Route::get('/car-loan-insurance-check', 'Frontend\HomeController@carLoanInsuranceCheck')->name('car-loan-insurance-check');
-Route::get('/compare/{url?}', 'Frontend\HomeController@compare')->name('compare');
-Route::post('/compare-car', 'Frontend\HomeController@compareCar')->name('compare-car');
+Route::get('/compare/{url?}', 'Frontend\CompareController@compare')->name('compare');
+Route::post('/compare-product', 'Frontend\CompareController@compareProduct')->name('compare-product');
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
 Route::get('/dealers/{id}', 'Backend\UserController@dealerDetail')->name('dealers.show');
 Route::get('/dealers', 'Backend\UserController@dealers')->name('dealers.index');
@@ -68,8 +71,8 @@ Route::get('/insurance-photos', 'Frontend\InsuranceController@photos')->name('in
 Route::get('/insurance-checkout', 'Frontend\InsuranceController@checkout')->name('insurance-checkout');
 Route::post('/insurance-checkout-store', 'Frontend\InsuranceController@checkoutStore')->name('insurance-checkout-store');
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
-Route::get('/national-distributors/{id}', 'Frontend\HomeController@nationalDistributorDetail')->name('national-distributors.show');
-Route::get('/national-distributors', 'Frontend\HomeController@nationalDistributorList')->name('national-distributors.index');
+Route::get('/national-distributors/{id}', 'Backend\UserController@nationalDistributorDetail')->name('national-distributors.show');
+Route::get('/national-distributors', 'Backend\UserController@nationalDistributorList')->name('national-distributors.index');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
 Route::get('/get-product', 'Backend\ProductController@getProduct')->name('get-product');
 Route::get('/get-regions', 'Frontend\HomeController@getRegions')->name('get-regions');

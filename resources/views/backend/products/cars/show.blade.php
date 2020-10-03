@@ -333,8 +333,8 @@
                 <div class="details-block details-weight">
                     <h5>General Specification</h5>
                     <ul>
-                        <li><span>Brand: </span> <strong class="text-right">{{ $product->car->brand->name ?? '' }}</strong></li>
-                        <li><span>Model: </span> <strong class="text-right">{{ $product->car->model->name ?? '' }}</strong></li>
+                        <li><span>Brand: </span> <strong class="text-right">{{ $product->brand->name ?? '' }}</strong></li>
+                        <li><span>Model: </span> <strong class="text-right">{{ $product->model->name ?? '' }}</strong></li>
                         <li><span>Body type: </span> <strong class="text-right">{{ $product->car->body_type->name ?? '' }}</strong></li>
                         <li><span>Package: </span> <strong class="text-right"> {{ $product->car->package->name ?? '' }}</strong></li>
                         <li><span>Displacement: </span> <strong class="text-right">{{ $product->car->displacement->name ?? '' }} cc</strong></li>
@@ -1085,7 +1085,7 @@
                 <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
                     @foreach($related_products as $used_product)
                     <div class="item">
-                        <div class="bg-white shadow m-3 zoom-parent overflow-hidden shadow-hover-10">
+                        <div class="bg-white shadow-sm mx-2 zoom-parent overflow-hidden shadow-hover-10">
                             <div class="size-53 clearfix">
                                 <div class="size-child overflow-hidden zoom-target-1">
                                     <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
@@ -1105,7 +1105,7 @@
                                 </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
-                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->car->brand->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                 </div>
                                 <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                 <div class="separator"></div>
@@ -1118,13 +1118,13 @@
                                         <i class="fa fa-calendar"></i> {{ $used_product->car->milage ?? ''}} km milage
                                     </div>
                                     <div class="col-6 my-1">
-                                        <i class="fa fa-calendar"></i> {{ $used_product->car->model->name ?? ''}} model
+                                        <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
                                     </div>
                                     <div class="col-6 my-1">
                                         <i class="fa fa-car"></i> {{ $used_product->car->fuel_type->name ?? ''}}
                                     </div>
                                     <div class="col-6 my-1">
-                                        <i class="fa fa-hourglass-end"></i> {{ $used_product->car->brand->name ?? ''}} brand
+                                        <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
                                     </div>
                                     <div class="col-6 my-1">
                                         <i class="fa fa-superpowers"></i> {{ $used_product->car->maximum_power ?? ''}} Watt

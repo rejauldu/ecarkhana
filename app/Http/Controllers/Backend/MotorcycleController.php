@@ -38,7 +38,7 @@ class MotorcycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::select('products.*')->has('motorcycle')->with('motorcycle', 'supplier.region');
+        $products = Product::select('products.*')->has('motorcycle')->with('motorcycle', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
@@ -256,7 +256,7 @@ class MotorcycleController extends Controller {
      */
     public function show($id) {
         $product = Product::has('motorcycle')
-                ->with('auction_grade', 'brand', 'model', 'motorcycle.displacement', 'motorcycle.ground_clearance', 'motorcycle.engine_type', 'motorcycle.condition', 'motorcycle.front_brake', 'motorcycle.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+                ->with('condition', 'auction_grade', 'brand', 'model', 'motorcycle.displacement', 'motorcycle.ground_clearance', 'motorcycle.engine_type', 'motorcycle.condition', 'motorcycle.front_brake', 'motorcycle.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'motorcycle.made_origin', 'motorcycle.made_in', 'bids', 'motorcycle.starting_system', 'motorcycle.cooling_system', 'motorcycle.tyre_type', 'supplier.user_type', 'supplier.division')
                 ->where('id', $id)
                 ->first();
         $key_features = KeyFeature::where('category_id', 2)->get();
@@ -264,7 +264,7 @@ class MotorcycleController extends Controller {
         $related_products = Product::whereHas('motorcycle', function($q) use($product) {
                     $q->where('brand_id', $product->motorcycle->brand_id);
                 })
-                ->with('motorcycle', 'motorcycle.brand', 'motorcycle.model', 'supplier.region')
+                ->with('motorcycle.displacement', 'brand', 'model', 'supplier.region')
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         $type = 'Motorcycle';

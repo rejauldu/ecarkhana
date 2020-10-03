@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9d8cdad5b23b2b15b168ed684548837",
+    "content-hash": "c70b8cc620a68428aa043cd38b06b6dc",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -3354,6 +3354,47 @@
                 "environment"
             ],
             "time": "2019-09-10T21:37:39+00:00"
+        },
+        {
+            "name": "ybaruchel/laravel-disable-lazyload",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ybaruchel/laravel-disable-lazyload.git",
+                "reference": "52cd505bcd0c427276d51054163c566a250fc364"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ybaruchel/laravel-disable-lazyload/zipball/52cd505bcd0c427276d51054163c566a250fc364",
+                "reference": "52cd505bcd0c427276d51054163c566a250fc364",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ybaruchel\\DisableLazyLoad\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yohanan Baruchel",
+                    "email": "ybaruchel@gmail.com"
+                }
+            ],
+            "description": "Disable lazy load on Laravel",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "lazyload"
+            ],
+            "time": "2018-10-26T20:16:17+00:00"
         }
     ],
     "packages-dev": [
@@ -4376,6 +4417,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

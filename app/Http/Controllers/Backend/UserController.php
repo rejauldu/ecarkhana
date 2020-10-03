@@ -19,7 +19,7 @@ use App\Product;
 class UserController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers']]);
+        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers', 'nationalDistributorDetail', 'nationalDistributorList']]);
     }
 
     /**
@@ -129,19 +129,35 @@ class UserController extends Controller {
     }
 
     public function dealerDetail($id) {
-        $u = User::find($id);
+        $u = User::with('region', 'division')->where('id', $id)->first();
         $related_products = Product::where('supplier_id', $id)
                 ->whereNotNull('car_id')
-                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
+                ->with('brand', 'model', 'car.fuel_type', 'supplier.region', 'category')
                 ->get();
         return view('frontend.dealer-detail', compact('u', 'related_products'));
     }
 
     public function dealers() {
         $users = User::where('user_type_id', 2)
-                ->with('products')
+                ->with('products', 'division')
                 ->paginate(10);
         return view('frontend.dealers', compact('users'));
+    }
+
+    public function nationalDistributorDetail($id) {
+        $u = User::with('division')->where('id', $id)->first();
+        $related_products = Product::where('supplier_id', $id)
+                ->whereNotNull('car_id')
+                ->with('car', 'brand', 'model', 'car.fuel_type', 'supplier.region', 'category')
+                ->get();
+        return view('frontend.national-distributor-detail', compact('u', 'related_products'));
+    }
+
+    public function nationalDistributorList() {
+        $users = User::where('user_type_id', 3)
+                ->with('products', 'division')
+                ->paginate(10);
+        return view('frontend.national-distributor-list', compact('users'));
     }
 
 }

@@ -31,6 +31,10 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'Y' => 
+        array (
+            'Ybaruchel\\DisableLazyLoad\\' => 26,
+        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
@@ -153,6 +157,10 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Ybaruchel\\DisableLazyLoad\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ybaruchel/laravel-disable-lazyload/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -421,6 +429,7 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
     );
 
     public static $classMap = array (
+        'App\\Advertisement' => __DIR__ . '/../..' . '/app/Advertisement.php',
         'App\\Bank' => __DIR__ . '/../..' . '/app/Bank.php',
         'App\\Bicycle' => __DIR__ . '/../..' . '/app/Bicycle.php',
         'App\\Bid' => __DIR__ . '/../..' . '/app/Bid.php',
@@ -432,6 +441,7 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         'App\\Color' => __DIR__ . '/../..' . '/app/Color.php',
         'App\\Comment' => __DIR__ . '/../..' . '/app/Comment.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Discomfort' => __DIR__ . '/../..' . '/app/Discomfort.php',
         'App\\Dropdowns\\AdditionalFeature' => __DIR__ . '/../..' . '/app/Dropdowns/AdditionalFeature.php',
         'App\\Dropdowns\\AfterSellService' => __DIR__ . '/../..' . '/app/Dropdowns/AfterSellService.php',
         'App\\Dropdowns\\AuctionGrade' => __DIR__ . '/../..' . '/app/Dropdowns/AuctionGrade.php',
@@ -483,6 +493,7 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\BackEnd\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/UserController.php',
+        'App\\Http\\Controllers\\Backend\\AdvertisementController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/AdvertisementController.php',
         'App\\Http\\Controllers\\Backend\\AuctionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/AuctionController.php',
         'App\\Http\\Controllers\\Backend\\BankController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/BankController.php',
         'App\\Http\\Controllers\\Backend\\BicycleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/BicycleController.php',
@@ -550,8 +561,10 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         'App\\Http\\Controllers\\Backend\\SubCommentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/SubCommentController.php',
         'App\\Http\\Controllers\\Backend\\SupplierController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/SupplierController.php',
         'App\\Http\\Controllers\\Backend\\UnitController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/UnitController.php',
+        'App\\Http\\Controllers\\Backend\\VersusSliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/VersusSliderController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Fronend\\ContactUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/ContactUsController.php',
+        'App\\Http\\Controllers\\Frontend\\BidController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/BidController.php',
         'App\\Http\\Controllers\\Frontend\\FitCalculatorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/FitCalculatorController.php',
         'App\\Http\\Controllers\\Frontend\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/HomeController.php',
         'App\\Http\\Controllers\\Frontend\\InsuranceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/InsuranceController.php',
@@ -600,6 +613,7 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         'App\\Notification' => __DIR__ . '/../..' . '/app/Notification.php',
         'App\\Notifications\\DatabaseNotification' => __DIR__ . '/../..' . '/app/Notifications/DatabaseNotification.php',
         'App\\Notifications\\EmailNotification' => __DIR__ . '/../..' . '/app/Notifications/EmailNotification.php',
+        'App\\Notifications\\FitResultNotification' => __DIR__ . '/../..' . '/app/Notifications/FitResultNotification.php',
         'App\\Notifications\\InvoicePaid' => __DIR__ . '/../..' . '/app/Notifications/InvoicePaid.php',
         'App\\Notifications\\VerifyEmail' => __DIR__ . '/../..' . '/app/Notifications/VerifyEmail.php',
         'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
@@ -625,6 +639,7 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         'App\\Traffic' => __DIR__ . '/../..' . '/app/Traffic.php',
         'App\\Unit' => __DIR__ . '/../..' . '/app/Unit.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\VersusSlider' => __DIR__ . '/../..' . '/app/VersusSlider.php',
         'Barryvdh\\DomPDF\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade.php',
         'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
         'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
@@ -4412,6 +4427,7 @@ class ComposerStaticInit78023d5add38e3d4779603866b840886
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
+        'Ybaruchel\\DisableLazyLoad\\DisableLazyLoad' => __DIR__ . '/..' . '/ybaruchel/laravel-disable-lazyload/src/DisableLazyLoad.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',

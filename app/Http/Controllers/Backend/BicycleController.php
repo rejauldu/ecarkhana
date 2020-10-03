@@ -30,7 +30,7 @@ class BicycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::select('products.*')->has('bicycle')->with('bicycle', 'supplier.region');
+        $products = Product::select('products.*')->has('bicycle')->with('bicycle', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
@@ -240,7 +240,7 @@ class BicycleController extends Controller {
      */
     public function show($id) {
         $product = Product::has('bicycle')
-                ->with('bicycle.brand', 'bicycle.model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+                ->with('condition', 'brand', 'model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier.region', 'supplier.division', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
                 ->where('id', $id)
                 ->first();
         $key_features = KeyFeature::where('category_id', 3)->get();
@@ -248,7 +248,7 @@ class BicycleController extends Controller {
         $related_products = Product::whereHas('bicycle', function($q) use($product) {
                     $q->where('brand_id', $product->bicycle->brand_id);
                 })
-                ->with('bicycle', 'bicycle.brand', 'bicycle.model', 'supplier.region')
+                ->with('bicycle', 'brand', 'model', 'supplier.region')
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         $today = strtotime(date("Y-m-d"));

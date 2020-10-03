@@ -88,7 +88,7 @@
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->brand->name ?? '' }}
+                                    {{ $products[$i]->brand->name ?? '' }}
                                 </div>
                             @endfor
                         </div>
@@ -98,7 +98,7 @@
                             </div>
                             @for ($i = 0; $i < $total; $i++)
                                 <div class="col px-3 py-2 text-center @if($i==2) d-none d-md-block @endif">
-                                    {{ $products[$i]->$category->model->name ?? '' }}
+                                    {{ $products[$i]->model->name ?? '' }}
                                 </div>
                             @endfor
                         </div>

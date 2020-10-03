@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('compare-car') }}">
+                            <a href="{{ route('compare-product') }}">
                                 <div class="service_box">
                                     <i class="fa fa-wpforms" aria-hidden="true"></i><br>
                                     <p>Loan eligible </p>
@@ -274,7 +274,7 @@
                                 </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
-                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->motorcycle->brand->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                 </div>
                                 <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                 <div class="separator"></div>
@@ -388,7 +388,7 @@ Start Compare -->
                                     </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->motorcycle->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
@@ -401,13 +401,13 @@ Start Compare -->
                                             <i class="fa fa-tachometer"></i> {{ $used_product->motorcycle->maximum_speed ?? ''}} km/h
                                         </div>
                                         <div class="col-6 my-1">
-                                            <i class="fa fa-calendar"></i> {{ $used_product->motorcycle->model->name ?? ''}}
+                                            <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}}
                                         </div>
                                         <div class="col-6 my-1">
                                             <i class="fa fa-road"></i> {{ $used_product->motorcycle->milage ?? ''}} km
                                         </div>
                                         <div class="col-6 my-1">
-                                            <i class="fa fa-user"></i> {{ $used_product->motorcycle->brand->name ?? ''}}
+                                            <i class="fa fa-user"></i> {{ $used_product->brand->name ?? ''}}
                                         </div>
                                         <div class="col-6 my-1">
                                             <i class="fa fa-industry"></i> {{ $used_product->motorcycle->made_origin->name ?? ''}}
@@ -471,9 +471,9 @@ Start Compare -->
                                     </div>
                                     <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
                                         <ul class="list-inline">
-                                            <li><i class="fa fa-registered"></i> {{ $new_product->car->manufacturing_year ?? ''}}</li>
-                                            <li><i class="fa fa-cog"></i> {{ $new_product->car->steering_gear_type ?? ''}}</li>
-                                            <li><i class="fa fa-dashboard"></i> {{ $new_product->car->milage ?? ''}} mi</li>
+                                            <li><i class="fa fa-registered"></i> {{ $new_product->motorcycle->manufacturing_year ?? ''}}</li>
+                                            <li><i class="fa fa-cog"></i> {{ $new_product->motorcycle->steering_gear_type ?? ''}}</li>
+                                            <li><i class="fa fa-dashboard"></i> {{ $new_product->motorcycle->milage ?? ''}} mi</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -487,7 +487,7 @@ Start Compare -->
                                     </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>

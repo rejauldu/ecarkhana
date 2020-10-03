@@ -3,9 +3,11 @@
 namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
+use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class SellingCapacity extends Model
 {
+    use DisableLazyLoad;
     /**
      * The attributes that are mass assignable.
      *

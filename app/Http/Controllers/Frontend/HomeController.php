@@ -47,16 +47,16 @@ class HomeController extends Controller {
         $home_sliders = HomeSlider::where('type', 'Car')->get();
         $versus_sliders = VersusSlider::where('category_id', 1)->with('product1.brand', 'product2.brand')->get();
         $advertisements = Advertisement::where('category_id', 1)->with('category')->get();
-        $new_products = Product::has('car')->where('condition_id', 1)->with('car')->take(10)->get();
-        $recondition_products = Product::has('car')->where('condition_id', 2)->with('car')->take(10)->get();
-        $used_products = Product::has('car')->where('condition_id', 3)->with('car')->take(10)->get();
-        $popular_products = Product::has('car')->with('car')->orderBy('view', 'desc')->take(10)->get();
+        $new_products = Product::has('car')->where('condition_id', 1)->with('brand', 'car', 'supplier.region')->take(10)->get();
+        $recondition_products = Product::has('car')->where('condition_id', 2)->with('brand', 'car', 'supplier.region', 'supplier.division')->take(10)->get();
+        $used_products = Product::has('car')->where('condition_id', 3)->with('brand', 'model', 'car.fuel_type', 'supplier.region', 'supplier.division')->take(10)->get();
+        $popular_products = Product::has('car')->with('brand', 'car', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $brands = Brand::where('category_id', 1)->get();
-        $models = Model::where('category_id', 1)->get();
+        $models = Model::where('category_id', 1)->with('brand')->get();
         $body_types = BodyType::where('category_id', 1)->get();
         $fuel_types = FuelType::where('category_id', 1)->get();
-        $packages = Package::where('category_id', 1)->get();
+        $packages = Package::where('category_id', 1)->with('model')->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Car';
         return view('frontend.index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages', 'posts'));
@@ -64,17 +64,17 @@ class HomeController extends Controller {
 
     public function motorcycleIndex() {
         $home_sliders = HomeSlider::where('type', 'Motorcycle')->get();
-        $new_products = Product::has('motorcycle')->where('condition_id', 1)->with('motorcycle')->take(10)->get();
         $versus_sliders = VersusSlider::where('category_id', 2)->with('product1.brand', 'product2.brand')->get();
         $advertisements = Advertisement::where('category_id', 2)->with('category')->get();
-        $used_products = Product::has('motorcycle')->where('condition_id', 3)->with('motorcycle')->take(10)->get();
-        $popular_products = Product::has('motorcycle')->with('motorcycle')->orderBy('view', 'desc')->take(10)->get();
+        $new_products = Product::has('motorcycle')->where('condition_id', 1)->with('brand', 'motorcycle.displacement', 'supplier.region', 'supplier.division')->take(10)->get();
+        $used_products = Product::has('motorcycle')->where('condition_id', 3)->with('brand', 'model', 'motorcycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
+        $popular_products = Product::has('motorcycle')->with('brand', 'motorcycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $brands = Brand::where('category_id', 2)->get();
-        $models = Model::where('category_id', 2)->get();
+        $models = Model::where('category_id', 2)->with('brand')->get();
         $body_types = BodyType::where('category_id', 2)->get();
         $displacements = Displacement::where('category_id', 2)->get();
-        $packages = Package::where('category_id', 2)->get();
+        $packages = Package::where('category_id', 2)->with('model')->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Motorcycle';
         return view('frontend.motorcycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'packages', 'posts'));
@@ -82,11 +82,11 @@ class HomeController extends Controller {
 
     public function bicycleIndex() {
         $home_sliders = HomeSlider::where('type', 'Bicycle')->get();
-        $new_products = Product::has('bicycle')->where('condition_id', 1)->with('bicycle')->take(10)->get();
         $versus_sliders = VersusSlider::where('category_id', 3)->with('product1.brand', 'product2.brand')->get();
         $advertisements = Advertisement::where('category_id', 3)->with('category')->get();
-        $popular_products = Product::has('bicycle')->with('bicycle')->orderBy('view', 'desc')->take(10)->get();
-        $used_products = Product::has('bicycle')->where('condition_id', 3)->with('bicycle', 'bicycle.model', 'bicycle.brand', 'bicycle.fuel_type', 'supplier.division', 'supplier.region')->take(10)->get();
+        $new_products = Product::has('bicycle')->where('condition_id', 1)->with('brand', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
+        $popular_products = Product::has('bicycle')->with('brand', 'bicycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
+        $used_products = Product::has('bicycle')->where('condition_id', 3)->with('brand', 'model', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Bicycle';
@@ -101,12 +101,8 @@ class HomeController extends Controller {
         return view('frontend.insurance-list');
     }
 
-    public function addToCompare() {
-        $brands = Brand::select('id', 'name')->where('category_id', 1)->get();
-        $models = Model::select('id', 'brand_id', 'name')->where('category_id', 1)->get();
-        $packages = Package::select('id', 'model_id', 'name')->where('category_id', 1)->get();
-        return view('frontend.add-to-compare', compact('brands', 'models', 'packages'));
-    }
+    
+    
 
     public function auctionBiddingList($id) {
         $product = Product::with(['bids' => function($q) {
@@ -181,90 +177,9 @@ class HomeController extends Controller {
         return view('frontend.car-loan-eligibility');
     }
 
-    public function compare(Request $request, $url = null) {
-        $brands = Brand::select('id', 'category_id', 'name')->get();
-        $models = Model::select('id', 'category_id', 'brand_id', 'name')->get();
-        $packages = Package::select('id', 'category_id', 'model_id', 'name')->get();
-        $data = array_filter(explode("-and-", $url));
-        $vehicles = [];
-        foreach ($data as $d) {
-            $temp = array_filter(explode('-', $d));
-            array_push($vehicles, $temp);
-        }
-        $products = [];
-        $category = 'car';
-        if (isset($request->category))
-            $category = strtolower($request->category);
-        $type = ucfirst($category);
+    
 
-        foreach ($vehicles as $vehicle) {
-            $v = Product::whereHas('brand', function (Builder $query) use($vehicle) {
-                        $query->where('name', $vehicle[0]);
-                    });
-            if (isset($vehicle[1]))
-                $v = $v->whereHas('model', function (Builder $query) use($vehicle) {
-                    $query->where('name', $vehicle[1]);
-                });
-            if (isset($vehicle[2]))
-                $v = $v->whereHas('package', function (Builder $query) use($vehicle) {
-                    $query->where('name', $vehicle[2]);
-                });
-            $p = $v->first();
-            if ($p->category_id == 1)
-                $v = $v->with('brand', 'model', 'package', $category . '.brand', $category . '.model', $category . '.package', $category . '.body_type', $category . '.displacement', $category . '.ground_clearance', $category . '.drive_type', $category . '.engine_type', $category . '.fuel_type');
-            elseif ($p->category_id == 2) {
-                $category = 'motorcycle';
-                $v = $v->with('brand', 'model', $category . '.brand', $category . '.model', $category . '.displacement', $category . '.ground_clearance', $category . '.engine_type', $category . '.made_in', $category . '.made_origin', $category . '.starting_system', $category . '.cooling_system', $category . '.condition', $category . '.tyre_type', $category . '.front_brake', $category . '.rear_brake');
-            } elseif ($p->category_id == 3) {
-                $category = 'bicycle';
-                $v = $v->with('brand', 'model', $category . '.brand', $category . '.model', $category . '.wheel_type', $category . '.made_origin', $category . '.tyre_type');
-            }
-            $v = $v->first();
-            if (isset($v->$category->key_feature))
-                $v->$category->key_feature = explode(',', $v->$category->key_feature);
-            if (isset($v->$category->interior_feature))
-                $v->$category->interior_feature = explode(',', $v->$category->interior_feature);
-            if (isset($v->$category->exterior_feature))
-                $v->$category->exterior_feature = explode(',', $v->$category->exterior_feature);
-            if (isset($v->$category->safety_security))
-                $v->$category->safety_security = explode(',', $v->$category->safety_security);
-            if (isset($v->$category->additional_feature))
-                $v->$category->additional_feature = explode(',', $v->$category->additional_feature);
-            array_push($products, $v);
-        }
-        if (isset($p)) {
-            $type = ucfirst($category);
-            $key_features = KeyFeature::where('category_id', $p->category_id)->get();
-            $interior_features = InteriorFeature::all();
-            $exterior_features = ExteriorFeature::all();
-            $safety_securities = SafetySecurity::all();
-            $additional_features = AdditionalFeature::all();
-            if ($p->category_id == 1)
-                return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
-            elseif ($p->category_id == 2) {
-                return view('frontend.compare.compare-motorcycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
-            } elseif ($p->category_id == 3) {
-                return view('frontend.compare.compare-bicycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));
-            }
-        }
-        return view('frontend.compare.compare-car', compact('brands', 'models', 'packages', 'products', 'type'));
-    }
-
-    public function compareCar(Request $request) {
-        $data = $request->except('_token', '_method');
-        $product[] = Product::where('id', $data['products'][0])->with('car.brand', 'car.model', 'car.package')->first();
-        $product[] = Product::where('id', $data['products'][1])->with('car.brand', 'car.model', 'car.package')->first();
-        $product[] = Product::where('id', $data['products'][2])->with('car.brand', 'car.model', 'car.package')->first();
-        $product[0]->car->key_feature = explode(',', $product[0]->car->key_feature);
-        $product[1]->car->key_feature = explode(',', $product[1]->car->key_feature);
-        $product[2]->car->key_feature = explode(',', $product[2]->car->key_feature);
-        $key_features = KeyFeature::where('category_id', 1)->get();
-        $interior_features = InteriorFeature::all();
-        $exterior_features = ExteriorFeature::all();
-        $safety_securities = SafetySecurity::all();
-        $additional_features = AdditionalFeature::all();
-        return view('frontend.compare-car', compact('product', 'key_features'));
-    }
+    
 
     public function contactUs() {
         return view('frontend.contact-us');
@@ -297,23 +212,6 @@ class HomeController extends Controller {
     public function motorcycleWishlist() {
         return view('frontend.motorcycle-wishlist');
     }
-
-    public function nationalDistributorDetail($id) {
-        $u = User::find($id);
-        $related_products = Product::where('supplier_id', $id)
-                ->whereNotNull('car_id')
-                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
-                ->get();
-        return view('frontend.national-distributor-detail', compact('u', 'related_products'));
-    }
-
-    public function nationalDistributorList() {
-        $users = User::where('user_type_id', 3)
-                ->with('products')
-                ->paginate(10);
-        return view('frontend.national-distributor-list', compact('users'));
-    }
-
     public function orderComplete() {
         return view('frontend.order-complete');
     }

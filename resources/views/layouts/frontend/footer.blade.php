@@ -288,7 +288,7 @@ back to top -->
     @delete
 </form>
 @endauth
-<form action="{{ route('compare-car') }}" id="compare-car-form" method="post">
+<form action="{{ route('compare-product') }}" id="compare-product-form" method="post">
     @csrf
     <input type="hidden" name="products[]" id="compare-product-0" value="" />
     <input type="hidden" name="products[]" id="compare-product-1" value="" />
@@ -383,7 +383,7 @@ function attachEventListener(c) {
             var total = pushToCompare(this.getAttribute("product-id"));
             if (total.length > 2) {
                 resetCompare();
-                document.getElementById("compare-car-form").submit();
+                document.getElementById("compare-product-form").submit();
             }
         } else {
             sessionStorage.compare_count = Number(sessionStorage.compare_count) - 1;

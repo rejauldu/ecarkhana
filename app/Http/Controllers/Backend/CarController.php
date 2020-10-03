@@ -48,7 +48,7 @@ class CarController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::select('products.*')->has('car')->with('car', 'supplier.region');
+        $products = Product::select('products.*')->has('car')->with('car', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
@@ -297,7 +297,7 @@ class CarController extends Controller {
      */
     public function show($id) {
         $product = Product::has('car')
-                ->with('auction_grade', 'car.brand', 'car.model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'region.division')
+                ->with('condition', 'auction_grade', 'brand', 'model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'supplier.region', 'supplier.division', 'supplier.user_type')
                 ->where('id', $id)
                 ->first();
         $key_features = KeyFeature::where('category_id', 1)->get();
@@ -309,7 +309,7 @@ class CarController extends Controller {
         $related_products = Product::whereHas('car', function($q) use($product) {
                     $q->where('brand_id', $product->car->brand_id);
                 })
-                ->with('car', 'car.brand', 'car.model', 'car.fuel_type', 'supplier.region')
+                ->with('car', 'brand', 'model', 'car.displacement', 'car.fuel_type', 'supplier.region', 'supplier.division')
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         return view('backend.products.cars.show', compact('product', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features', 'after_sell_services', 'related_products'));

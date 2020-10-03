@@ -340,7 +340,7 @@
                                     </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
@@ -462,7 +462,7 @@
                                     </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->car->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
@@ -475,13 +475,13 @@
                                             <i class="fa fa-calendar"></i> {{ $used_product->car->milage ?? ''}} km milage
                                         </div>
                                         <div class="col-6 my-1">
-                                            <i class="fa fa-calendar"></i> {{ $used_product->car->model->name ?? ''}} model
+                                            <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
                                         </div>
                                         <div class="col-6 my-1">
                                             <i class="fa fa-car"></i> {{ $used_product->car->fuel_type->name ?? ''}}
                                         </div>
                                         <div class="col-6 my-1">
-                                            <i class="fa fa-hourglass-end"></i> {{ $used_product->car->brand->name ?? ''}} brand
+                                            <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
                                         </div>
                                         <div class="col-6 my-1">
                                             <i class="fa fa-superpowers"></i> {{ $used_product->car->maximum_power ?? ''}} Watt
@@ -567,7 +567,7 @@
                                     </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
@@ -626,7 +626,7 @@
                                 </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}, {{ $new_product->supplier->division->name ?? ''}}</span>
-                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->car->brand->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                 </div>
                                 <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                 <div class="separator"></div>
