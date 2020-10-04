@@ -158,23 +158,25 @@ Start Car Loan  Eligibility-->
                     </select>
                 </div>
             </div>
-            <div class="col-12 col-md-6" v-if="profession == 1">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
-                    <label for="experience">Job Experience<sup class="text-danger">*</sup></label>
+                    <label for="experience" v-if="profession == 1">Job Experience<sup class="text-danger">*</sup></label>
+                    <label for="experience" v-if="profession == 2">Trade Licence Age<sup class="text-danger">*</sup></label>
+                    <label for="experience" v-if="profession == 3">Land Ownership Age<sup class="text-danger">*</sup></label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="experience" placeholder="Enter job experience" name="experience" required="">
+                        <input type="number" class="form-control" id="experience" placeholder="Years" name="experience" required="">
                         <div class="input-group-append">
                             <span class="input-group-text">Years</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6" v-if="profession == 1 || profession == 2">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="salary" v-if="profession == 1">Salary Per Month<sup class="text-danger">*</sup></label>
-                    <label for="salary" v-if="profession == 2">Your gross monthly income<sup class="text-danger">*</sup></label>
+                    <label for="salary" v-else>Your gross monthly income<sup class="text-danger">*</sup></label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="salary" placeholder="Enter Salary" name="salary" required="">
+                        <input type="number" class="form-control" id="salary" placeholder="Enter Income" name="salary" required="">
                         <div class="input-group-append">
                             <span class="input-group-text">TK</span>
                         </div>
@@ -230,17 +232,6 @@ Start Car Loan  Eligibility-->
                         <input type="number" class="form-control" id="last-year-transaction" placeholder="Enter Share portion" name="last_year_transaction">
                         <div class="input-group-append">
                             <span class="input-group-text">TK</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6" v-if="profession == 2">
-                <div class="form-group">
-                    <label for="trade-license">Trade license age</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="trade-license" placeholder="Enter Trade license age" name="trade_license">
-                        <div class="input-group-append">
-                            <span class="input-group-text">Years</span>
                         </div>
                     </div>
                 </div>

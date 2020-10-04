@@ -23,8 +23,8 @@
                                 <img class="img-circle resize" alt="" src="{{ url('/') }}/assets/profile/{{ $user->photo ?? 'not-found.jpg' }}"> {{ $user->name ?? 'Unnamed' }} <i class="fa fa-sort-desc" aria-hidden="true"></i>
                             </a>
                             <ul>
-                                <li><a href="{{ route('seller', Auth::user()->id) }}">Seller Profile</a></li>
-                                <li><a href="{{ route('my-ads', Auth::user()->id) }}">Active Ads</a></li>
+                                <li><a href="{{ route('profile') }}">Seller Profile</a></li>
+                                <li><a href="{{ route('ads') }}">Active Ads</a></li>
                                 <li><a href="{{ route('chats.index') }}">Message Panel</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                             </ul>

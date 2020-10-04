@@ -411,7 +411,13 @@ class ProductController extends Controller {
         return redirect()->route('products.index')->with('message', 'This product has been added to auction');
     }
     public function getProduct(Request $request) {
-        $product = Product::where('brand_id', $request->brand_id)->where('model_id', $request->model_id)->where('package_id', $request->package_id)->with('brand', 'model', 'package')->first();
+        $product = Product::where('brand_id', $request->brand_id)->where('model_id', $request->model_id);
+        if($request->package_id) {
+            $product = $product->where('package_id', $request->package_id)->with('brand', 'model', 'package')->first();
+        } else {
+            $product = $product->with('brand', 'model')->first();
+        }
+        
         return $product;
     }
 

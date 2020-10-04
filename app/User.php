@@ -10,7 +10,6 @@ use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-	use DisableLazyLoad;
     use Notifiable;
 
     /**

@@ -15,11 +15,12 @@ use App\Locations\Region;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Product;
+use App\OrderDetail;
 
 class UserController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers', 'nationalDistributorDetail', 'nationalDistributorList']]);
+        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers', 'nationalDistributorDetail', 'nationalDistributorList', 'sellerProfile', 'myAds']]);
     }
 
     /**
@@ -158,6 +159,34 @@ class UserController extends Controller {
                 ->with('products', 'division')
                 ->paginate(10);
         return view('frontend.national-distributor-list', compact('users'));
+    }
+
+    public function profile() {
+        $id = Auth::user()->id;
+        $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products', 'division', 'region', 'billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', $id)->first();
+        $sell = OrderDetail::whereHas('product', function($q) use($id) {
+                            $q->where('supplier_id', $id);
+                        })
+                        ->whereHas('order', function($q) {
+                            $q->where('order_status_id', 4);
+                        })
+                        ->get()->count();
+        $divisions = Division::all();
+        $regions = Region::all();
+        return view('backend.users.profile', compact('user', 'sell', 'divisions', 'regions'));
+    }
+
+    public function ads() {
+        $id = Auth::user()->id;
+        $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products.brand', 'products.model', 'products.category', 'products.order_details', 'products.supplier.region', 'products.supplier.division')->where('id', $id)->first();
+        $sell = OrderDetail::whereHas('product', function($q) use($id) {
+                            $q->where('supplier_id', $id);
+                        })
+                        ->whereHas('order', function($q) {
+                            $q->where('order_status_id', 4);
+                        })
+                        ->get()->count();
+        return view('backend.users.ads', compact('user', 'sell'));
     }
 
 }

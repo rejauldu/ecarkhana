@@ -37,18 +37,18 @@
 		<div class="dashboard-menu-container">
 			<ul>
 				<li @if(isset($profile) && $profile=='active') class="active" @endif>
-					<a href="{{ route('seller-profile', $user->id) }}">
+					<a href="{{ route('profile') }}">
 						<div class="menu-name"> Profile </div>
 					</a>
 				</li>
 				<li @if(isset($ad) && $ad == 'active') class="active" @endif>
-					<a href="{{ route('seller-my-ad', $user->id) }}">
+					<a href="{{ route('ads') }}">
 						<div class="menu-name">My Ads</div>
 					</a>
 				</li>
 
 				<li>
-					<a href="{{ route('seller-message.show', $user->id) }}">
+					<a href="{{ route('chats.index') }}">
 						<div class="menu-name">Messages</div>
 					</a>
 				</li>

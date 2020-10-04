@@ -18,13 +18,13 @@
                         </div>
                         @endguest
                         @auth
-                        <div class="sms-seller-dropdown" id="app">
+                        <div class="sms-seller-dropdown">
                             <a href="#" class="sms-dropdown">
                                 <img class="img-circle resize" alt="" src="{{ url('/') }}/assets/profile/{{ $user->photo ?? 'not-found.jpg' }}"> {{ $user->name ?? 'Unnamed' }} <i class="fa fa-sort-desc" aria-hidden="true"></i>
                             </a>
                             <ul>
-                                <li><a href="{{ route('seller-profile', Auth::user()->id) }}">Seller Profile</a></li>
-                                <li><a href="{{ route('seller-my-ad', Auth::user()->id) }}">Active Ads</a></li>
+                                <li><a href="{{ route('profile') }}">Seller Profile</a></li>
+                                <li><a href="{{ route('ads') }}">Active Ads</a></li>
                                 <li><a href="{{ route('chats.index') }}">Message Panel</a></li>
                                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                             </ul>
@@ -59,7 +59,10 @@
                             </div>
                         </div>
                         <div class="sell-car-btn">
-                            <a href="car-ad-post" class="button red">Sell Car</a>
+                            @if(!isset($type))
+                            @php($type = 'Car')
+                            @endif
+                            <a href="{{ route('sell-'.strtolower($type)) }}" class="button red">Sell {{ $type ?? 'Car' }}</a>
                         </div>
                         <div>
                             <form action="{{ route('search') }}">
@@ -82,7 +85,7 @@
         <div class="container">
             <div id='main-menu' class='main-menu'>
                 <div class="logo">
-                    <a href="{{ url('/') }}"><img src="{{ asset('assets/logo.png') }}" alt="image" /></a>
+                    <a href="{{ route('car') }}"><img src="{{ asset('assets/logo.png') }}" alt="image" /></a>
                 </div>
                 <div class='container-menu'>
                     <nav class='navigation'>
@@ -104,12 +107,9 @@
                                     <ul class="m-0 p-0">
                                         <li class="mobile-menu"><a href='{{ route("car") }}'>Car</a></li>
                                         <li class="mobile-menu"><a href='{{ route("motorcycle") }}'>Bike</a> </li>
-                                        <li class="mobile-menu"><a href='{{ route("bicycle") }}'>Bicycle</a>
-                                        </li>
-                                        <li><a href="{{ route('dealers.index') }}" class="current-hover">EShowroom</a>
-                                        </li>
-                                        <li><a href="{{ route('national-distributors.index') }}">National Distributor </a>
-                                        </li>
+                                        <li class="mobile-menu"><a href='{{ route("bicycle") }}'>Bicycle</a></li>
+                                        <li><a href="{{ route('dealers.index') }}" class="current-hover">EShowroom</a></li>
+                                        <li><a href="{{ route('national-distributors.index') }}">National Distributor </a></li>
                                         <li class="carkhana-drop"><a href="#">Loan Info <i class="fa fa-angle-double-down"></i></a>
                                             <ul class='dropdown'>
                                                 <li><a href="{{ route('car-loan') }}">Apply Loan </a></li>
@@ -117,12 +117,12 @@
                                                 <li><a href="{{ route('insurance') }}">Insurance</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{ route('cars.index') }}">Buy Cars</a>
+                                        <li><a href="{{ route(strtolower($type).'s.index') }}">Buy {{ $type ?? 'Car' }}</a>
                                         </li>
-                                        <li><a href="{{ route('sell-product-list') }}">Sell Cars</a> </li>
-                                        <li><a href="{{ route('compare-car') }}">Comparison</a> </li>
+                                        <!-- <li><a href="#">Sell Cars</a> </li> -->
+                                        <li><a href="{{ route('compare-'.strtolower($type)) }}">Comparison</a> </li>
                                         <li><a href="{{ route('auction-products') }}">Auction</a> </li>
-                                        <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li>
+                                        <!-- <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li> -->
                                     </ul>
                                 </nav>
                             </div>
@@ -133,7 +133,6 @@
         </div>
     </div>
     <!-- Navigation end -->
-
 </header>
 
 <!--=================================header -->

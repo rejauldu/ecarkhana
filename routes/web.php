@@ -113,8 +113,8 @@ Route::get('/panorama', function() {
 })->name('panorama');
 //Routes for dashboard
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/my-ads/{id}', 'Frontend\HomeController@sellerMyAd')->name('my-ads');
-    Route::get('/seller/{id}', 'Frontend\HomeController@sellerProfile')->name('seller');
+    Route::get('/ads', 'Backend\UserController@ads')->name('ads');
+    Route::get('/profile', 'Backend\UserController@profile')->name('profile');
     Route::resource('advertisements', 'Backend\AdvertisementController')->middleware('moderator:Product');
     Route::resource('auctions', 'Backend\AuctionController');
     Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');

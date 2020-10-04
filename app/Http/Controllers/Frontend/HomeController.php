@@ -224,31 +224,7 @@ class HomeController extends Controller {
         return view('frontend.seller-message');
     }
 
-    public function sellerMyAd($id) {
-        $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products.brand', 'products.model', 'products.supplier.region', 'products.supplier.division')->where('id', $id)->first();
-        $sell = OrderDetail::whereHas('product', function($q) use($id) {
-                            $q->where('supplier_id', $id);
-                        })
-                        ->whereHas('order', function($q) {
-                            $q->where('order_status_id', 4);
-                        })
-                        ->get()->count();
-        return view('frontend.seller-my-ad', compact('user', 'sell'));
-    }
-
-    public function sellerProfile($id) {
-        $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products', 'division', 'region', 'billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', $id)->first();
-        $sell = OrderDetail::whereHas('product', function($q) use($id) {
-                            $q->where('supplier_id', $id);
-                        })
-                        ->whereHas('order', function($q) {
-                            $q->where('order_status_id', 4);
-                        })
-                        ->get()->count();
-        $divisions = Division::all();
-        $regions = Region::all();
-        return view('frontend.seller-profile', compact('user', 'sell', 'divisions', 'regions'));
-    }
+    
 
     public function sellProductList() {
         $search = '';

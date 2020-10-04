@@ -444,8 +444,8 @@
                         <div class="item">
                             <div class="bg-white shadow-sm mx-2 mb-3 zoom-parent overflow-hidden shadow-hover-10">
                                 <div class="size-53 clearfix">
-                                    <div class="size-child overflow-hidden zoom-target-1">
-                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
+                                    <div class="size-child zoom-target-1">
+                                        <img class="position-center w-100" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
                                     </div>
                                     <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
                                         <input type="checkbox" id="used-{{ $used_product->id }}" class="compare-checkbox" product-id="{{ $used_product->id }}">
