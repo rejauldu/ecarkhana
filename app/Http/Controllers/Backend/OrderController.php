@@ -89,7 +89,7 @@ class OrderController extends Controller {
      */
     public function show($id) {
         $user = Auth::user();
-        $order = Order::with('details.product')
+        $order = Order::with('details.product', 'customer.shipping_region', 'customer.shipping_division', 'customer.billing_region', 'customer.billing_division')
                 ->where('id', $id)
                 ->first();
         return view('backend.orders.show', compact('order'));

@@ -197,17 +197,17 @@
                                             <b>Status :</b> {{ $order->status->name }}
                                         </div>
                                         <div class="sms-order-id">
-                                            <b>Order ID :</b> #{{ $order->id }}
+                                            <b>Order ID :</b> #EC-{{ $order->id }}
                                         </div>
                                         <div class="sms-order-price">
 											@php($sum = 0)
 											@foreach($order->order_details as $detail)
 												@php($sum += $detail->product->msrp*$detail->quantity)
 											@endforeach
-                                            <b>Total Amount: </b> ৳{{ $sum }}
+                                            <b>Total Amount: </b> BDT {{ $sum }}
                                         </div>
                                         <div class="sms-order-button">
-                                            <button class="button red" onclick="window.location.href = 'bike-cart.html';">Show Details</button>
+                                            <a class="button red" href="{{ route('orders.show', $order->id) }}">Show Details</a>
                                         </div>
                                     </div>
 									@endforeach
