@@ -571,8 +571,6 @@
             brands: @json($brands),
             model:  {},
             models: @json($models),
-            package: {},
-            packages: @json($packages),
             page: 1,
             loading: 0,
             category_id: 1

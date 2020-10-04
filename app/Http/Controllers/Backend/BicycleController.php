@@ -327,6 +327,7 @@ class BicycleController extends Controller {
         $models = Model::where('category_id', 1)->get();
         $divisions = Division::all();
         $ownerships = Ownership::all();
-        return view('backend.products.bicycles.sell', compact('brands', 'models', 'divisions', 'ownerships'));
+        $type = "Bicycle";
+        return view('backend.products.bicycles.sell', compact('brands', 'models', 'divisions', 'ownerships', 'type'));
     }
 }

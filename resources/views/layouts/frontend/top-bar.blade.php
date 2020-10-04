@@ -59,7 +59,10 @@
                             </div>
                         </div>
                         <div class="sell-car-btn">
-                            <a href="{{ route('sell-car') }}" class="button red">Sell Car</a>
+                            @if(!isset($type))
+                            @php($type = 'Car')
+                            @endif
+                            <a href="{{ route('sell-'.strtolower($type)) }}" class="button red">Sell {{ $type ?? 'Car' }}</a>
                         </div>
                         <div>
                             <form action="{{ route('search') }}">
@@ -114,12 +117,12 @@
                                                 <li><a href="{{ route('insurance') }}">Insurance</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="{{ route('cars.index') }}">Buy Cars</a>
+                                        <li><a href="{{ route(strtolower($type).'s.index') }}">Buy {{ $type ?? 'Car' }}</a>
                                         </li>
-                                        <li><a href="#">Sell Cars</a> </li>
-                                        <li><a href="{{ route('compare') }}@if(isset($type) && $type == 'Motorcycle')?category=Motorcycle @elseif(isset($type) && $type == 'Bicycle')?category=Bicycle @endif">Comparison</a> </li>
+                                        <!-- <li><a href="#">Sell Cars</a> </li> -->
+                                        <li><a href="{{ route('compare-'.strtolower($type)) }}">Comparison</a> </li>
                                         <li><a href="{{ route('auction-products') }}">Auction</a> </li>
-                                        <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li>
+                                        <!-- <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li> -->
                                     </ul>
                                 </nav>
                             </div>
