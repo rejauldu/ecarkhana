@@ -12,7 +12,7 @@
 
     <!--=================================Start Seller Profile  -->
 
-    <section class="seller-profile page-section-ptb">
+    <section class="seller-profile page-section-ptb pt-0">
         <div class="container">
 			@if ($errors->any())
 			<div class="row">
@@ -175,7 +175,7 @@
 									<div class="text-center">
 										<img id="display-photo-on-select" src="{{ asset('/assets/profile') }}/{{ $user->photo }}" class="img-thumbnail rounded-circle" style="max-width:200px" alt="avatar">
 										<h6>Upload a different photo...</h6>
-										<form class="ajax-upload text-left" action="{{ route('users.update', $user->id) }}" method="post" enctype="multipart/form-data">
+										<form class="ajax-upload text-left d-block" action="{{ route('users.update', $user->id) }}" method="post" enctype="multipart/form-data">
 											@csrf
 											@method('PUT')
 											<div class="form-group">
@@ -184,7 +184,7 @@
 											<div class="progress mt-2">
 												<div class="progress-bar progress-bar-striped active list" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0%; height:100%; line-height:22px"></div>
 											</div>
-											<input type="submit" class="button red" value="Upload" />
+											<input type="submit" class="button red mt-3" value="Upload" />
 										</form>
 									</div>
 								</div>

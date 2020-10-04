@@ -1,11 +1,11 @@
 @extends('layouts.index')
 @section('content')
 @include('layouts.frontend.car-background')
-<div class="container mt-sm-4 mt-md-5">
+<div class="container">
 	<div class="row">
 		<div class="col-12">
-			<div class="box box-info">
-				<div class="box-body">
+			<div class="card">
+				<div class="card-body">
 					<div class="row pt-2">
 						<div class="col-12 col-sm-6">
 							<div class="img-thumbnail d-inline-block mb-3 p-3">

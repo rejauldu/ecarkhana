@@ -14,7 +14,7 @@ class LoanApplication extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'amount', 'condition_id', 'dependant', 'dob', 'marital_status', 'city', 'address', 'house_number', 'monthly_income', 'gender', 'employment_industry', 'employment_name', 'work_phone', 'viewed_at', 'updated_at', 'created_at'
+        'name', 'email', 'phone', 'amount', 'condition_id', 'dependant', 'dob', 'marital_status', 'division_id', 'region_id', 'address', 'monthly_income', 'gender', 'employment_industry', 'employer_name', 'work_phone', 'viewed_at', 'updated_at', 'created_at'
     ];
 
     /**

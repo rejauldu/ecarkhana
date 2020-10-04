@@ -126,7 +126,9 @@ class HomeController extends Controller {
 
     public function carLoan() {
         $conditions = Condition::all();
-        return view('frontend.car-loan', compact('conditions'));
+        $divisions = Division::all();
+        $regions = Region::all();
+        return view('frontend.car-loan', compact('conditions', 'divisions', 'regions'));
     }
 
     public function carLoanStore(Request $request) {

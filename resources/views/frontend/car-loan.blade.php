@@ -12,6 +12,149 @@
 
     <!--=================================
 Car Loan  -->
+<section class="container">
+    <div class="card">
+        <div class="card-header bg-white">
+            <h3 class="text-center">Apply for Car loan</h3>
+        </div>
+        <div class="card-body">
+            <form id="loan" class="ajax-upload d-block" action="{{ route('car-loan') }}" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Full Name" id="name" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email ID" id="email" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" name="phone" class="form-control" placeholder="Phone Number" id="phone" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="amount">Loan Amount</label>
+                            <input type="number" name="amount" class="form-control" placeholder="Loan Amount" id="amount" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="condition">Condition</label>
+                            <select class="form-control" name="condition_id" id="condition" required="">
+                                <option value="0" selected>--Select Condition--</option>
+                                @foreach($conditions as $condition)
+                                <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="dependant">No. of dependant</label>
+                            <select class="form-control" name="dependant" id="dependant" required="">
+                                <option>Number of Dependants</option>
+                                <option value="0">0 Dependant</option>
+                                <option value="1">1 Dependant</option>
+                                <option value="2">2 Dependants</option>
+                                <option value="3">3 Dependants</option>
+                                <option value="4">4 Dependants</option>
+                                <option value="5">5+ Dependants</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" name="dob" class="form-control" placeholder="Date of Birth" id="dob" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="marital-status">Marital Status</label>
+                            <select class="form-control" name="marital_status" id="marital-status" required="">
+                                <option value="0">--Marital Status-</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="division">City</label>
+                            <select id="division" name="division_id" class="custom-select">
+                                <option value="0" selected>--Select city--</option>
+                                @foreach($divisions as $division)
+                                <option value="{{ $division->id }}">{{ $division->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="region">Region</label>
+                            <select id="region" name="region_id" class="custom-select">
+                                <option value="{{ $region->id ?? 0 }}" selected>--Select region--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea class="form-control" name="address" id="address" placeholder="Enter Address" title="Enter you Address">{{ $address ?? ''}}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="income">Monthly Income</label>
+                            <input type="number" name="monthly_income" class="form-control" placeholder="Monthly Income" id="income" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group select">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender" id="gender" required="">
+                              <option value="0">--Select Gender--</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="industry">Employment Industry Name</label>
+                            <input type="text" name="employment_industry" class="form-control" placeholder="Employment Industry" id="industry" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="employer">Your Employer Name</label>
+                            <input type="text" name="employer_name" class="form-control" placeholder="Employer Name" id="employer" required="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="tel">City</label>
+                            <input type="tel" name="work_phone" class="form-control" placeholder="Work Phone Number" id="tel" required="">
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <div class="form-group">
+                            <button class="button red" type="submit" data-toggle="modal" data-target="#submitquote">Submit Quote</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
     <section class="Car Loan page-section-ptb">
         <div class="container">
@@ -120,81 +263,7 @@ Car Loan  -->
                             <h5>Quick Apply for Loan</h5>
                         </div>
                         <div class="box-body">
-                            <form id="loan" class="ajax-upload" action="{{ route('car-loan') }}" method="post">
-								@csrf
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Full Name" id="validationCustom01" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Email ID" id="validationCustom02" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" name="phone" class="form-control" placeholder="Phone Number" id="validationCustom03" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" name="amount" class="form-control" placeholder="Loan Amount" id="validationCustom04" required="">
-                                </div>
-                                <div class="form-group select">
-                                    <select class="form-control" name="condition_id" id="validationCustom05" required="">
-										<option value="0" selected>--Select Condition--</option>
-										@foreach($conditions as $condition)
-										<option value="{{ $condition->id }}">{{ $condition->name }}</option>
-										@endforeach
-									</select>
-                                </div>
-                                <div class="form-group select">
-                                    <select class="form-control" name="dependant" id="validationCustom06" required="">
-									  <option>Number of Dependants</option>
-									  <option value="0">0 Dependant</option>
-									  <option value="1">1 Dependant</option>
-									  <option value="2">2 Dependants</option>
-									  <option value="3">3 Dependants</option>
-									  <option value="4">4 Dependants</option>
-									  <option value="5">5+ Dependants</option>
-									</select>
-                                </div>
-								<div class="form-group">
-                                    <input type="date" name="dob" class="form-control" placeholder="Date of Birth" id="validationCustom07" required="">
-                                </div>
-                                <div class="form-group select">
-                                    <select class="form-control" name="marital_status" id="validationCustom18" required="">
-									  <option value="0">--Marital Status-</option>
-									  <option value="Single">Single</option>
-									  <option value="Married">Married</option>
-									</select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="city" class="form-control" placeholder="Town/City" id="validationCustom10" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="address" class="form-control" placeholder="Street" id="validationCustom11" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="house_number" class="form-control" placeholder="House Number" id="validationCustom12" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" name="monthly_income" class="form-control" placeholder="Monthly Income" id="validationCustom13" required="">
-                                </div>
-                                <div class="form-group select">
-                                    <select class="form-control" name="gender" id="validationCustom14" required="">
-									  <option value="0">--Select Gender--</option>
-									  <option value="Male">Male</option>
-									  <option value="Female">Female</option>
-									</select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="employment_industry" class="form-control" placeholder="Employment Industry" id="validationCustom15" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="employment_name" class="form-control" placeholder="Employer Name" id="validationCustom16" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" name="work_phone" class="form-control" placeholder="Work Phone Number" id="validationCustom17" required="">
-                                </div>
-                                <div class="form-group">
-                                    <button class="button red" type="submit" data-toggle="modal" data-target="#submitquote">Submit Quote</button>
-                                </div>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
