@@ -36,11 +36,13 @@ use App\Dropdowns\AdditionalFeature;
 use App\Dropdowns\WhatANew;
 use App\Dropdowns\ProsCons;
 use App\Dropdowns\AfterSellService;
+use App\Dropdowns\Ownership;
+use App\Locations\Division;
 
 class CarController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['index', 'show']]);
+        $this->middleware('moderator:Product', ['except' => ['index', 'show', 'sell']]);
     }
     /**
      * Display a listing of the resource.
@@ -208,7 +210,7 @@ class CarController extends Controller {
      */
     public function manageIndex() {
         $cars = Car::with('brand', 'model', 'package')->orderBy('id', 'desc')->get();
-        return view('backend.products.cars.manage-cars', compact('cars'));
+        return view('backend.products.cars.manage-index', compact('cars'));
     }
 
     /**
@@ -420,6 +422,15 @@ class CarController extends Controller {
      */
     public function destroy($id) {
         //
+    }
+
+    public function sell() {
+        $brands = Brand::where('category_id', 1)->get();
+        $models = Model::where('category_id', 1)->get();
+        $packages = Package::where('category_id', 1)->get();
+        $divisions = Division::all();
+        $ownerships = Ownership::all();
+        return view('backend.products.cars.sell', compact('brands', 'models', 'packages', 'divisions', 'ownerships'));
     }
 
 }

@@ -18,6 +18,8 @@ use App\Dropdowns\WhatANew;
 use App\Dropdowns\ProsCons;
 use App\Dropdowns\AfterSellService;
 use App\User;
+use App\Dropdowns\Ownership;
+use App\Locations\Division;
 
 class BicycleController extends Controller {
 
@@ -320,5 +322,11 @@ class BicycleController extends Controller {
     public function destroy($id) {
         //
     }
-
+    public function sell() {
+        $brands = Brand::where('category_id', 1)->get();
+        $models = Model::where('category_id', 1)->get();
+        $divisions = Division::all();
+        $ownerships = Ownership::all();
+        return view('backend.products.bicycles.sell', compact('brands', 'models', 'divisions', 'ownerships'));
+    }
 }

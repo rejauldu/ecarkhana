@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="sell-car-btn">
-                            <a href="car-ad-post" class="button red">Sell Car</a>
+                            <a href="{{ route('sell-car') }}" class="button red">Sell Car</a>
                         </div>
                         <div>
                             <form action="{{ route('search') }}">

@@ -215,7 +215,7 @@ class ProductController extends Controller {
         $dropdowns['conditions'] = Condition::all();
         $dropdowns['colors'] = Color::all();
         $dropdowns['sizes'] = Size::all();
-        $dropdowns['after_sell_services'] = AfterSellService::all();
+        $dropdowns['after_sell_services'] = AfterSellService::with('category')->get();
         $dropdowns['auction_grades'] = AuctionGrade::all();
         $dropdowns['ownerships'] = Ownership::all();
 

@@ -124,15 +124,6 @@ class HomeController extends Controller {
         return view('frontend.bicycle-fit-calculator');
     }
 
-    public function carAdPost() {
-        $brands = Brand::where('category_id', 1)->get();
-        $models = Model::where('category_id', 1)->get();
-        $packages = Package::where('category_id', 1)->get();
-        $divisions = Division::all();
-        $ownerships = Ownership::all();
-        return view('frontend.car-ad-post', compact('brands', 'models', 'packages', 'divisions', 'ownerships'));
-    }
-
     public function carLoan() {
         $conditions = Condition::all();
         return view('frontend.car-loan', compact('conditions'));

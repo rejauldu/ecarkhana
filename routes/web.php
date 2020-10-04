@@ -44,7 +44,6 @@ Route::resource('motorcycles', 'Backend\MotorcycleController');
 Route::get('/motorcycle-compare', 'Frontend\HomeController@motorcycleCompare')->name('motorcycle-compare');
 Route::get('/motorcycle-listing', 'Frontend\HomeController@motorcycleListing')->name('motorcycle-listing');
 Route::get('/motorcycle-wishlist', 'Frontend\HomeController@motorcycleWishlist')->name('motorcycle-wishlist');
-Route::get('/car-ad-post', 'Frontend\HomeController@carAdPost')->name('car-ad-post');
 
 Route::get('/car-listing', 'Frontend\HomeController@carListing')->name('car-listing');
 Route::get('/car-loan', 'Frontend\HomeController@carLoan')->name('car-loan');
@@ -79,6 +78,9 @@ Route::get('/get-region', 'Frontend\HomeController@getRegion')->name('get-region
 Route::get('/search', 'Frontend\HomeController@searchPage')->name('search');
 
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');
+Route::get('/sell-car', 'Backend\CarController@sell')->name('sell-car');
+Route::get('/sell-motorcycle', 'Backend\MotorcycleController@sell')->name('sell-motorcycle');
+Route::get('/sell-bicycle', 'Backend\BicycleController@sell')->name('sell-bicycle');
 Route::get('/single-accessories', 'Frontend\HomeController@singleAccessories')->name('single-accessories');
 Route::get('/single-bicycle-product/{product}', 'Frontend\HomeController@singleBicycleProduct')->name('single-bicycle-product');
 Route::get('/single-motorcycle-product/{product}', 'Frontend\HomeController@singleMotorcycleProduct')->name('single-motorcycle-product');
