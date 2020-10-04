@@ -216,13 +216,12 @@
 
 
                             <div class="tab-pane fade" id="nav-notification-setting" role="tabpanel" aria-labelledby="nav-notification-setting-tab">
-                                <h2 class="heading-md">Manage your Notifications.</h2>
-                                <p>Below are the notifications you may manage.</p>
-								<ul>
+                                <h4>Below are the unread notifications for you</h4>
+								<div class="list-group">
 									@foreach(Auth::user()->unreadNotifications as $notification)
-									<li><a class="btn btn-link" href="#">{{ $notification->data['subject'] }}</a></li>
+									<a class="list-group-item list-group-item-action" href="{{ route('notifications.show', $notification->id) }}">{{ $notification->data['subject'] }}</a>
 									@endforeach
-								</ul>
+								</div>
                             </div>
 
                         </div>

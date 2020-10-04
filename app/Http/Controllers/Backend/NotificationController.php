@@ -69,7 +69,9 @@ class NotificationController extends Controller {
         $notification = Notification::with('user')->find($id);
         if (User::isUserBy($notification->user->id))
             $notification->update(['read_at' => Carbon::now()]);
-        return view('backend.notifications.show', compact('notification'));
+        if(Auth::user()->user_type_id > 1)
+            return view('backend.notifications.show', compact('notification'));
+        return view('backend.notifications.show-frontend', compact('notification'));
     }
 
     /**
