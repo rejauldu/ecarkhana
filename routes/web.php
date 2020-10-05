@@ -19,6 +19,7 @@ Route::get('/motorcycle', 'Frontend\HomeController@motorcycleIndex')->name('moto
 Route::get('/bicycle', 'Frontend\HomeController@bicycleIndex')->name('bicycle');
 
 Route::get('/about-us', 'Frontend\HomeController@aboutUs')->name('about-us');
+Route::get('/advertise', 'Frontend\HomeController@aboutUs')->name('advertise');
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
 Route::get('/auction-products', 'Backend\AuctionController@auctionProduct')->name('auction-products');
 Route::resource('banks', 'Backend\BankController');
@@ -60,6 +61,7 @@ Route::get('/compare-bicycle', 'Frontend\CompareController@addBicycleToCompare')
 Route::get('/contact-us', 'Frontend\HomeController@contactUs')->name('contact-us');
 Route::get('/dealers/{id}', 'Backend\UserController@dealerDetail')->name('dealers.show');
 Route::get('/dealers', 'Backend\UserController@dealers')->name('dealers.index');
+Route::get('/faq', 'Frontend\HomeController@faq')->name('faq');
 Route::resource('fit-calculators', 'Frontend\FitCalculatorController');
 Route::get('/fit-calculator/{detail?}', 'Frontend\FitCalculatorController@fitCalculator')->name('fit-calculator');
 Route::get('/fit-result/{url?}', 'Frontend\FitCalculatorController@download')->name('fit-result');
@@ -72,12 +74,13 @@ Route::post('/insurance-checkout-store', 'Frontend\InsuranceController@checkoutS
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
 Route::get('/national-distributors/{id}', 'Backend\UserController@nationalDistributorDetail')->name('national-distributors.show');
 Route::get('/national-distributors', 'Backend\UserController@nationalDistributorList')->name('national-distributors.index');
+Route::get('/promotion', 'Frontend\HomeController@promotion')->name('promotion');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
 Route::get('/get-product', 'Backend\ProductController@getProduct')->name('get-product');
 Route::get('/get-regions', 'Frontend\HomeController@getRegions')->name('get-regions');
 Route::get('/get-region', 'Frontend\HomeController@getRegion')->name('get-region');
+Route::get('/return-policy', 'Frontend\HomeController@aboutUs')->name('return-policy');
 Route::get('/search', 'Frontend\HomeController@searchPage')->name('search');
-
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');
 Route::get('/sell-car', 'Backend\CarController@sell')->name('sell-car');
 Route::get('/sell-motorcycle', 'Backend\MotorcycleController@sell')->name('sell-motorcycle');
@@ -87,6 +90,7 @@ Route::get('/single-bicycle-product/{product}', 'Frontend\HomeController@singleB
 Route::get('/single-motorcycle-product/{product}', 'Frontend\HomeController@singleMotorcycleProduct')->name('single-motorcycle-product');
 Route::get('/single-blog', 'Frontend\HomeController@singleBlog')->name('single-blog');
 Route::get('/single-car-product/{product}', 'Frontend\HomeController@singleCarProduct')->name('single-car-product');
+Route::post('subscriptions', 'Backend\ContactUsController@subscribe')->name('subscriptions.store');
 Route::get('/product/{product}', 'Frontend\HomeController@product')->name('product');
 Route::get('/term-and-condition', 'Frontend\HomeController@termAndCondition')->name('term-and-condition');
 Route::post('/send-otp', 'Frontend\HomeController@sendOtp')->name('send-otp');

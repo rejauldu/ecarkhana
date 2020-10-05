@@ -93,4 +93,14 @@ class ContactUsController extends Controller
     {
         return view('backend.chats.chat');
     }
+
+    // Chat page
+    public function subscribe(Request $request)
+    {
+        $subscription = Subscription::where('email', $request->email)->first();
+        if(!$subscription)
+            Subscription::create(['email' => $request->email]);
+        return redirect()->back()->with('message', 'Thank you for your subscription');
+    }
+}
 }

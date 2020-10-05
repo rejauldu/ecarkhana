@@ -140,15 +140,12 @@ class HomeController extends Controller {
     public function carLoanEligibility() {
         return view('frontend.car-loan-eligibility');
     }
-
-    
-
-    
-
     public function contactUs() {
         return view('frontend.contact-us');
     }
-
+    public function faq() {
+        return view('frontend.faq');
+    }
     public function groupBuyingList() {
         return view('frontend.group-buying-list');
     }
@@ -183,7 +180,9 @@ class HomeController extends Controller {
     public function privacyPolicy() {
         return view('frontend.privacy-policy');
     }
-
+    public function promotion() {
+        return view('frontend.promotion');
+    }
     public function searchPage(Request $request) {
         $search = '';
         $products = Product::has('car')->with('car', 'supplier');

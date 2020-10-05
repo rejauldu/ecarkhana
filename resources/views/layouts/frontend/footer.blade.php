@@ -2,89 +2,67 @@
 footer -->
 
 <footer class="footer bg-2 bg-overlay-black-90" @if(isset($type) && ($type == 'Motorcycle' || $type == 'Bicycle')) style="background-image: url({{ url('/') }}/images/bike/bike-title.jpg);" @endif>
-    <div class="container">
+    <div class="container text-light">
         <div class="row">
-            <div class="col-md-12">
-                <div class="social">
-                    <ul>
-                        <li><a class="facebook" href="#">facebook <i class="fa fa-facebook"></i> </a></li>
-                        <li><a class="twitter" href="#">twitter <i class="fa fa-twitter"></i> </a></li>
-                        <li><a class="pinterest" href="#">pinterest <i class="fa fa-pinterest-p"></i> </a></li>
-                        <li><a class="dribbble" href="#">dribbble <i class="fa fa-dribbble"></i> </a></li>
-                        <li><a class="google-plus" href="#">google plus <i class="fa fa-google-plus"></i> </a></li>
-                        <li><a class="behance" href="#">behance <i class="fa fa-behance"></i> </a></li>
-                    </ul>
+            <div class="col-12 col-sm-6 col-md-4">
+                <h6 class="text-white mb-1">About</h6>
+                <ul class="list-group">
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('about-us') }}'">About Us</a></li>
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('faq') }}'">FAQs</a></li>
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('term-and-condition') }}'">Terms of Services</a></li>
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><span class="text-light-secondary cursor-pointer" data-toggle="modal" data-target="#advertise-with-us">Advertising with us</span></li>
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('privacy-policy') }}'">Privacy Policy</a></li>
+                    
+                </ul>
+            </div>
+            @computer
+            <div class="col-12 col-sm-6 col-md-4">
+                <h6 class="text-white mb-1">Subscribe to our newsletter</h6>
+                <form class="d-block" action="{{ route('subscriptions.store') }}" method="post">
+                    @csrf
+                    <input type="email" placeholder="Enter your Email" class="form-control mb-2 py-0 height-30">
+                    <input type="submit" class="button red" value="Subscribe" />
+                </form>
+                <h6 class="text-white mb-1 mt-2">Others</h6>
+                <ul class="list-group">
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><span class="text-light-secondary cursor-pointer" data-toggle="modal" data-target="#signupform">Be a partner with us</span></li>
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('promotion') }}'">Promotion</a></li>
+                </ul>
+            </div>
+            @endcomputer
+            <div class="col-12 col-sm-6 col-md-4">
+                <h6 class="text-white mb-1">Connect with us</h6>
+                <div class="row">
+                    <div class="col-2">
+                        <a href="https://facebook.com/ecarkhana" class="rounded-circle bg-facebook d-inline-block text-center btn width-40 height-40 p-0"><i class="fa fa-facebook text-white font-weight-bold line-height-40"></i></a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://youtube.com/ecarkhana" class="rounded-circle bg-youtube d-inline-block text-center btn width-40 height-40 p-0"><i class="fa fa-youtube text-white font-weight-bold line-height-40"></i></a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://twitter.com/ecarkhana" class="rounded-circle bg-twitter d-inline-block text-center btn width-40 height-40 p-0"><i class="fa fa-twitter text-white font-weight-bold line-height-40"></i></a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://linkedin.com/ecarkhana" class="rounded-circle bg-linkedin d-inline-block text-center btn width-40 height-40 p-0"><i class="fa fa-linkedin text-white font-weight-bold line-height-40"></i></a>
+                    </div>
+                    <div class="col-2">
+                        <a href="https://instagram.com/ecarkhana" class="rounded-circle bg-instagram d-inline-block text-center btn width-40 height-40 p-0"><i class="fa fa-instagram text-white font-weight-bold line-height-40"></i></a>
+                    </div>
+                    <div class="col-12 pt-3">
+                        <h6 class="text-white mb-1">Contact</h6>
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="https://www.google.com/maps/@{lat},{long},{zoom}z"><i class="fa fa-map-marker"></i>220E Front St. Burlington NC 27215</a></li>
+                            <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="tel:{{ env('PHONE_CONTACT_US') }}"><i class="fa fa-phone"></i><span> {{ env('PHONE_CONTACT_US') }}</span></a></li>
+                            <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="mailto:{{ env('MAIL_CONTACT_US') }}"><i class="fa fa-envelope-o"></i><span> {{ env('MAIL_CONTACT_US') }}</span></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <div class="address">
-                    <ul>
-                        <li> <i class="fa fa-map-marker"></i><span>220E Front St. Burlington NC 27215</span> </li>
-                        <li> <i class="fa fa-phone"></i><span>{{ env('PHONE_CONTACT_US') }}</span> </li>
-                        <li> <i class="fa fa-envelope-o"></i><span>{{ env('MAIL_CONTACT_US') }}</span> </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="recent-post-block">
-                    <h6 class="text-white">recent posts </h6>
-                    <div class="recent-post">
-                        <div class="recent-post-image">
-                            <img class="img-fluid" src="{{ url('/') }}/images/car01.jpg" alt="">
-                        </div>
-                        <div class="recent-post-info">
-                            <a href="#">Time to change your </a>
-                            <span class="post-date"><i class="fa fa-calendar"></i>September 10, 2017</span>
-                        </div>
-                    </div>
-                    <div class="recent-post">
-                        <div class="recent-post-image">
-                            <img class="img-fluid" src="{{ url('/') }}/images/car02.jpg" alt="">
-                        </div>
-                        <div class="recent-post-info">
-                            <a href="#">The best time to </a>
-                            <span class="post-date"><i class="fa fa-calendar"></i>September 10, 2017</span>
-                        </div>
-                    </div>
-                    <div class="recent-post">
-                        <div class="recent-post-image">
-                            <img class="img-fluid" src="{{ url('/') }}/images/car03.jpg" alt="">
-                        </div>
-                        <div class="recent-post-info">
-                            <a href="#">Replacing a timing </a>
-                            <span class="post-date"><i class="fa fa-calendar"></i>September 10, 2017</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="news-letter">
-                    <h6 class="text-white">subscribe Our Newsletter </h6>
-                    <p>Keep up on our always evolving products features and technology. Enter your e-mail and subscribe to our newsletter.</p>
-                    <form class="news-letter">
-                        <input type="email" placeholder="Enter your Email" class="form-control placeholder">
-                        <a class="button red" href="#">Subscribe</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <hr />
-        <div class="copyright">
-            <div class="row">
-                <div class="col-lg-6 col-md-12">
-                    <div class="text-lg-left text-center">
-                        <p>©Copyright {{ date('Y') }} E-CarKhana Developed by <a href="http://www.storerepublic.com" target="_blank"><span style="color:#009900">
-                                    Store</span><span style="color:#1363C6"> Republic</span></a></p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <ul class="list-inline text-lg-right text-center">
-                        <li><a href="Privacy-Policy">privacy policy </a> | </li>
-                        <li><a href="Terms And Conditions">terms and conditions </a> |</li>
-                        <li><a href="contact us">contact us </a></li>
-                    </ul>
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="text-center">
+                    <p class="text-secondary">©Copyright {{ date('Y') }} E-CarKhana Developed by <a href="http://www.storerepublic.com" target="_blank"><span style="color:#009900"> Store</span><span style="color:#1363C6"> Republic</span></a></p>
                 </div>
             </div>
         </div>
@@ -157,8 +135,8 @@ back to top -->
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title">Sign Up</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="row signup_wrap">
@@ -274,6 +252,25 @@ back to top -->
             </div>
             <div class="modal-footer text-center">
 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="advertise-with-us">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Advertise With Us</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body text-justify">
+                Ecarkhana is the right platform to reach out to your customers. We ensure that your advertising messages reach the relevant customer in the right way.<br/>
+                For any advertising options and corporate tie-ups, you may contact us at the below details:
+                <ul class="list-group text-left mt-3">
+                    <li class="list-group-item border-0 py-0 pl-0"><a class="text-dark" href="https://www.google.com/maps/@{lat},{long},{zoom}z"><i class="fa fa-map-marker"></i> 220E Front St. Burlington NC 27215</a></li>
+                    <li class="list-group-item border-0 py-0 pl-0"><a class="text-dark" href="tel:{{ env('PHONE_CONTACT_US') }}"><i class="fa fa-phone"></i><span> {{ env('PHONE_CONTACT_US') }}</span></a></li>
+                    <li class="list-group-item border-0 py-0 pl-0"><a class="text-dark" href="mailto:{{ env('MAIL_CONTACT_US') }}"><i class="fa fa-envelope-o"></i><span> {{ env('MAIL_CONTACT_US') }}</span></a></li>
+                </ul>
             </div>
         </div>
     </div>

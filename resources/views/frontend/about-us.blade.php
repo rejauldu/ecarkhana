@@ -13,27 +13,26 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="section-title">
-					<span>Welcome to</span>
-					<h2>The Ecarkhana Online</h2>
+				<div class="section-title mb-3">
+					<h2>About Ecarkhana</h2>
 					<div class="separator"></div>
 				</div>
 			</div>
 			<div class="col-md-12">
-				<p style="text-align:center;">
-					E-carkhana is the best premium WordPress Theme. We provide everything you need to build an Amazing dealership website developed especially for car sellers, dealers or auto motor retailers. You can use this template for creating website based on any framework language.
+				<p class="text-justify">
+					Ecarkhana.com is Bangladesh's leading car search venture that helps users buy cars that are right for them. Its website and app carry rich automotive content such as expert reviews, detailed specs and prices, comparisons as well as videos and pictures of all car brands and models available in Bangladesh. The company has tie-ups with many auto manufacturers, more than 4000 car dealers and numerous financial institutions to facilitate the purchase of vehicles.
 				</p>
 			</div>
 
 			<div class="col-md-6">
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus vero voluptatibus natus, magnam perferendis reprehenderit cupiditate deleniti, laudantium dolorum adipisci reiciendis corrupti vel dignissimos ipsam molestias esse! Dolorum ipsa ducimus corporis. Ad vitae, provident consectetur fugit ratione ut molestias aperiam optio laborum blanditiis placeat. Ab, in excepturi. Accusantium delectus, dignissimos id aliquam veniam, corporis asperiores totam nostrum, nam magnam error! Voluptate quis possimus quam? Aperiam excepturi distinctio explicabo veniam eum. Et totam, autem illo aut error cupiditate quibusdam odio id!
+				<p class="text-justify">
+					Ecarkhana.com has launched many innovative features to ensure that users get an immersive experience of the car model before visiting a dealer showroom. These include a Feel The Car tool that gives 360-degree interior/exterior views with sounds of the car and explanations of features with videos; search and comparison by make, model, price, features; and live offers and promotions in all cities. The platform also has used car classifieds wherein users can upload their cars for sale, and find used cars for buying from individuals and used car dealers.
 				</p>
 			</div>
 
 			<div class="col-md-6">
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. A pariatur numquam aspernatur necessitatibus inventore repudiandae! Minus animi voluptatem iure. Repudiandae quis voluptatum eaque itaque explicabo assumenda nemo ullam, cupiditate tenetur culpa dicta hic sint quos accusantium eum, beatae maiores inventore labore eos aperiam laudantium? Hic cum, deleniti ipsum odio saepe vitae ipsa. Veniam, architecto quas? Ipsa temporibus accusamus deserunt, necessitatibus officiis libero et impedit sint ullam eius vero rem soluta earum harum minima perspiciatis voluptate in eum sunt veritatis. Dicta!
+				<p class="text-justify">
+					Besides the above consumer product features, Ecarkhana.com provides a rich array of tech-enabled tools to OE manufacturers and car dealers. These include apps for dealer sales executives to manage leads, cloud services for tracking sales performance, call tracker solution, digital marketing support, virtual online showroom and outsourced lead management operational process for taking consumers from enquiry to sale.
 				</p>
 			</div>
 
@@ -43,9 +42,12 @@
 				</div>
 
 				<div class="col-md-6">
-					<p>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati dignissimos voluptates, ut quia corrupti asperiores atque expedita voluptatum laboriosam at officia repudiandae animi quam harum temporibus aliquid consequatur autem quae odit quos omnis rem? In, veniam quibusdam. Odio quidem quasi tenetur, exercitationem suscipit debitis ratione cum natus voluptas aspernatur a molestias numquam illo deleniti veniam porro nobis eum? Exercitationem ullam eaque, quibusdam porro quaerat nemo necessitatibus obcaecati. Ullam vel perferendis ratione ipsa expedita sunt rerum, tempora nulla laboriosam omnis soluta est earum, consequatur repellendus vero commodi excepturi. Neque molestiae itaque beatae. Sunt, similique corporis velit dolor ipsa quia nesciunt adipisci porro itaque illum consequuntur saepe voluptatem eos iste natus rerum modi perspiciatis quis eveniet aut doloremque ab placeat. Eum, labore?
+					<p class="text-justify">
+						Our vision is to construct a complete ecosystem for consumers and car manufacturers, dealers and related businesses such that consumers have easy and complete access to not only buying and selling cars, but also manage their entire ownership experience, be it accessories, tyres, batteries, insurance or roadside assistance. The company has expanded to Southeast Asia with the launch of Zigwheels.ph, Zigwheels.my and Oto.com. It also has a presence in the UAE with Zigwheels.ae<br/>
+						To diversify our product offerings we have ventured into car insurance business through ecarkhana.com
 					</p>
+					<h3>Investors and shareholders</h3>
+					<p class="text-justify">Ecarkhana.com, which went live in 2008, was set up by a bunch of young, enthusiastic IIT graduates. Its investors include Google Capital, Tybourne Capital, Hillhouse Capital, Sequoia Capital, HDFC Bank, Ratan Tata and Times Internet.</p>
 				</div>
 			</div>
 

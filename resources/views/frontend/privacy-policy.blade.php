@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="section-title">
+                    <div class="section-title mb-3">
                         <span>Protecting your personal information </span>
                         <h2>Privacy Policy </h2>
                         <div class="separator"></div>

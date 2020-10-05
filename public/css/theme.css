@@ -243,6 +243,24 @@ table.dataTable thead .sorting_desc_disabled:before {
 .bg-facebook {
 	background: #3b5998 !important;
 }
+.text-youtube {
+	color: #d40000 !important;
+}
+.bg-youtube {
+	background: #d40000 !important;
+}
+.text-google {
+	color: #d45049 !important;
+}
+.bg-google {
+	background: #d45049 !important;
+}
+.text-instagram {
+	color: #6c27b2 !important;
+}
+.bg-instagram {
+	background: #6c27b2 !important;
+}
 .text-twitter {
 	color: #00acee !important;
 }

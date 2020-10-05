@@ -2888,10 +2888,6 @@ footer.footer.bg-2.bg-overlay-black-90:before {
 
 /*social*/
 
-.social {
-    margin-bottom: 80px;
-    display: none;
-}
 
 .social ul {
     width: 100%;
@@ -4619,10 +4615,6 @@ ul.wht-new-list li {
 }
 
 .details-nav li:nth-child(3) {
-    display: none;
-}
-
-.footer .copyright .col-lg-6.col-md-12 ul.list-inline.text-lg-right.text-center {
     display: none;
 }
 

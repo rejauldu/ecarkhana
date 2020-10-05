@@ -82,7 +82,7 @@ Start Car Loan  Eligibility check-->
 
             <div class="col-12 card-features" style="display: none;">
                 <div class="row">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 mb-2">
                         <div class="card alert-danger">
                         	<div class="card-header list-group-item-danger">
 	                            <h5 class="card-title">Product Features</h5>
@@ -96,7 +96,7 @@ Start Car Loan  Eligibility check-->
 	                        </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 mb-2">
                         <div class="card alert-danger h-100">
                         	<div class="card-header list-group-item-danger">
 	                            <h5 class="card-title">Loan Eligibility</h5>
