@@ -17,17 +17,12 @@ Start Car Loan  Eligibility-->
     <div class="card">
         <div class="card-header">
             <div class="section-title mb-0">
-                @if(isset($data_type) && $data_type == 'eligibility')
                 <h2>Loan Eligibility </h2>
-                @else
-                <h2>Car Loan Application</h2>
-                @endif
                 <div class="separator"></div>
             </div>
         </div>
         <div class="card-body">
             <form action="{{ route('loan-infos.store') }}" class="d-block" method="post">
-                <input type="hidden" name="data_type" value="{{ $data_type ?? 'eligibility' }}">
                 @csrf
                 <div class="row" id="loan-eligibility">
                     <div class="col-12 col-md-6">
@@ -109,7 +104,7 @@ Start Car Loan  Eligibility-->
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <div class="form-group position-center-v">
+                        <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="have-choice" name="have_choice" value="1">
                                 <label class="custom-control-label" for="have-choice">Do you have any choice car?</label>
@@ -258,11 +253,7 @@ Start Car Loan  Eligibility-->
                     </div>
                     <div class="col-12 text-right">
                         <div class="form-group text-right">
-                            @if(isset($data_type) && $data_type == 'eligibility')
                             <button type="submit" class="btn button red">Check Eligibility</button>
-                            @else
-                            <button type="submit" class="btn button red">Apply for Loan</button>
-                            @endif
                         </div>
                     </div>
 

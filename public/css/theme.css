@@ -561,6 +561,16 @@ table.dataTable thead .sorting_desc_disabled:before {
 	top:50%;
 	transform:translate(-50%, -50%);
 }
+.position-center-h {
+	position:absolute;
+	left:50%;
+	transform:translate(-50%, 0);
+}
+.position-center-v {
+	position:absolute;
+	top:50%;
+	transform:translate(0, -50%);
+}
 /* modal scrollable */
 /* Important part */
 .modal-scrollable>.modal-dialog {

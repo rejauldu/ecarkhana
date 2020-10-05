@@ -27,3 +27,18 @@ if (! function_exists('shortDateTime')) {
 	    return $date->format("h:i:sA");
 	}
 }
+if(! function_exists('integerWithCommas')) {
+	function integerWithCommas($x) {
+	    return preg_replace("/\B(?=(\d{3})+(?!\d))/i", ",", $x);
+	}
+}
+if(! function_exists('integerWithCommasIndian')) {
+	function integerWithCommasIndian($x) {
+	    $lastThree = substr($x, strlen($x)-3);
+	    $otherNumbers = substr($x, 0, strlen($x)-3);
+	    if($otherNumbers != '')
+	        $lastThree = ',' . $lastThree;
+	    $res = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $otherNumbers) . $lastThree;
+	    return $res;
+	}
+}

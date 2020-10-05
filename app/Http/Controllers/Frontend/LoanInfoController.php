@@ -12,6 +12,9 @@ use App\Locations\Division;
 
 class LoanInfoController extends Controller {
 
+    public function __construct() {
+        $this->middleware('moderator:Product', ['only' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +33,20 @@ class LoanInfoController extends Controller {
     public function create() {
         $conditions = Condition::all();
         $divisions = Division::all();
-        return view('frontend.loan-infos.create', compact('conditions', 'divisions'));
+        $data_type = 'eligibility';
+        return view('frontend.loan-infos.create', compact('conditions', 'divisions', 'data_type'));
+    }
+
+    public function carLoan($bank = null) {
+        $conditions = Condition::all();
+        $divisions = Division::all();
+        $data_type = 'application';
+        return view('frontend.loan-infos.create', compact('conditions', 'divisions', 'data_type'));
+    }
+    public function carLoanTo($bank, $info) {
+        $loan_info = LoanInfo::find($info);
+        $loan_info->update(['bank_id' => $bank, 'data_type' => 'application']);
+        return redirect()->route('loan-infos.create');
     }
 
     /**
@@ -46,8 +62,14 @@ class LoanInfoController extends Controller {
             $data['user_id'] = Auth::user()->id;
         }
         $loan_info = LoanInfo::where('email', $request->email)->first();
-        if(!$loan_info)
-            LoanInfo::create($data);
+        
+        if($loan_info)
+            $loan_info->update($data);
+        else
+            $loan_info = LoanInfo::create($data);
+        if($request->data_type != 'eligibility') {
+            return redirect()->route('loan-infos.create');
+        }
         $profession = '';
         if($request->profession_id == 1) {
             $profession = 'salaried';
@@ -56,6 +78,7 @@ class LoanInfoController extends Controller {
         } else {
             $profession = 'land_lord';
         }
+        
         $age = $this->age($request->dob);
         $banks = Bank::where($profession.'_income', '<=', $request->salary)
                 ->where($profession.'_duration', '<=', $request->experience)
@@ -69,10 +92,11 @@ class LoanInfoController extends Controller {
             $profession = 'business';
         else
             $profession = 'land_lord';
+        $data['id'] = $loan_info->id;
         $loan_info = (object) $data;
         $loan_info->profession = $profession;
         if($banks->count()) {
-            return view('backend.banks.index', compact('banks', 'loan_info'));
+            return view('frontend.loan-infos.index', compact('banks', 'loan_info'));
         }
         return redirect()->back()->with('message', 'Sorry! your are not eligible for loan');
     }

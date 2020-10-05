@@ -46,7 +46,8 @@ Route::get('/motorcycle-listing', 'Frontend\HomeController@motorcycleListing')->
 Route::get('/motorcycle-wishlist', 'Frontend\HomeController@motorcycleWishlist')->name('motorcycle-wishlist');
 
 Route::get('/car-listing', 'Frontend\HomeController@carListing')->name('car-listing');
-Route::get('/car-loan', 'Frontend\HomeController@carLoan')->name('car-loan');
+Route::get('/car-loan', 'Frontend\LoanInfoController@carLoan')->name('car-loan');
+Route::get('/car-loan-to/{bank}/application/{loan_info?}', 'Frontend\LoanInfoController@carLoanTo')->name('car-loan-to');
 Route::resource('loan-applications', 'Backend\LoanApplicationController');
 Route::get('loan-applications-unviewed', 'Backend\LoanApplicationController@unviewed')->name('loan-applications.unviewed');
 Route::get('/loan-eligibility', 'Frontend\LoanInfoController@create')->name('loan-eligibility');
