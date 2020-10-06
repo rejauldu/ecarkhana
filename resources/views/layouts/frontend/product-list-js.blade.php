@@ -148,5 +148,9 @@
                 }
             }
         });
+        $('#mobile-filter').on('show.bs.collapse', function () {
+            setTimeout(function(){ multiHandleSlider(); }, 0);
+        });
     })();
+
 </script>

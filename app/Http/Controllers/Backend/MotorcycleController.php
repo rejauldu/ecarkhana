@@ -183,8 +183,8 @@ class MotorcycleController extends Controller {
         $products = $products->appends($request->except('page'));
         $data['products'] = $products;
         $data['conditions'] = Condition::all();
-        $data['brands'] = Brand::where('category_id', 1)->with('models')->get();
-        $data['models'] = Model::where('category_id', 1)->with('brand')->get();
+        $data['brands'] = Brand::where('category_id', 2)->with('models')->get();
+        $data['models'] = Model::where('category_id', 2)->with('brand')->get();
         $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $data['type'] = 'Motorcycle';
         return view('backend.products.motorcycles.index', $data);

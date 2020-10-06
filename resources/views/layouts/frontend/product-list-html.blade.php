@@ -20,7 +20,7 @@
         <div class="row">
             @computer
             <div class="col-lg-3 col-md-4">
-                <div class="listing-sidebar">
+                <div id="left-filter">
                     @include('layouts.frontend.left-filter')
                 </div>
             </div>
@@ -36,7 +36,7 @@
             
         </div>
 </section>
-
+@mobile
 <section class="w-100 z-index-999999 position-relative py-0">
     <div class="row">
         <div class="col-12">
@@ -48,14 +48,16 @@
         </div>
     </div>
 </section>
-<section class="w-100 bg-white z-index-99999 position-fixed bottom-0 py-0 collapse" id="mobile-filter">
+<section class="w-100 bg-white z-index-99999 position-fixed bottom-50 py-0 collapse" id="mobile-filter">
     <div class="row">
         <div class="col-12 y-scroll vh">
-            @include('layouts.frontend.left-filter')
+            <div>
+                @include('layouts.frontend.left-filter')
+            </div>
         </div>
     </div>
 </section>
-
+@endmobile
 <!--=================================product-listing  -->
 
 

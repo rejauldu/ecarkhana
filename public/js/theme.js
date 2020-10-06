@@ -263,6 +263,9 @@ function setParentsHeight() {
 })();
 /* Multi handle slider starts */
 (function() {
+    multiHandleSlider();
+})();
+function multiHandleSlider() {
     var slides = document.getElementsByClassName("multi-handle-slider");
     if(!slides.length)
         return false;
@@ -278,7 +281,15 @@ function setParentsHeight() {
             slide = e.target.parentElement || e.srcElement.parentElement;
             handle1Clicked = true;
         });
+        slides[i].querySelector(".handle-1").addEventListener('touchstart', e => {
+            slide = e.target.parentElement || e.srcElement.parentElement;
+            handle1Clicked = true;
+        });
         slides[i].querySelector(".handle-2").addEventListener('mousedown', e => {
+            slide = e.target.parentElement || e.srcElement.parentElement;
+            handle2Clicked = true;
+        });
+        slides[i].querySelector(".handle-2").addEventListener('touchstart', e => {
             slide = e.target.parentElement || e.srcElement.parentElement;
             handle2Clicked = true;
         });
@@ -294,6 +305,18 @@ function setParentsHeight() {
             updateHandle2(slide, position);
         }
     });
+    document.addEventListener('touchmove', event => {
+        event = getMouseEvent(event);
+        var x = event.changedTouches[0].pageX;
+        var left = slide.getBoundingClientRect().left;
+        
+        var position = x-left-10;
+        if(handle1Clicked) {
+            updateHandle1(slide, position);
+        } else if(handle2Clicked) {
+            updateHandle2(slide, position);
+        }
+    });
     document.addEventListener('mouseup', e => {
         let updated = slide.getAttribute("data-updated");
         if(updated && (handle1Clicked || handle2Clicked)) {
@@ -302,7 +325,15 @@ function setParentsHeight() {
         handle1Clicked = false;
         handle2Clicked = false;
     });
-})();
+    document.addEventListener('touchend', e => {
+        let updated = slide.getAttribute("data-updated");
+        if(updated && (handle1Clicked || handle2Clicked)) {
+            window[updated]();
+        }
+        handle1Clicked = false;
+        handle2Clicked = false;
+    });
+}
 function getMouseEvent(event) {
     var eventDoc, doc, body;
     event = event || window.event;
