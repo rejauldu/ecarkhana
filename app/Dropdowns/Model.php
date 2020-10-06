@@ -3,11 +3,9 @@
 namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model as Mod;
-use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Model extends Mod
 {
-    use DisableLazyLoad;
     /**
      * The attributes that are mass assignable.
      *

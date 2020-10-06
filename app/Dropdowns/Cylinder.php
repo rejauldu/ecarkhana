@@ -3,11 +3,9 @@
 namespace App\Dropdowns;
 
 use Illuminate\Database\Eloquent\Model;
-use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Cylinder extends Model
 {
-    use DisableLazyLoad;
     /**
      * The attributes that are mass assignable.
      *

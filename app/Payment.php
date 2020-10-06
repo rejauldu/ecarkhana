@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Payment extends Model
 {
-    use DisableLazyLoad;
     /**
      * The attributes that are mass assignable.
      *

@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Guest extends Model
 {

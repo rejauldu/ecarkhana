@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class Order extends Model
 {

@@ -6,7 +6,6 @@ use App\Notifications\VerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Ybaruchel\DisableLazyLoad\DisableLazyLoad;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
