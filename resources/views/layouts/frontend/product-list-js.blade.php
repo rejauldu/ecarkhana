@@ -110,7 +110,12 @@
                     this.kms_driven_max = max;
                 },
                 searchSubmit: function() {
-                    var url = "{{ url('/', $category_small) }}s?";
+                    @if(isset($url))
+                    @php($link = $url)
+                    @else
+                    @php($link = '/'.$category_small.'s')
+                    @endif
+                    var url = "{{ url($link) }}?";
                     if(this.price_min)
                         url += "&minimum-price="+this.price_min;
                     if(this.price_max)

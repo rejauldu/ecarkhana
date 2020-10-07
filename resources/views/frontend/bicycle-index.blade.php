@@ -263,7 +263,7 @@ Start Used Cars In Your City And Budget -->
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                 </div>
-                                <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('bicycles.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                 <div class="separator"></div>
                                 <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
                             </div>
@@ -380,7 +380,7 @@ start Featured Cars -->
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('single-car-product', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('bicycles.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
                                     <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
                                     <div class="row text-left">

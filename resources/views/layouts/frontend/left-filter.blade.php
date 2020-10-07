@@ -7,8 +7,17 @@
   </div>
   <div id="left-filter-price" class="collapse show" data-parent="#left-filter">
     <div class="card-body">
-      @if($type == 'Car')
-      <div id="price-show" class="text-center mb-3">BDT 0 Lakh - BDT 10 Crore </div>
+      @if(isset($url))
+      <div id="price-show" class="text-center mb-3">BDT 0 - BDT 5 Crore</div>
+      <div class="multi-handle-slider" data-min="1000" data-max="10000000" data-handle-1="{{ $minimum_price ?? 1000 }}" data-handle-2="{{ $maximum_price ?? 10000000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
+        <span class="handle-1"></span>
+        <span class="highlight"></span>
+        <span class="handle-2"></span>
+        <input type="hidden" id="minimum-price" class="minimum" value="1000">
+        <input type="hidden" id="maximum-price" class="maximum" value="10000000">
+      </div>
+      @elseif($type == 'Car')
+      <div id="price-show" class="text-center mb-3">BDT 0 Lakh - BDT 10 Crore</div>
       <div class="multi-handle-slider" data-min="50000" data-max="50000000" data-handle-1="{{ $minimum_price ?? 50000 }}" data-handle-2="{{ $maximum_price ?? 50000000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
         <span class="handle-1"></span>
         <span class="highlight"></span>
@@ -17,8 +26,7 @@
         <input type="hidden" id="maximum-price" class="maximum" value="50000000">
       </div>
       @elseif($type == 'Motorcycle')
-      ddd
-      <div id="price-show" class="text-center mb-3">BDT 0 K - BDT 50 Lakh </div>
+      <div id="price-show" class="text-center mb-3">BDT 0 K - BDT 50 Lakh</div>
       <div class="multi-handle-slider" data-min="0" data-max="5000000" data-handle-1="{{ $minimum_price ?? 0 }}" data-handle-2="{{ $maximum_price ?? 5000000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
         <span class="handle-1"></span>
         <span class="highlight"></span>
@@ -27,8 +35,8 @@
         <input type="hidden" id="maximum-price" class="maximum" value="5000000">
       </div>
       @else
-      <div id="price-show" class="text-center mb-3">BDT 0 K - BDT 5 Lakh </div>
-      <div class="multi-handle-slider" data-min="0" data-max="50000000" data-handle-1="{{ $minimum_price ?? 0 }}" data-handle-2="{{ $maximum_price ?? 500000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
+      <div id="price-show" class="text-center mb-3">BDT 0 K - BDT 5 Lakh</div>
+      <div class="multi-handle-slider" data-min="0" data-max="500000" data-handle-1="{{ $minimum_price ?? 0 }}" data-handle-2="{{ $maximum_price ?? 500000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
         <span class="handle-1"></span>
         <span class="highlight"></span>
         <span class="handle-2"></span>
@@ -69,6 +77,7 @@
     </div>
   </div>
 </div>
+@if(!isset($url))
 <div class="card">
   <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
     <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-make-year" aria-expanded="true">
@@ -114,28 +123,6 @@
   </div>
 </div>
 @endif
-<div class="card">
-  <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
-    <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-condition" @if(isset($condition_search)) aria-expanded="true" @endif>
-      <i class="fa fa-collapse-icon"></i>
-      Condition
-    </a>
-  </div>
-  <div id="left-filter-condition" class="collapse @if(isset($condition_search)) show @endif" data-parent="#left-filter">
-    <div class="card-body py-1 text-dark">
-      <ul class="list-group list-group-flush">
-        @foreach($conditions as $condition)
-        <li class="list-group-item py-1">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="condition-{{ $condition->id }}" onclick="products.updateCondition('{{ $condition->name }}')" @if(isset($condition_search) && strpos(strtolower($condition_search), strtolower($condition->name)) !== false) checked @endif>
-            <label class="custom-control-label" for="condition-{{ $condition->id }}">{{ $condition->name ?? 'Unnamed' }}</label>
-          </div>
-        </li>
-        @endforeach
-      </ul>
-    </div>
-  </div>
-</div>
 @if($category != 'Bicycle')
 <div class="card">
   <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
@@ -158,3 +145,26 @@
   </div>
 </div>
 @endif
+@endif
+<div class="card">
+  <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+    <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-condition" @if(isset($condition_search)) aria-expanded="true" @endif>
+      <i class="fa fa-collapse-icon"></i>
+      Condition
+    </a>
+  </div>
+  <div id="left-filter-condition" class="collapse @if(isset($condition_search)) show @endif" data-parent="#left-filter">
+    <div class="card-body py-1 text-dark">
+      <ul class="list-group list-group-flush">
+        @foreach($conditions as $condition)
+        <li class="list-group-item py-1">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="condition-{{ $condition->id }}" onclick="products.updateCondition('{{ $condition->name }}')" @if(isset($condition_search) && strpos(strtolower($condition_search), strtolower($condition->name)) !== false) checked @endif>
+            <label class="custom-control-label" for="condition-{{ $condition->id }}">{{ $condition->name ?? 'Unnamed' }}</label>
+          </div>
+        </li>
+        @endforeach
+      </ul>
+    </div>
+  </div>
+</div>

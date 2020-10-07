@@ -49,18 +49,19 @@ class HomeController extends Controller {
         $home_sliders = HomeSlider::where('type', 'Car')->get();
         $versus_sliders = VersusSlider::where('category_id', 1)->with('product1.brand', 'product2.brand')->get();
         $advertisements = Advertisement::where('category_id', 1)->with('category')->get();
-        $new_products = Product::has('car')->where('condition_id', 1)->with('brand', 'car', 'supplier.region')->take(10)->get();
-        $recondition_products = Product::has('car')->where('condition_id', 2)->with('brand', 'car', 'supplier.region', 'supplier.division')->take(10)->get();
-        $used_products = Product::has('car')->where('condition_id', 3)->with('brand', 'model', 'car.fuel_type', 'supplier.region', 'supplier.division')->take(10)->get();
-        $popular_products = Product::has('car')->with('brand', 'car', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
+        $new_products = Product::where('category_id', 1)->where('condition_id', 1)->with('brand', 'car', 'supplier.region')->take(10)->get();
+        $recondition_products = Product::where('category_id', 1)->where('condition_id', 2)->with('brand', 'car', 'supplier.region', 'supplier.division')->take(10)->get();
+        $used_products = Product::where('category_id', 1)->where('condition_id', 3)->with('brand', 'model', 'car.fuel_type', 'supplier.region', 'supplier.division')->take(10)->get();
+        $popular_products = Product::where('category_id', 1)->with('brand', 'car', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $brands = Brand::where('category_id', 1)->get();
         $models = Model::where('category_id', 1)->with('brand')->get();
         $body_types = BodyType::where('category_id', 1)->get();
         $fuel_types = FuelType::where('category_id', 1)->get();
         $packages = Package::where('category_id', 1)->with('model')->get();
-        $posts = Blog::with('user')->take(2)->get();
+        $posts = Blog::with('user')->where('category_id', 1)->take(2)->get();
         $type = 'Car';
+        $ps = Product::all();
         return view('frontend.index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'recondition_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'fuel_types', 'packages', 'posts'));
     }
 
@@ -68,16 +69,16 @@ class HomeController extends Controller {
         $home_sliders = HomeSlider::where('type', 'Motorcycle')->get();
         $versus_sliders = VersusSlider::where('category_id', 2)->with('product1.brand', 'product2.brand')->get();
         $advertisements = Advertisement::where('category_id', 2)->with('category')->get();
-        $new_products = Product::has('motorcycle')->where('condition_id', 1)->with('brand', 'motorcycle.displacement', 'supplier.region', 'supplier.division')->take(10)->get();
-        $used_products = Product::has('motorcycle')->where('condition_id', 3)->with('brand', 'model', 'motorcycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
-        $popular_products = Product::has('motorcycle')->with('brand', 'motorcycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
+        $new_products = Product::where('category_id', 2)->where('condition_id', 1)->with('brand', 'motorcycle.displacement', 'supplier.region', 'supplier.division')->take(10)->get();
+        $used_products = Product::where('category_id', 2)->where('condition_id', 3)->with('brand', 'model', 'motorcycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
+        $popular_products = Product::where('category_id', 2)->with('brand', 'motorcycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $brands = Brand::where('category_id', 2)->get();
         $models = Model::where('category_id', 2)->with('brand')->get();
         $body_types = BodyType::where('category_id', 2)->get();
         $displacements = Displacement::where('category_id', 2)->get();
         $packages = Package::where('category_id', 2)->with('model')->get();
-        $posts = Blog::with('user')->take(2)->get();
+        $posts = Blog::with('user')->where('category_id', 2)->take(2)->get();
         $type = 'Motorcycle';
         return view('frontend.motorcycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'type', 'suppliers', 'brands', 'models', 'body_types', 'displacements', 'packages', 'posts'));
     }
@@ -86,15 +87,15 @@ class HomeController extends Controller {
         $home_sliders = HomeSlider::where('type', 'Bicycle')->get();
         $versus_sliders = VersusSlider::where('category_id', 3)->with('product1.brand', 'product2.brand')->get();
         $advertisements = Advertisement::where('category_id', 3)->with('category')->get();
-        $new_products = Product::has('bicycle')->where('condition_id', 1)->with('brand', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
-        $popular_products = Product::has('bicycle')->with('brand', 'bicycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
-        $used_products = Product::has('bicycle')->where('condition_id', 3)->with('brand', 'model', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
+        $new_products = Product::where('category_id', 3)->where('condition_id', 1)->with('brand', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
+        $popular_products = Product::where('category_id', 3)->with('brand', 'bicycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
+        $used_products = Product::where('category_id', 3)->where('condition_id', 3)->with('brand', 'model', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $brands = Brand::where('category_id', 3)->get();
         $models = Model::where('category_id', 3)->with('brand')->get();
         $bicycle_types = BicycleType::all();
         $biker_genders = BikerGender::all();
-        $posts = Blog::with('user')->take(2)->get();
+        $posts = Blog::with('user')->where('category_id', 3)->take(2)->get();
         $type = 'Bicycle';
         return view('frontend.bicycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'brands', 'models', 'bicycle_types', 'biker_genders', 'type', 'posts'));
     }
@@ -191,7 +192,7 @@ class HomeController extends Controller {
     }
     public function searchPage(Request $request) {
         $search = '';
-        $products = Product::has('car')->with('car', 'supplier');
+        $products = Product::with('car', 'supplier');
         if ($request->region_id) {
             $products = $products->whereHas('supplier', function (Builder $query) {
                 $query->where('region_id', $request->region_id);
@@ -235,7 +236,7 @@ class HomeController extends Controller {
 
     public function sellProductList() {
         $search = '';
-        $products = Product::has('motorcycle')->orHas('bicycle')->with('motorcycle', 'bicycle', 'supplier');
+        $products = Product::where('category_id', 2)->orWhere('category_id', 3)->with('motorcycle', 'bicycle', 'supplier');
         $products = $products->paginate(9);
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $type = 'Motorcycle';
@@ -247,7 +248,7 @@ class HomeController extends Controller {
     }
 
     public function singleBicycleProduct($id) {
-        $product = Product::has('bicycle')
+        $product = Product::where('category_id', 3)
                 ->with('bicycle.brand', 'bicycle.model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
                 ->where('id', $id)
                 ->first();

@@ -34,6 +34,7 @@ Route::resource('blogs', 'Backend\BlogController');
 Route::get('/cart', 'Frontend\HomeController@cart')->name('cart');
 Route::resource('cars', 'Backend\CarController');
 Route::get('/checkout', 'Frontend\HomeController@checkout')->name('checkout');
+Route::get('/discount-products', 'Backend\ProductController@discountProducts')->name('discount-products');
 Route::get('/manage-banks', 'Backend\BankController@manageIndex')->name('manage-banks');
 Route::get('/manage-bicycles', 'Backend\BicycleController@manageIndex')->name('manage-bicycles');
 Route::get('/manage-blogs', 'Backend\BlogController@manageIndex')->name('manage-blogs');
@@ -164,6 +165,7 @@ Route::prefix('dropdowns')->group(function () {
     Route::resource('after-sell-services', 'Backend\Dropdowns\AfterSellServiceController')->middleware('moderator:Dropdown');
     Route::resource('auction-grades', 'Backend\Dropdowns\AuctionGradeController')->middleware('moderator:Dropdown');
     Route::resource('bicycle-types', 'Backend\Dropdowns\BicycleTypeController')->middleware('moderator:Dropdown');
+    Route::resource('biker-genders', 'Backend\Dropdowns\BikerGenderController')->middleware('moderator:Dropdown');
     Route::resource('body-types', 'Backend\Dropdowns\BodyTypeController')->middleware('moderator:Dropdown');
     Route::resource('brands', 'Backend\Dropdowns\BrandController')->middleware('moderator:Dropdown');
     Route::resource('conditions', 'Backend\Dropdowns\ConditionController')->middleware('moderator:Dropdown');

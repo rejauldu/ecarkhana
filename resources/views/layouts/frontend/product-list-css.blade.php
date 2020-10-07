@@ -1,7 +1,7 @@
 <script>
 function priceOnchange(min, max) {
     var show = document.getElementById("price-show");
-    if(min>10000000) {
+    if(min>=10000000) {
         min /= 10000000;
         min = Math.round(min);
         min += ' Crore';
@@ -14,7 +14,7 @@ function priceOnchange(min, max) {
         min = Math.round(min);
         min += ' K';
     }
-    if(max>10000000) {
+    if(max>=10000000) {
         max /= 10000000;
         max = Math.round(max);
         max += ' Crore';
