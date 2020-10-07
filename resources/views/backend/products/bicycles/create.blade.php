@@ -66,6 +66,15 @@
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="bicycle-type">Bicycle Type</label>
+                                                        <select id="bicycle-type" name="bicycle_type_id" class="custom-select">
+                                                            <option value="0" selected>--Select Bicycle Type--</option>
+                                                            @foreach($bicycle_types as $bicycle_type)
+                                                            <option value="{{ $bicycle_type->id }}" @if(isset($bicycle) && $bicycle->bicycle_type_id == $bicycle_type->id) selected @endif>{{ $bicycle_type->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="frame-size">Frame Size</label>
                                                         <input id="frame-size" type="number" class="form-control" name="frame_size" value="{{ $bicycle->frame_size ?? '' }}" placeholder="Enter Frame Size" title="Enter Frame Size" />
                                                     </div>
@@ -221,6 +230,15 @@
                                                     <div class="form-group">
                                                         <label for="brake-system">Biker weight limit</label>
                                                         <input id="brake-system" type="text" class="form-control" name="biker_weight" value="{{ $bicycle->biker_weight ?? '' }}" placeholder="Enter Biker weight limit" title="Enter Biker weight limit" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="biker-gender">Biker Gender</label>
+                                                        <select id="biker-gender" name="biker_gender_id" class="custom-select">
+                                                            <option value="0" selected>--Select Biker Gender--</option>
+                                                            @foreach($biker_genders as $biker_gender)
+                                                            <option value="{{ $biker_gender->id }}" @if(isset($bicycle) && $bicycle->biker_gender_id == $biker_gender->id) selected @endif>{{ $biker_gender->name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="display-5">Feature</div>
                                                     <div class="custom-control custom-checkbox">

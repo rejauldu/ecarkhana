@@ -792,7 +792,6 @@
                     });
                     this.getProduct(i);
                 }
-                console.log(this.category_id);
             },
             packageSelected: function (p, i=0) {
                 this.package = p;
@@ -819,7 +818,6 @@
                     success: function(result){
                         _this.page = 1;
                         _this.products[i] = result;
-                        console.log(_this.products.length);
                         _this.configuration = _this.products.length+1;
                         _this.reset('brand', 'model', 'package');
                         _this.loading = 0;

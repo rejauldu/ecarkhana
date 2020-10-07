@@ -714,7 +714,6 @@
                     success: function(result){
                         _this.page = 1;
                         _this.products[i] = result;
-                        console.log(_this.products.length);
                         _this.configuration = _this.products.length+1;
                         _this.reset('brand', 'model', 'package');
                         _this.loading = 0;

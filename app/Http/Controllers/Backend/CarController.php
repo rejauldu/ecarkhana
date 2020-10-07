@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -50,13 +51,14 @@ class CarController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::has('car')->with('car', 'brand', 'supplier.region');
+        $products = Product::select('products.*')->has('car')->with('car', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
                 $q->whereRaw('lower(name) like "%' . strtolower($request->condition) . '%"');
             });
             $data['condition'] = $request->condition;
+            $data['condition_search'] = $request->condition;
         }
         if ($request->location) {
             $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
@@ -75,9 +77,10 @@ class CarController extends Controller {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
             });
             $data['model'] = $request->model;
+            $data['model_search'] = $request->model;
         }
-        if ($request->body_type && $request->body_type != 'All Body Types') {
-            $products = $products->whereHas('car.body_type', function(Builder $query) use($request) {
+        if ($request->body_type && $request->body_type != 'All Bike Types') {
+            $products = $products->whereHas('car.body_type', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
             });
             $data['body_type'] = $request->body_type;
@@ -104,14 +107,14 @@ class CarController extends Controller {
             $body_types = explode('-and-', Input::get('body-types'));
             $body_type = array_shift($body_types);
             $products = $products->whereHas('car', function($q) use($body_type) {
-                $q->whereHas('body_type', function($q) use($body_type) {
-                    $q->where('name', str_replace('-', ' ', $body_type));
+                $q->whereHas('body_type', function($query) use($body_type) {
+                    $query->where('name', str_replace('-', ' ', $body_type));
                 });
             });
             foreach ($body_types as $body_type) {
                 $products = $products->orWhereHas('car', function($q) use($body_type) {
-                    $q->whereHas('body_type', function($q) use($body_type) {
-                        $q->where('name', str_replace('-', ' ', $body_type));
+                    $q->whereHas('body_type', function($query) use($body_type) {
+                        $query->where('name', str_replace('-', ' ', $body_type));
                     });
                 });
             }
@@ -156,16 +159,17 @@ class CarController extends Controller {
         }
         /* Car list left filter ends */
         if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
-            $products = $products->whereHas('car.fuel_type', function(Builder $query) use($request) {
+            $products = $products->whereHas('car.fuel_type', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
             });
             $data['fuel_type'] = $request->fuel_type;
         }
-        if ($request->package && $request->package != 'All Packages') {
-            $products = $products->whereHas('car.package', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
-            });
-            $data['package'] = $request->package;
+        if ($request->price && $request->price != 'Any Price') {
+            $prices = explode("-", $request->price);
+            $products = $products->where('msrp', '>', $prices[0])->where('msrp', '<', $prices[1]);
+            $data['price'] = $request->price;
+            $data['minimum_price'] = $prices[0];
+            $data['maximum_price'] = $prices[1];
         }
         if ($request->lat && $request->lon) {
             $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
@@ -312,6 +316,7 @@ class CarController extends Controller {
                     $q->where('brand_id', $product->car->brand_id);
                 })
                 ->with('car', 'brand', 'model', 'car.displacement', 'car.fuel_type', 'supplier.region', 'supplier.division')
+                ->take(10)
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         return view('backend.products.cars.show', compact('product', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features', 'after_sell_services', 'related_products'));

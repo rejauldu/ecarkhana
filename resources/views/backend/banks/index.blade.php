@@ -13,17 +13,19 @@
 <!--=================================
 Start Car Loan  Eligibility check-->
 
-<section class="Car-eligibility-check page-section-ptb">
+<section class="Car-eligibility-check page-section-ptb" id="bank">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h4>We Have Found {{ $banks->count() }} Vehicle Loan of Amount 10.00 Lac (BDT) for 5 Years </h4>
+                    <h4>Choose the right bank for your car loan</h4>
                     <div class="separator"></div>
                 </div>
             </div>
         </div>
-		@foreach($banks as $bank)
+        @php($i = 0)
+        @foreach($banks as $bank)
+
         <div class="row insurance-area pb-5 border border-left-0 border-top-0 border-right-0">
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
@@ -49,25 +51,9 @@ Start Car Loan  Eligibility check-->
                             <span class="card-box-title">Loan tenure</span>
                             <p class="mb-0 font-weight-bold text-1e6  ff-roboto card-box-content ">{{ $bank->loan_tenure_min ?? 0 }} - {{ $bank->loan_tenure_max ?? 0 }} Years</p>
                         </div>
-                        <div class="col text-center   mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
-                            <span class="card-box-title text-capitalize">Customer Age</span>
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto card-box-content ">{{ $bank->age_min ?? 0 }} - {{ $bank->age_max ?? 0 }} Years</p>
-                        </div>
-                        <div class="col text-center   mt-lg-3 mt-md-2 border-right border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
+                        <div class="col text-center mt-lg-3 mt-md-2 border-right-0 border-left-0 pt-lg-3 pt-md-2 border-top-0 border-bottom-0 border-dashed pr-0 pl-0">
                             <span class="card-box-title text-uppercase">Loan amount</span>
-							@if(isset($loan_info))
-							@php($profession = $loan_info->profession)
-							@else
-                            @php($profession = 'salaried')
-							@endif
-                            @php($min = $profession.'_loan_min')
-                            @php($max = $profession.'_loan_max')
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $bank->$min }} - {{ $bank->$max }} TK</p>
-                        </div>
-                        <div class="col text-center   mt-lg-3 mt-md-2  border-left-0 pt-lg-3 pt-md-2 ">
-                            <span class="fz-15  fw-medium letter-spacing-07 card-box-title text-capitalize">Monthly Income</span>
-                            @php($income = $profession.'_income')
-                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">{{ $bank->$income }} TK (min)</p>
+                            <p class="mb-0 font-weight-bold text-1e6  ff-roboto  card-box-content">BDT {{ integerWithCommasIndian($bank->salaried_loan_min) }} - {{ integerWithCommasIndian($bank->salaried_loan_max) }}</p>
                         </div>
                     </div>
                 </div>
@@ -75,142 +61,119 @@ Start Car Loan  Eligibility check-->
             <div class="col-md-2">
                 <div class="table-grid-1 border-left border-top-0 border-bottom-0 border-right-0 border-dashed col">
                     <div class="card full-height d-flex align-items-center justify-content-center border-0 align-items-center justify-content-streatch">
+                        <div>Add to compare</div>
+                        <div class="text-center"><i class="fa fa-level-down"></i></div>
                         <div class="coverage">
-							<div class="cover-circle">
-								<div>
-									<span class="cover__title">2</span>Covers
-								</div>
-							</div>
-						</div>
-						<button class="required" data-toggle="modal" data-target="#exampleModalScrollable">Required Documents</button>
-						<button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-					</div>
+                            <div class="cover-circle">
+                                <input type="checkbox" v-model="selected_banks" class="width-20 height-20" value="{{ $i ?? 0 }}">
+                            </div>
+                        </div>
+                        <button class="quick-details"><span>Quick Details</span><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-features border-top border-dashed mt-0 " style="display: none;">
+            <div class="col-12 card-features" style="display: none;">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="card border-0">
-                            <h5 class="features-art pb-2">Fees &amp; Charges</h5>
-                            <div>
-                                <p>Processing Fee: 1% of the approved loan amount</p>
-                                <p>Early Adjustment Fee: 2% of outstanding amount</p>
-                                <p>Partial Payment Fee: 2% of the prepayment amount</p>
-                                <p>Penal Charge: 2% on the arrears amount.&nbsp;</p>
+                    <div class="col-12 col-md-6 mb-2">
+                        <div class="card alert-danger">
+                            <div class="card-header list-group-item-danger">
+                                <h5 class="card-title">Product Features</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item py-1 border-0 bg-transparent"><strong>Financial Amount:</strong> BDT {{ integerWithCommasIndian($bank->salaried_loan_min) }} - {{ integerWithCommasIndian($bank->salaried_loan_max) }}</li>
+                                    <li class="list-group-item py-1 border-0 bg-transparent"><strong>Loan Tenure:</strong> {{ $bank->loan_tenure_min ?? 0 }} - {{ $bank->loan_tenure_max ?? 0 }} Years</li>
+                                    <li class="list-group-item py-1 border-0 bg-transparent"><strong>Interest Rate:</strong> {{ $bank->loan_percentage ?? 0 }}%</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 ">
-                        <div class="card border-0">
-                            <h5 class="features-art pb-2">Features</h5>
-                            <div>
-                                <div>Financing for buying new, reconditioned and used cars</div>
-                                <div>Transparent fixed pricing</div>
-                                <div>Finance of up to 50% of car value</div>
-                                <div>Maximum loan amount of BDT 400,00,00</div>
-                                <div>Flexible tenure of up to 5 years</div>
-                                <div>Discount in pricing for bundle combination with Personal Loan&nbsp;</div>
-                                <div>No prior account relationship, personal guarantee or cash security required
-                                </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <div class="card alert-danger h-100">
+                            <div class="card-header list-group-item-danger">
+                                <h5 class="card-title">Loan Eligibility</h5>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card pl-3 border-0">
-                            <h5 class="features-art pb-2">Eligibility</h5>
-                            <div>
-                                <p>Minimum Income: BDT 32,500<br>Minimum&nbsp; Years Ownership Required.<br>Age Requirement&nbsp;: 23 to 65 Years.</p>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item py-1 border-0 bg-transparent"><strong>Min. Salary Requirement:</strong> BDT {{ integerWithCommasIndian($bank->salaried_income) }}</li>
+                                    <li class="list-group-item py-1 border-0 bg-transparent"><strong>Age Requirement:</strong> {{ $bank->age_min ?? 0 }} - {{ $bank->age_max ?? 0 }} Years</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        @php($i++)
         @endforeach
+    </div>
+    <div class=" position-fixed right-0 position-center-v height-50 width-100 alert-secondary rounded shadow-sm" v-if="selected_banks.length">
+        <a href="#bank-modal" data-toggle="modal" class="btn alert-danger position-center">Compare</a>
+    </div>
+    <!-- The Modal -->
+    <div class="modal fullscreen-md" id="bank-modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Choose the right bank</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Bank</th>
+                                    <th>Interest Rate</th>
+                                    <th>Loan Amount (BDT)</th>
+                                    <th>Age Limit</th>
+                                    <th>Loan Tenure</th>
+                                    <th>Monthly Income (BDT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="i in selected_banks">
+                                    <th>@{{ banks[i].name }}</th>
+                                    <td>@{{ banks[i].loan_percentage }}%</td>
+                                    <td>@{{ integerWithCommasIndian(banks[i].salaried_loan_min) }} - @{{ integerWithCommasIndian(banks[i].salaried_loan_max) }} (Job)<br/>
+                                        @{{ integerWithCommasIndian(banks[i].business_loan_min) }} - @{{ integerWithCommasIndian(banks[i].business_loan_max) }} (Business)<br/>
+                                        @{{ integerWithCommasIndian(banks[i].land_lord_loan_min) }} - @{{ integerWithCommasIndian(banks[i].land_lord_loan_max) }} (Land Lord)
+                                    </td>
+                                    <td>@{{ banks[i].age_min }} - @{{ banks[i].age_max }} Years</td>
+                                    <td>@{{ banks[i].loan_tenure_min }} - @{{ banks[i].loan_tenure_max }} Years</td>
+                                    <td>@{{ integerWithCommasIndian(banks[i]['salaried_income']) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+                </div>
+
+            </div>
+        </div>
     </div>
 </section>
 
-<!--=================================
-End  Car Loan Eligibility Check-->
+<!--=================================End  Car Loan Eligibility Check-->
 
-
-
-<!-- Required Document -->
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">Required Documents</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="required-title"><i class="fa fa-info-circle"></i>REMEMBER</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Loan processing will start only after submitting all the documents to the bank you have applied for.</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>If any further document is required please submit it as early as possible otherwise loan processing will not start.</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>In case you submit any fake/false documents , you will be blacklisted by the bank for lifetime.</li>
-                            </ul>
-                        </div>
-
-                        <div class="required-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Watchout</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Do not submit any fake/false document.</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Each and every document should be up-to-date.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="required-title"><i class="fa fa-info-circle"></i>ESSENTIAL DOCUMENTS</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lab Print Photo 4 Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>NID/ Passport Clear Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>TIN Certificate Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Utility Bill Copy (Update)</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Mutation Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Title Deed Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Update Land Tax Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Holding Tax Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Rental Deed Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Partition Deed Copy (If Needed)</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Bank Statement Last 12 Months</li>
-                            </ul>
-                        </div>
-                        <div class="required-title"><i class="fa fa-info-circle"></i>GUARANTOR DOCUMENTS</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Lab Print Photo 2 Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>NID/ Passport Clear Copy</li>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Personal Information (Address, Mobile Number)</li>
-                            </ul>
-                        </div>
-                        <div class="required-title"><i class="fa fa-info-circle"></i>REFERENCE DOCUMENTS</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Personal Information (Address, Mobile Number)</li>
-                            </ul>
-                        </div>
-                        <div class="required-title"><i class="fa fa-info-circle"></i>NEW CAR</div>
-                        <div class="required-list">
-                            <ul>
-                                <li><i class="fa fa-angle-double-right" aria-hidden="true"></i>Car Quotation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Required Document -->
-
-
+@endsection
+@section('script')
+<script>
+var bank = new Vue({
+    el: '#bank',
+    data: {
+        banks: @json($banks),
+        selected_banks: [],
+    }
+});
+</script>
 @endsection

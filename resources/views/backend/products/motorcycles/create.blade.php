@@ -70,6 +70,15 @@
 														<input id="manufacturing-year" type="number" class="form-control" name="manufacturing_year" value="{{ $motorcycle->manufacturing_year ?? '' }}" placeholder="Enter Manufacturing Year" title="Enter Manufacturing Year" />
 													</div>
 													<div class="form-group">
+                                                        <label for="package">Package</label>
+                                                        <select id="package" name="package_id" class="custom-select" derive-from="model">
+                                                            <option value="0" selected>--Select Package--</option>
+                                                            @foreach($packages as $package)
+                                                            <option value="{{ $package->id }}" @if(isset($motorcycle) && $car->package_id == $package->id) selected @endif derive-parent="{{ $package->model_id }}">{{ $package->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+													<div class="form-group">
 														<label for="body-type">Bike Type / Body Type</label>
 														<select id="body-type" name="body_type_id" class="custom-select">
 															<option value="0" selected>--Select Body Type--</option>

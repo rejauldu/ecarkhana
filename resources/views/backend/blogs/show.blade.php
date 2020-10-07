@@ -19,16 +19,16 @@
             <hr/>
         </div>
         <!-- Post Content -->
-        <div class="text-justify lead">{!! $post->body !!}</div>
+        <div class="text-justify">{!! $post->body !!}</div>
     </div>
     <div class="col-sm-0 col-lg-2 bg-white py-5">
         <div class="card">
-            <div class="card-header">Categories</div>
+            <div class="card-header bg-white">Categories</div>
             <div class="card-body">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="btn btn-link" href="{{ route('blogs.index') }}">All Posts</a></li>
+                    <li class="nav-item"><a class="btn btn-link py-0" href="{{ route('blogs.index') }}">All Posts</a></li>
                     @foreach($categories as $category)
-                    <li class="nav-item"><a class="btn btn-link" href="{{ route('blogs.index') }}?category={{ $category->id }}">{{ $category->name }}</a></li>
+                    <li class="nav-item"><a class="btn btn-link py-0" href="{{ route('blogs.index') }}?category={{ $category->id }}">{{ $category->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

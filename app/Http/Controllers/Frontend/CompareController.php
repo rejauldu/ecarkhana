@@ -106,7 +106,6 @@ class CompareController extends Controller
                 $exterior_features = ExteriorFeature::all();
                 $safety_securities = SafetySecurity::all();
                 $additional_features = AdditionalFeature::all();
-                dd($p->id);
                 return view('frontend.compares.compare-car', compact('brands', 'models', 'packages', 'products', 'type', 'key_features', 'interior_features', 'exterior_features', 'safety_securities', 'additional_features'));
             } elseif ($p->category_id == 2) {
                 return view('frontend.compares.compare-motorcycle', compact('brands', 'models', 'packages', 'products', 'type', 'key_features'));

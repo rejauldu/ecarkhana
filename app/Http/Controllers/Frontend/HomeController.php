@@ -28,6 +28,8 @@ use App\OrderDetail;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
 use App\Dropdowns\BodyType;
+use App\Dropdowns\BicycleType;
+use App\Dropdowns\BikerGender;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Dropdowns\Displacement;
@@ -88,9 +90,13 @@ class HomeController extends Controller {
         $popular_products = Product::has('bicycle')->with('brand', 'bicycle', 'supplier.region')->orderBy('view', 'desc')->take(10)->get();
         $used_products = Product::has('bicycle')->where('condition_id', 3)->with('brand', 'model', 'bicycle.made_origin', 'supplier.region', 'supplier.division')->take(10)->get();
         $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $brands = Brand::where('category_id', 3)->get();
+        $models = Model::where('category_id', 3)->with('brand')->get();
+        $bicycle_types = BicycleType::all();
+        $biker_genders = BikerGender::all();
         $posts = Blog::with('user')->take(2)->get();
         $type = 'Bicycle';
-        return view('frontend.bicycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'type', 'posts'));
+        return view('frontend.bicycle-index', compact('home_sliders', 'versus_sliders', 'advertisements', 'new_products', 'used_products', 'popular_products', 'used_products', 'suppliers', 'brands', 'models', 'bicycle_types', 'biker_genders', 'type', 'posts'));
     }
 
     public function aboutUs() {

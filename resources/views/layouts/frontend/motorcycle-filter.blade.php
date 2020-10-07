@@ -14,9 +14,9 @@ Start Form -->
         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
             <div class="tab-pane fade show active" id="tab-new" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="sms-bg">
-                    <h3 class="car-title">Find Your Dream Car</h3>
+                    <h3 class="car-title">Find Your Dream Bike</h3>
                     <div class="row">
-                        <form id="filter-new" action="{{ route('car-listing') }}" method="get">
+                        <form id="filter-new" action="{{ route('motorcycles.index') }}" method="get">
                             <input type="hidden" name="condition" value="new"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
@@ -42,7 +42,7 @@ Start Form -->
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
-                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
+                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Bike</button>
                             </div>
                             <div class="form-group col-md-12 col-sm-6">
                                 <div class="sms-advance">Advanced Search</div>
@@ -90,7 +90,7 @@ Start Form -->
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
                                                 <select class="form-control" id="body-type" name="body_type">
-                                                    <option>All Body Types</option>
+                                                    <option>All Bike Types</option>
                                                     @foreach($body_types as $b)
                                                     <option value="{{ $b->name }}" @if(isset($body_type) && $body_type == $b->name) selected @endif>{{ $b->name }}</option>
                                                     @endforeach
@@ -99,7 +99,7 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <select class="form-control" id="fuel-type" name="fuel_type">
+                                                <select class="form-control" id="displacement" name="displacement">
                                                     <option>All Displacements</option>
                                                     @foreach($displacements as $d)
                                                     <option value="{{ $d->name }}" @if(isset($displacement) && $displacement == $d->name) selected @endif>{{ $d->name }}</option>
@@ -109,7 +109,16 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <input type="text" class="form-control" name="msrp" value="{{ $msrp ?? '' }}" placeholder="Search by price" />
+                                                <select class="form-control" id="price" name="price">
+                                                    <option>Any Price</option>
+                                                    <option value="0-100000" @if(isset($price) && $price == '0-100000') selected @endif>Less than BDT 1,00,000</option>
+                                                    <option value="100000-200000" @if(isset($price) && $price == '100000-200000') selected @endif>BDT 1,00,000 - 2,00,000</option>
+                                                    <option value="200000-300000" @if(isset($price) && $price == '200000-300000') selected @endif>BDT 2,00,000 - 3,00,000</option>
+                                                    <option value="300000-500000" @if(isset($price) && $price == '300000-500000') selected @endif>BDT 3,00,000 - 5,00,000</option>
+                                                    <option value="500000-700000" @if(isset($price) && $price == '500000-700000') selected @endif>BDT 5,00,000 - 7,00,000</option>
+                                                    <option value="700000-1000000" @if(isset($price) && $price == '700000-1000000') selected @endif>BDT 7,00,000 - 10,00,000</option>
+                                                    <option value="1000000-10000000" @if(isset($price) && $price == '1000000-10000000') selected @endif>Above BDT 10,00,000</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
@@ -131,10 +140,10 @@ Start Form -->
             </div>
             <div class="tab-pane fade" id="tab-used" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="sms-bg">
-                    <h3 class="car-title">Find Your Dream Car</h3>
+                    <h3 class="car-title">Find Your Dream Bike</h3>
                     <div class="row">
-                        <form id="filter-new" action="{{ route('car-listing') }}" method="get">
-                            <input type="hidden" name="condition" value="new"/>
+                        <form id="filter-new" action="{{ route('motorcycles.index') }}" method="get">
+                            <input type="hidden" name="condition" value="used"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
                             </div>
@@ -159,7 +168,7 @@ Start Form -->
                                 </div>
                             </div>
                             <div class="form-group col-md-3 col-sm-6">
-                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Car</button>
+                                <button type="submit" class="btn btn-dark w-100"><i class="fa fa-search" aria-hidden="true"></i> Search Bike</button>
                             </div>
                             <div class="form-group col-md-12 col-sm-6">
                                 <div class="sms-advance">Advanced Search</div>
@@ -207,7 +216,7 @@ Start Form -->
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
                                                 <select class="form-control" id="body-type" name="body_type">
-                                                    <option>All Body Types</option>
+                                                    <option>All Bike Types</option>
                                                     @foreach($body_types as $b)
                                                     <option value="{{ $b->name }}" @if(isset($body_type) && $body_type == $b->name) selected @endif>{{ $b->name }}</option>
                                                     @endforeach
@@ -216,7 +225,7 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <select class="form-control" id="fuel-type" name="fuel_type">
+                                                <select class="form-control" id="displacement" name="displacement">
                                                     <option>All Displacements</option>
                                                     @foreach($displacements as $d)
                                                     <option value="{{ $d->name }}" @if(isset($displacement) && $displacement == $d->name) selected @endif>{{ $d->name }}</option>
@@ -226,12 +235,26 @@ Start Form -->
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <input type="text" class="form-control" name="msrp" value="{{ $msrp ?? '' }}" placeholder="Search by price" />
+                                                <select class="form-control" id="price" name="price">
+                                                    <option>Any Price</option>
+                                                    <option value="0-100000" @if(isset($price) && $price == '0-100000') selected @endif>Less than BDT 1,00,000</option>
+                                                    <option value="100000-200000" @if(isset($price) && $price == '100000-200000') selected @endif>BDT 1,00,000 - 2,00,000</option>
+                                                    <option value="200000-300000" @if(isset($price) && $price == '200000-300000') selected @endif>BDT 2,00,000 - 3,00,000</option>
+                                                    <option value="300000-500000" @if(isset($price) && $price == '300000-500000') selected @endif>BDT 3,00,000 - 5,00,000</option>
+                                                    <option value="500000-700000" @if(isset($price) && $price == '500000-700000') selected @endif>BDT 5,00,000 - 7,00,000</option>
+                                                    <option value="700000-1000000" @if(isset($price) && $price == '700000-1000000') selected @endif>BDT 7,00,000 - 10,00,000</option>
+                                                    <option value="1000000-10000000" @if(isset($price) && $price == '1000000-10000000') selected @endif>Above BDT 10,00,000</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <input type="text" class="form-control" name="registration_year" value="{{ $registration_year ?? '' }}" placeholder="Search by registration year" />
+                                                <select class="form-control" id="package" name="package">
+                                                    <option>All Versions</option>
+                                                    @foreach($packages as $p)
+                                                    <option value="{{ $p->name }}" @if(isset($package) && $package == $p->name) selected @endif>{{ $p->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

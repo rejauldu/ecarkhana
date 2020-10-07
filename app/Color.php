@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Color extends Model
 {
-	use DisableLazyLoad;
 /**
  * The attributes that are mass assignable.
  *

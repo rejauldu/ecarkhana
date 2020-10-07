@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -9,6 +10,8 @@ use App\Product;
 use App\Bicycle;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
+use App\Dropdowns\BicycleType;
+use App\Dropdowns\BikerGender;
 use App\Dropdowns\Condition;
 use App\Dropdowns\WheelType;
 use App\Dropdowns\MadeOrigin;
@@ -24,7 +27,7 @@ use App\Locations\Division;
 class BicycleController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['index', 'show']]);
+        $this->middleware('moderator:Product', ['except' => ['index', 'show', 'sell']]);
     }
     /**
      * Display a listing of the resource.
@@ -39,6 +42,7 @@ class BicycleController extends Controller {
                 $q->whereRaw('lower(name) like "%' . strtolower($request->condition) . '%"');
             });
             $data['condition'] = $request->condition;
+            $data['condition_search'] = $request->condition;
         }
         if ($request->location) {
             $products = $products->whereHas('supplier.region', function (Builder $q) use($request) {
@@ -57,16 +61,33 @@ class BicycleController extends Controller {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
             });
             $data['model'] = $request->model;
+            $data['model_search'] = $request->model;
         }
-        if ($request->body_type && $request->body_type != 'All Body Types') {
-            $products = $products->whereHas('bicycle.body_type', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
+        if ($request->bicycle_type && $request->bicycle_type != 'All Bike Types') {
+            $products = $products->whereHas('bicycle.bicycle_type', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->bicycle_type) . "%'");
             });
-            $data['body_type'] = $request->body_type;
+            $data['bicycle_type'] = $request->bicycle_type;
         }
-        if ($request->msrp) {
-            $products = $products->where('msrp', $request->msrp);
-            $data['msrp'] = $request->msrp;
+        if ($request->frame_size && $request->frame_size != 'Any Frame Size') {
+            $frame_sizes = explode("-", $request->frame_size);
+            $products = $products->whereHas('bicycle', function(Builder $q) use($frame_sizes) {
+                $q->where('frame_size', '>', $frame_sizes[0])->where('frame_size', '<', $frame_sizes[1]);
+            });
+            $data['frame_size'] = $request->frame_size;
+        }
+        if ($request->price && $request->price != 'Any Price') {
+            $prices = explode("-", $request->price);
+            $products = $products->where('msrp', '>', $prices[0])->where('msrp', '<', $prices[1]);
+            $data['price'] = $request->price;
+            $data['minimum_price'] = $prices[0];
+            $data['maximum_price'] = $prices[1];
+        }
+        if ($request->biker_gender && $request->biker_gender != 'All Genders') {
+            $products = $products->whereHas('bicycle.biker_gender', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->biker_gender) . "%'");
+            });
+            $data['biker_gender'] = $request->biker_gender;
         }
         /* Bicycle list left filter */
         if (Input::get('conditions')) {
@@ -86,14 +107,14 @@ class BicycleController extends Controller {
             $body_types = explode('-and-', Input::get('body-types'));
             $body_type = array_shift($body_types);
             $products = $products->whereHas('bicycle', function($q) use($body_type) {
-                $q->whereHas('body_type', function($q) use($body_type) {
-                    $q->where('name', str_replace('-', ' ', $body_type));
+                $q->whereHas('body_type', function($query) use($body_type) {
+                    $query->where('name', str_replace('-', ' ', $body_type));
                 });
             });
             foreach ($body_types as $body_type) {
                 $products = $products->orWhereHas('bicycle', function($q) use($body_type) {
-                    $q->whereHas('body_type', function($q) use($body_type) {
-                        $q->where('name', str_replace('-', ' ', $body_type));
+                    $q->whereHas('body_type', function($query) use($body_type) {
+                        $query->where('name', str_replace('-', ' ', $body_type));
                     });
                 });
             }
@@ -137,18 +158,6 @@ class BicycleController extends Controller {
             $data['maximum_kms_driven'] = Input::get('maximum-kms-driven');
         }
         /* Bicycle list left filter ends */
-        if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
-            $products = $products->whereHas('bicycle.fuel_type', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
-            });
-            $data['fuel_type'] = $request->fuel_type;
-        }
-        if ($request->package && $request->package != 'All Packages') {
-            $products = $products->whereHas('bicycle.package', function(Builder $query) use($request) {
-                $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
-            });
-            $data['package'] = $request->package;
-        }
         if ($request->lat && $request->lon) {
             $products = $products->join('users', 'products.supplier_id', '=', 'users.id')
                     ->selectRaw('ROUND(('
@@ -177,6 +186,8 @@ class BicycleController extends Controller {
         $data['conditions'] = Condition::all();
         $data['brands'] = Brand::where('category_id', 3)->with('models')->get();
         $data['models'] = Model::where('category_id', 3)->with('brand')->get();
+        $data['bicycle_types'] = BicycleType::all();
+        $data['biker_genders'] = BikerGender::all();
         $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $data['type'] = 'Bicycle';
         return view('backend.products.bicycles.index', $data);
@@ -251,6 +262,7 @@ class BicycleController extends Controller {
                     $q->where('brand_id', $product->bicycle->brand_id);
                 })
                 ->with('bicycle', 'brand', 'model', 'supplier.region')
+                ->take(10)
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         $today = strtotime(date("Y-m-d"));

@@ -163,6 +163,7 @@ Route::prefix('dropdowns')->group(function () {
     Route::resource('additional-features', 'Backend\Dropdowns\AdditionalFeatureController')->middleware('moderator:Dropdown');
     Route::resource('after-sell-services', 'Backend\Dropdowns\AfterSellServiceController')->middleware('moderator:Dropdown');
     Route::resource('auction-grades', 'Backend\Dropdowns\AuctionGradeController')->middleware('moderator:Dropdown');
+    Route::resource('bicycle-types', 'Backend\Dropdowns\BicycleTypeController')->middleware('moderator:Dropdown');
     Route::resource('body-types', 'Backend\Dropdowns\BodyTypeController')->middleware('moderator:Dropdown');
     Route::resource('brands', 'Backend\Dropdowns\BrandController')->middleware('moderator:Dropdown');
     Route::resource('conditions', 'Backend\Dropdowns\ConditionController')->middleware('moderator:Dropdown');

@@ -44,7 +44,7 @@ Start Service -->
                 </div>
                 <ul class="service pl-0">
                     <li>
-                        <a href="car-listing.html">
+                        <a href="#" onclick="getLocation()">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
                                 <p>Nearby bicycle </p>
@@ -52,7 +52,7 @@ Start Service -->
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('fit-calculator') }}">
                             <div class="service_box">
                                 <i class="flaticon-tag"></i><br>
                                 <p>Fit calculator</p>
@@ -60,7 +60,7 @@ Start Service -->
                         </a>
                     </li>
                     <li>
-                        <a href="dealer-list.html">
+                        <a href="{{ route('bicycles.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-friend"></i><br>
                                 <p> Buy bicycle </p>
@@ -68,7 +68,7 @@ Start Service -->
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('sell-bicycle') }}">
                             <div class="service_box">
                                 <i class="flaticon-tag"></i><br>
                                 <p>Sell bicycle </p>
@@ -76,7 +76,7 @@ Start Service -->
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('compare-bicycle') }}">
                             <div class="service_box">
                                 <i class="flaticon-money"></i><br>
                                 <p>Comparision </p>
@@ -85,23 +85,23 @@ Start Service -->
                     </li>
 
                     <li>
-                        <a href="">
+                        <a href="{{ route('bicycles.index') }}?conditions=new">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
-                                <p>New bicycle / bike</p>
+                                <p>New bicycle</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="car-insurance.html">
+                        <a href="{{ route('bicycles.index') }}?conditions=used">
                             <div class="service_box">
                                 <i class="flaticon-umbrella"></i><br>
-                                <p>Used bicycle </p>
+                                <p>Used bicycle</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="single-accessories.html">
+                        <a href="{{ route('national-distributors.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-supermarket"></i><br>
                                 <p>National distributor </p>
@@ -116,7 +116,7 @@ Start Service -->
                        @endmobile
 
                         <li>
-                            <a href="">
+                            <a href="{{ route('banks.index') }}">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
                                     <p>Loan comparison</p>
@@ -124,7 +124,7 @@ Start Service -->
                             </a>
                         </li>
                         <li>
-                            <a href="compare-car.html">
+                            <a href="#">
                                 <div class="service_box">
                                     <i class="fa fa-wpforms" aria-hidden="true"></i><br>
                                     <p>Nearby workshop</p>
@@ -132,7 +132,7 @@ Start Service -->
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('auction-products') }}">
                                 <div class="service_box">
                                     <i class="fa fa-hdd-o" aria-hidden="true"></i><br>
                                     <p>auction</p>
@@ -140,7 +140,7 @@ Start Service -->
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="#">
                                 <div class="service_box">
                                     <i class="fa fa-ravelry" aria-hidden="true"></i><br>
                                     <p>group buying</p>
@@ -148,7 +148,7 @@ Start Service -->
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('blogs.index') }}">
                                 <div class="service_box">
                                     <i class="fa fa-bookmark-o" aria-hidden="true"></i><br>
                                     <p>Blog </p>
@@ -156,10 +156,10 @@ Start Service -->
                             </a>
                         </li>
                         <li>
-                            <a href="car-loan.html">
+                            <a href="{{ route('bicycles.index') }}">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
-                                    <p>Offer </p>
+                                    <p>Offer</p>
                                 </div>
                             </a>
                         </li>

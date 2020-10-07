@@ -25,15 +25,12 @@
                 </div>
             </div>
             @endcomputer
-
             <div class="col-lg-9 col-md-8" id="products">
                 @include('layouts.frontend.products')
                 <div class="pagination-nav d-flex justify-content-center">
                     {{ $products->links() }}
                 </div>
             </div>
-            
-            
         </div>
 </section>
 @mobile

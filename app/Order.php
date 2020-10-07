@@ -7,7 +7,6 @@ use Auth;
 
 class Order extends Model
 {
-	use DisableLazyLoad;
     /**
      * The attributes that are mass assignable.
      *

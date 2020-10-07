@@ -7,6 +7,7 @@
   </div>
   <div id="left-filter-price" class="collapse show" data-parent="#left-filter">
     <div class="card-body">
+      @if($type == 'Car')
       <div id="price-show" class="text-center mb-3">BDT 0 Lakh - BDT 10 Crore </div>
       <div class="multi-handle-slider" data-min="50000" data-max="50000000" data-handle-1="{{ $minimum_price ?? 50000 }}" data-handle-2="{{ $maximum_price ?? 50000000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
         <span class="handle-1"></span>
@@ -15,6 +16,26 @@
         <input type="hidden" id="minimum-price" class="minimum" value="50000">
         <input type="hidden" id="maximum-price" class="maximum" value="50000000">
       </div>
+      @elseif($type == 'Motorcycle')
+      ddd
+      <div id="price-show" class="text-center mb-3">BDT 0 K - BDT 50 Lakh </div>
+      <div class="multi-handle-slider" data-min="0" data-max="5000000" data-handle-1="{{ $minimum_price ?? 0 }}" data-handle-2="{{ $maximum_price ?? 5000000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
+        <span class="handle-1"></span>
+        <span class="highlight"></span>
+        <span class="handle-2"></span>
+        <input type="hidden" id="minimum-price" class="minimum" value="0">
+        <input type="hidden" id="maximum-price" class="maximum" value="5000000">
+      </div>
+      @else
+      <div id="price-show" class="text-center mb-3">BDT 0 K - BDT 5 Lakh </div>
+      <div class="multi-handle-slider" data-min="0" data-max="50000000" data-handle-1="{{ $minimum_price ?? 0 }}" data-handle-2="{{ $maximum_price ?? 500000 }}" data-updated="priceUpdate" data-onchange="priceOnchange" data-logarithm="true">
+        <span class="handle-1"></span>
+        <span class="highlight"></span>
+        <span class="handle-2"></span>
+        <input type="hidden" id="minimum-price" class="minimum" value="0">
+        <input type="hidden" id="maximum-price" class="maximum" value="500000">
+      </div>
+      @endif
     </div>
   </div>
 </div>

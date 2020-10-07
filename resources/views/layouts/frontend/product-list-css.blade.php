@@ -5,7 +5,7 @@ function priceOnchange(min, max) {
         min /= 10000000;
         min = Math.round(min);
         min += ' Crore';
-    } else if(min>100000) {
+    } else if(min>=100000) {
         min /= 100000;
         min = Math.round(min);
         min += ' Lakh';
@@ -18,7 +18,7 @@ function priceOnchange(min, max) {
         max /= 10000000;
         max = Math.round(max);
         max += ' Crore';
-    } else if(max>100000) {
+    } else if(max>=100000) {
         max /= 100000;
         max = Math.round(max);
         max += ' Lakh';

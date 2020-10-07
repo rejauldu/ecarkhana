@@ -423,7 +423,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 .size-53:after {
 	content: "";
 	display: block;
-	padding-bottom: 60%;
+	padding-bottom: 67%;
 }
 
 .size-53>img, .size-53>.size-child {

@@ -332,7 +332,7 @@ back to top -->
     </div>
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}?{{ time() }}"></script>
+<script src="{{ asset('js/app.js') }}?110"></script>
 <!-- Smooth Scroll -->
 <script src="{{ asset('js/smooth-scroll.js') }}"></script>
 <!-- owl-carousel -->
@@ -360,9 +360,9 @@ back to top -->
 <script type="text/javascript" src="{{ asset('js/revolution/extensions/revolution.extension.video.min.js') }}"></script>
 
 <!-- custom -->
-<script type="text/javascript" src="{{ asset('js/custom.js') }}?{{ time() }}"></script>
-<script src="{{ asset('js/theme.js') }}?{{ time() }}"></script>
-<script src="{{ asset('js/script.js') }}?{{ time() }}"></script>
+<script type="text/javascript" src="{{ asset('js/custom.js') }}?110"></script>
+<script src="{{ asset('js/theme.js') }}?110"></script>
+<script src="{{ asset('js/script.js') }}?110"></script>
 <script>
 (function () {
     var checkboxes;

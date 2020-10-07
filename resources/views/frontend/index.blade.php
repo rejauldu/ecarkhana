@@ -112,12 +112,12 @@
                                 <a href="#" onclick="return getLocation()">
                                     <div class="service_box">
                                         <i class="flaticon-car"></i><br>
-                                        <p>Nearby by car </p>
+                                        <p>Nearby by car</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('cars.index') }}">
                                     <div class="service_box">
                                         <i class="flaticon-tag"></i><br>
                                         <p>Buy Car</p>
@@ -125,15 +125,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="dealer-list">
+                                <a href="{{ route('sell-car') }}">
                                     <div class="service_box">
                                         <i class="flaticon-friend"></i><br>
-                                        <p> Sell Car </p>
+                                        <p> Sell Car</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('compare-car') }}">
                                     <div class="service_box">
                                         <i class="flaticon-tag"></i><br>
                                         <p>Car comparison</p>
@@ -141,10 +141,10 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('cars.index') }}?conditions=new">
                                     <div class="service_box">
                                         <i class="flaticon-money"></i><br>
-                                        <p>New car </p>
+                                        <p>New car</p>
                                     </div>
                                 </a>
                             </li>
@@ -153,23 +153,23 @@
                                 <a href="">
                                     <div class="service_box">
                                         <i class="flaticon-car"></i><br>
-                                        <p>Recindition car </p>
+                                        <p>Recindition car</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="car-insurance">
+                                <a href="{{ route('cars.index') }}?conditions=used">
                                     <div class="service_box">
                                         <i class="flaticon-umbrella"></i><br>
-                                        <p>Used Car </p>
+                                        <p>Used Car</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="single-accessories">
+                                <a href="{{ route('dealers.index') }}">
                                     <div class="service_box">
                                         <i class="flaticon-supermarket"></i><br>
-                                        <p> Eshowroom</p>
+                                        <p>Eshowroom</p>
                                     </div>
                                 </a>
                             </li>
@@ -181,15 +181,15 @@
                             <div class="sms-view-content" style="display:none;">
                                @endmobile
                                <li>
-                                <a href="">
+                                <a href="{{ route('national-distributors.index') }}">
                                     <div class="service_box">
                                         <i class="flaticon-car"></i><br>
-                                        <p>National distributor </p>
+                                        <p>National distributor</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="compare-car">
+                                <a href="{{ route('banks.index') }}">
                                     <div class="service_box">
                                         <i class="fa fa-wpforms" aria-hidden="true"></i><br>
                                         <p>Loan Comparision</p>
@@ -197,39 +197,39 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('insurance') }}">
                                     <div class="service_box">
                                         <i class="fa fa-hdd-o" aria-hidden="true"></i><br>
-                                        <p>Insurance </p>
+                                        <p>Insurance</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('auction-products') }}">
                                     <div class="service_box">
                                         <i class="fa fa-ravelry" aria-hidden="true"></i><br>
-                                        <p>Auction </p>
+                                        <p>Auction</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="#">
                                     <div class="service_box">
                                         <i class="fa fa-bookmark-o" aria-hidden="true"></i><br>
-                                        <p>Group buying </p>
+                                        <p>Group buying</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="car-loan">
+                                <a href="{{ route('loan-eligibility') }}">
                                     <div class="service_box">
                                         <i class="flaticon-money"></i><br>
-                                        <p>Loan Eligible </p>
+                                        <p>Loan Eligible</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="#">
                                     <div class="service_box">
                                         <i class="flaticon-car"></i><br>
                                         <p>Brta Service</p>
@@ -237,7 +237,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ route('cars.index') }}">
                                     <div class="service_box">
                                         <i class="flaticon-friend"></i><br>
                                         <p>Offer</p>
@@ -756,7 +756,7 @@
         }
 
         function showPosition(position) {
-            window.location = "{{ route('car-listing') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude;
+            window.location = "{{ route('cars.index') }}?lat="+position.coords.latitude+"&lon="+position.coords.longitude;
         }
         function addCoordinate(condition) {
             var container = '';

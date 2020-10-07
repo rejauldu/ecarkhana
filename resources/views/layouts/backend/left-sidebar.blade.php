@@ -304,6 +304,8 @@
                     <li class="{{ Request::is('dropdowns/additional-features') ? 'active' : '' }}"><a href="{{ route('additional-features.index') }}"><i class="fa fa-circle-o"></i> Manage Additional Feature</a></li>
                     <li class="{{ Request::is('dropdowns/after-sell-services') ? 'active' : '' }}"><a href="{{ route('after-sell-services.index') }}"><i class="fa fa-circle-o"></i> Manage After Sell Service</a></li>
                     <li class="{{ Request::is('dropdowns/auction-grades') ? 'active' : '' }}"><a href="{{ route('auction-grades.index') }}"><i class="fa fa-circle-o"></i> Manage Auction Grade</a></li>
+                    <li class="{{ Request::is('dropdowns/bicycle-types') ? 'active' : '' }}"><a href="{{ route('bicycle-types.index') }}"><i class="fa fa-circle-o"></i> Manage Bicycle Type</a></li>
+                    <li class="{{ Request::is('dropdowns/biker-genders') ? 'active' : '' }}"><a href="{{ route('biker-genders.index') }}"><i class="fa fa-circle-o"></i> Manage Biker Gender</a></li>
                     <li class="{{ Request::is('dropdowns/body-types') ? 'active' : '' }}"><a href="{{ route('body-types.index') }}"><i class="fa fa-circle-o"></i> Manage Body Type</a></li>
                     <li class="{{ Request::is('dropdowns/brands') ? 'active' : '' }}"><a href="{{ route('brands.index') }}"><i class="fa fa-circle-o"></i> Manage Brand</a></li>
                     <li class="{{ Request::is('dropdowns/conditions') ? 'active' : '' }}"><a href="{{ route('conditions.index') }}"><i class="fa fa-circle-o"></i> Manage Condition</a></li>

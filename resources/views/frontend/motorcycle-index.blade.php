@@ -40,7 +40,7 @@
                 </div>
                 <ul class="service pl-0">
                     <li>
-                        <a href="{{ route('motorcycles.index') }}">
+                        <a href="#" onclick="getLocation()">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
                                 <p>Nearby bike</p>
@@ -48,7 +48,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('motorcycles.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-tag"></i><br>
                                 <p>Buy bike</p>
@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dealers.index') }}">
+                        <a href="{{ route('sell-motorcycle') }}">
                             <div class="service_box">
                                 <i class="flaticon-friend"></i><br>
                                 <p>Sell bike</p>
@@ -64,15 +64,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('compare-motorcycle') }}">
                             <div class="service_box">
                                 <i class="flaticon-tag"></i><br>
-                                <p>Bike comparison </p>
+                                <p>Bike comparison</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('motorcycles.index') }}?conditions=new">
                             <div class="service_box">
                                 <i class="flaticon-money"></i><br>
                                 <p>New bike</p>
@@ -81,7 +81,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="{{ route('motorcycles.index') }}?conditions=used">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
                                 <p>Used Bike</p>
@@ -89,7 +89,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('insurance') }}">
+                        <a href="{{ route('dealers.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-umbrella"></i><br>
                                 <p>Eshowroom </p>
@@ -97,7 +97,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('single-accessories') }}">
+                        <a href="{{ route('national-distributors.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-supermarket"></i><br>
                                 <p>National distributor</p>
@@ -112,7 +112,7 @@
                        @endmobile
 
                         <li>
-                            <a href="#">
+                            <a href="{{ route('banks.index') }}">
                                 <div class="service_box">
                                     <i class="flaticon-car"></i><br>
                                     <p>Loan comparison</p>
@@ -120,15 +120,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('compare-product') }}">
+                            <a href="{{ route('loan-eligibility') }}">
                                 <div class="service_box">
                                     <i class="fa fa-wpforms" aria-hidden="true"></i><br>
-                                    <p>Loan eligible </p>
+                                    <p>Loan eligible</p>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('auction-products') }}">
                                 <div class="service_box">
                                     <i class="fa fa-hdd-o" aria-hidden="true"></i><br>
                                     <p>auction</p>
@@ -144,7 +144,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('insurance') }}">
                                 <div class="service_box">
                                     <i class="fa fa-bookmark-o" aria-hidden="true"></i><br>
                                     <p>Insurance </p>
@@ -152,7 +152,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('car-loan') }}">
+                            <a href="#">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
                                     <p>Brta services</p>
@@ -168,10 +168,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('motorcycles.index') }}">
                                 <div class="service_box">
                                     <i class="flaticon-friend"></i><br>
-                                    <p>Offer </p>
+                                    <p>Offer</p>
                                 </div>
                             </a>
                         </li>

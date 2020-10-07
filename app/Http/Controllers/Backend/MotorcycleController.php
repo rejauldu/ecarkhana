@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -9,6 +10,7 @@ use App\Product;
 use App\Motorcycle;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
+use App\Dropdowns\Package;
 use App\Dropdowns\BodyType;
 use App\Dropdowns\Displacement;
 use App\Dropdowns\GroundClearance;
@@ -32,7 +34,7 @@ use App\Locations\Division;
 class MotorcycleController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['index', 'show']]);
+        $this->middleware('moderator:Product', ['except' => ['index', 'show', 'sell']]);
     }
     /**
      * Display a listing of the resource.
@@ -65,12 +67,26 @@ class MotorcycleController extends Controller {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->model) . "%'");
             });
             $data['model'] = $request->model;
+            $data['model_search'] = $request->model;
         }
-        if ($request->body_type && $request->body_type != 'All Body Types') {
-            $products = $products->whereHas('motorcycle.body_type', function(Builder $query) use($request) {
+        if ($request->body_type && $request->body_type != 'All Bike Types') {
+            $products = $products->whereHas('motorcycle.body_type', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->body_type) . "%'");
             });
             $data['body_type'] = $request->body_type;
+        }
+        if ($request->displacement && $request->displacement != 'All Displacements') {
+            $products = $products->whereHas('motorcycle.displacement', function(Builder $q) use($request) {
+                $q->whereRaw("upper(name) like '%" . strtoupper($request->displacement) . "%'");
+            });
+            $data['displacement'] = $request->displacement;
+        }
+        if ($request->price && $request->price != 'Any Price') {
+            $prices = explode("-", $request->price);
+            $products = $products->where('msrp', '>', $prices[0])->where('msrp', '<', $prices[1]);
+            $data['price'] = $request->price;
+            $data['minimum_price'] = $prices[0];
+            $data['maximum_price'] = $prices[1];
         }
         if ($request->msrp) {
             $products = $products->where('msrp', $request->msrp);
@@ -94,14 +110,14 @@ class MotorcycleController extends Controller {
             $body_types = explode('-and-', Input::get('body-types'));
             $body_type = array_shift($body_types);
             $products = $products->whereHas('motorcycle', function($q) use($body_type) {
-                $q->whereHas('body_type', function($q) use($body_type) {
-                    $q->where('name', str_replace('-', ' ', $body_type));
+                $q->whereHas('body_type', function($query) use($body_type) {
+                    $query->where('name', str_replace('-', ' ', $body_type));
                 });
             });
             foreach ($body_types as $body_type) {
                 $products = $products->orWhereHas('motorcycle', function($q) use($body_type) {
-                    $q->whereHas('body_type', function($q) use($body_type) {
-                        $q->where('name', str_replace('-', ' ', $body_type));
+                    $q->whereHas('body_type', function($query) use($body_type) {
+                        $query->where('name', str_replace('-', ' ', $body_type));
                     });
                 });
             }
@@ -146,13 +162,13 @@ class MotorcycleController extends Controller {
         }
         /* Motorcycle list left filter ends */
         if ($request->fuel_type && $request->fuel_type != 'All Fuel Types') {
-            $products = $products->whereHas('motorcycle.fuel_type', function(Builder $query) use($request) {
+            $products = $products->whereHas('motorcycle.fuel_type', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->fuel_type) . "%'");
             });
             $data['fuel_type'] = $request->fuel_type;
         }
         if ($request->package && $request->package != 'All Packages') {
-            $products = $products->whereHas('motorcycle.package', function(Builder $query) use($request) {
+            $products = $products->whereHas('motorcycle.package', function(Builder $q) use($request) {
                 $q->whereRaw("upper(name) like '%" . strtoupper($request->package) . "%'");
             });
             $data['package'] = $request->package;
@@ -185,6 +201,7 @@ class MotorcycleController extends Controller {
         $data['conditions'] = Condition::all();
         $data['brands'] = Brand::where('category_id', 2)->with('models')->get();
         $data['models'] = Model::where('category_id', 2)->with('brand')->get();
+        $data['packages'] = Package::where('category_id', 2)->with('model')->get();
         $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $data['type'] = 'Motorcycle';
         return view('backend.products.motorcycles.index', $data);
@@ -207,6 +224,7 @@ class MotorcycleController extends Controller {
     public function create() {
         $dropdowns['brands'] = Brand::where('category_id', 2)->get();
         $dropdowns['models'] = Model::where('category_id', 2)->get();
+        $dropdowns['packages'] = Package::where('category_id', 2)->get();
         $dropdowns['body_types'] = BodyType::where('category_id', 2)->get();
         $dropdowns['displacements'] = Displacement::where('category_id', 2)->get();
         $dropdowns['ground_clearances'] = GroundClearance::where('category_id', 2)->get();
@@ -267,6 +285,7 @@ class MotorcycleController extends Controller {
                     $q->where('brand_id', $product->motorcycle->brand_id);
                 })
                 ->with('motorcycle.displacement', 'brand', 'model', 'supplier.region')
+                ->take(10)
                 ->get();
         $product->after_sell_service = explode(',', $product->after_sell_service);
         $type = 'Motorcycle';
@@ -288,6 +307,7 @@ class MotorcycleController extends Controller {
     public function edit($id) {
         $dropdowns['brands'] = Brand::where('category_id', 2)->get();
         $dropdowns['models'] = Model::where('category_id', 2)->get();
+        $dropdowns['packages'] = Package::where('category_id', 2)->get();
         $dropdowns['body_types'] = BodyType::where('category_id', 2)->get();
         $dropdowns['displacements'] = Displacement::where('category_id', 2)->get();
         $dropdowns['ground_clearances'] = GroundClearance::where('category_id', 2)->get();

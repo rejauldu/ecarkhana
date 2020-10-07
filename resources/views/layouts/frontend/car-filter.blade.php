@@ -17,7 +17,7 @@ Start Form -->
                 <div class="sms-bg">
                     <h3 class="car-title">Find Your Dream Car</h3>
                     <div class="row">
-                        <form id="filter-new" action="{{ route('car-listing') }}" method="get">
+                        <form id="filter-new" action="{{ route('cars.index') }}" method="get">
                             <input type="hidden" name="condition" value="new"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
@@ -102,7 +102,16 @@ Start Form -->
 
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <input type="text" class="form-control" name="msrp" value="{{ $msrp ?? '' }}" placeholder="Search by price" />
+                                                <select class="form-control" id="price" name="price">
+                                                    <option>Any Price</option>
+                                                    <option value="50000-500000" @if(isset($price) && $price == '50000-100000') selected @endif>Less than BDT 5,00,000</option>
+                                                    <option value="500000-1000000" @if(isset($price) && $price == '100000-1000000') selected @endif>BDT 5,00,000 - 10,00,000</option>
+                                                    <option value="1000000-2000000" @if(isset($price) && $price == '1000000-2000000') selected @endif>BDT 10,00,000 - 20,00,000</option>
+                                                    <option value="2000000-5000000" @if(isset($price) && $price == '2000000-5000000') selected @endif>BDT 20,00,000 - 50,00,000</option>
+                                                    <option value="5000000-7000000" @if(isset($price) && $price == '5000000-7000000') selected @endif>BDT 50,00,000 - 70,00,000</option>
+                                                    <option value="7000000-10000000" @if(isset($price) && $price == '7000000-10000000') selected @endif>BDT 70,00,000 - 1,00,00,000</option>
+                                                    <option value="10000000-50000000" @if(isset($price) && $price == '10000000-50000000') selected @endif>Above BDT 1,00,00,000</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
@@ -136,7 +145,7 @@ Start Form -->
                 <div class="sms-bg" class="main_bg white-text">
                     <h3>Find Your Dream Car</h3>
                     <div class="row">
-                        <form id="filter-used" action="{{ route('car-listing') }}" method="get">
+                        <form id="filter-used" action="{{ route('cars.index') }}" method="get">
                             <input type="hidden" name="condition" value="used"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
@@ -221,7 +230,16 @@ Start Form -->
 
                                         <div class="form-group col-md-3 col-sm-6">
                                             <div class="select">
-                                                <input type="text" class="form-control" name="msrp" value="{{ $msrp ?? '' }}" placeholder="Search by price" />
+                                                <select class="form-control" id="price" name="price">
+                                                    <option>Any Price</option>
+                                                    <option value="50000-500000" @if(isset($price) && $price == '50000-100000') selected @endif>Less than BDT 5,00,000</option>
+                                                    <option value="500000-1000000" @if(isset($price) && $price == '100000-1000000') selected @endif>BDT 5,00,000 - 10,00,000</option>
+                                                    <option value="1000000-2000000" @if(isset($price) && $price == '1000000-2000000') selected @endif>BDT 10,00,000 - 20,00,000</option>
+                                                    <option value="2000000-5000000" @if(isset($price) && $price == '2000000-5000000') selected @endif>BDT 20,00,000 - 50,00,000</option>
+                                                    <option value="5000000-7000000" @if(isset($price) && $price == '5000000-7000000') selected @endif>BDT 50,00,000 - 70,00,000</option>
+                                                    <option value="7000000-10000000" @if(isset($price) && $price == '7000000-10000000') selected @endif>BDT 70,00,000 - 1,00,00,000</option>
+                                                    <option value="10000000-50000000" @if(isset($price) && $price == '10000000-50000000') selected @endif>Above BDT 1,00,00,000</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
@@ -245,7 +263,7 @@ Start Form -->
                 <div class="sms-bg" class="main_bg white-text">
                     <h3>Find Your Dream Car</h3>
                     <div class="row">
-                        <form id="filter-new" action="{{ route('car-listing') }}" method="get">
+                        <form id="filter-new" action="{{ route('cars.index') }}" method="get">
                             <input type="hidden" name="condition" value="reconditioned"/>
                             <div class="form-group col-md-3 col-sm-6">
                                 <input type="text" class="form-control" name="location" value="{{ $location ?? '' }}" placeholder="Search location" v-model="input" autocomplete="off" data-toggle="modal" data-target="#location-modal" />
