@@ -87,7 +87,7 @@ class BlogController extends Controller {
      */
     public function show($id) {
 
-        $post = Blog::find($id);
+        $post = Blog::with('comments.sub_comments', 'comments.user', 'comments.sub_comments.user')->find($id);
         $categories = Category::all();
         return view('backend.blogs.show', compact('post', 'categories'));
     }

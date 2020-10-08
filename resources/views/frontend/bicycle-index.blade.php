@@ -34,7 +34,7 @@ Bike slider -->
 Start Service -->
 
 <section class="service_wrap">
-    <div class="container">
+    <div class="container px-0">
         <!--            <div class="row justify-content-md-center">-->
         <div class="row">
 
@@ -47,7 +47,7 @@ Start Service -->
                         <a href="#" onclick="getLocation()">
                             <div class="service_box">
                                 <i class="flaticon-car"></i><br>
-                                <p>Nearby bicycle </p>
+                                <p>Nearby bicycle</p>
                             </div>
                         </a>
                     </li>
@@ -63,7 +63,7 @@ Start Service -->
                         <a href="{{ route('bicycles.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-friend"></i><br>
-                                <p> Buy bicycle </p>
+                                <p>Buy bicycle</p>
                             </div>
                         </a>
                     </li>
@@ -71,7 +71,7 @@ Start Service -->
                         <a href="{{ route('sell-bicycle') }}">
                             <div class="service_box">
                                 <i class="flaticon-tag"></i><br>
-                                <p>Sell bicycle </p>
+                                <p>Sell bicycle</p>
                             </div>
                         </a>
                     </li>
@@ -79,7 +79,7 @@ Start Service -->
                         <a href="{{ route('compare-bicycle') }}">
                             <div class="service_box">
                                 <i class="flaticon-money"></i><br>
-                                <p>Comparision </p>
+                                <p>Comparision</p>
                             </div>
                         </a>
                     </li>
@@ -104,7 +104,7 @@ Start Service -->
                         <a href="{{ route('national-distributors.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-supermarket"></i><br>
-                                <p>National distributor </p>
+                                <p>Distributor</p>
                             </div>
                         </a>
                     </li>
@@ -132,7 +132,7 @@ Start Service -->
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('auction-products') }}">
+                            <a href="{{ route('auction-products') }}?categories=bicycle">
                                 <div class="service_box">
                                     <i class="fa fa-hdd-o" aria-hidden="true"></i><br>
                                     <p>auction</p>
@@ -151,12 +151,12 @@ Start Service -->
                             <a href="{{ route('blogs.index') }}">
                                 <div class="service_box">
                                     <i class="fa fa-bookmark-o" aria-hidden="true"></i><br>
-                                    <p>Blog </p>
+                                    <p>Blog</p>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('bicycles.index') }}">
+                            <a href="{{ route('discount-products') }}?categories=bicycle">
                                 <div class="service_box">
                                     <i class="flaticon-money"></i><br>
                                     <p>Offer</p>
@@ -184,7 +184,7 @@ End Service -->
 Start Used Cars In Your City And Budget -->
 
 <section id="used-car-by-cat">
-    <div class="container">
+    <div class="container px-0">
         <div class="row">
             <div class="col-lg-4 col-sm-12">
                 <nav>
@@ -347,7 +347,7 @@ End Compare -->
 start Featured Cars -->
 
 <section>
-        <div class="container">
+        <div class="container px-0">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <span>Used Bicycles Special Offers</span>
@@ -415,7 +415,7 @@ End Featured Cars -->
 <!--=================================
 Start Banner -->
 <section class="sms-banner">
-        <div class="container">
+        <div class="container px-0">
             <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-space="20">
                 @foreach($advertisements as $advertisement)
                 <div class="item">
@@ -437,7 +437,7 @@ End Banner -->
 Start Popular car -->
 
 <section id="popular">
-        <div class="container">
+        <div class="container px-0">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="section-title mb-2">
@@ -500,7 +500,7 @@ End Popular car -->
 Start business partner -->
 
 <section id="partner">
-    <div class="container">
+    <div class="container px-0">
         <div class="row">
             <div class="col-md-12">
                 <div class="owl-carousel owl-loaded owl-drag" data-nav-dots="true" data-items="5" data-md-items="5" data-sm-items="3" data-xs-items="2" data-space="10">

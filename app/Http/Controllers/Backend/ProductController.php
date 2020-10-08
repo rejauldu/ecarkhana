@@ -27,11 +27,12 @@ use App\User;
 use App\Http\Controllers\Backend\CarController;
 use App\Http\Controllers\Backend\MotorcycleController;
 use App\Http\Controllers\Backend\BicycleController;
+use Carbon\Carbon;
 
 class ProductController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['store', 'getProduct', 'show']]);
+        $this->middleware('moderator:Product', ['except' => ['index', 'store', 'getProduct', 'show', 'auctionProducts', 'discountProducts']]);
     }
 
     /**
@@ -68,6 +69,28 @@ class ProductController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function auctionProducts(Request $request) {
+        $data = $this->filteredProducts($request);
+        $products = $data['products'];
+        $products = $products->where('auction_from', '<=', Carbon::now())->where('auction_to', '>=', Carbon::now());
+        $products = $products->paginate(12);
+        $products = $products->appends($request->except('page'));
+        $data['products'] = $products;
+        $data['conditions'] = Condition::all();
+        $data['brands'] = Brand::with('models')->get();
+        $data['models'] = Model::with('brand')->get();
+        $data['categories'] = Category::all();
+        $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $data['type'] = 'Car';
+        $data['url'] = route('auction-products');
+        return view('backend.products.index', $data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function discountProducts(Request $request) {
         $data = $this->filteredProducts($request);
         $products = $data['products'];
@@ -76,8 +99,9 @@ class ProductController extends Controller {
         $products = $products->appends($request->except('page'));
         $data['products'] = $products;
         $data['conditions'] = Condition::all();
-        $data['brands'] = Brand::where('category_id', 1)->with('models')->get();
-        $data['models'] = Model::where('category_id', 1)->with('brand')->get();
+        $data['brands'] = Brand::with('models')->get();
+        $data['models'] = Model::with('brand')->get();
+        $data['categories'] = Category::all();
         $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $data['type'] = 'Car';
         $data['url'] = route('discount-products');
@@ -323,10 +347,18 @@ class ProductController extends Controller {
         if (Input::get('models')) {
             $models = explode('-and-', Input::get('models'));
             $models = str_replace('-', ' ', $models);
-            $products = $products->whereHas('model', function($q) use($model) {
+            $products = $products->whereHas('model', function($q) use($models) {
                 $q->whereIn('name', $models);
             });
             $data['model_search'] = Input::get('models');
+        }
+        if (Input::get('categories')) {
+            $categories = explode('-and-', Input::get('categories'));
+            $categories = str_replace('-', ' ', $categories);
+            $products = $products->whereHas('category', function($q) use($categories) {
+                $q->whereIn('name', $categories);
+            });
+            $data['category_search'] = Input::get('categories');
         }
         $data['products'] = $products;
         return $data;

@@ -3,7 +3,7 @@ Start Form -->
 
 
 <section id="filter-form">
-    <div class="container">
+    <div class="container px-0">
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#tab-new" role="tab" aria-controls="tab-new" aria-selected="true">New</a>
@@ -48,7 +48,7 @@ Start Form -->
                                 <div class="sms-advance">Advanced Search</div>
                             </div>
                             <div class="sms-toggle-content">
-                                <div class="container">
+                                <div class="container px-0">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
                                             <a class="btn btn-light border w-100" @click.prevent="getCurrentLocation()" href="#">Current Location</a>
@@ -178,7 +178,7 @@ Start Form -->
                                 <div class="sms-advance">Advanced Search</div>
                             </div>
                             <div class="sms-toggle-content">
-                                <div class="container">
+                                <div class="container px-0">
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
                                             <a class="btn btn-light border w-100" @click.prevent="getCurrentLocation()" href="#">Current Location</a>

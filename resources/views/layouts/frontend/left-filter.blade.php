@@ -145,6 +145,29 @@
   </div>
 </div>
 @endif
+@else
+<div class="card">
+  <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">
+    <a class="card-link text-dark d-block p-2" data-toggle="collapse" href="#left-filter-category" @if(isset($category_search)) aria-expanded="true" @endif>
+      <i class="fa fa-collapse-icon"></i>
+      Product Category
+    </a>
+  </div>
+  <div id="left-filter-category" class="collapse @if(isset($category_search)) show @endif" data-parent="#left-filter">
+    <div class="card-body py-1 text-dark">
+      <ul class="list-group list-group-flush">
+        @foreach($categories as $category)
+        <li class="list-group-item py-1">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="category-{{ $category->id }}" onclick="products.updateCategory('{{ $category->name }}')" @if(isset($category_search) && strpos(strtolower($category_search), strtolower($category->name)) !== false) checked @endif>
+            <label class="custom-control-label" for="category-{{ $category->id }}">{{ $category->name ?? 'Unnamed' }}</label>
+          </div>
+        </li>
+        @endforeach
+      </ul>
+    </div>
+  </div>
+</div>
 @endif
 <div class="card">
   <div class="card-header bg-white font-16 font-weight-bold position-relative p-0 border-bottom-0">

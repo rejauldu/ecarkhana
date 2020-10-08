@@ -30,7 +30,7 @@
 <!--=================================Start Service -->
 
 <section class="service_wrap">
-    <div class="container">
+    <div class="container px-0">
         <!--            <div class="row justify-content-md-center">-->
         <div class="row">
 
@@ -100,7 +100,7 @@
                         <a href="{{ route('national-distributors.index') }}">
                             <div class="service_box">
                                 <i class="flaticon-supermarket"></i><br>
-                                <p>National distributor</p>
+                                <p>Distributor</p>
                             </div>
                         </a>
                     </li>
@@ -128,7 +128,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('auction-products') }}">
+                            <a href="{{ route('auction-products') }}?category=car">
                                 <div class="service_box">
                                     <i class="fa fa-hdd-o" aria-hidden="true"></i><br>
                                     <p>auction</p>
@@ -168,7 +168,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('motorcycles.index') }}">
+                            <a href="{{ route('discount-products') }}?categories=motorcycle">
                                 <div class="service_box">
                                     <i class="flaticon-friend"></i><br>
                                     <p>Offer</p>
@@ -197,7 +197,7 @@
 <!--=================================Start Used Cars In Your City And Budget -->
 
 <section id="used-car-by-cat">
-    <div class="container">
+    <div class="container px-0">
         <div class="row">
             <div class="col-lg-4 col-sm-12">
                 <nav>
@@ -357,7 +357,7 @@ Start Compare -->
 
 <!--=================================start Featured Cars -->
 <section>
-        <div class="container">
+        <div class="container px-0">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <span>Used Bikes Special Offers</span>
@@ -428,7 +428,7 @@ Start Compare -->
 
 <!--=================================Start Banner -->
 <section class="sms-banner">
-        <div class="container">
+        <div class="container px-0">
             <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-space="20">
                 @foreach($advertisements as $advertisement)
                 <div class="item">
@@ -447,7 +447,7 @@ Start Compare -->
 
 <!--=================================Start Popular bike -->
 <section id="popular">
-        <div class="container">
+        <div class="container px-0">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="section-title mb-2">
@@ -508,7 +508,7 @@ Start Compare -->
 <!--=================================Start business partner -->
 
 <section id="partner">
-    <div class="container">
+    <div class="container px-0">
         <div class="row">
             <div class="col-md-12">
                 <div class="owl-carousel owl-loaded owl-drag" data-nav-dots="true" data-items="5" data-md-items="5" data-sm-items="3" data-xs-items="2" data-space="10">

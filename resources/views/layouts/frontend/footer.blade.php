@@ -1,5 +1,4 @@
-<!--=================================
-footer -->
+<!--=================================footer -->
 
 <footer class="footer bg-2 bg-overlay-black-90" @if(isset($type) && ($type == 'Motorcycle' || $type == 'Bicycle')) style="background-image: url({{ url('/') }}/images/bike/bike-title.jpg);" @endif>
     <div class="container text-light">
@@ -12,7 +11,10 @@ footer -->
                     <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('term-and-condition') }}'">Terms of Services</a></li>
                     <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><span class="text-light-secondary cursor-pointer" data-toggle="modal" data-target="#advertise-with-us">Advertising with us</span></li>
                     <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('privacy-policy') }}'">Privacy Policy</a></li>
-                    
+                    @mobile
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><span class="text-light-secondary cursor-pointer" data-toggle="modal" data-target="#signupform">Be a partner with us</span></li>
+                    <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="#" onclick="window.location='{{ route('promotion') }}'">Promotion</a></li>
+                    @endmobile
                 </ul>
             </div>
             @computer
@@ -48,6 +50,7 @@ footer -->
                     <div class="col-2">
                         <a href="https://instagram.com/ecarkhana" class="rounded-circle bg-instagram d-inline-block text-center btn width-40 height-40 p-0"><i class="fa fa-instagram text-white font-weight-bold line-height-40"></i></a>
                     </div>
+                    @computer
                     <div class="col-12 pt-3">
                         <h6 class="text-white mb-1">Contact</h6>
                         <ul class="list-group">
@@ -56,6 +59,7 @@ footer -->
                             <li class="list-group-item border-0 py-0 pl-0 bg-transparent"><a class="text-light-secondary" href="mailto:{{ env('MAIL_CONTACT_US') }}"><i class="fa fa-envelope-o"></i><span> {{ env('MAIL_CONTACT_US') }}</span></a></li>
                         </ul>
                     </div>
+                    @endcomputer
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'product_id', 'comment_id',  'data', 'updated_at', 'created_at'
+        'user_id', 'product_id', 'blog_id',  'data', 'updated_at', 'created_at'
     ];
 
     /**
@@ -43,4 +43,7 @@ class Comment extends Model
 	public function sub_comments() {
 		return $this->hasMany('App\SubComment');
 	}
+    public function blog() {
+        return $this->belongsTo('App\Blog');
+    }
 }

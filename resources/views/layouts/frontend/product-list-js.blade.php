@@ -20,7 +20,8 @@
                 make_year_max: {{ $maximum_make_year ?? 0 }},
                 kms_driven_min: {{ $minimum_kms_driven ?? 0 }},
                 kms_driven_max: {{ $maximum_kms_driven ?? 0 }},
-                conditions: '{{ $condition_search ?? '' }}'
+                conditions: '{{ $condition_search ?? '' }}',
+                categories: '{{ $category_search ?? '' }}',
             },
             methods: {
                 openWhatsappModal: function (id) {
@@ -105,6 +106,14 @@
                         this.conditions += '-and-'+name.toLowerCase();
                     this.searchSubmit();
                 },
+                updateCategory: function(name) {
+                    if(this.categories.toLowerCase().includes(name.toLowerCase())) {
+                        this.categories = this.categories.toLowerCase().replace('-and-'+name.toLowerCase(), '');
+                        this.categories = this.categories.replace(name.toLowerCase(), '');
+                    } else
+                        this.categories += '-and-'+name.toLowerCase();
+                    this.searchSubmit();
+                },
                 updateKmsDriven: function(min, max) {
                     this.kms_driven_min = min;
                     this.kms_driven_max = max;
@@ -135,6 +144,10 @@
                     if(this.conditions) {
                         this.conditions = this.conditions.replace(/^(-and-)+/g, "");
                         url += "&conditions="+this.conditions;
+                    }
+                    if(this.categories) {
+                        this.categories = this.categories.replace(/^(-and-)+/g, "");
+                        url += "&categories="+this.categories;
                     }
                     if(this.kms_driven_min)
                         url += "&minimum-kms-driven="+this.kms_driven_min;

@@ -910,7 +910,7 @@
                             </div>
                         </form>
                         @if($product->comments->count()>0)
-                        <ul class="comments-list">
+                        <ul class="comments-list list-style-type-none">
                             @foreach($product->comments as $comment)
                             <li class="comment">
                                 <a class="pull-left" href="#" style="position:absolute">
@@ -928,7 +928,7 @@
                                          onclick="document.getElementById('comment-box-{{ $comment->id }}').classList.remove('d-none')">
                                         <i class="fa fa-reply" aria-hidden="true"></i></div>
                                 </div>
-                                <ul>
+                                <ul class="list-style-type-none">
                                     @foreach($comment->sub_comments as $sub_comment)
                                     <li class="comment sms-reply-comment">
                                         <a class="pull-left" href="#" style="position:absolute">

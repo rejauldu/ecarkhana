@@ -30,6 +30,7 @@
                 <div class="pagination-nav d-flex justify-content-center">
                     {{ $products->links() }}
                 </div>
+                @include('layouts.frontend.whatsapp-modal')
             </div>
         </div>
 </section>
@@ -76,8 +77,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i
-                                class="fa fa-angle-left fa-2x"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button>
+                    <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-angle-left fa-2x"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button>
                     </div>
                     <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
                 </div>

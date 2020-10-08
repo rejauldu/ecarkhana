@@ -51,7 +51,7 @@ class CarController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::select('products.*')->has('car')->with('car', 'brand', 'supplier.region');
+        $products = Product::select('products.*')->where('category_id', 1)->with('car', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
@@ -92,32 +92,18 @@ class CarController extends Controller {
         /* Car list left filter */
         if (Input::get('conditions')) {
             $conditions = explode('-and-', Input::get('conditions'));
-            $condition = array_shift($conditions);
-            $products = $products->whereHas('condition', function($q) use($condition) {
-                $q->where('name', str_replace('-', ' ', $condition));
+            $conditions = str_replace('-', ' ', $conditions);
+            $products = $products->whereHas('condition', function($q) use($conditions) {
+                $q->whereIn('name', $conditions);
             });
-            foreach ($conditions as $condition) {
-                $products = $products->orWhereHas('condition', function($q) use($condition) {
-                    $q->where('name', str_replace('-', ' ', $condition));
-                });
-            }
             $data['condition_search'] = Input::get('conditions');
         }
         if (Input::get('body-types')) {
             $body_types = explode('-and-', Input::get('body-types'));
-            $body_type = array_shift($body_types);
-            $products = $products->whereHas('car', function($q) use($body_type) {
-                $q->whereHas('body_type', function($query) use($body_type) {
-                    $query->where('name', str_replace('-', ' ', $body_type));
-                });
+            $body_types = str_replace('-', ' ', $body_types);
+            $products = $products->whereHas('car.body_type', function($q) use($body_types) {
+                $q->whereIn('name', $body_types);
             });
-            foreach ($body_types as $body_type) {
-                $products = $products->orWhereHas('car', function($q) use($body_type) {
-                    $q->whereHas('body_type', function($query) use($body_type) {
-                        $query->where('name', str_replace('-', ' ', $body_type));
-                    });
-                });
-            }
             $data['body_type_search'] = Input::get('body-types');
         }
         if (Input::get('minimum-price')) {
@@ -138,15 +124,10 @@ class CarController extends Controller {
         }
         if (Input::get('models')) {
             $models = explode('-and-', Input::get('models'));
-            $model = array_shift($models);
-            $products = $products->whereHas('model', function($q) use($model) {
-                $q->where('name', str_replace('-', ' ', $model));
+            $models = str_replace('-', ' ', $models);
+            $products = $products->whereHas('model', function($q) use($models) {
+                $q->whereIn('name', $models);
             });
-            foreach ($models as $model) {
-                $products = $products->orWhereHas('model', function($q) use($model) {
-                    $q->where('name', str_replace('-', ' ', $model));
-                });
-            }
             $data['model_search'] = Input::get('models');
         }
         if (Input::get('minimum-kms-driven')) {
@@ -302,8 +283,7 @@ class CarController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $product = Product::has('car')
-                ->with('condition', 'auction_grade', 'brand', 'model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'supplier.region', 'supplier.division', 'supplier.user_type')
+        $product = Product::with('condition', 'auction_grade', 'brand', 'model', 'car.body_type', 'car.package', 'car.displacement', 'car.ground_clearance', 'car.drive_type', 'car.engine_type', 'car.fuel_type', 'car.condition', 'car.transmission', 'car.selling_capacity', 'car.gear_box', 'car.wheel_base', 'car.cylinder', 'car.wheel_type', 'car.tyre_type', 'car.front_brake', 'car.rear_brake', 'supplier', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews', 'supplier.region', 'supplier.division', 'supplier.user_type')
                 ->where('id', $id)
                 ->first();
         $key_features = KeyFeature::where('category_id', 1)->get();

@@ -21,7 +21,7 @@ Route::get('/bicycle', 'Frontend\HomeController@bicycleIndex')->name('bicycle');
 Route::get('/about-us', 'Frontend\HomeController@aboutUs')->name('about-us');
 Route::get('/advertise', 'Frontend\HomeController@aboutUs')->name('advertise');
 Route::get('/auction-bidding-list/{product}', 'Frontend\HomeController@auctionBiddingList')->name('auction-bidding-list');
-Route::get('/auction-products', 'Backend\AuctionController@auctionProduct')->name('auction-products');
+Route::get('/auction-products', 'Backend\ProductController@auctionProducts')->name('auction-products');
 Route::resource('banks', 'Backend\BankController');
 Route::resource('bids', 'Frontend\BidController');
 Route::resource('bicycles', 'Backend\BicycleController');

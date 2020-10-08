@@ -35,7 +35,7 @@ class BicycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        $products = Product::select('products.*')->has('bicycle')->with('bicycle', 'brand', 'supplier.region');
+        $products = Product::select('products.*')->where('category_id', 3)->with('bicycle', 'brand', 'supplier.region');
         $filters = [];
         if ($request->condition) {
             $products = $products->whereHas('condition', function (Builder $q) use($request) {
@@ -92,32 +92,18 @@ class BicycleController extends Controller {
         /* Bicycle list left filter */
         if (Input::get('conditions')) {
             $conditions = explode('-and-', Input::get('conditions'));
-            $condition = array_shift($conditions);
-            $products = $products->whereHas('condition', function($q) use($condition) {
-                $q->where('name', str_replace('-', ' ', $condition));
+            $conditions = str_replace('-', ' ', $conditions);
+            $products = $products->whereHas('condition', function($q) use($conditions) {
+                $q->whereIn('name', $conditions);
             });
-            foreach ($conditions as $condition) {
-                $products = $products->orWhereHas('condition', function($q) use($condition) {
-                    $q->where('name', str_replace('-', ' ', $condition));
-                });
-            }
             $data['condition_search'] = Input::get('conditions');
         }
         if (Input::get('body-types')) {
             $body_types = explode('-and-', Input::get('body-types'));
-            $body_type = array_shift($body_types);
-            $products = $products->whereHas('bicycle', function($q) use($body_type) {
-                $q->whereHas('body_type', function($query) use($body_type) {
-                    $query->where('name', str_replace('-', ' ', $body_type));
-                });
+            $body_types = str_replace('-', ' ', $body_types);
+            $products = $products->whereHas('bicycle.body_type', function($q) use($body_types) {
+                $q->whereIn('name', $body_types);
             });
-            foreach ($body_types as $body_type) {
-                $products = $products->orWhereHas('bicycle', function($q) use($body_type) {
-                    $q->whereHas('body_type', function($query) use($body_type) {
-                        $query->where('name', str_replace('-', ' ', $body_type));
-                    });
-                });
-            }
             $data['body_type_search'] = Input::get('body-types');
         }
         if (Input::get('minimum-price')) {
@@ -138,15 +124,10 @@ class BicycleController extends Controller {
         }
         if (Input::get('models')) {
             $models = explode('-and-', Input::get('models'));
-            $model = array_shift($models);
-            $products = $products->whereHas('model', function($q) use($model) {
-                $q->where('name', str_replace('-', ' ', $model));
+            $models = str_replace('-', ' ', $models);
+            $products = $products->whereHas('model', function($q) use($models) {
+                $q->whereIn('name', $models);
             });
-            foreach ($models as $model) {
-                $products = $products->orWhereHas('model', function($q) use($model) {
-                    $q->where('name', str_replace('-', ' ', $model));
-                });
-            }
             $data['model_search'] = Input::get('models');
         }
         if (Input::get('minimum-kms-driven')) {
@@ -252,8 +233,7 @@ class BicycleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $product = Product::has('bicycle')
-                ->with('condition', 'brand', 'model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier.region', 'supplier.division', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
+        $product = Product::with('condition', 'brand', 'model', 'bicycle.wheel_type', 'bicycle.made_origin', 'bicycle.tyre_type', 'supplier.region', 'supplier.division', 'comments.sub_comments', 'comments.user', 'comments.sub_comments.user', 'reviews')
                 ->where('id', $id)
                 ->first();
         $key_features = KeyFeature::where('category_id', 3)->get();
