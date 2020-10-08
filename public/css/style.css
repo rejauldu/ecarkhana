@@ -3854,22 +3854,6 @@ ul.list-style-none li {
     width: 100%;
 }
 
-.car-details .modal-header {
-    border-bottom: 0px;
-    background: #323232;
-    padding: 15px 26px;
-    margin: 10px;
-}
-
-.car-details h4.modal-title {
-    position: relative;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-    display: inline-block;
-    color: #ffffff;
-    margin-top: 3px;
-    left: 0;
-}
 
 .car-details #rmi_form, .car-details #std_form, .car-details #mao_form, .car-details #etf_form {
     display: flex;
@@ -3890,13 +3874,6 @@ select#mao_financing {
     padding-left: 10px;
 }
 
-.car-details .modal .modal-header .close {
-    color: #fff;
-    left: -10px;
-    font-weight: 500;
-    line-height: 5px;
-}
-
 .car-details .form-group .radio {
     margin: 0px;
 }
@@ -3908,26 +3885,6 @@ select#mao_financing {
 .car-details .form-group input[type=radio] {
     margin-top: 10px;
     width: auto;
-}
-
-.car-details .close {
-    color: #ffffff;
-    opacity: 1;
-    text-shadow: none;
-    transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-}
-
-.car-details .close span {
-    font-size: 30px;
-}
-
-.car-details .close span::hover {
-    color: #db2d2e;
-    opacity: 1;
 }
 
 .car-details .modal .modal-header .close span:hover {

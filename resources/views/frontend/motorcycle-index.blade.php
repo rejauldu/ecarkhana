@@ -497,7 +497,7 @@ Start Compare -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('motorcycles.index') }}" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('popular-products') }}?categories=motorcycle" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

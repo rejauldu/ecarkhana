@@ -75,6 +75,7 @@ Route::post('/insurance-checkout-store', 'Frontend\InsuranceController@checkoutS
 Route::resource('insurance-companies', 'Backend\InsuranceCompanyController');
 Route::get('/national-distributors/{id}', 'Backend\UserController@nationalDistributorDetail')->name('national-distributors.show');
 Route::get('/national-distributors', 'Backend\UserController@nationalDistributorList')->name('national-distributors.index');
+Route::get('/popular-products', 'Backend\ProductController@popularProducts')->name('popular-products');
 Route::get('/promotion', 'Frontend\HomeController@promotion')->name('promotion');
 Route::get('/privacy-policy', 'Frontend\HomeController@privacyPolicy')->name('privacy-policy');
 Route::get('/get-product', 'Backend\ProductController@getProduct')->name('get-product');

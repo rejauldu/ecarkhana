@@ -33,11 +33,11 @@
                             <label for="ownership" class=" cursor-pointer">Ownership</label>
                         </div>
                         <div class="form-group form-label-group">
-                            <input type="text" class="form-control bg-light" id="region" placeholder="Select Area" readonly="" v-model="region.name" @click.prevent="openModal(5)" />
+                            <input type="text" class="form-control bg-light" id="region" placeholder="Select Area" readonly="" v-model="region.name" @click.prevent="openModal(6)" />
                             <label for="region" class=" cursor-pointer">Area</label>
                         </div>
                         <div class="form-group form-label-group">
-                            <input type="text" class="form-control bg-light" id="price" placeholder="Select Price" readonly="" v-model="price" @click.prevent="openModal(6)" />
+                            <input type="text" class="form-control bg-light" id="price" placeholder="Select Price" readonly="" v-model="price" @click.prevent="openModal(7)" />
                             <label for="price" class=" cursor-pointer">Expected Price</label>
                         </div>
                         <div class="row mb-3">
@@ -49,60 +49,60 @@
                         <div class="row mb-3">
                             <div class="col-4 col-md-2">
                                 <div class="size-11 cursor-pointer bg-light border">
-                                    <div class="size-child" @click.prevent="openModal(7)" v-if="images[0]">
+                                    <div class="size-child" @click.prevent="openModal(8)" v-if="images[0]">
                                         <img :src="images[0].src" class="rounded w-100 h-100" />
                                     </div>
-                                    <div class="size-child" @click.prevent="openModal(7)" v-else>
+                                    <div class="size-child" @click.prevent="openModal(8)" v-else>
                                         <i class="fa fa-plus position-center"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 col-md-2">
                                 <div class="size-11 cursor-pointer bg-light border">
-                                    <div class="size-child" @click.prevent="openModal(7)" v-if="images[1]">
+                                    <div class="size-child" @click.prevent="openModal(8)" v-if="images[1]">
                                         <img :src="images[1].src" class="rounded w-100 h-100" />
                                     </div>
-                                    <div class="size-child" @click.prevent="openModal(7)" v-else>
+                                    <div class="size-child" @click.prevent="openModal(8)" v-else>
                                         <i class="fa fa-plus position-center"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 col-md-2">
                                 <div class="size-11 cursor-pointer bg-light border">
-                                    <div class="size-child" @click.prevent="openModal(7)" v-if="images[2]">
+                                    <div class="size-child" @click.prevent="openModal(8)" v-if="images[2]">
                                         <img :src="images[2].src" class="rounded w-100 h-100" />
                                     </div>
-                                    <div class="size-child" @click.prevent="openModal(7)" v-else>
+                                    <div class="size-child" @click.prevent="openModal(8)" v-else>
                                         <i class="fa fa-plus position-center"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 col-md-2">
                                 <div class="size-11 cursor-pointer bg-light border">
-                                    <div class="size-child" @click.prevent="openModal(7)" v-if="images[3]">
+                                    <div class="size-child" @click.prevent="openModal(8)" v-if="images[3]">
                                         <img :src="images[3].src" class="rounded w-100 h-100" />
                                     </div>
-                                    <div class="size-child" @click.prevent="openModal(7)" v-else>
+                                    <div class="size-child" @click.prevent="openModal(8)" v-else>
                                         <i class="fa fa-plus position-center"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 col-md-2">
                                 <div class="size-11 cursor-pointer bg-light border">
-                                    <div class="size-child" @click.prevent="openModal(7)" v-if="images[4]">
+                                    <div class="size-child" @click.prevent="openModal(8)" v-if="images[4]">
                                         <img :src="images[4].src" class="rounded w-100 h-100" />
                                     </div>
-                                    <div class="size-child" @click.prevent="openModal(7)" v-else>
+                                    <div class="size-child" @click.prevent="openModal(8)" v-else>
                                         <i class="fa fa-plus position-center"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 col-md-2">
                                 <div class="size-11 cursor-pointer bg-light border">
-                                    <div class="size-child" @click.prevent="openModal(7)" v-if="images[5]">
+                                    <div class="size-child" @click.prevent="openModal(8)" v-if="images[5]">
                                         <img :src="images[5].src" class="rounded w-100 h-100" />
                                     </div>
-                                    <div class="size-child" @click.prevent="openModal(7)" v-else>
+                                    <div class="size-child" @click.prevent="openModal(8)" v-else>
                                         <i class="fa fa-plus position-center"></i>
                                     </div>
                                 </div>
@@ -120,15 +120,15 @@
             <div class="modal-dialog modal-dialog-center">
                 <div class="modal-content">
                     <!-- Modal Header -->
-                    <div class="modal-header flex-md-row flex-column justify-content-between" :class="{'border-bottom-0': page != 6}">
+                    <div class="modal-header flex-md-row flex-column justify-content-between" :class="{'border-bottom-0': page != 7}">
                         <i class="fa fa-arrow-left cursor-pointer height-30 line-height-30" data-dismiss="modal" v-if="page == 1"></i>
-                        <span class="fa fa-close cursor-pointer height-30 line-height-30" v-else-if="page == 7" @click.prevent="page--"></span>
+                        <span class="fa fa-close cursor-pointer height-30 line-height-30" v-else-if="page == 8" @click.prevent="page--"></span>
                         <span class="fa fa-arrow-left cursor-pointer height-30 line-height-30" v-else @click.prevent="page--"></span>
-                        <div class="flex-grow-1 px-5 container" v-if="page == 6">
+                        <div class="flex-grow-1 px-5 container" v-if="page == 7">
                             <div class="row">
                                 <div class="col-4 col-md-3">
                                     <div class="size-11 cursor-pointer bg-light border">
-                                        <div class="size-child" @click.prevent="page = 7" v-if="images[0]">
+                                        <div class="size-child" @click.prevent="page = 8" v-if="images[0]">
                                             <img :src="images[0].src" class="w-100 h-100" />
                                         </div>
                                         <div class="size-child" @click.prevent="selectImage()" v-else>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-4 col-md-3">
                                     <div class="size-11 cursor-pointer bg-light border">
-                                        <div class="size-child" @click.prevent="page = 7" v-if="images[1]">
+                                        <div class="size-child" @click.prevent="page = 8" v-if="images[1]">
                                             <img :src="images[1].src" class="w-100 h-100" />
                                         </div>
                                         <div class="size-child" @click.prevent="selectImage()" v-else>
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="col-4 col-md-3">
                                     <div class="size-11 cursor-pointer bg-light border">
-                                        <div class="size-child" @click.prevent="page = 7" v-if="images[2]">
+                                        <div class="size-child" @click.prevent="page = 8" v-if="images[2]">
                                             <img :src="images[2].src" class="w-100 h-100" />
                                         </div>
                                         <div class="size-child" @click.prevent="selectImage()" v-else>
@@ -159,7 +159,7 @@
                                 @computer
                                 <div class="col-4 col-md-3">
                                     <div class="size-11 cursor-pointer bg-light border">
-                                        <div class="size-child" @click.prevent="page = 7" v-if="images[3]">
+                                        <div class="size-child" @click.prevent="page = 8" v-if="images[3]">
                                             <img :src="images[3].src" class="w-100 h-100" />
                                         </div>
                                         <div class="size-child" @click.prevent="selectImage()" v-else>
@@ -171,22 +171,23 @@
                                 <div class="col-12"><hr></div>
                                 <div class="col-12">
                                     <div class="text-dark">@{{ brand.name }} @{{ model.name }} @{{ manufacturing_year }}</div>
-                                    <small class="text-secondary">@{{ ownership.name }} <i class="fa fa-angle-double-right"></i> @{{ region.name }}, @{{ division.name }}</small><br/>
+                                    <small class="text-secondary">@{{ ownership.name }}  @{{ registration_year }}<i class="fa fa-angle-double-right"></i> @{{ region.name }}, @{{ division.name }}</small><br/>
                                     <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-grow-1 px-3 overflow-hidden" v-else-if="page != 7">
+                        <div class="flex-grow-1 px-3 overflow-hidden" v-else-if="page != 8">
                             <div class="horizontal-scroll py-1">
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(brand)" @click.prevent="brandSelected(brand)">@{{ brand.name }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(model)" @click.prevent="modelSelected(model)">@{{ model.name }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="manufacturing_year" @click.prevent="manufacturingYearSelected(manufacturing_year)">@{{ manufacturing_year }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(ownership)" @click.prevent="ownershipSelected(ownership)">@{{ ownership.name }}</span>
+                                <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="registration_year" @click.prevent="registrationYearSelected(registration_year)"> @{{ registration_year }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="!isEmpty(region)" @click.prevent="divisionSelected(division)"> @{{ region.name }}, @{{ division.name }}</span>
                                 <span class="border rounded cursor-pointer width-100 text-center d-inline-block overflow-hidden" v-if="price" @click.prevent="priceSelected(price)">৳@{{ price }}</span>
                             </div>
                         </div>
-                        <span v-if="page != 7" class="float-right nowrap height-30  width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
+                        <span v-if="page != 8" class="float-right nowrap height-30  width-40"><i class="fa fa-angle-left cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollLeft()" v-if="!scrolledLeft"></i><i class="fa fa-angle-right cursor-pointer width-20 height-30 line-height-30 text-center border" @click.prevent="scrollRight()" v-if="!scrolledRight"></i></span>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
@@ -194,8 +195,9 @@
                         <h4 class="mx-5" v-else-if="page==2">Motorcycle Model</h4>
                         <h4 class="mx-5" v-else-if="page==3">Motorcycle Make Year</h4>
                         <h4 class="mx-5" v-else-if="page==4">Motorcycle Ownership</h4>
+                        <h4 class="mx-5" v-else-if="page==5">Registration Year</h4>
 
-                        <div class="form-group mx-5" v-if="page != 5 && page != 6 && page != 7">
+                        <div class="form-group mx-5" v-if="page != 6 && page != 7 && page != 8">
                             <input class="form-control" placeholder="Search..." v-model="search" />
                         </div>
                         <ul class="list-group list-group-flush mx-5" v-if="page == 1">
@@ -214,7 +216,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-else-if="page == 5" class="mx-5">
+                        <ul class="list-group list-group-flush mx-5" v-else-if="page == 5">
+                            <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="r in filteredRegistrationYears" @click.prevent="registrationYearSelected(r)" :class="{'text-danger': r == registration_year}"><i class="fa fa-check" v-if="r == registration_year"></i> @{{ r }}</li>
+                        </ul>
+                        <div v-else-if="page == 6" class="mx-5">
                             <h4 class="">Motorcycle Area</h4>
                             <div class="form-group">
                                 <div class="input-group mb-3">
@@ -241,7 +246,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div v-else-if="page == 6" class="mx-5">
+                        <div v-else-if="page == 7" class="mx-5">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -302,6 +307,7 @@
                                     <input type="hidden" name="model_id" v-model="model.id" />
                                     <input type="hidden" name="manufacturing_year" v-model="manufacturing_year" />
                                     <input type="hidden" name="ownership_id" v-model="ownership.id" />
+                                    <input type="hidden" name="registration_year" v-model="registration_year" />
                                     <input type="hidden" name="region_id" v-model="region.id" />
                                     <input type="hidden" name="msrp" v-model="price" />
                                     <input type="hidden" name="note" v-model="note" />
@@ -317,7 +323,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-else-if="page == 7" class="mx-5">
+                        <div v-else-if="page == 8" class="mx-5">
                             <div class="size-53 mb-3 position-relative">
                                 <div class="size-child">
                                     <img :src="images[cover_image].src" class="img-fluid position-center" v-if="images[cover_image]" />
@@ -398,7 +404,7 @@
                             <hr/>
                             <div class="col-12">
                                 <div class="text-dark">@{{ brand.name }} @{{ model.name }} @{{ manufacturing_year }}</div>
-                                <small class="text-secondary"></i> @{{ ownership.name }} <i class="fa fa-angle-double-right"></i>  @{{ region.name }}, @{{ division.name }}</small><br/>
+                                <small class="text-secondary"></i> @{{ ownership.name }} @{{ registration_year }}<i class="fa fa-angle-double-right"></i> @{{ region.name }}, @{{ division.name }}</small><br/>
                                 <a href="#" class="btn btn-link text-danger pl-0" data-dismiss="modal">Edit details</a>
                             </div>
                         </div>
@@ -430,6 +436,9 @@ End  Post Your Ad -->
                     1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
             ownership: {},
             ownerships: @json($ownerships),
+            registration_year: '',
+            registration_years: [2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995,
+                    1994, 1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980],
             division: {},
             divisions: @json($divisions),
             region:{},
@@ -454,36 +463,41 @@ End  Post Your Ad -->
             brandSelected: function (b) {
                 this.brand = b;
                 this.page = 2;
-                this.reset('model', 'model', 'manufacturing_year', 'ownership', 'region', 'division', 'price');
+                this.reset('model', 'model', 'manufacturing_year', 'ownership', 'registration_year', 'region', 'division', 'price');
             },
             modelSelected: function (m) {
                 this.model = m;
                 this.page = 3;
-                this.reset('manufacturing_year', 'ownership', 'region', 'division', 'price');
+                this.reset('manufacturing_year', 'ownership', 'registration_year', 'region', 'division', 'price');
             },
             manufacturingYearSelected: function (m) {
                 this.manufacturing_year = m;
                 this.page = 4;
-                this.reset('ownership', 'region', 'division', 'price');
+                this.reset('ownership', 'registration_year', 'region', 'division', 'price');
             },
             ownershipSelected: function (m) {
                 this.ownership = m;
                 this.page = 5;
-                this.reset('division', 'price');
+                this.reset('registration_year', 'division', 'price');
+            },
+            registrationYearSelected: function (m) {
+                this.registration_year = m;
+                this.page = 6;
+                this.reset('region', 'division', 'price');
             },
             divisionSelected: function (m) {
                 this.division = m;
-                this.page = 6;
+                this.page = 7;
                 this.reset('price');
             },
             regionSelected: function (m) {
                 this.region = m;
-                this.page = 6;
+                this.page = 7;
                 this.reset('price');
             },
             priceSelected: function (m) {
                 this.price = m;
-                //this.page = 7;
+                //this.page = 8;
             },
             photoSelected: function (m) {
                 this.photo = m;
@@ -498,6 +512,8 @@ End  Post Your Ad -->
                         this.manufacturing_year = '';
                     } else if (args[i] == 'ownership') {
                         this.ownership = {};
+                    } else if (args[i] == 'registration_year') {
+                        this.registration_year = '';
                     } else if (args[i] == 'division') {
                         this.division = {};
                     } else if (args[i] == 'region') {
@@ -546,15 +562,15 @@ End  Post Your Ad -->
                 } else if (p == 4) {
                     if (this.ownership)
                         this.page = 4;
-                } else if (p == 5) {
-                    if (!this.isEmpty(this.division))
-                        this.page = 5;
                 } else if (p == 6) {
-                    if (this.price)
+                    if (!this.isEmpty(this.division))
                         this.page = 6;
                 } else if (p == 7) {
-                    if (this.images.length > 0)
+                    if (this.price)
                         this.page = 7;
+                } else if (p == 8) {
+                    if (this.images.length > 0)
+                        this.page = 8;
                 }
 
                 $('#sell-motorcycle-modal').modal('show');
@@ -564,7 +580,7 @@ End  Post Your Ad -->
                 f.src = URL.createObjectURL(event.target.files[0]);
                 this.images.push(f);
                 this.photo++;
-                this.page = 7;
+                this.page = 8;
             },
             selectImage: function() {
                 document.getElementById('file-input-'+this.photo).click();
@@ -629,6 +645,8 @@ End  Post Your Ad -->
                     this.manufacturing_year = localStorage.manufacturing_year;
                 if (localStorage.ownership)
                     this.ownership = JSON.parse(localStorage.ownership);
+                if (localStorage.registration_year)
+                    this.registration_year = localStorage.registration_year;
                 if (localStorage.division)
                     this.division = JSON.parse(localStorage.division);
                 if (localStorage.region)
@@ -679,7 +697,7 @@ End  Post Your Ad -->
                 if(!$s && e) {
                     e.preventDefault();
                 } else if($s) {
-                    this.reset('brand', 'model', 'manufacturing_year', 'ownership', 'division', 'price');
+                    this.reset('brand', 'model', 'manufacturing_year', 'ownership', 'registration_year', 'division', 'price');
                 }
                 return $s;
             },
@@ -706,6 +724,11 @@ End  Post Your Ad -->
             filteredOwnerships() {
                 return this.ownerships.filter(item => {
                     return item.name.toLowerCase().startsWith(this.search.toLowerCase());
+                })
+            },
+            filteredRegistrationYears() {
+                return this.registration_years.filter(item => {
+                    return item.toString().startsWith(this.search);
                 })
             },
             filteredDivisions() {
@@ -753,6 +776,9 @@ End  Post Your Ad -->
             },
             ownership: function(v) {
                 localStorage.ownership = JSON.stringify(v);
+            },
+            manufacturing_year: function(v) {
+                localStorage.registration_year = v;
             },
             division: function(v) {
                 localStorage.division = JSON.stringify(v);

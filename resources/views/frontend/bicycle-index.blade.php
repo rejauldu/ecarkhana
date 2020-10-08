@@ -487,7 +487,7 @@ Start Popular car -->
                         </div>
                         @endforeach
                     </div>
-                    <a href="{{ route('bicycles.index') }}" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('popular-products') }}?categories=bicycle" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

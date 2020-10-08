@@ -13,7 +13,6 @@
         <div class="row">
             <div class="col-md-9">
                 <h3>{{ $product->name }}</h3>
-                <div>{!! $product->note !!}</div>
                 <div class="star mt-2">
                     <i class="fa fa-star @if($product->reviews->avg('score')<1) fa-star-o @endif orange-color"></i>
                     <i class="fa fa-star @if($product->reviews->avg('score')<2) fa-star-o @endif orange-color"></i>
@@ -22,9 +21,11 @@
                     <i class="fa fa-star @if($product->reviews->avg('score')<5) fa-star-o @endif orange-color"></i>
                 </div>
             </div>
+            @if($product->condition_id == 3)
             <div class="col-md-3">
-                <div class="singleprice-tag">Tk.{{ $product->msrp }}<span>(Fixed)</span></div>
+                <div class="singleprice-tag">BDT {{ $product->msrp }}</div>
             </div>
+            @endif
         </div>
 
 
@@ -644,65 +645,160 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 text-center">
-                    <h2>Related Bikes</h2>
-                    <div class="car-item">
-                        <div class="separator"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-details-sidebar">
+                    <div class="details-social details-weight">
+                        <h5>Share now</h5>
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/sharer.php?u={{ Request::url() }}" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+                            </li>
+                            <li>
+                                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ $product->note }}&url={{ Request::url() }}" data-size="large"><i class="fa fa-twitter"></i> Twitter</a>
+                            </li>
+                            <li>
+                                <a href="whatsapp://send?text={{ Request::url() }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i> WhatsApp</a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url() }}" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
-                        @foreach($related_products as $used_product)
-                        <div class="item">
-                            <div class="bg-white shadow-sm mx-1 zoom-parent overflow-hidden shadow-hover-10">
-                                <div class="size-53 clearfix">
-                                    <div class="size-child overflow-hidden zoom-target-1">
-                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
-                                    </div>
-                                    <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                                        <input type="checkbox" id="used-{{ $used_product->id }}" class="compare-checkbox" product-id="{{ $used_product->id }}">
-                                        <label for="used-{{ $used_product->id }}">Compare</label>
-                                    </div>
+
+                    <div class="sidebar_widget">
+                        <div class="widget_heading">
+                            <h5><i class="fa fa-address-card-o" aria-hidden="true"></i> Dealer Contact </h5>
+                        </div>
+                        <div class="user-info-card">
+                            <div class="user-photo border-0">
+                                <img class="img-circle" src="{{ url('/') }}/assets/profile/{{ $product->supplier->photo ?? 'avatar.png' }}" alt="">
+                            </div>
+                            <div class="user-information">
+                                <span class="user-name"><a class="hover-color" href="#">{{ $product->supplier->name ?? $product->dealer_name ?? ''  }}</a></span>
+                                <div class="item-date">
+                                    <span>Published on: {{ $product->created_at->format('jS M Y') }}</span>
+                                    @if($product->supplier)
+                                    <br>
+                                    <a href="{{ route('car-listing') }}" class="link">More Ads</a>
+                                    @endif
                                 </div>
-                                <div class="text-dark clearfix px-3 py-1">
-                                    <div>
-                                        <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                <div class="user-phone">
+                                    <i class="fa fa-phone" aria-hidden="true"></i> <span data-replace="{{ $product->supplier->phone ?? $product->phone ?? ''  }}">{{ $product->supplier->phone ?? $product->phone ?? ''  }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        </br>
+                        <form class="gray-form" action="{{ route('requested-more-infos.store') }}" method="post">
+                            @if($product->supplier_id)
+                            @csrf
+                            <h5>Message to Dealer</h5>
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" id="validationCustom01"
+                                       placeholder="Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="email" class="form-control" id="validationCustom02"
+                                       placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="phone" class="form-control" id="validationCustom03"
+                                       placeholder="Phone" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" rows="4"
+                                          placeholder="Comment"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button red">Request a service</button>
+                            </div>
+                            @endif
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <h2>Related Bikes</h2>
+                <div class="car-item">
+                    <div class="separator"></div>
+                </div>
+                <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
+                    @foreach($related_products as $used_product)
+                    <div class="item">
+                        <div class="bg-white shadow-sm mx-1 zoom-parent overflow-hidden shadow-hover-10">
+                            <div class="size-53 clearfix">
+                                <div class="size-child overflow-hidden zoom-target-1">
+                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
+                                </div>
+                                <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
+                                    <input type="checkbox" id="used-{{ $used_product->id }}" class="compare-checkbox" product-id="{{ $used_product->id }}">
+                                    <label for="used-{{ $used_product->id }}">Compare</label>
+                                </div>
+                            </div>
+                            <div class="text-dark clearfix px-3 py-1">
+                                <div>
+                                    <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
+                                    <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
+                                </div>
+                                <div class="text-left clearfix">
+                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
+                                </div>
+                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                <div class="separator"></div>
+                                <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
+                                <div class="row text-left">
+                                    <div class="col-12 my-1">
+                                        <i class="fa fa-road"></i> {{ $used_product->motorcycle->displacement->name ?? ''}} cc
                                     </div>
-                                    <div class="text-left clearfix">
-                                        <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
+                                    <div class="col-12 my-1">
+                                        <i class="fa fa-calendar"></i> {{ $used_product->motorcycle->milage ?? ''}} km milage
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
-                                    <div class="separator"></div>
-                                    <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
-                                    <div class="row text-left">
-                                        <div class="col-12 my-1">
-                                            <i class="fa fa-road"></i> {{ $used_product->motorcycle->displacement->name ?? ''}} cc
-                                        </div>
-                                        <div class="col-12 my-1">
-                                            <i class="fa fa-calendar"></i> {{ $used_product->motorcycle->milage ?? ''}} km milage
-                                        </div>
-                                        <div class="col-12 my-1">
-                                            <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
-                                        </div>
-                                        <div class="col-12 my-1">
-                                            <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
-                                        </div>
+                                    <div class="col-12 my-1">
+                                        <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
+                                    </div>
+                                    <div class="col-12 my-1">
+                                        <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-                    <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+                    @endforeach
+                </div>
+                <a href="{{ route('motorcycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+            </div>
+            @mobile
+            <div class="w-100 z-index-999999 position-relative py-0">
+                <div class="position-fixed w-100 bottom-0 z-index bg-white shadow-lg text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 col-sm-7">
+                                <div class="height-50 line-height-50" data-toggle="collapse" data-target="#mobile-filter">
+                                    <a href="{{ route('dealers.show', $product->supplier->id) }}" class="btn alert-danger px-sm-2 px-md-4"><i class="fa fa-{{ strtolower($type) }} text-danger"></i> Seller Detail</a>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-5">
+                                <div class="height-50 line-height-50">
+                                    <a href="#" class="btn btn-light border" @click.prevent="openWhatsappModal({{ $product->id }})"><i class="fa fa-whatsapp text-whatsapp"></i> WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            @endmobile
+            @include('layouts.frontend.whatsapp-modal')
         </div>
     </section>
-    <div class="modal fade bd-example-modal-lg-360" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade bd-example-modal-lg-360 z-index-99999" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-center">
             <div class="modal-content">
                 <div class="modal-body row">
                     <div class="clearfix col-12">
@@ -710,7 +806,7 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="col-12 size-32"><div id="object" class="size-child"></div></div>
+                    <div class="col-12 size-53"><div id="object" class="size-child"></div></div>
                 </div>
             </div>
         </div>
@@ -750,9 +846,67 @@
         var app2 = new Vue({
             el: '#product',
             data: {
+                id: '',
+                name: '',
+                phone: '',
+                otp: '',
+                terms: '',
+                otp_sent: false,
+                otp_error: false,
+                countDown: 60,
                 temp_quantity:1
             },
             methods: {
+                openWhatsappModal: function (id) {
+                    this.id = id;
+                    if (localStorage.getItem("phone_verified")) {
+                        window.location = this.whatsappLink;
+                    } else {
+                        $('#whatsapp-modal').modal('show');
+                    }
+                },
+                isPhoneValid: function () {
+                    var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
+                    return pattern.test(this.phone);
+                },
+                sendOtp: function () {
+                    var _this = this;
+                    this.countDown = 60;
+                    this.countDownTimer();
+                    $.ajax({
+                        url: "{{ route('send-otp') }}",
+                        data: {"name":this.name, "phone":this.phone, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            _this.otp_sent = true;
+                        }
+                    });
+                },
+                countDownTimer() {
+                    if (this.countDown > 0) {
+                        setTimeout(() => {
+                            this.countDown -= 1
+                            this.countDownTimer()
+                        }, 1000);
+                    } else {
+                        this.otp_sent = false;
+                    }
+                },
+                verifyOtp: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: "{{ route('verify-otp') }}",
+                        data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            if(result == 'success') {
+                                localStorage.phone_verified = 1;
+                                window.location = _this.whatsappLink;
+                            } else
+                                _this.otp_error = true;
+                        }
+                    });
+                },
                 floatImage: function (e) {
                     var img = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('img.slick-active');
                     console.log(img);
@@ -855,6 +1009,13 @@
                       document.getElementById("countdown").innerHTML = "EXPIRED";
                     }
                   }, 1000);
+                }
+            },
+            computed: {
+                whatsappLink: function () {
+                    var encodedURL = encodeURIComponent("{{ url('/products') }}/" + this.id);
+                    var link = 'https://api.whatsapp.com/send?phone=8801817338234&text=' + encodedURL + '%0a‎Hello%0aI%0aneed%0asome%0ainformation%0aabout%0athis%0avehicle';
+                    return link;
                 }
             },
             mounted: function () {

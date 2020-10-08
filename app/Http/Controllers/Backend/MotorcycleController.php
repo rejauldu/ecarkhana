@@ -349,8 +349,8 @@ class MotorcycleController extends Controller {
         //
     }
     public function sell() {
-        $brands = Brand::where('category_id', 1)->get();
-        $models = Model::where('category_id', 1)->get();
+        $brands = Brand::where('category_id', 2)->get();
+        $models = Model::where('category_id', 2)->get();
         $divisions = Division::all();
         $ownerships = Ownership::all();
         $type = "Bicycle";

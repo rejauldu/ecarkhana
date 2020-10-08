@@ -109,6 +109,28 @@ class ProductController extends Controller {
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function popularProducts(Request $request) {
+        $data = $this->filteredProducts($request);
+        $products = $data['products'];
+        $products = $products->orderBy('view', 'desc');
+        $products = $products->paginate(12);
+        $products = $products->appends($request->except('page'));
+        $data['products'] = $products;
+        $data['conditions'] = Condition::all();
+        $data['brands'] = Brand::with('models')->get();
+        $data['models'] = Model::with('brand')->get();
+        $data['categories'] = Category::all();
+        $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
+        $data['type'] = 'Car';
+        $data['url'] = route('discount-products');
+        return view('backend.products.index', $data);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

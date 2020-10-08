@@ -13,7 +13,6 @@
         <div class="row">
             <div class="col-md-9">
                 <h3>{{ $product->name ?? 'Unnamed'}}</h3>
-                <div>{!! $product->note !!}</div>
                 <div class="star mt-2">
                     <i class="fa fa-star @if($product->reviews->avg('score')<1) fa-star-o @endif orange-color"></i>
                     <i class="fa fa-star @if($product->reviews->avg('score')<2) fa-star-o @endif orange-color"></i>
@@ -22,9 +21,11 @@
                     <i class="fa fa-star @if($product->reviews->avg('score')<5) fa-star-o @endif orange-color"></i>
                 </div>
             </div>
+            @if($product->condition_id == 3)
             <div class="col-md-3">
-                <div class="singleprice-tag">Tk.{{ $product->msrp }}<span>(Fixed)</span></div>
+                <div class="singleprice-tag">BDT {{ $product->msrp }}</div>
             </div>
+            @endif
         </div>
 
 
@@ -542,12 +543,6 @@
                             <li>
                                 <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ Request::url() }}" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn</a>
                             </li>
-                            <li>
-                                <a href="https://pinterest.com/pin/create/button?url={{ Request::url() }}&media={{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}&description={{ $product->note }}" class="pin-it-button" count-layout="horizontal"><i class="fa fa-pinterest"></i> Pinterest</a>
-                            </li>
-                            <li>
-                                <a href="https://reddit.com/submit?url={{ Request::url() }}&title={{ $product->name }}" target="_blank"><i class="fa fa-whatsapp"></i> Reddit</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="sidebar_widget">
@@ -663,10 +658,31 @@
                 <a href="{{ route('bicycles.index') }}" target="_blank" class="button red mt-3">View All<i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
             </div>
         </div>
+        @mobile
+        <div class="w-100 z-index-999999 position-relative py-0">
+            <div class="position-fixed w-100 bottom-0 z-index bg-white shadow-lg text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 col-sm-7">
+                            <div class="height-50 line-height-50" data-toggle="collapse" data-target="#mobile-filter">
+                                <a href="{{ route('dealers.show', $product->supplier->id) }}" class="btn alert-danger px-sm-2 px-md-4"><i class="fa fa-{{ strtolower($type) }} text-danger"></i> Seller Detail</a>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-5">
+                            <div class="height-50 line-height-50">
+                                <a href="#" class="btn btn-light border" @click.prevent="openWhatsappModal({{ $product->id }})"><i class="fa fa-whatsapp text-whatsapp"></i> WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endmobile
+        @include('layouts.frontend.whatsapp-modal')
     </div>
 </section>
-<div class="modal fade bd-example-modal-lg-360" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade bd-example-modal-lg-360 z-index-99999" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-center">
         <div class="modal-content">
             <div class="modal-body row">
                 <div class="clearfix col-12">
@@ -674,7 +690,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="col-12 size-32"><div id="object" class="size-child"></div></div>
+                <div class="col-12 size-53"><div id="object" class="size-child"></div></div>
             </div>
         </div>
     </div>
@@ -715,9 +731,67 @@
     var app2 = new Vue({
     el: '#product',
             data: {
-            temp_quantity:1
+                id: '',
+                name: '',
+                phone: '',
+                otp: '',
+                terms: '',
+                otp_sent: false,
+                otp_error: false,
+                countDown: 60,
+                temp_quantity:1
             },
             methods: {
+                openWhatsappModal: function (id) {
+                    this.id = id;
+                    if (localStorage.getItem("phone_verified")) {
+                        window.location = this.whatsappLink;
+                    } else {
+                        $('#whatsapp-modal').modal('show');
+                    }
+                },
+                isPhoneValid: function () {
+                    var pattern = /(^(\+88|0088)?(01){1}[356789]{1}(\d){8,9})$/;
+                    return pattern.test(this.phone);
+                },
+                sendOtp: function () {
+                    var _this = this;
+                    this.countDown = 60;
+                    this.countDownTimer();
+                    $.ajax({
+                        url: "{{ route('send-otp') }}",
+                        data: {"name":this.name, "phone":this.phone, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            _this.otp_sent = true;
+                        }
+                    });
+                },
+                countDownTimer() {
+                    if (this.countDown > 0) {
+                        setTimeout(() => {
+                            this.countDown -= 1
+                            this.countDownTimer()
+                        }, 1000);
+                    } else {
+                        this.otp_sent = false;
+                    }
+                },
+                verifyOtp: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: "{{ route('verify-otp') }}",
+                        data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
+                        type: "post",
+                        success: function(result){
+                            if(result == 'success') {
+                                localStorage.phone_verified = 1;
+                                window.location = _this.whatsappLink;
+                            } else
+                                _this.otp_error = true;
+                        }
+                    });
+                },
             floatImage: function (e) {
             var img = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('img.slick-active');
             console.log(img);
@@ -767,12 +841,12 @@
                     }
                     if (!is_same) {
                     let product = {
-                    "id": {{ $product->id }},
-                            "quantity": this.temp_quantity,
-                            "msrp": {{ $product->msrp }},
-                            "name": "{{ $product->name ?? 'Unnamed' }}",
-                            "image1": "{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg'}}",
-                            "note": @json($product->note)
+                        "id": {{ $product->id }},
+                        "quantity": this.temp_quantity,
+                        "msrp": {{ $product->msrp }},
+                        "name": "{{ $product->name ?? 'Unnamed' }}",
+                        "image1": "{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg'}}",
+                        "note": @json($product->note)
                     };
                     cart.products.unshift(product);
                     }
@@ -794,6 +868,13 @@
                     if (this.temp_quantity < 12)
                             this.temp_quantity = 12;
                     }
+            },
+            computed: {
+                whatsappLink: function () {
+                    var encodedURL = encodeURIComponent("{{ url('/products') }}/" + this.id);
+                    var link = 'https://api.whatsapp.com/send?phone=8801817338234&text=' + encodedURL + '%0a‎Hello%0aI%0aneed%0asome%0ainformation%0aabout%0athis%0avehicle';
+                    return link;
+                }
             }
     });</script>
 
