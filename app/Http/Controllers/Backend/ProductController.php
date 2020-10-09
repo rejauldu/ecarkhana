@@ -32,7 +32,7 @@ use Carbon\Carbon;
 class ProductController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['except' => ['index', 'store', 'getProduct', 'show', 'auctionProducts', 'discountProducts']]);
+        $this->middleware('auth', ['except' => ['index', 'store', 'getProduct', 'show', 'auctionProducts', 'discountProducts']]);
     }
 
     /**
@@ -60,7 +60,11 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function manageIndex() {
-        $products = Product::with('category')->orderBy('id', 'desc')->get();
+        $user = Auth::user();
+        if($user->role_id>1)
+            $products = Product::with('category')->orderBy('id', 'desc')->get();
+        else
+            $products = Product::with('category')->where('supplier_id', $user->id)->orderBy('id', 'desc')->get();
         return view('backend.products.manage-index', compact('products'));
     }
 
@@ -248,6 +252,9 @@ class ProductController extends Controller {
         $data[strtolower($category->name) . '_id'] = $id;
 
         $product = Product::find($request->id);
+        $user = Auth::user();
+        if($user->role_id < 2)
+            return redirect()->back();
         if (isset($data['after_sell_service']))
             $data['after_sell_service'] = implode(',', $data['after_sell_service']);
         $product->update($data);
@@ -328,8 +335,12 @@ class ProductController extends Controller {
     }
 
     public function auction($id) {
+        $user = Auth::user();
         $product = Product::find($id);
-        return view('backend.auctions.create', compact('product'));
+        if($user->user_type_id>1)
+            return view('backend.auctions.create', compact('product'));
+        else
+            return view('backend.auctions.create-frontend', compact('product'));
     }
 
     public function auctionStore(Request $request, $id) {

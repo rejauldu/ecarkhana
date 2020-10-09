@@ -6447,10 +6447,6 @@ button.required {
 }
 
 .seller-profile .search-result-item .image-link {
-    display: block;
-    overflow: hidden;
-    display: inline-block;
-    margin: -20px 0 -20px -20px;
     float: left;
     width: 200px;
 }

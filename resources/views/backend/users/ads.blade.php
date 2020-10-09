@@ -13,12 +13,12 @@
     <!--=================================
 Start Seller ad  -->
 
-    <section class="seller-profile page-section-ptb">
+    <section class="seller-profile page-section-ptb pt-0">
         <div class="container">
             @include('layouts.frontend.profile-header', ['ad' => 'active'])
             <div class="seller-ad-area">
                 @php($products = $user->products)
-                @include('layouts.frontend.used-products')
+                @include('layouts.frontend.user-products')
             </div>
         </div>
     </section>

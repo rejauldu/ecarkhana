@@ -46,8 +46,7 @@
                             <a href="#" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fa fa-question-circle"></i>Request More Info
                             </a>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -57,34 +56,26 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="sub-title">Please fill out the information below and one of
-                                                our representatives will contact you regarding your more information
-                                                request. </p>
-                                            <form class="gray-form reset_css ajax-upload" id="rmi_form"
-                                                  action="{{ route('requested-more-infos.store') }}" method="post">
+                                            <p class="sub-title">Please fill out the information below and one of our representatives will contact you regarding your more information request. </p>
+                                            <form class="gray-form reset_css ajax-upload" id="rmi_form" action="{{ route('requested-more-infos.store') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}"/>
 
                                                 <div class="form-group">
                                                     <label>Name*</label>
-                                                    <input type="text" class="form-control" name="name"
-                                                           id="validationCustom122" required="" id="rmi_name"/>
+                                                    <input type="text" class="form-control" name="name" id="validationCustom122" required="" id="rmi_name"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email address*</label>
-                                                    <input type="text" class="form-control" name="email"
-                                                           id="validationCustom132" required="" id="rmi_email"/>
+                                                    <input type="text" class="form-control" name="email" id="validationCustom132" required="" id="rmi_email"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Phone*</label>
-                                                    <input type="text" class="form-control" id="phone"
-                                                           id="validationCustom142" required="" name="rmi_phone">
+                                                    <input type="text" class="form-control" id="phone" id="validationCustom142" required="" name="rmi_phone">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Message</label>
-                                                    <textarea class="form-control" name="message"
-                                                              id="validationCustom152" required=""
-                                                              id="rmi_message"></textarea>
+                                                    <textarea class="form-control" name="message" id="validationCustom152" required="" id="rmi_message"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="button red">Submit</button>
@@ -1178,13 +1169,13 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="internal" class="container tab-pane active"><br>
+                        <div id="internal" class="container tab-pane active">
                             <div class="row">
                                 <div class="col-12 size-53"><div id="panorama" class="size-child"></div></div>
                             </div>
 
                         </div>
-                        <div id="external" class="container tab-pane fade"><br>
+                        <div id="external" class="container tab-pane fade">
                             <div class="row">
                                 <div class="col-12 size-53"><div id="object" class="size-child"></div></div>
                             </div>

@@ -75,10 +75,6 @@
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="frame-size">Frame Size</label>
-                                                        <input id="frame-size" type="number" class="form-control" name="frame_size" value="{{ $bicycle->frame_size ?? '' }}" placeholder="Enter Frame Size" title="Enter Frame Size" />
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label for="frame-material">Frame Material</label>
                                                         <input id="frame-material" type="text" class="form-control" name="frame_material" value="{{ $bicycle->frame_material ?? '' }}" placeholder="Enter Frame Material" title="Enter Frame Material" />
                                                     </div>

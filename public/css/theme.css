@@ -496,7 +496,8 @@ table.dataTable thead .sorting_desc_disabled:before {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	overflow: auto;
+	overflow: hidden;
+	overflow-y: auto;
 }
 @media(max-width: 768px) {
 	.modal-dialog-center {

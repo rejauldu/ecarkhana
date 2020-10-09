@@ -6,9 +6,8 @@
                 <div class="size-child zoom-target-1">
                     <img class="position-center w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $product->name }}">
                 </div>
-                <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                    <input type="checkbox" id="used-{{ $product->id }}" class="compare-checkbox" product-id="{{ $product->id }}">
-                    <label for="used-{{ $product->id }}">Compare</label>
+                <div class="float-right d-inline-block position-relative p-1">
+                    <a href="{{ route('products.auction', $product->id) }}" class="btn btn-sm alert-danger"><i class="fa fa-gavel"></i> Auction</a>
                 </div>
             </div>
             <div class="text-dark clearfix px-3 py-1">

@@ -47,7 +47,7 @@
 									<td>{{ $product->category->name ?? ''}}</td>
 									<td>{{ $product->name }}</td>
 									<td>{{ $product->created_at->format('jS M Y') }}</td>
-									<td><a href="{{ route('products.auction', $product->id) }}" class="text-warning fa fa-gavel"></button></td>
+									<td><a href="{{ route('products.auction', $product->id) }}" class="text-danger fa fa-gavel"></button></td>
 									<td><a href="{{ route('products.destroy', $product->id) }}" onclick="event.preventDefault(); document.getElementById('delete-form').action = this.href; document.getElementById('delete-form').submit.click();" class="text-danger fa fa-trash"></button></td>
 								</tr>
 								@endforeach

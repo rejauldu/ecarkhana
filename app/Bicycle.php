@@ -12,7 +12,7 @@ class Bicycle extends Model
      * @var array
      */
     protected $fillable = [
-        'brand_id', 'model_id', 'bicycle_type_id', 'frame_size', 'frame_material', 'suspension', 'gear_no', 'wheel_type_id', 'wheel_size', 'shifter', 'made_origin_id', 'weight', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'after_sell_service', 'shifter_lever', 'front_derailleur', 'rear_derailleur', 'rims', 'hub_quality', 'cassette', 'recommended_biker_height', 'tyre_type_id', 'tyre_size', 'crank', 'seat_post', 'chain', 'pedal', 'saddle', 'headset', 'handlebar', 'grip', 'stem', 'brake_system', 'key_feature', 'fork', 'brake_type', 'rim', 'gear', 'freewheel', 'biker_weight', 'biker_gender_id', 'created_at', 'updated_at'
+        'brand_id', 'model_id', 'bicycle_type_id', 'frame_material', 'suspension', 'gear_no', 'wheel_type_id', 'wheel_size', 'shifter', 'made_origin_id', 'weight', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10', 'after_sell_service', 'shifter_lever', 'front_derailleur', 'rear_derailleur', 'rims', 'hub_quality', 'cassette', 'recommended_biker_height', 'tyre_type_id', 'tyre_size', 'crank', 'seat_post', 'chain', 'pedal', 'saddle', 'headset', 'handlebar', 'grip', 'stem', 'brake_system', 'key_feature', 'fork', 'brake_type', 'rim', 'gear', 'freewheel', 'biker_weight', 'biker_gender_id', 'created_at', 'updated_at'
     ];
 
     /**

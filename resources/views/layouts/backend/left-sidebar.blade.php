@@ -52,7 +52,6 @@
                 <a href="{{ route('cashbooks.index') }}"><i class="fa fa-bell"></i><span>{{ __('Cashbook') }}</span></a>
             </li>
             @endmoderator
-            @moderator(Product)
             <li class="treeview {{ Request::is('products*') || Request::is('cars*') || Request::is('motorcycles*') || Request::is('bicycles*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-product-hunt" aria-hidden="true"></i> <span>Product</span>
@@ -61,15 +60,16 @@
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('manage-products') ? 'active' : '' }}"><a href="{{ route('manage-products') }}"><i class="fa fa-circle-o"></i> Manage Product</a></li>
                     <li class="{{ Request::is('products/create') ? 'active' : '' }}"><a href="{{ route('products.create') }}"><i class="fa fa-circle-o"></i> Add New Product</a></li>
+                    @moderator(Product)
                     <li class="{{ Request::is('manage-cars') ? 'active' : '' }}"><a href="{{ route('manage-cars') }}"><i class="fa fa-circle-o"></i> Manage Car</a></li>
                     <li class="{{ Request::is('cars/create') ? 'active' : '' }}"><a href="{{ route('cars.create') }}"><i class="fa fa-circle-o"></i> Add New Car</a></li>
                     <li class="{{ Request::is('manage-motorcycles') ? 'active' : '' }}"><a href="{{ route('manage-motorcycles') }}"><i class="fa fa-circle-o"></i> Manage Motorcycle</a></li>
                     <li class="{{ Request::is('motorcycles/create') ? 'active' : '' }}"><a href="{{ route('motorcycles.create') }}"><i class="fa fa-circle-o"></i> Add New Motorcycle</a></li>
                     <li class="{{ Request::is('manage-bicycles') ? 'active' : '' }}"><a href="{{ route('manage-bicycles') }}"><i class="fa fa-circle-o"></i> Manage Bicycle</a></li>
                     <li class="{{ Request::is('bicycles/create') ? 'active' : '' }}"><a href="{{ route('bicycles.create') }}"><i class="fa fa-circle-o"></i> Add New Bicycle</a></li>
+                    @endmoderator
                 </ul>
             </li>
-            @endmoderator
             @dealeroradmin
             <li class="treeview {{ Request::is('notifications*') ? 'active' : '' }}">
                 <a href="#">

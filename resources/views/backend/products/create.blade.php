@@ -79,7 +79,7 @@
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
-                                            <div class="form-group d-cross d-car">
+                                            <div class="form-group d-cross d-car d-motorcycle">
                                                 <label for="package">Package</label>
                                                 <select id="package" name="package_id" class="custom-select" derive-from="model" required>
                                                     <option value="0" selected>--Select Package--</option>
@@ -130,16 +130,9 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label for="size">Size</label>
-                                                <select id="size" name="size_id" class="custom-select" required>
-                                                    <option value="0" selected>--Select Size--</option>
-                                                    @foreach($sizes as $size)
-                                                    <option value="{{ $size->id }}" @if(isset($product) && $product->size_id == $size->id) selected @endif>{{ $size->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="valid-feedback">Valid.</div>
-                                                <div class="invalid-feedback">Please fill out this field.</div>
+                                            <div class="form-group d-cross d-bicycle">
+                                                <label for="frame-size">Frame Size</label>
+                                                <input id="frame-size" type="number" class="form-control" name="frame_size" value="{{ $bicycle->frame_size ?? '' }}" placeholder="Enter Frame Size" title="Enter Frame Size" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="msrp">Price</label>
@@ -153,13 +146,7 @@
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="stock">Stock</label>
-                                                <input id="stock" type="number" class="form-control" name="stock" value="{{ $product->stock ?? '' }}" placeholder="Enter Stock" title="Enter Stock" required/>
-                                                <div class="valid-feedback">Valid.</div>
-                                                <div class="invalid-feedback">Please fill out this field.</div>
-                                            </div>
-                                            <div class="form-group d-cross d-car-used">
+                                            <div class="form-group d-cross d-car-used d-motorcycle-used">
                                                 <label for="registration-year">Registration Year</label>
                                                 <input id="registration-year" type="number" class="form-control" name="registration_year" value="{{ $product->registration_year ?? '' }}" placeholder="Enter Registration Year" title="Enter Registration Year" />
                                             </div>
@@ -245,7 +232,7 @@
         var car_reconditions = document.getElementsByClassName("d-car-recondition");
         var car_useds = document.getElementsByClassName("d-car-used");
         var motorcycles = document.getElementsByClassName("d-motorcycle");
-        var bicycles = document.getElementsByClassName("d-bicycles");
+        var bicycles = document.getElementsByClassName("d-bicycle");
         for (let i = 0; i < crosses.length; i++) {
             crosses[i].classList.add('d-none');
         }

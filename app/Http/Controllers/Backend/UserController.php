@@ -20,7 +20,7 @@ use App\OrderDetail;
 class UserController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers', 'nationalDistributorDetail', 'nationalDistributorList', 'sellerProfile', 'myAds']]);
+        $this->middleware('moderatorOrOwner:User', ['except' => ['dealerDetail', 'dealers', 'nationalDistributorDetail', 'nationalDistributorList', 'profile', 'ads']]);
     }
 
     /**
@@ -180,12 +180,12 @@ class UserController extends Controller {
         $id = Auth::user()->id;
         $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products.brand', 'products.model', 'products.category', 'products.order_details', 'products.supplier.region', 'products.supplier.division')->where('id', $id)->first();
         $sell = OrderDetail::whereHas('product', function($q) use($id) {
-                            $q->where('supplier_id', $id);
-                        })
-                        ->whereHas('order', function($q) {
-                            $q->where('order_status_id', 4);
-                        })
-                        ->get()->count();
+            $q->where('supplier_id', $id);
+        })
+        ->whereHas('order', function($q) {
+            $q->where('order_status_id', 4);
+        })
+        ->get()->count();
         return view('backend.users.ads', compact('user', 'sell'));
     }
 

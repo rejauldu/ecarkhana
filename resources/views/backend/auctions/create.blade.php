@@ -60,18 +60,11 @@
 </div>
 @endsection
 @section('style')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
 	<link href="{{ url('/') }}/css/bootstrap-datepicker.min.css" rel="stylesheet">
 @endsection
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 	<script src="{{ url('/') }}/js/bootstrap-datepicker.min.js"></script>
     <script>
-		$('.editor-tools').summernote({
-			placeholder: 'Enter email body',
-			tabsize: 2,
-			height: 100
-		});
 		$('.datepicker').datepicker({
 			autoclose:true,
 			disableTouchKeyboard: true,
@@ -79,5 +72,4 @@
 			format: 'yyyy/mm/dd'
 		});
     </script>
-	
 @endsection
