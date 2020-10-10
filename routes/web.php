@@ -82,7 +82,6 @@ Route::get('/get-product', 'Backend\ProductController@getProduct')->name('get-pr
 Route::get('/get-regions', 'Frontend\HomeController@getRegions')->name('get-regions');
 Route::get('/get-region', 'Frontend\HomeController@getRegion')->name('get-region');
 Route::get('/return-policy', 'Frontend\HomeController@aboutUs')->name('return-policy');
-Route::get('/search', 'Frontend\HomeController@searchPage')->name('search');
 Route::get('/sell-product-list', 'Frontend\HomeController@sellProductList')->name('sell-product-list');
 Route::get('/sell-car', 'Backend\CarController@sell')->name('sell-car');
 Route::get('/sell-motorcycle', 'Backend\MotorcycleController@sell')->name('sell-motorcycle');

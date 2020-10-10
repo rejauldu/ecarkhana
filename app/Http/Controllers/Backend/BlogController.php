@@ -86,10 +86,10 @@ class BlogController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-
-        $post = Blog::with('comments.sub_comments', 'comments.user', 'comments.sub_comments.user')->find($id);
+        $post = Blog::with('comments.user', 'comments.sub_comments.user', 'category')->find($id);
         $categories = Category::all();
-        return view('backend.blogs.show', compact('post', 'categories'));
+        $type = $post->category->name;
+        return view('backend.blogs.show', compact('post', 'categories', 'type'));
     }
 
     /**

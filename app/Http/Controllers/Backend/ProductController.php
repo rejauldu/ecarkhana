@@ -28,6 +28,7 @@ use App\Http\Controllers\Backend\CarController;
 use App\Http\Controllers\Backend\MotorcycleController;
 use App\Http\Controllers\Backend\BicycleController;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends Controller {
 
@@ -49,6 +50,7 @@ class ProductController extends Controller {
         $data['conditions'] = Condition::all();
         $data['brands'] = Brand::where('category_id', 1)->with('models')->get();
         $data['models'] = Model::where('category_id', 1)->with('brand')->get();
+        $data['categories'] = Category::all();
         $data['suppliers'] = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
         $data['type'] = 'Car';
         $data['url'] = route('products.index');
@@ -361,13 +363,13 @@ class ProductController extends Controller {
     }
     private function filteredProducts($request) {
         $products = Product::with('brand', 'supplier.region');
-        if (Input::get('conditions')) {
-            $conditions = explode('-and-', Input::get('conditions'));
+        if ($request->conditions) {
+            $conditions = explode('-and-', $request->conditions);
             $conditions = str_replace('-', ' ', $conditions);
             $products = $products->whereHas('condition', function($q) use($conditions) {
                 $q->whereIn('name', $conditions);
             });
-            $data['condition_search'] = Input::get('conditions');
+            $data['condition_search'] = $request->conditions;
         }
         if (Input::get('minimum-price')) {
             $products = $products->where('msrp', '>=', Input::get('minimum-price'));
@@ -377,21 +379,40 @@ class ProductController extends Controller {
             $products = $products->where('msrp', '<=', Input::get('maximum-price'));
             $data['maximum_price'] = Input::get('maximum-price');
         }
-        if (Input::get('models')) {
-            $models = explode('-and-', Input::get('models'));
+        if ($request->models) {
+            $models = explode('-and-', $request->models);
             $models = str_replace('-', ' ', $models);
             $products = $products->whereHas('model', function($q) use($models) {
                 $q->whereIn('name', $models);
             });
-            $data['model_search'] = Input::get('models');
+            $data['model_search'] = $request->models;
         }
-        if (Input::get('categories')) {
-            $categories = explode('-and-', Input::get('categories'));
+        if ($request->categories) {
+            $categories = explode('-and-', $request->categories);
             $categories = str_replace('-', ' ', $categories);
             $products = $products->whereHas('category', function($q) use($categories) {
                 $q->whereIn('name', $categories);
             });
-            $data['category_search'] = Input::get('categories');
+            $data['category_search'] = $request->categories;
+        }
+        if ($request->search) {
+            $products = $products->where(function($q) use($request) {
+                $q->whereHas('category', function(Builder $query) use($request) {
+                    $query->where('name', 'like', '%'.$request->search.'%');
+                })
+                ->orWhereHas('brand', function(Builder $query) use($request) {
+                    $query->where('name', 'like', '%'.$request->search.'%');
+                })
+                ->orWhereHas('model', function(Builder $query) use($request) {
+                    $query->where('name', 'like', '%'.$request->search.'%');
+                })
+                ->orWhereHas('package', function(Builder $query) use($request) {
+                    $query->where('name', 'like', '%'.$request->search.'%');
+                })
+                ->orWhere('manufacturing_year', 'like', '%'.$request->search.'%')
+                ->orWhere('frame_size', 'like', '%'.$request->search.'%');
+            });
+            $data['category_search'] = $request->search;
         }
         $data['products'] = $products;
         return $data;

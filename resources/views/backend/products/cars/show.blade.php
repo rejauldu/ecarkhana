@@ -1,12 +1,14 @@
 @extends('layouts.index')
 
 @section('content')
+@if(!isset($type))
+@php($type = 'Car')
+@endif
 @if(session()->has('message'))
 <div class="alert alert-warning">
     {{ session()->get('message') }}
 </div>
 @endif
-
 
 @include('layouts.frontend.car-background')
 
@@ -15,7 +17,7 @@
 
 <section class="car-details page-section-ptb" id="product">
 
-    <div class="container px-0">
+    <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <h3>{{ $product->name }}</h3>
@@ -1126,7 +1128,7 @@
         </div>
         @mobile
         <div class="w-100 z-index-999999 position-relative py-0">
-            <div class="position-fixed w-100 bottom-0 z-index bg-white shadow-lg text-center">
+            <div class="position-fixed w-100 bottom-0 left-0 z-index bg-white shadow-lg text-center">
                 <div class="container">
                     <div class="row">
                         <div class="col-6 col-sm-7">

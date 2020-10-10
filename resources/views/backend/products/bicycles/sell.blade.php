@@ -189,10 +189,9 @@
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <h4 class="mx-5" v-if="page==1">Motorcycle Brand</h4>
-                        <h4 class="mx-5" v-else-if="page==2">Motorcycle Model</h4>
-                        <h4 class="mx-5" v-else-if="page==3">Motorcycle Ownership</h4>
-
+                        <h4 class="mx-5" v-if="page==1">Bicycle Brand</h4>
+                        <h4 class="mx-5" v-else-if="page==2">Bicycle Model</h4>
+                        <h4 class="mx-5" v-else-if="page==3">Bicycle Ownership</h4>
                         <div class="form-group mx-5" v-if="page != 4 && page != 5 && page != 6">
                             <input class="form-control" placeholder="Search..." v-model="search" />
                         </div>
@@ -210,7 +209,7 @@
                             </div>
                         </div>
                         <div v-else-if="page == 4" class="mx-5">
-                            <h4 class="">Motorcycle Area</h4>
+                            <h4 class="">Bicycle Area</h4>
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -225,7 +224,6 @@
                             </div>
                             <div v-if="!isEmpty(region)" class="list-group-item-danger mb-3 px-3">Select Region to change</div>
                             <ul class="list-group list-group-flush" id="cities">
-                                
                                 <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d" :class="{'text-danger': d.id == division.id}">
                                     <div>@{{ d.name }}</div>
                                     <div :id="'regions-'+d.id">
@@ -240,7 +238,22 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="note">Motorcycle Price</label>
+                                        <label for="note">Bicycle Frame Size</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text text-danger bg-white fa fa-bicycle"></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Enter Frame Size" v-model="frame_size" />
+                                            <div class="input-group-append" v-if="frameSizeValidate">
+                                                <span class="input-group-text text-danger bg-white">Invalid</span>
+                                            </div>
+                                            <div class="input-group-append" v-else>
+                                                <span class="input-group-text bg-white">Centimeter</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="note">Bicycle Price</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text text-danger bg-white">৳</span>
@@ -252,7 +265,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="note">Motorcycle Description</label>
+                                        <label for="note">Bicycle Description</label>
                                         <textarea class="form-control" rows="5" id="note" placeholder="Description" v-model="note"></textarea>
                                     </div>
                                     <hr/>
@@ -297,6 +310,7 @@
                                     <input type="hidden" name="model_id" v-model="model.id" />
                                     <input type="hidden" name="ownership_id" v-model="ownership.id" />
                                     <input type="hidden" name="region_id" v-model="region.id" />
+                                    <input type="hidden" name="frame_size" v-model="frame_size" />
                                     <input type="hidden" name="msrp" v-model="price" />
                                     <input type="hidden" name="note" v-model="note" />
                                     <input type="hidden" name="dealer_name" v-model="name" />
@@ -381,7 +395,7 @@
                                     <div id="photo-tips" class="collapse">
                                         <ul class="list-group list-group-flush bullet">
                                             <li class="list-group-item py-1">A bicycle with 5+ photos gives you 5 times response</li>
-                                            <li class="list-group-item py-1">Motorcycle photo format - .JPG / .PNG</li>
+                                            <li class="list-group-item py-1">Bicycle photo format - .JPG / .PNG</li>
                                             <li class="list-group-item py-1">Click image in landscape mode (recommended)</li>
                                             <li class="list-group-item py-1">Upload high resolution images up to 5 MB</li>
                                             <li class="list-group-item py-1">Upload clear bicycle images without including owner and contact details.</li>
@@ -425,6 +439,7 @@ End  Post Your Ad -->
             divisions: @json($divisions),
             region:{},
             regions: [],
+            frame_size:'',
             price: '',
             prices: [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000],
             scrolledLeft: true,
@@ -445,31 +460,30 @@ End  Post Your Ad -->
             brandSelected: function (b) {
                 this.brand = b;
                 this.page = 2;
-                this.reset('model', 'model', 'ownership', 'region', 'division', 'price');
+                this.reset('model', 'model', 'ownership', 'region', 'division', 'price', 'frame_size');
             },
             modelSelected: function (m) {
                 this.model = m;
                 this.page = 3;
-                this.reset('ownership', 'region', 'division', 'price');
+                this.reset('ownership', 'region', 'division', 'price', 'frame_size');
             },
             ownershipSelected: function (m) {
                 this.ownership = m;
                 this.page = 4;
-                this.reset('division', 'price');
+                this.reset('division', 'price', 'frame_size');
             },
             divisionSelected: function (m) {
                 this.division = m;
                 this.page = 5;
-                this.reset('price');
+                this.reset('price', 'frame_size');
             },
             regionSelected: function (m) {
                 this.region = m;
                 this.page = 5;
-                this.reset('price');
+                this.reset('price', 'frame_size');
             },
             priceSelected: function (m) {
                 this.price = m;
-                //this.page = 6;
             },
             photoSelected: function (m) {
                 this.photo = m;
@@ -487,6 +501,8 @@ End  Post Your Ad -->
                     } else if (args[i] == 'region') {
                         this.region = {};
                     } else if (args[i] == 'price') {
+                        this.price = '';
+                    } else if (args[i] == 'frame_size') {
                         this.price = '';
                     }
                 }
@@ -540,7 +556,6 @@ End  Post Your Ad -->
                     if (this.images.length > 0)
                         this.page = 6;
                 }
-
                 $('#sell-bicycle-modal').modal('show');
             },
             processFile: function(event) {
@@ -617,6 +632,8 @@ End  Post Your Ad -->
                     this.region = JSON.parse(localStorage.region);
                 if (localStorage.price)
                     this.price = localStorage.price;
+                if (localStorage.frame_size)
+                    this.price = localStorage.frame_size;
                 if (localStorage.note)
                     this.note = localStorage.note;
                 if (localStorage.name)
@@ -712,6 +729,11 @@ End  Post Your Ad -->
                 if (this.price.length == 0)
                     return false;
                 return this.price.length < 4 || this.price.length > 8;
+            },
+            frameSizeValidate() {
+                if (this.frame_size < 10)
+                    return false;
+                return this.frame_size < 30 || this.frame_size > 100;
             }
         },
         watch: {
@@ -736,6 +758,9 @@ End  Post Your Ad -->
             },
             price: function(v) {
                 localStorage.price = v;
+            },
+            frame_size: function(v) {
+                localStorage.frame_size = v;
             },
             note: function(v) {
                 localStorage.note = v;

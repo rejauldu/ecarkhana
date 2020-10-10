@@ -14,7 +14,7 @@
 	<meta property="og:title"         content="{{ config('app.name', 'Laravel') }}" />
 	<meta property="og:description"   content="{{ config('app.name', 'Laravel') }}" />
 	@if(isset($product))
-	<meta property="og:image"         content="{{ url('/assets/products/cars') }}/{{ $product->photo ?? 'not-found.jpg' }}" />
+	<meta property="og:image"         content="{{ asset('/assets/products') }}/{{ $product->id }}/{{ $product->image1 }}" />
 	@endif
 	<!--/Facebook Share end-->
 
@@ -22,7 +22,8 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
 	<link rel="icon" href="{{ asset('assets/favicon.ico') }}" type="image/gif" sizes="16x16">
 	<!-- Fonts -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
 	<!-- All packages style -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<!-- flaticon -->
@@ -35,8 +36,8 @@
     <!-- revolution -->
     <link rel="stylesheet" href="{{ asset('css/revolution/settings.css') }}" />
     <!-- main style -->
-    <link rel="stylesheet" href="{{ asset('css/theme.css') }}?110" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}?110" />
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}?120" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?121" />
     <!-- swiper -->
     <link rel="stylesheet" href="{{ asset('css/swiper.css') }}" />
 	@yield('style')

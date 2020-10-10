@@ -1,6 +1,9 @@
 @extends('layouts.index')
 
 @section('content')
+@if(!isset($type))
+@php($type = 'Car')
+@endif
 @if(session()->has('message'))
 <div class="alert alert-warning">
     {{ session()->get('message') }}

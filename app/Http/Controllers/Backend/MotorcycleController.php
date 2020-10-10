@@ -353,7 +353,7 @@ class MotorcycleController extends Controller {
         $models = Model::where('category_id', 2)->get();
         $divisions = Division::all();
         $ownerships = Ownership::all();
-        $type = "Bicycle";
+        $type = "Motorcycle";
         return view('backend.products.motorcycles.sell', compact('brands', 'models', 'divisions', 'ownerships', 'type'));
     }
 }

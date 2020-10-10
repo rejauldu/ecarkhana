@@ -628,7 +628,7 @@ section.slider {
 }
 
 #rev_slider_2_1_wrapper .tp-loader.spinner3 {
-    background-color: #FFFFFF !important;
+    display: none;
 }
 
 .tp-caption.text-center {

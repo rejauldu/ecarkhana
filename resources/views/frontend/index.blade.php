@@ -11,9 +11,10 @@
 <!--=================================
     rev slider -->
     <section class="slider">
-        <div id="rev_slider_2_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="car-dealer-03" style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
+        <div id="rev_slider_2_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container size-53" data-alias="car-dealer-03" style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
             <!-- START REVOLUTION SLIDER 5.2.6 fullwidth mode -->
-            <div id="rev_slider_2_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.2.6">
+            <div id="rev_slider_2_1" class="rev_slider fullwidthabanner size-child" style="display:none;" data-version="5.2.6">
+                <i class="fa fa-cog fa-spin position-center font-20 text-danger z-index"></i>
                 <ul>
                     <!-- SLIDE  -->
                     @foreach($home_sliders as $home_slider)
@@ -331,20 +332,13 @@
                                     </div>
                                 </div>
                                 <div class="text-dark clearfix px-3 py-1">
-                                    <div>
-                                        <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                    </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
-                                        <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
+                                        <span class="float-right"><i class="fa fa-industry text-danger"></i> {{ $new_product->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                    <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
-                                    <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
+                                    <div class="teext-center font-16">BDT {{ $new_product->msrp }}</div>
                                 </div>
                             </div>
                         </div>
@@ -453,38 +447,19 @@
                                     </div>
                                 </div>
                                 <div class="text-dark clearfix px-3 py-1">
-                                    <div>
-                                        <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                    </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                    <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
-                                    <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
+                                    <div class="text-center font-16">BDT {{ $used_product->msrp }}</div>
                                     <div class="row text-left">
                                         <div class="col-6 my-1">
                                             <i class="fa fa-road"></i> {{ $used_product->kms_driven ?? ''}} km driven
                                         </div>
                                         <div class="col-6 my-1">
                                             <i class="fa fa-calendar"></i> {{ $used_product->car->milage ?? ''}} km milage
-                                        </div>
-                                        <div class="col-6 my-1">
-                                            <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
-                                        </div>
-                                        <div class="col-6 my-1">
-                                            <i class="fa fa-car"></i> {{ $used_product->car->fuel_type->name ?? ''}}
-                                        </div>
-                                        <div class="col-6 my-1">
-                                            <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
-                                        </div>
-                                        <div class="col-6 my-1">
-                                            <i class="fa fa-superpowers"></i> {{ $used_product->car->maximum_power ?? ''}} Watt
                                         </div>
                                     </div>
                                 </div>
@@ -558,20 +533,13 @@
                                     </div>
                                 </div>
                                 <div class="text-dark clearfix px-3 py-1">
-                                    <div class="text-center">
-                                        <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                    </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                     </div>
-                                    <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                    <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                     <div class="separator"></div>
-                                    <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
+                                    <div class="text-center font-16">BDT {{ $new_product->msrp }}</div>
                                 </div>
                             </div>
                         </div>
@@ -617,20 +585,13 @@
                                 </div>
                             </div>
                             <div class="text-dark clearfix px-3 py-1">
-                                <div class="text-center">
-                                    <i class="fa @if($new_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($new_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($new_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($new_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($new_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $new_product->supplier->region->name ?? ''}}, {{ $new_product->supplier->division->name ?? ''}}</span>
                                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $new_product->brand->name ?? ''}}</span>
                                 </div>
-                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
+                                <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $new_product->id) }}" class="">{{ $new_product->name }}</a></div>
                                 <div class="separator"></div>
-                                <h3 class="owl-heading">Tk.{{ $new_product->msrp }}</h3>
+                                <div class="text-center font-16">BDT {{ $new_product->msrp }}</div>
                             </div>
                         </div>
                     </div>
@@ -646,39 +607,39 @@
 <!--=================================
     Start business partner -->
 
-    <section id="partner">
-        <div class="container px-0">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="owl-carousel owl-loaded owl-drag" data-nav-dots="true" data-items="5" data-md-items="5" data-sm-items="3" data-xs-items="2" data-space="10">
-                        <div class="owl-stage-outer">
-                            <div class="owl-stage" style="transform: translate3d(-2530px, 0px, 0px); transition: all 0.25s ease 0s; width: 4140px;">
-                                @foreach($suppliers as $supplier)
-                                <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
-                                    <div class="item">
-                                        <img class="img-fluid center-block" src="{{ url('/') }}/assets/profile/{{ $supplier->photo }}" alt="">
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i
-                            class="fa fa-angle-left fa-2x"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button>
-                        </div>
-                        <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section id="partner">
+      <div class="container px-0">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="owl-carousel owl-loaded owl-drag" data-nav-dots="true" data-items="5" data-md-items="5" data-sm-items="3" data-xs-items="2" data-space="10">
+                      <div class="owl-stage-outer">
+                          <div class="owl-stage" style="transform: translate3d(-2530px, 0px, 0px); transition: all 0.25s ease 0s; width: 4140px;">
+                              @foreach($suppliers as $supplier)
+                              <div class="owl-item cloned" style="width: 220px; margin-right: 10px;">
+                                  <div class="item">
+                                      <img class="img-fluid center-block" src="{{ url('/') }}/assets/profile/{{ $supplier->photo }}" alt="">
+                                  </div>
+                              </div>
+                              @endforeach
+                          </div>
+                      </div>
+                      <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><i
+                          class="fa fa-angle-left fa-2x"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right fa-2x"></i></button>
+                      </div>
+                      <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
 
-    <form class="ajax-upload d-none" action="{{ route('cars.index') }}" method="post">
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="lat" id="lat" />
-        <input type="hidden" name="lon" id="lon" />
-        <button id="lat-lon-submit" class="btn btn-theme" type="submit">Update</button>
-    </form>
+  <form class="ajax-upload d-none" action="{{ route('cars.index') }}" method="post">
+      @csrf
+      @method('PUT')
+      <input type="hidden" name="lat" id="lat" />
+      <input type="hidden" name="lon" id="lon" />
+      <button id="lat-lon-submit" class="btn btn-theme" type="submit">Update</button>
+  </form>
 
 <!--=================================
     End business partner -->

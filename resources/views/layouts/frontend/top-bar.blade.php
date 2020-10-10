@@ -65,7 +65,7 @@
                             <a href="{{ route('sell-'.strtolower($type)) }}" class="button red">Sell {{ $type ?? 'Car' }}</a>
                         </div>
                         <div>
-                            <form action="{{ route('search') }}">
+                            <form action="{{ route('products.index') }}">
                                 <div class="searchBox">
                                     <input class="searchInput" type="text" name="search" placeholder="Search" value="{{ $search ?? '' }}">
                                     <button class="searchButton" type="submit">
