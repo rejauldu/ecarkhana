@@ -22,10 +22,21 @@
                 kms_driven_max: {{ $maximum_kms_driven ?? 0 }},
                 conditions: '{{ $condition_search ?? '' }}',
                 categories: '{{ $category_search ?? '' }}',
+                modal_type: ''
             },
             methods: {
                 openWhatsappModal: function (id) {
                     this.id = id;
+                    this.modal_type = 'whatsapp';
+                    if (localStorage.getItem("phone_verified")) {
+                        window.location = this.whatsappLink;
+                    } else {
+                        $('#whatsapp-modal').modal('show');
+                    }
+                },
+                openDealerModal: function (id) {
+                    this.id = id;
+                    this.modal_type = 'dealer';
                     if (localStorage.getItem("phone_verified")) {
                         window.location = this.whatsappLink;
                     } else {
@@ -65,10 +76,13 @@
                         url: "{{ route('verify-otp') }}",
                         data: {"phone":this.phone, "otp":this.otp, "_token":"{{ csrf_token() }}"},
                         type: "post",
-                        success: function(result){
+                        success: function(result) {
                             if(result == 'success') {
                                 localStorage.phone_verified = 1;
-                                window.location = _this.whatsappLink;
+                                if(_this.modal_type = 'whatsapp')
+                                    window.location = _this.whatsappLink;
+                                else
+                                    window.location = _this.dealerLink;
                             } else
                                 _this.otp_error = true;
                         }
@@ -162,6 +176,10 @@
                 whatsappLink: function () {
                     var encodedURL = encodeURIComponent("{{ url('/products') }}/" + this.id);
                     var link = 'https://api.whatsapp.com/send?phone=8801817338234&text=' + encodedURL + '%0a‎Hello%0aI%0aneed%0asome%0ainformation%0aabout%0athis%0avehicle';
+                    return link;
+                },
+                dealerLink: function () {
+                    var link = "{{ url('/dealers') }}/" + this.id;
                     return link;
                 }
             }

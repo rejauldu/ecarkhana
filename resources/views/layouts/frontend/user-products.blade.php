@@ -11,20 +11,13 @@
                 </div>
             </div>
             <div class="text-dark clearfix px-3 py-1">
-                <div>
-                    <i class="fa @if($product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                    <i class="fa @if($product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                    <i class="fa @if($product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                    <i class="fa @if($product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                    <i class="fa @if($product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                </div>
                 <div class="text-left clearfix">
                     <span><i class="fa fa-map-marker text-danger"></i> {{ $product->supplier->region->name ?? ''}}, {{ $product->supplier->division->name ?? ''}}</span>
                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $product->category->name ?? ''}}</span>
                 </div>
-                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $product->id) }}" class="">{{ $product->name }}</a></div>
+                <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $product->id) }}" class="">{{ $product->name }}</a></div>
                 <div class="separator"></div>
-                <h3 class="owl-heading">Tk.{{ $product->msrp }}</h3>
+                <div class="text-center font-16">BDT {{ $product->msrp }}</h3>
                 <div class="row text-left">
                     <div class="col-6 my-1">
                         <i class="fa fa-road"></i> {{ $product->brand->name ?? ''}}

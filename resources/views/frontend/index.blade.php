@@ -99,7 +99,7 @@
 <!--=================================
     Start Service -->
 
-    <section class="service_wrap">
+    <section class="service_wrap my-0 my-md-5">
         <div class="container px-0">
             <!--            <div class="row justify-content-md-center">-->
                 <div class="row">
@@ -264,7 +264,7 @@
 <!--=================================
     Start Used Cars In Your City And Budget -->
 
-    <section id="used-car-by-cat">
+    <section id="used-car-by-cat" class="py-0 py-md-5">
         <div class="container px-0">
             <div class="row">
                 <div class="col-lg-4 col-12">
@@ -315,13 +315,17 @@
                             <div class="bg-white product-hover-effect shadow-sm mx-1">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
-                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                        <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
+                                            <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                        </a>
                                     </div>
                                     <div class="size-child product-hover-show">
-                                        <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                                            <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
-                                            <label for="new-{{ $new_product->id }}">Compare</label>
-                                        </div>
+                                        <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
+                                            <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative py-1 height-30">
+                                                <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                                <label for="new-{{ $new_product->id }}">Compare</label>
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
                                         <ul class="list-inline">
@@ -424,7 +428,7 @@
 <!--=================================
     start Featured Cars -->
 
-    <section>
+    <section class="py-1 py-md-5">
         <div class="container px-0">
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -516,13 +520,17 @@
                             <div class="bg-white product-hover-effect shadow-sm mx-1">
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
-                                        <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                        <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
+                                            <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                        </a>
                                     </div>
                                     <div class="size-child product-hover-show">
-                                        <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                                            <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
-                                            <label for="new-{{ $new_product->id }}">Compare</label>
-                                        </div>
+                                        <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
+                                            <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative py-1 height-30">
+                                                <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                                <label for="new-{{ $new_product->id }}">Compare</label>
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
                                         <ul class="list-inline">
@@ -553,7 +561,7 @@
 <!--=================================
     End Popular car -->
 
-<section class="pt-0">
+<section class="py-1 py-md-5">
     <div class="container px-0">
         <div class="row">
             <div class="col-lg-12 col-sm-12 text-center">
@@ -568,13 +576,17 @@
                         <div class="bg-white product-hover-effect shadow-sm mx-2">
                             <div class="size-53">
                                 <div class="size-child overflow-hidden">
-                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                    <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
+                                        <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                    </a>
                                 </div>
                                 <div class="size-child product-hover-show">
-                                    <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                                        <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
-                                        <label for="new-{{ $new_product->id }}">Compare</label>
-                                    </div>
+                                    <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
+                                        <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative py-1 height-30">
+                                            <input type="checkbox" id="new-{{ $new_product->id }}" class="compare-checkbox" product-id="{{ $new_product->id }}">
+                                            <label for="new-{{ $new_product->id }}">Compare</label>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="bg-white product-hover-show2 position-absolute height-30 w-100 line-height-30 bottom-0">
                                     <ul class="list-inline">

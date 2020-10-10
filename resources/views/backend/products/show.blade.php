@@ -69,24 +69,19 @@
 
                                                 <div class="form-group">
                                                     <label>Name*</label>
-                                                    <input type="text" class="form-control" name="name"
-                                                           id="validationCustom122" required="" id="rmi_name"/>
+                                                    <input type="text" class="form-control" name="name" id="validationCustom122" required="" id="rmi_name"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email address*</label>
-                                                    <input type="text" class="form-control" name="email"
-                                                           id="validationCustom132" required="" id="rmi_email"/>
+                                                    <input type="text" class="form-control" name="email" id="validationCustom132" required="" id="rmi_email"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Phone*</label>
-                                                    <input type="text" class="form-control" id="phone"
-                                                           id="validationCustom142" required="" name="rmi_phone">
+                                                    <input type="text" class="form-control" id="phone" id="validationCustom142" required="" name="rmi_phone">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Message</label>
-                                                    <textarea class="form-control" name="message"
-                                                              id="validationCustom152" required=""
-                                                              id="rmi_message"></textarea>
+                                                    <textarea class="form-control" name="message" id="validationCustom152" required="" id="rmi_message"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <button class="button red">Submit</button>
@@ -113,9 +108,7 @@
                                         </div>
                                         <div id="std_message"></div>
                                         <div class="modal-body">
-                                            <p class="sub-title">Complete this form to request a test drive of your
-                                                favorite car. Our Sales Advisor will contact you promptly to confirm
-                                                your appointment. </p>
+                                            <p class="sub-title">Complete this form to request a test drive of your favorite car. Our Sales Advisor will contact you promptly to confirm your appointment.  </p>
                                             <form class="gray-form reset_css" id="std_form" action="post">
                                                 <input type="hidden" name="action" value="schedule_test_drive"/>
                                                 <div class="form-group">
@@ -1099,13 +1092,6 @@
                                 </div>
                             </div>
                             <div class="text-dark clearfix px-3 py-1">
-                                <div>
-                                    <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
                                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->car->brand->name ?? ''}}</span>
@@ -1118,19 +1104,7 @@
                                         <i class="fa fa-road"></i> {{ $used_product->car->displacement->name ?? ''}} cc
                                     </div>
                                     <div class="col-6 my-1">
-                                        <i class="fa fa-calendar"></i> {{ $used_product->car->milage ?? ''}} km milage
-                                    </div>
-                                    <div class="col-6 my-1">
-                                        <i class="fa fa-calendar"></i> {{ $used_product->car->model->name ?? ''}} model
-                                    </div>
-                                    <div class="col-6 my-1">
-                                        <i class="fa fa-car"></i> {{ $used_product->car->fuel_type->name ?? ''}}
-                                    </div>
-                                    <div class="col-6 my-1">
-                                        <i class="fa fa-hourglass-end"></i> {{ $used_product->car->brand->name ?? ''}} brand
-                                    </div>
-                                    <div class="col-6 my-1">
-                                        <i class="fa fa-superpowers"></i> {{ $used_product->car->maximum_power ?? ''}} Watt
+                                        <i class="fa fa-calendar"></i> {{ $used_product->car->model->name ?? ''}}
                                     </div>
                                 </div>
                             </div>

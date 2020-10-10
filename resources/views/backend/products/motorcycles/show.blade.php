@@ -683,7 +683,7 @@
                                     <span>Published on: {{ $product->created_at->format('jS M Y') }}</span>
                                     @if($product->supplier)
                                     <br>
-                                    <a href="{{ route('car-listing') }}" class="link">More Ads</a>
+                                    <a href="{{ route('motorcycles.index') }}" class="link">More Ads</a>
                                     @endif
                                 </div>
                                 <div class="user-phone">
@@ -742,32 +742,19 @@
                                 </div>
                             </div>
                             <div class="text-dark clearfix px-3 py-1">
-                                <div>
-                                    <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                    <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                </div>
                                 <div class="text-left clearfix">
                                     <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}</span>
                                     <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                 </div>
-                                <div class="display-6 my-2 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
+                                <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                 <div class="separator"></div>
-                                <h3 class="owl-heading">Tk.{{ $used_product->msrp }}</h3>
+                                <div class="text-center font-16">BDT {{ $used_product->msrp }}</div>
                                 <div class="row text-left">
                                     <div class="col-12 my-1">
                                         <i class="fa fa-road"></i> {{ $used_product->motorcycle->displacement->name ?? ''}} cc
                                     </div>
                                     <div class="col-12 my-1">
-                                        <i class="fa fa-calendar"></i> {{ $used_product->motorcycle->milage ?? ''}} km milage
-                                    </div>
-                                    <div class="col-12 my-1">
-                                        <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}} model
-                                    </div>
-                                    <div class="col-12 my-1">
-                                        <i class="fa fa-hourglass-end"></i> {{ $used_product->brand->name ?? ''}} brand
+                                        <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}}
                                     </div>
                                 </div>
                             </div>
