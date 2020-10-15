@@ -80,7 +80,7 @@
                     @moderator(Notification)
                     <li class="{{ Request::is('notifications-all') ? 'active' : '' }}"><a href="{{ route('notifications.all') }}"><i class="fa fa-circle-o"></i> {{ __('All Notifications') }}</a></li>
                     <li class="{{ Request::is('notifications/create') ? 'active' : '' }}"><a href="{{ route('notifications.create') }}"><i class="fa fa-circle-o"></i> {{ __('Send Notification') }}</a></li>
-                    <li class="{{ Request::is('loan-applications*') ? 'active' : '' }}"><a href="{{ route('loan-applications.unviewed') }}"><i class="fa fa-circle-o"></i> {{ __('Applications for Loan') }}</a></li>
+                    <li class="{{ Request::is('loan-infos*') ? 'active' : '' }}"><a href="{{ route('loan-infos.index') }}"><i class="fa fa-circle-o"></i> {{ __('Applications for Loan') }}</a></li>
                     @endmoderator
                     <li class="{{ Request::is('requested-more-infos*') ? 'active' : '' }}"><a href="{{ route('requested-more-infos.unviewed') }}"><i class="fa fa-circle-o"></i> {{ __('Requested More Infos') }}</a></li>
                     <li class="{{ Request::is('make-an-offers*') ? 'active' : '' }}"><a href="{{ route('make-an-offers.unviewed') }}"><i class="fa fa-circle-o"></i> {{ __('Offers Made') }}</a></li>

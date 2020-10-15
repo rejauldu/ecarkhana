@@ -198,6 +198,8 @@ class BicycleController extends Controller {
         $dropdowns['key_features'] = KeyFeature::where('category_id', 3)->get();
         $dropdowns['what_a_news'] = WhatANew::all();
         $dropdowns['pros_conses'] = ProsCons::all();
+        $dropdowns['bicycle_types'] = BicycleType::all();
+        $dropdowns['biker_genders'] = BikerGender::all();
         return view('backend.products.bicycles.create', $dropdowns);
     }
 
@@ -271,6 +273,8 @@ class BicycleController extends Controller {
         $dropdowns['key_features'] = KeyFeature::where('category_id', 3)->get();
         $dropdowns['what_a_news'] = WhatANew::all();
         $dropdowns['pros_conses'] = ProsCons::all();
+        $dropdowns['bicycle_types'] = BicycleType::all();
+        $dropdowns['biker_genders'] = BikerGender::all();
         $bicycle = Bicycle::find($id);
         $dropdowns['bicycle'] = $bicycle;
         if (isset($bicycle->key_feature))

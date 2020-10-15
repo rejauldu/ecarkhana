@@ -81,8 +81,8 @@
                                         <div class="row">
                                             @foreach($coverages as $coverage)
                                             <div class="col-6">
-                                                <input type="checkbox" class="custom-control-input" id="insurance-feature-{{ $coverage->id }}" name="insurance_feature[]" value="{{ $coverage->id }}" @if(isset($insurance_company) && $insurance_company->basic_coverage && in_array($coverage->id, $insurance_company->basic_coverage)) checked @endif>
-                                                <label class="custom-control-label" for="insurance-feature-{{ $coverage->id }}">{{ $coverage->name }}</label>
+                                                <input type="checkbox" class="custom-control-input" id="basic-coverage-{{ $coverage->id }}" name="basic_coverage[]" value="{{ $coverage->id }}" @if(isset($insurance_company) && $insurance_company->basic_coverage && in_array($coverage->id, $insurance_company->basic_coverage)) checked @endif>
+                                                <label class="custom-control-label" for="basic-coverage-{{ $coverage->id }}">{{ $coverage->name }}</label>
                                             </div>
                                             @endforeach
                                         </div>

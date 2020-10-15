@@ -16,8 +16,6 @@ export default {
 				let partner_id = this.partner?this.partner.id:0;
 				if(e.sender_id != this.user.id && e.sender_id != partner_id) {
 					this.mutable_total_unread_message++;
-					this.changeFavicon();
-					this.sound();
 				}
 			}
 		},
@@ -35,7 +33,8 @@ export default {
 			}
 		},
 		sendByAxios: function(data) {
-			axios.post('/chats', data)
+			let baseUrl = document.head.querySelector("[name='base-url']").getAttribute('content');
+			axios.post(baseUrl+'/chats', data)
 				.then(function(response) {
 					
 				})
@@ -44,18 +43,6 @@ export default {
 		},
 		isEmpty: function(obj) {
 			return Object.entries(obj).length === 0 && obj.constructor === Object;
-		},
-		changeFavicon: function() {
-			var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-			link.type = 'image/x-icon';
-			link.rel = 'shortcut icon';
-			var base_url = document.querySelector('meta[name="base-url"]').content;
-			link.href = base_url+'/assets/favicon-notification.ico';
-			document.getElementsByTagName('head')[0].appendChild(link);
-		},
-		sound: function() {
-			let audio = new Audio(base_url+'assets/audio.mp3');
-			audio.play();
 		}
 	},
 	computed: {

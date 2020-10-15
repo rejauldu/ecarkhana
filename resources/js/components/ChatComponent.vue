@@ -1,31 +1,40 @@
 <template>
-<div>
-	<div class="chat-history">
-		<div v-for="message in mutable_messages" v-if="message.receiver_id == user.id"  class="incoming_msg" :ref="message.id">
-			<div class="incoming_msg_img"> <img :src="'/assets/profile/'+partner.photo" alt="sunil"> </div>
-			<div class="received_msg">
-				<div class="received_withd_msg">
-					<p class="px-2">{{ message.message }}</p>
-					<span class="time_date">{{ convertToDate(message.created_at) }}</span>
+<div class="container-fluid px-0 vh-103 overflow-hidden positon-relative font-16">
+	
+	<div class="mb-5 scroll-y vh-140 bg-image" ref="chat-history">
+		<div class="alert alert-danger alert-dismissible sticky-top" v-if="mutable_error">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Error!</strong> {{ mutable_error }}
+		</div>
+		<!-- incoming -->
+		<div v-for="message in mutable_messages" v-if="message.receiver_id == user.id"  class="text-left" :ref="message.id">
+			<div class="alert-light border m-2 shadow-sm d-inline-flex rounded-right">
+				<div class="width-30 height-30 float-left"><img :src="'/assets/profile/'+partner.photo" class="w-100 h-100" alt="Profile"></div>
+				<div class="px-2 line-height-30">{{ message.message }} <span class="font-10 line-height-30 px-2 nowrap height-30 float-right">{{ convertToDate(message.created_at) }}</span></div>
+			</div>
+		</div>
+		<!-- Outgoing -->
+		<div class="text-right" v-else :ref="message.id">
+			<div class="alert-primary border m-2 shadow-sm d-inline-flex rounded-left">
+				<div class="px-2 line-height-30 text-left">{{ message.message }}
+					<span class="font-10 px-2 nowrap float-right text-secondary">
+						<span class="mx-1">{{ convertToDate(message.created_at) }}</span>
+						<i v-if="message.viewed_at" class="fa fa-check font-10"></i>
+						<i v-else-if="message.sent_at" class="fa fa-check-circle font-10"></i>
+						<i v-else-if="message.created_at" class="fa fa-circle-o font-10"></i>
+						<i v-else class="fa fa-spinner fa-spin font-10"></i>
+					</span>
 				</div>
 			</div>
 		</div>
-		<div class="outgoing_msg" v-else  :ref="message.id">
-			<div class="sent_msg">
-				<p class="bg-theme px-2">{{ message.message }}</p>
-				<span class="time_date">{{ convertToDate(message.created_at) }}</span>
-				<i v-if="message.viewed_at" class="fa fa-check text-small"></i>
-				<i v-else-if="message.sent_at" class="fa fa-check-circle text-small"></i>
-				<i v-else-if="message.created_at" class="fa fa-circle-o text-small"></i>
-				<i v-else class="fa fa-spinner v-spin text-small"></i>
-			</div>
-		</div>
 	</div>
-	<div class="type_msg">
-		<div class="col-12 d-none" ref="chat-whisper">Typing... <i class="text-dark fa fa-circle-o-notch fa-spin"></i></div>
-		<div class="input_msg_write">
-			<input ref="chat-input" type="text" class="write_msg px-3" placeholder="Type a message" />
-			<button ref="chat-submit" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+	<div class="position-absolute bottom-0 w-100">
+		<div class="d-none" ref="chat-whisper">Typing... <i class="text-dark fa fa-circle-o-notch fa-spin"></i></div>
+		<div class="input-group">
+			<input type="text" class="form-control" ref="chat-input" placeholder="Type a message" />
+			<span class="input-group-append">
+				<button type="button" class="btn alert-primary fa fa-caret-right" @click.prevent="sendText()"></button>
+			</span>
 		</div>
 	</div>
 </div>
@@ -34,6 +43,7 @@
 export default {
 	data () {
 		return {
+			mutable_error: this.error?this.error:'',
 			mutable_messages: this.messages,
 			typing: false
 		}
@@ -47,15 +57,15 @@ export default {
 			var day = date.getDay();
 			var today = new Date();
 			if(today.getDate() == date.getDate() && today.getMonth() == date.getMonth() && today.getFullYear() == date.getFullYear()) {
-				return this.timeFormat(date)+ ' | '+'Today';
+				return this.timeFormat(date);
 			}
-			return this.timeFormat(date)+' | '+months[date.getMonth()]+' '+date.getDate();
+			return months[date.getMonth()]+' '+date.getDate();
 		},
 		timeFormat: function(date) {
 			let today = new Date();
 			let hours = date.getHours();
 			let minutes = date.getMinutes();
-			let ampm = hours >= 12 ? 'PM' : 'AM';
+			let ampm = hours >= 12 ? 'pm' : 'am';
 			hours = hours % 12;
 			hours = hours ? hours : 12;
 			hours += today.getTimezoneOffset()/60;
@@ -64,7 +74,7 @@ export default {
 			return strTime;
 		},
 		scrollToBottom: function() {
-			let element = document.querySelector('.chat-history');
+			let element = this.$refs["chat-history"];
 			
 			this.$nextTick(function () {
 				element.scrollTo(0, element.scrollHeight);
@@ -121,7 +131,8 @@ export default {
 		},
 		sendByAxios: function(data) {
 			let _this = this;
-			axios.post('/chats', data)
+			let baseUrl = document.head.querySelector("[name='base-url']").getAttribute('content');
+			axios.post(baseUrl+'/chats', data)
 				.then(function(response) {
 					_this.sentToServer(response);
 				})
@@ -150,6 +161,10 @@ export default {
 			}
 		},
 		sentToServer: function(response) {
+			if(typeof response.data == 'string') {
+				this.mutable_error = response.data;
+				return false;
+			}
 			let objIndex = this.mutable_messages.findIndex((obj => obj.id == response.data.client_id));
 			this.mutable_messages[objIndex].created_at = response.data.created_at;
 			this.mutable_messages[objIndex].id = response.data.server_id;
@@ -226,7 +241,7 @@ export default {
 			}
 		},
 		isMessageViewed: function() {
-			this.attachEvent(document.querySelector('.chat-history'), "scroll", this.onScrollUpdate);
+			this.attachEvent(this.$refs["chat-history"], "scroll", this.onScrollUpdate);
 			window.addEventListener('focus', this.onScrollUpdate);
 			this.attachEvent(window, "resize", this.onScrollUpdate);
 			this.onScrollUpdate();
@@ -236,8 +251,9 @@ export default {
 		sendWhisper: function() {
 			let _this = this;
 			let type = this.typing? "whisper-start":"whisper-stop";
-			let data = {"type":type, "message":"", "sender_id":this.user.id, "receiver_id":this.partner.id}
-			axios.post('/chats', data)
+			let data = {"type":type, "message":"", "sender_id":this.user.id, "receiver_id":this.partner.id};
+			let baseUrl = document.head.querySelector("[name='base-url']").getAttribute('content');
+			axios.post(baseUrl+'/chats', data)
 				.then(function(response) {
 					
 				})
@@ -263,9 +279,6 @@ export default {
 				_this.showWhispering(e);
 			});
 	},
-	props: ['user', 'partner', 'messages', 'message_list']
+	props: ['user', 'partner', 'messages', 'message_list', 'error']
 }
 </script>
-<style>
-
-</style>

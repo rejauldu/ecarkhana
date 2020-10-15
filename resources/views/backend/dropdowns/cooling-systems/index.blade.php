@@ -44,8 +44,8 @@
 								@foreach($cooling_systems as $cooling_system)
 								<tr>
 									<td>{{ $cooling_system->id }}</td>
-									<td>{{ $cooling_system->category->name }}</td>
-									<td>{{ $cooling_system->name }}</td>
+									<td>{{ $cooling_system->category->name ?? '' }}</td>
+									<td>{{ $cooling_system->name ?? ''}}</td>
 									<td>{{ $cooling_system->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('cooling-systems.edit', $cooling_system->id) }}" class="text-success fa fa-edit"></a></td>
 									<td><a href="{{ route('cooling-systems.destroy', $cooling_system->id) }}" onclick="event.preventDefault(); document.getElementById('delete-form').action = this.href; document.getElementById('delete-form').submit.click();" class="text-danger fa fa-trash"></button></td>
@@ -88,6 +88,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

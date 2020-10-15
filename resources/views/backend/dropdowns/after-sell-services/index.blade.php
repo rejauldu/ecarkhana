@@ -44,7 +44,7 @@
 								@foreach($after_sell_services as $after_sell_service)
 								<tr>
 									<td>{{ $after_sell_service->id }}</td>
-									<td>{{ $after_sell_service->category->name }}</td>
+									<td>{{ $after_sell_service->category->name ?? '' }}</td>
 									<td>{{ $after_sell_service->name }}</td>
 									<td>{{ $after_sell_service->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('after-sell-services.edit', $after_sell_service->id) }}" class="text-success fa fa-edit"></a></td>
@@ -88,6 +88,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

@@ -45,8 +45,8 @@
 								@foreach($displacements as $displacement)
 								<tr>
 									<td>{{ $displacement->id }}</td>
-									<td>{{ $displacement->category->name }}</td>
-									<td>{{ $displacement->model->name }}</td>
+									<td>{{ $displacement->category->name ?? '' }}</td>
+									<td>{{ $displacement->model->name ?? ''}}</td>
 									<td>{{ $displacement->name }}</td>
 									<td>{{ $displacement->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('displacements.edit', $displacement->id) }}" class="text-success fa fa-edit"></a></td>
@@ -91,6 +91,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

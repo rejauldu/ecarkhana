@@ -44,7 +44,7 @@
 								@foreach($what_a_news as $what_a_new)
 								<tr>
 									<td>{{ $what_a_new->id }}</td>
-									<td>{{ $what_a_new->category->name }}</td>
+									<td>{{ $what_a_new->category->name ?? '' }}</td>
 									<td>{{ $what_a_new->name }}</td>
 									<td>{{ $what_a_new->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('what-a-news.edit', $what_a_new->id) }}" class="text-success fa fa-edit"></a></td>
@@ -88,6 +88,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

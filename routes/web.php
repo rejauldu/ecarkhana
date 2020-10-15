@@ -12,7 +12,7 @@
  */
 
 Route::get('/', 'Frontend\HomeController@index')->name('index');
-Route::get('/insurances', 'Frontend\HomeController@insuranceList');
+Route::get('/insurances', 'Frontend\HomeController@insuranceList')->name('insurances');
 Route::get('/home', 'Frontend\HomeController@index')->name('home');
 Route::get('/', 'Frontend\HomeController@index')->name('car');
 Route::get('/motorcycle', 'Frontend\HomeController@motorcycleIndex')->name('motorcycle');
@@ -126,7 +126,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', 'Backend\DashboardController@dashboard')->name('dashboard');
     Route::resource('cashbooks', 'Backend\CashbookController');
     Route::resource('users', 'Backend\UserController');
-    Route::resource('chats', 'Backend\ChatController');
+    Route::get('chats/delete/{id?}', 'Backend\ChatController@destroy')->name('chats.destroy');
+    Route::get('chats/block/{id?}', 'Backend\ChatController@block')->name('chats.block');
+    Route::resource('chats', 'Backend\ChatController')->except(['destroy']);
     Route::get('seller-message', 'Backend\ChatController@indexFront')->name('seller-message');
     Route::get('seller-message/{id}', 'Backend\ChatController@showFront')->name('seller-message.show');
     Route::resource('categories', 'Backend\CategoryController')->middleware('moderator:Category');

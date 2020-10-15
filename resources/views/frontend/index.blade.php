@@ -316,7 +316,7 @@
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
-                                            <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                            <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
                                         </a>
                                     </div>
                                     <div class="size-child product-hover-show">
@@ -521,7 +521,7 @@
                                 <div class="size-53">
                                     <div class="size-child overflow-hidden">
                                         <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
-                                            <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                            <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
                                         </a>
                                     </div>
                                     <div class="size-child product-hover-show">
@@ -577,7 +577,7 @@
                             <div class="size-53">
                                 <div class="size-child overflow-hidden">
                                     <a href="{{ route('products.show', $new_product->id) }}" class="w-100 h-100 d-inline-block">
-                                        <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $product->id }}/{{ $product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
+                                        <img class="position-center h-auto w-100" src="{{ url('/') }}/assets/products/{{ $new_product->id }}/{{ $new_product->image1 ?? 'not-found.jpg' }}" alt="{{ $new_product->name }}">
                                     </a>
                                 </div>
                                 <div class="size-child product-hover-show">

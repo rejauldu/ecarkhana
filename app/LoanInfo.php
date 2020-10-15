@@ -30,6 +30,7 @@ class LoanInfo extends Model
      * @var array
      */
     protected $casts = [
+        'dob' => 'datetime',
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
@@ -37,10 +38,10 @@ class LoanInfo extends Model
 		return $this->belongsTo('App\User');
 	}
 	public function condition() {
-		return $this->belongsTo('App\Condition');
+		return $this->belongsTo('App\Dropdowns\Condition');
 	}
 	public function division() {
-		return $this->belongsTo('App\Division');
+		return $this->belongsTo('App\Locations\Division');
 	}
     public function bank() {
         return $this->belongsTo('App\Bank');

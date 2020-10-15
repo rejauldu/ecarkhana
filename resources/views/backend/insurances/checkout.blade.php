@@ -112,12 +112,13 @@ checkout-listing  -->
                                             </div>
                                             <input type="text" class="form-control border-left-0 pl-0" :class="{'opacity-5': otp_sent, 'border-right-0': phone != new_phone && isPhoneValid()}" name="phone" id="phone" v-model="new_phone" :disabled="otp_sent || otp_verified">
                                             <div class="input-group-append">
-                                                <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-if="isPhoneValid() && !otp_sent && phone != new_phone" @click.prevent="sendOtp">Verify Now</a>
+                                                <a class="input-group-text btn btn-link bg-white border-left-0 text-secondary" href="#" v-if="!isPhoneValid()"><i class="fa fa-phone"></i></a>
+                                                <a class="input-group-text btn btn-link bg-white border-left-0 text-success" href="#" v-else-if="isPhoneValid() && !phone_verified && !otp_sent && phone != new_phone" @click.prevent="sendOtp">Verify Now</a>
                                                 <span class="input-group-text btn bg-white border-left-0 text-secondary" v-else-if="!otp_sent && phone != new_phone">Invalid</span>
                                                 <a class="input-group-text btn bg-white border-left-0 text-danger" href="#" v-else-if="!otp_verified && phone != new_phone">@{{ countDown }}</a>
                                                 <span class="input-group-text btn bg-white border-left-0 text-success" v-else>Verified</span>
                                             </div>
-                                            <div class="position-center" v-if="otp_sent"><i class="fa fa-spinner fa-spin text-dark"></i></div>
+                                            <div class="position-center" v-if="otp_sent && !otp_verified"><i class="fa fa-spinner fa-spin text-dark"></i></div>
                                         </div>
                                     </div>
                                     <div class="form-group" v-if="otp_sent">
@@ -341,7 +342,7 @@ checkout-listing  -->
                         </div>
                     </div>
                     <div class="col-12">
-                        <input type="submit" class="btn button red" value="Update" :disabled="(phone == new_phone || otp_verified) && isPhoneValid()"/>
+                        <input type="submit" class="btn button red" value="Update" :disabled="!(phone == new_phone && phone_verified)"/>
                     </div>
                 </div>
             </form>
@@ -369,11 +370,12 @@ checkout-listing  -->
             companies: @json($insurance_companies),
             coverages: @json($coverages),
             features: @json($insurance_features),
-            phone: '{{ $profile->phone ?? "" }}',
+            phone: localStorage.verified_phone?localStorage.verified_phone:'',
             new_phone: '{{ $profile->phone ?? "" }}',
             otp: '',
             otp_sent: false,
             otp_verified: false,
+            phone_verified: localStorage.phone_verified?true:false,
             countDown: 60
         },
         methods: {
@@ -480,6 +482,8 @@ checkout-listing  -->
                             _this.otp = '';
                             localStorage.phone_verified = 1;
                             localStorage.verified_phone = _this.new_phone;
+                            _this.phone = _this.new_phone;
+                            _this.phone_verified = true;
                         }
                     }
                 });
@@ -489,7 +493,10 @@ checkout-listing  -->
             
         },
         watch: {
-            
+            otp() {
+              if(this.otp.length > 3)
+                this.verifyOtp();
+            }
         },
         created: function() {
             this.calculateRate();

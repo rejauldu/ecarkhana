@@ -74,7 +74,7 @@
                                                         <select id="package" name="package_id" class="custom-select" derive-from="model">
                                                             <option value="0" selected>--Select Package--</option>
                                                             @foreach($packages as $package)
-                                                            <option value="{{ $package->id }}" @if(isset($motorcycle) && $car->package_id == $package->id) selected @endif derive-parent="{{ $package->model_id }}">{{ $package->name }}</option>
+                                                            <option value="{{ $package->id }}" @if(isset($motorcycle) && $motorcycle->package_id == $package->id) selected @endif derive-parent="{{ $package->model_id }}">{{ $package->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -173,7 +173,7 @@
 															<input type="file" id="image1" name="image1" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image1-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image1-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image1 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image1-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image1 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -181,7 +181,7 @@
 															<input type="file" id="image2" name="image2" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image2-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image2-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image2 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image2-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image2 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -189,7 +189,7 @@
 															<input type="file" id="image3" name="image3" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image3-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image3-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image3 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image3-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image3 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -197,7 +197,7 @@
 															<input type="file" id="image4" name="image4" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image4-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image4-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image4 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image4-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image4 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -205,7 +205,7 @@
 															<input type="file" id="image5" name="image5" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image5-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image5-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image5 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image5-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image5 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -213,7 +213,7 @@
 															<input type="file" id="image6" name="image6" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image6-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image6-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image6 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image6-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image6 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -221,7 +221,7 @@
 															<input type="file" id="image7" name="image7" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image7-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image7-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image7 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image7-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image7 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -229,7 +229,7 @@
 															<input type="file" id="image8" name="image8" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image8-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image8-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image8 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image8-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image8 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -237,7 +237,7 @@
 															<input type="file" id="image9" name="image9" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image9-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image9-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image9 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image9-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image9 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 													<div class="row">
@@ -245,7 +245,7 @@
 															<input type="file" id="image10" name="image10" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image10-view')" accept="image/*" value="Upload image" />
 														</div>
 														<div class="col-6 form-group">
-															<img id="image10-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image10 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Car">
+															<img id="image10-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image10 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
 														</div>
 													</div>
 												</div>

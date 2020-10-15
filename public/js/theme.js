@@ -25,7 +25,7 @@ function setInputFilter(textbox, inputFilter) {
     });
 }
 /* Ajax uploader */
-// this is the id of the form
+/* this is the id of the form */
 $(".ajax-upload").submit(function (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -251,7 +251,7 @@ function setParentsHeight() {
 }
 /*sticky-top event */
 (function() {
-    // get the sticky element
+    /* get the sticky element */
     window.observer = new IntersectionObserver(
         ([e]) => {
             e.target.classList.toggle('stuck', e.intersectionRatio < 1);
@@ -447,4 +447,16 @@ function integerWithCommasIndian(x) {
         lastThree = ',' + lastThree;
     var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
     return res;
+}
+/*Fade out element */
+(function() {
+    fadeOut();
+})();
+function fadeOut() {
+    var fades = document.getElementsByClassName('fade-out');
+    if(fades.length>0)
+        Array.prototype.forEach.call(fades, function(item) {
+            item.style.opacity = '0';
+            item.addEventListener('transitionend', () => { item.style.opacity = '1'; item.remove();});
+        });
 }

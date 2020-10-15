@@ -38,7 +38,7 @@
 									@endif
 									<div class="form-group">
 										<label for="card-type">Category</label>
-										<select id="category" name="category_id" class="custom-select">
+										<select id="category" name="category_id" class="custom-select" required="">
 											<option value="0" selected>--Select Category--</option>
 											@foreach($categories as $category)
 											<option value="{{ $category->id }}" @if(isset($model) && $category->id == $model->category_id) selected @endif>{{ $category->name }}</option>
@@ -47,7 +47,7 @@
 									</div>
 									<div class="form-group">
 										<label for="card-type">Brand</label>
-										<select id="brand" name="brand_id" class="custom-select" derive-from="category">
+										<select id="brand" name="brand_id" class="custom-select" derive-from="category" required="">
 											<option value="0" selected>--Select Brand--</option>
 											@foreach($brands as $brand)
 											<option value="{{ $brand->id }}" @if(isset($model) && $brand->id == $model->brand_id) selected @endif derive-parent="{{ $brand->category_id }}">{{ $brand->name }}</option>

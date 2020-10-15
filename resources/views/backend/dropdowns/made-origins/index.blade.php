@@ -45,8 +45,8 @@
 								@foreach($made_origins as $made_origin)
 								<tr>
 									<td>{{ $made_origin->id }}</td>
-									<td>{{ $made_origin->category->name }}</td>
-									<td>{{ $made_origin->brand->name }}</td>
+									<td>{{ $made_origin->category->name ?? ''}}</td>
+									<td>{{ $made_origin->brand->name ?? ''}}</td>
 									<td>{{ $made_origin->name }}</td>
 									<td>{{ $made_origin->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('made-origins.edit', $made_origin->id) }}" class="text-success fa fa-edit"></a></td>
@@ -91,6 +91,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

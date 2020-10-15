@@ -44,7 +44,7 @@
 								@foreach($wheel_types as $wheel_type)
 								<tr>
 									<td>{{ $wheel_type->id }}</td>
-									<td>{{ $wheel_type->category->name }}</td>
+									<td>{{ $wheel_type->category->name ?? ''}}</td>
 									<td>{{ $wheel_type->name }}</td>
 									<td>{{ $wheel_type->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('wheel-types.edit', $wheel_type->id) }}" class="text-success fa fa-edit"></a></td>
@@ -88,6 +88,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

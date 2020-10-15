@@ -88,6 +88,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script src="{{ asset('js/dataTables.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
 <!--/dataTables plugin JavaScript -->
 @endsection

@@ -1,6 +1,6 @@
 <template>
-<span class="chat-popover">
-    <a href="#" class="fa fa-ellipsis-h" :class="'partner-'+partner_id" data-toggle="popover" title="Settings" data-placement="left"></a>
+<span class="chat-ellipsis height-15">
+    <a href="#" class="fa fa-ellipsis-h line-height-15 font-16" :class="'partner-'+partner_id" data-toggle="popover" title="Settings" data-placement="left" @click.prevent="del($event)"></a>
 </span>
 </template>
  
@@ -15,13 +15,17 @@
 			setContent: function() {
 				let _this = this;
 				$('[data-toggle="popover"].partner-'+this.partner_id).popover({html:true, content:_this.popoverContent});
+			},
+			del: function(event) {
+				event.stopPropagation();
 			}
 		},
 		computed: {
 			popoverContent: function() {
+				let baseUrl = document.head.querySelector("[name='base-url']").getAttribute('content');
 				return '<div class="list-group">'
-					+'<a href="/chats/delete/'+this.partner_id+'" class="list-group-item list-group-item-action">Delete</a>'
-					+'<a href="/chats/block/'+this.partner_id+'" class="list-group-item list-group-item-action">Block</a>'
+					+'<a href="'+baseUrl+'/chats/delete/'+this.partner_id+'" class="list-group-item" id="del-'+this.partner_id+'">Delete</a>'
+					+'<a href="'+baseUrl+'/chats/block/'+this.partner_id+'" class="list-group-item" id="blo-'+this.partner_id+'">Block</a>'
 				+'</div>';
 			},
 			jqueryInitialize: function() {
@@ -40,13 +44,10 @@
     }
 </script>
 <style>
-	.chat_list .chat-popover {
+	.chat-ellipsis {
 		visibility:hidden;
 	}
-	.chat_list:hover .chat-popover {
+	.ellipsis-hover:hover .chat-ellipsis {
 		visibility:visible;
-	}
-	.popover-body {
-		padding:0;
 	}
 </style>

@@ -16,6 +16,7 @@ class BicycleTypeController extends Controller
      */
     public function index()
     {
+        $bicycle_types = BicycleType::all();
         return view('backend.dropdowns.bicycle-types.index', compact('bicycle_types'));
     }
 
@@ -26,7 +27,7 @@ class BicycleTypeController extends Controller
      */
     public function create()
     {
-        return view('backend.dropdowns.bicycle-types.create', compact('categories'));
+        return view('backend.dropdowns.bicycle-types.create');
     }
 
     /**
@@ -51,7 +52,7 @@ class BicycleTypeController extends Controller
     public function show($id)
     {
         $bicycle_type = BicycleType::find($id);
-		return view('backend.dropdowns.bicycle-types.show', compact('categories', 'bicycle_type'));
+		return view('backend.dropdowns.bicycle-types.show', compact('bicycle_type'));
     }
 
     /**
@@ -63,7 +64,7 @@ class BicycleTypeController extends Controller
     public function edit($id)
     {
         $bicycle_type = BicycleType::find($id);
-		return view('backend.dropdowns.bicycle-types.create', compact('categories', 'bicycle_type'));
+		return view('backend.dropdowns.bicycle-types.create', compact('bicycle_type'));
     }
 
     /**

@@ -45,8 +45,8 @@
 								@foreach($wheel_bases as $wheel_base)
 								<tr>
 									<td>{{ $wheel_base->id }}</td>
-									<td>{{ $wheel_base->category->name }}</td>
-									<td>{{ $wheel_base->model->name }}</td>
+									<td>{{ $wheel_base->category->name ?? '' }}</td>
+									<td>{{ $wheel_base->model->name ?? ''}}</td>
 									<td>{{ $wheel_base->name }}</td>
 									<td>{{ $wheel_base->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('wheel-bases.edit', $wheel_base->id) }}" class="text-success fa fa-edit"></a></td>
@@ -91,6 +91,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

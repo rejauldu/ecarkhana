@@ -16,6 +16,7 @@ class BikerGenderController extends Controller
      */
     public function index()
     {
+        $biker_genders = BikerGender::all();
         return view('backend.dropdowns.biker-genders.index', compact('biker_genders'));
     }
 
@@ -26,7 +27,7 @@ class BikerGenderController extends Controller
      */
     public function create()
     {
-        return view('backend.dropdowns.biker-genders.create', compact('categories'));
+        return view('backend.dropdowns.biker-genders.create');
     }
 
     /**
@@ -63,7 +64,7 @@ class BikerGenderController extends Controller
     public function edit($id)
     {
         $biker_gender = BikerGender::find($id);
-		return view('backend.dropdowns.biker-genders.create', compact('categories', 'biker_gender'));
+		return view('backend.dropdowns.biker-genders.create', compact('biker_gender'));
     }
 
     /**

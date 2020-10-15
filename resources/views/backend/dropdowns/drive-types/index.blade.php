@@ -44,7 +44,7 @@
 								@foreach($drive_types as $drive_type)
 								<tr>
 									<td>{{ $drive_type->id }}</td>
-									<td>{{ $drive_type->category->name }}</td>
+									<td>{{ $drive_type->category->name ?? '' }}</td>
 									<td>{{ $drive_type->name }}</td>
 									<td>{{ $drive_type->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('drive-types.edit', $drive_type->id) }}" class="text-success fa fa-edit"></a></td>
@@ -88,6 +88,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/datatables.js') }}"></script>
 	<!--/dataTables plugin JavaScript -->
 @endsection

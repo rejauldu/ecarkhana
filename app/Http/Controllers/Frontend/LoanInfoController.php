@@ -13,7 +13,7 @@ use App\Locations\Division;
 class LoanInfoController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Product', ['only' => ['index']]);
+        $this->middleware('moderator:Product', ['only' => ['index', 'show']]);
     }
     /**
      * Display a listing of the resource.
@@ -21,8 +21,9 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        $banks = Bank::all();
         $loan_infos = LoanInfo::all();
-        return view('frontend.loan-infos.index', compact('loan_infos'));
+        return view('frontend.loan-infos.index', compact('loan_infos', 'banks'));
     }
 
     /**
@@ -108,8 +109,8 @@ class LoanInfoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $loan_info = LoanInfo::find($id);
-        return view('frontend.loan-infos.index', compact('loan_info'));
+        $loan_info = LoanInfo::with('condition', 'division')->where('id', $id)->first();
+        return view('frontend.loan-infos.show', compact('loan_info'));
     }
 
     /**

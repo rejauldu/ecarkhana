@@ -41,7 +41,7 @@ Start Car Loan  Eligibility check-->
                     <div class="row">
                         <div class="col-12 col-md-6 border-right border-left-0 border-top-0 border-bottom-0 border-dashed text-center pt-2">
                             <ul class="list-group list-group-flush bullet">
-                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="c.basic_coverage.includes(coverage.id.toString()) || c.basic_coverage.includes(coverage.id)">@{{ coverage.name }}</li>
+                                <li class="list-group-item py-1 text-justify" v-for="coverage in coverages" v-if="c.basic_coverage && (c.basic_coverage.includes(coverage.id.toString()) || c.basic_coverage.includes(coverage.id))">@{{ coverage.name }}</li>
                             </ul>
                         </div>
                         <div class="col-12 d-md-none text-right">
@@ -49,7 +49,7 @@ Start Car Loan  Eligibility check-->
                         </div>
                         <div class="col-12 col-md-6 text-center pt-2">
                             <ul class="list-group list-group-flush bullet">
-                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="c.insurance_feature.includes(feature.id.toString()) || c.insurance_feature.includes(feature.id)">@{{ feature.name }}</li>
+                                <li class="list-group-item py-1 text-justify" v-for="feature in features" v-if="c.insurance_feature && (c.insurance_feature.includes(feature.id.toString()) || c.insurance_feature.includes(feature.id))">@{{ feature.name }}</li>
                             </ul>
                         </div>
                     </div>
@@ -160,7 +160,7 @@ Start Car Loan  Eligibility check-->
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Buy Now</button>
+                    <a href="#" class="btn btn-danger" @click.prevent="formSubmit(company)">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -218,8 +218,10 @@ Start Car Loan  Eligibility check-->
             },
             coverageStringToArray: function() {
                 for(let i=0; i<this.companies.length; i++) {
-                    this.companies[i].basic_coverage = this.companies[i].basic_coverage.split(',');
-                    this.companies[i].insurance_feature = this.companies[i].insurance_feature.split(',');
+                    if(this.companies[i].basic_coverage)
+                        this.companies[i].basic_coverage = this.companies[i].basic_coverage.split(',');
+                    if(this.companies[i].insurance_feature)
+                        this.companies[i].insurance_feature = this.companies[i].insurance_feature.split(',');
                 }
             },
             pageSetting: function() {
@@ -258,7 +260,7 @@ Start Car Loan  Eligibility check-->
             calculateRate: function() {
                 for(let c = 0; c < this.companies.length; c++) {
                     this.companies[c].total_rate = 0;
-                    for(let i = 0; i < this.companies[c].basic_coverage.length; i++) {
+                    for(let i = 0; i < this.companies[c].basic_coverage && this.companies[c].basic_coverage.length; i++) {
                         for(let j=0; j<this.coverages.length; j++) {
                             if(this.companies[c].basic_coverage[i] == this.coverages[j].id) {
                                 this.companies[c].total_rate += Number(this.coverages[j].rate);

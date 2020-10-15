@@ -1,33 +1,38 @@
 <template>
-<div class="chat-inbox row">
-	<div class="headind_srch col-12 py-2">
-		<div class="srch_bar">
-			<div class="stylish-input-group">
-				<input type="text" class="search-bar"  placeholder="Search" v-model="search" />
-				<span class="input-group-addon">
-					<button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-				</span>
+<div class="vh-103 scroll-y scrollbar container-fluid px-0">
+	<div class="row sticky-top bg-light border-bottom shadow-sm">
+		<div class="col-12">
+			<div class="input-group">
+				<input type="text" class="form-control"  placeholder="Search" v-model="search" />
 			</div>
 		</div>
 	</div>
-	<div v-for="message in mutable_message_list" v-if="searched(getPartner(message))" class="chat_list col-12" :class="{ 'active_chat': getPartnerId(message) == partner.id}" @click="chatListClick" :partner="getPartner(message).id">
-		<div class="chat_people">
-			<div class="chat_img"> <img :src="'/assets/profile/'+getPartner(message).photo" alt="sunil"> <i class="fa fa-circle" :class="{'text-success': isOnline(message)}"></i></div>
-			<div class="chat_ib">
-				<h5>{{ getPartner(message).name }} <span class="chat_date">{{ convertToDate(message.created_at) }}</span></h5>
-				<p>{{ message.message }}</p>
-				<popover :partner_id="getPartnerId(message)"></popover>
+	<div class="row">
+		<div class="col-12">
+			<div v-for="message in mutable_message_list" v-if="searched(getPartner(message))" :class="{ 'alert-secondary': getPartnerId(message) == partner.id}" class="border-bottom" @click="chatListClick" :partner="getPartner(message).id">
+				<div class="cursor-pointer ellipsis-hover clearfix">
+					<div class="width-64 height-64 position-relative float-left">
+						<img :src="'/assets/profile/'+getPartner(message).photo" class="w-100 h-100" alt="Profile">
+						<i class="fa fa-circle position-absolute bottom-5 right-5 text-secondary" :class="{'text-success': isOnline(message)}"></i>
+					</div>
+					<div class="overflow-hidden clearfix ml-1 mr-2 pl-2">
+						<div class="float-right">{{ convertToDate(message.created_at) }}</div>
+						<h5 class="excerpt mt-1 mb-0">{{ getPartner(message).name }}</h5>
+						<p class="mb-0 excerpt">{{ message.message }}</p>
+						<ellipsis :partner_id="getPartnerId(message)" class="float-right" @del="del"></ellipsis>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 </template>
 <script>
-import popover from './PopoverComponent.vue'
+import ellipsis from './EllipsisComponent.vue'
 
 export default {
 	components: {
-		popover
+		ellipsis
 	},
 	data () {
 		return {
@@ -97,8 +102,8 @@ export default {
 			}
 		},
 		chatDelete: function(partner) {
-			console.log(partner);
-			document.getElementById('delete-form').action = '/chats/'+partner;
+			let baseUrl = document.head.querySelector("[name='base-url']").getAttribute('content');
+			document.getElementById('delete-form').action = baseUrl+'/chats/'+partner;
 			document.getElementById('delete-form').submit();
 			console.log(partner);
 		},
@@ -109,13 +114,15 @@ export default {
 				return true;
 			}
 			return false;
+		},
+		del: function(partner) {
+			alert(partner);
 		}
 	},
 	computed: {
 		
 	},
 	mounted: function() {
-		
 	},
 	created() {
 		this.$eventBus.$on('message', this.messageReceived);
@@ -128,8 +135,3 @@ export default {
 	props: ['user', 'partner', 'message_list']
 }
 </script>
-<style scoped>
-	.chat_list {
-		cursor:pointer;
-	}
-</style>

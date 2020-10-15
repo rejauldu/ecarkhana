@@ -4,24 +4,17 @@
 @endsection
 @section('content')
 <div class="content-wrapper">
-	@include('layouts.chat-content')
+	<div class="container-fluid bg-light">
+		<div class="row">
+			@computer
+			<div class="col-md-3 col-sm-6 col-12 px-0">
+				<chat-list :user='@json($user)' :partner='@json($partner)' :message_list='@json($message_list)' @if(session()->has('message')) error='{{ session()->get('message') }}' @endif></chat-list>
+			</div>
+			@endcomputer
+			<div class="col-md-9 col-sm-6 col-12 px-0">
+				<chat v-bind:user='@json($user)' v-bind:partner='@json($partner)' :messages='@json($messages)'></chat>
+			</div>
+		</div>
+	</div>
 </div>
-@endsection
-@section('style')
-	<link href="{{ asset('css/chat.css') }}" type="text/css" rel="stylesheet">
-@endsection
-@section('script')
-<script>
-(function() {
-	/*var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);*/
-	var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-	var chat_history = document.querySelector('.chat-history');
-	if(chat_history)
-	chat_history.style.height = (h-104)+'px';
-	var chat_inbox = document.querySelector('.chat-inbox');
-	if(chat_inbox)
-	chat_inbox.style.height = (h-55)+'px';
-})();
-	
-</script>
 @endsection
