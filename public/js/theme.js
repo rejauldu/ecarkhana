@@ -174,7 +174,7 @@ function locationAjaxCall(item, child) {
         }
     });
 }
-/* Dropdowns filtering with two classes .derive-from in select, .derive-parent in option */
+/* Dropdowns filtering with two classes .derive-from (parent's id) in select, .derive-parent (parent option's value) in option */
 (function () {
     var derives = document.querySelectorAll('[derive-from]');
     derives.forEach(function (item, index) {

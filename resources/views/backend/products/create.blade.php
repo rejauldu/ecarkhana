@@ -73,7 +73,7 @@
                                                 <select id="model" name="model_id" class="custom-select" derive-from="brand" required>
                                                     <option value="0" selected>--Select Model--</option>
                                                     @foreach($models as $model)
-                                                    <option value="{{ $model->id }}" @if(isset($product) && $product->model_id == $model->id) selected @endif derive-parent="{{ $model->brand_id }}">{{ $model->name }}</option>
+                                                    <option value="{{ $model->id }}" @if(isset($product) && $product->model_id == $model->id) selected @endif derive-parent="{{ $model->brand_id }}" derive-parent="{{ $model->brand_id }}">{{ $model->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 <div class="valid-feedback">Valid.</div>
