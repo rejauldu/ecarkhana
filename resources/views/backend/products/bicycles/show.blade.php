@@ -607,37 +607,32 @@
                     <div class="separator"></div>
                 </div>
                 <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="1" data-space="0">
-                    @foreach($related_products as $related_product)
+                    @foreach($related_products as $used_product)
                     <div class="item">
-                        <div class="bg-white shadow-sm mx-2 zoom-parent overflow-hidden shadow-hover-10">
+                        <div class="bg-white shadow-sm mx-1 zoom-parent overflow-hidden shadow-hover-10">
                             <div class="size-53 clearfix">
                                 <div class="size-child overflow-hidden zoom-target-1">
-                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $related_product->id }}/{{ $related_product->image1 ?? 'not-found.jpg' }}" alt="{{ $related_product->name }}">
+                                    <img class="position-center h-auto" src="{{ url('/') }}/assets/products/{{ $used_product->id }}/{{ $used_product->image1 ?? 'not-found.jpg' }}" alt="{{ $used_product->name }}">
                                 </div>
                                 <div class="float-left form-control bg-dark text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                                    <input type="checkbox" id="used-{{ $related_product->id }}" class="compare-checkbox" product-id="{{ $related_product->id }}">
-                                    <label for="used-{{ $related_product->id }}">Compare</label>
+                                    <input type="checkbox" id="used-{{ $used_product->id }}" class="compare-checkbox" product-id="{{ $used_product->id }}">
+                                    <label for="used-{{ $used_product->id }}">Compare</label>
                                 </div>
-                                @if($related_product->condition_id == 3)
-                                <div class="float-right form-control bg-danger text-white text-left border-0 d-inline-block w-auto position-relative height-30 py-1">
-                                    Used
-                                </div>
-                                @endif
                             </div>
                             <div class="text-dark clearfix px-3 py-1">
                                 <div class="text-left clearfix">
-                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $related_product->supplier->region->name ?? ''}}</span>
-                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $related_product->brand->name ?? ''}}</span>
+                                    <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}</span>
+                                    <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                 </div>
-                                <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $related_product->id) }}" class="">{{ $related_product->name }}</a></div>
+                                <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                 <div class="separator"></div>
-                                <div class="text-center font-16">BDT {{ $related_product->msrp }}</h3>
+                                <div class="text-center font-16">BDT {{ $used_product->msrp }}</div>
                                 <div class="row text-left">
-                                    <div class="col-6 my-1">
-                                        <i class="fa fa-road"></i> {{ $related_product->kms_driven ?? ''}} km
+                                    <div class="col-12 my-1">
+                                        <i class="fa fa-road"></i> {{ $used_product->bicycle->displacement->name ?? ''}} cc
                                     </div>
-                                    <div class="col-6 my-1">
-                                        <i class="fa fa-calendar"></i> {{ $related_product->model->name ?? ''}}
+                                    <div class="col-12 my-1">
+                                        <i class="fa fa-calendar"></i> {{ $used_product->model->name ?? ''}}
                                     </div>
                                 </div>
                             </div>

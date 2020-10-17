@@ -1,0 +1,5 @@
+@include('layouts.chat.header')
+@include('layouts.chat.top-bar')
+@include('layouts.chat.left-sidebar')
+@yield('content')
+@include('layouts.chat.footer')

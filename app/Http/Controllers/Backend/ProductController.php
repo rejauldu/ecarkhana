@@ -167,7 +167,7 @@ class ProductController extends Controller {
         if ($request->after_sell_service)
             $data['after_sell_service'] = implode(',', $data['after_sell_service']);
         if (Auth::check())
-            $data['user_id'] = Auth::user()->id;
+            $data['supplier_id'] = Auth::user()->id;
         if (!$request->name) {
             $brand = Brand::find($request->brand_id);
             $model = Model::find($request->brand_id);
@@ -180,7 +180,7 @@ class ProductController extends Controller {
         $data[strtolower($category->name) . '_id'] = $id;
 
         Product::find($product->id)->update($data);
-        return redirect(route('products.manage-index'))->with('message', 'Product created successfully');
+        return redirect(route('ads'))->with('message', 'Product created successfully');
     }
 
     /**

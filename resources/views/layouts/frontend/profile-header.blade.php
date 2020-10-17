@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12 col-12 col-sm-12">
-		<section class="search-result-item">
-			<a class="image-link" href="#"><img class="image center-block" alt="" src="{{ asset('/assets/profile') }}/{{ $user->photo }}"> </a>
+		<section class="search-result-item p-0 overflow-hidden">
+			<a class="image-link" href="#"><img class="img-thumbnail w-100" alt="" src="{{ asset('/assets/profile') }}/{{ $user->photo }}"> </a>
 			<div class="search-result-item-body">
 				<div class="row">
 					<div class="col-md-5 col-sm-12 col-12">
@@ -12,19 +12,19 @@
 					<div class="col-md-7 col-sm-12 col-12">
 						<div class="row ad-history">
 							<div class="col-md-4 col-sm-4 col-12">
-								<div class="user-stats">
+								<div class="user-stats h-100">
 									<h2>{{ $sell ?? 0 }}</h2>
 									<small>Ad Sold</small>
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-4 col-12">
-								<div class="user-stats">
+								<div class="user-stats h-100">
 									<h2>{{ $user->products->count() }}</h2>
 									<small>Total Listings</small>
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-4 col-12">
-								<div class="user-stats">
+								<div class="user-stats h-100">
 									<h2>{{ $user->orders->count() }}</h2>
 									<small>Total Order</small>
 								</div>

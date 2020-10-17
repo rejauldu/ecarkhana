@@ -371,7 +371,7 @@ start Featured Cars -->
                                     </div>
                                     <div class="display-6 my-0 owl-heading"><a href="{{ route('bicycles.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
-                                    <div class="text-center font-16">BDT {{ $used_product->msrp }}</h3>
+                                    <div class="text-center font-16">BDT {{ $used_product->msrp }}</div>
                                     <div class="row text-left">
                                         <div class="col-6 my-1">
                                             <i class="fa fa-user"></i> {{ $used_product->model->name ?? ''}}
@@ -379,6 +379,7 @@ start Featured Cars -->
                                         <div class="col-6 my-1">
                                             <i class="fa fa-calendar"></i> {{ $used_product->frame_size ?? ''}} cm
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

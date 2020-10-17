@@ -8,14 +8,6 @@
 @endif
 
 @include('layouts.frontend.car-background')
-
-
-<!-- <section id="filter_form24">
-        <div class="container">
-            
-        </div>
-    </section> -->
-
 <section class="sms-new-Car-insurance page-section-ptb">
         <div class="container">
 			<div class="row">

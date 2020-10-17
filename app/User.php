@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'password', 'photo', 'role_id', 'credit_card', 'payment_id', 'card_exp_month', 'card_exp_year', 'address', 'union_id', 'union_id', 'upazila_id', 'district_id', 'division_id', 'billing_address', 'billing_region_id', 'billing_union_id', 'billing_upazila_id', 'billing_district_id', 'billing_division_id', 'shipping_address', 'shipping_region_id', 'shipping_union_id', 'shipping_upazila_id', 'shipping_district_id', 'shipping_division_id', 'user_type_id', 'about', 'website', 'lat', 'lon', 'updated_at', 'created_at'
+        'name', 'email', 'password', 'photo', 'role_id', 'credit_card', 'payment_id', 'card_exp_month', 'card_exp_year', 'address', 'union_id', 'union_id', 'upazila_id', 'district_id', 'division_id', 'billing_address', 'billing_region_id', 'billing_union_id', 'billing_upazila_id', 'billing_district_id', 'billing_division_id', 'shipping_address', 'shipping_region_id', 'shipping_union_id', 'shipping_upazila_id', 'shipping_district_id', 'shipping_division_id', 'user_type_id', 'about', 'website', 'lat', 'lon', 'updated_at', 'created_at'
     ];
 
     /**
@@ -119,6 +119,6 @@ class User extends Authenticatable implements MustVerifyEmail
 		return \Auth::user()->id == $id;
 	}
 	public function products() {
-		return $this->hasMany('App\Product', 'supplier_id', 'id');
+		return $this->hasMany('App\Product', 'supplier_id', 'id')->latest();
 	}
 }

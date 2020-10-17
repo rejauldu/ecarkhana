@@ -367,23 +367,16 @@ Start Compare -->
                                     </div>
                                 </div>
                                 <div class="text-dark clearfix px-3 py-1">
-                                    <div>
-                                        <i class="fa @if($used_product->rating > 0) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 1) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 2) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 3) fa-star @else fa-star-o @endif orange-color"></i>
-                                        <i class="fa @if($used_product->rating > 4) fa-star @else fa-star-o @endif orange-color"></i>
-                                    </div>
                                     <div class="text-left clearfix">
                                         <span><i class="fa fa-map-marker text-danger"></i> {{ $used_product->supplier->region->name ?? ''}}, {{ $used_product->supplier->division->name ?? ''}}</span>
                                         <span class="float-right"><i class="fa fa-industry text-warning"></i> {{ $used_product->brand->name ?? ''}}</span>
                                     </div>
                                     <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $used_product->id) }}" class="">{{ $used_product->name }}</a></div>
                                     <div class="separator"></div>
-                                    <div class="text-center font-16">Tk.{{ $used_product->msrp }}</h3>
+                                    <div class="text-center font-16">Tk.{{ $used_product->msrp }}</div>
                                     <div class="row text-left">
                                         <div class="col-6 my-1">
-                                            <i class="fa fa-superpowers"></i> {{ $used_product->motorcycle->displacement ?? ''}}cc
+                                            <i class="fa fa-superpowers"></i> {{ $used_product->motorcycle->displacement->name ?? ''}} cc
                                         </div>
                                         <div class="col-6 my-1">
                                             <i class="fa fa-tachometer"></i> {{ $used_product->motorcycle->maximum_speed ?? ''}} km/h
@@ -404,18 +397,18 @@ Start Compare -->
 
 <!--=================================Start Banner -->
 <section class="sms-banner">
-        <div class="container px-0">
-            <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-space="20">
-                @foreach($advertisements as $advertisement)
-                <div class="item">
-                    <div class="wpb_single_image">
-                        <a href="{{ $advertisement->url }}"><img src="{{ asset('assets/advertisements') }}/{{ $advertisement->image }}"></a>
-                    </div>
+    <div class="container px-0">
+        <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-space="20">
+            @foreach($advertisements as $advertisement)
+            <div class="item">
+                <div class="wpb_single_image">
+                    <a href="{{ $advertisement->url }}"><img src="{{ asset('assets/advertisements') }}/{{ $advertisement->image }}"></a>
                 </div>
-                @endforeach
             </div>
+            @endforeach
         </div>
-    </section>
+    </div>
+</section>
 
 <!--=================================End Banner -->
 

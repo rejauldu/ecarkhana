@@ -101,7 +101,7 @@ class UserController extends Controller {
             $file->move($destination_path, $new_name);
             User::where('id', $id)->update(['photo' => $new_name]);
             if ($request->data_source && $request->data_source == 'frontend') {
-                User::where('id', $id)->update($request->except('_token', '_method', 'data_source', 'photo'));
+                User::where('id', $id)->update($request->except('_token', '_method', 'data_source', 'photo', 'email'));
             }
         } elseif ($request->password_old) {
             $user = User::find($id);

@@ -39,17 +39,17 @@
     <div class="row">
         <div class="col-12">
             <div class="position-fixed w-100 bottom-10 z-index">
-                <div class="height-40 line-height-40 display-6 bg-white mx-5 shadow text-center rounded-lg" data-toggle="collapse" data-target="#mobile-filter">
+                <div class="height-40 line-height-40 display-6 bg-white mx-5 shadow text-center rounded-lg" data-toggle="collapse" data-target="#left-filter">
                     <i class="fa fa-filter text-danger"></i> Filter
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="w-100 bg-white z-index-99999 position-fixed bottom-50 py-0 collapse" id="mobile-filter">
+<section class="w-100 bg-white z-index-99999 position-fixed bottom-50 py-0 collapse" id="left-filter">
     <div class="row">
-        <div class="col-12 y-scroll vh">
-            <div>
+        <div class="col-12">
+            <div class="scroll-y vh-50">
                 @include('layouts.frontend.left-filter')
             </div>
         </div>

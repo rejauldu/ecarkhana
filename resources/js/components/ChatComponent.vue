@@ -1,13 +1,13 @@
 <template>
-<div class="container-fluid px-0 vh-103 overflow-hidden positon-relative font-16">
+<div class="px-0 vh-50 overflow-hidden positon-relative font-16">
 	
-	<div class="mb-5 scroll-y vh-140 bg-image" ref="chat-history">
+	<div class="pb-md-5 scroll-y vh-50 bg-image" ref="chat-history">
 		<div class="alert alert-danger alert-dismissible sticky-top" v-if="mutable_error">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>Error!</strong> {{ mutable_error }}
 		</div>
 		<!-- incoming -->
-		<div v-for="message in mutable_messages" v-if="message.receiver_id == user.id"  class="text-left" :ref="message.id">
+		<div v-for="message in mutable_messages" v-if="message.receiver_id == user.id"  class="text-left" :ref="message.id"">
 			<div class="alert-light border m-2 shadow-sm d-inline-flex rounded-right">
 				<div class="width-30 height-30 float-left"><img :src="'/assets/profile/'+partner.photo" class="w-100 h-100" alt="Profile"></div>
 				<div class="px-2 line-height-30">{{ message.message }} <span class="font-10 line-height-30 px-2 nowrap height-30 float-right">{{ convertToDate(message.created_at) }}</span></div>
@@ -28,12 +28,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="position-absolute bottom-0 w-100">
+	<div class="position-absolute left-0 bottom-0 right-0 bg-light">
 		<div class="d-none" ref="chat-whisper">Typing... <i class="text-dark fa fa-circle-o-notch fa-spin"></i></div>
-		<div class="input-group">
+		<div class="input-group mb-2">
 			<input type="text" class="form-control" ref="chat-input" placeholder="Type a message" />
 			<span class="input-group-append">
-				<button type="button" class="btn alert-primary fa fa-caret-right" @click.prevent="sendText()"></button>
+				<button type="button" class="btn alert-primary fa fa-caret-right px-4" @click.prevent="sendText()"></button>
 			</span>
 		</div>
 	</div>
@@ -115,8 +115,7 @@ export default {
 			let input = this.$refs["chat-input"];
 			let data;
 			let id = this.getMilliSeconds();
-			
-			if(input) {
+			if(input.value) {
 				data = {
 					"id":id,
 					"type":"text",
@@ -126,8 +125,9 @@ export default {
 				};
 				this.updateMessage(data);
 				input.value='';
+				this.sendByAxios(data);
 			}
-			this.sendByAxios(data);
+			
 		},
 		sendByAxios: function(data) {
 			let _this = this;
@@ -269,7 +269,11 @@ export default {
 		this.checkTyping();
 		this.checkSubmit();
 		this.isMessageViewed();
-		this.scrollToBottom();
+		var _this = this;
+		setTimeout(function () {
+			_this.scrollToBottom();
+		}, 0);
+		
 		this.pageVisitAllView();
 		var _this = this;
 		this.channel = Echo.private('Chat.'+_this.user.id)

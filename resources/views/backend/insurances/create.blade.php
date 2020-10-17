@@ -322,6 +322,7 @@
             },
             filteredModels() {
                 return this.models.filter(item => {
+                    if(item.name)
                     return item.name.toLowerCase().startsWith(this.search.toLowerCase());
                 })
             },
@@ -356,6 +357,7 @@
             },
             type: function(v) {
                 localStorage.type = v;
+                console.log(localStorage.type);
             },
             displacement: function(v) {
                 localStorage.displacement = JSON.stringify(v);

@@ -575,14 +575,15 @@ End  Post Your Ad -->
                 this.search = '';
                 var e = document.querySelector('.horizontal-scroll');
                 var _this = this;
-                setTimeout(function() {
-                    if (e.offsetWidth < e.scrollWidth)
-                        _this.scrolledRight = false;
-                    else {
-                        _this.scrolledLeft = true;
-                        _this.scrolledRight = true;
-                    }
-                }, 1000);
+                if (e)
+	                setTimeout(function() {
+	                    if (e.offsetWidth < e.scrollWidth)
+	                        _this.scrolledRight = false;
+	                    else {
+	                        _this.scrolledLeft = true;
+	                        _this.scrolledRight = true;
+	                    }
+	                }, 0);
             },
             scrollLeft: function () {
                 var e = document.querySelector('.horizontal-scroll');
@@ -753,13 +754,13 @@ End  Post Your Ad -->
                 });
             },
             isSubmitable: function(e = null) {
-                $s = !(!this.photo || !this.price || !this.name || !this.otp_verified || !this.terms);
-                if(!$s && e) {
+                var s = !(!this.photo || !this.price || !this.name || !this.otp_verified || !this.terms);
+                if(!s && e) {
                     e.preventDefault();
-                } else if($s) {
-                    this.reset('brand', 'model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
+                } else if(s) {
+                    //this.reset('brand', 'model', 'manufacturing_year', 'package', 'kms_driven', 'ownership', 'division', 'registration_year', 'price');
                 }
-                return $s;
+                return s;
             },
             isEmpty: function(obj) {
                 return Object.keys(obj).length === 0;

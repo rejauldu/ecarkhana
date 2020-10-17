@@ -100,7 +100,7 @@
     Start Service -->
 
     <section class="service_wrap my-0 my-md-5">
-        <div class="container px-0">
+        <div class="container">
             <!--            <div class="row justify-content-md-center">-->
                 <div class="row">
 
@@ -265,7 +265,7 @@
     Start Used Cars In Your City And Budget -->
 
     <section id="used-car-by-cat" class="py-0 py-md-5">
-        <div class="container px-0">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-12">
                     <nav>
@@ -429,7 +429,7 @@
     start Featured Cars -->
 
     <section class="py-1 py-md-5">
-        <div class="container px-0">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <span>Used Cars Special Offers</span>
@@ -484,7 +484,7 @@
 <!--=================================
     Start Banner -->
     <section class="sms-banner">
-        <div class="container px-0">
+        <div class="container">
             <div class="owl-carousel owl-theme" data-nav-arrow="true" data-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-space="20">
                 @foreach($advertisements as $advertisement)
                 <div class="item">
@@ -506,7 +506,7 @@
     Start Popular car -->
 
     <section id="popular">
-        <div class="container px-0">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="section-title mb-0">
@@ -562,7 +562,7 @@
     End Popular car -->
 
 <section class="py-1 py-md-5">
-    <div class="container px-0">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 col-sm-12 text-center">
                 <div class="section-title mb-0">
@@ -620,7 +620,7 @@
     Start business partner -->
 
   <section id="partner">
-      <div class="container px-0">
+      <div class="container">
           <div class="row">
               <div class="col-md-12">
                   <div class="owl-carousel owl-loaded owl-drag" data-nav-dots="true" data-items="5" data-md-items="5" data-sm-items="3" data-xs-items="2" data-space="10">

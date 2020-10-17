@@ -1,5 +1,5 @@
 <template>
-<div class="vh-103 scroll-y scrollbar container-fluid px-0">
+<div class="vh-50 scroll-y scrollbar container-fluid px-0">
 	<div class="row sticky-top bg-light border-bottom shadow-sm">
 		<div class="col-12">
 			<div class="input-group">
@@ -9,17 +9,17 @@
 	</div>
 	<div class="row">
 		<div class="col-12">
-			<div v-for="message in mutable_message_list" v-if="searched(getPartner(message))" :class="{ 'alert-secondary': getPartnerId(message) == partner.id}" class="border-bottom" @click="chatListClick" :partner="getPartner(message).id">
-				<div class="cursor-pointer ellipsis-hover clearfix">
-					<div class="width-64 height-64 position-relative float-left">
+			<div v-for="message in mutable_message_list" v-if="searched(getPartner(message))" :class="{ 'alert-secondary': getPartnerId(message) == partner.id, 'alert-primary font-weight-bold': isHighlight(message)}" class="border-bottom"  @click="chatListClick" :partner="getPartner(message).id">
+				<div class="cursor-pointer ellipsis-hover clearfix" :key="message.id+message.sender_id+user.id">
+					<div class="width-64 height-64 position-relative float-left collapse-fit">
 						<img :src="'/assets/profile/'+getPartner(message).photo" class="w-100 h-100" alt="Profile">
-						<i class="fa fa-circle position-absolute bottom-5 right-5 text-secondary" :class="{'text-success': isOnline(message)}"></i>
+						<i class="fa fa-circle position-absolute bottom-5 right-5 text-light-secondary font-9" :class="{'text-success': isOnline(message)}"></i>
 					</div>
-					<div class="overflow-hidden clearfix ml-1 mr-2 pl-2">
+					<div class="overflow-hidden clearfix ml-1 mr-2 pl-2 collapse-none">
 						<div class="float-right">{{ convertToDate(message.created_at) }}</div>
 						<h5 class="excerpt mt-1 mb-0">{{ getPartner(message).name }}</h5>
 						<p class="mb-0 excerpt">{{ message.message }}</p>
-						<ellipsis :partner_id="getPartnerId(message)" class="float-right" @del="del"></ellipsis>
+						<ellipsis :partner_id="getPartnerId(message)" class="float-right"></ellipsis>
 					</div>
 				</div>
 			</div>
@@ -63,6 +63,7 @@ export default {
 				if(!this.mutable_message_list[i].sender || this.mutable_message_list[i].sender.id == partner_id || this.mutable_message_list[i].receiver.id == partner_id) {
 					_this.mutable_message_list[i].id = data.id;
 					_this.mutable_message_list[i].message = data.message;
+					_this.mutable_message_list[i].viewed_at = data.viewed_at;
 					isExist = true;
 					break;
 				}
@@ -101,12 +102,6 @@ export default {
 			
 			}
 		},
-		chatDelete: function(partner) {
-			let baseUrl = document.head.querySelector("[name='base-url']").getAttribute('content');
-			document.getElementById('delete-form').action = baseUrl+'/chats/'+partner;
-			document.getElementById('delete-form').submit();
-			console.log(partner);
-		},
 		searched: function(user) {
 			var name = user.name.toUpperCase();;
 			var string = this.search.toUpperCase();
@@ -115,8 +110,8 @@ export default {
 			}
 			return false;
 		},
-		del: function(partner) {
-			alert(partner);
+		isHighlight: function(message) {
+			return !message.viewed_at && message.sender_id != this.user.id && message.sender_id != this.partner.id;
 		}
 	},
 	computed: {
@@ -135,3 +130,15 @@ export default {
 	props: ['user', 'partner', 'message_list']
 }
 </script>
+<style>
+.sidebar-collapse .main-sidebar .collapse-fit {
+	width:45px !important;
+	height:45px !important;
+}
+.sidebar-collapse .main-sidebar .collapse-none {
+	display:none !important;
+}
+.main-sidebar {
+	padding-top:50px !important;
+}
+</style>

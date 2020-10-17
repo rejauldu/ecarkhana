@@ -120,12 +120,17 @@ class CompareController extends Controller
         $product[] = Product::where('id', $data['products'][0])->with('brand', 'model', 'package')->first();
         $product[] = Product::where('id', $data['products'][1])->with('brand', 'model', 'package')->first();
         $product[] = Product::where('id', $data['products'][2])->with('brand', 'model', 'package')->first();
-        if($product[0]->category_id == 3) {
-            $path = $product[0]->brand->name.'-'.$product[0]->model->name.'-and-'.$product[1]->brand->name.'-'.$product[1]->model->name.'-and-'.$product[2]->brand->name.'-'.$product[2]->model->name;
+        if(($product[0]->category_id == 1 && $product[1]->category_id == 1 && $product[2]->category_id == 1) || ($product[0]->category_id == 2 && $product[1]->category_id == 2 && $product[2]->category_id == 2) || ($product[0]->category_id == 3 && $product[1]->category_id == 3 && $product[2]->category_id == 3)) {
+            if($product[0]->category_id == 3) {
+                $path = $product[0]->brand->name.'-'.$product[0]->model->name.'-and-'.$product[1]->brand->name.'-'.$product[1]->model->name.'-and-'.$product[2]->brand->name.'-'.$product[2]->model->name;
+                return redirect()->route("compare", $path);
+            }
+
+            $path = $product[0]->brand->name.'-'.$product[0]->model->name.'-'.$product[0]->package->name.'-and-'.$product[1]->brand->name.'-'.$product[1]->model->name.'-'.$product[1]->package->name.'-and-'.$product[2]->brand->name.'-'.$product[2]->model->name.'-'.$product[2]->package->name;
             return redirect()->route("compare", $path);
         }
-
-        $path = $product[0]->brand->name.'-'.$product[0]->model->name.'-'.$product[0]->package->name.'-and-'.$product[1]->brand->name.'-'.$product[1]->model->name.'-'.$product[1]->package->name.'-and-'.$product[2]->brand->name.'-'.$product[2]->model->name.'-'.$product[2]->package->name;
-        return redirect()->route("compare", $path);
+        else {
+            return redirect()->route("compare");
+        }
     }
 }

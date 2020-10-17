@@ -55,7 +55,7 @@
     </a>
   </div>
   <div id="left-filter-brand" class="collapse show" data-parent="#left-filter">
-    <div class="card-body py-1 text-dark">
+    <div class="card-body py-1 text-dark scroll-y height-200">
       <ul class="list-group list-group-flush">
         @foreach($brands as $brand)
         <li class="list-group-item py-1">
@@ -107,7 +107,7 @@
     </a>
   </div>
   <div id="left-filter-body-type" class="collapse @if(isset($body_type_search)) show @endif" data-parent="#left-filter">
-    <div class="card-body py-1 text-dark">
+    <div class="card-body py-1 text-dark height-200 scroll-y">
       <ul class="list-group list-group-flush">
         @foreach($body_types as $body_type)
         @php($body = str_replace(' ', '-', $body_type->name))
@@ -180,12 +180,14 @@
     <div class="card-body py-1 text-dark">
       <ul class="list-group list-group-flush">
         @foreach($conditions as $condition)
+        @if($category == 'Car' || $condition->id != 2)
         <li class="list-group-item py-1">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="condition-{{ $condition->id }}" onclick="products.updateCondition('{{ $condition->name }}')" @if(isset($condition_search) && strpos(strtolower($condition_search), strtolower($condition->name)) !== false) checked @endif>
             <label class="custom-control-label" for="condition-{{ $condition->id }}">{{ $condition->name ?? 'Unnamed' }}</label>
           </div>
         </li>
+        @endif
         @endforeach
       </ul>
     </div>

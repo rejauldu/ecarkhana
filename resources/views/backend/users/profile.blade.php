@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="form-group col-md-6 col-sm-12">
                                             <label class="control-label">Your Email</label>
-                                            <input type="email" name="email" class="form-control" placeholder="username@example.com" value="{{ $user->email ?? '' }}">
+                                            <input type="email" name="email" class="form-control" placeholder="username@example.com" value="{{ $user->email ?? '' }}" disabled="disabled">
                                         </div>
                                         <div class="form-group col-md-12 col-sm-12">
                                             <label class="control-label">Contact Number</label>

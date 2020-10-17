@@ -304,7 +304,7 @@
                                         <input type="checkbox" class="custom-control-input" id="terms" v-model="terms">
                                         <label class="custom-control-label" for="terms">I agree to the <a class="btn btn-link text-primary py-0" href="#">Terms of Service</a> and <a class="btn btn-link text-primary py-0" href="#">Privacy Policy</a></label>
                                     </div>
-                                    <input type="hidden" name="category_id" value="1" />
+                                    <input type="hidden" name="category_id" value="3" />
                                     <input type="hidden" name="condition_id" value="3" />
                                     <input type="hidden" name="brand_id" v-model="brand.id" />
                                     <input type="hidden" name="model_id" v-model="model.id" />
@@ -509,14 +509,15 @@ End  Post Your Ad -->
                 this.search = '';
                 var e = document.querySelector('.horizontal-scroll');
                 var _this = this;
-                setTimeout(function() {
-                    if (e.offsetWidth < e.scrollWidth)
-                        _this.scrolledRight = false;
-                    else {
-                        _this.scrolledLeft = true;
-                        _this.scrolledRight = true;
-                    }
-                }, 1000);
+                if(e)
+                    setTimeout(function() {
+                        if (e.offsetWidth < e.scrollWidth)
+                            _this.scrolledRight = false;
+                        else {
+                            _this.scrolledLeft = true;
+                            _this.scrolledRight = true;
+                        }
+                    }, 0);
             },
             scrollLeft: function () {
                 var e = document.querySelector('.horizontal-scroll');
@@ -527,7 +528,7 @@ End  Post Your Ad -->
                     _this.scrolledLeft = true;
                 if (e.scrollLeft < (e.scrollWidth - e.offsetWidth))
                     _this.scrolledRight = false;
-                }, 1000);
+                }, 0);
             },
             scrollRight: function () {
                 var e = document.querySelector('.horizontal-scroll');
@@ -538,7 +539,7 @@ End  Post Your Ad -->
                         _this.scrolledRight = true;
                     if (e.scrollLeft > 0)
                         _this.scrolledLeft = false;
-                }, 1000);
+                }, 0);
             },
             openModal: function (p) {
                 if (p == 1) {
@@ -674,13 +675,11 @@ End  Post Your Ad -->
                 });
             },
             isSubmitable: function(e = null) {
-                $s = !(!this.photo || !this.price || !this.name || !this.otp_verified || !this.terms);
-                if(!$s && e) {
+                var s = !(!this.photo || !this.price || !this.name || !this.otp_verified || !this.terms);
+                if(!s && e) {
                     e.preventDefault();
-                } else if($s) {
-                    this.reset('brand', 'model', 'ownership', 'division', 'price');
                 }
-                return $s;
+                return s;
             },
             isEmpty: function(obj) {
                 return Object.keys(obj).length === 0;

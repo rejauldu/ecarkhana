@@ -27,15 +27,15 @@ Start Car Loan  Eligibility check-->
             <div class="col-md-2">
                 <div class="card  border-0  align-items-center">
                     <div class="card-image mt-0"><img class=" " :src="'/assets/insurance-company/'+c.logo" style="width: 160px; max-width: 160px;"></div>
-                    <a class="btn button red" href="#" @click.prevent="formSubmit(c)">Buy @Tk.@{{ grandTotal(c) }}</a>
+                    <a class="btn btn-danger" href="#" @click.prevent="formSubmit(c)">Buy @Tk.@{{ grandTotal(c) }}</a>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card border-0">
                     <div class="row">
                         <div class="col">
-                            <h4 class=" fz-22  pb-3 " style="text-align: center">@{{ c.name }}</h4>
-                            <hr class=" mt-0 mb-0" />
+                            <h4 class="pb-3 text-center">@{{ c.name }}</h4>
+                            <hr class="mt-0 mb-0" />
                         </div>
                     </div>
                     <div class="row">
@@ -61,7 +61,8 @@ Start Car Loan  Eligibility check-->
                         <div class="coverage">
                             <div class="cover-circle">
                                 <div v-if="type == types[1]">
-                                    <span class="cover__title" v-if="c">@{{ c.basic_coverage.length }}</span>Covers
+                                    <span class="cover__title" v-if="c && c.basic_coverage">@{{ c.basic_coverage.length }}</span>
+                                    <span class="cover__title" v-else>0</span>Covers
                                 </div>
                             </div>
                         </div>
@@ -260,14 +261,15 @@ Start Car Loan  Eligibility check-->
             calculateRate: function() {
                 for(let c = 0; c < this.companies.length; c++) {
                     this.companies[c].total_rate = 0;
-                    for(let i = 0; i < this.companies[c].basic_coverage && this.companies[c].basic_coverage.length; i++) {
-                        for(let j=0; j<this.coverages.length; j++) {
-                            if(this.companies[c].basic_coverage[i] == this.coverages[j].id) {
-                                this.companies[c].total_rate += Number(this.coverages[j].rate);
-                                break;
+                    if(this.companies[c].basic_coverage)
+                        for(let i = 0; i < this.companies[c].basic_coverage.length; i++) {
+                            for(let j=0; j<this.coverages.length; j++) {
+                                if(this.companies[c].basic_coverage[i] == this.coverages[j].id) {
+                                    this.companies[c].total_rate += Number(this.coverages[j].rate);
+                                    break;
+                                }
                             }
                         }
-                    }
                 }
             }
         },

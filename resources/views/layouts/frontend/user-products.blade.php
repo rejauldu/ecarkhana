@@ -17,7 +17,7 @@
                 </div>
                 <div class="display-6 my-0 owl-heading"><a href="{{ route('products.show', $product->id) }}" class="">{{ $product->name }}</a></div>
                 <div class="separator"></div>
-                <div class="text-center font-16">BDT {{ $product->msrp }}</h3>
+                <div class="text-center font-16">BDT {{ $product->msrp }}</div>
                 <div class="row text-left">
                     <div class="col-6 my-1">
                         <i class="fa fa-road"></i> {{ $product->brand->name ?? ''}}
