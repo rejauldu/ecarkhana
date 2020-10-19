@@ -63,6 +63,8 @@ class ProductController extends Controller {
      */
     public function manageIndex() {
         $user = Auth::user();
+        if($user->role_id == 1 && $user->user_type_id == 1)
+            return redirect()->route('ads');
         if($user->role_id>1)
             $products = Product::with('category')->orderBy('id', 'desc')->get();
         else

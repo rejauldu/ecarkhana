@@ -899,7 +899,6 @@
                 },
                 floatImage: function (e) {
                     var img = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('img.slick-active');
-                    console.log(img);
                     var cloned = img.cloneNode();
                     var coords = this.getCoords(img);
                     var cart_coords = this.getCoords(document.getElementById('cart'));
@@ -1009,7 +1008,9 @@
                 }
             },
             mounted: function () {
+                @if(isset($auction) && $auction)
                 this.countdown();
+                @endif
             }
         });
     </script>

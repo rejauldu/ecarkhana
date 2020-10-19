@@ -60,7 +60,7 @@ cart-listing  -->
                         <p>Enter your coupon code if you have one.</p>
                         <div class="coupon_form_inner">
                             <input type="text" placeholder="Coupon code">
-                            <input type="submit" value="Apply Coupon">
+                            <input type="submit" value="Apply Coupon" @click.prevent="">
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ cart-listing  -->
     var app2 = new Vue({
         el: '#cart-products',
         data: {
-            products: cart.products
+            products: JSON.parse(localStorage.cart) || []
         },
         methods: {
             remove: function (id) {

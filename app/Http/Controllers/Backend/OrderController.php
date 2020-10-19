@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Notification;
+use App\Notifications\OrderNotification;
 use Auth;
 use App\Order;
 use App\OrderDetail;
@@ -12,11 +16,12 @@ use App\Cashbook;
 use App\OrderStatus;
 use App\User;
 use App\Guest;
+use App\Product;
 
 class OrderController extends Controller {
 
     public function __construct() {
-        $this->middleware('auth', ['except' => ['store']]);
+        $this->middleware('auth', ['except' => ['store', 'orderComplete']]);
     }
 
     /**
@@ -53,7 +58,7 @@ class OrderController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(OrderRequest $request) {
         $inputs = ['name' => $request->name, 'billing_division_id' => $request->billing_division_id, 'billing_region_id' => $request->billing_region_id, 'billing_address' => $request->billing_address, 'phone' => $request->phone];
         if ($request->different_shipping == 'true') {
             $inputs['shipping_division_id'] = $request->shipping_division_id;
@@ -64,21 +69,39 @@ class OrderController extends Controller {
             $inputs['shipping_region_id'] = $request->billing_region_id;
             $inputs['shipping_address'] = $request->billing_address;
         }
+
+        $total = 0;
+        $password = false;
+
         $data = $request->only('payment_method');
         if (Auth::check()) {
             $user = Auth::user();
             $user->update($inputs);
             $data['customer_id'] = $user->id;
         } else {
-            $guest = Guest::create($inputs);
-            $data['guest_id'] = $guest->id;
+            $inputs['email'] = $request->email;
+            if($request->create_account) {
+                $password = str_random(8);
+                $inputs['password'] = Hash::make($password);
+                $user = User::create($inputs);
+                $data['customer_id'] = $user->id;
+            } else {
+                $guest = Guest::create($inputs);
+                $data['guest_id'] = $guest->id;
+                $user = $guest;
+            }
+            
         }
         $data['order_status_id'] = 3;
         $order = Order::create($data);
         for ($i = 0; $i < count($request->product_id); $i++) {
-            OrderDetail::create(['order_id' => $order->id, 'product_id' => $request->product_id[$i], 'quantity' => $request->quantity[$i]]);
+            $product = Product::find($request->product_id[$i]);
+            OrderDetail::create(['order_id' => $order->id, 'product_id' => $request->product_id[$i], 'quantity' => $request->quantity[$i], 'total' => $product->msrp*$request->quantity[$i]]);
+            $total += $product->msrp*$request->quantity[$i];
         }
-        return redirect()->route('order-complete')->with('message', 'Order created successfully');
+
+        $user->notify(new OrderNotification($order, $total, $password));
+        return redirect()->route('order-complete');
     }
 
     /**

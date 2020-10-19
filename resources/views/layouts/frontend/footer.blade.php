@@ -366,7 +366,7 @@ back to top -->
 <!-- custom -->
 <script type="text/javascript" src="{{ asset('js/custom.js') }}?110"></script>
 @yield('script')
-<script src="{{ asset('js/theme.js') }}?110" defer></script>
+<script src="{{ asset('js/theme.js') }}?113" defer></script>
 <script src="{{ asset('js/script.js') }}?110"></script>
 <script>
 (function () {

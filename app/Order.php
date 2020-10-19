@@ -47,7 +47,7 @@ class Order extends Model
 		return $details;
 	}
 	public function order_details() {
-		return $this->hasMany('App\OrderDetail');
+		return $this->hasMany('App\OrderDetail')->with('product');
 	}
 	public function customer() {
 		return $this->belongsTo('App\User', 'customer_id', 'id');

@@ -77,6 +77,8 @@ class UserController extends Controller {
      */
     public function edit($id) {
         $profile = User::with('payment', 'division', 'district', 'upazila', 'union', 'region', 'billing_division', 'billing_district', 'billing_upazila', 'billing_union', 'billing_region', 'shipping_division', 'shipping_district', 'shipping_upazila', 'shipping_union', 'shipping_region')->where('id', $id)->first();
+        if($profile->role_id == 1 && $profile->user_type_id==1)
+            return $this->profile();
         $payments = Payment::all();
         $divisions = Division::all();
         $districts = District::all();
@@ -162,7 +164,11 @@ class UserController extends Controller {
     }
 
     public function profile() {
-        $id = Auth::user()->id;
+        $u = Auth::user();
+        $id = $u->id;
+        if($u->role_id>1 || $u->user_type_id>1)
+            return redirect()->route('users.edit', $id);
+        
         $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products', 'division', 'region', 'billing_division', 'billing_region', 'shipping_division', 'shipping_region')->where('id', $id)->first();
         $sell = OrderDetail::whereHas('product', function($q) use($id) {
                             $q->where('supplier_id', $id);
@@ -177,7 +183,10 @@ class UserController extends Controller {
     }
 
     public function ads() {
-        $id = Auth::user()->id;
+        $u = Auth::user();
+        $id = $u->id;
+        if($u->role_id>1 || $u->user_type_id>1)
+            return redirect()->route('manage-products');
         $user = User::with('orders.status', 'orders.order_details.product', 'role', 'products.brand', 'products.model', 'products.category', 'products.order_details', 'products.supplier.region', 'products.supplier.division')->where('id', $id)->first();
         $sell = OrderDetail::whereHas('product', function($q) use($id) {
             $q->where('supplier_id', $id);

@@ -113,14 +113,6 @@ function displayPhotoOnSelect(input, id = 'display-photo-on-select') {
         });
     }, false);
 })();
-/* View port height matching */
-(function () {
-    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    var vp_h_55_md = document.querySelector('.vp-h-55-md');
-    if (w > 768 && vp_h_55_md)
-        vp_h_55_md.style.height = (h - 55) + 'px';
-})();
 /* Location control */
 (function () {
     locationHandle('division', 'district', 'upazila', 'union', 'region');
@@ -198,14 +190,14 @@ function locationAjaxCall(item, child) {
 })();
 /* Vue cart */
 (function () {
-    if (!localStorage.getItem("cart_products")) {
-        localStorage.cart_products = '[]';
+    if (!localStorage.getItem("cart")) {
+        localStorage.cart = '[]';
     }
     if (document.getElementById('cart'))
-        var cart = new Vue({
+        window.cart = new Vue({
             el: '#cart',
             data: {
-                products: JSON.parse(localStorage.cart_products)
+                products: JSON.parse(localStorage.cart)
             },
             methods: {
                 remove: function (id) {
@@ -230,7 +222,7 @@ function locationAjaxCall(item, child) {
             watch: {
                 products: {
                     handler: function (n, o) {
-                        localStorage.cart_products = JSON.stringify(n);
+                        localStorage.cart = JSON.stringify(n);
                         if (app2)
                             app2.products = n;
                     },

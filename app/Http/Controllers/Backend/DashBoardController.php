@@ -37,7 +37,10 @@ class DashBoardController extends Controller
 		$views = ProductService::getViewed();
 		$total_view = ProductService::getTotalView();
 		$cashbook = CashbookService::getAccount();
-		
+		$user = Auth::user();
+		if($user->role_id == 1 && Auth::user()->user_type_id == 1) {
+			return redirect()->route('profile');
+		}
         return view('backend.dashboard', compact('traffic', 'devices', 'browsers', 'status', 'orders', 'users', 'products', 'views', 'total_view', 'cashbook'));
     }
 

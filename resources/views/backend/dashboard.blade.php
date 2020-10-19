@@ -43,7 +43,7 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box bg-green">
+								<div class="small-box bg-success text-light">
 									<div class="inner">
 										<h3>{{ $status->total }}</h3>
 										<h4>Total Orders</h4>
@@ -56,7 +56,7 @@
 								<!-- /.info-box -->
 							</div>
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box bg-yellow">
+								<div class="small-box bg-warning text-dark">
 									<div class="inner">
 										<h3>{{ $status->sale }}</h3>
 										<h4>Total Sales</h4>
@@ -71,7 +71,7 @@
 							<!-- /.col -->
 							<!-- /.col -->
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box bg-blue">
+								<div class="small-box bg-primary text-white">
 									<div class="inner">
 										<h3>{{ $users }}</h3>
 										<h4>Registered Users</h4>
@@ -85,7 +85,7 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box bg-primary text-white">
+								<div class="small-box bg-success text-white">
 									<div class="inner">
 										<h3>{{ $products->total }}</h3>
 										<h4>Total products</h4>
@@ -99,7 +99,7 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box small-box bg-red">
+								<div class="small-box small-box bg-danger text-white">
 									<div class="inner">
 										<h3>{{ $products->out_of_stock }}</h3>
 										<h4>Out of stock</h4>
@@ -113,7 +113,7 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box bg-green">
+								<div class="small-box bg-primary text-white">
 									<div class="inner">
 										<h3>{{ $products->available }}</h3>
 										<h4>Active products</h4>
@@ -127,7 +127,7 @@
 							</div>
 							<!-- /.col -->
 							<div class="col-md-3 col-sm-6 col-12">
-								<div class="small-box bg-aqua">
+								<div class="small-box alert-danger">
 									<div class="inner">
 										<h3>{{ $user->unreadNotifications()->groupBy('notifiable_type')->count() }}</h3>
 										<h4>Unseen notifications</h4>

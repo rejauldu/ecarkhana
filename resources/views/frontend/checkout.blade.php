@@ -12,11 +12,16 @@
 
 <!--=================================
 checkout-listing  -->
-<section class="bike-checkout">
+<section class="bike-checkout pt-4">
     <div class="checkout-area">
         <div class="container">
 
             <div class="row">
+                <div class="col-12 mb-3">
+                    @if($errors->any())
+                    {!! implode('', $errors->all('<div class="alert alert-danger alert-dismissible text-center py-1 mb-1"><button type="button" class="close py-1" data-dismiss="alert">&times;</button>:message</div>')) !!}
+                    @endif
+                </div>
                 <div class="col-md-12">
                     <div class="coupon-accordion">
                         @guest
@@ -24,7 +29,6 @@ checkout-listing  -->
                         <h3>Returning customer? <span id="showlogin" class="text-danger">Click here to login</span></h3>
                         <div id="checkout-login" class="coupon-content" style="display: none;">
                             <div class="coupon-info">
-                                <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <p class="form-row-first">
@@ -54,7 +58,7 @@ checkout-listing  -->
                         <h3>Have a coupon? <span id="showcoupon" class="text-danger">Click here to enter your code</span></h3>
                         <div id="checkout_coupon" class="coupon-checkout-content" style="display: none;">
                             <div class="coupon-info">
-                                <form action="#">
+                                <form action="#" @submit.prevent="">
                                     <p class="checkout-coupon">
                                         <input type="text" name="coupon" placeholder="Coupon code">
                                         <input type="submit" value="Apply Coupon">
@@ -113,7 +117,7 @@ checkout-listing  -->
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email Address <span class="required">*</span></label>
-                                        <input type="email" name="email" value="{{ $profile->email ?? '' }}">
+                                        <input type="email" name="email" value="{{ $profile->email ?? '' }}" @auth disabled="" @endauth>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -129,12 +133,14 @@ checkout-listing  -->
                                     <textarea class="form-control" name="note" id="note" placeholder="Enter Note" title="Enter Note"></textarea>
                                 </div>
                             </div>
+                            @guest
                             <div class="col-md-12">
                                 <div class="checkout-form-list create-acc">
                                     <input id="cbox" type="checkbox" name="create_account" value="1">
                                     <label for="cbox">Create an account?</label>
                                 </div>
                             </div>
+                            @endguest
                             <div class="different-address">
                                 <div class="ship-different-title">
                                     <h3>
@@ -197,18 +203,18 @@ checkout-listing  -->
                                                 <input type="hidden" name="quantity[]" v-model="product.quantity" />
                                             </td>
                                             <td class="product-total">
-                                                <span class="amount">৳ @{{ product.msrp*product.quantity }}</span>
+                                                <span class="amount">BDT @{{ product.msrp*product.quantity }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">৳ @{{ subTotal }}</span></td>
+                                            <td><span class="amount">BDT @{{ subTotal }}</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">৳ @{{ total }}</span></strong>
+                                            <td><strong><span class="amount">BDT @{{ total }}</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -254,7 +260,7 @@ checkout-listing  -->
     var app2 = new Vue({
         el: '#checkout',
         data: {
-            products: cart.products
+            products: JSON.parse(localStorage.cart) || []
         },
         computed: {
             subTotal: function () {
