@@ -14,9 +14,9 @@ class Chat extends Model
     protected $fillable = [
         'message', 'file_name', 'type', 'sender_id', 'receiver_id', 'sent_at', 'viewed_at', 'deleted_by'
     ];
-	
+
 	protected $dates = ['sent_at', 'viewed_at', 'updated_at', 'created_at'];
-	
+
     /**
      * The attributes that should be cast to native types.
      *

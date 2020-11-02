@@ -21,7 +21,7 @@ class Bid extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -34,7 +34,7 @@ class Bid extends Model
 		'created_at' => 'datetime',
 		'valid_until' => 'datetime',
     ];
-	
+
 	public function user() {
 		return $this->belongsTo('App\User');
 	}

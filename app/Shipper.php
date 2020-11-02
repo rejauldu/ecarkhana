@@ -21,7 +21,7 @@ class Shipper extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\HomeSlider;
 use App\VersusSlider;
 use App\Product;
-use App\Car;
-use App\Dropdowns\UserType;
 use App\Dropdowns\KeyFeature;
 use App\Dropdowns\InteriorFeature;
 use App\Dropdowns\ExteriorFeature;
@@ -17,14 +14,10 @@ use App\Dropdowns\SafetySecurity;
 use App\Dropdowns\AdditionalFeature;
 use App\Dropdowns\AfterSellService;
 use App\Dropdowns\Condition;
-use App\LoanApplication;
-use App\Comment;
 use App\User;
 use Carbon\Carbon;
 use App\Locations\Division;
 use App\Locations\Region;
-use Auth;
-use App\OrderDetail;
 use App\Dropdowns\Brand;
 use App\Dropdowns\Model;
 use App\Dropdowns\BodyType;
@@ -33,7 +26,6 @@ use App\Dropdowns\BikerGender;
 use App\Dropdowns\FuelType;
 use App\Dropdowns\Package;
 use App\Dropdowns\Displacement;
-use App\Dropdowns\Ownership;
 use App\Blog;
 use App\Otp;
 use App\Advertisement;
@@ -107,10 +99,6 @@ class HomeController extends Controller {
     public function insuranceList() {
         return view('frontend.insurance-list');
     }
-
-    
-    
-
     public function auctionBiddingList($id) {
         $product = Product::with(['bids' => function($q) {
                         $q->with('user')->where('valid_until', '<=', Carbon::now())->latest();
@@ -190,49 +178,12 @@ class HomeController extends Controller {
     public function promotion() {
         return view('frontend.promotion');
     }
-    public function searchPage(Request $request) {
-        $search = '';
-        $products = Product::with('car', 'supplier');
-        if ($request->region_id) {
-            $products = $products->whereHas('supplier', function (Builder $query) {
-                $query->where('region_id', $request->region_id);
-            });
-        }
-        if ($request->brand_id) {
-            $products = $products->whereHas('car', function (Builder $query) {
-                $query->where('brand_id', $request->brand_id);
-            });
-        }
-        if ($request->model_id) {
-            $products = $products->whereHas('car', function (Builder $query) {
-                $query->where('model_id', $request->model_id);
-            });
-        }
-        if ($request->search) {
-            $search = $request->search;
-            $products = $products->whereHas('car', function (Builder $query) use($search) {
-                $query->whereHas('brand', function (Builder $q) use($search) {
-                            $q->where('name', $search);
-                        })
-                        ->orWhereHas('model', function (Builder $q) use($search) {
-                            $q->where('name', $search);
-                        })
-                        ->orWhereHas('package', function (Builder $q) use($search) {
-                            $q->where('name', $search);
-                        });
-            });
-        }
-        $products = $products->paginate(9);
-        $suppliers = User::where('user_type_id', 2)->orWhere('user_type_id', 3)->take(15)->get();
-        $type = 'Car';
-        return view('frontend.car-listing', compact('products', 'type', 'search', 'suppliers'));
-    }
 
     public function sellerMessage($id) {
         return view('frontend.seller-message');
     }
 
-    
+
 
     public function sellProductList() {
         $search = '';
@@ -356,7 +307,7 @@ class HomeController extends Controller {
         return (string) $region;
     }
 
-    
+
 
     public function sendOtp(Request $request) {
         $data = $request->except('_token', '_method');

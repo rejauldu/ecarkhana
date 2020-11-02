@@ -21,7 +21,7 @@ class HomeSlider extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

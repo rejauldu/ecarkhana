@@ -28,11 +28,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
-	
+
 	protected $dates = ['updated_at', 'created_at'];
-	
-    
-	
+
+
+
 	/**
 	 * Send the email verification notification.
 	 *
@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
 	{
 		$this->notify(new VerifyEmail); // my notification
 	}
-	
+
 	public function getDateAttribute() {
 		return $this->created_at->format('M Y');
 	}

@@ -21,7 +21,7 @@ class Otp extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

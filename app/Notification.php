@@ -24,7 +24,7 @@ class Notification extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -36,7 +36,7 @@ class Notification extends Model
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
-	
+
 	public function user() {
 		return $this->belongsTo('App\User', 'notifiable_id', 'id');
 	}

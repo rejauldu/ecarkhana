@@ -21,7 +21,7 @@ class Permission extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -33,7 +33,7 @@ class Permission extends Model
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
-	
+
 	public function role() {
 		return $this->belongsTo('App\Role');
 	}

@@ -21,7 +21,7 @@ class MakeAnOffer extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -34,7 +34,7 @@ class MakeAnOffer extends Model
 		'created_at' => 'datetime',
 		'viewed_at' => 'datetime',
     ];
-	
+
 	public function product() {
 		return $this->belongsTo('App\Product');
 	}

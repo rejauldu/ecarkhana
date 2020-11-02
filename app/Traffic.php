@@ -14,9 +14,9 @@ class Traffic extends Model
     protected $fillable = [
         'user_id', 'ip', 'latitude', 'longitude', 'browser', 'browser_version', 'platform', 'device', 'visited_page', 'updated_at', 'created_at'
     ];
-	
+
 	protected $dates = ['updated_at', 'created_at'];
-	
+
 	public function getDateAttribute() {
 		return $this->created_at->format('M Y');
 	}

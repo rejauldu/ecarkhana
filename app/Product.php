@@ -21,7 +21,7 @@ class Product extends Model
      * @var array
      */
     protected $hidden = [
-    	
+
     ];
 
     /**
@@ -29,7 +29,7 @@ class Product extends Model
      *
      * @var array
      */
-    
+
     public function category() {
     	return $this->belongsTo('App\Category');
     }

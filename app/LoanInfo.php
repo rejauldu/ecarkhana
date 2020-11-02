@@ -21,7 +21,7 @@ class LoanInfo extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

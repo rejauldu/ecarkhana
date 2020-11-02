@@ -21,7 +21,7 @@ class Role extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -33,7 +33,7 @@ class Role extends Model
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
-	
+
 	public function users() {
 		return $this->hasMany('App\User');
 	}

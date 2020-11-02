@@ -21,7 +21,7 @@ class Bicycle extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -33,7 +33,7 @@ class Bicycle extends Model
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
-	
+
 	public function brand() {
 		return $this->belongsTo('App\Dropdowns\Brand');
 	}

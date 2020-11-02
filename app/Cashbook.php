@@ -21,7 +21,7 @@ class Cashbook extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -33,7 +33,7 @@ class Cashbook extends Model
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
-	
+
 	public function order() {
 		return $this->belongsTo('App\Order');
 	}

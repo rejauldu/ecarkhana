@@ -21,7 +21,7 @@ class SubComment extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

@@ -22,7 +22,7 @@ class Order extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
 	protected $dates = ['required_at', 'paid_at', 'updated_at', 'created_at'];

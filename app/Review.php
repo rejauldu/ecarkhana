@@ -21,7 +21,7 @@ class Review extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -33,7 +33,7 @@ class Review extends Model
         'updated_at' => 'datetime',
 		'created_at' => 'datetime',
     ];
-	
+
 	public function user() {
 		return $this->belongsTo('App\User');
 	}

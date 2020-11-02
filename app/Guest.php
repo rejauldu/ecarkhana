@@ -9,7 +9,7 @@ class Guest extends Model
 {
 
 	use Notifiable;
-	
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,17 +24,17 @@ class Guest extends Model
      *
      * @var array
      */
-	
+
 	protected $dates = ['updated_at', 'created_at'];
-	
-    
-	
+
+
+
 	/**
 	 * Send the email verification notification.
 	 *
 	 * @return void
 	 */
-	
+
 	public function getDateAttribute() {
 		return $this->created_at->format('M Y');
 	}

@@ -21,7 +21,7 @@ class Bank extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

@@ -21,7 +21,7 @@ class Block extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**

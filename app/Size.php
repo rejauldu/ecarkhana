@@ -21,7 +21,7 @@ class Size extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
