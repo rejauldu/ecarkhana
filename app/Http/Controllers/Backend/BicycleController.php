@@ -225,7 +225,7 @@ class BicycleController extends Controller {
             }
         }
         
-        return redirect(route('bicycles.manage-bicycles'))->with('message', 'Bicycle created successfully');
+        return redirect(route('manage-bicycles'))->with('message', 'Bicycle created successfully');
     }
 
     /**
@@ -306,7 +306,7 @@ class BicycleController extends Controller {
             }
         }
         Bicycle::find($id)->update($data);
-        return redirect(route('bicycles.manage-bicycles'))->with('message', 'Bicycle updated successfully');
+        return redirect(route('manage-bicycles'))->with('message', 'Bicycle updated successfully');
     }
 
     /**

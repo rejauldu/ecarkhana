@@ -263,6 +263,12 @@ class CarController extends Controller {
             $new_name = 'panorama' . '.jpg';
             $panorama->move($destination_path, $new_name);
         }
+        $panorama_preview = $request->file('panorama_preview');
+        if ($panorama_preview) {
+            $destination_path = 'assets/products/cars/'.$car->id;
+            $new_name = 'panorama-preview' . '.jpg';
+            $panorama_preview->move($destination_path, $new_name);
+        }
         $files = $request->file('360');
         for ($i = 0; $i < count($files); $i++) {
             $file = $files[$i];
@@ -386,6 +392,12 @@ class CarController extends Controller {
             $new_name = 'panorama' . '.jpg';
             $panorama->move($destination_path, $new_name);
         }
+        $panorama_preview = $request->file('panorama_preview');
+        if ($panorama_preview) {
+            $destination_path = 'assets/products/cars/'.$id;
+            $new_name = 'panorama-preview' . '.jpg';
+            $panorama_preview->move($destination_path, $new_name);
+        }
         $files = $request->file('360');
         for ($i = 0; $i < count($files); $i++) {
             $file = $files[$i];
@@ -396,7 +408,7 @@ class CarController extends Controller {
             }
         }
         Car::find($id)->update($data);
-        return redirect(route('cars.manage-cars'))->with('message', 'Car updated successfully');
+        return redirect(route('manage-cars'))->with('message', 'Car updated successfully');
     }
 
     /**

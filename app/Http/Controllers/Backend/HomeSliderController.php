@@ -102,10 +102,10 @@ class HomeSliderController extends Controller
 				$new_name = $home_slider->id.'-image'.$i.'.'.$file->getClientOriginalExtension();
 				$file->move($destination_path, $new_name);
 				$data['image'.$i] = $new_name;
-				$home_slider->update($data);
 			}
 		}
-		return redirect(route('home-sliders.index'))->with('message', 'HomeSlider updated successfully');
+        $home_slider->update($data);
+		return redirect(route('home-sliders.index'))->with('message', 'Home Slider updated successfully');
     }
 
     /**

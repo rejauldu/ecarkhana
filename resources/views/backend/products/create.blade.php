@@ -46,6 +46,7 @@
                                             @if(isset($product))
                                             <input type="hidden" name="id" value="{{ $product->id }}" />
                                             @endif
+                                            <input type="hidden" name="region_id" value="{{ $user->region_id }}" />
                                             <div class="form-group">
                                                 <label for="category">Category</label>
                                                 <select id="category" name="category_id" class="custom-select" required onchange="updateCrossElements()">
@@ -107,7 +108,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="name">Name</label>
-                                                <input id="name" type="text" class="form-control" name="name" value="{{ $product->name ?? '' }}" placeholder="Enter Name" title="Enter Name" required/>
+                                                <input id="name" type="text" class="form-control" name="name" value="{{ $product->name ?? '' }}" placeholder="Enter Name" title="Enter Name"/>
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
@@ -123,7 +124,7 @@
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="view360">Images for 360<sup>0</sup> view</label>
+                                                <label for="view360">Product photos</label>
                                                 <image-update id="view360" stored_images="{{ $images ?? '[]' }}"></image-update>
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
@@ -142,7 +143,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="discount">Discount</label>
-                                                <input id="discount" type="number" class="form-control" name="discount" value="{{ $product->discount ?? '' }}" placeholder="Enter Discount percentage" title="Enter Discount %" required/>
+                                                <input id="discount" type="number" class="form-control" name="discount" value="{{ $product->discount ?? '' }}" placeholder="Enter Discount percentage" title="Enter Discount %"/>
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
@@ -189,7 +190,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="note">Note:</label>
-                                                <textarea name="note" class="form-control editor-tools" rows="5" id="note" required>{!! $product->note ?? '' !!}</textarea>
+                                                <textarea name="note" class="form-control editor-tools" rows="5" id="note">{!! $product->note ?? '' !!}</textarea>
                                                 <div class="valid-feedback">Valid.</div>
                                                 <div class="invalid-feedback">Please fill out this field.</div>
                                             </div>
@@ -214,11 +215,11 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <script>
-                                                    $('.editor-tools').summernote({
-                                                        placeholder: 'Enter note for your product',
-                                                        tabsize: 2,
-                                                        height: 100
-                                                    });
+    $('.editor-tools').summernote({
+        placeholder: 'Enter note for your product',
+        tabsize: 2,
+        height: 100
+    });
 </script>
 <script>
     (function () {

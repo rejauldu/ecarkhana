@@ -74,7 +74,7 @@
                                     <div class="form-group">
                                         <label for="loan_percentage">Loan percentage of total price</label>
                                         <div class="input-group">
-                                            <input id="loan_percentage" type="number" class="form-control" name="loan_percentage" value="{{ $bank->loan_percentage ?? '' }}" placeholder="Loan percentage" title="Enter Loan percentage" />
+                                            <input id="loan_percentage" type="number" step=".01" class="form-control" name="loan_percentage" value="{{ $bank->loan_percentage ?? '' }}" placeholder="Loan percentage" title="Enter Loan percentage" />
                                             <div class="input-group-append">
                                                 <span class="input-group-text">%</span>
                                             </div>

@@ -2,13 +2,13 @@
 Start Form -->
 
 
-<section id="filter-form" class="pt-0">
+<section id="filter-form" class="pt-0 z-index position-relative">
     <div class="container px-0">
         <nav>
-            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#tab-new" role="tab" aria-controls="nav-home" aria-selected="true">New</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tab-used" role="tab" aria-controls="nav-profile" aria-selected="false">Used</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#tab-recondition" role="tab" aria-controls="nav-contact" aria-selected="false">Recondition</a>
+            <div class="nav nav-tabs nav-fill" id="nav-tab">
+                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-new">New</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-used">Used</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-recondition">Recondition</a>
             </div>
         </nav>
 

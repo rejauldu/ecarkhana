@@ -452,3 +452,15 @@ function fadeOut() {
             item.addEventListener('transitionend', () => { item.style.opacity = '1'; item.remove();});
         });
 }
+/*Togglable left menu */
+(function() {
+    leftMenu();
+})();
+function leftMenu() {
+    var left_menu_toggle=document.getElementById("left-menu-toggle");
+    var left_menu=document.getElementById("left-menu");
+    if(left_menu_toggle && left_menu)
+        left_menu_toggle.addEventListener("click", function() {
+            left_menu.classList.toggle("left-menu-collapse");
+        });
+}

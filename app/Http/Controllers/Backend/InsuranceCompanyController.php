@@ -65,7 +65,7 @@ class InsuranceCompanyController extends Controller {
             $data['logo'] = $new_name;
         }
         InsuranceCompany::create($data);
-        return redirect(route('insurance-companies.index'))->with('message', 'InsuranceCompany created successfully');
+        return redirect(route('manage-insurance-companies'))->with('message', 'Insurance Company created successfully');
     }
 
     /**
@@ -127,7 +127,7 @@ class InsuranceCompanyController extends Controller {
         }
         $insurance_company->update($data);
 
-        return redirect(route('insurance-companies.index'))->with('message', 'InsuranceCompany updated successfully');
+        return redirect(route('manage-insurance-companies'))->with('message', 'Insurance Company updated successfully');
     }
 
     /**
@@ -140,7 +140,7 @@ class InsuranceCompanyController extends Controller {
         $insurance_company = InsuranceCompany::find($id);
         @unlink(public_path('assets/insurance-company/' . $insurance_company->logo));
         $insurance_company->delete();
-        return redirect()->back()->with('message', 'InsuranceCompany has been deleted');
+        return redirect()->back()->with('message', 'Insurance Company has been deleted');
     }
 
 }

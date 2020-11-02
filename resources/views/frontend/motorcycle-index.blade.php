@@ -285,14 +285,6 @@ End Used Cars In Your City And Budget -->
 Start Compare -->
 
 <section class="tg-haslayout tg-vehicle-compare">
-    <div class="tg-vstag">
-        <div class="holder">
-            <div class="tg-border-heading">
-                <h3>vs</h3>
-            </div>
-            <a href="{{ route('compare') }}">view now</a>
-        </div>
-    </div>
     <div id="tg-compare-slider" class="tg-compare-slider tg-comparebox swiper-container-horizontal swiper-container-fade">
         <div class="swiper-wrapper" style="transition-duration: 0ms;">
             @foreach($versus_sliders as $slider)
@@ -330,6 +322,14 @@ Start Compare -->
                     <figure class="tg-rightimginout">
                         <img src="{{ url('assets/versus-sliders') }}/{{ $slider->product2_image }}" alt="{{ $slider->product2->brand->name ?? ''}}">
                     </figure>
+                </div>
+                <div class="tg-vstag d-none cursor-pointer" onclick="location.href=document.getElementById('vs-slider-button')">
+                    <div class="holder">
+                        <div class="tg-border-heading">
+                            <h3>vs</h3>
+                        </div>
+                        <a id="vs-slider-button" href="{{ route('compare') }}/{{ $slider->product1->brand->name.'-'.$slider->product1->model->name.'-'.$slider->product1->package->name.'-and-'.$slider->product2->brand->name.'-'.$slider->product2->model->name.'-'.$slider->product2->package->name }}">view now</a>
+                    </div>
                 </div>
             </div>
             @endforeach
@@ -611,4 +611,11 @@ Start Compare -->
         localStorage.category_id = 2;
     })();
 </script>
+@endsection
+@section('style')
+<style>
+    .swiper-slide-active .tg-vstag {
+        display: block !important;
+    }
+</style>
 @endsection

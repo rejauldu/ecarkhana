@@ -50,7 +50,7 @@
                                     <div class="row">	
                                         <div class="col-6 form-group">
                                             <label for="body">Photo (900x300)</label>
-                                            <input type="file" id="photo" name="photo" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'photo-view')" accept="image/*" value="Upload image" @if(!isset($product->photo)) required @endif/>	
+                                            <input type="file" id="photo" name="photo" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'photo-view')" accept="image/*" value="Upload image" @if(!isset($post->photo)) required @endif/>	
                                             <div class="valid-feedback">Valid.</div>	
                                             <div class="invalid-feedback">Please fill out this field.</div>	
                                         </div>	
@@ -61,7 +61,7 @@
                                     <div class="row">	
                                         <div class="col-6 form-group">
                                             <label for="body">Thumbnail (300x300)</label>
-                                            <input type="file" id="thumbnail" name="thumbnail" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'thumbnail-view')" accept="image/*" value="Upload image" @if(!isset($product->thumbnail)) required @endif/>	
+                                            <input type="file" id="thumbnail" name="thumbnail" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'thumbnail-view')" accept="image/*" value="Upload image" @if(!isset($post->thumbnail)) required @endif/>	
                                             <div class="valid-feedback">Valid.</div>	
                                             <div class="invalid-feedback">Please fill out this field.</div>	
                                         </div>	

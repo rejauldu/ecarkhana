@@ -32,7 +32,7 @@
 						<table id="dataTables" class="display nowrap" cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<th>ID</th>
+									<th>Order ID</th>
 									<th>Customer</th>
 									<th>Status</th>
 									<th>Created</th>
@@ -42,8 +42,8 @@
 							<tbody>
 								@foreach($orders as $order)
 								<tr>
-									<td>{{ $order->id }}</td>
-									<td>{{ $order->customer->name ?? ''}}</td>
+									<td>EC#{{ $order->id }}</td>
+									<td>{{ $order->customer->name ?? $order->guest->name ?? '(Unnamed)' }}</td>
 									<td>{{ $order->status->name ?? ''}}</td>
 									<td>{{ $order->created_at->format('jS M Y') }}</td>
 									<td><a href="{{ route('orders.edit', $order->id) }}" class="text-primary fa fa-eye"></a></td>

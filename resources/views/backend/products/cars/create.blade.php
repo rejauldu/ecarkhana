@@ -209,7 +209,7 @@
                                                         <input id="boot-space" type="text" class="form-control" name="boot_space" value="{{ $car->boot_space ?? '' }}" placeholder="Enter Boot Space" title="Enter Boot Space" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="color">dashboard_ Color</label>
+                                                        <label for="color">dashboard Color</label>
                                                         <select id="color" name="dashboard_color_id" class="custom-select" required>
                                                             <option value="0" selected>--Select Color--</option>
                                                             @foreach($colors as $color)
@@ -221,10 +221,20 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-6 form-group">
-                                                            <input type="file" id="panorama" name="panorama" class="form-control bg-theme text-white" accept="image/*" value="Upload Panorama" />
+                                                            <label for="panorama">Internal view (panorama)</label>
+                                                            <input type="file" id="panorama" name="panorama" onchange="displayPhotoOnSelect(this, 'panorama-view')" class="form-control bg-theme text-white" accept="image/*" value="Upload Panorama" />
                                                         </div>
                                                         <div class="col-6 form-group">
-                                                            <img id="image1-view" style="width:50px; height:50px" src="{{ asset('/assets/products/cars') }}/{{ $car->id ?? '0'}}/panorama.jpg" class="img-thumbnail" alt="Car">
+                                                            <img id="panorama-view" style="width:50px; height:50px" src="{{ asset('/assets/products/cars') }}/{{ $car->id ?? '0'}}/panorama.jpg" class="img-thumbnail" alt="Car">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6 form-group">
+                                                            <label for="panorama">Preview photo (Internal)</label>
+                                                            <input type="file" id="panorama-preview" name="panorama_preview" onchange="displayPhotoOnSelect(this, 'panorama-preview-view')" class="form-control bg-theme text-white" accept="image/*" value="Upload Preview" />
+                                                        </div>
+                                                        <div class="col-6 form-group">
+                                                            <img id="panorama-preview-view" style="width:50px; height:50px" src="{{ asset('/assets/products/cars') }}/{{ $car->id ?? '0'}}/panorama-preview.jpg" class="img-thumbnail" alt="Car">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

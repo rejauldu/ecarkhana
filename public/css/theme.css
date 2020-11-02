@@ -697,6 +697,9 @@ table.dataTable thead .sorting_desc_disabled:before {
 .height-50 {
     height: 50px !important;
 }
+.height-55 {
+    height: 55px !important;
+}
 .height-60 {
     height: 60px !important;
 }
@@ -1317,4 +1320,16 @@ ul.bullet>li {
 /* background with small image */
 .bg-image {
     background-image: url("/assets/chat.jpg");
+}
+/*Togglable left menu */
+#left-menu {
+  transition: width 0.2s ease-out;
+  background-color: #f1f1f1;
+  width:230px;
+  overflow:hidden;
+  height:calc(100vh - 55px);
+  white-space:nowrap;
+}
+.left-menu-collpase {
+  width:0 !important;
 }

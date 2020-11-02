@@ -52,7 +52,7 @@
                 <a href="{{ route('cashbooks.index') }}"><i class="fa fa-bell"></i><span>{{ __('Cashbook') }}</span></a>
             </li>
             @endmoderator
-            <li class="treeview {{ Request::is('products*') || Request::is('cars*') || Request::is('motorcycles*') || Request::is('bicycles*') ? 'active' : '' }}">
+            <li class="treeview {{ Request::is('products*') || Request::is('manage-products*') || Request::is('cars*') || Request::is('manage-cars*') || Request::is('manage-motorcycles*') || Request::is('motorcycles*') || Request::is('manage-bicycles*') || Request::is('bicycles*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-product-hunt" aria-hidden="true"></i> <span>Product</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -71,7 +71,7 @@
                 </ul>
             </li>
             @dealeroradmin
-            <li class="treeview {{ Request::is('notifications*') ? 'active' : '' }}">
+            <li class="treeview {{ Request::is('notifications*') || Request::is('loan-infos') || Request::is('requested-more-infos*') || Request::is('make-an-offers*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-bell"></i><span>{{ __('Notification') }}</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -162,42 +162,6 @@
                 </ul>
             </li>
             @endmoderator
-            @moderator(Supplier)
-            <li class="treeview {{ Request::is('suppliers*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-industry" aria-hidden="true"></i> <span> {{ __('Supplier') }}</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('suppliers') ? 'active' : '' }}"><a href="{{ route('suppliers.index') }}"><i class="fa fa-circle-o"></i> Manage Supplier</a></li>
-                    <li class="{{ Request::is('suppliers/create') ? 'active' : '' }}"><a href="{{ route('suppliers.create') }}"><i class="fa fa-circle-o"></i> Add New Supplier</a></li>
-                </ul>
-            </li>
-            @endmoderator
-            @moderator(Category)
-            <li class="treeview {{ Request::is('categories*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-list" aria-hidden="true"></i> <span>Category</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('categories') ? 'active' : '' }}"><a href="{{ route('categories.index') }}"><i class="fa fa-circle-o"></i> Manage Category</a></li>
-                    <li class="{{ Request::is('categories/create') ? 'active' : '' }}"><a href="{{ route('categories.create') }}"><i class="fa fa-circle-o"></i> Add New Category</a></li>
-                </ul>
-            </li>
-            @endmoderator
-            @moderator(Payment)
-            <li class="treeview {{ Request::is('payments*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-credit-card" aria-hidden="true"></i> <span>Payment</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('payments') ? 'active' : '' }}"><a href="{{ route('payments.index') }}"><i class="fa fa-circle-o"></i> Manage Payment</a></li>
-                    <li class="{{ Request::is('payments/create') ? 'active' : '' }}"><a href="{{ route('payments.create') }}"><i class="fa fa-circle-o"></i> Add New Payment</a></li>
-                </ul>
-            </li>
-            @endmoderator
             @moderator(Payment)
             <li class="treeview {{ Request::is('banks*') || Request::is('manage-banks') ? 'active' : '' }}">
                 <a href="#">
@@ -222,18 +186,6 @@
                 </ul>
             </li>
             @endmoderator
-            @moderator(Unit)
-            <li class="treeview {{ Request::is('units*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-balance-scale" aria-hidden="true"></i> <span>Unit</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('units') ? 'active' : '' }}"><a href="{{ route('units.index') }}"><i class="fa fa-circle-o"></i> Manage Unit</a></li>
-                    <li class="{{ Request::is('units/create') ? 'active' : '' }}"><a href="{{ route('units.create') }}"><i class="fa fa-circle-o"></i> Add New Unit</a></li>
-                </ul>
-            </li>
-            @endmoderator
             @moderator(Location)
             <li class="treeview {{ Request::is('regions*') ? 'active' : '' }}">
                 <a href="#">
@@ -243,18 +195,6 @@
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('regions') ? 'active' : '' }}"><a href="{{ route('regions.index') }}"><i class="fa fa-circle-o"></i> Manage Region</a></li>
                     <li class="{{ Request::is('regions/create') ? 'active' : '' }}"><a href="{{ route('regions.create') }}"><i class="fa fa-circle-o"></i> Add New Region</a></li>
-                </ul>
-            </li>
-            @endmoderator
-            @moderator(Size)
-            <li class="treeview {{ Request::is('sizes*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-arrows-alt" aria-hidden="true"></i> <span>Size</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('sizes') ? 'active' : '' }}"><a href="{{ route('sizes.index') }}"><i class="fa fa-circle-o"></i> Manage Size</a></li>
-                    <li class="{{ Request::is('sizes/create') ? 'active' : '' }}"><a href="{{ route('sizes.create') }}"><i class="fa fa-circle-o"></i> Add New Size</a></li>
                 </ul>
             </li>
             @endmoderator
@@ -279,18 +219,6 @@
                 <ul class="treeview-menu">
                     <li class="{{ Request::is('order-statuses') ? 'active' : '' }}"><a href="{{ route('order-statuses.index') }}"><i class="fa fa-circle-o"></i> Manage Order Status</a></li>
                     <li class="{{ Request::is('order-statuses/create') ? 'active' : '' }}"><a href="{{ route('order-statuses.create') }}"><i class="fa fa-circle-o"></i> Add New Status</a></li>
-                </ul>
-            </li>
-            @endmoderator
-            @moderator(Shipper)
-            <li class="treeview {{ Request::is('shippers*') ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-ship" aria-hidden="true"></i> <span>Shipper</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{ Request::is('shippers') ? 'active' : '' }}"><a href="{{ route('shippers.index') }}"><i class="fa fa-circle-o"></i> Manage Shipper</a></li>
-                    <li class="{{ Request::is('shippers/create') ? 'active' : '' }}"><a href="{{ route('shippers.create') }}"><i class="fa fa-circle-o"></i> Add New Shipper</a></li>
                 </ul>
             </li>
             @endmoderator

@@ -47,7 +47,7 @@ class HomeController extends Controller {
      */
     public function index() {
         $home_sliders = HomeSlider::where('type', 'Car')->get();
-        $versus_sliders = VersusSlider::where('category_id', 1)->with('product1.brand', 'product2.brand')->get();
+        $versus_sliders = VersusSlider::where('category_id', 1)->with('product1.brand', 'product2.brand', 'product1.model', 'product2.model', 'product1.package', 'product2.package')->get();
         $advertisements = Advertisement::where('category_id', 1)->with('category')->latest()->get();
         $new_products = Product::where('category_id', 1)->where('condition_id', 1)->with('brand', 'car', 'supplier.region', 'region')->latest()->take(10)->get();
         $recondition_products = Product::where('category_id', 1)->where('condition_id', 2)->with('brand', 'car', 'supplier.region', 'region', 'supplier.division')->latest()->take(10)->get();
@@ -67,7 +67,7 @@ class HomeController extends Controller {
 
     public function motorcycleIndex() {
         $home_sliders = HomeSlider::where('type', 'Motorcycle')->get();
-        $versus_sliders = VersusSlider::where('category_id', 2)->with('product1.brand', 'product2.brand')->get();
+        $versus_sliders = VersusSlider::where('category_id', 2)->with('product1.brand', 'product2.brand', 'product1.model', 'product2.model')->get();
         $advertisements = Advertisement::where('category_id', 2)->with('category')->latest()->get();
         $new_products = Product::where('category_id', 2)->where('condition_id', 1)->with('brand', 'motorcycle.displacement', 'supplier.region', 'region', 'supplier.division')->latest()->take(10)->get();
         $used_products = Product::where('category_id', 2)->where('condition_id', 3)->with('brand', 'model', 'motorcycle.made_origin', 'supplier.region', 'region', 'supplier.division')->latest()->take(10)->get();

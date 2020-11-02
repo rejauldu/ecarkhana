@@ -25,11 +25,19 @@ class BlogController extends Controller {
     public function index(Request $request) {
         
         $posts = Blog::orderBy('id', 'desc');
-        if($request->category)
+        if($request->category) {
             $posts->where('category_id', $request->category);
+            if ($request->category == 2) {
+                $type = "Motorcycle";
+            } elseif ($request->category == 3) {
+                $type = "Bicycle";
+            } else {
+                $type = "Car";
+            }
+        }
         $posts = $posts->paginate(10);
         $categories = Category::all();
-        return view('backend.blogs.index', compact('posts', 'categories'));
+        return view('backend.blogs.index', compact('posts', 'categories', 'type'));
     }
 
     /**
@@ -71,12 +79,12 @@ class BlogController extends Controller {
         $thumbnail = $request->file('thumbnail');
         if ($thumbnail) {
             $destination_path = 'assets/blogs';
-            $new_name = time() . '-thumb.' . $file->getClientOriginalExtension();
-            $file->move($destination_path, $new_name);
+            $new_name = time() . '-thumb.' . $thumbnail->getClientOriginalExtension();
+            $thumbnail->move($destination_path, $new_name);
             $data['thumbnail'] = $new_name;
         }
         Blog::create($data);
-        return redirect(route('manage-index'))->with('message', 'Blog created successfully');
+        return redirect(route('manage-blogs'))->with('message', 'Blog created successfully');
     }
 
     /**
@@ -127,8 +135,8 @@ class BlogController extends Controller {
         $thumbnail = $request->file('thumbnail');
         if ($thumbnail) {
             $destination_path = 'assets/blogs';
-            $new_name = time() . '-thumb.' . $file->getClientOriginalExtension();
-            $file->move($destination_path, $new_name);
+            $new_name = time() . '-thumb.' . $thumbnail->getClientOriginalExtension();
+            $thumbnail->move($destination_path, $new_name);
             $data['thumbnail'] = $new_name;
             File::delete($directory . $post->thumbnail);
         }

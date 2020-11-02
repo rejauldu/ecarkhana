@@ -32,9 +32,9 @@
 						<div class="row pt-2">
 							<div class="col-12 col-md-12">
 								<ul class="nav nav-tabs">
-									<li class="nav-item"><a class="nav-link active" href="{{ route('cars.index') }}">Car</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{ route('motorcycles.index') }}">Motorcycle</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{ route('bicycles.index') }}">Bicycle</a></li>
+									<li class="nav-item"><a class="nav-link active" href="{{ route('manage-cars') }}">Car</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('manage-motorcycles') }}">Motorcycle</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ route('manage-bicycles') }}">Bicycle</a></li>
 								</ul>
 								<div class="tab-content mt-3">
 									<div class="tab-pane active">

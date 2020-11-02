@@ -246,7 +246,7 @@ class MotorcycleController extends Controller {
             }
         }
         
-        return redirect(route('motorcycles.manage-motorcycles'))->with('message', 'Motorcycle created successfully');
+        return redirect(route('manage-motorcycles'))->with('message', 'Motorcycle created successfully');
     }
 
     /**
@@ -336,7 +336,7 @@ class MotorcycleController extends Controller {
             }
         }
         Motorcycle::find($id)->update($data);
-        return redirect(route('motorcycles.index'))->with('message', 'Motorcycle updated successfully');
+        return redirect(route('manage-motorcycles'))->with('message', 'Motorcycle updated successfully');
     }
 
     /**

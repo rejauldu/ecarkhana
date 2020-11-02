@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Carbon\Carbon;
+use Notification as NotificationOnDemand;
 use App\Http\Requests\NotificationRequest;
 use App\Notifications\EmailNotification;
 use App\Notifications\FitResultNotification;
@@ -51,10 +52,15 @@ class NotificationController extends Controller {
                 $users = User::all();
                 NotificationFacade::send($users, new EmailNotification((object) $request->all()));
             } elseif ($request->user_amount == 'individual') {
-                User::where('email', $request->email)->first()->notify(new EmailNotification((object) $request->all()));
+                NotificationOnDemand::route('mail', $request->email)->notify(new EmailNotification((object) $request->all()));
             }
         } elseif (isset($request->database)) {
-            User::where('email', $request->email)->first()->notify(new DatabaseNotification((object) $request->all()));
+            if (isset($request->user_amount) && $request->user_amount == 'all-user') {
+                $users = User::all();
+                NotificationFacade::send($users, new DatabaseNotification((object) $request->all()));
+            } elseif ($request->user_amount == 'individual') {
+                NotificationOnDemand::route('mail', $request->email)->notify(new DatabaseNotification((object) $request->all()));
+            }
         }
         return redirect()->back()->with('message', 'Notification sent');
     }

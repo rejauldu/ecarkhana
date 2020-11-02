@@ -140,8 +140,6 @@
                                                         <label for="hub-quality">Hub Quality</label>
                                                         <input id="hub-quality" type="text" class="form-control" name="hub_quality" value="{{ $bicycle->hub_quality ?? '' }}" placeholder="Enter Hub Quality" title="Enter Hub Quality" />
                                                     </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label for="cassette">Cassette</label>
                                                         <input id="cassette" type="text" class="form-control" name="cassette" value="{{ $bicycle->cassette ?? '' }}" placeholder="Enter Cassette" title="Enter Cassette" />
@@ -159,6 +157,8 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label for="tyre-size">Tyre Size</label>
                                                         <input id="tyre-size" type="number" class="form-control" name="tyre_size" value="{{ $bicycle->tyre_size ?? '' }}" placeholder="Enter Tyre Size" title="Enter Tyre Size" />

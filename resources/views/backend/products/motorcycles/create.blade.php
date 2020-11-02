@@ -168,88 +168,10 @@
 														<label for="kerb-weight">Kerb Weight</label>
 														<input id="kerb-weight" type="text" class="form-control" name="kerb_weight" value="{{ $motorcycle->kerb_weight ?? '' }}" placeholder="Enter Kerb Weight" title="Enter Kerb Weight" />
 													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image1" name="image1" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image1-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image1-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image1 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image2" name="image2" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image2-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image2-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image2 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image3" name="image3" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image3-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image3-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image3 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image4" name="image4" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image4-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image4-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image4 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image5" name="image5" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image5-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image5-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image5 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image6" name="image6" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image6-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image6-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image6 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image7" name="image7" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image7-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image7-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image7 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image8" name="image8" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image8-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image8-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image8 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image9" name="image9" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image9-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image9-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image9 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-6 form-group">
-															<input type="file" id="image10" name="image10" class="form-control bg-theme text-white" onchange="displayPhotoOnSelect(this, 'image10-view')" accept="image/*" value="Upload image" />
-														</div>
-														<div class="col-6 form-group">
-															<img id="image10-view" style="width:50px; height:50px" src="{{ asset('/assets/products/motorcycles') }}/{{ $motorcycle->image10 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="motorcycle">
-														</div>
-													</div>
-												</div>
-												<div class="col-12 col-md-6">
+													<div class="form-group">
+                                                        <label for="color">Images for 360 view</label>
+                                                        <input type="file" id="360" name="360[]" class="form-control bg-theme text-white" accept="image/*" value="Upload image" multiple />
+                                                    </div>
 													<div class="form-group">
 														<label for="wheel-base">Wheel Base</label>
 														<input id="wheel-base" type="number" class="form-control" name="wheel_base" value="{{ $motorcycle->wheel_base ?? '' }}" placeholder="Enter Gear Number" title="Enter Gear Number" />
@@ -262,6 +184,8 @@
 														<label for="bore">Bore</label>
 														<input id="bore" type="text" class="form-control" name="bore" value="{{ $motorcycle->bore ?? '' }}" placeholder="Enter Bore" title="Enter Bore" />
 													</div>
+                                                </div>
+												<div class="col-12 col-md-6">
 													<div class="form-group">
 														<label for="stroke">Stroke</label>
 														<input id="stroke" type="text" class="form-control" name="stroke" value="{{ $motorcycle->stroke ?? '' }}" placeholder="Enter Stroke" title="Enter Stroke" />

@@ -33,17 +33,17 @@
 							<div class="col-12 col-sm-6">
 								<div class="img-thumbnail d-inline-block mb-3 p-3">
 									<h3>Shipping Address</h3>
-									<div>{{ $order->customer->name }}</div>
-									<div>{{ $order->customer->shipping_address }}</div>
-									<div><strong>{{ $order->customer->shipping_region->name }}</strong>, {{ $order->customer->shipping_division->name }}</div>
+									<div>{{ $order->customer->name ?? $order->guest->name ?? '(Unnamed)' }}</div>
+									<div>{{ $order->customer->shipping_address ?? $order->guest->shipping_address ?? '' }}</div>
+									<div><strong>{{ $order->customer->shipping_region->name ?? $order->guest->shipping_region->name ?? '' }}</strong>, {{ $order->customer->shipping_division->name ?? $order->guest->shipping_division->name ?? '' }}</div>
 								</div>
 							</div>
 							<div class="col-12 col-sm-6">
 								<div class="img-thumbnail d-inline-block mb-3 p-3">
 									<h3>Billing Address</h3>
-									<div>{{ $order->customer->name }}</div>
-									<div>{{ $order->customer->billing_address }}</div>
-									<div><strong>{{ $order->customer->billing_region->name }}</strong>, {{ $order->customer->billing_division->name }}</div>
+									<div>{{ $order->customer->name ?? $order->guest->name ?? '(Unnamed)' }}</div>
+									<div>{{ $order->customer->billing_address ?? $order->guest->billing_address ?? '' }}</div>
+									<div><strong>{{ $order->customer->billing_region->name ?? $order->guest->billing_region->name ?? '' }}</strong>, {{ $order->customer->billing_division->name ?? $order->guest->billing_division->name ?? '' }}</div>
 								</div>
 							</div>
 							<div class="col-12"><!--left col-->
