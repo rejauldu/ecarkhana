@@ -262,7 +262,7 @@
                             </div>
                             <div v-if="!isEmpty(region)" class="list-group-item-danger mb-3 px-3">Select Region to change</div>
                             <ul class="list-group list-group-flush" id="cities">
-                                
+
                                 <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d" :class="{'text-danger': d.id == division.id}">
                                     <div>@{{ d.name }}</div>
                                     <div :id="'regions-'+d.id">
@@ -486,13 +486,13 @@ End  Post Your Ad -->
             images: [],
             cover_image: 0,
             photo: 0,
-            name: '',
-            phone: '',
+            name: '{{ $user->name ?? "" }}',
+            phone: '{{ $user->phone ?? "" }}',
             note: '',
             terms: '',
             otp: '',
             otp_sent: false,
-            otp_verified: false,
+            otp_verified: @auth true @else false @endauth,
             countDown: 60
         },
         methods: {

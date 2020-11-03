@@ -689,11 +689,13 @@
 
 
 <!--=================================End What a new button -->
+@if($product->supplier_id)
 <div class="communication-box">
     <div class="fabs">
         <a href="{{ route('chats.show', $product->supplier_id) }}" id="prime" class="fab"><i class="fa fa-comments-o"></i></a>
     </div>
 </div>
+@endif
 @endsection
 @section('style')
 <style>
@@ -948,7 +950,7 @@
     }
 
 
-    //------------------------------- 
+    //-------------------------------
     function addNavigation() {
     stage.onMouseOver = mouseOver;
     stage.onMouseDown = mousePressed;

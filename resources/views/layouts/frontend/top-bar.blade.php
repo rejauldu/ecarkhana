@@ -35,21 +35,17 @@
                             <div class="shopping-cart">
                                 <div class="shopping-cart-header">
                                     <i class="fa fa-shopping-cart cart-icon"></i><span class="badge total-product">@{{ totalProduct }}</span>
-                                    <div class="shopping-cart-total">
-                                        <span class="lighter-text">Total:</span>
-                                        <span class="main-color-text total-cost"></span>
-                                    </div>
                                 </div>
                                 <!--end shopping-cart-header -->
 
-                                <ul class="shopping-cart-items">
+                                <ul class="shopping-cart-items pl-0">
                                     <li class="clearfix" v-for="product in products">
                                         <img v-bind:src="product.image1" alt="item1" />
-                                        <span class="item-name">@{{ product.name }}</span>
+                                        <span class="item-name mr-2">@{{ product.name }}</span>
                                         <span class="item-detail owl-paragraph">@{{ product.note }}</span>
                                         <span class="item-price">Tk.@{{ product.msrp }}</span>
                                         <span class="item-quantity">Quantity: @{{ product.quantity }}</span>
-                                        <span class="sms-cart-delete" @click.prevent="remove(product.id)"><i class="fa fa-trash"></i></span>
+                                        <span class="position-absolute right-0 top-0 text-danger" @click.prevent="remove(product.id)"><i class="fa fa-trash"></i></span>
                                     </li>
                                 </ul>
                                 <div class="sms-ecommerce-btn">

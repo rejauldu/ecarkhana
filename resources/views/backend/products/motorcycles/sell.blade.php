@@ -33,6 +33,10 @@
                             <label for="ownership" class=" cursor-pointer">Ownership</label>
                         </div>
                         <div class="form-group form-label-group">
+                            <input type="text" class="form-control bg-light" id="registration_year" placeholder="Select Registration Year" readonly="" v-model="registration_year" @click.prevent="openModal(5)" />
+                            <label for="registration_year" class=" cursor-pointer">Registration Year</label>
+                        </div>
+                        <div class="form-group form-label-group">
                             <input type="text" class="form-control bg-light" id="region" placeholder="Select Area" readonly="" v-model="region.name" @click.prevent="openModal(6)" />
                             <label for="region" class=" cursor-pointer">Area</label>
                         </div>
@@ -235,7 +239,7 @@
                             </div>
                             <div v-if="!isEmpty(region)" class="list-group-item-danger mb-3 px-3">Select Region to change</div>
                             <ul class="list-group list-group-flush" id="cities">
-                                
+
                                 <li class="list-group-item list-group-item-action py-1 cursor-pointer" v-for="d in filteredDivisions" @click.prevent="regionsByDivision(d.name); division = d" :class="{'text-danger': d.id == division.id}">
                                     <div>@{{ d.name }}</div>
                                     <div :id="'regions-'+d.id">
@@ -450,13 +454,13 @@ End  Post Your Ad -->
             images: [],
             cover_image: 0,
             photo: 0,
-            name: '',
-            phone: '',
+            name: '{{ $user->name ?? "" }}',
+            phone: '{{ $user->phone ?? "" }}',
             note: '',
             terms: '',
             otp: '',
             otp_sent: false,
-            otp_verified: false,
+            otp_verified: @auth true @else false @endauth,
             countDown: 60
         },
         methods: {

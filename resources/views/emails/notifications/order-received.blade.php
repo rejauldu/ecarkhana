@@ -21,15 +21,17 @@
 				<p><strong>Note:</strong> {{ $order->note ?? '' }}</p>
 			</div>
 			<div style="width:100%">
-				<span style="text-transform: uppercase;">Order ID: {{ env('APP_NAME_SHORT') ?? '' }}{{ $order->id ?? '' }}</span><br/>
+				<span style="text-transform: uppercase;">Order ID: EC#{{ env('APP_NAME_SHORT') ?? '' }}{{ $order->id ?? '' }}</span><br/>
 				<span style="text-transform: uppercase; color:#555">Order Date: {{ $order->created_at->format('jS M Y') ?? '' }}</span>
 			</div>
 			<hr style="color:#555; border-top:1px dotted #555;">
 			<div style="width:100%; height:30px;"></div>
-			
+
 			<div style="width:100%">
             	<table style="width:100%">
+                    @php($total = 0)
             		@foreach($order->order_details as $detail)
+                        @php($total += $detail->total ?? 0)
             		<tr>
             			<td>
             				<img src="{{ url('/assets/products') }}/{{ $detail->product->image1 ?? 'not-found.jpg' }}" alt="{{ $detail->product->name }}" style="width:100px; height:50px; border-radius:5px" />
@@ -38,13 +40,13 @@
             				{{ $detail->product->name }}
             			</td>
             			<td>
-            				{{ $detail->product->msrp }}
+            				BDT {{ $detail->product->msrp }}
             			</td>
             			<td>
             				{{ $detail->quantity ?? 0 }}
             			</td>
             			<td>
-            				{{ $detail->total ?? 0 }}
+            				BDT {{ $detail->total ?? 0 }}
             			</td>
             		</tr>
             		@endforeach
@@ -53,7 +55,7 @@
             				Total Price
             			</th>
             			<th>
-            				{{ $order->total ?? 0 }}
+            				BDT {{ $total ?? 0 }}
             			</th>
             		</tr>
             	</table>

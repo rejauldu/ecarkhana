@@ -692,7 +692,7 @@
                             </div>
 
                         </div>
-                        
+
                         </br>
                         <form class="gray-form" action="{{ route('requested-more-infos.store') }}" method="post">
                             @if($product->supplier_id)
@@ -810,11 +810,13 @@
 
 
     <!--=================================End What a new button -->
+    @if($product->supplier_id)
     <div class="communication-box">
         <div class="fabs">
             <a href="{{ route('chats.show', $product->supplier_id) }}" id="prime" class="fab"><i class="fa fa-comments-o"></i></a>
         </div>
     </div>
+    @endif
     @endsection
     @section('style')
     <style>

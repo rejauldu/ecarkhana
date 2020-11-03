@@ -12,7 +12,7 @@ class HomeSlider extends Model
      * @var array
      */
     protected $fillable = [
-        'type', 'number', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'title', 'description', 'updated_at', 'created_at'
+        'device', 'type', 'number', 'image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'title', 'description', 'updated_at', 'created_at'
     ];
 
     /**

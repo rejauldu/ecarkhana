@@ -33,6 +33,7 @@
 							<thead>
 								<tr>
 									<th>ID</th>
+                                    <th>Device</th>
 									<th>Type</th>
 									<th>Image</th>
 									<td>Title</td>
@@ -46,6 +47,7 @@
 								@foreach($home_sliders as $home_slider)
 								<tr>
 									<td>{{ $home_slider->id }}</td>
+                                    <td>{{ $home_slider->device }}</td>
 									<td>{{ $home_slider->type }}</td>
 									<td><img style="width:50px; height:50px" src="{{ asset('/assets/home-sliders') }}/{{ $home_slider->image1 ?? 'not-found.jpg'}}" class="img-thumbnail" alt="Slider" /></td>
 									<td>{{ $home_slider->title }}</td>
@@ -59,6 +61,7 @@
 							<tfoot>
 								<tr>
 									<th>ID</th>
+                                    <td>Device</td>
 									<th>Type</th>
 									<th>Image</th>
 									<td>Title</td>

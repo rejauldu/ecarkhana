@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Http\Controllers\Controller;
 use App\HomeSlider;
 use App\VersusSlider;

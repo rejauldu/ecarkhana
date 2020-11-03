@@ -38,7 +38,7 @@ class OrderController extends Controller {
                     $q->where('supplier_id', $user->id);
                 });
             });
-        $orders = $orders->orderBy('id', 'desc')->get();
+        $orders = $orders->latest()->get();
         return view('backend.orders.index', compact('orders'));
     }
 
@@ -90,7 +90,7 @@ class OrderController extends Controller {
                 $data['guest_id'] = $guest->id;
                 $user = $guest;
             }
-            
+
         }
         $data['order_status_id'] = 3;
         $order = Order::create($data);

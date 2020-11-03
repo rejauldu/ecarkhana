@@ -447,13 +447,13 @@ End  Post Your Ad -->
             images: [],
             cover_image: 0,
             photo: 0,
-            name: '',
-            phone: '',
+            name: '{{ $user->name ?? "" }}',
+            phone: '{{ $user->phone ?? "" }}',
             note: '',
             terms: '',
             otp: '',
             otp_sent: false,
-            otp_verified: false,
+            otp_verified: @auth true @else false @endauth,
             countDown: 60
         },
         methods: {
