@@ -904,10 +904,14 @@
             height:40px;
             margin:8px 0;
         }
+        .border-menu {
+            border-color:#F3F3F3 !important;
+        }
         .search-form .input-group {
             width: 100%;
             transition: 0.2s all linear;
             position:absolute;
+            box-shadow: 0 0 2px #555;
         }
         .search-form .form-control {
             height:40px;
@@ -916,8 +920,7 @@
             margin: 0;
             border: 0;
             transition: 0.2s all linear;
-            background-color: #2f3640;
-            color: #FFF;
+            background-color: #374850;
             box-shadow:none;
             padding-left:10px;
         }
@@ -925,8 +928,8 @@
             width:250px;
         }
         .search-form .input-group-text {
-            background:#2f3640;
-            border-color:#2f3640;
+            background:#374850;
+            border-color:#374850;
         }
         .search-form .input-group:hover .form-control, .search-form .input-group .form-control:focus {
             width:210px;

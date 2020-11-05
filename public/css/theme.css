@@ -101,24 +101,6 @@ body {
 .text-small, .text-8, .font-8 {
     font-size:8px !important;
 }
-.text-9, .font-9 {
-    font-size:9px !important;
-}
-.text-10, .font-10 {
-    font-size:10px !important;
-}
-.text-11, .font-11 {
-    font-size:11px !important;
-}
-.text-12, .font-12 {
-    font-size:12px !important;
-}
-.text-13, .font-13 {
-    font-size:13px !important;
-}
-.text-14, .font-14 {
-    font-size:14px !important;
-}
 /* Dashboard menu */
 .list-group-transparent .list-group-item {
     background:#343a40;
@@ -1048,6 +1030,9 @@ table.dataTable thead .sorting_desc_disabled:before {
 .right-15 {
     right:15px;
 }
+.font-9 {
+    font-size:9px !important;
+}
 .font-10 {
     font-size:10px;
 }
@@ -1098,6 +1083,12 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 .font-120 {
     font-size:120px;
+}
+.shadow-inner {
+    box-shadow: inset 3px 3px 4px #000;
+}
+.shadow-inner-light {
+    box-shadow: inset 3px 3px 4px #AAA;
 }
 .z-index {
     z-index:1;
@@ -1150,6 +1141,18 @@ ul.bullet>li {
 .bg-white-transparent,.bg-white-transparent-fixed {
     background:#ffffffcc;
 }
+.bg-black {
+    background:#000 !important;
+}
+.text-black {
+    color:#000 !important;
+}
+.text-white {
+    color:#FFF !important;
+}
+.bg-white {
+    background: #FFF !important;
+}
 /*Trigger stuck event */
 .sticky-top {
     top:-1px !important;
@@ -1172,9 +1175,6 @@ ul.bullet>li {
 }
 .tooltip.bs-tooltip-top .arrow:before {
     border-top-color: #EDD !important;
-}
-.bg-white {
-    background: #FFF !important;
 }
 /* Zoom on hover */
 .zoom-hover, .zoom-hover-1, .zoom-hover-2, .zoom-hover-3, .zoom-hover-4, .zoom-hover-5, .zoom-hover-1-n, .zoom-target, .zoom-target-1, .zoom-target-2, .zoom-target-3, .zoom-target-4, .zoom-target-5, .zoom-target-1-n {

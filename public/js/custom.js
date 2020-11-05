@@ -56,10 +56,10 @@ var SHOWROV = {};
         smsToggle.on('click', function() {
             if ($(this).hasClass('open')) {
                 $(this).removeClass('open');
-                $(this).siblings('.sms-main-menu').removeClass('open');
+                $("body").find('.sms-main-menu').removeClass('open');
             } else {
                 $(this).addClass('open');
-                $(this).siblings('.sms-main-menu').addClass('open');
+                $("body").find('.sms-main-menu').addClass('open');
             }
         });
 
@@ -123,7 +123,7 @@ var SHOWROV = {};
         Cart-dropdown menu
         *************************/
 
-        var cartmenuToggle = $('#cart');
+        var cartmenuToggle = $('.cart-toggler');
         cartmenuToggle.on('click', function() {
             $(".shopping-cart").toggleClass("active");
         });
@@ -313,7 +313,7 @@ var SHOWROV = {};
     });
 
     /*************************
-    Featured Cars  owl carousel 
+    Featured Cars  owl carousel
     *************************/
     SHOWROV.carousel = function() {
         $(".owl-carousel").each(function() {
@@ -373,7 +373,7 @@ var SHOWROV = {};
     });
 
     /*************************
-          Slick slider  
+          Slick slider
     *************************/
     SHOWROV.slickslider = function() {
         if ($(".slider-slick").exists()) {

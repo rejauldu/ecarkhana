@@ -14,24 +14,6 @@ a, .btn {
     transition: all 0.5s ease-out 0s;
 }
 
-a:focus {
-    text-decoration: none !important;
-}
-
-a:focus, a:hover {
-    color: #db2d2e;
-    text-decoration: none !important;
-}
-
-a, button, input {
-    outline: none !important;
-    color: #db2d2e;
-}
-
-input:focus, textarea:focus, select:focus {
-    outline: none !important;
-}
-
 .uppercase {
     text-transform: uppercase;
 }
@@ -889,16 +871,6 @@ li span.toggle:before {
     padding: 2px 8px;
 }
 
-.header_wrap .button.red a {
-    color: #fff;
-    font-size: 14px;
-    outline: none !important;
-}
-
-.header_wrap .button.red a:hover {
-    outline: none !important;
-}
-
 li.sms-focus {
     transition: all 0.5s;
 }
@@ -920,10 +892,6 @@ li.sms-focus {
     background: #f7f7f7;
     border: none;
     border-radius: 5px;
-}
-
-.menu-wrapper.text-center .sms-menu-toggle:focus {
-    outline: none;
 }
 
 .menu-wrapper.text-center .sms-menu-toggle div {
@@ -6295,10 +6263,6 @@ button.required {
     background-color: #68768A;
 }
 
-.date-picker .input button::focus {
-    outline: 0;
-}
-
 .date-picker .calendar {
     position: relative;
     width: 100%;
@@ -6534,12 +6498,6 @@ form.search-wrapper {
     border-radius: 3px 0 0 3px;
 }
 
-.search-wrapper input:focus {
-    outline: 0;
-    background: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
-}
-
 .search-wrapper input::-webkit-input-placeholder {
     color: #999;
     font-weight: normal;
@@ -6579,11 +6537,6 @@ form.search-wrapper {
 
 .search-wrapper button:hover {
     background: #e54040;
-}
-
-.search-wrapper button:active, .search-wrapper button:focus {
-    background: #c42f2f;
-    outline: 0;
 }
 
 .search-wrapper button:before {
@@ -6764,22 +6717,6 @@ span.remaining {
 
 .seller-tab-area .sms-up {
     margin-top: 20px;
-}
-
-.seller-tab-area .sms-up .btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
 }
 
 .seller-tab-area .sms-up .btn.btn-default.btn-file {
@@ -7666,20 +7603,6 @@ a.active small {
     font-size: 15px;
 }
 
-.chat_field {
-    position: relative;
-    margin: 5px 0 5px 0;
-    width: 50%;
-    font-family: 'Roboto';
-    font-size: 12px;
-    line-height: 30px;
-    font-weight: 500;
-    color: #4b4b4b;
-    border: none;
-    outline: none;
-    display: inline-block;
-}
-
 .chat_field.chat_message {
     height: 30px;
     resize: none;
@@ -7899,24 +7822,6 @@ a.active small {
     font-size: 11px;
 }
 
-.chat_form .get-notified input {
-    margin: 2px 0 0 0;
-    border: 1px solid #83c76d;
-    max-width: 83%;
-    position: relative;
-    width: 90%;
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 500;
-    color: #4b4b4b;
-    outline: none;
-    background: #fff;
-    display: inline-block;
-    resize: none;
-    padding: 5px;
-    border-radius: 3px;
-}
-
 .chat_form .get-notified i {
     background: #db2d2e;
     width: 30px;
@@ -7945,42 +7850,6 @@ a.active small {
 
 a.fab.is-float.is-visible i:before {
     content: '\f00d';
-}
-
-.chat_form .message_form textarea {
-    margin: 5px 0 5px 0;
-    border: 1px solid #e0e0e0;
-    position: relative;
-    width: 100%;
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 500;
-    color: #4b4b4b;
-    outline: none;
-    background: #fff;
-    display: inline-block;
-    resize: none;
-    padding: 5px;
-    border-radius: 3px;
-}
-
-.chat_form .message_form button {
-    margin: 5px 0 5px 0;
-    border: 1px solid #e0e0e0;
-    position: relative;
-    width: 100%;
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 500;
-    color: #fff;
-    outline: none;
-    background: #fff;
-    display: inline-block;
-    resize: none;
-    padding: 5px;
-    border-radius: 3px;
-    background: #db2d2e;
-    cursor: pointer;
 }
 
 strong.chat_time {
@@ -9391,19 +9260,6 @@ div#four .mesuarement-size .sms-btttn-cos #next-4, div#four .mesuarement-size .s
     margin: 0 auto;
 }
 
-.form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border: none;
-    outline: none !important;
-    box-shadow: 0 0 0 1px rgba(219, 45, 46, 0.52);
-}
-
-.button:focus, .btn.btn-block:focus {
-    color: #ffffff;
-    outline: none !important;
-}
-
 /* add to compare */
 
 .m-b30 {
@@ -9718,3 +9574,4 @@ h3.listClose {
 .swiper-slide-active .tg-vstag {
     display: block !important;
 }
+/*Menubar*/

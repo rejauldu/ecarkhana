@@ -1,3 +1,6 @@
+@if(!isset($type))
+    @php($type = 'Car')
+@endif
 @computer
 <header id="header" class="defualt">
     <div class="topbar">
@@ -31,7 +34,7 @@
                             </ul>
                         </div>
                         @endauth
-                        <div class="sms-menu-add-cart" id="cart">
+                        <div class="sms-menu-add-cart cart-toggler" id="cart">
                             <a href="#"><i class="fa fa-shopping-cart"></i> Cart <span class="badge total-product">@{{ totalProduct }}</span></a>
                             <div class="shopping-cart">
                                 <div class="shopping-cart-header">
@@ -56,9 +59,6 @@
                             </div>
                         </div>
                         <div class="sell-car-btn">
-                            @if(!isset($type))
-                            @php($type = 'Car')
-                            @endif
                             <a href="{{ route('sell-'.strtolower($type)) }}" class="button red">Sell {{ $type ?? 'Car' }}</a>
                         </div>
                         <div>
@@ -119,7 +119,7 @@
                                         <!-- <li><a href="#">Sell Cars</a> </li> -->
                                         <li><a href="{{ route('compare-'.strtolower($type)) }}">Comparison</a> </li>
                                         <li><a href="{{ route('auction-products') }}">Auction</a> </li>
-                                        <!-- <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li> -->
+                                    <!-- <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li> -->
                                     </ul>
                                 </nav>
                             </div>
@@ -132,35 +132,90 @@
     <!-- Navigation end -->
 </header>
 @else
-<header class="container-fluid">
-    <div class="row overflow-hidden height-55">
-        <div class="col-4 px-1">
+<div class="height-55"></div>
+<header class="container-fluid position-fixed z-index-99 top-0">
+
+    <div class="row overflow-hidden height-55 bg-black">
+        <div class="col-3 px-1">
             <form class="search-form" action="/search">
                 <div class="input-group flex-nowrap">
                     <input type="text" class="form-control" placeholder="Search">
                     <div class="input-group-append">
-                        <button class="input-group-text"><i class="fa fa-search"></i></button>
+                        <button class="input-group-text text-secondary"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-1 px-1">
             <div class="height-40 position-relative menubar-login text-center">
-                <a href="#" class="btn btn-danger p-0 width-20 height-20 position-center rounded-circle line-height-20 border-0"><i class="font-12 fa fa-user height-20 line-height-20"></i></a>
+                <a href="#" class="btn text-danger p-0 width-20 height-20 position-center rounded line-height-20 border-0" data-toggle="modal" data-dismiss="modal" data-target="#loginform"><i class="display-6 fa fa-user height-20 line-height-20"></i></a>
             </div>
         </div>
-        <div class="col-4 px-1">
-            <a href="#" class="menubar-logo"><img src="{{ asset('/assets/logo.png') }}" class="w-100 mh-100 position-center px-2"/></a>
+        <div class="col-5 px-1">
+            <a href="#" class="menubar-logo"><img src="{{ asset('/assets/logo-text.png') }}" class="w-100 mh-100 position-center px-2"/></a>
         </div>
         <div class="col-1 px-1">
             <div class="height-40 position-relative menubar-login text-center">
-                <a href="#" class="btn btn-danger p-0 width-20 height-20 position-center rounded-circle line-height-20 border-0"><i class="font-12 fa fa-user height-20 line-height-20"></i></a>
+                <a href="#" class="btn text-danger p-0 width-20 height-20 position-center rounded line-height-20 border-0 cart-toggler">
+                    <i class="display-6 fa fa-shopping-cart height-20 line-height-20"></i>
+                </a>
             </div>
         </div>
         <div class="col-2 px-1">
-            <div class="height-40 position-relative menubar-login text-center">
-                <a href="#" class="btn btn-danger p-0 width-20 height-20 position-center rounded-circle line-height-20 border-0"><i class="font-12 fa fa-user height-20 line-height-20"></i></a>
+            <div class="menu-wrapper text-center">
+                <button class="sms-menu-toggle my-3 width-30 height-30">
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
+                </button>
             </div>
+        </div>
+    </div>
+    <div class="row sms-menu-add-cart cart-toggler" id="cart">
+        <div class="shopping-cart">
+            <div class="shopping-cart-header height-30">
+                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge total-product float-right">@{{ totalProduct }}</span>
+            </div>
+            <ul class="shopping-cart-items pl-0">
+                <li class="clearfix" v-for="product in products">
+                    <img v-bind:src="product.image1" alt="item1" />
+                    <span class="item-name mr-2">@{{ product.name }}</span>
+                    <span class="item-detail owl-paragraph">@{{ product.note }}</span>
+                    <span class="item-price">Tk.@{{ product.msrp }}</span>
+                    <span class="item-quantity">Quantity: @{{ product.quantity }}</span>
+                    <span class="position-absolute right-0 top-0 text-danger" @click.prevent="remove(product.id)"><i class="fa fa-trash"></i></span>
+                </li>
+            </ul>
+            <div class="sms-ecommerce-btn">
+                <a href="{{ route('cart') }}" class="button red">View Cart  <i class="fa fa-chevron-right"></i></a>
+                <a href="{{ route('checkout') }}" class="button red">Checkout <i class="fa fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="sms-main-menu">
+            <nav>
+                <ul class="m-0 p-0">
+                    <li class="mobile-menu"><a href='{{ route("car") }}'>Car</a></li>
+                    <li class="mobile-menu"><a href='{{ route("motorcycle") }}'>Bike</a> </li>
+                    <li class="mobile-menu"><a href='{{ route("bicycle") }}'>Bicycle</a></li>
+                    <li><a href="{{ route('dealers.index') }}" class="current-hover">EShowroom</a></li>
+                    <li><a href="{{ route('national-distributors.index') }}">National Distributor </a></li>
+                    <li class="carkhana-drop"><a href="#">Loan Info <i class="fa fa-angle-double-down"></i></a>
+                        <ul class='dropdown'>
+                            <li><a href="{{ route('car-loan') }}">Apply Loan </a></li>
+                            <li><a href="{{ route('loan-eligibility') }}">Loan Eligibility</a></li>
+                            <li><a href="{{ route('insurance') }}">Insurance</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ route(strtolower($type).'s.index') }}">Buy {{ $type ?? 'Car' }}</a>
+                    </li>
+                    <!-- <li><a href="#">Sell Cars</a> </li> -->
+                    <li><a href="{{ route('compare-'.strtolower($type)) }}">Comparison</a> </li>
+                    <li><a href="{{ route('auction-products') }}">Auction</a> </li>
+                <!-- <li><a href="{{ route('group-buying-products') }}">Group Buying</a> </li> -->
+                </ul>
+            </nav>
         </div>
     </div>
 </header>
