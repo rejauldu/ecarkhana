@@ -7,18 +7,16 @@
 </div>
 @endif
 <!--=================================bike slider -->
-<section class="bike-slider @computer size-21 @else size-23 @endcomputer"">
-    <div class="owl-carousel owl-theme size-child" data-nav-arrow="true" data-nav-dots='false' data-items="1" data-md-items="1" data-sm-items="1" data-xs-items="1" data-space="0">
+<section class="bike-slider">
+    <div class="owl-carousel owl-theme" data-nav-arrow="true" data-nav-dots='false' data-items="1" data-md-items="1" data-sm-items="1" data-xs-items="1" data-space="0">
         @foreach($home_sliders as $home_slider)
-            @if($home_slider->device == $device)
             <div class="item">
                 <div class="car-item text-center">
-                    <div class="car-image @computer size-21 @else size-23 @endcomputer">
-                        <img class="img-fluid size-child" src="{{ url('/') }}/assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt="">
+                    <div class="car-image">
+                        <img class="img-fluid" src="{{ url('/') }}/assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt="">
                     </div>
                 </div>
             </div>
-            @endif
         @endforeach
     </div>
 </section>

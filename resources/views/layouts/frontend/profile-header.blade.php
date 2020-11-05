@@ -46,15 +46,14 @@
 						<div class="menu-name">My Ads</div>
 					</a>
 				</li>
-
+                <li @if(isset($incomplete) && $incomplete == 'active') class="active" @endif>
+                    <a href="{{ route('orders.incomplete') }}">
+                        <div class="menu-name">Incomplete orders</div>
+                    </a>
+                </li>
 				<li>
 					<a href="{{ route('chats.index') }}">
 						<div class="menu-name">Messages</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-						<div class="menu-name">Logout</div>
 					</a>
 				</li>
 			</ul>

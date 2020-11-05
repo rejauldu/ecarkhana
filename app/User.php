@@ -104,7 +104,7 @@ class User extends Authenticatable implements MustVerifyEmail
 		return $this->belongsTo('App\Dropdowns\UserType');
 	}
 	public function orders() {
-		return $this->hasMany('App\Order', 'customer_id', 'id');
+		return $this->hasMany('App\Order', 'customer_id', 'id')->latest();
 	}
 	public static function ifAdmin() {
 		if(\Auth::user()->role->id != 3)

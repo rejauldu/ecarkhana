@@ -150,7 +150,7 @@ class OrderController extends Controller {
             $cashbook_id = Cashbook::where('order_id', $id)->pluck('id');
             Cashbook::destroy($cashbook_id);
         }
-        $order->update(['order_status_id' => $order->order_status_id]);
+        $order->update(['order_status_id' => $request->order_status_id]);
         return redirect(route('orders.index'))->with('message', 'Order updated successfully');
     }
 
@@ -168,16 +168,17 @@ class OrderController extends Controller {
 
     public function incomplete() {
         $user = Auth::user();
-        $orders = Order::where('order_status_id', 3)->with('customer', 'status');
+        $orders = Order::where('order_status_id', 3)->with('customer', 'guest', 'status');
         if ($user->role_id == 1)
             $orders = $orders->whereHas('details', function(Builder $query) use($user) {
                 $query->whereHas('product', function(Builder $q) use($user) {
                     $q->where('supplier_id', $user->id);
                 });
             });
-        $orders = $orders->orderBy('id', 'desc')->get();
-
-        return view('backend.orders.index', compact('orders'));
+        $orders = $orders->latest()->get();
+        if($user->role_id>1 || $user->user_type_id>1)
+            return view('backend.orders.index', compact('orders'));
+        return view('backend.users.orders-incomplete', compact('orders'));
     }
 
     /**

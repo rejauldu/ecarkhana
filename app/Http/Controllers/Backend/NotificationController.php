@@ -18,7 +18,7 @@ use Auth;
 class NotificationController extends Controller {
 
     public function __construct() {
-        $this->middleware('moderator:Notification', ['except' => ['index', 'bicycleFitResult']]);
+        $this->middleware('moderator:Notification', ['except' => ['index', 'bicycleFitResult', 'show']]);
     }
 
     /**

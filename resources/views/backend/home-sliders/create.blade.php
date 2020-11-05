@@ -37,13 +37,13 @@
 									@if(isset($home_slider))
 										@method('PUT')
 									@endif
-                                    <div class="form-group">
-                                        <label for="device">Device</label>
-                                        <select id="device" name="device" class="custom-select">
-                                            <option value="Computer" @if(isset($home_slider) && $home_slider->device == 'computer') selected @endif>Computer</option>
-                                            <option value="Mobile" @if(isset($home_slider) && $home_slider->device == 'mobile') selected @endif>Mobile</option>
-                                        </select>
-                                    </div>
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="device">Device</label>--}}
+{{--                                        <select id="device" name="device" class="custom-select">--}}
+{{--                                            <option value="Computer" @if(isset($home_slider) && $home_slider->device == 'computer') selected @endif>Computer</option>--}}
+{{--                                            <option value="Mobile" @if(isset($home_slider) && $home_slider->device == 'mobile') selected @endif>Mobile</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
 									<div class="form-group">
 										<label for="type">Product type</label>
 										<select id="type" name="type" onchange="typeChange(this)" class="custom-select">

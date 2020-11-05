@@ -2,7 +2,7 @@
 Start Form -->
 
 
-<section id="filter-form" class="pt-0 z-index position-relative">
+<section id="filter-form" class="z-index position-relative">
     <div class="container px-0">
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab">

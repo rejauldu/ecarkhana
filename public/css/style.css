@@ -126,7 +126,7 @@ hr.gray {
 }
 
 /*************************
-  Section Title 
+  Section Title
 ***********************/
 
 .section-title {
@@ -299,10 +299,6 @@ section:hover .section-title .separator:before::after {
     border-color: #db2d2e;
 }
 
-section {
-    padding: 80px 0;
-}
-
 /* Ajax-Loader */
 
 .ajax-loading {
@@ -422,7 +418,7 @@ blockquote cite {
 }
 
 /***************************
-Page section margin padding 
+Page section margin padding
 ****************************/
 
 .page-section-ptb {
@@ -477,12 +473,8 @@ Page section margin padding
 }
 
 /*************************
-    Header 
+    Header
 *************************/
-
-section.slider {
-    padding: 0;
-}
 
 #header.defualt {
     background: transparent;
@@ -1284,11 +1276,6 @@ li.sms-focus {
 }
 
 @media (max-width: 991px) {
-    section.slider {
-        padding: 0;
-        position: relative;
-        top: 50px;
-    }
     .topbar {
         background: #000;
     }
@@ -1588,10 +1575,6 @@ li.sms-focus {
     ul.page-breadcrumb {
         justify-content: center !important;
     }
-    section.slider {
-        position: relative;
-        top: 85px;
-    }
     .tp-bullets.hermes.vertical.nav-pos-hor-right.nav-pos-ver-center.nav-dir-vertical {
         height: 30px !important;
         left: 106% !important;
@@ -1744,7 +1727,7 @@ form {
     }
 }
 
-/*** 
+/***
 ========== service-area ==========
 ***/
 
@@ -9729,4 +9712,9 @@ h3.listClose {
 }
 .bottom-0 {
     bottom: 0;
+}
+/* rejauldu CSS starts */
+/*VS view slider CSS */
+.swiper-slide-active .tg-vstag {
+    display: block !important;
 }

@@ -5,187 +5,78 @@
     <!--=================================
     rev slider -->
     <section class="slider">
-        <div id="rev_slider_2_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container @computer size-32 @else size-23 @endif"
-             data-alias="car-dealer-03"
-             style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
+        <div id="rev_slider_2_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container size-53" data-alias="car-dealer-03" style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
             <!-- START REVOLUTION SLIDER 5.2.6 fullwidth mode -->
-            <div id="rev_slider_2_1" class="rev_slider fullwidthabanner size-child" style="display:none;"
-                 data-version="5.2.6">
+            <div id="rev_slider_2_1" class="rev_slider fullwidthabanner size-child" style="display:none;" data-version="5.2.6">
                 <i class="fa fa-cog fa-spin position-center font-20 text-danger z-index"></i>
                 <ul>
                     <!-- SLIDE  -->
                     @foreach($home_sliders as $home_slider)
-                        @if($home_slider->device == $device)
-                            @if($home_slider->number == 3)
-                                <li data-index="rs-{{ $home_slider->id }}" data-transition="fade"
-                                    data-slotamount="default"
-                                    data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default"
-                                    data-easeout="default" data-masterspeed="default"
-                                    data-thumb="revolution/assets/100x50_3176d-road-bg.jpg"
-                                    data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1=""
-                                    data-param2="" data-param3="" data-param4="" data-param5="" data-param6=""
-                                    data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-                                    <!-- MAIN IMAGE -->
-                                    <img src="assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt=""
-                                         data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
-                                         class="rev-slidebg" data-no-retina>
-                                    <!-- LAYERS -->
+                        @if($home_slider->number == 3)
+                            <li data-index="rs-{{ $home_slider->id }}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="revolution/assets/100x50_3176d-road-bg.jpg"
+                                data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                                <!-- MAIN IMAGE -->
+                                <img src="assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                                <!-- LAYERS -->
 
-                                    <!-- LAYER NR. 1 -->
-                                    <div class="tp-caption tp-resizeme text-light @computer display-6 @else font-12 @endcomputer z-index nowrap font-weight-bold text-uppercase" id="slide-{{ $home_slider->id }}-layer-6"
-                                         data-x="center" data-hoffset="" data-y="270" data-width="['auto']"
-                                         data-height="['auto']" data-transform_idle="o:1;"
-                                         data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;"
-                                         data-start="1400"
-                                         data-splitin="chars" data-splitout="none" data-responsive_offset="on"
-                                         data-elementdelay="0.05">
-                                        {{ $home_slider->title }}</div>
+                                <!-- LAYER NR. 1 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-6" data-x="center" data-hoffset="" data-y="270" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;" data-start="1400" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 5; white-space: nowrap; font-size: 30px; line-height: 30px; font-weight: 400; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                                    {{ $home_slider->title }}</div>
 
-                                    <!-- LAYER NR. 2 -->
-                                    <div class="tp-caption tp-resizeme text-light @computer display-4 @else display-6 @endcomputer z-index nowrap font-weight-bold text-uppercase" id="slide-{{ $home_slider->id }}-layer-7"
-                                         data-x="center" data-hoffset="" data-y="center" data-voffset="-140"
-                                         data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;"
-                                         data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;"
-                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="1700"
-                                         data-splitin="chars" data-splitout="none" data-responsive_offset="on"
-                                         data-elementdelay="0.05">
-                                        {{ $home_slider->description }}</div>
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-7" data-x="center" data-hoffset="" data-y="center" data-voffset="-140" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:800;e:Power4.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="1700" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 6; white-space: nowrap; font-size: 70px; line-height: 70px; font-weight: 700; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                                    {{ $home_slider->description }}</div>
 
 
-                                    <!-- LAYER NR. 4 -->
-                                    <div class="tp-caption tp-resizeme" id="slide-{{ $home_slider->id }}-layer-12"
-                                         data-x="right" data-hoffset="70" data-y="center" @computer data-voffset="130" @else data-voffset="75" @endcomputer
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="x:-50px;opacity:0;s:800;e:Power2.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="620"
-                                         data-responsive_offset="on"
-                                         style="z-index: 8;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
+                                <!-- LAYER NR. 4 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-12" data-x="right" data-hoffset="70" data-y="center" data-voffset="135" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:800;e:Power2.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="620" data-responsive_offset="on" style="z-index: 8;"><img src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                    <!-- LAYER NR. 5 -->
-                                    <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-11"
-                                         data-x="120" data-y="center" @computer data-voffset="130" @else data-voffset="75" @endcomputer
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="x:50px;opacity:0;s:800;e:Power2.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="200"
-                                         data-responsive_offset="on"
-                                         style="z-index: 9;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
-                                </li>
-                            @elseif($home_slider->number == 6)
-                                <li data-index="rs-{{ $home_slider->id }}" data-transition="fade"
-                                    data-slotamount="default"
-                                    data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default"
-                                    data-easeout="default" data-masterspeed="default"
-                                    data-thumb="revolution/assets/100x50_3176d-road-bg.jpg"
-                                    data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1=""
-                                    data-param2="" data-param3="" data-param4="" data-param5="" data-param6=""
-                                    data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-                                    <!-- MAIN IMAGE -->
-                                    <img src="assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt=""
-                                         data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
-                                         class="rev-slidebg" data-no-retina>
-                                    <!-- LAYERS -->
-                                    <!-- LAYER NR. 1 -->
-                                    <div class="tp-caption tp-resizeme" id="slide-{{ $home_slider->id }}-layer-4"
-                                         data-x="3" data-y="center" data-voffset="50"
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="2060"
-                                         data-responsive_offset="on"
-                                         style="z-index: 5;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
+                                <!-- LAYER NR. 5 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-11" data-x="120" data-y="center" data-voffset="130" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:800;e:Power2.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="200" data-responsive_offset="on" style="z-index: 9;"><img src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                            </li>
+                        @elseif($home_slider->number == 6)
+                            <li data-index="rs-{{ $home_slider->id }}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="revolution/assets/100x50_3176d-road-bg.jpg"
+                                data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                                <!-- MAIN IMAGE -->
+                                <img src="assets/home-sliders/{{ $home_slider->image1 ?? 'not-found.jpg' }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                                <!-- LAYERS -->
+                                <!-- LAYER NR. 1 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-4" data-x="3" data-y="center" data-voffset="50" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="2060" data-responsive_offset="on" style="z-index: 5;"><img src="assets/home-sliders/{{ $home_slider->image2 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                    <!-- LAYER NR. 2 -->
-                                    <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-5"
-                                         data-x="right" data-hoffset="-10" data-y="center" data-voffset="60"
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="2060"
-                                         data-responsive_offset="on"
-                                         style="z-index: 6;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-5" data-x="right" data-hoffset="-10" data-y="center" data-voffset="60" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="2060" data-responsive_offset="on" style="z-index: 6;"><img src="assets/home-sliders/{{ $home_slider->image3 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                    <!-- LAYER NR. 3 -->
-                                    <div class="tp-caption tp-resizeme text-light @computer display-6 @else font-12 @endcomputer z-index nowrap font-weight-bold text-uppercase" id="slide-{{ $home_slider->id }}-layer-6"
-                                         data-x="center" data-hoffset="" data-y="270" data-width="['auto']"
-                                         data-height="['auto']" data-transform_idle="o:1;"
-                                         data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;"
-                                         data-start="3260"
-                                         data-splitin="chars" data-splitout="none" data-responsive_offset="on"
-                                         data-elementdelay="0.05">
-                                        {{ $home_slider->title }} </div>
+                                <!-- LAYER NR. 3 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-6" data-x="center" data-hoffset="" data-y="270" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;" data-start="3260" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 7; white-space: nowrap; font-size: 30px; line-height: 30px; font-weight: 400; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                                    {{ $home_slider->title }} </div>
 
-                                    <!-- LAYER NR. 4 -->
-                                    <div class="tp-caption tp-resizeme text-light @computer display-4 @else display-6 @endcomputer z-index nowrap font-weight-bold text-uppercase" id="slide-{{ $home_slider->id }}-layer-7"
-                                         data-x="center" data-hoffset="" data-y="center" data-voffset="-140"
-                                         data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;"
-                                         data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;"
-                                         data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="4290"
-                                         data-splitin="chars" data-splitout="none" data-responsive_offset="on"
-                                         data-elementdelay="0.05">
-                                        {{ $home_slider->description }} </div>
+                                <!-- LAYER NR. 4 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-7" data-x="center" data-hoffset="" data-y="center" data-voffset="-140" data-width="['auto']" data-height="['auto']" data-transform_idle="o:1;" data-transform_in="y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;s:300;e:Power4.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-mask_in="x:0px;y:0px;s:inherit;e:inherit;" data-start="4290" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 8; white-space: nowrap; font-size: 70px; line-height: 70px; font-weight: 700; color: rgba(255, 255, 255, 1.00);font-family:Roboto;text-align:center;text-transform:uppercase;">
+                                    {{ $home_slider->description }} </div>
 
 
-                                    <!-- LAYER NR. 6 -->
-                                    <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-3"
-                                         data-x="right" data-hoffset="159" data-y="center" data-voffset="81"
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="1220"
-                                         data-responsive_offset="on"
-                                         style="z-index: 10;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image4 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
+                                <!-- LAYER NR. 6 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-3" data-x="right" data-hoffset="159" data-y="center" data-voffset="81" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:-50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="1220" data-responsive_offset="on" style="z-index: 10;"><img src="assets/home-sliders/{{ $home_slider->image4 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                    <!-- LAYER NR. 7 -->
-                                    <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-2"
-                                         data-x="202" data-y="center" data-voffset="80"
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="1200"
-                                         data-responsive_offset="on"
-                                         style="z-index: 11;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image5 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
+                                <!-- LAYER NR. 7 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-2" data-x="202" data-y="center" data-voffset="80" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="x:50px;opacity:0;s:1500;e:Power3.easeOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="1200" data-responsive_offset="on" style="z-index: 11;"><img src="assets/home-sliders/{{ $home_slider->image5 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
 
-                                    <!-- LAYER NR. 8 -->
-                                    <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-1"
-                                         data-x="center" data-hoffset="" data-y="center" data-voffset="100"
-                                         data-width="['none','none','none','none']"
-                                         data-height="['none','none','none','none']" data-transform_idle="o:1;"
-                                         data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:670;e:Power3.easeInOut;"
-                                         data-transform_out="opacity:0;s:300;" data-start="500"
-                                         data-responsive_offset="on"
-                                         style="z-index: 12;"><img
-                                            src="assets/home-sliders/{{ $home_slider->image6 ?? 'not-found.jpg' }}"
-                                            alt=""
-                                            data-ww="auto" data-hh="auto" data-no-retina></div>
-
-                                </li>
-                            @endif
-                        @endif
-                    @endforeach
+                                <!-- LAYER NR. 8 -->
+                                <div class="tp-caption   tp-resizeme" id="slide-{{ $home_slider->id }}-layer-1" data-x="center" data-hoffset="" data-y="center" data-voffset="100" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:670;e:Power3.easeInOut;"
+                                     data-transform_out="opacity:0;s:300;" data-start="500" data-responsive_offset="on" style="z-index: 12;"><img src="assets/home-sliders/{{ $home_slider->image6 ?? 'not-found.jpg' }}" alt="" data-ww="auto" data-hh="auto" data-no-retina> </div>
+                                @endif
+                            </li>
+                            @endforeach
                 </ul>
                 <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
             </div>
@@ -856,10 +747,15 @@
                     revslider_showDoubleJqueryError("#rev_slider_2_1");
                 } else {
                     revapi2 = tpj("#rev_slider_2_1").show().revolution({
-                        delay: 5000,
+                        sliderType: "standard",
+                        sliderLayout: "fullwidth",
+                        dottedOverlay: "none",
+                        delay: 9000,
                         navigation: {
                             keyboardNavigation: "off",
                             keyboard_direction: "horizontal",
+                            mouseScrollNavigation: "off",
+                            mouseScrollReverse: "default",
                             onHoverStop: "off",
                             bullets: {
                                 enable: true,
@@ -875,14 +771,28 @@
                                 tmp: ''
                             }
                         },
-                        @computer
-                        gridwidth: 1914,
-                        gridheight: 970,
-                        @else
-                        gridwidth: 375,
-                        gridheight: 667,
-                        @endif
-                        spinner:"none",
+                        visibilityLevels: [1240, 1024, 778, 480],
+                        gridwidth: 1570,
+                        gridheight: 1000,
+                        lazyType: "none",
+                        shadow: 0,
+                        spinner: "spinner3",
+                        stopLoop: "off",
+                        stopAfterLoops: -1,
+                        stopAtSlide: -1,
+                        shuffle: "off",
+                        autoHeight: "off",
+                        disableProgressBar: "on",
+                        hideThumbsOnMobile: "off",
+                        hideSliderAtLimit: 0,
+                        hideCaptionAtLimit: 0,
+                        hideAllCaptionAtLilmit: 0,
+                        debugMode: false,
+                        fallbacks: {
+                            simplifyAll: "off",
+                            nextSlideOnWindowFocus: "off",
+                            disableFocusListener: false,
+                        }
                     });
                 }
             });
@@ -987,8 +897,54 @@
 @endsection
 @section('style')
     <style>
-        .swiper-slide-active .tg-vstag {
-            display: block !important;
+        .search-form {
+            position:relative;
+            z-index:1;
+            width:100%;
+            height:40px;
+            margin:8px 0;
+        }
+        .search-form .input-group {
+            width: 100%;
+            transition: 0.2s all linear;
+            position:absolute;
+        }
+        .search-form .form-control {
+            height:40px;
+            flex: inherit;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            transition: 0.2s all linear;
+            background-color: #2f3640;
+            color: #FFF;
+            box-shadow:none;
+            padding-left:10px;
+        }
+        .search-form .input-group:hover {
+            width:250px;
+        }
+        .search-form .input-group-text {
+            background:#2f3640;
+            border-color:#2f3640;
+        }
+        .search-form .input-group:hover .form-control, .search-form .input-group .form-control:focus {
+            width:210px;
+            flex: inherit;
+            margin: inherit;
+        }
+        .menubar-login {
+            margin: 8px 0;
+        }
+        .menubar-logo {
+            width:100%;
+            height:40px;
+            margin:8px 0;
+            display: block;
+        }
+        .menubar-logo a {
+            width:100px;
+            display:inline-block;
         }
     </style>
 @endsection

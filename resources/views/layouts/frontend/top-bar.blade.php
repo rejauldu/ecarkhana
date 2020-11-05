@@ -1,3 +1,4 @@
+@computer
 <header id="header" class="defualt">
     <div class="topbar">
         <div class="container">
@@ -130,5 +131,38 @@
     </div>
     <!-- Navigation end -->
 </header>
-
+@else
+<header class="container-fluid">
+    <div class="row overflow-hidden height-55">
+        <div class="col-4 px-1">
+            <form class="search-form" action="/search">
+                <div class="input-group flex-nowrap">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                        <button class="input-group-text"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-1 px-1">
+            <div class="height-40 position-relative menubar-login text-center">
+                <a href="#" class="btn btn-danger p-0 width-20 height-20 position-center rounded-circle line-height-20 border-0"><i class="font-12 fa fa-user height-20 line-height-20"></i></a>
+            </div>
+        </div>
+        <div class="col-4 px-1">
+            <a href="#" class="menubar-logo"><img src="{{ asset('/assets/logo.png') }}" class="w-100 mh-100 position-center px-2"/></a>
+        </div>
+        <div class="col-1 px-1">
+            <div class="height-40 position-relative menubar-login text-center">
+                <a href="#" class="btn btn-danger p-0 width-20 height-20 position-center rounded-circle line-height-20 border-0"><i class="font-12 fa fa-user height-20 line-height-20"></i></a>
+            </div>
+        </div>
+        <div class="col-2 px-1">
+            <div class="height-40 position-relative menubar-login text-center">
+                <a href="#" class="btn btn-danger p-0 width-20 height-20 position-center rounded-circle line-height-20 border-0"><i class="font-12 fa fa-user height-20 line-height-20"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+@endcomputer
 <!--=================================header -->

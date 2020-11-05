@@ -36,8 +36,8 @@
     <!-- revolution -->
     <link rel="stylesheet" href="{{ asset('css/revolution/settings.css') }}" />
     <!-- main style -->
-    <link rel="stylesheet" href="{{ asset('css/theme.css') }}?120" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}?121" />
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <!-- swiper -->
     <link rel="stylesheet" href="{{ asset('css/swiper.css') }}" />
 	@yield('style')

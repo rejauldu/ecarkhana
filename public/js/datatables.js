@@ -8,11 +8,6 @@ $(document).ready(function() {
 					target: 'tr'
 				}
 			},
-			columnDefs: [ {
-				className: 'control',
-				orderable: false,
-				targets:   0
-			} ],
 			order: [ 0, 'desc' ]
 		});
 	if($('#dataTables-export').length)

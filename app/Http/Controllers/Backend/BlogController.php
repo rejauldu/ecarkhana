@@ -23,7 +23,7 @@ class BlogController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        
+
         $posts = Blog::orderBy('id', 'desc');
         if($request->category) {
             $posts->where('category_id', $request->category);
@@ -37,6 +37,7 @@ class BlogController extends Controller {
         }
         $posts = $posts->paginate(10);
         $categories = Category::all();
+        $type = 'Car';
         return view('backend.blogs.index', compact('posts', 'categories', 'type'));
     }
 

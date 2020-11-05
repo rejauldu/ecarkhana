@@ -197,7 +197,7 @@
                                             <b>Status :</b> {{ $order->status->name }}
                                         </div>
                                         <div class="sms-order-id">
-                                            <b>Order ID :</b> #EC-{{ $order->id }}
+                                            <b>Order ID :</b> EC#{{ $order->id }}
                                         </div>
                                         <div class="sms-order-price">
 											@php($sum = 0)

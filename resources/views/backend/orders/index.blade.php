@@ -42,7 +42,7 @@
 							<tbody>
 								@foreach($orders as $order)
 								<tr>
-									<td>EC#{{ $order->id }}</td>
+									<td>{{ $order->id }}</td>
 									<td>{{ $order->customer->name ?? $order->guest->name ?? '(Unnamed)' }}</td>
 									<td>{{ $order->status->name ?? ''}}</td>
 									<td>{{ $order->created_at->format('jS M Y') }}</td>
